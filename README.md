@@ -19,7 +19,7 @@ There are test examples of both controllers and data access objects using the Sp
 Building a Docker image
 -----------------------
 
-It is possible to build, test and push a Docker image of Eionet DataLake to EEA's Docker registry. To do so you activate the `docker` profile. The `install` goal will do a test start up of the container. The `docker:push` will push the Docker image to dockerrepo.eionet.europa.eu:5000.
+It is possible to build, test and push a Docker image of Eionet DataLake to EEA's Docker registry. To do so you activate the `docker` profile. The `install` goal will do a test start up of the container. The `docker:push` will push the Docker image to Docker Hub as `eeacms/rod`.
 ```
 mvn -Pdocker install docker:push
 ```
