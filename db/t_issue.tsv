@@ -1,0 +1,12 @@
+PK_ISSUE_ID	ISSUE_NAME	FK_DD_GUID	DD_URL
+1	Climate Change	NULL	NULL
+2	Ozone Depletion	NULL	NULL
+4	Soil	NULL	NULL
+6	Air pollution	NULL	NULL
+7	Noise	NULL	NULL
+8	Natural Resources	NULL	NULL
+10	Chemicals	NULL	NULL
+12	Various other issues	NULL	NULL
+13	Waste	NULL	NULL
+14	Biodiversity Change and Nature	NULL	NULL
+15	Water	NULL	NULL

@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet author="roug" id="rev-1" context="demo">
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO_RECOGNIZED"/>
+      <column name="HELP_TITLE" value=""/>
+      <column name="HELP_TEXT" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_PARAMETERS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Parameters"/>
+      <column name="HELP_TEXT" value="Information about specific parameters collected by a reporting obligation may be entered here.&#10;&#10;Summary parameters can be entered as text variables for Eionet dataflows. Beyond this, this field is not being actively managed pending integration with the Data dictionary."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_MAIN"/>
+      <column name="HELP_TITLE" value="Test"/>
+      <column name="HELP_TEXT" value="Test2"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RORA"/>
+      <column name="HELP_TITLE" value="Search Obligations"/>
+      <column name="HELP_TEXT" value="Use this form to search for reporting obligations. Possible filters for the search are:&#10;&#10;* Environmental issues&#10;* Spatial coverage attributes: countries&#10;* Specific parameter groups"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_MAIN_ENVIRONMENTALISSUES"/>
+      <column name="HELP_TITLE" value="Environmental Issues"/>
+      <column name="HELP_TEXT" value="Use this drop down list to select an environmental issue. Generally 1 environmental issue is attibuted to each reporting activity. Reporting obligations inherit all the environmental issues from the reporting activities under them."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO_REPORTTO"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Report to client"/>
+      <column name="HELP_TEXT" value="This is the organisation to which the reported data set should be sent. &#10;&#10;This may be the same as the issuer of the legislation or can be different.This field should be filled from the list of organisations in the drop down list. If the &quot;report to&quot; organisation for the obligation is not listed, create a new organisation using the &quot;new&quot; button. &#10;&#10;Please consider carefully whether you need to create a new organisation before doing so. Please enter all details for the new organisation in the window that opens.&#10;&#10;Note: The &quot;issued by&quot; organisation has a separate field from the &quot;report to&quot; or client organisation. The &quot;issued by&quot; field is for the organisation responsible for the legislation, whereas the &quot;report to&quot; field is for the organisation responsible for receiving the flow of information under the reporting obligation. Often these are the same organisation."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO_OBLIGATIONTYPE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Obligation type"/>
+      <column name="HELP_TEXT" value="This field should categorise the type of reporting obligation. One of the three options should be selected (Compulsory, expected or voluntary) depending on the legal framework and requirements.&#10;&#10;Compulsory&#10;Required reporting obligations must be submitted in order to be in compliance with the legal instrument. Typically the obligation will arise from the articles of the instrument with wording such as &quot;shall&quot;, &quot;requires&quot;, &quot;will&quot; or &quot;must&quot;.The format and content of required reports may not carry the same level of obligation, since the report format may be specified in administrative decisions rather than ratified articles of the instrument. Hence the submission of a required report in an incomplete or incorrect format may not constitute lack of compliance. In applying this definition it is the level of compulsion of the reporting obligation itself that is paramount.&#10;&#10;Expected &#10;A report that all parties under normal circumstances are expected to submit but with incomplete compulsion, i.e. failure to submit would not seem to constitute a lack of compliance with the instrument. The obligation may arise from articles of the instrument, but typically from subsequent decisions of the governing body (e.g. Conference of the Parties or EEA Management Board) and often will carry wording such as &quot;should&quot;, &quot;recommend&quot; or &quot;will endeavour&quot;. The use of &quot;Expected&quot; type of reporting may also be appropriate for use where the Instrument itself is a non-compulsory agreement for example, &quot;Agenda 21&quot; (obligation to report to the Commission on Sustainable Development), or the UNESCO Man and Biosphere programme.&#10;&#10;Voluntary&#10;A report that parties may submit at their own volition. These usually arise from governance or administrative decisions and are specifically identified as &quot;voluntary&quot; or employ phrases such as &quot;may&quot; or &quot;might&quot; or &quot;parties are invited (or encouraged) to?&quot;. It is clear and obvious that failure to report does not contravene the terms of the Instrument."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_SPATIALCOVERAGE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Countries reporting formally"/>
+      <column name="HELP_TEXT" value="AAll the countries that have agreed to this reporting obligation should be listed in the right hand column. &#10;&#10;The left-hand select box displays the items that can be selected. A country can be added to the right hand box selecting item(s) from the left-hand box and then clicking the &quot;--&gt;&quot; button. Similarly, to remove countries, select item(s) from the right-hand box and press the &quot;&lt;--&quot; button. To select multiple items from a select box, a CTRL key has to be held down while the items are clicked with the mouse.&#10;&#10;Countries selected then become participants in the reporting obligations for the period of time whilst they are selected. This caters for situations like accession countries, or where countries exit from an agreement. The reporting obligations still exist for the period of participation.&#10;&#10;This status does not infer anything about situations where, for example, a country has agreed to the obligation but has excluded part of its territory.&#10;&#10;Note: Particular attention should be paid not to assume that EU legislation only ever covers the EU member countries."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_TITLE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Title"/>
+      <column name="HELP_TEXT" value="This is a short identifier for the reporting obligation. The field should show the name that is commonly used for this obligation and ideally reflect the type of reporting or information collected."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_VALIDTO"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Valid to"/>
+      <column name="HELP_TEXT" value="&quot;Valid to&quot; is a date field that specifies how long the reporting obligation is going to be valid. After a value for the &quot;Baseline reporting date&quot; field has been entered the application suggests a default value of &quot;31/12/9999&quot; for the valid to date.&#10;&#10;If the reporting obligation is for a limited period, a one-off reporting or will be repealed then the end validity date should be entered.&#10;&#10;When a reporting obligation is no longer active, the user interface displays &quot;terminated&quot;. The &quot;valid to&quot; date should be set as one year after the reporting date for one-off reporting.&#10;&#10;See &quot;Baseline reporting date&quot; text above."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_RESPONSIBLEFORREPORTING"/>
+      <column name="HELP_TITLE" value="Reporting obligation - National reporting contacts"/>
+      <column name="HELP_TEXT" value="This field should be filled with the details of the technical contact for the reporting for this obligation. This is the person who will prepare and upload the reported information. The contact details can be entered into ROD in different ways.&#10;&#10;Ideally, it should be a CIRCA role making use of country suffixes. The CIRCA role prefix (without the country-specific part) should be entered (for example eionet-nrc-acc). Generally, the &quot;national contacts&quot; role should be the NRC for Eionet dataflows and the &quot;national coordinator&quot; should be the PCP Eionet role.&#10;&#10;On saving a record in ROD, the role is checked against the CIRCA directory. Non-existent roles will result in an error message. A list of all roles in the directory can be found at: http://eea.eionet.eu.int:8980/Members/irc/eionet-circle/Home/central_dir_admin?fn=roles&amp;rd=0&amp;af=0&amp;ud=0&amp;od=0&amp;act=srch&amp;v=*&#10;&#10;Alternatively a central CIRCA role may be the contact point for the list of coordinators for all countries. The third option is that the name of the list with a URL pointing to where the list of contacts for this reporting obligation is available on the Internet can be used. These options and the 3 fields should cater for most situations."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_VALIDFROM"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Baseline reporting date"/>
+      <column name="HELP_TEXT" value="The baseline reporting date should contain the first reporting date (including any subsequent amendments to the date). &#10;&#10;In many cases, it is a hypothetical start date for reporting that corresponds to the current reporting cycle. This field is not visible in the user interface but is used to calculate reporting dates, deadlines and notifications. &#10;&#10;For newly introduced reporting obligations, the baseline reporting date may be in the future and will also then be the first reporting deadline.&#10;&#10;There are two ways to specify reporting due dates in ROD: text based (&quot;ASAP&quot;, etc.) and numeric date based. This field is for numeric reporting dates.&#10;&#10;Dates should, where possible use the numeric fields. This allows the deadlines to be sorted and used for notifications. If needed additional comments can be added in the &quot;dates comments&quot; field. Use of text dates should be avoided, however, it is accepted that in some instances no alternative is suitable. &#10;&#10;EITHER numeric OR text based dates can be entered but not both.&#10;&#10;The following additional guidance on dates is provided:&#10;&#10;Reporting that is due in a year with no month or date specified is set as being due at on 31 December of the year. If the month is specified, then the reporting is set as being due on the last day in the month. The &quot;dates comments&quot; field should indicate this with &quot;year only specified&quot; or &quot;Year and month only specified&quot; as appropriate.&#10;&#10;If reporting is due in time for a regular event, such as a 3 yearly conference of the parties to a convention, then a numeric date for the COP should be entered in the baseline date field, along with a frequency. In this example the frequency would be 36. A note in the date comments field should indicate something similar to  &quot;Reporting submitted prior to 3 yearly COP depending on exact dates of COP&quot;.&#10;&#10;For numeric datesEnter a value for &quot;Baseline reporting date&quot; and then the &quot;Reporting frequency in months&quot; (whole number) fields. From these, &quot;Next due date&quot; is calculated. Some calendar rounding is automatically done in this calculation for leap years and so on.&#10;&#10;If reporting frequency in months is set to zero, the application assumes non-repeating reporting date (one-off) and uses &quot;First reporting&quot; date as the &quot;Next due date&quot;. The &quot;Next due date&quot; will never be larger than &quot;Valid to&quot; date (no need to report if the obligation is no longer valid). The application recalculates the &quot;Next due date&quot; fields for all obligations every day, so they are always up to date. This is used to calculate the values displayed in the next reporting due field."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_REPORTINGDATETEXTFORMAT"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Text dates"/>
+      <column name="HELP_TEXT" value="There are two ways to specify reporting due dates in ROD: &#10;&#10;Text based (&quot;ASAP&quot;, etc.) and numeric date based. Only one method can be used at once. This field is for the text-based format.&#10;&#10;Dates should, where possible use the numeric fields rather than this text field. This allows the deadlines to be sorted and used for notifications. If needed, additional comments can be added in the &quot;dates comments&quot; field. &#10;&#10;Use of text dates should be avoided, however, it is accepted that in some instances no alternative is suitable. EITHER numeric OR text based dates can be entered ? but not both.&#10;&#10;To use text based due dates, simply enter a value for &quot;Reporting date (text format)&quot; field and leave the &quot;Reporting frequency&quot; field empty. The system will know you want to use text-based deadline."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_REPORTINGFREQUENCYINMONTHS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Reporting frequency"/>
+      <column name="HELP_TEXT" value="See &quot;Baseline reporting date&quot; text above.&#10;&#10;Enter a value as a whole number for the number of months between reporting due dates. For annual reporting this would be 12, for three yearly reporting, 36.&#10;&#10;If reporting frequency in months is set to zero, the application assumes non-repeating date and uses &quot;Baseline reporting date&quot; as the &quot;Next due date&quot;."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_LOCATIONINFO"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Name of repository"/>
+      <column name="HELP_TEXT" value="The name of the repository where countries make deliveries (for electronic reporting) should be entered here."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_NEXTDUEDATE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Next due date"/>
+      <column name="HELP_TEXT" value="See also &quot;Baseline reporting date&quot; help text.&#10;&#10;Values entered in the &quot;Baseline reporting date&quot; field and the &quot;Reporting frequency in months&quot; field. Are used to calculate the &quot;Next due date&quot; according to the following rules (assuming &quot;today&quot; is 05-12-2002 in our example):&#10;&#10;If the day of the starting date is &lt; 28, a number of months specified in reporting frequency is added to the starting date repeatedly, until &quot;Next due date&quot; is in the future. For example, with 15-09-2002 start date and reporting frequency of 3 months, next reporting will be 15-12-2002.&#10;&#10;If the day of the starting date is &gt;= 28, a number of months specified in reporting frequency is added to the starting date, until &quot;Next due date&quot; is in the future1, and the day set to the end of the month. For example, with 30-11-2002 start date and reporting frequency of 3 months, next reporting will be 28-02-2003.&#10;&#10;If reporting frequency in months is set to zero, the application assumes non-repeating reporting date (one-off) and uses &quot;First reporting&quot; date as the &quot;Next due date&quot;. The &quot;Next due date&quot; will never be larger than &quot;Valid to&quot; date (no need to report if the obligation is no longer valid). &#10;&#10;The application recalculates the &quot;Next due date&quot; fields for all obligations every day, so they are always up to date."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_ENVIRONMENTALISSUES"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Environmental issues"/>
+      <column name="HELP_TEXT" value="Generally one or two environmental issues should be selected for a reporting obligation. &#10;&#10;The left-hand select box displays the items that can be selected. Environmental issues can be managed by moving items to the right hand box. Select item(s) from the left-hand box and then click the &quot;--&gt;&quot; button. Similarly, to remove items, select item(s) from the right-hand box and press the &quot;&lt;--&quot; button. To select multiple items from a select box, a CTRL key has to be held down while the items are clicked with the mouse.&#10;&#10;The environmental issues are aligned with the themes used in the EEA Reference Centre and Data warehouse. They are not aligned with the Eur-lex classification used for legislative instruments."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_REPORTINGGUIDELINES"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Reporting guidelines Extra info"/>
+      <column name="HELP_TEXT" value="This field displays extra information about the reporting guidelines. (older versions, format of submissions, extra URLs (not dynamic) etc)."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_COMMENT"/>
+      <column name="HELP_TITLE" value="Reporting obligation - General comments"/>
+      <column name="HELP_TEXT" value="General comments about the reporting obligation. This field was previously used to give a general description of the reporting activity. General descriptive text should be moved to the description field."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_OVERLAPURL"/>
+      <column name="HELP_TITLE" value="reporting obligation - URL of overlapping obligation"/>
+      <column name="HELP_TEXT" value="If the reporting process for this reporting obligation overlaps with the reporting process for another obligation, then the ROD URL for that reporting obligation should be entered here. An Example could be where reporting to an international convention overlaps in content or process with reporting for an EU directive.&#10;&#10;A URL should be entered if the reporting obligation overlaps. &#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI"/>
+      <column name="HELP_TITLE" value="Legal Instruments"/>
+      <column name="HELP_TEXT" value="The ROD database contains records at two levels. The highest level is the legislative instrument level. before a new reporting obligation can be entered, a new legal instrument record must be entered. This legal instrument record is the legal basis for one or more reporting obligations. Before entering a new legal instrument, confirm that it has not already been entered by searching ROD. &#10;&#10;The information entered into ROD about the legal instrument should be taken from authoritative sources such as Celex or Convention websites. If the current legal instrument amends some existing act, then this relationship can be specified by selecting a &quot;Parent legal instrument&quot; from the list."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_ECENTRYINTOFORCE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - EC Entry into force"/>
+      <column name="HELP_TEXT" value="For conventions ratified by the EC / EU, the date on which convention entered into force for the EC / EU should be entered here. The date directives enter into force is 20 days after the date of publication in the Official Journal if nothing else is mentioned."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_CLASSIFICATION"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Eur-lex Categories"/>
+      <column name="HELP_TEXT" value="The right-hand select box should be filled with the Eur-lex categories for EU legislation linked to the instrument being edited. &#10;&#10;The left-hand select box displays the items that can be selected. A legal instrument can be classified by selecting item(s) from the left-hand box and then clicking the &quot;--&gt;&quot; button. Similarly, to remove categories, select item(s) from the right-hand box and press the &quot;&lt;--&quot; button. To select multiple items from the select box, a CTRL key has to be held down while the items are clicked with the mouse. &#10;&#10;The classification is based on the Eur-lex classification, which can be browsed at http://europa.eu.int/eur-lex/en/lif/index.html to check how an instrument should be classified.&#10;&#10;In addition, in ROD, the classification also includes &quot;Conventions&quot; and Other legislation&quot; to cater for legislative instruments not in Eur-lex."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_VALIDFROM"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Valid from"/>
+      <column name="HELP_TEXT" value="The date on which the legislation enters into force: the date on which the act became operative. The date directives enter into force is 20 days after the date of publication in the Official Journal if nothing else is mentioned.&#10;&#10;This date is for reference and analysis only, and is not used in any calculations for reporting obligation deadlines."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_ABSTRACT"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Abstract"/>
+      <column name="HELP_TEXT" value="A short abstract about the legislation should be put here. The focus should be on defining what the legislation covers from a reporting obligation perspective. Where possible the text should be taken directly from an authoritative summary such as from the objective in EU legislative texts."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_COMMENT"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Comments"/>
+      <column name="HELP_TEXT" value="Put any additional comments or remarks here. Comments are often anticipated revision dates, notes about the relationship between this instrument and other legislation, the history of significant changes, etc."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_PARENTLEGALINSTRUMENT"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Parent legal instrument"/>
+      <column name="HELP_TEXT" value="If the current legal instrument amends some existing act, or if it is subsidiary legislation dependent on the framework provided by another legal instrument (Ex a convention) then this relationship should be specified by selecting a &quot;Parent legal instrument&quot; from the list.&#10;&#10;The parent legal instrument needs to be entered first. If the parent legal instrument is not yet entered into the ROD, complete the current LI record first. Then create a new legislative instrument for the parent legislation. When this record is completed, return to the child legal instrument in edit mode and select the parent instrument from the list."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_LEGALNAME"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Legal Name"/>
+      <column name="HELP_TEXT" value="The full legal name of the legislative instrument."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_ALIASNAME"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Short name"/>
+      <column name="HELP_TEXT" value="The short name by which the legislative instrument is known. Example: Birds directive."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_CELEXREFERENCE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Celex reference"/>
+      <column name="HELP_TEXT" value="Every document in the Celex database has a unique identification number known as the Celex document number. This can be found on the legal text, in the Eurlex database, or in Celex and should be entered in this field for all documents legislative instrument records that are in Celex.&#10;&#10;This field should be left blank for legislative instruments not in Celex.&#10;&#10;The Celex number is an alphanumeric sequence consisting of four principal elements. These are:&#10;*   the sector (one character) [S];&#10;*   the year (four digits) [YYYY];&#10;*   the type of document code (one or two-character code) [T(T)];&#10;*   a sequential number representing the original reference number of the act where possible (natural number) [NNN(N)]. Example: 41993Y0517(01)&#10;&#10;&#10;Notes:The year represents:* for Sectors 1 and 2, the year of signature or the year of publication* for Sectors 3 and 4, the year of adoption;* for Sector 5, Commission documents, the year of the final (FIN) document;* for European Parliament documents, the parliamentary year during which the document of the part-session or the question was introduced;* for ESC documents (AC, IC), the year of adoption;* for Sector 6 documents, the year the case was lodged;* for Sector 7 documents, the year of adoption of corresponding directive.&#10;&#10;* Articles of a treaty may be treated as separate documentary units and each  given a 3-digit number;* a document number may be followed by a series number in parentheses indicating that several agreements were signed or published on the same day, for example 21986A0331(01).&#10;&#10;* In Sector 7, documents are attributed the same CELEX number as that of the corresponding directive in Sector 3 except that the initial number 3 is replaced with a 7.&#10;&#10;* The CELEX document number is used as the basis for cross-referencing of documents in the database as well as for implementing hypertext links."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_RMVERIFIED"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Verified date"/>
+      <column name="HELP_TEXT" value="The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier.&#10;&#10;This field is for the date of last verification (This is the same as the last update date if updated by an appointed thematic expert)"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_ISSUEDBY"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Issued by"/>
+      <column name="HELP_TEXT" value="This field should be filled from the list of organisations in the drop down list. If the issuing organisation for the legislation is not listed, create a new organisation using the &quot;new&quot; button. &#10;&#10;Please think carefully whether you need to create a new organisation before doing so. Please enter all details for the new organisation in the window that opens.&#10;&#10;Note: The &quot;issued by&quot; organisation has a separate field from the &quot;report to&quot; or client organisation in ROD. &#10;&#10;The &quot;issued by&quot; field is for the organisation responsible for the legislation, whereas the &quot;report to&quot; field is for the organisation responsible for receiving the flow of information under the reporting obligation. Often these are the same organisation."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_URLTOOFFICIALSOURCE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - URL to official source"/>
+      <column name="HELP_TEXT" value="A web link to the Eur-lex entry or the text of conventions and other international agreements should be entered here. Where possible this should be to a stable non-password protected URL that links to pdf files displaying all tables and annexes.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_URLTOISSUER"/>
+      <column name="HELP_TITLE" value="Legislative instrument - URL to issuer"/>
+      <column name="HELP_TEXT" value="The URL to issuer's web page for this specific legal instrument should be entered here.&#10;&#10;The URL entered in this field should be different from the organisational url entered in the issuer?s details. The URL in this field should point to an introductory information page about the legislative instrument, if one exists.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_SEARCH1"/>
+      <column name="HELP_TITLE" value="Show reporting obligations"/>
+      <column name="HELP_TEXT" value="The query form will generate a list of reporting obligations. The list can be refined by selecting any combination from the three drop down lists.&#10;&#10;For example, select a country from the countries drop-down menu if you are only interested getting results relevant for a  particular country.&#10;&#10;Select the issue that you are interested in to generate a list of all reporting obligations for that issue.&#10;&#10;Select an organisation to see all the reporting obligations for that organisation.&#10;&#10;Click on the GO button to generate the list.&#10;&#10;Naturally if an item from all three list boxes is selected, then the list will only list reporting obligaitons that are for that specific organisation, country and issue together."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_HIERARCHY"/>
+      <column name="HELP_TITLE" value="Legislative instruments - Eur-lex categories"/>
+      <column name="HELP_TEXT" value="This page shows a clickable categories based on the Eurlex classification. The list is used to navigate  to legislative instruments. &#10;&#10;More information about the Eur-lex categories can be found at: http://europa.eu.int/eur-lex/en/lif/index.html. &#10;&#10;In ROD, the classification also includes &quot;Conventions&quot; and &quot;Other legislation&quot; to cater for legislative instruments not in Eur-lex."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_SEARCH2"/>
+      <column name="HELP_TITLE" value="Show reporting obligations or activities (Report to)"/>
+      <column name="HELP_TEXT" value="This query box generates a list of all reporting obligations (and reporting activities underneath them) that are categorised by the list of issues.&#10;&#10;By selecting an organisation from the last drop-down menu, the query generates a list of obligations that have to be delivered to that particular organisation (Report to).&#10;&#10;- Select the issue that you are interested in from the drop-down menu.&#10;&#10;-Select an organisation from the last drop-down menu if you want to get results relevant for a  particular organisation.&#10;&#10;Click on the GO button."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_GENERAL"/>
+      <column name="HELP_TITLE" value="General ROD help"/>
+      <column name="HELP_TEXT" value="This database contains information describing reporting obligations that countries have towards international organisations for air, waste, water, biodiversity and EEA priority data flows. These themes have been quality assessed.&#10;&#10;The database has 3 functions:&#10;&#10;*to assist in the analysis of member countries reporting obligation's burden;&#10;* to support member countries in planning and fulfilling reporting obligations;&#10;* to assist in streamlining the flow of data to the EEA and other international organisations.&#10;&#10;---------------------------------------------------&#10;&#10;The database covers EEA member countries as well as countries included in the following groupings:&#10;* Central and eastern European Countries (CEEC)&#10;* Eastern Europe, Caucasus and Central Asia (EECCA)&#10;* Countries participating in the Desertification Information System for the Mediterranean (DISMED)&#10;&#10;---------------------------------------------------&#10;The ROD database contains records at 3 levels. The top level is the legislative instrument (LI) level. Underneath this level is a summary reporting obligation (RO) level and then the reporting activity (RA) level. A legal instrument record is the legal basis for one or more reporting obligations.&#10;&#10;The Reporting obligation record is a summary display presenting information from both the RA, RO and LI levels in the database.&#10;&#10;Reporting obligation is taken to mean:&#10;Any requirement to provide specified information to (or to &quot;inform&quot;) the secretariat, coordinating body or governing body of the instrument, or their representatives, whether or not there is a prescribed format or fixed frequency, or whether or not the word &quot;report&quot; is used. &#10;&#10;ROD focuses on environmental reporting for EEA member countries to international organisations. Coverage extends to pan European reporting.&#10;&#10;Excluded from ROD are non-environmental reporting, requirements for proposals or the seeking of permits, requirements for specific actions to be taken (as opposed to reporting on actions taken), and administrative processes such as notifications of contact points, instances of issuance/withdrawal of permits (rather than reports that summarise permits issued), notifications of legal transposition and implementation measures.&#10;&#10;Reporting activity level corresponds crudely to data or information deliveries that arise from a reporting obligation. It is in this view that the details of reporting obligation requirements are shown. In particular, the focus is on dates (when deliveries are due) and the thematic issues covered. It is proposed to merge the RO and RA level in the near future."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_DRAFT"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Draft"/>
+      <column name="HELP_TEXT" value="Normally &quot;No&quot;. Only &quot;Yes&quot; for new legislation not finalised."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_IDENTIFICATIONNUMBER"/>
+      <column name="HELP_TITLE" value="Legislative instrument - ID number"/>
+      <column name="HELP_TEXT" value="The ID number for the legal instrument. For EU legislation, this is normally also in the title. Ex. 92/72/EEC.&#10;&#10;Some instruments do not have an ID number."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_RMVERIFIEDBY"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Verified by"/>
+      <column name="HELP_TEXT" value="Initials of the person that verified or updated the record and organisational identifier. Thematic experts carry out verification. Contents that are verified are accepted as correct until the update cycle date is reached. The process of updating verifies that records are correct and re-sets the update date for a suitable point in time in the future. This is the next update date.&#10;&#10;The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_RMNEXTUPDATEDUE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - next update due"/>
+      <column name="HELP_TEXT" value="This should be entered as 12 months from the point in time when verification or updating took place unless there is some reason to undertake an update earlier (change in legislation or reporting requirements foreseen).&#10;&#10;The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA"/>
+      <column name="HELP_TITLE" value="Reporting obligation - General help"/>
+      <column name="HELP_TEXT" value="This page shows the details of reporting obligations in ROD. It is in this view that the details of reporting obligation requirements are shown.&#10;&#10;The &quot;D&quot; buttons on the right hand side of the display open pop-up windows that display more detailed information on the line selected. For the directory contacts an Eionet username and password may be required to view the contact details.&#10;&#10;The green text buttons on the top right hand side of the page open windows showing more detiled information that is drawn from ROD and other Reportnet modules as well as opening printer friendly pages and page help."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_LOCATIONPTR"/>
+      <column name="HELP_TITLE" value="Reporting obligation - URL to principle repository"/>
+      <column name="HELP_TEXT" value="This field is for the url to the repository where countries make deliveries in response to the reporting obligations. This may be a CDR url, a CIRCA url, an ftp address, a url to a web form, to a database, a downloadable application or some other Internet service.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_FLAGS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Flags"/>
+      <column name="HELP_TEXT" value="Priority dataflow flag:&#10;This tick-box should be selected if the reporting obligation is a priority dataflow for the EEA.&#10;&#10;Core set of indictors flag:&#10;This tick-box should be selected if the reporting obligation is used to create an indicator that is used in the EEA core set of indicators.&#10;&#10;Delivery process is managed by EEA  flag:&#10;This tick-box should be selected if reporting under this obligation is an EEA managed data flow (EDF)."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_DATECOMMENTS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Date comments"/>
+      <column name="HELP_TEXT" value="If the reporting dates can be entered as numerical dates but also require some explanatory text, then enter these additional notes here."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_RMNEXTUPDATEDUE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Next update due"/>
+      <column name="HELP_TEXT" value="This should be entered as 12 months from the point in time when verification or updating took place unless there is some reason to undertake an update earlier (change in legislation or reporting requirements foreseen).&#10;&#10;The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_RMVERIFIEDBY"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Verified by"/>
+      <column name="HELP_TEXT" value="Initials of the person that verified or updated the record and organisational identifier. Thematic experts carry out verification. Contents that are verified are accepted as correct until the update cycle date is reached. The process of updating verifies that records are correct and re-sets the update date for a suitable point in time in the future. This is the next update date.&#10;&#10;The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_RMVERIFIED"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Verified"/>
+      <column name="HELP_TEXT" value="The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier.&#10;&#10;This field is for the date of last verification (This is the same as the last update date if updated by an appointed thematic expert)"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO"/>
+      <column name="HELP_TITLE" value="Reporting obligation - General help"/>
+      <column name="HELP_TEXT" value="Reporting obligation is taken to mean:&#10;Any requirement to provide specified information to (or to &quot;inform&quot;) the secretariat, coordinating body or governing body of the instrument - whether or not there is a prescribed format or fixed frequency, or whether or not the word &quot;report&quot; is used. &#10;&#10;ROD focuses on environmental reporting for EEA member countries to international organisations. Coverage extends to pan European reporting.&#10;&#10;Excluded from ROD are requirements for proposals or the seeking of permits, requirements for specific actions to be taken (as opposed to reporting on actions taken), and administrative processes such as notifications of contact points, instances of issuance of permits (rather than reports that summarise permits issued), notifications of legal transposition and implementation measures."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_CSMAIN"/>
+      <column name="HELP_TITLE" value="Country deadlines"/>
+      <column name="HELP_TEXT" value="This page shows deadlines that countries have for reporting obligations. This functionality in ROD works best when the deadlines are entered as numeric dates.&#10;&#10;Explanation of columns:&#10;&#10;* Reporting obligation&#10;Reporting obligation is taken to mean:&#10;Any requirement to provide specified information to (or to &quot;inform&quot;) the secretariat, coordinating body or governing body of the instrument, or their representatives, whether or not there is a prescribed format or fixed frequency, or whether or not the word &quot;report&quot; is used. ROD focuses on environmental reporting for EEA member countries to international organisations. &#10;&#10;* Reporting to&#10;This is the organisation to which the reported data is sent. This may be the same as the issuer of the legislation or can be different.&#10;&#10;* Deadline and Next Deadline&#10;The next reporting due date. The next deadline field is the following deadline (Only for numeric dates).&#10;&#10;* Responsible&#10;This links to the nominated national contact for the reporting obligation in the Directory. This field is only populated when the roles are entered and populated in the directory.&#10;&#10;* Deliveries&#10;This provides a link to the status of deliveries page in ROD. This page harvests information from CDR, the principle repository for European environmental reporting."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_SECRETARIATHOMEPAGE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - URL to Secretariat homepage"/>
+      <column name="HELP_TEXT" value="URL of the convention secretariat homepage. URLs in ROD should start with the full address. Example: http://www"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_SECRETARIAT"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Convention secretariat"/>
+      <column name="HELP_TEXT" value="Name of the convention secretariat."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO_OTHERCLIENTS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Other clients using this reporting"/>
+      <column name="HELP_TEXT" value="This field identifies organisations that make use of the information collected under this reporting obligation but who are not the official client organisation. Usually these organisations are actively involved in the reporting obligation.&#10;&#10;This is similar to being a &quot;cc&quot; recipient on an email."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_ECACCESSION"/>
+      <column name="HELP_TITLE" value="Legislative instrument - EC accession"/>
+      <column name="HELP_TEXT" value="For conventions where the EC or EU is a party to the convention, the date of EC accession to a convention. leave blank if not applicable."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_CSINDEX_SEARCH"/>
+      <column name="HELP_TITLE" value="Deadlines Advanced Search"/>
+      <column name="HELP_TEXT" value="This form allows the list of deadlines to be refined to only show deadlines for a certain period or for an issue or organisation.&#10;&#10;Note that text deadlines will appear in all lists generated, as the application does not know when these are calendared for."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_VOLUNTARYCOUNTRIES"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Countries reporting voluntarily"/>
+      <column name="HELP_TEXT" value="This field is for countries who are not officially involved in the reporting obligation but who report on a voluntary basis as a gesture of goodwill or for some other reason.&#10;&#10;Examples include:&#10;* Norway for some EU reporting obligations&#10;* Andorra for EEA reporting&#10;* EU Accession countries for EU reporting obligations&#10;&#10;This field should only be filled at a country's request or for EEA member countries participating in Eionet priority dataflows who are not formally listed as reporters under the obligation."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_NAMEOFREPORTINGGUIDELINES"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Name of reporting guidelines"/>
+      <column name="HELP_TEXT" value="The name of the reporting guidelines that will appear as the hyperlink text for the link to the guidance document. &#10;&#10;See URL to reporting guidelines."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_URLTOREPORTINGGUIDELINES"/>
+      <column name="HELP_TITLE" value="Reporting obligation - URL to reporting guidelines"/>
+      <column name="HELP_TEXT" value="The URL linking to the guidelines homepage or document. (This is sometimes password protected). The url should not return an error page.&#10;&#10;URLs in ROD should start with the full address. (Example: http://www)"/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RO_INFOTYPE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Type of information reported"/>
+      <column name="HELP_TEXT" value="This field is a drop down list where the type of information to be reported can be identified. (Administrative, compliance, data regulatory, spatial, state of the environment, text report). Non of these is precisely defined."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_INDICATORS"/>
+      <column name="HELP_TITLE" value="Reporting obligation - indicators"/>
+      <column name="HELP_TEXT" value="Leave blank."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_FORMATVALIDSINCE"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Format valid since"/>
+      <column name="HELP_TEXT" value="The date on which the reporting guidelines became valid should be entered here. This prevents problems with versions of guidelines. ROD should point to the latest version required for the current or forthcoming reporting cycle."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_CSMAIN1"/>
+      <column name="HELP_TITLE" value="Deadline list refinements"/>
+      <column name="HELP_TEXT" value="This form allows the list of deadlines to be refined to only show deadlines for a certain period or for an issue or organisation.&#10;&#10;Note that text deadlines will appear in all lists generated, as the application does not know when these are calendared for."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_DESCRIPTION"/>
+      <column name="HELP_TITLE" value="Reporting obligation - description"/>
+      <column name="HELP_TEXT" value="This is for a short description of the reporting obligation to expand on the title. Guide length: three lines or less."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_REPORTINGCOORDINATOR"/>
+      <column name="HELP_TITLE" value="Reporting obligation - National reporting coordinators"/>
+      <column name="HELP_TEXT" value="This field should be filled with the details of the coordinator for the reporting for this obligation. This information can be entered into ROD in different ways. &#10;&#10;Ideally, it should be a CIRCA role making use of country suffixes. The CIRCA role prefix (without the country-specific part) should be entered (for example eionet-pcp-acc). Generally, the &quot;national contacts&quot; role should be the NRC for Eionet dataflows and the &quot;national coordinator&quot; should be the PCP Eionet role.&#10;&#10;On saving a record in ROD, the role is checked against the CIRCA directory. Non-existent roles will result in an error message. A list of all roles in the directory can be found at: http://eea.eionet.eu.int:8980/Members/irc/eionet-circle/Home/central_dir_admin?fn=roles&amp;rd=0&amp;af=0&amp;ud=0&amp;od=0&amp;act=srch&amp;v=*&#10;&#10;Alternatively a central CIRCA role may be the contact point for the list of coordinators for all countries. The third option is that the name of the list with a URL pointing to where the list of contacts for this reporting obligation is available on the Internet can be used. These options and the 3 fields should cater for most situations."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_AUTHORITY"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Authority giving rise to the obligation"/>
+      <column name="HELP_TEXT" value="This field should contain the &quot;authority&quot; for the obligation ? e.g. what Article, Decision, Recommendation, etc. gives rise to the Obligation. This is separate and distinct from any &quot;reporting guidelines&quot; or &quot;formats&quot; and is not an organisation. (Example: Article 1, paragraph ii).&#10;&#10;This field may not be appropriate for all obligations. If this information is in the title of the reporting obligation, it should be removed form the title and placed in this field."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_RA_VALIDATEDBY"/>
+      <column name="HELP_TITLE" value="Reporting obligation - Validated by"/>
+      <column name="HELP_TEXT" value="Initials of the person that validated the record and organizational identifier. Validation is a quality assurance carried out by the owners of the reporting obligations in ROD. Legislative authoritative bodies carry out validation for their own reporting obligations. The validated status of records in ROD is not currently displayed."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_DGENVREVIEW"/>
+      <column name="HELP_TITLE" value="Legislative instrument - DG Env review of reporting theme"/>
+      <column name="HELP_TEXT" value="As part of the preparation for the DG Environment framework directive on the review of reporting, EU environmental legislation was classified according to one of 9 themes. Reporting to DG Environment should be correctly classified according to the correct theme."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_GSCOPE"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Geographic scope"/>
+      <column name="HELP_TEXT" value="A few words on the geographical area of coverage of the instrument should be entered here. Examples: European Union; Arctic; Worldwide; North Sea; Baltic Sea; North East Atlantic; etc."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_LI_RMVALIDATEDBY"/>
+      <column name="HELP_TITLE" value="Legislative instrument - Validated by"/>
+      <column name="HELP_TEXT" value="Initials of the person that validated the record and organizational identifier. Validation is a quality assurance carried out by the owners of the reporting obligations in ROD. Legislative authoritative bodies carry out validation for their own reporting obligations. The validated status of records in ROD is not currently displayed."/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_ANALYSIS_EEACORE"/>
+      <column name="HELP_TITLE" value=""/>
+      <column name="HELP_TEXT" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_ANALYSIS_EIONETPRIORITY"/>
+      <column name="HELP_TITLE" value=""/>
+      <column name="HELP_TEXT" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_ANALYSIS_OVERLAPPING"/>
+      <column name="HELP_TITLE" value=""/>
+      <column name="HELP_TEXT" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_HELP_ID" value="HELP_ANALYSIS_FLAGGED"/>
+      <column name="HELP_TITLE" value="Reporting obligation where the delivery process is managed by EEA"/>
+      <column name="HELP_TEXT" value="Also known as: EEA managed data flow (EDF)."/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

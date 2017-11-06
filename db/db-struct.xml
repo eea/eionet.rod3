@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update, liquibase:status or liquibase:changelogSync
+      Potentially with -Dliquibase.dropFirst=true
+ -->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="roug" id="rev-1">
+        <comment>Access control lists</comment>
+        <createTable tableName="ACLS">
+            <column name="ACL_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="ACL_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_NAME" type="VARCHAR(100)"/>
+            <column defaultValue="" name="OWNER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="DESCRIPTION" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createIndex indexName="ACL_NAME" tableName="ACLS" unique="true">
+            <column name="ACL_NAME"/>
+            <column name="PARENT_NAME"/>
+        </createIndex>
+
+        <addAutoIncrement tableName="ACLS" columnName="ACL_ID" columnDataType="INT"/>
+
+    </changeSet>
+
+    <changeSet author="roug" id="rev-2">
+        <createTable tableName="ACL_ROWS">
+            <column defaultValueNumeric="0" name="ACL_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="'object'" name="TYPE" type="enum('object','doc','dcc')">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="'user'" name="ENTRY_TYPE" type="enum('owner','user','localgroup','other','foreign','unauthenticated','authenticated','mask')">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="PRINCIPAL" type="CHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="PERMISSIONS" type="CHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="STATUS" type="INT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="ACL_ID, TYPE, ENTRY_TYPE, PRINCIPAL, STATUS" tableName="ACL_ROWS"/>
+
+    </changeSet>
+
+    <changeSet author="roug" id="rev-3">
+        <createTable tableName="HLP_AREA">
+            <column defaultValue="" name="AREA_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="LANGUAGE" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HTML" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="MD5" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="400" name="POPUP_WIDTH" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="400" name="POPUP_LENGTH" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--
+        <modifySql dbms="mysql">
+             <replace replace="LONGTEXT" with="text"/>
+         </modifySql>
+        -->
+       <addPrimaryKey columnNames="AREA_ID, SCREEN_ID, LANGUAGE" tableName="HLP_AREA"/>
+
+    </changeSet>
+
+    <changeSet author="roug" id="rev-4">
+        <createTable tableName="HLP_SCREEN">
+            <column defaultValue="" name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DESCRIPTION" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--
+        <modifySql dbms="mysql">
+             <replace replace="LONGTEXT" with="text"/>
+        </modifySql>
+         -->
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-5">
+        <sql>CREATE TABLE T_CLIENT (
+  PK_CLIENT_ID int(10) unsigned NOT NULL auto_increment,
+  CLIENT_NAME varchar(255) default NULL,
+  CLIENT_ACRONYM varchar(100) default NULL,
+  CLIENT_URL varchar(255) default NULL,
+  CLIENT_ADDRESS varchar(255) default NULL,
+  CLIENT_EMAIL varchar(255) default NULL,
+  DESCRIPTION text,
+  POSTAL_CODE varchar(100) default NULL,
+  CITY varchar(255) default NULL,
+  COUNTRY varchar(255) default NULL,
+  CLIENT_SHORT_NAME varchar(100) default NULL,
+  PRIMARY KEY  (PK_CLIENT_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-6">
+        <sql>CREATE TABLE T_CLIENT_LNK (
+  FK_CLIENT_ID int(10) NOT NULL default '0',
+  FK_OBJECT_ID int(10) NOT NULL default '0',
+  TYPE char(1) NOT NULL default '',
+  STATUS enum('M','C') NOT NULL default 'M',
+  PRIMARY KEY  (FK_CLIENT_ID,FK_OBJECT_ID,TYPE,STATUS)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-7">
+        <comment>Delivery information from Content Registry to the reporting</comment>
+        <createTable tableName="T_DELIVERY">
+            <column name="RA_URL" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TITLE" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPLOAD_DATE" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DELIVERY_URL" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="FORMAT" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="FK_RA_ID" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="FK_SPATIAL_ID" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="COVERAGE" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="INT(1)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="FK_RA_ID" tableName="T_DELIVERY" unique="false">
+            <column name="FK_RA_ID"/>
+        </createIndex>
+
+        <createIndex indexName="FK_SPATIAL_ID" tableName="T_DELIVERY" unique="false">
+            <column name="FK_SPATIAL_ID"/>
+        </createIndex>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-9">
+        <sql>CREATE TABLE T_HELP (
+  PK_HELP_ID varchar(50) NOT NULL default '',
+  HELP_TITLE varchar(255) default NULL,
+  HELP_TEXT text,
+  PRIMARY KEY  (PK_HELP_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-10">
+        <sql>CREATE TABLE T_HISTORIC_DEADLINES (
+  FK_RA_ID int(10) NOT NULL default '0',
+  DEADLINE date NOT NULL default '0000-00-00',
+  PRIMARY KEY  (FK_RA_ID,DEADLINE)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-11">
+        <sql>CREATE TABLE T_HISTORY (
+  PK_HISTORY_ID int(10) unsigned NOT NULL auto_increment,
+  ITEM_ID int(10) default NULL,
+  ITEM_TYPE char(1) default NULL,
+  ACTION_TYPE char(1) default NULL,
+  LOG_TIME datetime default NULL,
+  USER varchar(100) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (PK_HISTORY_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-12">
+        <sql>CREATE TABLE T_INDICATOR (
+  PK_INDICATOR_ID int(10) NOT NULL auto_increment,
+  FK_RA_ID int(10) NOT NULL default '0',
+  NUMBER varchar(100) NOT NULL default '',
+  TITLE varchar(255) default NULL,
+  URL varchar(255) default NULL,
+  OWNER varchar(255) default NULL,
+  PRIMARY KEY  (PK_INDICATOR_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-13">
+        <sql>CREATE TABLE T_INFO_LNK (
+  FK_RA_ID int(10) NOT NULL default '0',
+  FK_INFO_ID char(1) NOT NULL default '',
+  PRIMARY KEY  (FK_RA_ID,FK_INFO_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-14">
+        <sql>CREATE TABLE T_ISSUE (
+  PK_ISSUE_ID int(11) unsigned NOT NULL auto_increment,
+  ISSUE_NAME varchar(100) NOT NULL default '',
+  FK_DD_GUID int(11) unsigned default NULL,
+  DD_URL varchar(255) default NULL,
+  PRIMARY KEY  (PK_ISSUE_ID),
+  KEY PK_ISSUE_ID (PK_ISSUE_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-15">
+        <sql>CREATE TABLE T_LOOKUP (
+  C_TERM varchar(100) NOT NULL default '',
+  CATEGORY enum('1','2','C','P','L','S','F','UT','ST','I','DGS') NOT NULL default 'P',
+  C_VALUE char(1) default NULL,
+  PRIMARY KEY  (C_TERM,CATEGORY)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-16">
+        <sql>CREATE TABLE T_OBLIGATION (
+  PK_RA_ID int(10) NOT NULL auto_increment,
+  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
+  VALID_SINCE date default NULL,
+  TITLE varchar(255) NOT NULL default '',
+  FORMAT_NAME varchar(100) default NULL,
+  REPORT_FORMAT_URL varchar(255) default NULL,
+  REPORT_FREQ_DETAIL varchar(50) default NULL,
+  REPORTING_FORMAT text,
+  DATE_COMMENTS varchar(255) default NULL,
+  LAST_UPDATE date default NULL,
+  TERMINATE enum('Y','N') NOT NULL default 'N',
+  REPORT_FREQ varchar(25) default NULL,
+  COMMENT text,
+  RESPONSIBLE_ROLE varchar(255) default NULL,
+  NEXT_DEADLINE date default NULL,
+  FIRST_REPORTING date default NULL,
+  REPORT_FREQ_MONTHS int(3) default NULL,
+  NEXT_REPORTING varchar(255) default NULL,
+  VALID_TO date default NULL,
+  FK_DELIVERY_COUNTRY_IDS varchar(255) default NULL,
+  NEXT_DEADLINE2 date default NULL,
+  RM_NEXT_UPDATE date default NULL,
+  RM_VERIFIED date default NULL,
+  RM_VERIFIED_BY varchar(50) default NULL,
+  LAST_HARVESTED datetime default NULL,
+  LOCATION_PTR varchar(255) default NULL,
+  LOCATION_INFO varchar(255) default NULL,
+  LEGAL_MORAL enum('L','M','V') default 'L',
+  FK_CLIENT_ID int(10) default NULL,
+  DESCRIPTION text,
+  RESPONSIBLE_ROLE_SUF int(1) NOT NULL default '1',
+  NATIONAL_CONTACT varchar(255) default NULL,
+  NATIONAL_CONTACT_URL varchar(255) default NULL,
+  COORDINATOR_ROLE varchar(255) default NULL,
+  COORDINATOR_ROLE_SUF int(1) NOT NULL default '1',
+  COORDINATOR varchar(255) default NULL,
+  COORDINATOR_URL varchar(255) default NULL,
+  PARAMETERS text,
+  VALIDATED_BY text,
+  EEA_PRIMARY int(1) default '0',
+  EEA_CORE int(1) default '0',
+  FLAGGED int(1) default '0',
+  AUTHORITY varchar(255) default NULL,
+  OVERLAP_URL varchar(255) default NULL,
+  DPSIR_D enum('yes','no') default NULL,
+  DPSIR_P enum('yes','no') default NULL,
+  DPSIR_S enum('yes','no') default NULL,
+  DPSIR_I enum('yes','no') default NULL,
+  DPSIR_R enum('yes','no') default NULL,
+  DATA_USED_FOR varchar(255) default NULL,
+  DATA_USED_FOR_URL varchar(255) default NULL,
+  CONTINOUS_REPORTING enum('yes','no') default NULL,
+  PRIMARY KEY  (PK_RA_ID),
+  KEY FK_SOURCE_ID (FK_SOURCE_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-17">
+        <sql>CREATE TABLE T_RAISSUE_LNK (
+  FK_ISSUE_ID int(10) unsigned NOT NULL default '0',
+  FK_RA_ID int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (FK_ISSUE_ID,FK_RA_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-18">
+        <sql>CREATE TABLE T_RASPATIAL_LNK (
+  FK_SPATIAL_ID int(10) unsigned NOT NULL default '0',
+  FK_RA_ID int(10) unsigned NOT NULL default '0',
+  VOLUNTARY enum('Y','N') NOT NULL default 'Y',
+  PRIMARY KEY  (FK_SPATIAL_ID,FK_RA_ID,VOLUNTARY)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-19">
+        <comment>Role information from DIRECTORY</comment>
+        <sql>CREATE TABLE T_ROLE (
+  ROLE_NAME varchar(255) NOT NULL default '',
+  ROLE_EMAIL varchar(255) NOT NULL default '',
+  ROLE_URL text,
+  ROLE_ID varchar(255) NOT NULL default '',
+  ROLE_MEMBERS_URL varchar(255) default NULL,
+  LAST_HARVESTED datetime default NULL,
+  STATUS int(1) NOT NULL default '0',
+  PRIMARY KEY  (ROLE_ID,STATUS)
+) COMMENT='Role information from DIRECTORY'</sql>
+   </changeSet>
+
+    <changeSet author="roug" id="rev-21">
+        <sql>CREATE TABLE T_SOURCE (
+  PK_SOURCE_ID int(10) unsigned NOT NULL auto_increment,
+  FK_TYPE_ID int(10) unsigned NOT NULL default '0',
+  SOURCE_CODE varchar(50) NOT NULL default '',
+  TITLE text NOT NULL,
+  CELEX_REF varchar(255) default NULL,
+  LEGAL_NAME varchar(255) NOT NULL default '',
+  URL text,
+  SECRETARIAT text,
+  SECRETARIAT_URL varchar(255) default NULL,
+  ABSTRACT text,
+  EC_ACCESSION date default NULL,
+  EC_ENTRY_INTO_FORCE date default NULL,
+  DRAFT enum('Y','N') default NULL,
+  COMMENT text,
+  LAST_MODIFIED date default NULL,
+  ISSUED_BY text,
+  VALID_FROM date default NULL,
+  ALIAS text,
+  ISSUED_BY_URL varchar(255) default NULL,
+  FK_CLIENT_ID int(10) default NULL,
+  LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  RM_NEXT_UPDATE date default NULL,
+  RM_VERIFIED date default NULL,
+  RM_VERIFIED_BY varchar(50) default NULL,
+  GEOGRAPHIC_SCOPE varchar(255) default NULL,
+  DGENV_REVIEW char(1) default NULL,
+  RM_VALIDATED_BY varchar(50) default NULL,
+  PRIMARY KEY  (PK_SOURCE_ID),
+  KEY FK_TYPE_ID (FK_TYPE_ID),
+  KEY LEGAL_NAME (LEGAL_NAME),
+  KEY FT_TITLE (TITLE(1)),
+  KEY TITLE (TITLE(20)),
+  KEY FT_ALIAS (ALIAS(1)),
+  KEY ALIAS (ALIAS(20))
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-22">
+        <sql>CREATE TABLE T_SOURCE_CLASS (
+  PK_CLASS_ID int(10) unsigned NOT NULL auto_increment,
+  CLASSIFICATOR varchar(20) default NULL,
+  CLASS_NAME varchar(255) NOT NULL default '',
+  NEW tinyint(3) unsigned NOT NULL default '1',
+  PRIMARY KEY  (PK_CLASS_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-23">
+        <sql>CREATE TABLE T_SOURCE_LNK (
+  PK_SOURCE_LNK_ID int(10) unsigned NOT NULL auto_increment,
+  FK_SOURCE_CHILD_ID int(10) unsigned NOT NULL default '0',
+  CHILD_TYPE enum('S','C') NOT NULL default 'S',
+  FK_SOURCE_PARENT_ID int(10) unsigned NOT NULL default '0',
+  PARENT_TYPE enum('S','C') NOT NULL default 'S',
+  PRIMARY KEY  (PK_SOURCE_LNK_ID),
+  UNIQUE KEY FK_SOURCE_CHILD_ID_2 (FK_SOURCE_CHILD_ID,CHILD_TYPE,FK_SOURCE_PARENT_ID,PARENT_TYPE),
+  KEY FK_SOURCE_CHILD_ID (FK_SOURCE_CHILD_ID,CHILD_TYPE),
+  KEY FK_SOURCE_PARENT_ID (FK_SOURCE_PARENT_ID,PARENT_TYPE)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-24">
+        <sql>CREATE TABLE T_SOURCE_TYPE (
+  PK_TYPE_ID int(10) unsigned NOT NULL auto_increment,
+  TYPE varchar(255) NOT NULL default '',
+  NEW tinyint(3) unsigned NOT NULL default '1',
+  PRIMARY KEY  (PK_TYPE_ID),
+  KEY TYPE (TYPE)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-25">
+        <sql>CREATE TABLE T_SPATIAL (
+  PK_SPATIAL_ID int(11) NOT NULL auto_increment,
+  SPATIAL_NAME varchar(100) NOT NULL default '',
+  SPATIAL_TYPE char(1) NOT NULL default '',
+  FK_DD_GUID int(11) default NULL,
+  DD_URL varchar(255) default NULL,
+  SPATIAL_TWOLETTER varchar(2) default NULL,
+  SPATIAL_ISMEMBERCOUNTRY enum('Y','N') default NULL,
+  PRIMARY KEY  (PK_SPATIAL_ID),
+  KEY PK_SPATIAL_ID (PK_SPATIAL_ID),
+  KEY SPATIAL_TYPE (SPATIAL_TYPE)
+) COMMENT='SpatialCoverage'</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-26">
+        <sql>CREATE TABLE T_SPATIAL_HISTORY (
+  FK_SPATIAL_ID int(10) unsigned NOT NULL default '0',
+  FK_RA_ID int(10) unsigned NOT NULL default '0',
+  VOLUNTARY enum('Y','N') default 'N',
+  START_DATE date default NULL,
+  END_DATE date default NULL,
+  PK_SPATIAL_HISTORY_ID int(10) unsigned NOT NULL auto_increment,
+  PRIMARY KEY  (PK_SPATIAL_HISTORY_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-27">
+        <sql>CREATE TABLE T_UNDO (
+  undo_time bigint(20) NOT NULL default '0',
+  tab varchar(32) NOT NULL default '',
+  col varchar(32) NOT NULL default '',
+  operation enum('I','D','U','A','L','K','O','UN','UD','UDD','T','ACL') NOT NULL default 'I',
+  quotes enum('n','y') default NULL,
+  p_key enum('n','y') default NULL,
+  value blob,
+  sub_trans_nr int(11) NOT NULL default '0',
+  show_object enum('n','y') default NULL,
+  PRIMARY KEY  (undo_time,tab,col,operation,sub_trans_nr),
+  KEY col (col)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-28">
+        <sql>CREATE TABLE X_ACTIVITY (
+  PK_RA_ID int(10) unsigned NOT NULL auto_increment,
+  FK_RO_ID int(10) unsigned NOT NULL default '0',
+  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
+  VALID_SINCE date default NULL,
+  TITLE varchar(255) NOT NULL default '',
+  FORMAT_NAME varchar(100) default NULL,
+  REPORT_FORMAT_URL varchar(255) default NULL,
+  REPORT_FREQ_DETAIL varchar(50) default NULL,
+  REPORTING_FORMAT text,
+  DATE_COMMENTS varchar(255) default NULL,
+  LAST_UPDATE date default NULL,
+  TERMINATE enum('Y','N') NOT NULL default 'N',
+  REPORT_FREQ varchar(25) default NULL,
+  COMMENT text,
+  RESPONSIBLE_ROLE varchar(255) default NULL,
+  NEXT_DEADLINE date default NULL,
+  FIRST_REPORTING date default NULL,
+  REPORT_FREQ_MONTHS int(3) default NULL,
+  NEXT_REPORTING varchar(255) default NULL,
+  VALID_TO date default NULL,
+  FK_DELIVERY_COUNTRY_IDS varchar(255) default NULL,
+  NEXT_DEADLINE2 date default NULL,
+  RM_NEXT_UPDATE date default NULL,
+  RM_VERIFIED date default NULL,
+  RM_VERIFIED_BY varchar(50) default NULL,
+  LAST_HARVESTED datetime default NULL,
+  LOCATION_PTR varchar(255) default NULL,
+  LOCATION_INFO varchar(255) default NULL,
+  PRIMARY KEY  (PK_RA_ID),
+  KEY FK_REPORTING_ID (FK_RO_ID)
+) COMMENT='Reporting Activity'</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-29">
+        <sql>CREATE TABLE X_CLIENT_LNK (
+  FK_CLIENT_ID int(10) default NULL,
+  FK_OBJECT_ID int(10) default NULL,
+  TYPE char(1) default NULL,
+  STATUS char(1) default NULL
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-30">
+        <sql>CREATE TABLE X_PARAMETER (
+  PK_PARAMETER_ID int(10) unsigned NOT NULL auto_increment,
+  PARAMETER_NAME varchar(100) NOT NULL default '',
+  FK_GROUP_ID int(11) NOT NULL default '0',
+  FK_DD_GUID int(11) unsigned default NULL,
+  DD_URL varchar(255) default NULL,
+  NEW tinyint(3) unsigned NOT NULL default '1',
+  PRIMARY KEY  (PK_PARAMETER_ID),
+  KEY FK_GROUP_ID (FK_GROUP_ID),
+  KEY PARAMETER_NAME (PARAMETER_NAME)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-31">
+        <sql>CREATE TABLE X_PARAMETER_LNK (
+  PK_PARAMETER_LNK_ID int(10) unsigned NOT NULL auto_increment,
+  FK_PARAMETER_ID int(10) unsigned NOT NULL default '0',
+  PARAMETER_UNIT varchar(50) default NULL,
+  FK_RA_ID int(10) unsigned NOT NULL default '0',
+  FK_UNIT_ID int(11) default NULL,
+  PRIMARY KEY  (PK_PARAMETER_LNK_ID),
+  KEY FK_PARAMETER_ID (FK_PARAMETER_ID),
+  KEY FK_RA_ID (FK_RA_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-32">
+        <sql>CREATE TABLE X_PARAM_GROUP (
+  PK_GROUP_ID int(11) NOT NULL auto_increment,
+  GROUP_NAME varchar(100) NOT NULL default '',
+  FK_DD_GUID int(11) default NULL,
+  DD_URL varchar(255) default NULL,
+  GROUP_TYPE enum('C','S') NOT NULL default 'C',
+  PRIMARY KEY  (PK_GROUP_ID),
+  KEY PK_GROUP_ID (PK_GROUP_ID)
+) COMMENT='GROUP'</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-33">
+        <sql>CREATE TABLE X_REPORTING (
+  PK_RO_ID int(10) unsigned NOT NULL auto_increment,
+  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
+  LEGAL_MORAL enum('L','M','V') NOT NULL default 'L',
+  LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  ALIAS varchar(255) default NULL,
+  REPORT_TO text,
+  VALID_FROM date default NULL,
+  RECOGNIZED enum('Y','N') NOT NULL default 'N',
+  RECOGNIZED_DETAIL varchar(255) default NULL,
+  REPORT_TO_ROLE varchar(255) default NULL,
+  FK_CLIENT_ID int(10) default NULL,
+  RM_NEXT_UPDATE date default NULL,
+  RM_VERIFIED date default NULL,
+  RM_VERIFIED_BY varchar(50) default NULL,
+  PRIMARY KEY  (PK_RO_ID),
+  KEY LEGAL_MORAL (LEGAL_MORAL),
+  KEY FK_SOURCE_ID (FK_SOURCE_ID)
+)</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-34">
+        <comment>Links spatial coverage and reporting obligation elements</comment>
+        <sql>CREATE TABLE X_SPATIAL_LNK (
+  PK_SPATIAL_LNK_ID int(11) NOT NULL auto_increment,
+  FK_SPATIAL_ID int(11) NOT NULL default '0',
+  FK_RO_ID int(11) NOT NULL default '0',
+  VOLUNTARY enum('Y','N') default 'N',
+  PRIMARY KEY  (PK_SPATIAL_LNK_ID),
+  KEY FK_SPATIAL_ID (FK_SPATIAL_ID),
+  KEY FK_RO_ID (FK_RO_ID)
+) COMMENT='Links spatial coverage and reporting obligation elements'</sql>
+   </changeSet>
+
+
+    <changeSet author="roug" id="rev-35">
+        <comment>Parameter unit types</comment>
+        <sql>CREATE TABLE X_UNIT (
+  PK_UNIT_ID int(11) unsigned NOT NULL auto_increment,
+  UNIT_NAME varchar(50) NOT NULL default '',
+  UNIT_HELP text,
+  PRIMARY KEY  (PK_UNIT_ID)
+) COMMENT='Parameter unit types'</sql>
+   </changeSet>
+
+    <changeSet author="heinlja" id="rev-36">
+        <comment>Add COVERAGE_NOTE column to T_DELIVERY</comment>
+        <sql>ALTER TABLE T_DELIVERY ADD COLUMN COVERAGE_NOTE TEXT DEFAULT NULL AFTER COVERAGE</sql>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-37">
+        <comment>Labels for names in T_ATTRIBUTE</comment>
+        <sql>CREATE TABLE T_NAMELABEL (
+  NAME varchar(50) NOT NULL default '',
+  LABEL varchar(64) default '',
+  PRIMARY KEY  (NAME)
+) COMMENT='Labels for names in T_ATTRIBUTE'</sql>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-38">
+        <comment>Ability to have random attributes on main objects</comment>
+        <sql>CREATE TABLE T_ATTRIBUTE (
+  ID int(11) NOT NULL default '-1',
+  SCOPE enum('obligations','instruments','clients','spatial') NOT NULL default 'obligations',
+  NAME varchar(50) NOT NULL default '',
+  OBJECT varchar(255) NOT NULL default '',
+  OBJECTLANG varchar(10) NOT NULL default '',
+  TYPE enum('reference','','string','integer','decimal','boolean','dateTime','date') default '',
+  LINKTEXT varchar(64) default '',
+  PRIMARY KEY  (ID,SCOPE,NAME,OBJECT,OBJECTLANG),
+  KEY PREDICATE (NAME),
+  KEY OBJECT (OBJECT),
+  CONSTRAINT T_ATTRIBUTE_ibfk_1 FOREIGN KEY (NAME) REFERENCES T_NAMELABEL (NAME)
+) COMMENT='Object attributes'</sql>
+    </changeSet>
+
+</databaseChangeLog>

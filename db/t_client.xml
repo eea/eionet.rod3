@@ -1,0 +1,801 @@
+<?xml version="1.0"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet author="roug" id="rev-1" context="demo">
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="1"/>
+      <column name="CLIENT_NAME" value="UNEP - Ozone Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="OZONE"/>
+      <column name="CLIENT_URL" value="http://www.unep.org/ozone"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="2"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General Environment"/>
+      <column name="CLIENT_ACRONYM" value="DG ENV (EC)"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/environment/index_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="Rue de la Loi 200"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="B-1049"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+      <column name="CLIENT_SHORT_NAME" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="3"/>
+      <column name="CLIENT_NAME" value="European Environment Agency"/>
+      <column name="CLIENT_ACRONYM" value="EEA"/>
+      <column name="CLIENT_URL" value="http://www.eea.europa.eu/"/>
+      <column name="CLIENT_ADDRESS" value="Kongens Nytorv 6"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="DK-1050"/>
+      <column name="CITY" value="Copenhagen"/>
+      <column name="COUNTRY" value="Denmark"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="4"/>
+      <column name="CLIENT_NAME" value="OSPAR Convention"/>
+      <column name="CLIENT_ACRONYM" value="OSPAR"/>
+      <column name="CLIENT_URL" value="http://www.ospar.org/"/>
+      <column name="CLIENT_ADDRESS" value="New Court, 48 Carey Street"/>
+      <column name="CLIENT_EMAIL" value="secretariat@ospar.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="GB-WC2A 2JQ"/>
+      <column name="CITY" value="London"/>
+      <column name="COUNTRY" value="United Kingdom"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="102"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General for Maritime Affairs and Fisheries"/>
+      <column name="CLIENT_ACRONYM" value="DG MARE"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/maritimeaffairs_fisheries/index_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="Rue Joseph II, 99"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="6"/>
+      <column name="CLIENT_NAME" value="Basel Convention"/>
+      <column name="CLIENT_ACRONYM" value="SBC"/>
+      <column name="CLIENT_URL" value="http://www.basel.int/"/>
+      <column name="CLIENT_ADDRESS" value="11-13 chemin des An&#xE9;mones"/>
+      <column name="CLIENT_EMAIL" value="sbc@unep.ch"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CH-1219"/>
+      <column name="CITY" value="Ch&#xE2;telaine, Geneva"/>
+      <column name="COUNTRY" value="Bosnia-Herzegovina"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="7"/>
+      <column name="CLIENT_NAME" value="Eurostat"/>
+      <column name="CLIENT_ACRONYM" value="EUROSTAT"/>
+      <column name="CLIENT_URL" value="http://epp.eurostat.ec.europa.eu/"/>
+      <column name="CLIENT_ADDRESS" value="B&#xE2;timent Jean Monnet Rue Alcide de Gasperi"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="L-2920"/>
+      <column name="CITY" value="Luxembourg"/>
+      <column name="COUNTRY" value="Luxembourg"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="8"/>
+      <column name="CLIENT_NAME" value="Arctic Council, AMAP Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="AMAP"/>
+      <column name="CLIENT_URL" value="http://www.amap.no/"/>
+      <column name="CLIENT_ADDRESS" value="Str&#xF8;msveien 96, P.O. Box 8100 Dep"/>
+      <column name="CLIENT_EMAIL" value="amap@amap.no"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="N-0032"/>
+      <column name="CITY" value="Oslo"/>
+      <column name="COUNTRY" value="Norway"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="10"/>
+      <column name="CLIENT_NAME" value="European Council"/>
+      <column name="CLIENT_URL" value="http://www.european-council.europa.eu"/>
+      <column name="CLIENT_ADDRESS" value="Rue de la Loi, 175"/>
+      <column name="DESCRIPTION" value="The European Council is the institution of the European Union (EU) responsible for defining the general political direction and priorities of the Union. It is different from the Council (or Council of the European Union)."/>
+      <column name="POSTAL_CODE" value="B-1048"/>
+      <column name="CITY" value="Brussels"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="11"/>
+      <column name="CLIENT_NAME" value="United Nations"/>
+      <column name="CLIENT_ACRONYM" value="UN"/>
+      <column name="CLIENT_URL" value="http://www.un.org"/>
+      <column name="CLIENT_ADDRESS" value=""/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="12"/>
+      <column name="CLIENT_NAME" value="European Parliament and Council"/>
+      <column name="CLIENT_ACRONYM" value="EP&amp;C"/>
+      <column name="CLIENT_URL" value="http://www.europarl.europa.eu/"/>
+      <column name="CLIENT_ADDRESS" value="WiertzStraat"/>
+      <column name="POSTAL_CODE" value="B-1047"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="14"/>
+      <column name="CLIENT_NAME" value="International Commission for the Protection of the Danube River"/>
+      <column name="CLIENT_ACRONYM" value="ICPDR"/>
+      <column name="CLIENT_URL" value="http://www.icpdr.org/"/>
+      <column name="CLIENT_ADDRESS" value="Vienna International Center, D0412, P. O. Box 500"/>
+      <column name="CLIENT_EMAIL" value="icpdr@unvienna.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="A-1400"/>
+      <column name="CITY" value="Vienna"/>
+      <column name="COUNTRY" value="Austria"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="15"/>
+      <column name="CLIENT_NAME" value="International Commission for the Protection of the Elbe"/>
+      <column name="CLIENT_ACRONYM" value="ICPE / IKSE / MKOL"/>
+      <column name="CLIENT_URL" value="http://www.ikse-mkol.de/"/>
+      <column name="CLIENT_ADDRESS" value="F&#xFC;rstenwallstr. 20"/>
+      <column name="CLIENT_EMAIL" value="IKSE.MKOL@t-online.de"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-39104"/>
+      <column name="CITY" value="Magdeburg"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="16"/>
+      <column name="CLIENT_NAME" value="Oder Commission"/>
+      <column name="CLIENT_ACRONYM" value="ICPOAP"/>
+      <column name="CLIENT_URL" value="http://www.mkoo.pl"/>
+      <column name="CLIENT_ADDRESS" value="Ul. C.K. Norwida 34"/>
+      <column name="CLIENT_EMAIL" value="mkoo@mkoo.pl"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="PL-50-375"/>
+      <column name="CITY" value="Wroclaw"/>
+      <column name="COUNTRY" value="Poland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="35"/>
+      <column name="CLIENT_NAME" value="UN Framework Convention on Climate Change"/>
+      <column name="CLIENT_ACRONYM" value="UNFCCC"/>
+      <column name="CLIENT_URL" value="http://unfccc.int/"/>
+      <column name="CLIENT_ADDRESS" value="Haus Carstanjen, Martin-Luther-King-Strasse 8"/>
+      <column name="CLIENT_EMAIL" value="secretariat@unfcc.int"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53175"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="23"/>
+      <column name="CLIENT_NAME" value="International Council for the Exploration of the Sea"/>
+      <column name="CLIENT_ACRONYM" value="ICES"/>
+      <column name="CLIENT_URL" value="http://www.ices.dk/"/>
+      <column name="CLIENT_ADDRESS" value="Pal&#xE6;gade 2-4"/>
+      <column name="CLIENT_EMAIL" value="info@ices.dk"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="DK - 1261"/>
+      <column name="CITY" value="Copenhagen K"/>
+      <column name="COUNTRY" value="Denmark"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="24"/>
+      <column name="CLIENT_NAME" value="Black Sea Commission"/>
+      <column name="CLIENT_ACRONYM" value="BSC"/>
+      <column name="CLIENT_URL" value="http://www.blacksea-environment.org/"/>
+      <column name="CLIENT_ADDRESS" value="Dolmabahce Saray 2. Hareket Kosku"/>
+      <column name="CLIENT_EMAIL" value="pdzhadzhev@blacksea-commission.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="TR-34353"/>
+      <column name="CITY" value="Besiktas, Istanbul"/>
+      <column name="COUNTRY" value="Turkey"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="25"/>
+      <column name="CLIENT_NAME" value="International Maritime Organisation"/>
+      <column name="CLIENT_ACRONYM" value="IMO"/>
+      <column name="CLIENT_URL" value="http://www.imo.org/home.asp"/>
+      <column name="CLIENT_ADDRESS" value="4 Albert Embankment"/>
+      <column name="CLIENT_EMAIL" value="info@imo.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="GB-SE1 7SR"/>
+      <column name="CITY" value="London"/>
+      <column name="COUNTRY" value="United Kingdom"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="37"/>
+      <column name="CLIENT_NAME" value="Rhine Commission"/>
+      <column name="CLIENT_ACRONYM" value="ICPR (RHINE)"/>
+      <column name="CLIENT_URL" value="http://www.iskr.org"/>
+      <column name="CLIENT_ADDRESS" value="Postfach 309"/>
+      <column name="CLIENT_EMAIL" value="sekretariat@iksr.de"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-56003"/>
+      <column name="CITY" value="Koblenz"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="34"/>
+      <column name="CLIENT_NAME" value="UNECE Environment and Human Settlements Division"/>
+      <column name="CLIENT_ACRONYM" value="UNECE"/>
+      <column name="CLIENT_URL" value="http://www.unece.org/env/"/>
+      <column name="CLIENT_ADDRESS" value="Palais des Nations, 8-14, avenue de la Paix"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CH-1211"/>
+      <column name="CITY" value="Geneva 10"/>
+      <column name="COUNTRY" value="Switzerland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="38"/>
+      <column name="CLIENT_NAME" value="Coordinating Unit for the Mediterranean Action Plan"/>
+      <column name="CLIENT_ACRONYM" value="MAP"/>
+      <column name="CLIENT_URL" value="http://www.unepmap.org/"/>
+      <column name="CLIENT_ADDRESS" value="P.O. Box 18019"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="11610"/>
+      <column name="CITY" value="Athens"/>
+      <column name="COUNTRY" value="Greece"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="39"/>
+      <column name="CLIENT_NAME" value="Organization for Economic Cooperation and Development"/>
+      <column name="CLIENT_ACRONYM" value="OECD"/>
+      <column name="CLIENT_URL" value="http://www.oecd.org"/>
+      <column name="CLIENT_ADDRESS" value="Environment Directorate2, rue Andre Pascal"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="F-75775"/>
+      <column name="CITY" value="Paris Cedex 16"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="41"/>
+      <column name="CLIENT_NAME" value="United Nations Environment Programme"/>
+      <column name="CLIENT_ACRONYM" value="UNEP"/>
+      <column name="CLIENT_URL" value="http://www.unep.org"/>
+      <column name="CLIENT_ADDRESS" value="various"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="42"/>
+      <column name="CLIENT_NAME" value="Convention on Biological Diversity"/>
+      <column name="CLIENT_ACRONYM" value="CBD"/>
+      <column name="CLIENT_URL" value="http://www.biodiv.org"/>
+      <column name="CLIENT_ADDRESS" value="World Trade Centre, 393 St. Jacques Street, Office 300"/>
+      <column name="CLIENT_EMAIL" value="secretariat@biodiv.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CDN-H2Y 1N9"/>
+      <column name="CITY" value="Montreal, Quebec"/>
+      <column name="COUNTRY" value="Canada"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="44"/>
+      <column name="CLIENT_NAME" value="UNEP-CMS Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="CMS"/>
+      <column name="CLIENT_URL" value="http://www.cms.int"/>
+      <column name="CLIENT_ADDRESS" value="United Nations Premises in Bonn, Martin-Luther-King-Str. 8"/>
+      <column name="POSTAL_CODE" value="D-53175"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="45"/>
+      <column name="CLIENT_NAME" value="UNEP/AEWA Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="AEWA"/>
+      <column name="CLIENT_URL" value="http://www.unep-aewa.org"/>
+      <column name="CLIENT_ADDRESS" value="United Nations Premises in Bonn, Martin-Luther-King-Str. 8"/>
+      <column name="CLIENT_EMAIL" value="aewa@unep.de"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53175"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="46"/>
+      <column name="CLIENT_NAME" value="UNEP/ASCOBANS Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="ASCOBANS"/>
+      <column name="CLIENT_URL" value="http://www.ascobans.org"/>
+      <column name="CLIENT_ADDRESS" value="United Nations Premises in Bonn, Martin-Luther-King-Str. 8"/>
+      <column name="CLIENT_EMAIL" value="ascobans@ascobans.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53175"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="48"/>
+      <column name="CLIENT_NAME" value="Ramsar Convention"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.ramsar.org"/>
+      <column name="CLIENT_ADDRESS" value="Rue Mauverney 28"/>
+      <column name="CLIENT_EMAIL" value="ramsar@ramsar.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CH-1196"/>
+      <column name="CITY" value="Gland"/>
+      <column name="COUNTRY" value="Switzerland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="49"/>
+      <column name="CLIENT_NAME" value="Ramsar Bureau and the Scientific and Technical Review Panel"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.ramsar.org"/>
+      <column name="CLIENT_ADDRESS" value="Rue Mauverney 28"/>
+      <column name="CLIENT_EMAIL" value="ramsar@ramsar.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CH-1196"/>
+      <column name="CITY" value="Gland"/>
+      <column name="COUNTRY" value="Switzerland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="50"/>
+      <column name="CLIENT_NAME" value="ACCOBAMS Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="ACCOBAMS"/>
+      <column name="CLIENT_URL" value="http://www.accobams.org"/>
+      <column name="CLIENT_ADDRESS" value="16 bd de Suisse"/>
+      <column name="CLIENT_EMAIL" value="mcvanklaveren@accobams.mc"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="MC-98000"/>
+      <column name="CITY" value="Monaco"/>
+      <column name="COUNTRY" value="Monaco"/>
+      <column name="CLIENT_SHORT_NAME" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="51"/>
+      <column name="CLIENT_NAME" value="United Nations Educational, Scientific and Cultural Organization"/>
+      <column name="CLIENT_ACRONYM" value="UNESCO"/>
+      <column name="CLIENT_URL" value="http://www.unesco.org"/>
+      <column name="CLIENT_ADDRESS" value="7, Place de Fontenoy"/>
+      <column name="CLIENT_EMAIL" value="bpiweb@unesco.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="F-75352"/>
+      <column name="CITY" value="Paris 07 SP"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="53"/>
+      <column name="CLIENT_NAME" value="World Heritage Committee, UNESCO World Heritage Centre"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.unesco.org/whc"/>
+      <column name="CLIENT_ADDRESS" value="7, place de Fontenoy"/>
+      <column name="CLIENT_EMAIL" value="wh-info@unesco.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="F-75352"/>
+      <column name="CITY" value="Paris 07 SP"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="54"/>
+      <column name="CLIENT_NAME" value="UNESCO World Heritage Centre"/>
+      <column name="CLIENT_ACRONYM" value="UNESCO"/>
+      <column name="CLIENT_URL" value=""/>
+      <column name="CLIENT_ADDRESS" value="7, place de Fontenoy"/>
+      <column name="CLIENT_EMAIL" value="wh-info@unesco.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="F-75352"/>
+      <column name="CITY" value="Paris 07 SP"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="55"/>
+      <column name="CLIENT_NAME" value="Biosafety Clearing House"/>
+      <column name="CLIENT_ACRONYM" value="BCH"/>
+      <column name="CLIENT_URL" value="http://bch.biodiv.org/"/>
+      <column name="CLIENT_ADDRESS" value="393 rue Saint-Jacques, suite 300"/>
+      <column name="DESCRIPTION" value="Affected of potentially affected States and the Biosafety Clearing House"/>
+      <column name="POSTAL_CODE" value="H2Y 1N9"/>
+      <column name="CITY" value="Montreal"/>
+      <column name="COUNTRY" value="Canada"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="101"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General for Energy"/>
+      <column name="CLIENT_ACRONYM" value="DG Energy"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/energy/mission_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="Rue J.-A. Demot, 24-28"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="58"/>
+      <column name="CLIENT_NAME" value="CITES Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="CITES"/>
+      <column name="CLIENT_URL" value="http://www.cites.org"/>
+      <column name="CLIENT_ADDRESS" value="International Environment House, Chemin des An&#xE9;mones, Ch&#xE2;telaine"/>
+      <column name="CLIENT_EMAIL" value="cites@unep.ch"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="CH-1219"/>
+      <column name="CITY" value="Geneva"/>
+      <column name="COUNTRY" value="Switzerland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="59"/>
+      <column name="CLIENT_NAME" value="Committee for the Habitats Directive, European Commission"/>
+      <column name="CLIENT_ACRONYM" value="DG ENV"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/environment/contact/contact_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="European Commission, Rue de la Loi / Wetstraat 200"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="B-1049"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="60"/>
+      <column name="CLIENT_NAME" value="Food and Agriculture Organization"/>
+      <column name="CLIENT_ACRONYM" value="FAO"/>
+      <column name="CLIENT_URL" value="http://www.fao.org"/>
+      <column name="CLIENT_ADDRESS" value="Viale delle Terme di Caracalla"/>
+      <column name="CLIENT_EMAIL" value="FAO-HQ@fao.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="I-00100"/>
+      <column name="CITY" value="Rome"/>
+      <column name="COUNTRY" value="Italy"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="61"/>
+      <column name="CLIENT_NAME" value="FAO Forestry Resources Assessment Programme"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.fao.org/forestry/foris/webview/forestry2/index.jsp?siteId=101&amp;langId=1"/>
+      <column name="CLIENT_ADDRESS" value="Forestry Department, Viale delle Terme di Caracalla"/>
+      <column name="CLIENT_EMAIL" value="FRA@fao.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="00100"/>
+      <column name="CITY" value="Rome"/>
+      <column name="COUNTRY" value="Italy"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="62"/>
+      <column name="CLIENT_NAME" value="Council of Europe"/>
+      <column name="CLIENT_ACRONYM" value="COE"/>
+      <column name="CLIENT_URL" value="http://www.coe.int"/>
+      <column name="CLIENT_ADDRESS" value="Avenue de l&#x2019;Europe"/>
+      <column name="DESCRIPTION" value="The international organisation of 47 European countries. Not an EU body!"/>
+      <column name="POSTAL_CODE" value="F-67075"/>
+      <column name="CITY" value="Strasbourg"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="63"/>
+      <column name="CLIENT_NAME" value="Bern Convention"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://conventions.coe.int/Treaty/en/Treaties/Html/104.htm"/>
+      <column name="CLIENT_ADDRESS" value="Council of Europe, Avenue de l&#x2019;Europe"/>
+      <column name="CLIENT_EMAIL" value="eladio.fernandez-galiano@coe.int"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="F-67000"/>
+      <column name="CITY" value="Strasbourg"/>
+      <column name="COUNTRY" value="France"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="65"/>
+      <column name="CLIENT_NAME" value="EUROBATS Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="EUROBATS"/>
+      <column name="CLIENT_URL" value="http://www.eurobats.org"/>
+      <column name="CLIENT_ADDRESS" value="United Nations Premises, Martin-Luther-King-Str. 8"/>
+      <column name="CLIENT_EMAIL" value="info@eurobats.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53175"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="66"/>
+      <column name="CLIENT_NAME" value="International Whaling Commission"/>
+      <column name="CLIENT_ACRONYM" value="IWC"/>
+      <column name="CLIENT_URL" value="http://www.iwcoffice.org"/>
+      <column name="CLIENT_ADDRESS" value="The Red House, 135 Station Road, Impington"/>
+      <column name="CLIENT_EMAIL" value="secretariat@iwcoffice.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="GB-CB4 9NP"/>
+      <column name="CITY" value="Cambridge"/>
+      <column name="COUNTRY" value="United Kingdom"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="67"/>
+      <column name="CLIENT_NAME" value="Scientific Committee, via the IWC Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="SC-IWC"/>
+      <column name="CLIENT_URL" value="http://www.iwcoffice.org"/>
+      <column name="CLIENT_ADDRESS" value="The Red House, 135 Station Road, Impington"/>
+      <column name="CLIENT_EMAIL" value="secretariat@iwcoffice.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="GB-CB4 9NP"/>
+      <column name="CITY" value="Cambridge"/>
+      <column name="COUNTRY" value="United Kingdom"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="68"/>
+      <column name="CLIENT_NAME" value="Alpine Convention Secretariat"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.alpenkonvention.org"/>
+      <column name="CLIENT_ADDRESS" value=""/>
+      <column name="CLIENT_EMAIL" value="alpconv@eurac.edu"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value="Innsbruck"/>
+      <column name="COUNTRY" value="Austria"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="69"/>
+      <column name="CLIENT_NAME" value="Programme Co-ordinating Centre"/>
+      <column name="CLIENT_ACRONYM" value="PCC"/>
+      <column name="CLIENT_URL" value="http://www.icp-forests.org/ChairCC.htm"/>
+      <column name="CLIENT_ADDRESS" value="Federal Research Centre for Forestry and Forest Products (BFH), Leuschnerstrasse 91"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-21031"/>
+      <column name="CITY" value="Hamburg"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="70"/>
+      <column name="CLIENT_NAME" value="Committee for Environmental Protection"/>
+      <column name="CLIENT_ACRONYM" value="CEP"/>
+      <column name="CLIENT_URL" value="http://www.cep.aq/"/>
+      <column name="CLIENT_ADDRESS" value="Australian Antarctic Division, Channel Highway, Kingston"/>
+      <column name="CLIENT_EMAIL" value="cep@cep.aq"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="AUS-7050"/>
+      <column name="CITY" value="Tasmania"/>
+      <column name="COUNTRY" value="Australia"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="71"/>
+      <column name="CLIENT_NAME" value="Commission for the Conservation of Antarctic Marine Living Resources"/>
+      <column name="CLIENT_ACRONYM" value="CCAMLR"/>
+      <column name="CLIENT_URL" value="http://www.ccamlr.org"/>
+      <column name="CLIENT_ADDRESS" value="PO Box 213, North Hobart"/>
+      <column name="CLIENT_EMAIL" value="ccamlr@ccamlr.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="AUS-7002"/>
+      <column name="CITY" value="Tasmania"/>
+      <column name="COUNTRY" value="Australia"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="72"/>
+      <column name="CLIENT_NAME" value="Baltic Marine Environment Protection Commission (Helsinki Commission)"/>
+      <column name="CLIENT_ACRONYM" value="HELCOM"/>
+      <column name="CLIENT_URL" value="http://www.helcom.fi"/>
+      <column name="CLIENT_ADDRESS" value="Katajanokanlaituri 6B"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="FIN-00160"/>
+      <column name="CITY" value="Helsinki"/>
+      <column name="COUNTRY" value="Finland"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="73"/>
+      <column name="CLIENT_NAME" value="The International Tropical Timber Organisation"/>
+      <column name="CLIENT_ACRONYM" value="ITTO"/>
+      <column name="CLIENT_URL" value="http://www.itto.or.jp"/>
+      <column name="CLIENT_ADDRESS" value="International Organizations Center, 5th Floor, Pacifico-Yokohama 1-1-1, Minato-Mirai, Nishi-ku"/>
+      <column name="CLIENT_EMAIL" value="itto@itto.or.jp"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="J-220-0012"/>
+      <column name="CITY" value="Yokohama"/>
+      <column name="COUNTRY" value="Japan"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="74"/>
+      <column name="CLIENT_NAME" value="UNCCD, Permanent Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="UNCCD"/>
+      <column name="CLIENT_URL" value="http://www.unccd.int"/>
+      <column name="CLIENT_ADDRESS" value="P.O. Box 260129, Haus Carstanjen"/>
+      <column name="CLIENT_EMAIL" value="secretariat@unccd.int"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53153"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="75"/>
+      <column name="CLIENT_NAME" value="Committee on Science and Technology"/>
+      <column name="CLIENT_ACRONYM" value="CST"/>
+      <column name="CLIENT_URL" value="http://www.unccd.int"/>
+      <column name="CLIENT_ADDRESS" value="P.O. Box 260129, Haus Carstanjen"/>
+      <column name="CLIENT_EMAIL" value="secretariat@unccd.int"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="D-53153"/>
+      <column name="CITY" value="Bonn"/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="77"/>
+      <column name="CLIENT_NAME" value="Commission on Sustainable Development"/>
+      <column name="CLIENT_ACRONYM" value="CSD"/>
+      <column name="CLIENT_URL" value="http://www.un.org/esa/sustdev/csd"/>
+      <column name="CLIENT_ADDRESS" value="Department of Economic and Social Affairs, Two United Nations Plaza, Room DC2-2220"/>
+      <column name="CLIENT_EMAIL" value="dsd@un.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="USA-NY 10017"/>
+      <column name="CITY" value="New York"/>
+      <column name="COUNTRY" value="USA"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="78"/>
+      <column name="CLIENT_NAME" value="Coordination Center for Effects"/>
+      <column name="CLIENT_ACRONYM" value="CCE"/>
+      <column name="CLIENT_URL" value="http://www.rivm.nl/cce"/>
+      <column name="CLIENT_ADDRESS" value="RIVM/LED (pb 24), P.O.Box 1"/>
+      <column name="CLIENT_EMAIL" value="j.p.hettelingh@rivm.nl"/>
+      <column name="DESCRIPTION" value="Resorts under the International Cooperative Programme on Modelling and Mapping of Critical Levels and Loads and Air Pollution Effects, Risks and Trends (ICP Modelling and Mapping) of the Working Group of Effects (WGE) of the Convention LRTAP of the UNECE"/>
+      <column name="POSTAL_CODE" value="NL-3720 BA"/>
+      <column name="CITY" value="Bilthoven"/>
+      <column name="COUNTRY" value="Netherlands"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="79"/>
+      <column name="CLIENT_NAME" value="International Cooperative Programme on Modelling and Mapping of Critical Levels and Loads and Air Pollution Effects, Risks and Trends"/>
+      <column name="CLIENT_ACRONYM" value="ICP M&amp;M"/>
+      <column name="CLIENT_URL" value="http://www.oekodata.com/icpmapping/index.html"/>
+      <column name="CLIENT_ADDRESS" value="UBA Berlin"/>
+      <column name="CLIENT_EMAIL" value="information@icpmapping.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+      <column name="COUNTRY" value="Germany"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="81"/>
+      <column name="CLIENT_NAME" value="Conference of the Parties to the Cartagena Convention, via the Caribbean Regional Co-ordinating Unit (CAR/RCU)"/>
+      <column name="CLIENT_ACRONYM" value="CAR/RCU"/>
+      <column name="CLIENT_URL" value="http://www.cep.unep.org"/>
+      <column name="CLIENT_ADDRESS" value="14-20 Port Royal Street"/>
+      <column name="CLIENT_EMAIL" value="uneprcuja@cwjamaica.com"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value="Kingston"/>
+      <column name="COUNTRY" value="Jamaica"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="82"/>
+      <column name="CLIENT_NAME" value="Caribbean Regional Co-ordinating Unit"/>
+      <column name="CLIENT_ACRONYM" value="CAR/RCU"/>
+      <column name="CLIENT_URL" value="http://www.cep.unep.org"/>
+      <column name="CLIENT_ADDRESS" value="14-20 Port Royal Street"/>
+      <column name="CLIENT_EMAIL" value="uneprcuja@cwjamaica.com"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="JA"/>
+      <column name="CITY" value="Kingston"/>
+      <column name="COUNTRY" value="Jamaica"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="83"/>
+      <column name="CLIENT_NAME" value="Helsinki Commission"/>
+      <column name="CLIENT_ACRONYM" value="HELCOM"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="84"/>
+      <column name="CLIENT_NAME" value="Bonn Agreement Secretariat"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value="http://www.bonnagreement.org/"/>
+      <column name="CLIENT_ADDRESS" value="48 Carey Street"/>
+      <column name="CLIENT_EMAIL" value="secretariat@bonnagreement.org"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="GB-WC2A 2JQ"/>
+      <column name="CITY" value="London"/>
+      <column name="COUNTRY" value="United Kingdom"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="86"/>
+      <column name="CLIENT_NAME" value="National Authorities, International Organisations, Public, Scientific Community etc"/>
+      <column name="CLIENT_ACRONYM" value=""/>
+      <column name="CLIENT_URL" value=""/>
+      <column name="CLIENT_ADDRESS" value=""/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+      <column name="COUNTRY" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="89"/>
+      <column name="CLIENT_NAME" value="European Free Trade Agreement Secretariat"/>
+      <column name="CLIENT_ACRONYM" value="EFTA"/>
+      <column name="CLIENT_URL" value="http://secretariat.efta.int"/>
+      <column name="CLIENT_ADDRESS" value="74 rue de Tr?ves"/>
+      <column name="CLIENT_EMAIL" value="mail.bxl@efta.int"/>
+      <column name="DESCRIPTION" value="At its Headquarters in Geneva the EFTA Secretariat serves the EFTA Council and its substructure in implementing the EFTA Convention and free trade agreements worldwide.&#10;&#10;In Brussels, the Secretariat serves the EFTA Standing Committee and its substructure, the EEA Joint Committee and the EEA Council in implementing the EEA Agreement providing for the extension of the EC Internal Market to Iceland, Liechtenstein and Norway.&#10;&#10;In Luxembourg, the Secretariat administers statistical cooperation on the basis of the EEA Agreement as well as technical assistance programmes."/>
+      <column name="POSTAL_CODE" value="B-1040"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="90"/>
+      <column name="CLIENT_NAME" value="EFTA Surveillance Authority"/>
+      <column name="CLIENT_ACRONYM" value="EFTA Surv"/>
+      <column name="CLIENT_URL" value="http://www.eftasurv.int/"/>
+      <column name="CLIENT_ADDRESS" value="Rue de Tr?ves 74"/>
+      <column name="CLIENT_EMAIL" value="registry@eftasurv.int"/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value="B-1040"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="92"/>
+      <column name="CLIENT_NAME" value="World Health Organization"/>
+      <column name="CLIENT_ACRONYM" value="WHO"/>
+      <column name="CLIENT_URL" value="http://www.who.int/en/"/>
+      <column name="CLIENT_ADDRESS" value=""/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+      <column name="COUNTRY" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="93"/>
+      <column name="CLIENT_NAME" value="Trilateral Monitoring and Assessment Group"/>
+      <column name="CLIENT_ACRONYM" value="TMAP"/>
+      <column name="CLIENT_URL" value=""/>
+      <column name="CLIENT_ADDRESS" value=""/>
+      <column name="DESCRIPTION" value=""/>
+      <column name="POSTAL_CODE" value=""/>
+      <column name="CITY" value=""/>
+      <column name="COUNTRY" value=""/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="99"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General Climate Action"/>
+      <column name="CLIENT_ACRONYM" value="DG Clima"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/clima/mission/index_en.htm"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="100"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General for Agriculture and Rural Development"/>
+      <column name="CLIENT_ACRONYM" value="DG AGRI"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/agriculture/index_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="130, Rue de la Loi"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="106"/>
+      <column name="CLIENT_NAME" value="Secretariat of the Union for the Mediterranean"/>
+      <column name="CLIENT_ACRONYM" value="UfMS"/>
+      <column name="CLIENT_URL" value="http://ufmsecretariat.org"/>
+      <column name="CLIENT_ADDRESS" value="Palacio de Pedralbes, Pere Duran Farell, 11"/>
+      <column name="DESCRIPTION" value="The Union for the Mediterranean is a multilateral partnership aiming at increasing the potential for regional integration and cohesion among Euro-Mediterranean countries.&#10;&#10;The Secretariat of the Union for the Mediterranean was created by 43 Euro-Mediterranean Heads of State and Government in Paris on 13 July 2008, with its headquarters in Barcelona. &#10;&#10;The mandate of the UfM Secretariat focuses on identifying, processing, promoting and coordinating regional projects, which are in line with the principles and rules of international law, and that enhance and strengthen cooperation and positively impact the lives of citizens.&#10;&#10;The mandate and mission of the Secretariat have been defined in the Paris and Marseille Declarations as well as in the Statutes adopted on 3 March 2010. The six priority areas of the UfM are: De-pollution of the Mediterranean; Maritime and land highways; Civil protection; Alternative energies: Mediterranean solar plan; Higher education and research, Euro-Mediterranean University; and the Mediterranean Business Initiative.&#10;Co-Presidency: The meetings of the Union for the Mediterranean are chaired by a co-presidency, one from the European Union side and the other from the Mediterranean side. The co-presidency applies to all levels: summits, ministerial meetings, and officials&#x2019; level meetings. The European Union assumed the northern co-presidency of the Union for the Mediterranean after the decision of the Council of EU Ministers of Foreign Affairs on 27th February 2012. Jordan assumes the southern co-presidency since June, 2012.&#10;&#10;Senior Officicial&#x2019;s meeting (SOM): The members of the Union for the Mediterranean meet on a regular basis at the level of Senior Officials from the Ministries of Foreign Affairs of the 43 countries, EU institutions and the League of Arab States. The Senior Officials Meetings (SOM) oversee and coordinate the work of the Union for the Mediterranean. They approve the budget and the work programme of the Secretariat and prepare ministerial meetings. They also discuss the project proposals submitted by the Secretariat for approval and endorsement. Senior Officials take decisions by consensus."/>
+      <column name="POSTAL_CODE" value="08034"/>
+      <column name="CITY" value="Barcelona"/>
+      <column name="COUNTRY" value="Spain"/>
+      <column name="CLIENT_SHORT_NAME" value="UfMS"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="97"/>
+      <column name="CLIENT_NAME" value="United Nations Statistics Division"/>
+      <column name="CLIENT_ACRONYM" value="UNSD"/>
+      <column name="CLIENT_URL" value="http://unstats.un.org/unsd/default.htm"/>
+      <column name="CLIENT_EMAIL" value="statistics@un.org"/>
+      <column name="POSTAL_CODE" value="NY-10017"/>
+      <column name="CITY" value="New York"/>
+      <column name="COUNTRY" value="United States of America"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="98"/>
+      <column name="CLIENT_NAME" value="Joint Research Centre - European Commission"/>
+      <column name="CLIENT_ACRONYM" value="JRC"/>
+      <column name="CLIENT_URL" value="http://www.jrc.ec.europa.eu"/>
+      <column name="POSTAL_CODE" value="B-1049"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="103"/>
+      <column name="CLIENT_NAME" value="European Commission, Directorate General for Regional and Urban Policy"/>
+      <column name="CLIENT_ACRONYM" value="DG REGIO"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/dgs/regional_policy/index_en.htm"/>
+      <column name="CLIENT_ADDRESS" value="Avenue de Beaulieu 5"/>
+      <column name="CITY" value="Brussels"/>
+      <column name="COUNTRY" value="Belgium"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="104"/>
+      <column name="CLIENT_NAME" value="European Commission"/>
+      <column name="CLIENT_ACRONYM" value="Commission"/>
+      <column name="CLIENT_URL" value="http://ec.europa.eu/about/"/>
+      <column name="CLIENT_SHORT_NAME" value="Commission"/>
+    </insert>
+    <insert>
+      <column name="PK_CLIENT_ID" valueNumeric="105"/>
+      <column name="CLIENT_NAME" value="Council of the European Union"/>
+      <column name="CLIENT_ACRONYM" value="Council"/>
+      <column name="CLIENT_URL" value="http://www.consilium.europa.eu/"/>
+      <column name="DESCRIPTION" value="The Council is the EU institution making EU laws together with the European Parliament. In most cases, the Council can only legislate on the basis of proposals submitted to it by the European Commission.&#10;The Council is composed of Member States' government representatives, i.e. the ministers of each Member State with responsibility for a given area. The composition and frequency of Council meetings vary depending on the issues dealt with. Foreign ministers, for example, meet roughly once a month in the Foreign Affairs Council. Similarly, economics and finance ministers meet once a month in the Council which handles economic and financial affairs, called the Ecofin Council."/>
+      <column name="CLIENT_SHORT_NAME" value="Council"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

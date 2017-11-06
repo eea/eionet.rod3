@@ -1,0 +1,130 @@
+ID	SCOPE	NAME	OBJECT	OBJECTLANG	TYPE	LINKTEXT
+2	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/AL		reference	NULL
+2	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/AL		reference	NULL
+2	spatial	owl:sameAs	http://sws.geonames.org/783754/		reference	NULL
+3	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/AT		reference	NULL
+3	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/AT		reference	NULL
+3	spatial	owl:sameAs	http://sws.geonames.org/2782113/		reference	NULL
+5	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/BE		reference	NULL
+5	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/BE		reference	NULL
+5	spatial	owl:sameAs	http://sws.geonames.org/2802361/		reference	NULL
+6	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/BA		reference	NULL
+6	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/BA		reference	NULL
+6	spatial	owl:sameAs	http://sws.geonames.org/3277605/		reference	NULL
+7	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/BG		reference	NULL
+7	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/BG		reference	NULL
+7	spatial	owl:sameAs	http://sws.geonames.org/732800/		reference	NULL
+8	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/HR		reference	NULL
+8	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/HR		reference	NULL
+8	spatial	owl:sameAs	http://sws.geonames.org/3202326/		reference	NULL
+9	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/CY		reference	NULL
+9	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/CY		reference	NULL
+9	spatial	owl:sameAs	http://sws.geonames.org/146669/		reference	NULL
+10	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/CZ		reference	NULL
+10	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/CZ		reference	NULL
+10	spatial	owl:sameAs	http://sws.geonames.org/3077311/		reference	NULL
+11	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/DK		reference	NULL
+11	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/DK		reference	NULL
+11	spatial	owl:sameAs	http://sws.geonames.org/2623032/		reference	NULL
+12	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/EE		reference	NULL
+12	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/EE		reference	NULL
+12	spatial	owl:sameAs	http://sws.geonames.org/453733/		reference	NULL
+13	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/FI		reference	NULL
+13	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/FI		reference	NULL
+13	spatial	owl:sameAs	http://sws.geonames.org/660013/		reference	NULL
+14	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/FR		reference	NULL
+14	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/FR		reference	NULL
+14	spatial	owl:sameAs	http://sws.geonames.org/3017382/		reference	NULL
+15	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/DE		reference	NULL
+15	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/DE		reference	NULL
+15	spatial	owl:sameAs	http://sws.geonames.org/2921044/		reference	NULL
+16	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/GR		reference	NULL
+16	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/GR		reference	NULL
+16	spatial	owl:sameAs	http://sws.geonames.org/390903/		reference	NULL
+17	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/HU		reference	NULL
+17	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/HU		reference	NULL
+17	spatial	owl:sameAs	http://sws.geonames.org/719819/		reference	NULL
+18	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/IS		reference	NULL
+18	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/IS		reference	NULL
+18	spatial	owl:sameAs	http://sws.geonames.org/2629691/		reference	NULL
+19	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/IT		reference	NULL
+19	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/IT		reference	NULL
+19	spatial	owl:sameAs	http://sws.geonames.org/3175395/		reference	NULL
+20	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/IE		reference	NULL
+20	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/IE		reference	NULL
+20	spatial	owl:sameAs	http://sws.geonames.org/2963597/		reference	NULL
+21	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/LV		reference	NULL
+21	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/LV		reference	NULL
+21	spatial	owl:sameAs	http://sws.geonames.org/458258/		reference	NULL
+22	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/LT		reference	NULL
+22	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/LT		reference	NULL
+22	spatial	owl:sameAs	http://sws.geonames.org/597427/		reference	NULL
+23	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/LU		reference	NULL
+23	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/LU		reference	NULL
+23	spatial	owl:sameAs	http://sws.geonames.org/2960313/		reference	NULL
+24	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/MK		reference	NULL
+24	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/MK		reference	NULL
+24	spatial	owl:sameAs	http://sws.geonames.org/718075/		reference	NULL
+25	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/MT		reference	NULL
+25	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/MT		reference	NULL
+25	spatial	owl:sameAs	http://sws.geonames.org/2562770/		reference	NULL
+27	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/NL		reference	NULL
+27	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/NL		reference	NULL
+27	spatial	owl:sameAs	http://sws.geonames.org/2750405/		reference	NULL
+28	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/NO		reference	NULL
+28	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/NO		reference	NULL
+28	spatial	owl:sameAs	http://sws.geonames.org/3144096/		reference	NULL
+29	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/PL		reference	NULL
+29	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/PL		reference	NULL
+29	spatial	owl:sameAs	http://sws.geonames.org/798544/		reference	NULL
+30	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/PT		reference	NULL
+30	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/PT		reference	NULL
+30	spatial	owl:sameAs	http://sws.geonames.org/2264397/		reference	NULL
+31	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/RO		reference	NULL
+31	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/RO		reference	NULL
+31	spatial	owl:sameAs	http://sws.geonames.org/798549/		reference	NULL
+32	obligations	foaf:page	http://eunis.eea.europa.eu/		reference	EUNIS: Presentation of CDDA sites
+33	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/SK		reference	NULL
+33	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/SK		reference	NULL
+33	spatial	owl:sameAs	http://sws.geonames.org/3057568/		reference	NULL
+34	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/SI		reference	NULL
+34	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/SI		reference	NULL
+34	spatial	owl:sameAs	http://sws.geonames.org/3190538/		reference	NULL
+35	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/ES		reference	NULL
+35	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/ES		reference	NULL
+35	spatial	owl:sameAs	http://sws.geonames.org/2510769/		reference	NULL
+36	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/SE		reference	NULL
+36	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/SE		reference	NULL
+36	spatial	owl:sameAs	http://sws.geonames.org/2661886/		reference	NULL
+37	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/CH		reference	NULL
+37	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/CH		reference	NULL
+37	spatial	owl:sameAs	http://sws.geonames.org/2658434/		reference	NULL
+38	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/TR		reference	NULL
+38	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/TR		reference	NULL
+38	spatial	owl:sameAs	http://sws.geonames.org/298795/		reference	NULL
+40	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/GB		reference	NULL
+40	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/GB		reference	NULL
+40	spatial	owl:sameAs	http://sws.geonames.org/2635167/		reference	NULL
+41	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/RS		reference	NULL
+41	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/RS		reference	NULL
+41	spatial	owl:sameAs	http://sws.geonames.org/6290252/		reference	NULL
+102	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/LI		reference	NULL
+102	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/LI		reference	NULL
+102	spatial	owl:sameAs	http://sws.geonames.org/3042058/		reference	NULL
+115	spatial	owl:sameAs	http://dd.eionet.europa.eu/vocabulary/common/countries/ME		reference	NULL
+115	spatial	owl:sameAs	http://rdfdata.eionet.europa.eu/eea/countries/ME		reference	NULL
+115	spatial	owl:sameAs	http://sws.geonames.org/3194884/		reference	NULL
+170	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1831		reference	EUNIS reference
+204	instruments	dcterms:isReplacedBy	http://rod.eionet.europa.eu/instruments/609		reference	Repealed by the Directive 2006/7/EC
+254	instruments	dcterms:isReplacedBy	http://rod.eionet.europa.eu/instruments/624		reference	Repealed by Directive 2006/66/EC
+551	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1813		reference	EUNIS reference
+555	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1836		reference	EUNIS reference
+558	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1806		reference	EUNIS reference
+560	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1482		reference	EUNIS reference
+563	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1798		reference	EUNIS reference
+564	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1564		reference	EUNIS reference
+574	instruments	foaf:isPrimaryTopicOf	http://eunis.eea.europa.eu/references/1837		reference	EUNIS reference
+578	instruments	foaf:isPrimaryTopicOf	http://informea.org/treaties/lrtap		reference	InforMEA: LRTAP
+609	instruments	dcterms:replaces	http://rod.eionet.europa.eu/instruments/204		reference	Repeals Bathing Water Directive (consolidated)
+616	obligations	foaf:page	http://eunis.eea.europa.eu/		reference	EUNIS: Presentation of Natura2000 sites
+624	instruments	dcterms:replaces	http://rod.eionet.europa.eu/instruments/254		reference	Repeals and replaces Directive 91/157/EEC

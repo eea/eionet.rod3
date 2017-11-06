@@ -1,0 +1,781 @@
+ACL_ID	ACL_NAME	PARENT_NAME	OWNER	DESCRIPTION
+1	8	/obligations		
+2	9	/obligations		
+3	11	/obligations		
+4	13	/obligations		
+5	14	/obligations		
+6	15	/obligations		
+7	16	/obligations		
+8	21	/obligations		
+9	23	/obligations		
+10	24	/obligations		
+11	26	/obligations		
+12	27	/obligations		
+13	28	/obligations		
+14	29	/obligations		
+15	30	/obligations		
+16	31	/obligations		
+17	32	/obligations		
+18	33	/obligations		
+19	35	/obligations		
+20	37	/obligations		
+21	39	/obligations		
+22	40	/obligations		
+23	43	/obligations		
+24	48	/obligations		
+25	49	/obligations		
+26	51	/obligations		
+27	52	/obligations		
+28	54	/obligations		
+29	56	/obligations		
+30	57	/obligations		
+631	631	/instruments	lglobevnik	
+32	59	/obligations		
+34	65	/obligations		
+35	66	/obligations		
+36	67	/obligations		
+37	68	/obligations		
+38	69	/obligations		
+40	71	/obligations		
+41	72	/obligations		
+649	622	/obligations	cryan	
+650	633	/instruments	cryan	
+654	626	/obligations	cryan	
+50	83	/obligations		
+51	84	/obligations		
+52	85	/obligations		
+53	94	/obligations		
+54	96	/obligations		
+55	97	/obligations		
+56	98	/obligations		
+57	102	/obligations		
+58	104	/obligations		
+59	106	/obligations		
+687	649	/obligations	lglobevnik	
+61	117	/obligations		
+62	118	/obligations		
+63	122	/obligations		
+64	123	/obligations		
+65	125	/obligations		
+66	126	/obligations		
+67	130	/obligations		
+68	131	/obligations		
+69	136	/obligations		
+70	137	/obligations		
+71	138	/obligations		
+72	141	/obligations		
+73	143	/obligations		
+74	144	/obligations		
+75	146	/obligations		
+76	147	/obligations		
+77	148	/obligations		
+78	149	/obligations		
+79	156	/obligations		
+80	157	/obligations		
+81	158	/obligations		
+82	159	/obligations		
+83	160	/obligations		
+84	162	/obligations		
+85	163	/obligations		
+86	164	/obligations		
+87	169	/obligations		
+88	171	/obligations		
+89	172	/obligations		
+90	173	/obligations		
+91	174	/obligations		
+92	177	/obligations		
+93	178	/obligations		
+94	179	/obligations		
+95	180	/obligations		
+96	181	/obligations		
+97	184	/obligations		
+98	185	/obligations		
+99	186	/obligations		
+100	187	/obligations		
+101	188	/obligations		
+102	199	/obligations		
+103	200	/obligations		
+104	201	/obligations		
+105	202	/obligations		
+106	205	/obligations		
+107	206	/obligations		
+108	207	/obligations		
+109	208	/obligations		
+110	209	/obligations		
+111	210	/obligations		
+112	211	/obligations		
+113	212	/obligations		
+114	213	/obligations		
+115	214	/obligations		
+116	215	/obligations		
+117	216	/obligations		
+118	217	/obligations		
+119	218	/obligations		
+120	219	/obligations		
+121	220	/obligations		
+122	221	/obligations		
+123	222	/obligations		
+124	223	/obligations		
+125	224	/obligations		
+126	225	/obligations		
+127	226	/obligations		
+128	227	/obligations		
+129	228	/obligations		
+130	229	/obligations		
+131	230	/obligations		
+132	231	/obligations		
+133	232	/obligations		
+134	233	/obligations		
+135	234	/obligations		
+136	235	/obligations		
+137	236	/obligations		
+138	237	/obligations		
+139	239	/obligations		
+140	240	/obligations		
+141	241	/obligations		
+142	243	/obligations		
+143	247	/obligations		
+144	248	/obligations		
+145	249	/obligations		
+146	250	/obligations		
+147	251	/obligations		
+148	252	/obligations		
+149	253	/obligations		
+150	254	/obligations		
+151	255	/obligations		
+152	256	/obligations		
+153	257	/obligations		
+154	258	/obligations		
+155	259	/obligations		
+156	260	/obligations		
+157	261	/obligations		
+158	262	/obligations		
+159	263	/obligations		
+160	264	/obligations		
+648	621	/obligations	cryan	
+163	268	/obligations		
+164	269	/obligations		
+647	620	/obligations	cryan	
+167	273	/obligations		
+168	274	/obligations		
+715	670	/obligations	cryan	
+170	276	/obligations		
+172	278	/obligations		
+173	280	/obligations		
+174	281	/obligations		
+175	282	/obligations		
+176	283	/obligations		
+177	284	/obligations		
+178	285	/obligations		
+179	286	/obligations		
+180	287	/obligations		
+181	288	/obligations		
+182	289	/obligations		
+183	290	/obligations		
+184	291	/obligations		
+185	292	/obligations		
+186	293	/obligations		
+187	294	/obligations		
+188	295	/obligations		
+189	296	/obligations		
+190	297	/obligations		
+191	298	/obligations		
+192	301	/obligations		
+193	302	/obligations		
+194	303	/obligations		
+195	304	/obligations		
+196	305	/obligations		
+197	306	/obligations		
+198	307	/obligations		
+199	308	/obligations		
+200	309	/obligations		
+201	310	/obligations		
+202	311	/obligations		
+203	312	/obligations		
+204	313	/obligations		
+205	314	/obligations		
+206	315	/obligations		
+207	316	/obligations		
+208	317	/obligations		
+209	318	/obligations		
+210	319	/obligations		
+211	320	/obligations		
+212	321	/obligations		
+213	322	/obligations		
+214	323	/obligations		
+215	324	/obligations		
+216	325	/obligations		
+217	326	/obligations		
+218	327	/obligations		
+219	328	/obligations		
+220	329	/obligations		
+221	330	/obligations		
+222	331	/obligations		
+223	332	/obligations		
+224	333	/obligations		
+225	334	/obligations		
+226	335	/obligations		
+227	336	/obligations		
+228	337	/obligations		
+229	338	/obligations		
+230	339	/obligations		
+231	340	/obligations		
+232	341	/obligations		
+233	342	/obligations		
+234	343	/obligations		
+235	344	/obligations		
+236	345	/obligations		
+237	346	/obligations		
+238	347	/obligations		
+239	348	/obligations		
+240	349	/obligations		
+241	350	/obligations		
+242	354	/obligations		
+243	355	/obligations		
+244	356	/obligations		
+245	357	/obligations		
+246	358	/obligations		
+247	359	/obligations		
+248	360	/obligations		
+249	362	/obligations		
+250	363	/obligations		
+251	365	/obligations		
+252	366	/obligations		
+253	367	/obligations		
+254	368	/obligations		
+255	369	/obligations		
+256	370	/obligations		
+257	371	/obligations		
+258	372	/obligations		
+259	373	/obligations		
+260	374	/obligations		
+261	375	/obligations		
+262	376	/obligations		
+263	377	/obligations		
+264	378	/obligations		
+265	380	/obligations		
+266	381	/obligations		
+267	382	/obligations		
+268	383	/obligations		
+269	384	/obligations		
+270	385	/obligations		
+271	386	/obligations		
+272	387	/obligations		
+273	389	/obligations		
+274	390	/obligations		
+275	391	/obligations		
+276	392	/obligations		
+277	393	/obligations		
+278	394	/obligations		
+279	395	/obligations		
+280	396	/obligations		
+281	397	/obligations		
+282	398	/obligations		
+283	399	/obligations		
+284	400	/obligations		
+285	401	/obligations		
+286	402	/obligations		
+287	403	/obligations		
+288	404	/obligations		
+289	405	/obligations		
+290	406	/obligations		
+291	407	/obligations		
+292	408	/obligations		
+293	409	/obligations		
+294	410	/obligations		
+295	411	/obligations		
+296	412	/obligations		
+297	413	/obligations		
+298	414	/obligations		
+299	415	/obligations		
+300	416	/obligations		
+301	417	/obligations		
+302	418	/obligations		
+303	419	/obligations		
+304	420	/obligations		
+305	422	/obligations		
+306	423	/obligations		
+307	424	/obligations		
+308	425	/obligations		
+309	426	/obligations		
+310	427	/obligations		
+311	428	/obligations		
+312	429	/obligations		
+313	430	/obligations		
+314	431	/obligations		
+315	432	/obligations		
+316	433	/obligations		
+317	434	/obligations		
+318	435	/obligations		
+319	436	/obligations		
+320	437	/obligations		
+321	438	/obligations		
+322	439	/obligations		
+323	440	/obligations		
+324	441	/obligations		
+325	442	/obligations		
+326	443	/obligations		
+327	444	/obligations		
+328	445	/obligations		
+329	446	/obligations		
+330	447	/obligations		
+331	448	/obligations		
+332	449	/obligations		
+333	450	/obligations		
+334	451	/obligations		
+335	452	/obligations		
+336	454	/obligations		
+337	455	/obligations		
+338	456	/obligations		
+339	458	/obligations		
+340	459	/obligations		
+341	460	/obligations		
+342	461	/obligations		
+343	462	/obligations		
+344	463	/obligations		
+345	464	/obligations		
+346	465	/obligations		
+347	466	/obligations		
+348	467	/obligations		
+349	468	/obligations		
+350	469	/obligations		
+351	470	/obligations		
+352	471	/obligations		
+353	472	/obligations		
+354	473	/obligations		
+355	474	/obligations		
+356	475	/obligations		
+357	476	/obligations		
+358	477	/obligations		
+359	478	/obligations		
+360	479	/obligations		
+361	480	/obligations		
+362	481	/obligations		
+363	482	/obligations		
+364	483	/obligations		
+365	484	/obligations		
+366	485	/obligations		
+367	486	/obligations		
+368	487	/obligations		
+369	488	/obligations		
+370	489	/obligations		
+371	490	/obligations		
+372	491	/obligations		
+373	492	/obligations		
+374	493	/obligations		
+375	494	/obligations		
+376	496	/obligations		
+377	497	/obligations		
+378	498	/obligations		
+379	499	/obligations		
+380	500	/obligations		
+381	501	/obligations		
+382	503	/obligations		
+383	506	/obligations		
+384	507	/obligations		
+385	513	/obligations		
+386	514	/obligations		
+387	515	/obligations		
+388	516	/obligations		
+389	518	/obligations		
+390	519	/obligations		
+391	520	/obligations		
+392	521	/obligations		
+393	522	/obligations		
+394	523	/obligations		
+395	524	/obligations		
+396	525	/obligations		
+397	526	/obligations		
+398	527	/obligations		
+399	528	/obligations		
+400	530	/obligations		
+401	531	/obligations		
+402	532	/obligations		
+403	533	/obligations		
+404	534	/obligations		
+405	535	/obligations		
+406	536	/obligations		
+407	537	/obligations		
+408	538	/obligations		
+410	540	/obligations		
+411	541	/obligations		
+412	542	/obligations		
+414	544	/obligations		
+415	545	/obligations		
+416	546	/obligations		
+417	547	/obligations		
+418	548	/obligations		
+419	549	/obligations		
+420	550	/obligations		
+421	551	/obligations		
+422	552	/obligations		
+423	554	/obligations		
+424	555	/obligations		
+425	556	/obligations		
+426	557	/obligations		
+427	558	/obligations		
+428	559	/obligations		
+429	560	/obligations		
+430	36	/instruments		
+431	142	/instruments		
+432	170	/instruments		
+433	174	/instruments		
+434	182	/instruments		
+435	183	/instruments		
+436	184	/instruments		
+437	191	/instruments		
+438	195	/instruments		
+439	202	/instruments		
+440	204	/instruments		
+441	205	/instruments		
+442	209	/instruments		
+443	210	/instruments		
+444	213	/instruments		
+445	214	/instruments		
+446	217	/instruments		
+447	218	/instruments		
+448	254	/instruments		
+449	257	/instruments		
+450	264	/instruments		
+451	272	/instruments		
+452	273	/instruments		
+453	274	/instruments		
+454	287	/instruments		
+455	344	/instruments		
+456	378	/instruments		
+457	381	/instruments		
+458	382	/instruments		
+459	388	/instruments		
+460	389	/instruments		
+461	394	/instruments		
+462	395	/instruments		
+463	396	/instruments		
+464	411	/instruments		
+465	498	/instruments		
+466	499	/instruments		
+467	500	/instruments		
+468	501	/instruments		
+469	502	/instruments		
+470	508	/instruments		
+471	509	/instruments		
+472	510	/instruments		
+473	511	/instruments		
+474	512	/instruments		
+734	651	/instruments	kjaerbir	
+476	514	/instruments		
+477	515	/instruments		
+478	516	/instruments		
+479	517	/instruments		
+480	518	/instruments		
+646	619	/obligations	roug	
+482	521	/instruments		
+483	522	/instruments		
+484	523	/instruments		
+485	524	/instruments		
+486	526	/instruments		
+487	527	/instruments		
+488	528	/instruments		
+489	530	/instruments		
+490	531	/instruments		
+491	532	/instruments		
+492	533	/instruments		
+493	534	/instruments		
+494	535	/instruments		
+495	536	/instruments		
+496	537	/instruments		
+497	538	/instruments		
+498	539	/instruments		
+499	541	/instruments		
+500	543	/instruments		
+501	545	/instruments		
+502	546	/instruments		
+503	547	/instruments		
+504	548	/instruments		
+505	549	/instruments		
+506	550	/instruments		
+507	551	/instruments		
+508	552	/instruments		
+509	553	/instruments		
+510	554	/instruments		
+511	555	/instruments		
+512	556	/instruments		
+513	557	/instruments		
+514	558	/instruments		
+515	559	/instruments		
+516	560	/instruments		
+517	561	/instruments		
+518	562	/instruments		
+519	563	/instruments		
+520	564	/instruments		
+521	565	/instruments		
+522	566	/instruments		
+523	567	/instruments		
+524	568	/instruments		
+525	569	/instruments		
+526	570	/instruments		
+527	571	/instruments		
+528	572	/instruments		
+529	573	/instruments		
+530	574	/instruments		
+531	575	/instruments		
+532	576	/instruments		
+533	577	/instruments		
+534	578	/instruments		
+535	579	/instruments		
+536	580	/instruments		
+537	582	/instruments		
+538	583	/instruments		
+539	584	/instruments		
+540	585	/instruments		
+541	586	/instruments		
+542	587	/instruments		
+543	588	/instruments		
+544	589	/instruments		
+545	590	/instruments		
+546	591	/instruments		
+547	592	/instruments		
+548	593	/instruments		
+549	594	/instruments		
+550	595	/instruments		
+551	598	/instruments		
+552	599	/instruments		
+553	600	/instruments		
+554	601	/instruments		
+555	602	/instruments		
+556	603	/instruments		
+557	606	/instruments		
+558	607	/instruments		
+559	608	/instruments		
+560	609	/instruments		
+561	610	/instruments		
+562	611	/instruments		
+563	612	/instruments		
+564	613	/instruments		
+565	614	/instruments		
+566	615	/instruments		
+713	669	/obligations	cryan	
+568	617	/instruments		
+569	618	/instruments		
+570	502	/obligations		
+571	421	/obligations		
+572	504	/obligations		
+573	561	/obligations	friboben	
+574	562	/obligations	friboben	
+575	563	/obligations	friboben	
+576	564	/obligations	friboben	
+577	565	/obligations	friboben	
+578	566	/obligations	friboben	
+579	567	/obligations	friboben	
+580	568	/obligations	desmepet	
+581	569	/obligations	desmepet	
+582	619	/instruments	friboben	
+583	620	/instruments	friboben	
+584	570	/obligations	friboben	
+585	571	/obligations	cryan	
+586	572	/obligations	cryan	
+589	574	/obligations	roug	
+590	575	/obligations	cryan	
+744	696	/obligations	dejeafr	
+592	622	/instruments	viisimat	
+593	623	/instruments	viisimat	
+594	576	/obligations	viisimat	
+595	624	/instruments	viisimat	
+596	577	/obligations	viisimat	
+597	578	/obligations	viisimat	
+598	579	/obligations	viisimat	
+599	625	/instruments	lglobevnik	
+600	580	/obligations	lglobevnik	
+601	581	/obligations	lglobevnik	
+602	626	/instruments	lglobevnik	
+603	582	/obligations	lglobevnik	
+604	583	/obligations	auestjoh	
+605	584	/obligations	auestjoh	
+606	585	/obligations	auestjoh	
+607	586	/obligations	mareckova	
+609	588	/obligations	jensearn	
+610	589	/obligations	jensearn	
+611	590	/obligations	jensearn	
+612	591	/obligations	jensearn	
+613	592	/obligations	jensearn	
+614	593	/obligations	jensearn	
+615	594	/obligations	jensearn	
+616	595	/obligations	jensearn	
+617	596	/obligations	jensearn	
+618	627	/instruments	cryan	
+619	597	/obligations	cryan	
+620	598	/obligations	cryan	
+621	599	/obligations	cryan	
+622	628	/instruments	roug	
+623	629	/instruments	lglobevnik	
+624	600	/obligations	lglobevnik	
+625	630	/instruments	lglobevnik	
+626	601	/obligations	lglobevnik	
+627	602	/obligations	lglobevnik	
+628	603	/obligations	lglobevnik	
+629	604	/obligations	peifer	
+630	605	/obligations	viisimat	
+632	606	/obligations	lglobevnik	
+633	607	/obligations	lglobevnik	
+634	608	/obligations	lglobevnik	
+640	632	/instruments	cryan	
+639	613	/obligations	lglobevnik	
+637	611	/obligations	lglobevnik	
+638	612	/obligations	lglobevnik	
+641	614	/obligations	cryan	
+643	616	/obligations	cryan	
+717	672	/obligations	cryan	
+655	627	/obligations	cryan	
+716	671	/obligations	cryan	
+714	650	/instruments	cryan	
+658	630	/obligations	lglobevnik	
+659	631	/obligations	cryan	
+660	632	/obligations	lglobevnik	
+661	634	/instruments	lglobevnik	
+662	633	/obligations	cryan	
+663	634	/obligations	cryan	
+664	635	/obligations	cryan	
+665	636	/obligations	cryan	
+666	637	/obligations	cryan	
+667	635	/instruments	roug	
+668	638	/obligations	roug	
+772	720	/obligations	alvardan	
+828	758	/obligations	peifer	
+827	757	/obligations	schistep	
+826	756	/obligations	alvardan	
+825	755	/obligations	dejeafr	
+824	754	/obligations	luekean	
+675	636	/instruments	lglobevnik	
+676	645	/obligations	lglobevnik	
+678	637	/instruments	kjaerbir	
+679	638	/instruments	kjaerbir	
+680	639	/instruments	kjaerbir	
+681	640	/instruments	kjaerbir	
+682	641	/instruments	kjaerbir	
+683	642	/instruments	kjaerbir	
+684	643	/instruments	kjaerbir	
+686	648	/obligations	kjaerbir	
+688	650	/obligations	lglobevnik	
+689	651	/obligations	lglobevnik	
+690	652	/obligations	lglobevnik	
+691	653	/obligations	lglobevnik	
+692	654	/obligations	lglobevnik	
+693	644	/instruments	peifer	
+694	655	/obligations	peifer	
+695	656	/obligations	roug	
+696	645	/instruments	roug	
+697	657	/obligations	roug	
+698	658	/obligations	cryan	
+699	646	/instruments	peifer	
+700	659	/obligations	peifer	
+701	647	/instruments	cryan	
+702	660	/obligations	cryan	
+703	661	/obligations	lglobevnik	
+704	662	/obligations	cryan	
+766	714	/obligations	nerifern	
+708	665	/obligations	peifer	
+707	648	/instruments	peifer	
+709	666	/obligations	steenkat	
+710	667	/obligations	cryan	
+712	649	/instruments	cryan	
+718	673	/obligations	cryan	
+719	674	/obligations	cryan	
+720	675	/obligations	cryan	
+721	676	/obligations	cryan	
+722	677	/obligations	cryan	
+723	678	/obligations	cryan	
+724	679	/obligations	cryan	
+725	680	/obligations	cryan	
+726	681	/obligations	cryan	
+727	682	/obligations	cryan	
+728	683	/obligations	cryan	
+729	684	/obligations	cryan	
+730	685	/obligations	cryan	
+731	686	/obligations	cryan	
+733	688	/obligations	kjaerbir	
+735	689	/obligations	kjaerbir	
+736	690	/obligations	roug	
+737	691	/obligations	cryan	
+738	692	/obligations	schadsve	
+739	693	/obligations	cryan	
+740	694	/obligations	cryan	
+742	652	/instruments	dejeafr	
+745	697	/obligations	dejeafr	
+746	698	/obligations	dejeafr	
+750	702	/obligations	dejeafr	
+748	700	/obligations	dejeafr	
+749	701	/obligations	dejeafr	
+751	703	/obligations	dejeafr	
+752	704	/obligations	dejeafr	
+753	705	/obligations	dejeafr	
+754	654	/instruments	peifer	
+755	655	/instruments	peifer	
+756	706	/obligations	peifer	
+757	707	/obligations	peifer	
+758	708	/obligations	dejeafr	
+762	711	/obligations	dejeafr	
+760	656	/instruments	peifer	
+761	710	/obligations	peifer	
+763	712	/obligations	simoens	
+764	657	/instruments	peifer	
+765	713	/obligations	peifer	
+767	715	/obligations	nerifern	
+768	716	/obligations	nerifern	
+769	717	/obligations	peifer	
+770	718	/obligations	peifer	
+771	719	/obligations	peifer	
+773	721	/obligations	alvardan	
+774	658	/instruments	peifer	
+775	722	/obligations	alvardan	
+776	723	/obligations	alvardan	
+777	724	/obligations	alvardan	
+778	659	/instruments	peifer	
+779	725	/obligations	peifer	
+780	726	/obligations	peifer	
+781	660	/instruments	peifer	
+782	727	/obligations	peifer	
+783	728	/obligations	peifer	
+784	661	/instruments	peifer	
+785	729	/obligations	peifer	
+786	730	/obligations	peifer	
+787	731	/obligations	peifer	
+788	662	/instruments	peifer	
+789	732	/obligations	peifer	
+790	733	/obligations	peifer	
+791	663	/instruments	peifer	
+792	664	/instruments	peifer	
+793	734	/obligations	peifer	
+794	665	/instruments	peifer	
+795	735	/obligations	peifer	
+796	666	/instruments	peifer	
+797	736	/obligations	peifer	
+798	737	/obligations	peifer	
+799	667	/instruments	peifer	
+800	668	/instruments	peifer	
+801	738	/obligations	peifer	
+802	669	/instruments	peifer	
+803	739	/obligations	peifer	
+804	670	/instruments	peifer	
+805	740	/obligations	peifer	
+806	671	/instruments	peifer	
+807	741	/obligations	peifer	
+808	742	/obligations	houssmic	
+809	743	/obligations	luekean	
+810	744	/obligations	luekean	
+811	745	/obligations	luekean	
+812	746	/obligations	luekean	
+813	672	/instruments	roug	
+814	673	/instruments	roug	
+815	674	/instruments	peifer	
+816	747	/obligations	whallcar	
+817	748	/obligations	luekean	
+818	749	/obligations	luekean	
+819	750	/obligations	luekean	
+820	751	/obligations	luekean	
+821	752	/obligations	luekean	
+822	753	/obligations	luekean	
+823	675	/instruments	peifer	
+829	759	/obligations	alvarire	
+830	760	/obligations	alvarire	
+831	761	/obligations	alvarire	
+832	762	/obligations	nerifern	
+833	763	/obligations	nerifern	
