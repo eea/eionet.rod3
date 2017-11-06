@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1 th:text="${title}">Page title</h1>
+        <div>
+<ul>
+<li>Data lake service
+</li>
+</ul>
+
+<p>
+Available space on the server: <span th:text="${freespace}">292 MB</span>
+</p>
+
+<h2>Author</h2>
+<ul>
+<li>Søren Roug, European Environment Agency</li>
+</ul>
+        </div>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

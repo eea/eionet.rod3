@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" />
+  </head>
+  <body  class="threecolumns">
+    <div id="container">
+      <div th:replace="layout :: bannerFragment">
+        <div id="pagehead">
+          <div id="networktitle">Datalake</div>
+          <div id="sitetitle">European Environment Information and Observation Network</div>
+          <div id="sitetagline">Networking improving Europe's environment</div>
+        </div>
+        <div id="menuribbon">
+        </div>
+        <div id="leftcolumn">
+        Something in left column.
+        </div>
+      </div>
+      <div id="rightcolumn" class="quickjumps" th:fragment="rightcolumn">
+        <div id="qaresult" class="success"
+            th:class="${dataset.countTests} gt 0 ? (${dataset.countFailures} == 0 ? 'success':'failure') : 'notests'">
+        <span th:text="${dataset.countFailures}">3</span> out of <span th:text="${dataset.countTests}">5</span> QA tests failed
+        </div>
+        <h2>Other editions</h2>
+        <div th:remove="all-but-first">
+          <p th:each="other : ${otherEditions}" th:class="${other.editionId} == ${editionId} ? 'currentedition' : ''"><strong><a
+              th:href="@{'/editions/' + ${other.editionId}}"
+              th:text="${#dates.format(other.uploadTime, 'dd-MMM-yyyy HH:mm:ss')}"
+              href="#">2009-04-29</a></strong><br/><span th:text="${other.filename}">CDDA 2009.mdb</span></p>
+          <p><strong><a href="#">2008-10-18</a>:</strong> CDDA 2008.mdb</p>
+        </div>
+      </div>
+      <div id="workarea">
+        <div id="drop-operations">
+          <h2>Operations</h2>
+          <ul>
+            <li><a href="editionQuery.html" th:href="@{'/editions/' + ${editionId} + '/query'}">Query dataset</a></li>
+            <li><a href="#" th:href="@{'/editions/' + ${editionId} + '/download'}">Download edition</a></li>
+            <li><a href="qatests.html" th:href="@{'/qatests/' + ${dataset.datasetId}}">Edit QA tests</a></li>
+            <li><a href="fileupload.html" th:href="@{/fileupload(datasetId=${dataset.datasetId})}">Upload new edition</a></li>
+            <li><a href="#" th:href="@{'/editions/' + ${editionId} + '/runqa'}">Run all QA</a></li>
+          </ul>
+        </div>
+        <h1 th:text="${dataset.filename}">Page title here</h1>
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+        <table class="datatable">
+          <tbody>
+            <tr>
+              <th scope="row">Filename</th><td th:text="${dataset.filename}">File name</td>
+            </tr>
+            <tr>
+              <th scope="row">Identifier</th><td th:text="${editionId}">gdcwljvmzydyqunukgpm1g</td>
+            </tr>
+            <tr>
+              <th scope="row">Dataset</th><td><a href="datasetFactsheet.html"
+                    th:href="@{'/datasets/' + ${dataset.datasetId}}"
+                    th:text="${dataset.datasetId}">lej24psm8ojdryeirulufw</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Content type</th><td th:text="${dataset.contentType}">image/gif</td>
+            </tr>
+            <tr>
+              <th scope="row">Size</th><td th:text="${dataset.humaneSize}">77 MB</td>
+            </tr>
+            <tr>
+              <th scope="row">Uploader</th><td th:text="${dataset.uploader}">heinlja</td>
+            </tr>
+            <tr>
+              <th scope="row">Date of upload</th><td th:text="${#dates.format(dataset.uploadTime, 'dd-MMM-yyyy HH:mm:ss')}">19-Apr-2016 18:47:35</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div th:if="${not #lists.isEmpty(testresults)}">
+          <h2>QA results</h2>
+          <table class="datatable">
+            <col style="width:3em"/>
+            <col style="width:3em"/>
+            <col style="width:11em"/>
+            <col style="width:15em"/>
+            <col style="width:15em"/>
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Pass</th>
+                <th scope="col">Query</th>
+                <th scope="col">Message</th>
+              </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+              <tr th:each="result : ${testresults}" th:class="${result.passed}? 'success':'failure'">
+                <td th:text="${result.testType}">19</td>
+                <td th:text="${result.passed}">true</td>
+                <!--<td th:text="${#dates.format(result.testRan, 'dd-MMM-yyyy HH:mm:ss')}">9-Apr-2016 19:35:25</td>-->
+                <td th:text="${result.query}"></td>
+                <td th:text="${result.result}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Tables &amp; columns</h2>
+        <p th:if="${#lists.isEmpty(columns)}">List is empty.</p>
+        <div th:if="${not #lists.isEmpty(columns)}">
+          <table class="datatable">
+            <col style="width:20em"/>
+            <col/>
+            <thead>
+              <tr>
+                <th scope="col">Table</th>
+                <th scope="col">Columns</th>
+              </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+              <tr th:each="tableCol : ${columns}">
+                <td th:text="${tableCol.key}">Long realistic table name</td>
+                <td th:text="${#strings.listJoin(tableCol.value, ', ')}">col1, col2, col3, col4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

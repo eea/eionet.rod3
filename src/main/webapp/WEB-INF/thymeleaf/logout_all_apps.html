@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1>Logout from all apps.</h1>
+        <div class="advice-msg">
+            You just logged out from Datalake.
+            To log out from all applications please click following link <a href="#" th:href="@{/j_spring_cas_security_logout}">Logout from all apps</a>.
+        </div>
+        <p>
+        Return to <a href="index.html" th:href="@{/}">Home</a>.
+        </p>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

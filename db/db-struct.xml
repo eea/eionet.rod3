@@ -648,4 +648,33 @@
 ) COMMENT='Object attributes'</sql>
     </changeSet>
 
+  <changeSet id="rev-39" author="roug">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="authorities"/>
+      </not>
+    </preConditions>
+    <createTable tableName="authorities">
+      <column name="username" type="varchar(40)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="authority" type="varchar(255)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="rev-40" author="roug">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="users"/>
+      </not>
+    </preConditions>
+    <createTable tableName="users">
+      <column name="username" type="varchar(40)">
+        <constraints unique="true"/>
+      </column>
+      <column name="password" type="varchar(40)"/>
+      <column name="enabled" type="boolean"/>
+    </createTable>
+  </changeSet>
+
 </databaseChangeLog>

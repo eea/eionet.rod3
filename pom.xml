@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
-    <version>0.1-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <name>rod</name>
     <url>http://rod.eionet.europa.eu</url>
 
@@ -431,10 +431,11 @@
                       </build>
                       <run>
                         <env>
-                          <CATALINA_OPTS>-Dinitial.username=roug -Djava.security.egd=file:/dev/./urandom
+                          <CATALINA_OPTS>-Dinitial.username=roug
                           -Dcas.service=http://localhost:4590
                           -Ddb.driver=org.mariadb.jdbc.Driver
                           -Ddb.url=jdbc:mariadb://database/rod3 -Ddb.username=roduser -Ddb.password=password
+                          -Ddeploy.contexts=test,demo
                           </CATALINA_OPTS>
                         </env>
                         <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
@@ -457,21 +458,6 @@
                       </run>
                     </image>
 
-<!--
-                    <image>
-                      <alias>database</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/eionet/transfer-db</name>
-                      <run>
-                        <ports>
-                          <port>database.port:1521</port>
-                        </ports>
-                        <wait>
-                          <log>TCP server running at </log>
-                          <time>6000</time>
-                        </wait>
-                      </run>
-                    </image>
--->
                     <image>
                       <alias>database</alias>
                       <name>mariadb:10.1</name>

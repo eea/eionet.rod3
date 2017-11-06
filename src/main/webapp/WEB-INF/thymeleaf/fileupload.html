@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1>Upload first edition of new dataset</h1>
+        <form id="uploadform" action="fileupload.html" th:action="@{/fileupload}" method="post" enctype="multipart/form-data">
+          <div class="formrow">
+            <label for="file">Select a file to upload:</label>
+            <input type="file" name="file" id="file" onchange="fileSelected();"/>
+            <input type="hidden" name="datasetId" th:value="${datasetId}"/>
+          </div>
+          <div id="uploadprogress">
+            <div id="fileName"></div>
+            <div id="fileSize"></div>
+            <div id="fileType"></div>
+            <progress id="progressbar" max="100"><span>0</span>% uploaded</progress>
+          </div>
+          <div class="formrow">
+            <p>Click this button to upload your dataset</p>
+            <input type="submit" id="submitbutton" onclick="return uploadFile()" value="Upload" />
+          </div>
+        </form>
+        <div id="uploadcomplete" th:style="${editionId}? 'display:block' : ''">
+          <h1>File successfully uploaded</h1>
+          <p>
+          Your file is uploaded now and you can query it.
+          </p>
+          <p>
+          <a id="factsheetLink" href="#">Dataset factsheet</a>
+          </p>
+          <p>
+          Return to <a href="index.html" th:href="@{/}">Home</a>.
+          </p>
+        </div>
+      </div>
+    </div> <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+    <script type="text/javascript">
+    // <![CDATA[
+
+      function fileSelected() {
+        var fileElem = document.getElementById('file');
+        if (!fileElem.files) { // IE 9 and older
+          var fileName = fileElem.value;
+          fileName = fileName.substr(Math.max(fileName.lastIndexOf('\\'), fileName.lastIndexOf('/')) + 1);
+          document.getElementById('fileName').innerHTML = 'Name: ' + fileName;
+          document.getElementById('uploadprogress').style.display = "block";
+          document.getElementById('uploadcomplete').style.display = "none";
+          document.getElementById('submitbutton').value = "Upload";
+          document.getElementById('submitbutton').disabled = false;
+          return;
+        }
+        var file = fileElem.files[0];
+        if (file) {
+          var fileSize = 0;
+          if (file.size > 1024 * 1024)
+            fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + ' MB';
+          else
+            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + ' KB';
+
+          document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+          document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+          document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+          document.getElementById('progressbar').value = 0;
+          document.getElementById('uploadprogress').style.display = "block";
+          document.getElementById('uploadcomplete').style.display = "none";
+        }
+      }
+
+      function uploadFile() {
+        var fileElem = document.getElementById('file');
+        if (!fileElem.files) { // IE 9 and older
+          if (!fileElem.value) {
+            alert("You must first select a file");
+            return false;
+          }
+        }
+        var file = fileElem.files[0];
+        if (!file) {
+            alert("You must first select a file");
+            return false;
+        }
+        document.getElementById('submitbutton').value = "Uploading..";
+        document.getElementById('submitbutton').disabled = true;
+        var uploadForm = document.getElementById('uploadform');
+        var formAction = uploadForm.action;
+        var fd = new FormData(uploadForm);
+        fd.append("ajaxupload", "1");
+
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.open("POST", formAction);
+        xhr.send(fd);
+        return false; // Return false so the browser doesn't upload again.
+      }
+
+      function uploadProgress(evt) {
+        var progressBar = document.getElementById('progressbar');
+        if (evt.lengthComputable) {
+          var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+          progressBar.value = percentComplete;
+          progressBar.getElementsByTagName('span')[0].innerHTML = percentComplete.toString();
+        } else {
+          progressBar.getElementsByTagName('span')[0].innerHTML = 'unable to compute';
+        }
+      }
+
+      function uploadComplete(evt) {
+        /* This event is raised when the server sends back a response */
+        var xmlDocument = evt.target.responseXML;
+
+        var editionLink = xmlDocument.documentElement.getElementsByTagName("editionLink")[0];
+        var editionchild = document.getElementById('factsheetLink');
+        editionchild.href = editionLink.firstChild.nodeValue;
+        document.getElementById('uploadprogress').style.display = "none";
+        document.getElementById('uploadcomplete').style.display = "block";
+        document.getElementById('submitbutton').value = "Upload";
+        document.getElementById('submitbutton').disabled = false;
+      }
+
+      function uploadFailed(evt) {
+        alert("There was an error attempting to upload the file.");
+        document.getElementById('submitbutton').value = "Upload";
+        document.getElementById('submitbutton').disabled = false;
+      }
+
+      function uploadCanceled(evt) {
+        alert("The upload has been canceled by the user or the browser dropped the connection.");
+        document.getElementById('submitbutton').value = "Upload";
+        document.getElementById('submitbutton').disabled = false;
+      }
+    // ]]>
+    </script>
+  </body>
+</html>

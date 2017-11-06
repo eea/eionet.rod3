@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div th:replace="layout :: bannerFragment">
+        <div id="pagehead">
+          <div id="networktitle">Datalake</div>
+          <div id="sitetitle">European Environment Information and Observation Network</div>
+          <div id="sitetagline">Networking improving Europe's environment</div>
+        </div>
+        <div id="menuribbon">
+        </div>
+        <div id="leftcolumn">
+        Something in left column.
+        </div>
+      </div>
+      <div id="workarea">
+        <div id="drop-operations">
+          <h2>Operations</h2>
+          <ul>
+            <li><a href="datasetEdit.html" th:href="@{'/datasets/' + ${dataset.datasetId} + '/edit'}">Edit metadata</a></li>
+            <li><a href="fileupload.html" th:href="@{/fileupload(datasetId=${dataset.datasetId})}">Upload new edition</a></li>
+            <li><a href="qatests.html" th:href="@{'/qatests/' + ${dataset.datasetId}}">Edit QA tests</a></li>
+            <li><a href="#" th:href="@{'/datasets/' + ${dataset.datasetId} + '/download'}">Download last good</a></li>
+            <li><a href="#" th:href="@{'/datasets/' + ${dataset.datasetId} + '/rdf'}">Download as RDF</a></li>
+          </ul>
+        </div>
+        <h1 th:text="${dataset.title}">Page title here</h1>
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+        <table class="datatable">
+          <tbody>
+            <tr>
+              <th scope="row">Title</th><td th:text="${dataset.title}">Dataset title</td>
+            </tr>
+            <tr>
+              <th scope="row">Identifier</th><td th:text="${dataset.datasetId}">oNS4DCOv6ZDgSl5ehlC4ww</td>
+            </tr>
+            <tr>
+              <th scope="row">Latest edition</th><td><a href="editionFactsheet.html"
+                  th:href="@{'/editions/' + ${dataset.latestEdition}}"
+                  th:text="${dataset.filename}">is9UjqqjYVALXoMkjku23</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Generations to keep</th><td th:text="${dataset.keep}?: 'No limit'">77</td>
+            </tr>
+            <tr>
+              <th scope="row">QA Failures to keep</th><td th:text="${dataset.keepFailures}?: 'No limit'">5</td>
+            </tr>
+            <!--
+            <tr>
+              <th scope="row">Date of upload</th><td th:text="${#dates.format(dataset.uploadTime, 'dd-MMM-yyyy HH:mm:ss')}">19-Apr-2016 18:47:35</td>
+            </tr>
+            -->
+          </tbody>
+        </table>
+
+        <h2>Editions</h2>
+        <table class="datatable">
+          <thead>
+            <tr>
+              <th scope="col">Uploaded</th>
+              <th scope="col">Title</th>
+              <th scope="col">Tests</th>
+              <th scope="col">Failures</th>
+            </tr>
+          </thead>
+          <tbody th:remove="all-but-first">
+            <tr th:each="other : ${otherEditions}" th:class="${other.countTests} gt 0 ? (${other.countFailures} == 0 ? 'success':'failure') : 'notests'" class="success">
+              <td th:text="${#dates.format(other.uploadTime, 'dd-MMM-yyyy HH:mm:ss')}">2009-04-29</td>
+              <td><a
+                th:href="@{'/editions/' + ${other.editionId}}" href="#"
+                th:text="${other.filename}">CDDA 2009.mdb</a>
+              </td>
+              <td th:text="${other.countTests}">9</td>
+              <td th:text="${other.countFailures}">0</td>
+            </tr>
+            <tr>
+              <td><a href="#">2008-10-18</a></td>
+              <td>CDDA 2008.mdb</td>
+              <td>9</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

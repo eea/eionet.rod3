@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1>Data lake</h1>
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+<p>
+The purpose of this website is to store one or more editions of <em>work</em> datasets, and check their quality.
+Potentially, the system can be integrated with automatic uploads from IDM3 tools as their datasets get created as a result of the FME process.
+</p>
+<p>
+The site is only open to uploaders with an Eionet account.
+</p>
+<ul style="font-size: 110%">
+  <li><a href="datasets.html" th:href="@{/datasets}">List of datasets</a></li>
+  <li><a href="fileupload.html" th:href="@{/fileupload}">Upload new dataset</a></li>
+</ul>
+
+<h2>Limitations of this prototype</h2>
+<ul>
+<li>Only works if you upload MDB or ACCDB files.</li>
+<li>Some navigational links are missing or don't work.</li>
+<li>Confusion in terminology.</li>
+<li>Only <code>tableExists</code> and <code>sqlCheck</code> QA tests work at the moment</li>
+</ul>
+
+<h2>TODO after prototype evaluation</h2>
+<ul>
+<li>When a QA test is added or modified then run the test on all editions in batch queue</li>
+<li>When a QA test is deleted, then delete test results from all editions</li>
+<li>At upload of new dataset edition, then add the QA tests to a batch queue</li>
+<li>More graceful handling of non-MDB files</li>
+<li>Ability to download dataset as zipped archive of CSV files.</li>
+<li>Integration into unified notification service</li>
+</ul>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

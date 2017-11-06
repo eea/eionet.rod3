@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+        <div id="pagehead">
+          <div id="networktitle">Datalake</div>
+          <div id="sitetitle">European Environment Information and Observation Network</div>
+          <div id="sitetagline">Networking improving Europe's environment</div>
+        </div>
+      </div>
+      <div id="workarea">
+        <h1 th:text="${title}">Datasets</h1>
+        <div th:if="${#lists.isEmpty(datasets)}">Table is empty.</div>
+        <div th:if="${not #lists.isEmpty(datasets)}">
+          <form action="#" th:action="@{/delete}" method="POST">
+            <table class="datatable" style="width:100%">
+              <col style="width:1em"/>
+              <col style="width:6em"/>
+              <col/>
+              <col style="width:16em"/>
+              <col style="width:12em"/>
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">QA score</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Latest edition</th>
+                  <th scope="col">Last upload</th>
+                </tr>
+              </thead>
+              <tbody th:remove="all-but-first">
+                <tr th:each="dataset : ${datasets}">
+                  <td><input type="checkbox" name="datasetId" th:name="datasetid" th:value="${dataset.datasetId}"/>
+                  <td
+                      th:class="${dataset.countTests} gt 0 ? (${dataset.countFailures} == 0 ? 'success':'failure') : 'notests'" class="success"
+                      th:text="${dataset.countTests - dataset.countFailures} + ' out of ' + ${dataset.countTests}">5 out of 8</td>
+                  <td><a th:href="@{'/datasets/'+${dataset.datasetId}}" href="datasetFactsheet.html"
+                       th:text="${dataset.title}">Long realistic title</a></td>
+                  <td><a th:href="@{'/editions/'+${dataset.latestEdition}}" href="editionFactsheet.html"
+                       th:title="'Latest edition of ' + ${dataset.title}"
+                       th:text="${dataset.filename}">gdcwljvmzydyqunukgpm1g</a></td>
+                  <td th:text="${#dates.format(dataset.uploadTime, 'dd-MMM-yyyy HH:mm:ss')}">19-Apr-2016 18:47:35</td>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>88888</td>
+                  <td>Filename.txt</td>
+                  <td>lej24psm8ojdryeirulufw</td>
+                  <td>2992929</td>
+                </tr>
+              </tbody>
+            </table>
+            <div><input type="submit" value="Delete"/></div>
+          </form>
+        </div>
+      </div>
+      <!-- workarea -->
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>
