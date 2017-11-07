@@ -25,6 +25,8 @@
   <include file="db/t_client.xml"/>
   <include file="db/t_source.xml"/>
   <include file="db/t_obligation.xml"/>
+  <!--
+  -->
   <include file="db/hlp_area.xml"/>
   <include file="db/t_help.xml"/>
 

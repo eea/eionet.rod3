@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
   <changeSet author="roug" id="rev-1" context="demo">
-    <insert>
+    <insert tableName="HLP_AREA">
       <column name="AREA_ID" value="Introduction"/>
       <column name="SCREEN_ID" value="Home_page"/>
       <column name="DESCRIPTION" value=""/>
@@ -11,7 +11,7 @@
       <column name="POPUP_WIDTH" value="400"/>
       <column name="POPUP_LENGTH" value="400"/>
     </insert>
-    <insert>
+    <insert tableName="HLP_AREA">
       <column name="AREA_ID" value="Two_boxes"/>
       <column name="SCREEN_ID" value="Home_page"/>
       <column name="DESCRIPTION" value="The two boxes below the search form"/>
@@ -21,7 +21,7 @@
       <column name="POPUP_WIDTH" value="400"/>
       <column name="POPUP_LENGTH" value="400"/>
     </insert>
-    <insert>
+    <insert tableName="HLP_AREA">
       <column name="AREA_ID" value="Disclaimer"/>
       <column name="SCREEN_ID" value="documentation"/>
       <column name="DESCRIPTION" value="Disclaimer"/>
@@ -31,7 +31,7 @@
       <column name="POPUP_WIDTH" value="400"/>
       <column name="POPUP_LENGTH" value="400"/>
     </insert>
-    <insert>
+    <insert tableName="HLP_AREA">
       <column name="AREA_ID" value="Help"/>
       <column name="SCREEN_ID" value="documentation"/>
       <column name="DESCRIPTION" value="What is ROD"/>
@@ -41,7 +41,7 @@
       <column name="POPUP_WIDTH" value="400"/>
       <column name="POPUP_LENGTH" value="400"/>
     </insert>
-    <insert>
+    <insert tableName="HLP_AREA">
       <column name="AREA_ID" value="RSSHelp"/>
       <column name="SCREEN_ID" value="documentation"/>
       <column name="DESCRIPTION" value="RSS XML/RPC data extraction"/>
