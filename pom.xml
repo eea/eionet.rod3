@@ -194,7 +194,7 @@
         <dependency>
             <groupId>eionet</groupId>
             <artifactId>rdf-exporter</artifactId>
-            <version>1.3-SNAPSHOT</version>
+            <version>1.3.0</version>
         </dependency>
 
         <dependency>
@@ -264,7 +264,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.17</version>
         </dependency>
 
         <dependency>
@@ -460,7 +460,7 @@
 
                     <image>
                       <alias>database</alias>
-                      <name>mariadb:10.1</name>
+                      <name>mariadb:10.2.10</name>
                       <run>
                         <ports>
                           <port>database.port:3306</port>
