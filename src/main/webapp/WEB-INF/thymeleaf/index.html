@@ -2,43 +2,127 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:include="layout :: headerFragment">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/handheld.css" media="handheld" />
+    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui-1.10.3.custom.min.css" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}" />
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
+    <script type="text/javascript" src="../../js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js" th:src="@{/js/jquery-ui-1.10.3.custom.min.js}"></script>
+    <script type="text/javascript" src="../../js/pageops.js" th:src="@{/js/pageops.js}"></script>
+    <script type="text/javascript" src="../../js/mark_special_links.js" th:src="@{/js/mark_special_links.js}"></script>
   </head>
   <body>
     <div id="container">
       <div th:include="layout :: bannerFragment">
       </div>
       <div id="workarea">
-        <h1>Data lake</h1>
+        <h1>What is ROD?</h1>
         <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
 <p>
-The purpose of this website is to store one or more editions of <em>work</em> datasets, and check their quality.
-Potentially, the system can be integrated with automatic uploads from IDM3 tools as their datasets get created as a result of the FME process.
+ROD is the EEA's reporting obligations database. It contains records
+describing environmental reporting obligations that countries have towards
+international organisations. ROD is part of Reportnet. Reportnet is
+group of web applications and processes developed by the EEA to support
+international environmental reporting.
 </p>
+<h2>What are reporting obligations?</h2>
 <p>
-The site is only open to uploaders with an Eionet account.
+Reporting obligations are requirements to provide information
+agreed between countries and international bodies such as the EEA or
+international conventions. Reporting obligations provide the basis for
+most environmental information flows.
 </p>
-<ul style="font-size: 110%">
-  <li><a href="datasets.html" th:href="@{/datasets}">List of datasets</a></li>
-  <li><a href="fileupload.html" th:href="@{/fileupload}">Upload new dataset</a></li>
-</ul>
+<h2>What does ROD cover?</h2>
+<p>
+ROD includes all environmental reporting obligations that EEA member
+countries have towards DG environment, European marine conventions,
+Eurostat, OECD, UN, UNECE, as well as the EEA itself. To learn more
+about ROD, the status of the contents and the intended users, please
+check out the general help section.
+</p>
+<form id="x1" action="/obligations" class="notprintable" method="get">
+  <table id="categorysearch">
+    <col style="width: 30%"/>
+    <col style="width: 65%"/>
+    <col style="width: 5%"/>
+    <tr>
+      <td colspan="2">
+        <b>Show reporting obligations</b>
+      </td>
+      <td class="center"> </td>
+    </tr>
+    <tr>
+      <td>
+        <label class="question">Country or territory</label>
+      </td>
+      <td>
+        <select name="country" size="1">
+          <option value="-1">Any country or territory</option>
+          <option value="3">Austria</option>
+          <option value="6">Bosnia and Herzegovina</option>
+          <option value="42">Kosovo under the UNSCR 1244/99</option>
+          <option value="24">The former Yugoslav Republic of Macedonia</option>
+          <option value="121">Vatican City</option>
+        </select>
+      </td>
+      <td rowspan="4" style="vertical-align:middle">
+        <input name="id" value="" type="hidden"/>
+        <input name="filter" value="GO" class="go_btn" type="submit"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label class="question">Issue</label>
+      </td>
+      <td>
+        <select style="width:223px" name="issue">
+          <option value="-1">All issues</option>
+          <option value="6">Air pollution</option>
+          <option value="14">Biodiversity Change and Nature</option>
+          <option value="10">Chemicals</option>
+          <option value="1">Climate Change</option>
+          <option value="8">Natural Resources</option>
+          <option value="7">Noise</option>
+          <option value="2">Ozone Depletion</option>
+          <option value="4">Soil</option>
+          <option value="12">Various other issues</option>
+          <option value="13">Waste</option>
+          <option value="15">Water</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label class="question">Organisation</label>
+      </td>
+      <td>
+        <select style="width:300px" name="client" size="1">
+          <option value="-1">Any organisation</option>
+          <option value="50">ACCOBAMS - ACCOBAMS Secretariat</option>
+          <option value="45">AEWA - UNEP/AEWA Secretariat</option>
+          <option value="68">Alpine Convention Secretariat</option>
+          <option value="63">Bern Convention</option>
+          <option value="84">Bonn Agreement Secretariat</option>
+          <option value="24">BSC - Black Sea Commission</option>
+          <option value="82">CAR/RCU - Caribbean Regional Co-ordinating Unit</option>
+          <option value="81">CAR/RCU - Conference of the Parties to the Cartagena Convent...</option>
+          <option value="42">CBD - Convention on Biological Diversity</option>
+          <option value="71">CCAMLR - Commission for the Conservation of Antarctic Marin...</option>
+          <option value="53">World Heritage Committee, UNESCO World Heritage Ce...</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>&#xA0;</td>
+      <td>
+        <input id="isterminated" name="terminated" value="Y" type="checkbox"/>
+        <label for="isterminated">Include terminated obligations</label>
+      </td>
+    </tr>
+  </table>
+</form>
 
-<h2>Limitations of this prototype</h2>
-<ul>
-<li>Only works if you upload MDB or ACCDB files.</li>
-<li>Some navigational links are missing or don't work.</li>
-<li>Confusion in terminology.</li>
-<li>Only <code>tableExists</code> and <code>sqlCheck</code> QA tests work at the moment</li>
-</ul>
-
-<h2>TODO after prototype evaluation</h2>
-<ul>
-<li>When a QA test is added or modified then run the test on all editions in batch queue</li>
-<li>When a QA test is deleted, then delete test results from all editions</li>
-<li>At upload of new dataset edition, then add the QA tests to a batch queue</li>
-<li>More graceful handling of non-MDB files</li>
-<li>Ability to download dataset as zipped archive of CSV files.</li>
-<li>Integration into unified notification service</li>
-</ul>
       </div>
     </div>
     <!-- container -->
