@@ -116,31 +116,43 @@
 
 
     <changeSet author="roug" id="rev-5">
-        <sql>CREATE TABLE T_CLIENT (
-  PK_CLIENT_ID int(10) unsigned NOT NULL auto_increment,
-  CLIENT_NAME varchar(255) default NULL,
-  CLIENT_ACRONYM varchar(100) default NULL,
-  CLIENT_URL varchar(255) default NULL,
-  CLIENT_ADDRESS varchar(255) default NULL,
-  CLIENT_EMAIL varchar(255) default NULL,
-  DESCRIPTION text,
-  POSTAL_CODE varchar(100) default NULL,
-  CITY varchar(255) default NULL,
-  COUNTRY varchar(255) default NULL,
-  CLIENT_SHORT_NAME varchar(100) default NULL,
-  PRIMARY KEY  (PK_CLIENT_ID)
-)</sql>
+        <createTable tableName="T_CLIENT">
+            <column defaultValue="" name="PK_CLIENT_ID" type="INT(10)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CLIENT_NAME" type="varchar(255)"/>
+            <column name="CLIENT_ACRONYM" type="varchar(100)"/>
+            <column name="CLIENT_URL" type="varchar(255)"/>
+            <column name="CLIENT_ADDRESS" type="varchar(255)"/>
+            <column name="CLIENT_EMAIL" type="varchar(255)"/>
+            <column name="DESCRIPTION" type="TEXT"/>
+            <column name="POSTAL_CODE" type="varchar(100)"/>
+            <column name="CITY" type="varchar(255)"/>
+            <column name="COUNTRY" type="varchar(255)"/>
+            <column name="CLIENT_SHORT_NAME" type="varchar(100)"/>
+        </createTable>
+
+        <addAutoIncrement tableName="T_CLIENT" columnName="PK_CLIENT_ID" columnDataType="INT"/>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-6">
-        <sql>CREATE TABLE T_CLIENT_LNK (
-  FK_CLIENT_ID int(10) NOT NULL default '0',
-  FK_OBJECT_ID int(10) NOT NULL default '0',
-  TYPE char(1) NOT NULL default '',
-  STATUS enum('M','C') NOT NULL default 'M',
-  PRIMARY KEY  (FK_CLIENT_ID,FK_OBJECT_ID,TYPE,STATUS)
-)</sql>
+        <createTable tableName="T_CLIENT_LNK">
+            <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValueNumeric="0" name="FK_OBJECT_ID" type="INT(10)">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValue="" name="TYPE" type="char(1)">
+                <constraints nullable="false" />
+            </column>
+            <column defaultValue="M" name="STATUS" type="enum('M','C')">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+       <addPrimaryKey tableName="T_CLIENT_LNK" columnNames="FK_CLIENT_ID,FK_OBJECT_ID,TYPE,STATUS"/>
    </changeSet>
 
 
