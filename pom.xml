@@ -403,6 +403,7 @@
                   <images>
                     <image>
                       <alias>service</alias>
+                      <registry>docker.io</registry>
                       <name>eeacms/${project.artifactId}</name>
                       <build>
                         <from>tomcat:8.5.0-jre8</from>
