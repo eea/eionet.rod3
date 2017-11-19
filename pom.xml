@@ -14,7 +14,6 @@
         <spring.version>4.1.6.RELEASE</spring.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
         <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
-        <checkstyle.config.location>${basedir}/doc/checkstyle.xml</checkstyle.config.location>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
@@ -95,6 +94,34 @@
                 </configuration>
             </plugin>
 
+
+            <!-- Configure Failsafe plugin (for executing integration tests) -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <db.driver>org.h2.Driver</db.driver>
+                        <db.url>jdbc:h2:file:${project.build.directory}/rod3test</db.url>
+                        <db.username>roduser</db.username>
+                        <db.password>password</db.password>
+                        <profile>test</profile>
+                        <storage.dir>${project.build.directory}</storage.dir>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
             <!-- Configure WAR plugin (for building WAR application) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -137,6 +164,34 @@
                     <failOnError>true</failOnError>
                 </configuration>
             </plugin>
+
+            <!-- Update database tables -->
+
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <id>Update database</id>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <skip>${maven.test.skip}</skip>
+                            <changeLogFile>db/changelog-master.xml</changeLogFile>
+                            <driver>org.h2.Driver</driver>
+                            <url>jdbc:h2:file:${project.build.directory}/rod3test</url>
+                            <username>roduser</username>
+                            <password>password</password>
+                            <contexts>test,xdemo</contexts>
+                        </configuration>
+                        <goals>
+                            <goal>dropAll</goal>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
 
         <!-- resources for the main code -->
@@ -297,11 +352,17 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>1.4.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.3.1</version>
+            <version>3.5.3</version>
         </dependency>
         <!-- Thymeleaf -->
         <dependency>
@@ -371,14 +432,6 @@
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>300</minimumTokens>
                     <targetJdk>1.6</targetJdk>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <configLocation>${checkstyle.config.location}</configLocation>
                 </configuration>
             </plugin>
         </plugins>
@@ -510,7 +563,7 @@
               <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19</version>
+                <version>2.20.1</version>
                 <configuration>
                   <systemPropertyVariables>
                     <db.driver>org.mariadb.jdbc.Driver</db.driver>

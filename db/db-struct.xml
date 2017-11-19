@@ -199,457 +199,678 @@
 
 
     <changeSet author="roug" id="rev-9">
-        <sql>CREATE TABLE T_HELP (
-  PK_HELP_ID varchar(50) NOT NULL default '',
-  HELP_TITLE varchar(255) default NULL,
-  HELP_TEXT text,
-  PRIMARY KEY  (PK_HELP_ID)
-)</sql>
+        <createTable tableName="T_HELP">
+            <column name="PK_HELP_ID" type="varchar(50)" defaultValue="">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="HELP_TITLE" type="varchar(255)"/>
+            <column name="HELP_TEXT" type="TEXT"/>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-10">
-        <sql>CREATE TABLE T_HISTORIC_DEADLINES (
-  FK_RA_ID int(10) NOT NULL default '0',
-  DEADLINE date NOT NULL default '0000-00-00',
-  PRIMARY KEY  (FK_RA_ID,DEADLINE)
-)</sql>
+        <createTable tableName="T_HISTORIC_DEADLINES">
+            <column name="FK_RA_ID" type="INT(10)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEADLINE" type="DATE" defaultValueDate="0000-00-00">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey tableName="T_HISTORIC_DEADLINES" columnNames="FK_RA_ID,DEADLINE"/>
+
    </changeSet>
 
 
     <changeSet author="roug" id="rev-11">
-        <sql>CREATE TABLE T_HISTORY (
-  PK_HISTORY_ID int(10) unsigned NOT NULL auto_increment,
-  ITEM_ID int(10) default NULL,
-  ITEM_TYPE char(1) default NULL,
-  ACTION_TYPE char(1) default NULL,
-  LOG_TIME datetime default NULL,
-  USER varchar(100) default NULL,
-  DESCRIPTION text,
-  PRIMARY KEY  (PK_HISTORY_ID)
-)</sql>
+        <createTable tableName="T_HISTORY">
+            <column name="PK_HISTORY_ID" type="INT(10)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ITEM_ID" type="INT(10)"/>
+            <column name="ITEM_TYPE" type="CHAR(1)"/>
+            <column name="ACTION_TYPE" type="CHAR(1)"/>
+            <column name="LOG_TIME" type="DATETIME"/>
+            <column name="USER" type="VARCHAR(100)"/>
+            <column name="DESCRIPTION" type="TEXT"/>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-12">
-        <sql>CREATE TABLE T_INDICATOR (
-  PK_INDICATOR_ID int(10) NOT NULL auto_increment,
-  FK_RA_ID int(10) NOT NULL default '0',
-  NUMBER varchar(100) NOT NULL default '',
-  TITLE varchar(255) default NULL,
-  URL varchar(255) default NULL,
-  OWNER varchar(255) default NULL,
-  PRIMARY KEY  (PK_INDICATOR_ID)
-)</sql>
+        <createTable tableName="T_INDICATOR">
+          <column name="PK_INDICATOR_ID" type="int(10)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_RA_ID" type="int(10)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="NUMBER" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="TITLE" type="varchar(255)"/>
+          <column name="URL" type="varchar(255)"/>
+          <column name="OWNER" type="varchar(255)"/>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-13">
-        <sql>CREATE TABLE T_INFO_LNK (
-  FK_RA_ID int(10) NOT NULL default '0',
-  FK_INFO_ID char(1) NOT NULL default '',
-  PRIMARY KEY  (FK_RA_ID,FK_INFO_ID)
-)</sql>
+        <createTable tableName="T_INFO_LNK">
+          <column name="FK_RA_ID" type="int(10)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_INFO_ID" type="char(1)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="T_INFO_LNK" columnNames="FK_RA_ID,FK_INFO_ID"/>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-14">
-        <sql>CREATE TABLE T_ISSUE (
-  PK_ISSUE_ID int(11) unsigned NOT NULL auto_increment,
-  ISSUE_NAME varchar(100) NOT NULL default '',
-  FK_DD_GUID int(11) unsigned default NULL,
-  DD_URL varchar(255) default NULL,
-  PRIMARY KEY  (PK_ISSUE_ID),
-  KEY PK_ISSUE_ID (PK_ISSUE_ID)
-)</sql>
+        <createTable tableName="T_ISSUE">
+          <column name="PK_ISSUE_ID" type="int(11) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="ISSUE_NAME" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_DD_GUID" type="int(11) unsigned"/>
+          <column name="DD_URL" type="varchar(255)"/>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-15">
-        <sql>CREATE TABLE T_LOOKUP (
-  C_TERM varchar(100) NOT NULL default '',
-  CATEGORY enum('1','2','C','P','L','S','F','UT','ST','I','DGS') NOT NULL default 'P',
-  C_VALUE char(1) default NULL,
-  PRIMARY KEY  (C_TERM,CATEGORY)
-)</sql>
+        <createTable tableName="T_LOOKUP">
+          <column name="C_TERM" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="CATEGORY" type="enum('1','2','C','P','L','S','F','UT','ST','I','DGS')" defaultValue="P">
+                <constraints nullable="false"/>
+            </column>
+          <column name="C_VALUE" type="char(1)"/>
+        </createTable>
+
+        <addPrimaryKey tableName="T_LOOKUP" columnNames="C_TERM,CATEGORY"/>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-16">
-        <sql>CREATE TABLE T_OBLIGATION (
-  PK_RA_ID int(10) NOT NULL auto_increment,
-  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
-  VALID_SINCE date default NULL,
-  TITLE varchar(255) NOT NULL default '',
-  FORMAT_NAME varchar(100) default NULL,
-  REPORT_FORMAT_URL varchar(255) default NULL,
-  REPORT_FREQ_DETAIL varchar(50) default NULL,
-  REPORTING_FORMAT text,
-  DATE_COMMENTS varchar(255) default NULL,
-  LAST_UPDATE date default NULL,
-  TERMINATE enum('Y','N') NOT NULL default 'N',
-  REPORT_FREQ varchar(25) default NULL,
-  COMMENT text,
-  RESPONSIBLE_ROLE varchar(255) default NULL,
-  NEXT_DEADLINE date default NULL,
-  FIRST_REPORTING date default NULL,
-  REPORT_FREQ_MONTHS int(3) default NULL,
-  NEXT_REPORTING varchar(255) default NULL,
-  VALID_TO date default NULL,
-  FK_DELIVERY_COUNTRY_IDS varchar(255) default NULL,
-  NEXT_DEADLINE2 date default NULL,
-  RM_NEXT_UPDATE date default NULL,
-  RM_VERIFIED date default NULL,
-  RM_VERIFIED_BY varchar(50) default NULL,
-  LAST_HARVESTED datetime default NULL,
-  LOCATION_PTR varchar(255) default NULL,
-  LOCATION_INFO varchar(255) default NULL,
-  LEGAL_MORAL enum('L','M','V') default 'L',
-  FK_CLIENT_ID int(10) default NULL,
-  DESCRIPTION text,
-  RESPONSIBLE_ROLE_SUF int(1) NOT NULL default '1',
-  NATIONAL_CONTACT varchar(255) default NULL,
-  NATIONAL_CONTACT_URL varchar(255) default NULL,
-  COORDINATOR_ROLE varchar(255) default NULL,
-  COORDINATOR_ROLE_SUF int(1) NOT NULL default '1',
-  COORDINATOR varchar(255) default NULL,
-  COORDINATOR_URL varchar(255) default NULL,
-  PARAMETERS text,
-  VALIDATED_BY text,
-  EEA_PRIMARY int(1) default '0',
-  EEA_CORE int(1) default '0',
-  FLAGGED int(1) default '0',
-  AUTHORITY varchar(255) default NULL,
-  OVERLAP_URL varchar(255) default NULL,
-  DPSIR_D enum('yes','no') default NULL,
-  DPSIR_P enum('yes','no') default NULL,
-  DPSIR_S enum('yes','no') default NULL,
-  DPSIR_I enum('yes','no') default NULL,
-  DPSIR_R enum('yes','no') default NULL,
-  DATA_USED_FOR varchar(255) default NULL,
-  DATA_USED_FOR_URL varchar(255) default NULL,
-  CONTINOUS_REPORTING enum('yes','no') default NULL,
-  PRIMARY KEY  (PK_RA_ID),
-  KEY FK_SOURCE_ID (FK_SOURCE_ID)
-)</sql>
+        <createTable tableName="T_OBLIGATION">
+          <column name="PK_RA_ID" type="int(10)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_SOURCE_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="VALID_SINCE" type="date"/>
+          <column name="TITLE" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FORMAT_NAME" type="varchar(100)"/>
+          <column name="REPORT_FORMAT_URL" type="varchar(255)"/>
+          <column name="REPORT_FREQ_DETAIL" type="varchar(50)"/>
+          <column name="REPORTING_FORMAT" type="text"/>
+          <column name="DATE_COMMENTS" type="varchar(255)"/>
+          <column name="LAST_UPDATE" type="date"/>
+          <column name="TERMINATE" type="enum('Y','N')" defaultValue="N">
+                <constraints nullable="false"/>
+            </column>
+          <column name="REPORT_FREQ" type="varchar(25)"/>
+          <column name="COMMENT" type="text"/>
+          <column name="RESPONSIBLE_ROLE" type="varchar(255)"/>
+          <column name="NEXT_DEADLINE" type="date"/>
+          <column name="FIRST_REPORTING" type="date"/>
+          <column name="REPORT_FREQ_MONTHS" type="int(3)"/>
+          <column name="NEXT_REPORTING" type="varchar(255)"/>
+          <column name="VALID_TO" type="date"/>
+          <column name="FK_DELIVERY_COUNTRY_IDS" type="varchar(255)"/>
+          <column name="NEXT_DEADLINE2" type="date"/>
+          <column name="RM_NEXT_UPDATE" type="date"/>
+          <column name="RM_VERIFIED" type="date"/>
+          <column name="RM_VERIFIED_BY" type="varchar(50)"/>
+          <column name="LAST_HARVESTED" type="datetime"/>
+          <column name="LOCATION_PTR" type="varchar(255)"/>
+          <column name="LOCATION_INFO" type="varchar(255)"/>
+          <column name="LEGAL_MORAL" type="enum('L','M','V')" defaultValue="L"/>
+          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="DESCRIPTION" type="text"/>
+          <column name="RESPONSIBLE_ROLE_SUF" type="int(1)" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+          <column name="NATIONAL_CONTACT" type="varchar(255)"/>
+          <column name="NATIONAL_CONTACT_URL" type="varchar(255)"/>
+          <column name="COORDINATOR_ROLE" type="varchar(255)"/>
+          <column name="COORDINATOR_ROLE_SUF" type="int(1)" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+          <column name="COORDINATOR" type="varchar(255)"/>
+          <column name="COORDINATOR_URL" type="varchar(255)"/>
+          <column name="PARAMETERS" type="text"/>
+          <column name="VALIDATED_BY" type="text"/>
+          <column name="EEA_PRIMARY" type="int(1)" defaultValueNumeric="0"/>
+          <column name="EEA_CORE" type="int(1)" defaultValueNumeric="0"/>
+          <column name="FLAGGED" type="int(1)" defaultValueNumeric="0"/>
+          <column name="AUTHORITY" type="varchar(255)"/>
+          <column name="OVERLAP_URL" type="varchar(255)"/>
+          <column name="DPSIR_D" type="enum('yes','no')"/>
+          <column name="DPSIR_P" type="enum('yes','no')"/>
+          <column name="DPSIR_S" type="enum('yes','no')"/>
+          <column name="DPSIR_I" type="enum('yes','no')"/>
+          <column name="DPSIR_R" type="enum('yes','no')"/>
+          <column name="DATA_USED_FOR" type="varchar(255)"/>
+          <column name="DATA_USED_FOR_URL" type="varchar(255)"/>
+          <column name="CONTINOUS_REPORTING" type="enum('yes','no')"/>
+        </createTable>
+        <createIndex tableName="T_OBLIGATION" indexName="FK_SOURCE_ID">
+          <column name="FK_SOURCE_ID"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-17">
-        <sql>CREATE TABLE T_RAISSUE_LNK (
-  FK_ISSUE_ID int(10) unsigned NOT NULL default '0',
-  FK_RA_ID int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (FK_ISSUE_ID,FK_RA_ID)
-)</sql>
+        <createTable tableName="T_RAISSUE_LNK">
+          <column name="FK_ISSUE_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="T_RAISSUE_LNK" columnNames="FK_ISSUE_ID,FK_RA_ID"/>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-18">
-        <sql>CREATE TABLE T_RASPATIAL_LNK (
-  FK_SPATIAL_ID int(10) unsigned NOT NULL default '0',
-  FK_RA_ID int(10) unsigned NOT NULL default '0',
-  VOLUNTARY enum('Y','N') NOT NULL default 'Y',
-  PRIMARY KEY  (FK_SPATIAL_ID,FK_RA_ID,VOLUNTARY)
-)</sql>
+        <createTable tableName="T_RASPATIAL_LNK">
+          <column name="FK_SPATIAL_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="VOLUNTARY" type="enum('Y','N')" defaultValue="Y">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="T_RASPATIAL_LNK" columnNames="FK_SPATIAL_ID,FK_RA_ID,VOLUNTARY"/>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-19">
         <comment>Role information from DIRECTORY</comment>
-        <sql>CREATE TABLE T_ROLE (
-  ROLE_NAME varchar(255) NOT NULL default '',
-  ROLE_EMAIL varchar(255) NOT NULL default '',
-  ROLE_URL text,
-  ROLE_ID varchar(255) NOT NULL default '',
-  ROLE_MEMBERS_URL varchar(255) default NULL,
-  LAST_HARVESTED datetime default NULL,
-  STATUS int(1) NOT NULL default '0',
-  PRIMARY KEY  (ROLE_ID,STATUS)
-) COMMENT='Role information from DIRECTORY'</sql>
+        <createTable tableName="T_ROLE">
+          <column name="ROLE_NAME" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="ROLE_EMAIL" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="ROLE_URL" type="text"/>
+          <column name="ROLE_ID" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="ROLE_MEMBERS_URL" type="varchar(255)"/>
+          <column name="LAST_HARVESTED" type="datetime"/>
+          <column name="STATUS" type="int(1)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="T_ROLE" columnNames="ROLE_ID,STATUS"/>
    </changeSet>
 
     <changeSet author="roug" id="rev-21">
-        <sql>CREATE TABLE T_SOURCE (
-  PK_SOURCE_ID int(10) unsigned NOT NULL auto_increment,
-  FK_TYPE_ID int(10) unsigned NOT NULL default '0',
-  SOURCE_CODE varchar(50) NOT NULL default '',
-  TITLE text NOT NULL,
-  CELEX_REF varchar(255) default NULL,
-  LEGAL_NAME varchar(255) NOT NULL default '',
-  URL text,
-  SECRETARIAT text,
-  SECRETARIAT_URL varchar(255) default NULL,
-  ABSTRACT text,
-  EC_ACCESSION date default NULL,
-  EC_ENTRY_INTO_FORCE date default NULL,
-  DRAFT enum('Y','N') default NULL,
-  COMMENT text,
-  LAST_MODIFIED date default NULL,
-  ISSUED_BY text,
-  VALID_FROM date default NULL,
-  ALIAS text,
-  ISSUED_BY_URL varchar(255) default NULL,
-  FK_CLIENT_ID int(10) default NULL,
-  LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  RM_NEXT_UPDATE date default NULL,
-  RM_VERIFIED date default NULL,
-  RM_VERIFIED_BY varchar(50) default NULL,
-  GEOGRAPHIC_SCOPE varchar(255) default NULL,
-  DGENV_REVIEW char(1) default NULL,
-  RM_VALIDATED_BY varchar(50) default NULL,
-  PRIMARY KEY  (PK_SOURCE_ID),
-  KEY FK_TYPE_ID (FK_TYPE_ID),
-  KEY LEGAL_NAME (LEGAL_NAME),
-  KEY FT_TITLE (TITLE(1)),
-  KEY TITLE (TITLE(20)),
-  KEY FT_ALIAS (ALIAS(1)),
-  KEY ALIAS (ALIAS(20))
-)</sql>
+        <createTable tableName="T_SOURCE">
+          <column name="PK_SOURCE_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_TYPE_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="SOURCE_CODE" type="varchar(50)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="TITLE" type="text">
+                <constraints nullable="false"/>
+            </column>
+          <column name="CELEX_REF" type="varchar(255)"/>
+          <column name="LEGAL_NAME" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="URL" type="text"/>
+          <column name="SECRETARIAT" type="text"/>
+          <column name="SECRETARIAT_URL" type="varchar(255)"/>
+          <column name="ABSTRACT" type="text"/>
+          <column name="EC_ACCESSION" type="date"/>
+          <column name="EC_ENTRY_INTO_FORCE" type="date"/>
+          <column name="DRAFT" type="enum('Y','N')"/>
+          <column name="COMMENT" type="text"/>
+          <column name="LAST_MODIFIED" type="date"/>
+          <column name="ISSUED_BY" type="text"/>
+          <column name="VALID_FROM" type="date"/>
+          <column name="ALIAS" type="text"/>
+          <column name="ISSUED_BY_URL" type="varchar(255)"/>
+          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="LAST_UPDATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+          <column name="RM_NEXT_UPDATE" type="date"/>
+          <column name="RM_VERIFIED" type="date"/>
+          <column name="RM_VERIFIED_BY" type="varchar(50)"/>
+          <column name="GEOGRAPHIC_SCOPE" type="varchar(255)"/>
+          <column name="DGENV_REVIEW" type="char(1)"/>
+          <column name="RM_VALIDATED_BY" type="varchar(50)"/>
+        </createTable>
+
+        <sql dbms="mysql">ALTER TABLE T_SOURCE MODIFY COLUMN LAST_UPDATE
+            LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
+
+        <createIndex tableName="T_SOURCE" indexName="FK_TYPE_ID">
+          <column name="FK_TYPE_ID"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE" indexName="LEGAL_NAME">
+          <column name="LEGAL_NAME"/>
+        </createIndex>
+   </changeSet>
+
+    <changeSet author="roug" id="rev-21m" dbms="mysql">
+        <createIndex tableName="T_SOURCE" indexName="FT_TITLE">
+          <column name="TITLE(1)"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE" indexName="TITLE">
+          <column name="TITLE(20)"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE" indexName="FT_ALIAS">
+          <column name="ALIAS(1)"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE" indexName="ALIAS">
+          <column name="ALIAS(20)"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-22">
-        <sql>CREATE TABLE T_SOURCE_CLASS (
-  PK_CLASS_ID int(10) unsigned NOT NULL auto_increment,
-  CLASSIFICATOR varchar(20) default NULL,
-  CLASS_NAME varchar(255) NOT NULL default '',
-  NEW tinyint(3) unsigned NOT NULL default '1',
-  PRIMARY KEY  (PK_CLASS_ID)
-)</sql>
+        <createTable tableName="T_SOURCE_CLASS">
+          <column name="PK_CLASS_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="CLASSIFICATOR" type="varchar(20)"/>
+          <column name="CLASS_NAME" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="NEW" type="tinyint(3) unsigned" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-23">
-        <sql>CREATE TABLE T_SOURCE_LNK (
-  PK_SOURCE_LNK_ID int(10) unsigned NOT NULL auto_increment,
-  FK_SOURCE_CHILD_ID int(10) unsigned NOT NULL default '0',
-  CHILD_TYPE enum('S','C') NOT NULL default 'S',
-  FK_SOURCE_PARENT_ID int(10) unsigned NOT NULL default '0',
-  PARENT_TYPE enum('S','C') NOT NULL default 'S',
-  PRIMARY KEY  (PK_SOURCE_LNK_ID),
-  UNIQUE KEY FK_SOURCE_CHILD_ID_2 (FK_SOURCE_CHILD_ID,CHILD_TYPE,FK_SOURCE_PARENT_ID,PARENT_TYPE),
-  KEY FK_SOURCE_CHILD_ID (FK_SOURCE_CHILD_ID,CHILD_TYPE),
-  KEY FK_SOURCE_PARENT_ID (FK_SOURCE_PARENT_ID,PARENT_TYPE)
-)</sql>
+        <createTable tableName="T_SOURCE_LNK">
+          <column name="PK_SOURCE_LNK_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_SOURCE_CHILD_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="CHILD_TYPE" type="enum('S','C')" defaultValue="S">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_SOURCE_PARENT_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="PARENT_TYPE" type="enum('S','C')" defaultValue="S">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="T_SOURCE_LNK" indexName="FK_SOURCE_CHILD_ID_2" unique="true">
+          <column name="FK_SOURCE_CHILD_ID"/>
+          <column name="CHILD_TYPE"/>
+          <column name="FK_SOURCE_PARENT_ID"/>
+          <column name="PARENT_TYPE"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE_LNK" indexName="FK_SOURCE_CHILD_ID">
+          <column name="FK_SOURCE_CHILD_ID"/>
+          <column name="CHILD_TYPE"/>
+        </createIndex>
+        <createIndex tableName="T_SOURCE_LNK" indexName="FK_SOURCE_PARENT_ID">
+          <column name="FK_SOURCE_PARENT_ID"/>
+          <column name="PARENT_TYPE"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-24">
-        <sql>CREATE TABLE T_SOURCE_TYPE (
-  PK_TYPE_ID int(10) unsigned NOT NULL auto_increment,
-  TYPE varchar(255) NOT NULL default '',
-  NEW tinyint(3) unsigned NOT NULL default '1',
-  PRIMARY KEY  (PK_TYPE_ID),
-  KEY TYPE (TYPE)
-)</sql>
+        <createTable tableName="T_SOURCE_TYPE">
+          <column name="PK_TYPE_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="TYPE" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="NEW" type="tinyint(3) unsigned" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="T_SOURCE_TYPE" indexName="TYPE">
+          <column name="TYPE"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-25">
-        <sql>CREATE TABLE T_SPATIAL (
-  PK_SPATIAL_ID int(11) NOT NULL auto_increment,
-  SPATIAL_NAME varchar(100) NOT NULL default '',
-  SPATIAL_TYPE char(1) NOT NULL default '',
-  FK_DD_GUID int(11) default NULL,
-  DD_URL varchar(255) default NULL,
-  SPATIAL_TWOLETTER varchar(2) default NULL,
-  SPATIAL_ISMEMBERCOUNTRY enum('Y','N') default NULL,
-  PRIMARY KEY  (PK_SPATIAL_ID),
-  KEY PK_SPATIAL_ID (PK_SPATIAL_ID),
-  KEY SPATIAL_TYPE (SPATIAL_TYPE)
-) COMMENT='SpatialCoverage'</sql>
+        <createTable tableName="T_SPATIAL" remarks="SpatialCoverage">
+          <column name="PK_SPATIAL_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="SPATIAL_NAME" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="SPATIAL_TYPE" type="char(1)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_DD_GUID" type="int(11)"/>
+          <column name="DD_URL" type="varchar(255)"/>
+          <column name="SPATIAL_TWOLETTER" type="varchar(2)"/>
+          <column name="SPATIAL_ISMEMBERCOUNTRY" type="enum('Y','N')"/>
+        </createTable>
+        <createIndex tableName="T_SPATIAL" indexName="SPATIAL_TYPE">
+          <column name="SPATIAL_TYPE"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-26">
-        <sql>CREATE TABLE T_SPATIAL_HISTORY (
-  FK_SPATIAL_ID int(10) unsigned NOT NULL default '0',
-  FK_RA_ID int(10) unsigned NOT NULL default '0',
-  VOLUNTARY enum('Y','N') default 'N',
-  START_DATE date default NULL,
-  END_DATE date default NULL,
-  PK_SPATIAL_HISTORY_ID int(10) unsigned NOT NULL auto_increment,
-  PRIMARY KEY  (PK_SPATIAL_HISTORY_ID)
-)</sql>
+        <createTable tableName="T_SPATIAL_HISTORY">
+          <column name="FK_SPATIAL_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="VOLUNTARY" type="enum('Y','N')" defaultValue="N"/>
+          <column name="START_DATE" type="date"/>
+          <column name="END_DATE" type="date"/>
+          <column name="PK_SPATIAL_HISTORY_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-27">
-        <sql>CREATE TABLE T_UNDO (
-  undo_time bigint(20) NOT NULL default '0',
-  tab varchar(32) NOT NULL default '',
-  col varchar(32) NOT NULL default '',
-  operation enum('I','D','U','A','L','K','O','UN','UD','UDD','T','ACL') NOT NULL default 'I',
-  quotes enum('n','y') default NULL,
-  p_key enum('n','y') default NULL,
-  value blob,
-  sub_trans_nr int(11) NOT NULL default '0',
-  show_object enum('n','y') default NULL,
-  PRIMARY KEY  (undo_time,tab,col,operation,sub_trans_nr),
-  KEY col (col)
-)</sql>
+        <createTable tableName="T_UNDO">
+          <column name="undo_time" type="bigint(20)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="tab" type="varchar(32)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="col" type="varchar(32)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="operation" type="enum('I','D','U','A','L','K','O','UN','UD','UDD','T','ACL')" defaultValue="I">
+                <constraints nullable="false"/>
+            </column>
+          <column name="quotes" type="enum('n','y')"/>
+          <column name="p_key" type="enum('n','y')"/>
+          <column name="value" type="blob"/>
+          <column name="sub_trans_nr" type="int(11)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="show_object" type="enum('n','y')"/>
+        </createTable>
+        <addPrimaryKey tableName="T_UNDO" columnNames="undo_time,tab,col,operation,sub_trans_nr"/>
+        <createIndex tableName="T_UNDO" indexName="col">
+          <column name="col"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-28">
-        <sql>CREATE TABLE X_ACTIVITY (
-  PK_RA_ID int(10) unsigned NOT NULL auto_increment,
-  FK_RO_ID int(10) unsigned NOT NULL default '0',
-  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
-  VALID_SINCE date default NULL,
-  TITLE varchar(255) NOT NULL default '',
-  FORMAT_NAME varchar(100) default NULL,
-  REPORT_FORMAT_URL varchar(255) default NULL,
-  REPORT_FREQ_DETAIL varchar(50) default NULL,
-  REPORTING_FORMAT text,
-  DATE_COMMENTS varchar(255) default NULL,
-  LAST_UPDATE date default NULL,
-  TERMINATE enum('Y','N') NOT NULL default 'N',
-  REPORT_FREQ varchar(25) default NULL,
-  COMMENT text,
-  RESPONSIBLE_ROLE varchar(255) default NULL,
-  NEXT_DEADLINE date default NULL,
-  FIRST_REPORTING date default NULL,
-  REPORT_FREQ_MONTHS int(3) default NULL,
-  NEXT_REPORTING varchar(255) default NULL,
-  VALID_TO date default NULL,
-  FK_DELIVERY_COUNTRY_IDS varchar(255) default NULL,
-  NEXT_DEADLINE2 date default NULL,
-  RM_NEXT_UPDATE date default NULL,
-  RM_VERIFIED date default NULL,
-  RM_VERIFIED_BY varchar(50) default NULL,
-  LAST_HARVESTED datetime default NULL,
-  LOCATION_PTR varchar(255) default NULL,
-  LOCATION_INFO varchar(255) default NULL,
-  PRIMARY KEY  (PK_RA_ID),
-  KEY FK_REPORTING_ID (FK_RO_ID)
-) COMMENT='Reporting Activity'</sql>
+        <createTable tableName="X_ACTIVITY" remarks="Reporting Activity">
+          <column name="PK_RA_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_RO_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_SOURCE_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="VALID_SINCE" type="date"/>
+          <column name="TITLE" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FORMAT_NAME" type="varchar(100)"/>
+          <column name="REPORT_FORMAT_URL" type="varchar(255)"/>
+          <column name="REPORT_FREQ_DETAIL" type="varchar(50)"/>
+          <column name="REPORTING_FORMAT" type="text"/>
+          <column name="DATE_COMMENTS" type="varchar(255)"/>
+          <column name="LAST_UPDATE" type="date"/>
+          <column name="TERMINATE" type="enum('Y','N')" defaultValue="N">
+                <constraints nullable="false"/>
+            </column>
+          <column name="REPORT_FREQ" type="varchar(25)"/>
+          <column name="COMMENT" type="text"/>
+          <column name="RESPONSIBLE_ROLE" type="varchar(255)"/>
+          <column name="NEXT_DEADLINE" type="date"/>
+          <column name="FIRST_REPORTING" type="date"/>
+          <column name="REPORT_FREQ_MONTHS" type="int(3)"/>
+          <column name="NEXT_REPORTING" type="varchar(255)"/>
+          <column name="VALID_TO" type="date"/>
+          <column name="FK_DELIVERY_COUNTRY_IDS" type="varchar(255)"/>
+          <column name="NEXT_DEADLINE2" type="date"/>
+          <column name="RM_NEXT_UPDATE" type="date"/>
+          <column name="RM_VERIFIED" type="date"/>
+          <column name="RM_VERIFIED_BY" type="varchar(50)"/>
+          <column name="LAST_HARVESTED" type="datetime"/>
+          <column name="LOCATION_PTR" type="varchar(255)"/>
+          <column name="LOCATION_INFO" type="varchar(255)"/>
+        </createTable>
+        <createIndex tableName="X_ACTIVITY" indexName="FK_REPORTING_ID">
+          <column name="FK_RO_ID"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-29">
-        <sql>CREATE TABLE X_CLIENT_LNK (
-  FK_CLIENT_ID int(10) default NULL,
-  FK_OBJECT_ID int(10) default NULL,
-  TYPE char(1) default NULL,
-  STATUS char(1) default NULL
-)</sql>
+        <createTable tableName="X_CLIENT_LNK">
+          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="FK_OBJECT_ID" type="int(10)"/>
+          <column name="TYPE" type="char(1)"/>
+          <column name="STATUS" type="char(1)"/>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-30">
-        <sql>CREATE TABLE X_PARAMETER (
-  PK_PARAMETER_ID int(10) unsigned NOT NULL auto_increment,
-  PARAMETER_NAME varchar(100) NOT NULL default '',
-  FK_GROUP_ID int(11) NOT NULL default '0',
-  FK_DD_GUID int(11) unsigned default NULL,
-  DD_URL varchar(255) default NULL,
-  NEW tinyint(3) unsigned NOT NULL default '1',
-  PRIMARY KEY  (PK_PARAMETER_ID),
-  KEY FK_GROUP_ID (FK_GROUP_ID),
-  KEY PARAMETER_NAME (PARAMETER_NAME)
-)</sql>
+        <createTable tableName="X_PARAMETER">
+          <column name="PK_PARAMETER_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="PARAMETER_NAME" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_GROUP_ID" type="int(11)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_DD_GUID" type="int(11) unsigned"/>
+          <column name="DD_URL" type="varchar(255)"/>
+          <column name="NEW" type="tinyint(3) unsigned" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="X_PARAMETER" indexName="FK_GROUP_ID">
+          <column name="FK_GROUP_ID"/>
+        </createIndex>
+        <createIndex tableName="X_PARAMETER" indexName="PARAMETER_NAME">
+          <column name="PARAMETER_NAME"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-31">
-        <sql>CREATE TABLE X_PARAMETER_LNK (
-  PK_PARAMETER_LNK_ID int(10) unsigned NOT NULL auto_increment,
-  FK_PARAMETER_ID int(10) unsigned NOT NULL default '0',
-  PARAMETER_UNIT varchar(50) default NULL,
-  FK_RA_ID int(10) unsigned NOT NULL default '0',
-  FK_UNIT_ID int(11) default NULL,
-  PRIMARY KEY  (PK_PARAMETER_LNK_ID),
-  KEY FK_PARAMETER_ID (FK_PARAMETER_ID),
-  KEY FK_RA_ID (FK_RA_ID)
-)</sql>
+        <createTable tableName="X_PARAMETER_LNK">
+          <column name="PK_PARAMETER_LNK_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_PARAMETER_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="PARAMETER_UNIT" type="varchar(50)"/>
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_UNIT_ID" type="int(11)"/>
+        </createTable>
+        <createIndex tableName="X_PARAMETER_LNK" indexName="FK_PARAMETER_ID">
+          <column name="FK_PARAMETER_ID"/>
+        </createIndex>
+        <createIndex tableName="X_PARAMETER_LNK" indexName="XP_RA_ID">
+          <column name="FK_RA_ID"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-32">
-        <sql>CREATE TABLE X_PARAM_GROUP (
-  PK_GROUP_ID int(11) NOT NULL auto_increment,
-  GROUP_NAME varchar(100) NOT NULL default '',
-  FK_DD_GUID int(11) default NULL,
-  DD_URL varchar(255) default NULL,
-  GROUP_TYPE enum('C','S') NOT NULL default 'C',
-  PRIMARY KEY  (PK_GROUP_ID),
-  KEY PK_GROUP_ID (PK_GROUP_ID)
-) COMMENT='GROUP'</sql>
+        <createTable tableName="X_PARAM_GROUP" remarks="GROUP">
+          <column name="PK_GROUP_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="GROUP_NAME" type="varchar(100)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_DD_GUID" type="int(11)"/>
+          <column name="DD_URL" type="varchar(255)"/>
+          <column name="GROUP_TYPE" type="enum('C','S')" defaultValue="C">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-33">
-        <sql>CREATE TABLE X_REPORTING (
-  PK_RO_ID int(10) unsigned NOT NULL auto_increment,
-  FK_SOURCE_ID int(10) unsigned NOT NULL default '0',
-  LEGAL_MORAL enum('L','M','V') NOT NULL default 'L',
-  LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  ALIAS varchar(255) default NULL,
-  REPORT_TO text,
-  VALID_FROM date default NULL,
-  RECOGNIZED enum('Y','N') NOT NULL default 'N',
-  RECOGNIZED_DETAIL varchar(255) default NULL,
-  REPORT_TO_ROLE varchar(255) default NULL,
-  FK_CLIENT_ID int(10) default NULL,
-  RM_NEXT_UPDATE date default NULL,
-  RM_VERIFIED date default NULL,
-  RM_VERIFIED_BY varchar(50) default NULL,
-  PRIMARY KEY  (PK_RO_ID),
-  KEY LEGAL_MORAL (LEGAL_MORAL),
-  KEY FK_SOURCE_ID (FK_SOURCE_ID)
-)</sql>
+        <createTable tableName="X_REPORTING">
+          <column name="PK_RO_ID" type="int(10) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_SOURCE_ID" type="int(10) unsigned" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="LEGAL_MORAL" type="enum('L','M','V')" defaultValue="L">
+                <constraints nullable="false"/>
+            </column>
+          <column name="LAST_UPDATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+          <column name="ALIAS" type="varchar(255)"/>
+          <column name="REPORT_TO" type="text"/>
+          <column name="VALID_FROM" type="date"/>
+          <column name="RECOGNIZED" type="enum('Y','N')" defaultValue="N">
+                <constraints nullable="false"/>
+            </column>
+          <column name="RECOGNIZED_DETAIL" type="varchar(255)"/>
+          <column name="REPORT_TO_ROLE" type="varchar(255)"/>
+          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="RM_NEXT_UPDATE" type="date"/>
+          <column name="RM_VERIFIED" type="date"/>
+          <column name="RM_VERIFIED_BY" type="varchar(50)"/>
+        </createTable>
+
+        <sql dbms="mysql">ALTER TABLE X_REPORTING MODIFY COLUMN LAST_UPDATE
+            LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
+
+        <createIndex tableName="X_REPORTING" indexName="LEGAL_MORAL">
+          <column name="LEGAL_MORAL"/>
+        </createIndex>
+        <createIndex tableName="X_REPORTING" indexName="XR_SOURCE_ID">
+          <column name="FK_SOURCE_ID"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-34">
         <comment>Links spatial coverage and reporting obligation elements</comment>
-        <sql>CREATE TABLE X_SPATIAL_LNK (
-  PK_SPATIAL_LNK_ID int(11) NOT NULL auto_increment,
-  FK_SPATIAL_ID int(11) NOT NULL default '0',
-  FK_RO_ID int(11) NOT NULL default '0',
-  VOLUNTARY enum('Y','N') default 'N',
-  PRIMARY KEY  (PK_SPATIAL_LNK_ID),
-  KEY FK_SPATIAL_ID (FK_SPATIAL_ID),
-  KEY FK_RO_ID (FK_RO_ID)
-) COMMENT='Links spatial coverage and reporting obligation elements'</sql>
+        <createTable tableName="X_SPATIAL_LNK">
+          <column name="PK_SPATIAL_LNK_ID" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="FK_SPATIAL_ID" type="int(11)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="FK_RO_ID" type="int(11)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+          <column name="VOLUNTARY" type="enum('Y','N')" defaultValue="N"/>
+        </createTable>
+        <createIndex tableName="X_SPATIAL_LNK" indexName="XS_SPATIAL_ID">
+          <column name="FK_SPATIAL_ID"/>
+        </createIndex>
+        <createIndex tableName="X_SPATIAL_LNK" indexName="XS_RO_ID">
+          <column name="FK_RO_ID"/>
+        </createIndex>
    </changeSet>
 
 
     <changeSet author="roug" id="rev-35">
         <comment>Parameter unit types</comment>
-        <sql>CREATE TABLE X_UNIT (
-  PK_UNIT_ID int(11) unsigned NOT NULL auto_increment,
-  UNIT_NAME varchar(50) NOT NULL default '',
-  UNIT_HELP text,
-  PRIMARY KEY  (PK_UNIT_ID)
-) COMMENT='Parameter unit types'</sql>
+        <createTable tableName="X_UNIT">
+          <column name="PK_UNIT_ID" type="int(11) unsigned" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="UNIT_NAME" type="varchar(50)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="UNIT_HELP" type="text"/>
+        </createTable>
    </changeSet>
 
     <changeSet author="roug" id="rev-37">
         <comment>Labels for names in T_ATTRIBUTE</comment>
-        <sql>CREATE TABLE T_NAMELABEL (
-  NAME varchar(50) NOT NULL default '',
-  LABEL varchar(64) default '',
-  PRIMARY KEY  (NAME)
-) COMMENT='Labels for names in T_ATTRIBUTE'</sql>
+        <createTable tableName="T_NAMELABEL">
+          <column name="NAME" type="varchar(50)" defaultValue="">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+          <column name="LABEL" type="varchar(64)" defaultValue=""/>
+        </createTable>
     </changeSet>
 
     <changeSet author="roug" id="rev-38">
         <comment>Ability to have random attributes on main objects</comment>
-        <sql>CREATE TABLE T_ATTRIBUTE (
-  ID int(11) NOT NULL default '-1',
-  SCOPE enum('obligations','instruments','clients','spatial') NOT NULL default 'obligations',
-  NAME varchar(50) NOT NULL default '',
-  OBJECT varchar(255) NOT NULL default '',
-  OBJECTLANG varchar(10) NOT NULL default '',
-  TYPE enum('reference','','string','integer','decimal','boolean','dateTime','date') default '',
-  LINKTEXT varchar(64) default '',
-  PRIMARY KEY  (ID,SCOPE,NAME,OBJECT,OBJECTLANG),
-  KEY PREDICATE (NAME),
-  KEY OBJECT (OBJECT),
-  CONSTRAINT T_ATTRIBUTE_ibfk_1 FOREIGN KEY (NAME) REFERENCES T_NAMELABEL (NAME)
-) COMMENT='Object attributes'</sql>
+        <createTable tableName="T_ATTRIBUTE">
+          <column name="ID" type="int(11)" defaultValueNumeric="-1">
+                <constraints nullable="false"/>
+            </column>
+          <column name="SCOPE" type="enum('obligations','instruments','clients','spatial')" defaultValue="obligations">
+                <constraints nullable="false"/>
+            </column>
+          <column name="NAME" type="varchar(50)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="OBJECT" type="varchar(255)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="OBJECTLANG" type="varchar(10)" defaultValue="">
+                <constraints nullable="false"/>
+            </column>
+          <column name="TYPE" type="enum('reference','string','integer','decimal','boolean','dateTime','date')" defaultValue="string"/>
+          <column name="LINKTEXT" type="varchar(64)" defaultValue=""/>
+       </createTable>
+       <addPrimaryKey tableName="T_ATTRIBUTE" columnNames="ID,SCOPE,NAME,OBJECT,OBJECTLANG"/>
+        <createIndex tableName="T_ATTRIBUTE" indexName="PREDICATE">
+          <column name="NAME"/>
+        </createIndex>
+        <createIndex tableName="T_ATTRIBUTE" indexName="OBJECT">
+          <column name="OBJECT"/>
+        </createIndex>
+       <addForeignKeyConstraint baseTableName="T_ATTRIBUTE" constraintName="T_ATTRIBUTE_ibfk_1"
+           baseColumnNames="NAME" referencedTableName="T_NAMELABEL" referencedColumnNames="NAME"/>
     </changeSet>
 
   <changeSet id="rev-39" author="roug">
@@ -659,10 +880,10 @@
       </not>
     </preConditions>
     <createTable tableName="authorities">
-      <column name="username" type="varchar(40)">
+          <column name="username" type="varchar(40)">
         <constraints nullable="false"/>
       </column>
-      <column name="authority" type="varchar(255)"/>
+          <column name="authority" type="varchar(255)"/>
     </createTable>
   </changeSet>
 
@@ -673,11 +894,11 @@
       </not>
     </preConditions>
     <createTable tableName="users">
-      <column name="username" type="varchar(40)">
+          <column name="username" type="varchar(40)">
         <constraints unique="true"/>
       </column>
-      <column name="password" type="varchar(40)"/>
-      <column name="enabled" type="boolean"/>
+          <column name="password" type="varchar(40)"/>
+          <column name="enabled" type="boolean"/>
     </createTable>
   </changeSet>
 
