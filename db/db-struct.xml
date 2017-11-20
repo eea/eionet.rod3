@@ -467,7 +467,7 @@
           <column name="RM_VALIDATED_BY" type="varchar(50)"/>
         </createTable>
 
-        <sql dbms="mysql">ALTER TABLE T_SOURCE MODIFY COLUMN LAST_UPDATE
+        <sql dbms="mysql">ALTER TABLE T_SOURCE CHANGE COLUMN LAST_UPDATE
             LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
 
         <createIndex tableName="T_SOURCE" indexName="FK_TYPE_ID">
@@ -588,7 +588,7 @@
     <changeSet author="roug" id="rev-26">
         <createTable tableName="T_SPATIAL_HISTORY">
           <column name="FK_SPATIAL_ID" type="int(10) unsigned" defaultValueNumeric="0">
-                <constraints nullable="false" primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
           <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
@@ -597,7 +597,7 @@
           <column name="START_DATE" type="date"/>
           <column name="END_DATE" type="date"/>
           <column name="PK_SPATIAL_HISTORY_ID" type="int(10) unsigned" autoIncrement="true">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
    </changeSet>
@@ -783,7 +783,7 @@
           <column name="RM_VERIFIED_BY" type="varchar(50)"/>
         </createTable>
 
-        <sql dbms="mysql">ALTER TABLE X_REPORTING MODIFY COLUMN LAST_UPDATE
+        <sql dbms="mysql">ALTER TABLE X_REPORTING CHANGE COLUMN LAST_UPDATE
             LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
 
         <createIndex tableName="X_REPORTING" indexName="LEGAL_MORAL">
