@@ -426,12 +426,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.8</version>
                 <configuration>
                     <linkXref>false</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>300</minimumTokens>
-                    <targetJdk>1.6</targetJdk>
+                    <!-- <targetJdk>1.8</targetJdk> -->
                 </configuration>
             </plugin>
         </plugins>
