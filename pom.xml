@@ -494,7 +494,7 @@
                           <!-- Check for this URL to return a 200 return code .... -->
                           <url>http://${docker.host.address}:${tomcat.port}/</url>
                           <!-- ... but at max 60 seconds -->
-                          <time>60000</time>
+                          <time>120000</time>
                         </wait>
                         <links>
                           <link>database</link>
