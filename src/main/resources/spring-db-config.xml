@@ -31,4 +31,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="clientService" class="eionet.rod.dao.ClientServiceJdbc">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

@@ -1,49 +1,6 @@
 
-#qaresult {
-border: 1px solid #aaa;
-font-size:120%;
-padding: 0.5em 1em;
-}
-
-.success {
-background-color: #00F000;
-}
-.failure {
-background-color: #FF1010;
-}
-.notests {
-background-color: #FFFF66;
-}
-
-.currentedition {
-background-color: #AAA;
-}
-
-progress:not([value]) {
-  display: none;
-}
-
-progress[value] {
-  display: block;
-  width: 250px;
-  height: 20px;
-}
-
-#uploadprogress {
-  padding: 1em;
-  margin: 1em;
-  border: 1px solid black;
-  background-color: #dddddd;
-  display: none;
-}
-
-#uploadcomplete {
-  display: none;
-  padding: 1em;
-  margin: 1em;
-  border: 1px solid #e5e5e5;
-  background-color: #f5f5f5;
-}
+.sortable tr:nth-child(even) {background: #CCC}
+.sortable tr:nth-child(odd) {background: #FFF}
 
 .bigbutton {
   padding: 1em;

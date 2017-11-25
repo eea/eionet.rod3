@@ -2,17 +2,17 @@ package eionet.rod;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+//import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
+//import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
+//import org.springframework.web.context.ContextLoaderListener;
 
 /**
  * Initialise DispatcherServlet.

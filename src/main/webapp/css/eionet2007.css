@@ -1,0 +1,656 @@
+@media screen { /* To prevent PocketPC from loading the stylesheet */
+
+/* start Reporting overview searchfields */
+td.select_issue {
+	border-left: #008080 1px solid;
+	border-right: #C0C0C0 1px solid;
+	border-top: #008080 1px solid;
+	font-family: Verdana, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	font-size: 0.8em;
+}
+
+td.select_client {
+	border-top: #008080 1px solid;
+	font-family: Verdana, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	font-size: 0.8em;
+}
+
+td.issues {
+	border-left: #008080 1px solid;
+	border-right: #C0C0C0 1px solid;
+	border-bottom: #008080 1px solid;
+}
+
+td.client {
+	border-bottom: #008080 1px solid;
+}
+
+select.issues {
+	font-size: 9pt;
+	width: 240px;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+select.client {
+	font-size: 9pt;
+	width: 240px;
+	color: #000000;
+	background-color: #ffffff;
+}
+
+td.select_deadline {
+	border-right: #C0C0C0 1px solid;
+	border-top: #008080 1px solid;
+	font-family: Verdana, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	font-size: 0.8em;
+}
+
+td.deadlines {
+	border-bottom: #008080 1px solid;
+	border-right: #C0C0C0 1px solid;
+}
+
+select.deadlines {
+	font-size: 9pt;
+	width: 129px;
+	color: #000000;
+	background-color: #ffffff
+}
+
+td.help_btn {
+	border-right: #008080 1px solid;
+	border-top: #008080 1px solid;
+}
+
+td.go_btn {
+	border-right: #008080 1px solid;
+	border-bottom: #008080 1px solid;
+}
+/* end Reporting overview searchfields */
+
+td.dark_green_heading {
+	background-color:#006666;
+	color: white;
+	font-weight:bold;
+}
+
+/*Directory role not found for */
+.role_not_found {
+	color: #000000;
+	font-weight:bold;
+}
+
+.terminated {
+	color: red;
+}
+
+tr.zebraeven {
+	background-color: #f6f6f6;
+}
+
+tr.even {
+	background-color: #f6f6f6;
+}
+/* */
+
+td.border_right {
+	border-right: 1px solid #C0C0C0;
+}
+
+td.border_left {
+	border-left: 1px solid #C0C0C0;
+}
+
+/*start eactivity, esource */
+.label {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+div.main {
+	border: 1px solid #006666;
+	width: 615px;
+	background: #cfe4ff;
+}
+
+textarea.ea {
+	width: 440px;
+}
+
+select.ea {
+	width: 410px;
+}
+
+select.multiple {
+	width: 240px;
+}
+
+td.save {
+	border-top: 3px solid #B7DBDB;
+	height: 40px;
+	background:#008080;
+}
+
+input.btn {
+	font-weight: bold;
+	color: #000000;
+	background-image: url('../images/bgr_form_buttons.jpg');
+}
+
+input.arrow_btns {
+	width: 80px;
+	background-image: url('../images/bgr_form_buttons.jpg');
+}
+
+input.indicator_btns {
+	color: #000000;
+	font-family: Verdana;
+	font-size: 8pt;
+	font-weight: bold;
+	background-image: url('../images/bgr_form_buttons_wide.jpg');
+}
+
+/*edit instrument form objects that has the same width */
+.es_object {
+	width: 400px;
+}
+
+td.or {
+	border-bottom:1px solid #C0C0C0;
+}
+
+td.important {
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	background: #FFCA95;
+	text-align: left;
+}
+/*end eactivity, esource */
+
+/* start Historival Deadlines */
+td.headline {
+	border-top: #008080 1px solid;
+	border-left: #008080 1px solid;
+	border-bottom: #008080 1px solid;
+	border-right: #008080 1px solid;
+	background: #FFFFFF;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+td.search {
+	border-left: #c0c0c0 1px solid;
+	border-right: #c0c0c0 1px solid;
+	border-bottom: #c0c0c0 1px solid;
+}
+/* end Historival Deadlines */
+
+/* start csssearch */
+table.main{
+	border: 1px solid #008080;
+}
+
+td.head {
+	border-bottom:1px solid #008080;
+}
+
+td.lab {
+	border-bottom: 1px solid #C0C0C0;
+	border-right:1px solid #C0C0C0;
+	font-weight:bold;
+}
+
+td.dat {
+	border-bottom: 1px solid #C0C0C0;
+}
+
+select.dat {
+	color: #000000;
+	font-size: 9pt;
+}
+
+input.dat {
+	color: #000000;
+	font-size: 10pt;
+}
+/* end csssearch */
+
+/* start eindicator */
+td.indicator_label {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+/* end eindicator */
+
+input.go_btn {
+	font-family: Verdana;
+	font-size: 10pt;
+	color: #000000;
+	text-align: Center;
+	background-color: #CBDCDC;
+	font-weight: bold;
+	border-left: 1px solid #008080;
+	border-right: 2px solid #006666;
+	border-top: 1px solid #008080;
+	border-bottom: 2px solid #006666;
+}
+
+.headsmall {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.head1 {
+	font-size: 13pt;
+	color: #006666;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.warning {
+	color: red;
+}
+
+/* start Legislative instruments hierarchy*/
+#hierarchy {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#hierarchy div.main {
+	background-color: white;
+	width:606px;
+	border: 1px solid #006666;
+}
+
+#hierarchy div.class_name {
+	padding:.5em .5em 0 .5em;
+}
+
+#hierarchy .eurlex {
+	font-size: 10pt;
+}
+
+#hierarchy .normal_weight {
+	font-weight: normal;
+}
+
+#hierarchy .topcategory {
+	list-style: circle;
+	margin-left:44px;
+	padding-left: 0;
+	padding-bottom: .5em;
+}
+
+#hierarchy .topcategory li {
+	padding-bottom: .5em;
+}
+
+#hierarchy .category {
+	list-style: none;
+	list-style-image: none;
+	margin-left:24px;
+	padding-left: 0;
+	padding-top: .5em;
+}
+/* end Legislative instruments hierarchy*/
+
+/* start spatialhistory*/
+table.spatial {
+	border: #c0c0c0 1px solid;
+	width: 680px;
+}
+
+td.spatial_label {
+	border-bottom: #c0c0c0 1px solid;
+	text-align: left;
+	vertical-align: middle;
+}
+/* end spatialhistory*/
+
+#categorysearch {
+	border-collapse: collapse;
+	border: 1px solid #008080;
+}
+
+#categorysearch td {
+	padding: 5px;
+	margin: 0px;
+	border: #c0c0c0 1px solid;
+}
+
+/* start Analysis */
+#analysis {
+	border-collapse: collapse;
+	border: #c0c0c0 1px solid;
+}
+
+#analysis td {
+	padding: 5px;
+	margin: 0px;
+	border: #c0c0c0 1px solid;
+}
+/* end Analysis */
+
+
+.popup {
+	margin:30px;
+	background-image: none;
+	background-color: white;
+}
+
+.popup #pagehead {
+	height: 108px;
+	width: 100%;
+	background: #a5ced1 url('top_01.png') repeat-y;
+	border-top: 4px solid #6f7072;
+	border-bottom: 1px solid #315076;
+}
+
+.popup #workarea {
+	margin-left: 0;
+	border-left: 0;
+	padding: 1em;
+}
+
+.popuphead hr {
+	background-color: #315076;
+	height: 15px;
+	border: none;
+}
+
+.popup h1 {
+	padding: 0.2em 0em;
+	margin: 0;
+	font-size: 135%;
+	background-color: transparent;
+	color: #315076;
+}
+
+.popup #close {
+	float:right;
+	padding-top:10px;
+}
+
+th.sorted a,th.sortable a {
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+th.order1 a {
+	background-image: url(../images/sortdown.gif);
+}
+
+th.order2 a {
+	background-image: url(../images/sortup.gif);
+}
+
+/* Dropdown operations */
+#dropdown-operations, #dropdown-operations ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	list-style-image: none;
+	float: right;
+	width: 144px;
+	font-family: verdana, helvetica, sans-serif;
+}
+
+#dropdown-operations li {
+	float: left;
+	position: relative;
+	background: transparent url('../images/operations_back.gif') no-repeat;
+	width: 144px;
+	font-weight: bold;
+	border-right: 1px dotted #ffffff;
+	color: #fff;
+	list-style: none;
+	list-style-image: none;
+	z-index: 11; /* Bug in IE6, IE7 */
+}
+
+#dropdown-operations li:hover {
+	background-image: url(../images/operations_back2.gif);
+}
+
+
+#dropdown-operations li ul li:hover {
+	background-image: none;
+}
+
+#dropdown-operations a:link, #dropdown-operations a:visited {
+	display: block;
+	text-decoration: none;
+	padding: 0em 0.5em;
+	color: #fff;
+	font-size: 12px;
+}
+
+#dropdown-operations ul {
+	display: none;
+	position: absolute;
+	top: 1.5em;
+	left: 0;
+	background-color: #A5CED1;
+	list-style: none;
+	list-style-image: none;
+}
+
+#dropdown-operations li > ul { /* For Opera and Firefox */
+	top: auto;
+	left: auto;
+}
+
+#dropdown-operations ul li {
+	float: none;
+	font-weight: normal;
+	border-right: 0 none transparent;
+	border-bottom: 1px dotted #000;
+	background-color: #A5CED1;
+	text-transform: none;
+	background-image: none;
+	margin: 0;
+	padding: 0.1em 0;
+	color: #fff;
+	
+}
+
+#dropdown-operations li ul li a:link, #dropdown-operations li ul li a:visited {
+	background: transparent url('../images/drop_operations_bullet.gif') 5px center no-repeat;
+	padding: 0.1em 0 0.1em 15px;
+	font-size: 12px;
+	color: #000;
+}
+#dropdown-operations li ul li a:hover {
+	background-color: #C8EDF0;
+}
+
+#dropdown-operations li:hover ul, #dropdown-operations li.over ul {
+	display: block;
+}
+#dropdown-operations li:hover ul li, #dropdown-operations li.over ul li{
+	width: 144px;
+}
+
+/* REDESIGNED PART START */
+
+table.formtable {
+	width: 100%;
+}
+.formtable .labelcol {
+	width: 25%;
+}
+.formtable .entrycol {
+	width: 75%;
+}
+
+table.fancyselect {
+}
+
+select.full {
+	width: 100%;
+}
+input.full {
+	width: 99%;
+}
+textarea.full {
+	width: 99%;
+	height: 10em;
+}
+.error-hint {
+/*	position: relative;
+	top: 0px;
+	left: 0px;
+*/
+	font-size: 80%;
+	margin: 2px;
+	padding: 2px;
+	border: 1px dotted black;
+	background-color: #ffff80;
+	color: black;
+}
+.input-hint {
+	font-size: 80%;
+	vertical-align:top;
+}
+
+a.field-help span {
+	display: none;
+}
+a.field-help {
+	display:inline-block;
+	float:right;
+	height: 15px;
+	color: #315076;
+	text-decoration: none;
+	vertical-align: top;
+	padding: 0 0 3px 15px;
+	background: url('../images/info_icon.gif') top left no-repeat;
+	cursor: help;
+}
+
+input.arrow_btn {
+	width: 80px; 
+}
+
+input.btn {
+	font-weight: bold; 
+	color: #000000; 
+}
+
+div.arrow_btnbox {
+	text-align:center;
+	margin: 0 10px;
+	padding:40px 0;
+}
+
+select.multiple {
+	width:300px;
+	height:200px
+}
+/* REDESIGNED PART END */
+
+
+
+tr.zebraeven {
+	background-color: #f6f6f6;
+}
+
+tr.even {
+	background-color: #f6f6f6;
+}
+/* */
+
+td.border_right {
+	border-right: 1px solid #C0C0C0;
+}
+
+td.border_left {
+	border-left: 1px solid #C0C0C0;
+}
+
+/*start eactivity, esource */
+.label {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-style: normal; 
+	line-height: normal; 
+	font-weight: bold; 
+	text-decoration: none;
+}
+
+div.main {
+	border: 1px solid #006666; 
+	width: 615px; 
+	background: #cfe4ff;
+}
+
+
+td.save {
+	border-top: 3 solid #B7DBDB; 
+	height: 40px; 
+	background:#00446a;
+}
+
+
+
+/*edit instrument form objects that has the same width */
+.es_object {
+	width: 400px;
+}
+
+td.or {
+	border-bottom:1px solid #C0C0C0;
+}
+
+td.important {
+	border-top: 1px solid #000000; 
+	border-bottom: 1px solid #000000;
+	background: #FFCA95;
+	text-align: left;
+}
+/*end eactivity, esource */
+
+
+
+.localservice {
+    margin: 2em 1em 0em 1em;
+    background-color: #a5ced1;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.localservice h2 {
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 120%;
+}
+
+
+
+} /* screen media */
