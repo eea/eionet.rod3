@@ -49,11 +49,12 @@ public class ClientServiceJdbc implements ClientService {
 
     @Override
     public ClientDTO getById(Integer clientId) {
-        String query = "SELECT T_CLIENT.PK_CLIENT_ID AS clientId, CLIENT_NAME AS name, CLIENT_ACRONYM AS acronym,"
+        String query = "SELECT T_CLIENT.PK_CLIENT_ID AS clientId,"
+                + "CLIENT_NAME AS name, CLIENT_ACRONYM AS acronym,"
                 + "CLIENT_URL AS url, CLIENT_ADDRESS AS address, CLIENT_EMAIL AS email,"
                 + "DESCRIPTION, POSTAL_CODE AS postalcode, CITY, COUNTRY, CLIENT_SHORT_NAME AS shortName "
                 + "FROM T_CLIENT "
-                + " WHERE T_CLIENT.clientId = ?";
+                + "WHERE T_CLIENT.PK_CLIENT_ID = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         ClientDTO clientRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), clientId);

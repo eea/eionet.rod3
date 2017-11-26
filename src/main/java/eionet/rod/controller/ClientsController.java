@@ -10,10 +10,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,18 @@ public class ClientsController {
     }
 
     /**
+     * Client factsheet.
+     */
+    @RequestMapping(value = "/{clientId}")
+    public String clientFactsheet(
+            @PathVariable("clientId") Integer clientId, final Model model) throws Exception {
+        model.addAttribute("clientId", clientId);
+        ClientDTO client = clientService.getById(clientId);
+        model.addAttribute("client", client);
+        return "clientfactsheet";
+    }
+
+    /**
      * Adds new client to database.
      * @param client client name
      * @param redirectAttributes
@@ -75,7 +88,7 @@ public class ClientsController {
      * @return view name
      */
     @RequestMapping("/edit")
-    public String editUserForm(@RequestParam Integer clientId, Model model,
+    public String editClientForm(@RequestParam Integer clientId, Model model,
             @RequestParam(required = false) String message) {
         model.addAttribute("clientId", clientId);
         BreadCrumbs.set(model, "Modify client");
@@ -94,7 +107,7 @@ public class ClientsController {
      * @return view name
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUser(ClientDTO client, BindingResult bindingResult, ModelMap model) {
+    public String editClient(ClientDTO client, BindingResult bindingResult, ModelMap model) {
         clientService.update(client);
         model.addAttribute("message", "Client " + client.getClientId() + " updated");
         return "redirect:view";
@@ -108,7 +121,7 @@ public class ClientsController {
      * @return view name
      */
     @RequestMapping("/delete")
-    public String deleteUser(@RequestParam Integer clientId, Model model) {
+    public String deleteClient(@RequestParam Integer clientId, Model model) {
         if (!clientService.clientExists(clientId)){
             model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist ");
         } else {

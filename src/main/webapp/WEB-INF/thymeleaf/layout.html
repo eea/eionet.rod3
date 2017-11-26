@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js" th:src="@{/js/jquery-ui-1.10.3.custom.min.js}"></script>
     <script type="text/javascript" src="../../js/pageops.js" th:src="@{/js/pageops.js}"></script>
     <script type="text/javascript" src="../../js/mark_special_links.js" th:src="@{/js/mark_special_links.js}"></script>
+    <script type="text/javascript" src="../../js/util.js" th:src="@{/js/util.js}"></script>
     <link rel="shortcut icon" href="#" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
     <link rel="icon" href="#" th:href="@{/images/eealogo256x256.png}" type="image/png" />
   </head>
@@ -38,6 +39,14 @@
             <a id="rsslink" type="application/rss+xml" href="http://www.eionet.europa.eu/announcements.rdf" title="Eionet headlines as RSS">
               <span>RSS</span>
             </a>
+            <form action="http://google.com/search" method="get">
+              <div id="freesrchform">
+                <label for="freesrchfld">Search</label>
+                <input type="text" id="freesrchfld" name="q" onfocus="if(this.value=='Search ROD')this.value='';" onblur="if(this.value=='')this.value='Search ROD';" value="Search ROD" size="10"/>
+                <input type="hidden" name="sitesearch" value="rod.eionet.europa.eu"/>
+                <input id="freesrchbtn" type="image" src="../../images/button_go.gif" th:src="@{/images/button_go.gif}" alt="Go"/>
+              </div>
+            </form>
           </div>
         </div>
         <!-- toolribbon -->
@@ -138,7 +147,6 @@ of the art customer service.
   <li>Oranges</li>
   <li>Pears</li>
 </ul>
-
       </div>
       <!-- workarea -->
     </div>
@@ -146,10 +154,10 @@ of the art customer service.
     <div id="pagefoot" th:fragment="footerFragment">
       <p>
 Document last modified 2015/04/03.
-</p>
+      </p>
       <p><a href="/disclaimer">Disclaimer</a>.
 Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
-</p>
+      </p>
     </div>
   </body>
 </html>
