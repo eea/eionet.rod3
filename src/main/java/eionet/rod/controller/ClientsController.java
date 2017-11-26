@@ -58,7 +58,7 @@ public class ClientsController {
         model.addAttribute("clientId", clientId);
         ClientDTO client = clientService.getById(clientId);
         model.addAttribute("client", client);
-        return "clientfactsheet";
+        return "clientFactsheet";
     }
 
     /**
