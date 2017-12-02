@@ -13,6 +13,7 @@
     <security:http entry-point-ref="casEntryPoint" pattern="/**" use-expressions="true" auto-config="false">
         <security:intercept-url pattern="/login" access="isAuthenticated()"/>
         <security:intercept-url pattern="/users/**" access="hasRole('ADMIN')"/>
+        <security:intercept-url pattern="/clients/edit" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/**" access="permitAll()"/>
         <security:custom-filter position="CAS_FILTER" ref="casFilter" />
         <security:logout logout-success-url="/logout"/>
