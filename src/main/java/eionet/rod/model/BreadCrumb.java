@@ -10,6 +10,11 @@ public class BreadCrumb {
     /** The text for the link. */
     private String linktext;
 
+    public BreadCrumb(String linktext) {
+        this.link = null;
+        this.linktext = linktext;
+    }
+
     public BreadCrumb(String link, String linktext) {
         this.link = link;
         this.linktext = linktext;

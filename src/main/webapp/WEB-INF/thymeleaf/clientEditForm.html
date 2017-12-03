@@ -143,7 +143,7 @@
       </div>
       <div id="workarea">
         <h1>Edit Client Organisation</h1>
-        <form action="clientEditForm.html" method="POST" th:action="@{/clients/edit}" th:object="${client}" >
+        <form action="clientEditForm.html" method="POST" th:action="@{'/clients/' + ${clientId} + '/edit'}" th:object="${client}" >
           <input name="clientId" th:value="*{clientId}" value="55" type="hidden"/>
           <table class="formtable">
             <col style="width:160px"/>

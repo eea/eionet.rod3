@@ -146,7 +146,7 @@
         <div  sec:authorize="hasRole('EDITOR')" id="drop-operations">
           <h2>Operations</h2>
           <ul>
-            <li><a href="clientEditform.html" th:href="@{/clients/edit(clientId=${client.clientId})}">Edit client</a></li>
+            <li><a href="clientEditform.html" th:href="@{'/clients/' + ${client.clientId} + '/edit'}">Edit client</a></li>
           </ul>
         </div>
 

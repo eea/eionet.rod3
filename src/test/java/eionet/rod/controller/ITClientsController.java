@@ -73,12 +73,23 @@ public class ITClientsController {
     }
 
     /**
+     * Simple test to display one client.
+     */
+    @Test
+    public void listClient1() throws Exception {
+        this.mockMvc.perform(get("/clients/1"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("breadcrumbs"))
+                .andExpect(model().attributeExists("client"))
+                .andExpect(view().name("clientFactsheet"));
+    }
+
+    /**
      * Since it is protected, it will redirect to login.
      */
     @Test
     public void clientEdit() throws Exception {
-        this.mockMvc.perform(get("/clients/edit")
-                .param("clientId", "1"))
+        this.mockMvc.perform(get("/clients/1/edit"))
                 .andExpect(status().is3xxRedirection());
     }
 
@@ -87,9 +98,7 @@ public class ITClientsController {
      */
     @Test
     public void clientEditWithAuth() throws Exception {
-        this.mockMvc.perform(get("/clients/edit")
-                .param("clientId", "1")
-                //.with(csrf()).with(user("editor").roles("EDITOR")))
+        this.mockMvc.perform(get("/clients/1/edit")
                 .with(user("editor").roles("EDITOR")))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("client"));
@@ -100,12 +109,12 @@ public class ITClientsController {
      */
     @Test
     public void clientPostWithAuth() throws Exception {
-        this.mockMvc.perform(post("/clients/edit")
+        this.mockMvc.perform(post("/clients/1/edit")
                 .param("clientId", "1")
                 .param("name", "New Name")
                 .with(csrf()).with(user("editor").roles("EDITOR")))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("view?message=Client+1+updated"))
+                .andExpect(redirectedUrl("/clients?message=Client+1+updated"))
                 .andExpect(model().attributeExists("message"));
     }
 
@@ -115,12 +124,36 @@ public class ITClientsController {
      * CSRF is Cross Site Request Forgery prevention
      */
     @Test
-    public void clientPostWithoutCSRF() throws Exception {
-        this.mockMvc.perform(post("/clients/edit")
+    public void editPostWithoutCSRF() throws Exception {
+        this.mockMvc.perform(post("/clients/1/edit")
                 .param("clientId", "1")
                 .param("name", "New Name")
                 .with(user("editor").roles("EDITOR")))
                 .andExpect(status().is4xxClientError());
+    }
+
+    /**
+     * Delete a client without login.
+     */
+    @Test
+    public void deleteWithoutAuth() throws Exception {
+        this.mockMvc.perform(get("/clients/delete")
+                .param("clientId", "1"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+
+    /**
+     * Login and delete a client
+     */
+    @Test
+    public void deleteWithAuth() throws Exception {
+        this.mockMvc.perform(get("/clients/delete")
+                .param("clientId", "1")
+                .with(csrf()).with(user("editor").roles("EDITOR")))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("view?message=Client+1+deleted"))
+                .andExpect(model().attributeExists("message"));
     }
 
 }

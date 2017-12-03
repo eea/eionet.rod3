@@ -2,6 +2,7 @@ package eionet.rod.controller;
 
 import eionet.rod.dao.ClientService;
 import eionet.rod.model.ClientDTO;
+import eionet.rod.model.BreadCrumb;
 import eionet.rod.util.BreadCrumbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/clients")
 public class ClientsController {
+
+    private static BreadCrumb clientsCrumb = new BreadCrumb("/clients", "Clients");
 
     /**
      * Service for client management.
@@ -57,8 +60,20 @@ public class ClientsController {
             @PathVariable("clientId") Integer clientId, final Model model) throws Exception {
         model.addAttribute("clientId", clientId);
         ClientDTO client = clientService.getById(clientId);
+        BreadCrumbs.set(model, clientsCrumb, new BreadCrumb(client.getName()));
         model.addAttribute("client", client);
         return "clientFactsheet";
+    }
+
+    /**
+     * Provide a form for a new client.
+     */
+    @RequestMapping("/add")
+    public String addClientForm(final Model model) {
+        BreadCrumbs.set(model, clientsCrumb, new BreadCrumb("Add client"));
+        ClientDTO client = new ClientDTO();
+        model.addAttribute("client", client);
+        return "clientNewClient";
     }
 
     /**
@@ -67,7 +82,7 @@ public class ClientsController {
      * @param redirectAttributes
      * @return view name or redirection
      */
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addClient(ClientDTO client, RedirectAttributes redirectAttributes) {
         String clientName = client.getName();
         if (clientName.trim().equals("")) {
@@ -87,8 +102,8 @@ public class ClientsController {
      * @param message
      * @return view name
      */
-    @RequestMapping("/edit")
-    public String editClientForm(@RequestParam Integer clientId, Model model,
+    @RequestMapping("/{clientId}/edit")
+    public String editClientForm(@PathVariable("clientId") Integer clientId, final Model model,
             @RequestParam(required = false) String message) {
         model.addAttribute("clientId", clientId);
         BreadCrumbs.set(model, "Modify client");
@@ -106,16 +121,17 @@ public class ClientsController {
      * @param model - contains attributes for the view
      * @return view name
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editClient(ClientDTO client, BindingResult bindingResult, ModelMap model) {
+    @RequestMapping(value = "/{clientId}/edit", method = RequestMethod.POST)
+    public String editClient(@PathVariable("clientId") Integer clientId,
+            ClientDTO client, BindingResult bindingResult, ModelMap model) {
         clientService.update(client);
         model.addAttribute("message", "Client " + client.getClientId() + " updated");
-        return "redirect:view";
+        return "redirect:/clients";
     }
 
     /**
      * Deletes client.
-     *
+     * TODO: Use POST
      * @param clientName
      * @param model - contains attributes for the view
      * @return view name
@@ -123,10 +139,10 @@ public class ClientsController {
     @RequestMapping("/delete")
     public String deleteClient(@RequestParam Integer clientId, Model model) {
         if (!clientService.clientExists(clientId)){
-            model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist ");
+            model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist");
         } else {
             clientService.deleteById(clientId);
-            model.addAttribute("message", "Client " + clientId + " deleted ");
+            model.addAttribute("message", "Client " + clientId + " deleted");
         }
         return "redirect:view";
     }
