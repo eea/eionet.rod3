@@ -42,4 +42,13 @@ public class ITUserManagementService {
          
     }
 
+    @Test
+    public void productionTest() throws Exception {
+        InitialUser initialUser = new InitialUser();
+        initialUser.setInitialUsername("johnny");
+        initialUser.setInitialPassword("rotten");
+        initialUser.setUserManagementService((UserManagementService) userManagementService);
+        initialUser.createUser();
+    }
+
 }
