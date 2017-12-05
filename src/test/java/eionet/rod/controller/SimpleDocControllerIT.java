@@ -45,6 +45,17 @@ public class SimpleDocControllerIT {
             .build();
     }
 
+    /**
+     * Test front page.
+     */
+    @Test
+    public void testIndex() throws Exception {
+        this.mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("breadcrumbs"))
+                .andExpect(view().name("index"))
+                .andExpect(content().contentType("text/html;charset=UTF-8"));
+    }
 
     /**
      * Test about page. Overkill with authentication.
@@ -59,4 +70,36 @@ public class SimpleDocControllerIT {
                 .andExpect(content().contentType("text/html;charset=UTF-8"));
     }
 
+    /**
+     * Test login page.
+     */
+    @Test
+    public void getLoginWithNoAuth() throws Exception {
+        this.mockMvc.perform(get("/login"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    /**
+     * We're getting the login page, but we are already logged in.
+     * What happens?
+     */
+    @Test
+    public void getLogin() throws Exception {
+        this.mockMvc.perform(get("/login").with(user("admin")))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("breadcrumbs"))
+                .andExpect(view().name("index"))
+                .andExpect(content().contentType("text/html;charset=UTF-8"));
+    }
+
+    /**
+     * Test logout page.
+     */
+    @Test
+    public void testLogout() throws Exception {
+        this.mockMvc.perform(get("/logout"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("logout_all_apps"))
+                .andExpect(content().contentType("text/html;charset=UTF-8"));
+    }
 }
