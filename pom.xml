@@ -193,7 +193,7 @@
                             <url>jdbc:h2:file:${project.build.directory}/rod3test</url>
                             <username>roduser</username>
                             <password>password</password>
-                            <contexts>test,xdemo</contexts>
+                            <contexts>test</contexts>
                         </configuration>
                         <goals>
                             <goal>dropAll</goal>
@@ -494,7 +494,7 @@
                           -Dcas.service=http://localhost:4590
                           -Ddb.driver=org.mariadb.jdbc.Driver
                           -Ddb.url=jdbc:mariadb://database/rod3 -Ddb.username=roduser -Ddb.password=password
-                          -Ddeploy.contexts=test,demo
+                          -Ddeploy.contexts=test
                           </CATALINA_OPTS>
                         </env>
                         <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
