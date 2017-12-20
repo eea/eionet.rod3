@@ -914,4 +914,11 @@
     <dropTable tableName="X_SPATIAL_LNK" />
     <dropTable tableName="X_UNIT" />
   </changeSet>
+
+  <changeSet author="santamik" id="rev-42">
+    <comment>
+      Refs #90918 Remove T_INDICATOR table
+    </comment>
+    <dropTable tableName="T_INDICATOR" />
+  </changeSet>  
 </databaseChangeLog>
