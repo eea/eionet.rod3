@@ -981,4 +981,14 @@
     </comment>
     <dropTable tableName="T_INDICATOR" />
   </changeSet>  
+  
+  <changeSet author="santamik" id="rev-49">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_CLIENT_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_CLIENT_LNK" />	
+  </changeSet>  
 </databaseChangeLog>
