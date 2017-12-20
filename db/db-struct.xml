@@ -903,19 +903,79 @@
   </changeSet>
 
   <changeSet author="santamik" id="rev-41">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_ACTIVITY"/>
+    </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>
-    <dropTable tableName="X_ACTIVITY" />
-    <dropTable tableName="X_PARAMETER" />
-    <dropTable tableName="X_PARAMETER_LNK" />
-    <dropTable tableName="X_PARAM_GROUP" />
-    <dropTable tableName="X_REPORTING" />
-    <dropTable tableName="X_SPATIAL_LNK" />
-    <dropTable tableName="X_UNIT" />
+    </comment>	
+    <dropTable tableName="X_ACTIVITY" />	
   </changeSet>
 
   <changeSet author="santamik" id="rev-42">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_PARAMETER"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_PARAMETER" />	
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-43">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_PARAMETER_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_PARAMETER_LNK" />	
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-44">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_PARAM_GROUP"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_PARAM_GROUP" />	
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-45">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_REPORTING"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_REPORTING" />	
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-46">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_SPATIAL_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_SPATIAL_LNK" />	
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-47">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_UNIT"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_UNIT" />	
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-48">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_INDICATOR"/>
+    </preConditions>  
     <comment>
       Refs #90918 Remove T_INDICATOR table
     </comment>
