@@ -902,4 +902,16 @@
     </createTable>
   </changeSet>
 
+  <changeSet author="santamik" id="rev-41">
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>
+    <dropTable tableName="X_ACTIVITY" />
+    <dropTable tableName="X_PARAMETER" />
+    <dropTable tableName="X_PARAMETER_LNK" />
+    <dropTable tableName="X_PARAM_GROUP" />
+    <dropTable tableName="X_REPORTING" />
+    <dropTable tableName="X_SPATIAL_LNK" />
+    <dropTable tableName="X_UNIT" />
+  </changeSet>
 </databaseChangeLog>
