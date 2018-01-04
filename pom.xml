@@ -489,6 +489,8 @@
                       </build>
                       <run>
                         <env>
+                          <LANG>C.UTF-8</LANG>
+                          <TZ>Europe/Copenhagen</TZ>
                           <CATALINA_OPTS>-Dinitial.username=roug
                           -Dcas.service=http://localhost:4590
                           -Ddb.driver=org.mariadb.jdbc.Driver
@@ -524,6 +526,8 @@
                           <port>database.port:3306</port>
                         </ports>
                         <env>
+                          <LANG>C.UTF-8</LANG>
+                          <TZ>Europe/Copenhagen</TZ>
                           <MYSQL_ROOT_PASSWORD>mayeceju</MYSQL_ROOT_PASSWORD>
                           <MYSQL_DATABASE>rod3</MYSQL_DATABASE>
                           <MYSQL_USER>roduser</MYSQL_USER>
