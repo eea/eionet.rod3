@@ -1147,5 +1147,93 @@
       Refs #89741 Remove "Parameters" from the Obligations
     </comment>  
     <dropColumn columnName="PARAMETERS" tableName="T_OBLIGATION"/>
-  </changeSet>     
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-64">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_VERIFIED"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-65">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_VERIFIED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED_BY" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-66">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_NEXT_UPDATE"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_NEXT_UPDATE" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-67">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="VALIDATED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="VALIDATED_BY" tableName="T_OBLIGATION"/>
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-68">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VERIFIED"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-69">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VERIFIED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED_BY" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-70">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_NEXT_UPDATE"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_NEXT_UPDATE" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-71">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VALIDATED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VALIDATED_BY" tableName="T_SOURCE"/>
+  </changeSet>      
 </databaseChangeLog>
