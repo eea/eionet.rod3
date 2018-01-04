@@ -1060,5 +1060,81 @@
     <addColumn tableName="T_SOURCE">
         <column name="TERMINATED" type="enum('Y','N')"/>
     </addColumn>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-56">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_D"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_D
+    </comment>  
+    <dropColumn columnName="DPSIR_D" tableName="T_OBLIGATION"/>
+  </changeSet>   
+ 
+  <changeSet author="santamik" id="rev-57">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_P"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_P
+    </comment>  
+    <dropColumn columnName="DPSIR_P" tableName="T_OBLIGATION"/>
+  </changeSet>  
+ 
+  <changeSet author="santamik" id="rev-58">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_S"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_S
+    </comment>  
+    <dropColumn columnName="DPSIR_S" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-59">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_I"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_I
+    </comment>  
+    <dropColumn columnName="DPSIR_I" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-60">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_R"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_R
+    </comment>  
+    <dropColumn columnName="DPSIR_R" tableName="T_OBLIGATION"/>
   </changeSet>     
+
+  <changeSet author="santamik" id="rev-61">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_INFO_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #89743 'Type of info reported' can be reported
+    </comment>  
+    <dropTable tableName="T_INFO_LNK" />  
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-62">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="LEGAL_MORAL"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove 'Obligation type'
+    </comment>  
+    <dropColumn columnName="LEGAL_MORAL" tableName="T_OBLIGATION"/>
+  </changeSet>      
 </databaseChangeLog>
