@@ -1136,5 +1136,16 @@
       Refs #89743 Remove 'Obligation type'
     </comment>  
     <dropColumn columnName="LEGAL_MORAL" tableName="T_OBLIGATION"/>
-  </changeSet>      
+  </changeSet>    
+
+  <changeSet author="santamik" id="rev-63">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="PARAMETERS"/>      
+    </preConditions>  
+    <comment>
+      Refs #89741 Remove "Parameters" from the Obligations
+    </comment>  
+    <dropColumn columnName="PARAMETERS" tableName="T_OBLIGATION"/>
+  </changeSet>     
 </databaseChangeLog>
