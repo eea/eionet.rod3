@@ -991,4 +991,74 @@
     </comment>	
     <dropTable tableName="X_CLIENT_LNK" />	
   </changeSet>  
+
+  <changeSet author="santamik" id="rev-50">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="GEOGRAPHIC_SCOPE"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Remove geographic scope
+    </comment>  
+    <dropColumn columnName="GEOGRAPHIC_SCOPE" tableName="T_SOURCE"/>  
+  </changeSet>    
+  
+  <changeSet author="santamik" id="rev-51">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="DGENV_REVIEW"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 'DG Env' review of reporting theme' can be removed
+    </comment>  
+    <dropColumn columnName="DGENV_REVIEW" tableName="T_SOURCE"/>  
+  </changeSet>     
+
+  <changeSet author="santamik" id="rev-52">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="ALIAS"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Short name must be mandatory
+    </comment>  
+    <sql>UPDATE T_SOURCE SET ALIAS = TITLE WHERE ALIAS IS NULL;</sql>
+  </changeSet> 
+  
+  <changeSet author="santamik" id="rev-53">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="ALIAS"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Short name must be mandatory
+    </comment>  
+    <addNotNullConstraint
+            columnDataType="text"
+            columnName="ALIAS"
+            tableName="T_SOURCE"/>
+  </changeSet> 
+  
+  <changeSet author="santamik" id="rev-54">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="DRAFT"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Remove Draft
+    </comment>  
+    <dropColumn columnName="DRAFT" tableName="T_SOURCE"/>  
+  </changeSet>   
+  
+  <changeSet author="santamik" id="rev-55">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Add Terminated column
+    </comment>  
+    <addColumn tableName="T_SOURCE">
+        <column name="TERMINATED" type="enum('Y','N')"/>
+    </addColumn>
+  </changeSet>     
 </databaseChangeLog>
