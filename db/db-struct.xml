@@ -981,4 +981,259 @@
     </comment>
     <dropTable tableName="T_INDICATOR" />
   </changeSet>  
+  
+  <changeSet author="santamik" id="rev-49">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="X_CLIENT_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Remove obsolete tables
+    </comment>	
+    <dropTable tableName="X_CLIENT_LNK" />	
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-50">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="GEOGRAPHIC_SCOPE"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Remove geographic scope
+    </comment>  
+    <dropColumn columnName="GEOGRAPHIC_SCOPE" tableName="T_SOURCE"/>  
+  </changeSet>    
+  
+  <changeSet author="santamik" id="rev-51">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="DGENV_REVIEW"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 'DG Env' review of reporting theme' can be removed
+    </comment>  
+    <dropColumn columnName="DGENV_REVIEW" tableName="T_SOURCE"/>  
+  </changeSet>     
+
+  <changeSet author="santamik" id="rev-52">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="ALIAS"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Short name must be mandatory
+    </comment>  
+    <sql>UPDATE T_SOURCE SET ALIAS = TITLE WHERE ALIAS IS NULL;</sql>
+  </changeSet> 
+  
+  <changeSet author="santamik" id="rev-53">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="ALIAS"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Short name must be mandatory
+    </comment>  
+    <addNotNullConstraint
+            columnDataType="text"
+            columnName="ALIAS"
+            tableName="T_SOURCE"/>
+  </changeSet> 
+  
+  <changeSet author="santamik" id="rev-54">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="DRAFT"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Remove Draft
+    </comment>  
+    <dropColumn columnName="DRAFT" tableName="T_SOURCE"/>  
+  </changeSet>   
+  
+  <changeSet author="santamik" id="rev-55">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+    </preConditions>  
+    <comment>
+      Refs #89744 Add Terminated column
+    </comment>  
+    <addColumn tableName="T_SOURCE">
+        <column name="TERMINATED" type="enum('Y','N')"/>
+    </addColumn>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-56">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_D"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_D
+    </comment>  
+    <dropColumn columnName="DPSIR_D" tableName="T_OBLIGATION"/>
+  </changeSet>   
+ 
+  <changeSet author="santamik" id="rev-57">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_P"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_P
+    </comment>  
+    <dropColumn columnName="DPSIR_P" tableName="T_OBLIGATION"/>
+  </changeSet>  
+ 
+  <changeSet author="santamik" id="rev-58">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_S"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_S
+    </comment>  
+    <dropColumn columnName="DPSIR_S" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-59">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_I"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_I
+    </comment>  
+    <dropColumn columnName="DPSIR_I" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-60">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="DPSIR_R"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove DPSIR_R
+    </comment>  
+    <dropColumn columnName="DPSIR_R" tableName="T_OBLIGATION"/>
+  </changeSet>     
+
+  <changeSet author="santamik" id="rev-61">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_INFO_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #89743 'Type of info reported' can be reported
+    </comment>  
+    <dropTable tableName="T_INFO_LNK" />  
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-62">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="LEGAL_MORAL"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove 'Obligation type'
+    </comment>  
+    <dropColumn columnName="LEGAL_MORAL" tableName="T_OBLIGATION"/>
+  </changeSet>    
+
+  <changeSet author="santamik" id="rev-63">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="PARAMETERS"/>      
+    </preConditions>  
+    <comment>
+      Refs #89741 Remove "Parameters" from the Obligations
+    </comment>  
+    <dropColumn columnName="PARAMETERS" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-64">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_VERIFIED"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-65">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_VERIFIED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED_BY" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-66">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="RM_NEXT_UPDATE"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_NEXT_UPDATE" tableName="T_OBLIGATION"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-67">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="VALIDATED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="VALIDATED_BY" tableName="T_OBLIGATION"/>
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-68">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VERIFIED"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-69">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VERIFIED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VERIFIED_BY" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-70">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_NEXT_UPDATE"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_NEXT_UPDATE" tableName="T_SOURCE"/>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-71">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+      <columnExists tableName="T_SOURCE" columnName="RM_VALIDATED_BY"/>      
+    </preConditions>  
+    <comment>
+      Refs #89742 Remove "Record management" section for obligations and instruments
+    </comment>  
+    <dropColumn columnName="RM_VALIDATED_BY" tableName="T_SOURCE"/>
+  </changeSet>      
 </databaseChangeLog>
