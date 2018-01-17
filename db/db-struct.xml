@@ -582,6 +582,9 @@
         <createIndex tableName="T_SPATIAL" indexName="SPATIAL_TYPE">
           <column name="SPATIAL_TYPE"/>
         </createIndex>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
