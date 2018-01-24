@@ -911,8 +911,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_ACTIVITY" />	
+    </comment>  
+    <dropTable tableName="X_ACTIVITY" />  
   </changeSet>
 
   <changeSet author="santamik" id="rev-42">
@@ -921,8 +921,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_PARAMETER" />	
+    </comment>  
+    <dropTable tableName="X_PARAMETER" /> 
   </changeSet>
 
   <changeSet author="santamik" id="rev-43">
@@ -931,8 +931,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_PARAMETER_LNK" />	
+    </comment>  
+    <dropTable tableName="X_PARAMETER_LNK" /> 
   </changeSet>
 
   <changeSet author="santamik" id="rev-44">
@@ -941,8 +941,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_PARAM_GROUP" />	
+    </comment>  
+    <dropTable tableName="X_PARAM_GROUP" /> 
   </changeSet>
 
   <changeSet author="santamik" id="rev-45">
@@ -951,8 +951,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_REPORTING" />	
+    </comment>  
+    <dropTable tableName="X_REPORTING" /> 
   </changeSet>
 
   <changeSet author="santamik" id="rev-46">
@@ -961,8 +961,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_SPATIAL_LNK" />	
+    </comment>  
+    <dropTable tableName="X_SPATIAL_LNK" /> 
   </changeSet>
 
   <changeSet author="santamik" id="rev-47">
@@ -971,8 +971,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_UNIT" />	
+    </comment>  
+    <dropTable tableName="X_UNIT" />  
   </changeSet>  
 
   <changeSet author="santamik" id="rev-48">
@@ -991,8 +991,8 @@
     </preConditions>
     <comment>
       Refs #90026 Remove obsolete tables
-    </comment>	
-    <dropTable tableName="X_CLIENT_LNK" />	
+    </comment>  
+    <dropTable tableName="X_CLIENT_LNK" />  
   </changeSet>  
 
   <changeSet author="santamik" id="rev-50">
@@ -1238,5 +1238,88 @@
       Refs #89742 Remove "Record management" section for obligations and instruments
     </comment>  
     <dropColumn columnName="RM_VALIDATED_BY" tableName="T_SOURCE"/>
-  </changeSet>      
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-72">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="FK_CLIENT_ID"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove "FK_CLIENT_ID" from the Obligations
+    </comment>  
+    <dropColumn columnName="FK_CLIENT_ID " tableName="T_OBLIGATION"/>
+  </changeSet> 
+
+  <changeSet author="santamik" id="rev-73">
+    <comment>
+      Refs #90026 New table for client-obligation relation
+    </comment>    
+    <createTable tableName="T_CLIENT_OBLIGATION_LNK">
+      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="FK_RA_ID" type="INT(10)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="M" name="STATUS" type="enum('M','C')">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <addPrimaryKey tableName="T_CLIENT_OBLIGATION_LNK" columnNames="FK_CLIENT_ID,FK_RA_ID,STATUS"/>      
+  </changeSet>
+
+  <changeSet author="santamik" id="rev-74">
+    <comment>
+      Refs #90026 New table for client-instrument relation
+    </comment>      
+    <createTable tableName="T_CLIENT_SOURCE_LNK">
+      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValueNumeric="0" name="FK_SOURCE_ID" type="INT(10) unsigned">
+        <constraints nullable="false" />
+      </column>
+      <column defaultValue="M" name="STATUS" type="enum('M','C')">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <addPrimaryKey tableName="T_CLIENT_SOURCE_LNK" columnNames="FK_CLIENT_ID,FK_SOURCE_ID,STATUS"/>
+  </changeSet>  
+  <changeSet author="santamik" id="rev-75">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_CLIENT_LNK"/>     
+      <tableExists tableName="T_CLIENT_OBLIGATION_LNK"/>      
+    </preConditions> 
+     <comment>
+      Refs #90026
+    </comment>  
+    <sql>INSERT INTO T_CLIENT_OBLIGATION_LNK (FK_CLIENT_ID, FK_RA_ID, STATUS)
+      SELECT FK_CLIENT_ID, FK_OBJECT_ID, STATUS
+      FROM T_CLIENT_LNK
+      WHERE TYPE = 'A'</sql>
+  </changeSet>  
+
+  <changeSet author="santamik" id="rev-76">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_CLIENT_LNK"/>     
+      <tableExists tableName="T_CLIENT_SOURCE_LNK"/>      
+    </preConditions> 
+     <comment>
+      Refs #90026
+    </comment>  
+    <sql>INSERT INTO T_CLIENT_SOURCE_LNK (FK_CLIENT_ID, FK_SOURCE_ID, STATUS)
+      SELECT FK_CLIENT_ID, FK_OBJECT_ID, STATUS
+      FROM T_CLIENT_LNK
+      WHERE TYPE = 'S'</sql>
+  </changeSet>   
+  <changeSet author="santamik" id="rev-77">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_CLIENT_LNK"/>
+    </preConditions>
+    <comment>
+      Refs #90026 Delete T_CLIENT_LNK table
+    </comment>  
+    <dropTable tableName="T_CLIENT_LNK" />  
+  </changeSet>   
 </databaseChangeLog>
