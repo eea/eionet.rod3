@@ -35,7 +35,7 @@
       <column name="URL" value="http://www.biodiv.org/convention/articles.asp"/>
       <column name="SECRETARIAT" value="Secretariat to the Convention on Biological Diversity (in Montreal, Canada)"/>
       <column name="SECRETARIAT_URL" value="http://www.biodiv.org"/>
-      <column name="ABSTRACT" value="The objective of the CBD is to conserve biological diversity, promote the sustainable use of its components, and encourage equitable sharing of the benefits arising out of the utilisation of genetic resources.  Such equitable sharing includes appropriate access to genetic resources, as well as appropriate transfer of technology, taking into account existing rights over such resources and such tecnology."/>
+      <column name="ABSTRACT" valueClobFile="t_source/abstract-549.txt"/>
       <column name="DRAFT" value="N"/>
       <column name="COMMENT" value="The CBD was developed during the United Nations Conference on Environment and Development (Rio de Janeiro, Brazil, 1992)."/>
       <column name="VALID_FROM" value="1993-12-29"/>
@@ -60,7 +60,7 @@
       <column name="URL" value="http://www.biodiv.org/biosafety/protocol.asp"/>
       <column name="SECRETARIAT" value="Secretariat to the Convention on Biological Diversity (in Montreal, Canada)"/>
       <column name="SECRETARIAT_URL" value="http://www.biodiv.org"/>
-      <column name="ABSTRACT" value="The Protocol aims at ensuring an adequate level of protection in the field of the safe transfer, handling and use of living modified organisms (LMOs) resulting from modern biotechnology.  It establishes a harmonised set of international rules and procedures designed to ensure that countries are provided with the relevant information to enable them to make informed decisions before agreeing to the import of LMOs.  It also ensures that LMO shipments are accompanied by appropriate identification documentation."/>
+      <column name="ABSTRACT" valueClobFile="t_source/abstract-550.txt"/>
       <column name="DRAFT" value="N"/>
       <column name="COMMENT" value="The Cartagena Protocol on Biosafety to the Convention on Biological Diversity was adopted by the Conference of the Parties to the Convention on 29 January 2000."/>
       <column name="VALID_FROM" value="2003-09-11"/>
@@ -147,9 +147,9 @@
       <column name="CELEX_REF" value="31991L0689"/>
       <column name="LEGAL_NAME" value=""/>
       <column name="URL" value="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:31991L0689:EN:NOT"/>
-      <column name="ABSTRACT" value="The object of this Directive, drawn up pursuant to Article 2 (2) of Directive 75/442/EEC, is to approximate the laws of the Member States on the controlled management of hazardous waste.&#10;Member States ensure that hazardous waste is recorded and identified; they also ensure that different categories of hazardous waste are not mixed and that hazardous waste is not mixed with non-hazardous waste.&#10;Any establishment or undertaking which carries out disposal or recovery operations must obtain a permit.  The permit requirement may be waived if the method of recovery is such that there is no danger to human health or the environment, or if the Member State has adopted general measures laying down conditions for various methods of recovery.&#10;Establishments or undertakings which carry out disposal and recovery operations and producers of hazardous waste are subject to periodic inspections."/>
+      <column name="ABSTRACT" valueClobFile="t_source/abstract-509.txt"/>
       <column name="DRAFT" value="N"/>
-      <column name="COMMENT" value="The Directive has been amended by Commission Directive 94/31/EC of 27 June 1994 (CELEX No 31994L0031).&#10;Article 8(3) of Directive 91/689/EEC is deleted by the E-PRTR regulation (Regulation (EC) No 166/2006 of the European Parliament and of the Council of 18 January 2006 concerning the establishment of a European Pollutant Release and Transfer Register and amending Council Directives 91/689/EEC and 96/61/EC)CELEX No 32006R0166.&#10;Commission Decision 97/622/EC of 27 May 1997 concerning questionnaires for Member States reports on the implementation of certain Directives in the waste sector (implementation of Council Directive 91/692/EEC) (CELEX No 31997D0622) has to be used when reported on the implementation of the Hazardous Waste Directive.&#10;Commission Decision 97/622/EC is amended as regards to Hazardous Waste Directive by Commission Decision 2007/151/EC of 6 March 2007 amending Decisions 94/741/EC and 97/622/EC as regards the questionnaires for the report on the implementation of Directive 2006/12/EC of the European Parliament and of the Council on waste and on the implementation of Council Directive 91/689/EEC on hazardous waste (CELEX No 32007D0151)&#10;The Directive will be repealed from the Directive 2008/98/EC on waste with effect from 12/12/2010"/>
+      <column name="COMMENT" valueClobFile="t_source/comment-509.txt"/>
       <column name="ISSUED_BY" value="EU Council"/>
       <column name="VALID_FROM" value="1991-12-19"/>
       <column name="ALIAS" value="Hazardous waste directive"/>
