@@ -1,18 +1,16 @@
 package eionet.rod.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Map;
 import javax.sql.DataSource;
 
 import eionet.rod.model.ClientDTO;
+import eionet.rod.util.exception.ResourceNotFoundException;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 /**
  * Service to store metadata for T_CLIENT using JDBC.
@@ -112,4 +110,52 @@ public class ClientServiceJdbc implements ClientService {
     public boolean clientExists(Integer clientId) {
         return true;
     }
+    
+    @Override
+    public List<ClientDTO> findOblClients(Integer raID, String status){
+    	
+    	String query = "SELECT OBCL.FK_CLIENT_ID AS clientId, CL.CLIENT_NAME as name "  
+    			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "
+    			+ "LEFT JOIN t_client CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "  
+    			+ "WHERE ";
+    			if (status != null){
+    				query = query + "STATUS='" + status + "' and ";
+    			}
+    			query = query +  "OBCL.FK_RA_ID = ? ";
+    		    query = query +  "ORDER BY CL.CLIENT_NAME";
+    	
+    	String queryCount = "SELECT Count(*) AS clientId "
+    			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "
+    			+ "LEFT JOIN t_client CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "
+    			+ "WHERE ";
+ 		    	if (status != null){
+ 		    		queryCount = queryCount + "STATUS='" + status + "' and ";
+				}
+ 		    	queryCount = queryCount +  "OBCL.FK_RA_ID = ? ";
+
+    	
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    	
+    	
+        try {
+    		
+			Integer countObligationClients = jdbcTemplate.queryForObject(queryCount, Integer.class, raID);
+		
+			if (countObligationClients == 0) {
+				List<ClientDTO> clients = null;
+				return clients;
+							
+				//throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
+		
+			}else {
+		
+				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), raID);
+
+			}
+			
+		} catch (DataAccessException e) {
+			throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
+		}
+     }
+    
 }

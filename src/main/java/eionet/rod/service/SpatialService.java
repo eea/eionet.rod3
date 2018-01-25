@@ -2,6 +2,7 @@ package eionet.rod.service;
 
 import java.util.List;
 
+import eionet.rod.model.ObligationCountry;
 import eionet.rod.model.Spatial;
 
 /**
@@ -23,5 +24,7 @@ public interface SpatialService {
 	Spatial findOne(Integer id);
 
 	Spatial getById(Integer spatialId);
-
+	
+	List<ObligationCountry> findObligationCountriesList(Integer obligationId);
+		
 }

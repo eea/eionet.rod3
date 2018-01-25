@@ -57,7 +57,10 @@
         </createTable>
 
         <addPrimaryKey columnNames="ACL_ID, TYPE, ENTRY_TYPE, PRINCIPAL, STATUS" tableName="ACL_ROWS"/>
-
+		<modifySql dbms="h2">
+    		<replace replace="ENUM('object','doc','dcc')" with="VARCHAR(6)"/>
+    		<replace replace="ENUM('owner','user','localgroup','other','foreign','unauthenticated','authenticated','mask')" with="VARCHAR(50)"/>
+		</modifySql> 
     </changeSet>
 
     <changeSet author="roug" id="rev-3">
@@ -149,6 +152,9 @@
         </createTable>
 
        <addPrimaryKey tableName="T_CLIENT_LNK" columnNames="FK_CLIENT_ID,FK_OBJECT_ID,TYPE,STATUS"/>
+       <modifySql dbms="h2">
+    		<replace replace="ENUM('M','C')" with="VARCHAR(1)"/>
+    	</modifySql>
    </changeSet>
 
 
@@ -297,6 +303,9 @@
         </createTable>
 
         <addPrimaryKey tableName="T_LOOKUP" columnNames="C_TERM,CATEGORY"/>
+        <modifySql dbms="h2">
+    		<replace replace="ENUM('1','2','C','P','L','S','F','UT','ST','I','DGS')" with="VARCHAR(3)"/>
+    	</modifySql>
    </changeSet>
 
 
@@ -367,9 +376,14 @@
           <column name="DATA_USED_FOR_URL" type="varchar(255)"/>
           <column name="CONTINOUS_REPORTING" type="enum('yes','no')"/>
         </createTable>
-        <createIndex tableName="T_OBLIGATION" indexName="FK_SOURCE_ID">
+       	 <createIndex tableName="T_OBLIGATION" indexName="FK_SOURCE_ID">
           <column name="FK_SOURCE_ID"/>
         </createIndex>
+        <modifySql dbms="h2">
+     		<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+     		<replace replace="ENUM('yes', 'no')" with="VARCHAR(2)"/>
+     		<replace replace="ENUM('L', 'M','V')" with="VARCHAR(1)"/>
+		</modifySql>
    </changeSet>
 
 
@@ -399,6 +413,9 @@
             </column>
         </createTable>
         <addPrimaryKey tableName="T_RASPATIAL_LNK" columnNames="FK_SPATIAL_ID,FK_RA_ID,VOLUNTARY"/>
+        <modifySql dbms="h2">
+     		<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+		</modifySql>
    </changeSet>
 
 
@@ -476,6 +493,9 @@
         <createIndex tableName="T_SOURCE" indexName="LEGAL_NAME">
           <column name="LEGAL_NAME"/>
         </createIndex>
+         <modifySql dbms="h2">
+     		<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+    	</modifySql>
    </changeSet>
 
     <changeSet author="roug" id="rev-21m" dbms="mysql">
@@ -542,6 +562,9 @@
           <column name="FK_SOURCE_PARENT_ID"/>
           <column name="PARENT_TYPE"/>
         </createIndex>
+         <modifySql dbms="h2">
+     		<replace replace="ENUM('S', 'C')" with="VARCHAR(1)"/>
+		</modifySql>
    </changeSet>
 
 
@@ -601,8 +624,12 @@
           <column name="END_DATE" type="date"/>
           <column name="PK_SPATIAL_HISTORY_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
-            </column>
+          </column>
+            
         </createTable>
+         <modifySql dbms="h2">
+             <replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -632,6 +659,10 @@
         <createIndex tableName="T_UNDO" indexName="col">
           <column name="col"/>
         </createIndex>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('I','D','U','A','L','K','O','UN','UD','UDD','T','ACL')" with="VARCHAR(3)"/>
+             <replace replace="ENUM('n','y')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -679,6 +710,9 @@
         <createIndex tableName="X_ACTIVITY" indexName="FK_REPORTING_ID">
           <column name="FK_RO_ID"/>
         </createIndex>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('Y','N')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -755,6 +789,9 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('C','S')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -795,6 +832,10 @@
         <createIndex tableName="X_REPORTING" indexName="XR_SOURCE_ID">
           <column name="FK_SOURCE_ID"/>
         </createIndex>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('L','M','V')" with="VARCHAR(1)"/>
+             <replace replace="ENUM('Y','N')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -818,6 +859,9 @@
         <createIndex tableName="X_SPATIAL_LNK" indexName="XS_RO_ID">
           <column name="FK_RO_ID"/>
         </createIndex>
+        <modifySql dbms="h2">
+             <replace replace="ENUM('Y','N')" with="VARCHAR(1)"/>
+        </modifySql>
    </changeSet>
 
 
@@ -874,6 +918,10 @@
         </createIndex>
        <addForeignKeyConstraint baseTableName="T_ATTRIBUTE" constraintName="T_ATTRIBUTE_ibfk_1"
            baseColumnNames="NAME" referencedTableName="T_NAMELABEL" referencedColumnNames="NAME"/>
+       <modifySql dbms="h2">
+             <replace replace="ENUM('obligations','instruments','clients','spatial')" with="VARCHAR(12)"/>
+             <replace replace="ENUM('reference','string','integer','decimal','boolean','dateTime','date')" with="VARCHAR(10)"/>
+        </modifySql>
     </changeSet>
 
   <changeSet id="rev-39" author="roug">
@@ -1063,7 +1111,10 @@
     <addColumn tableName="T_SOURCE">
         <column name="TERMINATED" type="enum('Y','N')"/>
     </addColumn>
-  </changeSet>  
+    <modifySql dbms="h2">
+    	<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
+	</modifySql>
+</changeSet>  
 
   <changeSet author="santamik" id="rev-56">
     <preConditions onFail="MARK_RAN">
@@ -1266,7 +1317,10 @@
         <constraints nullable="false" />
       </column>
     </createTable>
-    <addPrimaryKey tableName="T_CLIENT_OBLIGATION_LNK" columnNames="FK_CLIENT_ID,FK_RA_ID,STATUS"/>      
+    <addPrimaryKey tableName="T_CLIENT_OBLIGATION_LNK" columnNames="FK_CLIENT_ID,FK_RA_ID,STATUS"/>
+    <modifySql dbms="h2">
+    	<replace replace="ENUM('M', 'C')" with="VARCHAR(1)"/>
+	</modifySql>      
   </changeSet>
 
   <changeSet author="santamik" id="rev-74">
@@ -1283,8 +1337,12 @@
       <column defaultValue="M" name="STATUS" type="enum('M','C')">
         <constraints nullable="false" />
       </column>
+      
     </createTable>
     <addPrimaryKey tableName="T_CLIENT_SOURCE_LNK" columnNames="FK_CLIENT_ID,FK_SOURCE_ID,STATUS"/>
+    <modifySql dbms="h2">
+    	<replace replace="ENUM('M', 'C')" with="VARCHAR(1)"/>
+	</modifySql>
   </changeSet>  
   <changeSet author="santamik" id="rev-75">
     <preConditions onFail="MARK_RAN">

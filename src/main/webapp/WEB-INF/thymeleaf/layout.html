@@ -6,13 +6,27 @@
     <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/eionet2007.css" th:href="@{/css/eionet2007.css}" />
     <link rel="stylesheet" type="text/css" href="../../css/jquery-ui-1.10.3.custom.min.css" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}" />
     <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
+    
+
     <script type="text/javascript" src="../../js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
     <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js" th:src="@{/js/jquery-ui-1.10.3.custom.min.js}"></script>
     <script type="text/javascript" src="../../js/pageops.js" th:src="@{/js/pageops.js}"></script>
     <script type="text/javascript" src="../../js/mark_special_links.js" th:src="@{/js/mark_special_links.js}"></script>
     <script type="text/javascript" src="../../js/util.js" th:src="@{/js/util.js}"></script>
+    <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>
+    <script type="text/javascript" src="../../js/helpModal.js" th:src="@{/js/helpModal.js}"></script>
+
+    <!-- link rel="stylesheet" type="text/css" href="https:////cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" media="datatable"/ -->
+    <!-- script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script -->
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    
+
     <link rel="shortcut icon" href="#" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
     <link rel="icon" href="#" th:href="@{/images/eealogo256x256.png}" type="image/png" />
   </head>
@@ -54,29 +68,12 @@
           <a title="Frontpage" th:href="@{/}" href="#">
             <img src="../../images/eea-print-logo.gif" th:src="@{/images/eea-print-logo.gif}" alt="Logo" id="logo" width="428" height="87"/>
           </a>
-          <div id="networktitle">Reporting Obligations Database (ROD)</div>
-          <div id="sitetitle">European Environment Information and Observation Network</div>
+          <div id="networktitle">Eionet</div>
+          <div id="sitetitle">Reporting Obligations Database (ROD)</div>
           <div id="sitetagline">Networking improving Europe's environment</div>
         </div>
         <div id="menuribbon">
-          <ul id="dropdowns" th:include="dropdownmenus :: [/ul]">
-            <li>
-              <a href="http://www.eionet.europa.eu/menuservices">Services</a>
-              <ul>
-                <li>
-                  <a href="http://www.eionet.europa.eu/helpdesk">Helpdesk</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="http://www.eionet.europa.eu/menureportnet">Reportnet</a>
-              <ul>
-                <li>
-                  <a href="http://cdr.eionet.europa.eu/">CDR Repository</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <ul id="dropdowns" th:include="dropdownmenus :: [/ul]"></ul>
         </div>
         <div class="breadcrumbtrail">
           <div class="breadcrumbhead">You are here:</div>
@@ -94,16 +91,15 @@
         </div>
         <div id="leftcolumn">
           <div class="localnav" th:fragment="menuFragment">
-            <h2>Local navigation</h2>
             <ul>
-              <li><a href="index.html" th:href="@{/}">Home</a></li>
-              <li><a href="spatial.html" th:href="@{/spatial}">Countries/territories</a></li>
-              <li><a href="obligations.html" th:href="@{/obligations}">Obligations</a></li>
-              <li><a href="clients.html" th:href="@{/clients}">Clients</a></li>
+              <li th:class="${activeTab == 'home'}? 'current' : null"><a href="index.html" th:href="@{/}">Home</a></li>
+              <li th:class="${activeTab == 'spatial'}? 'current' : null"><a href="spatial.html" th:href="@{/spatial}">Countries/territories</a></li>
+              <li th:class="${activeTab == 'obligations'}? 'current' : null"><a href="obligations.html" th:href="@{/obligations}">Obligations</a></li>
+              <li th:class="${activeTab == 'clients'}? 'current' : null"><a href="clients.html" th:href="@{/clients}">Clients</a></li>
               <li sec:authorize-url="/datasets">
                 <a href="obligations.html" th:href="@{/obligations}">Obligations</a>
               </li>
-              <li sec:authorize="hasRole('ADMIN')">
+              <li sec:authorize="hasRole('ADMIN')"  th:class="${activeTab == 'users'}? 'current' : null">
                 <a href="users.html" th:href="@{/users/view}">User authorisations</a>
               </li>
             </ul>
@@ -113,6 +109,7 @@
       <div th:replace="${view} :: rightcolumn">
       </div>
       <div id="workarea">
+      
         <h1 th:text="${title}">Page title here</h1>
 <p>
 Technologies turn-key reinvent <a href="http://bullshitipsum.com/?paragraphs=5">portals synergies interfaces</a>,
@@ -152,12 +149,9 @@ of the art customer service.
     </div>
     <!-- container -->
     <div id="pagefoot" th:fragment="footerFragment">
-      <p>
-Document last modified 2015/04/03.
-      </p>
-      <p><a href="/disclaimer">Disclaimer</a>.
-Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
-      </p>
-    </div>
+		<p><a href="/disclaimer">Disclaimer</a> | <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20Data%20Dictionary%20website">Feedback</a> | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a></p>
+        <p><a href="http://www.eea.europa.eu/"><b>European Environment Agency</b></a>
+        <br/>Kgs. Nytorv 6, DK-1050 Copenhagen K, Denmark - Phone: +45 3336 7100</p>
+	</div>
   </body>
 </html>

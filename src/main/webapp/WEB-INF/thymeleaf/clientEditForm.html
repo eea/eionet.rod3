@@ -1,146 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-    <title>Edit Client Organisation</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/print.css" media="print"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/handheld.css" media="handheld"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/eionet2007.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/print.css" media="print"/>
-    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript" src="../../script/util.js"></script>
-    <script type="text/javascript" src="../../script/pageops.js"></script>
-    <script type="text/javascript" src="../../script/mark_special_links.js"></script>
-    <script type="text/javascript" src="../../script/editor.js"></script>
-  </head>
+  <head th:include="layout :: headerFragment"></head>
   <body>
     <div id="container">
-      <div th:include="layout :: bannerFragment">
-      <div id="toolribbon">
-        <div id="lefttools">
-          <a id="eealink" href="http://www.eea.europa.eu/">EEA</a>
-          <a id="ewlink" href="http://www.ewindows.eu.org/">EnviroWindows</a>
-        </div>
-        <div id="righttools">
-          <a href="/logout" id="logoutlink" title="Logout">Logout roug</a>
-          <a id="printlink" title="Print this page" href="javascript:this.print();">
-            <span>Print</span>
-          </a>
-          <a id="fullscreenlink" href="javascript:toggleFullScreenMode()" title="Switch to/from full screen mode">
-            <span>Switch to/from full screen mode</span>
-          </a>
-          <a id="acronymlink" href="http://www.eionet.europa.eu/acronyms" title="Look up acronyms">
-            <span>Acronyms</span>
-          </a>
-          <form action="http://google.com/search" method="get">
-            <div id="freesrchform">
-              <label for="freesrchfld">Search</label>
-              <input type="text" id="freesrchfld" name="q" onfocus="if(this.value=='Search ROD')this.value='';" onblur="if(this.value=='')this.value='Search ROD';" value="Search ROD" size="10"/>
-              <input type="hidden" name="sitesearch" value="rod.eionet.europa.eu"/>
-              <input id="freesrchbtn" type="image" src="../../images/button_go.gif" alt="Go"/>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- toolribbon -->
-      <div id="pagehead">
-        <a href="/">
-          <img src="/images/eea-print-logo.gif" alt="Logo" id="logo"/>
-        </a>
-        <div id="networktitle">Eionet</div>
-        <div id="sitetitle">Reporting Obligations Database (ROD)</div>
-        <div id="sitetagline">This service is part of Reportnet</div>
-      </div>
-      <!-- pagehead -->
-      <div id="menuribbon">
-        <ul id="dropdowns">
-          <li>
-            <a href="http://www.eionet.europa.eu/menuservices">Services</a>
-            <ul>
-              <li>
-                <a href="http://www.eionet.europa.eu/helpdesk">Helpdesk</a>
-              </li>
-              <li>
-                <a href="http://forum.eionet.europa.eu/">Forum</a>
-              </li>
-              <li>
-                <a href="http://projects.eionet.europa.eu/">Projects</a>
-              </li>
-              <li>
-                <a href="http://uns.eionet.europa.eu/">Subscriptions</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="http://www.eionet.europa.eu/menureportnet">Reportnet</a>
-            <ul>
-              <li>
-                <a href="http://cdr.eionet.europa.eu/">CDR Repository</a>
-              </li>
-              <li>
-                <a href="http://uwwtd.eionet.europa.eu/">UWWTD dataflow</a>
-              </li>
-              <li>
-                <a href="http://www.eionet.europa.eu/reportnet">Reportnet Documents</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="http://www.eionet.europa.eu/menutools">Tools</a>
-            <ul>
-              <li>
-                <a href="http://www.eionet.europa.eu/gis/">GIS</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="http://www.eionet.europa.eu/menutopics">Topics (ETCs)</a>
-            <ul>
-              <li>
-                <a href="http://acm.eionet.europa.eu/">Air pollution and Climate Change mitigation</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="breadcrumbtrail">
-        <div class="breadcrumbhead">You are here:</div>
-        <div class="breadcrumbitem eionetaccronym">
-          <a href="http://www.eionet.europa.eu">Eionet</a>
-        </div>
-        <div class="breadcrumbitem">
-          <a href="/">ROD</a>
-        </div>
-        <div class="breadcrumbitemlast">Edit Client Organisation</div>
-        <div class="breadcrumbtail"></div>
-      </div>
-      <div id="leftcolumn" class="localnav">
-        <ul>
-          <li>
-            <a href="/index.html" title="ROD Home">Home</a>
-          </li>
-          <li>
-            <a href="/spatial">Countries/territories</a>
-          </li>
-          <li>
-            <a href="/obligations" title="Reporting Obligations">Obligations</a>
-          </li>
-          <li>
-            <a href="/clients" title="Clients">Clients</a>
-          </li>
-          <li>
-            <a href="/subscribe" title="Create a UNS Subscription">Subscribe</a>
-          </li>
-          <li>
-            <a href="/documentation/Help" title="General Help">Help</a>
-          </li>
-          <li>
-            <a href="/versions">Global History</a>
-          </li>
-        </ul>
-      </div>
-      </div>
+     <div th:include="layout :: bannerFragment" ></div>
       <div id="workarea">
         <h1>Edit Client Organisation</h1>
         <form action="clientEditForm.html" method="POST" th:action="@{'/clients/' + ${clientId} + '/edit'}" th:object="${client}" >
@@ -232,17 +95,7 @@ Affected of potentially affected States and the Biosafety Clearing House</textar
           </table>
         </form>
       </div>
-      <div id="pagefoot" th:include="layout :: footerFragment">
-            <a href="/documentation/Disclaimer">Disclaimer</a>
-            | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
-            | Last updated:
-            <a href="/analysis.jsv">21/11/17</a>
-            |       <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20ROD%20website">Feedback</a>
-            <br/>
-            <a href="http://www.eea.europa.eu">European Environment Agency</a>
-            <br/>
-            Kgs. Nytorv 6, DK-1050 Copenhagen K, Denmark - Phone: +45 3336 7100
-        </div>
+      <div id="pagefoot" th:include="layout :: footerFragment"></div>
     </div>
   </body>
 </html>

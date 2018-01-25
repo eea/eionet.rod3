@@ -10,18 +10,18 @@
       <column name="LEGAL_NAME" value="Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community"/>
       <column name="URL" value="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:1977D0795:20040501:EN:PDF"/>
       <column name="ABSTRACT" value="Consolidated version: http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:1977D0795:20040501:EN:PDF&#10;&#10;The decision establishes a common procedure for the exchange of information on the quality of surface fresh water in the Community.&#10;The information covered by the exchange of information shall be: (a) the results of the measurements carried out by the sampling or measuring stations; (b) a description of the sampling, sample preservation and measuring methods used and the frequency of sampling.&#10;&#10;The Decision is amended by:&#10;-Council Decision 81/856/EEC of 19 October 1981 adapting, consequent upon the accession of Greece, Decision 77/795/EEC. &#10;-Commission Decision 84/422/EEC of 24 July 1984 amending Annex I to Council Decision 77/795/EEC. &#10;-Council Decision 86/574/EEC of 24 November 1986 amending Decision 77/795/EEC. &#10;-Commission Decision 90/2/EEC of 14 December 1989 amending Annex I to Council Decision 77/795/EEC.&#10;-Council Regulation (EC) No 807/2003 of 14 April 2003 adapting to Decision 1999/468/EC the provisions relating to committees which assist the Commission in the exercise of its implementing powers laid down in Council instruments adopted in accordance with the consultation procedure."/>
-      <column name="DRAFT" value="N"/>
+      <!-- column name="DRAFT" value="N"/ -->
       <column name="COMMENT" value="The Decision 77/795/EEC has been repealed by the Water Framework Directive 2000/60/EEC 7 years after its entry into force (i.e. on 22/12/2007)."/>
       <column name="LAST_MODIFIED" value="1998-12-15"/>
       <column name="ISSUED_BY" value="DG XI European Commission"/>
       <column name="VALID_FROM" value="1977-12-24"/>
       <column name="ALIAS" value="Exchange of information Decision on fresh water (consolidated)"/>
-      <column name="FK_CLIENT_ID" valueNumeric="105"/>
+      <!--  column name="FK_CLIENT_ID" valueNumeric="105"/ -->
       <column name="LAST_UPDATE" valueDate="2014-02-19T23:00:00"/>
-      <column name="RM_VERIFIED" value="2014-02-20"/>
+      <!-- column name="RM_VERIFIED" value="2014-02-20"/>
       <column name="RM_VERIFIED_BY" value="Fran&#xE7;ois Dejean (EEA)"/>
       <column name="GEOGRAPHIC_SCOPE" value="European Union"/>
-      <column name="DGENV_REVIEW" value="W"/>
+      <column name="DGENV_REVIEW" value="W"/ -->
     </insert>
     <!--
     <insert tableName="T_SOURCE">
@@ -196,20 +196,20 @@
       <column name="SECRETARIAT_URL" value="http://www.basel.int/"/>
       <column name="ABSTRACT" value="The Convention is the response of the international community to the problems caused by the annual worldwide production of 400 million tonnes of wastes which are hazardous to people or the environment because they are toxic, poisonous, explosive, corrosive, flammable, eco-toxic, or infectious."/>
       <column name="EC_ENTRY_INTO_FORCE" value="1994-02-07"/>
-      <column name="DRAFT" value="N"/>
+      <!-- >column name="DRAFT" value="N"/ -->
       <column name="COMMENT" value="Convention is amended by:&#10;Amendment to the Basel Convention on the control of transboundary movements of hazardous wastes and their disposal [CELEX No 21997A1004(01)]&#10;Convention is adopted by:&#10; Council Decision 93/98/EEC of 1 February 1993 on the conclusion, on behalf of the Community, of the Convention on the control of transboundary movements of hazardous wastes and their disposal (Basel Convention)(CELEX No 31993D0098)."/>
       <column name="LAST_MODIFIED" value="2000-03-29"/>
       <column name="ISSUED_BY" value="United Nations"/>
       <column name="VALID_FROM" value="1992-05-05"/>
       <column name="ALIAS" value="Basel Convention"/>
       <column name="ISSUED_BY_URL" value="http://www.basel.int"/>
-      <column name="FK_CLIENT_ID" valueNumeric="11"/>
+      <!-- column name="FK_CLIENT_ID" valueNumeric="11"/ -->
       <column name="LAST_UPDATE" valueDate="2009-12-14T23:00:00"/>
-      <column name="RM_NEXT_UPDATE" value="2010-07-30"/>
+      <!-- column name="RM_NEXT_UPDATE" value="2010-07-30"/>
       <column name="RM_VERIFIED" value="2009-12-01"/>
       <column name="RM_VERIFIED_BY" value="B.J.K. ETC/SCP"/>
       <column name="GEOGRAPHIC_SCOPE" value="Worldwide"/>
-      <column name="DGENV_REVIEW" value="0"/>
+      <column name="DGENV_REVIEW" value="0"/ -->
     </insert>
     <insert tableName="T_SOURCE">
       <column name="PK_SOURCE_ID" valueNumeric="170"/>
@@ -222,18 +222,18 @@
       <column name="SECRETARIAT" value="OSPAR Secretariat, New Court , 48 Carey Street, London WC2A 2JQ / UK, Tel: +44 (0) 20 7430 5200, Fax: +44 (0) 20 7430 5225, e-mail: secretariat@ospar.org"/>
       <column name="SECRETARIAT_URL" value="http://www.ospar.org/eng/html/welcome.html"/>
       <column name="ABSTRACT" value="The Convention for the Protection of the Marine Environment of the North-East Atlantic (&quot;OSPAR Convention&quot;)."/>
-      <column name="DRAFT" value="N"/>
+      <!--  column name="DRAFT" value="N"/ -->
       <column name="COMMENT" value="The Convention for the Protection of the Marine Environment of the North-East Atlantic (&quot;OSPAR Convention&quot;) was opened for signature at the Ministerial Meeting of the Oslo and Paris Commissions in Paris on 22 September 1992."/>
       <column name="LAST_MODIFIED" value="2000-03-29"/>
       <column name="ISSUED_BY" value="OSPAR Commission"/>
       <column name="VALID_FROM" value="1998-04-03"/>
       <column name="ALIAS" value="OSPAR Convention"/>
       <column name="ISSUED_BY_URL" value="http://www.ospar.org/"/>
-      <column name="FK_CLIENT_ID" valueNumeric="4"/>
+      <!-- column name="FK_CLIENT_ID" valueNumeric="4"/ -->
       <column name="LAST_UPDATE" valueDate="2016-05-01T22:00:00"/>
-      <column name="RM_NEXT_UPDATE" value="2005-06-08"/>
+      <!-- column name="RM_NEXT_UPDATE" value="2005-06-08"/>
       <column name="RM_VERIFIED" value="2004-06-08"/>
-      <column name="RM_VERIFIED_BY" value="ETC Water BFB"/>
+      <column name="RM_VERIFIED_BY" value="ETC Water BFB"/ -->
     </insert>
     <!--
     <insert tableName="T_SOURCE">

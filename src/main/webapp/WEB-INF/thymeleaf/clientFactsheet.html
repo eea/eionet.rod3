@@ -1,149 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-    <title>Council of the European Union - ROD - Eionet</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="publisher" content="EEA, The European Environment Agency"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/print.css" media="print"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/handheld.css" media="handheld"/>
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/eionet2007.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/print.css" media="print"/>
-    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript" src="../../js/util.js"></script>
-    <script type="text/javascript" src="../../js/pageops.js"></script>
-    <script type="text/javascript" src="../../js/mark_special_links.js"></script>
-    <link rel="alternate" type="application/rdf+xml" title="RDF" href="/clients/105"/>
-  </head>
+  <head th:include="layout :: headerFragment"></head>
   <body>
     <div id="container">
-      <div th:include="layout :: bannerFragment">
-        <div id="toolribbon">
-          <div id="lefttools">
-            <a id="eealink" href="http://www.eea.europa.eu/">EEA</a>
-            <a id="ewlink" href="http://www.ewindows.eu.org/">EnviroWindows</a>
-          </div>
-          <div id="righttools">
-            <a href="https://sso.eionet.europa.eu/login?service=http%3A%2F%2Frod.eionet.europa.eu%2Flogin" id="loginlink" title="Login">Login</a>
-            <a id="printlink" title="Print this page" href="javascript:this.print();">
-              <span>Print</span>
-            </a>
-            <a id="fullscreenlink" href="javascript:toggleFullScreenMode()" title="Switch to/from full screen mode">
-              <span>Switch to/from full screen mode</span>
-            </a>
-            <a id="acronymlink" href="http://www.eionet.europa.eu/acronyms" title="Look up acronyms">
-              <span>Acronyms</span>
-            </a>
-            <form action="http://google.com/search" method="get">
-              <div id="freesrchform">
-                <label for="freesrchfld">Search</label>
-                <input type="text" id="freesrchfld" name="q" onfocus="if(this.value=='Search ROD')this.value='';" onblur="if(this.value=='')this.value='Search ROD';" value="Search ROD" size="10"/>
-                <input type="hidden" name="sitesearch" value="rod.eionet.europa.eu"/>
-                <input id="freesrchbtn" type="image" src="/images/button_go.gif" alt="Go"/>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!-- toolribbon -->
-        <div id="pagehead">
-          <a href="/">
-            <img src="/images/eea-print-logo.gif" alt="Logo" id="logo"/>
-          </a>
-          <div id="networktitle">Eionet</div>
-          <div id="sitetitle">Reporting Obligations Database (ROD)</div>
-          <div id="sitetagline">This service is part of Reportnet</div>
-        </div>
-        <!-- pagehead -->
-        <div id="menuribbon">
-          <ul id="dropdowns">
-            <li>
-              <a href="http://www.eionet.europa.eu/menuservices">Services</a>
-              <ul>
-                <li>
-                  <a href="http://www.eionet.europa.eu/helpdesk">Helpdesk</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="http://www.eionet.europa.eu/menureportnet">Reportnet</a>
-              <ul>
-                <li>
-                  <a href="http://cdr.eionet.europa.eu/">CDR Repository</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="http://www.eionet.europa.eu/menutools">Tools</a>
-              <ul>
-                <li>
-                  <a href="http://www.eionet.europa.eu/gis/">GIS</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="http://www.eionet.europa.eu/menutopics">Topics (ETCs)</a>
-              <ul>
-                <li>
-                  <a href="http://acm.eionet.europa.eu/">Air pollution and Climate Change mitigation</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="breadcrumbtrail">
-          <div class="breadcrumbhead">You are here:</div>
-          <div class="breadcrumbitem eionetaccronym">
-            <a href="http://www.eionet.europa.eu">Eionet</a>
-          </div>
-          <div class="breadcrumbitem">
-            <a href="/">ROD</a>
-          </div>
-          <div class="breadcrumbitem">
-            <a href="/clients">Clients</a>
-          </div>
-          <div class="breadcrumbitemlast">Client information</div>
-          <div class="breadcrumbtail"/>
-        </div>
-        <div id="leftcolumn" class="localnav">
-          <ul>
-            <li>
-              <a href="/index.html" title="ROD Home">Home</a>
-            </li>
-            <li>
-              <a href="/spatial">Countries/territories</a>
-            </li>
-            <li>
-              <a href="/obligations" title="Reporting Obligations">Obligations</a>
-            </li>
-            <li>
-              <a href="/clients" title="Clients">Clients</a>
-            </li>
-            <li>
-              <a href="/subscribe" title="Create a UNS Subscription">Subscribe</a>
-            </li>
-            <li>
-              <a href="/documentation/Help" title="General Help">Help</a>
-            </li>
-            <li>
-              <a href="/instruments" title="Navigate to reporting obligations via the Eur-lex legislative instrument categories">Legal instruments</a>
-            </li>
-            <li>
-              <a href="/obligations?anmode=P" title="Eionet core data flows">Core data flows</a>
-            </li>
-            <li>
-              <a href="/obligations?anmode=F" title="EEA data flows">EEA data flows</a>
-            </li>
-            <li>
-              <a href="/analysis" title="Database statistics">Database statistics</a>
-            </li>
-            <li>
-              <a href="/search" title="Advanced search">Advanced search</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <div th:include="layout :: bannerFragment"></div>
       <div id="workarea">
-        <div  sec:authorize="hasRole('EDITOR')" id="drop-operations">
+        <div sec:authorize="hasRole('EDITOR')" id="drop-operations">
           <h2>Operations</h2>
           <ul>
             <li><a href="clientEditform.html" th:href="@{'/clients/' + ${client.clientId} + '/edit'}">Edit client</a></li>
@@ -152,40 +14,40 @@
 
         <h1>Reporting client or issuer details</h1>
         <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-        <table class="datatable">
+        <table class="datatable results">
           <col style="width:8em"/>
           <col style="width:30em"/>
           <tbody>
-            <tr>
-              <th scope="row">Name</th>
+            <tr class="odd">
+              <td scope="row">Name</td>
               <td th:text="${client.name}">Council of the European Union</td>
             </tr>
-            <tr>
-              <th scope="row">Short Name</th>
+            <tr class="even">
+              <td scope="row">Short Name</td>
               <td th:text="${client.shortName}">Council</td>
             </tr>
-            <tr>
-              <th scope="row">Acronym</th>
+            <tr class="odd">
+              <td scope="row">Acronym</td>
               <td th:text="${client.acronym}">Council</td>
             </tr>
-            <tr>
-              <th scope="row">Address</th>
+            <tr class="even">
+              <td scope="row">Address</td>
               <td th:text="${client.address}"/>
             </tr>
-            <tr>
-              <th scope="row">Postal code</th>
+            <tr class="odd">
+              <td scope="row">Postal code</td>
               <td th:text="${client.postalCode}">9999</td>
             </tr>
-            <tr>
-              <th scope="row">City</th>
+            <tr class="even">
+              <td scope="row">City</td>
               <td th:text="${client.city}">Copenhagen</td>
             </tr>
-            <tr>
-              <th scope="row">Country</th>
+            <tr class="odd">
+              <td scope="row">Country</td>
               <td th:text="${client.country}">Daisyland</td>
             </tr>
-            <tr>
-              <th scope="row">Homepage</th>
+            <tr class="even">
+              <td scope="row">Homepage</td>
               <td>
                 <a href="http://www.consilium.europa.eu/" th:href="${client.url}" th:text="${client.url}">
                                     http://www.consilium.europa.eu/
@@ -193,7 +55,7 @@
               </td>
             </tr>
             <tr>
-              <th scope="row">Description</th>
+              <td scope="row">Description</td>
               <td th:text="${client.description}">
 The Council is the EU institution making EU laws.
                         </td>
@@ -202,18 +64,20 @@ The Council is the EU institution making EU laws.
         </table>
         <h2>Direct Obligations</h2>
         <table class="datatable" width="600">
+          <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Title</th>
           </tr>
+          </thead>
           <tr>
-            <td>
+            <td class="odd">
               <a href="/obligations/738">738</a>
             </td>
             <td>Implementation report
                                         </td>
           </tr>
-          <tr>
+          <tr class="even">
             <td>
               <a href="/obligations/733">733</a>
             </td>
@@ -245,17 +109,7 @@ The Council is the EU institution making EU laws.
           </tr>
         </table>
       </div>
-      <div id="pagefoot" th:include="layout :: footerFragment">
-      <a href="/documentation/Disclaimer">Disclaimer</a>
-                                | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
-                                | Last updated:
-                                <a href="/analysis.jsv">21/11/17</a>
-                                |	<a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20ROD%20website">Feedback</a>
-                                <br/>
-                                <a href="http://www.eea.europa.eu">European Environment Agency</a>
-                                <br/>
-                                Kgs. Nytorv 6, DK-1050 Copenhagen K, Denmark - Phone: +45 3336 7100
-                        </div>
+      <div id="pagefoot" th:include="layout :: footerFragment"></div>
     </div>
     <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>
   </body>

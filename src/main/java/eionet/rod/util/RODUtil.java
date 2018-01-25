@@ -228,4 +228,27 @@ public class RODUtil {
     public static boolean isNullOrEmpty(String s) {
         return s == null || s.length() == 0;
     }
+    
+    /**
+     * Surrounds given string with apostrophes and also escapes any apostrophes inside the text for SQL.
+     *
+     * @param in The text to parse.
+     * @return The result.
+     */
+    public static String strLiteral(String in) {
+        in = (in != null ? in : "");
+        StringBuffer ret = new StringBuffer("'");
+
+        for (int i = 0; i < in.length(); i++) {
+            char c = in.charAt(i);
+            if (c == '\'') {
+                ret.append("''");
+            } else {
+                ret.append(c);
+            }
+        }
+        ret.append('\'');
+
+        return ret.toString();
+    }
 }

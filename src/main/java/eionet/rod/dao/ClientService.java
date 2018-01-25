@@ -24,4 +24,11 @@ public interface ClientService {
     void update(ClientDTO clientRec);
 
     boolean clientExists(Integer clientId);
+    
+    /**
+     * Get all clients, by obligation id with status = C.
+     */
+    
+    List<ClientDTO> findOblClients(Integer raID, String c);
+    
 }

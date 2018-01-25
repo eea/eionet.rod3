@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import eionet.rod.dao.SpatialDao;
+import eionet.rod.model.ObligationCountry;
 import eionet.rod.model.Spatial;
 
 /**
@@ -30,7 +31,19 @@ public class SpatialServiceImpl implements SpatialService {
 	public List<Spatial> findAllMember(String Member) {
 		return spatialDao.findAllMember(Member);
 	}
-
+	
+	@Override
+	public List<ObligationCountry> findObligationCountriesList(Integer obligationId){
+		return spatialDao.findObligationCountriesList(obligationId);
+	}
+	
+	@Override
+	public Spatial findOne(Integer id) {
+		
+		return spatialDao.findId(id);
+	}
+	
+	
 	@Override
 	public Long create(Spatial resource) {
 		// TODO Auto-generated method stub
@@ -49,11 +62,7 @@ public class SpatialServiceImpl implements SpatialService {
 		
 	}
 
-	@Override
-	public Spatial findOne(Integer id) {
-		
-		return spatialDao.findId(id);
-	}
+	
 
 	@Override
 	public Spatial getById(Integer spatialId) {

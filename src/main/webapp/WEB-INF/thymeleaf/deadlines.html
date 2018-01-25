@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+  <script>
+	 $(document).ready(function(){
+	    $('#obligationTable').DataTable({
+	    	"sDom": 'Tfrtipt',
+	    	"sPaginationType": "full_numbers"
+	    });
+	        
+	    
+	});
+	 
+</script>
+<div id="container">
+<div th:include="layout :: bannerFragment"></div>
+  <div id="workarea">
+     <div class="title">
+     	<h1 th:text="'Reporting deadlines: ' + ${countryName}"></h1>
+     </div>
+     <form method="POST" th:action="@{'/spatial/' + ${countryId} + '/deadlines/search'}" th:object="${obligation}" name="f">
+     	<div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+     
+     	<div id="drop-operations">
+	        <ul>
+	            <li class="search open"><a class="searchSection" href="#" title="Search reporting deadlines">Search reporting deadlines</a></li>
+	        </ul>
+    	</div>
+     
+     	<div id="filters">
+        	<div class="filter">
+            	<div class="row">
+                	<div class="labeldiv">
+                    	 <label for="shortName">Select issue</label>
+                    </div>
+	                <div class="input">
+						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
+							<option value="0" label="Any issues"></option>
+			    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+	                <div class="labeldiv">
+	                    <label for="shortName">Select Deadline</label>
+	                </div>
+	                <div class="input">
+						<select name="deadlines"  id="deadlines" class="smalltext" th:field="*{deadlineId}">
+							<option value="0" label="All deadlines"></option>
+							<option th:value="1" label="In the next month" th:selected="*{deadlineId == '1'}"/>
+	                		<option th:value="2" label="In the next 3 months" th:selected="*{deadlineId == '2'}"/>
+	                		<option th:value="3" label="In the next 6 months" th:selected="*{deadlineId =='3'}"/>
+	                		<option th:value="4" label="Previous months" th:selected="*{deadlineId == '4'}"/>
+			    		</select>
+					</div>
+				</div>
+				<div class="row">
+                	<div class="labeldiv">
+                    	<label for="shortName">Select Client</label>
+                    </div>
+	      			<div class="input">
+						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+							<option value="0" label="Any organisation"></option>
+					    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+						</select>
+					</div>
+				</div>
+			</div>
+				<p class="actions">
+                    <input class="mediumbuttonb searchButton" type="submit" value="Search" />
+                    <input class="mediumbuttonb" type="reset" value="Reset" />
+                </p>
+			</div>
+		</form>
+		
+		<div style="clear: both;"></div>
+		
+		<div>
+			<span>The list includes also recently passed deadlines, until 10% of the time difference between last deadline and next deadline has passed - 3 days for a monthly deadline, 36 days for a yearly deadline etc.</span>
+		</div>
+		
+		<div style="clear: both;"></div>
+		
+        <div th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></div>
+        <div th:if="${not #lists.isEmpty(allObligations)}">
+	        <table id="obligationTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>Reporting obligations</th>
+			        <th>Reporting to</th>
+			        <th>Deadline</th>
+			        <th>Responsible</th>
+			        <th>Deliveries</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
+	        	<td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
+	        	<td>
+	        		<span th:if="${obligation.nextDeadline} != ''" th:text="${obligation.nextDeadline}" ></span>
+						<span th:unless="${obligation.nextDeadline} != ''" th:text="${obligation.nextReporting}" ></span>
+	        	</td>
+	        	<td>
+	        		<a th:if="${obligation.respRoleId != null}" th:utext="${obligation.respRoleName}" th:href="@{'/contacts?roleId=' + ${obligation.respRoleId}}"></a>
+	        		<span th:if="${obligation.respRoleId == null}" th:utext="${countryName}"></span>
+	        	</td>
+	        	<td>
+	        		<a th:if="${obligation.hasDelivery != ''}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligation.obligationId} + '&saptialId=' +  ${countryId}}"></a>
+	        		<span th:unless="${obligation.hasDelivery != ''}" th:text="'None'"></span>
+	        	</td>
+	        </tr>
+	        </table>
+        </div>
+       
+      
+     </div>
+      
+	 <div th:replace="layout :: footerFragment"></div>
+    </div>
+  </body>
+</html>

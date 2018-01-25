@@ -120,7 +120,7 @@ public class RODUtilTest {
     @Test
     public void test_str2Date() {
     	
-    	System.out.print(RODUtil.str2Date("21/12/2017"));
+    	//System.out.print(RODUtil.str2Date("21/12/2017"));
     	assertEquals("2017-12-21",RODUtil.str2Date("21/12/2017"));
     	assertEquals("NULL" ,RODUtil.str2Date(""));
     }

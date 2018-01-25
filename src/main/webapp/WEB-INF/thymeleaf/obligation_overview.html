@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+	<div th:include="layout :: bannerFragment" ></div>
+    <div id="workarea">
+	    <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
+			<h1 th:unless="${obligation.oblTitle == null}" th:text="'Reporting obligation for: ' + ${obligation.oblTitle}"></h1>
+	    
+	    <div id="tabbedmenu">
+		    <ul>
+			    <li id="currenttab"><span>Overview</span></li>
+			    <li><a th:href="@{'/obligations/' + ${obligationId} + '/legislation'}">Legislation</a></li>
+		    </ul>
+	    </div>
+		
+		<table class="datatable results">
+			<tr class="odd">
+				<td>Title</td>
+				<td th:utext="${obligation.oblTitle}"></td>
+			</tr>
+			<tr class="even">
+				<td>Description</td>
+				<td>
+					<span th:utext="${obligation.description}"></span>
+					<span th:if="${obligation.eeaPrimary == 1}"><br/><br/>This reporting obligation is an Eionet core data flow.</span>
+					<span th:if="${obligation.eeaCore == 1}"><br/><br/>Reporting under this obligation is used for EEA Core set of indicators.</span>
+					<span th:if="${obligation.flagged == 1}"><br/><br/>Delivery process is managed by EEA.</span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Legislative instruments title</td>
+				<td>
+					<a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		
+		<h2>Reporting dates and guidelines</h2>
+		
+		<table class="datatable results">
+			<tr class="odd">
+				<td>National reporting coordinators</td>
+				<td>
+					<a th:if="${obligation.coordRoleId != ''}" th:utext="${obligation.coordRoleName} + ' (' + ${obligation.coordRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.coordRoleId}}" th:title="'Public role information'"></a>
+					<span th:unless="${obligation.coordRoleId != ''}">
+						<span class="role_not_found" th:if="${obligation.coordinatorRole != ''}" th:utext="'Directory role not found for ' + ${obligation.coordinatorRole}"></span>
+						<span th:utext="${obligation.coordinator}"></span>
+						<a th:if="${obligation.coordinatorUrl != ''}" th:href="${obligation.coordinatorUrl}" th:utext="${obligation.coordinatorUrl}"></a>
+					</span>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>National reporting contacts</td>
+				<td>
+					<a th:if="${obligation.respRoleId != ''}" th:utext="${obligation.respRoleName} + ' (' + ${obligation.respRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.respRoleId}}" th:title="'Public role information'"></a>
+					<span th:unless="${obligation.respRoleId != ''}">
+						<span class="role_not_found" th:if="${obligation.responsibleRole != ''}" th:utext="'Directory role not found for ' + ${obligation.responsibleRole}"></span>
+						<span th:utext="${obligation.nationalContact}"></span>
+						<a th:if="${obligation.nationalContactUrl != ''}" th:href="${obligation.nationalContactUrl}" th:utext="${obligation.nationalContactUrl}"></a>
+					</span>
+				</td>
+			</tr>
+			
+			<tr class="odd">
+				<td>Reporting frequency</td>
+				<td >
+					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated" ></span>
+					<span th:unless="${obligation.terminate} != 'N'">
+						<th:block th:switch="${obligation.reportFreqMonths}">
+							<span th:case="''" th:text="''"></span>
+							<span th:case="'0'" th:text="'One time only'"></span>
+							<span th:case="'1'" th:text="'Monthly'"></span>
+							<span th:case="'12'" th:text="Annually"></span>
+							<span th:case="*" th:text="'Every ' + ${obligation.reportFreqMonths} + ' months'"></span>
+						</th:block>
+					</span>
+				</td>
+			</tr>
+			
+			<tr class="even">
+				<td>Next report due</td>
+				<td >
+					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated"  class="terminated"></span>
+					<span th:unless="${obligation.terminate} != 'N'">
+						<span th:if="${obligation.nextDeadline} != ''" th:text="${obligation.nextDeadline}" ></span>
+						<span th:unless="${obligation.nextDeadline} != ''" th:text="${obligation.nextReporting}" ></span>
+					</span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Date comments</td>
+				<td th:text="${obligation.dateComments}"></td>
+			</tr>
+			<tr class="even">
+				<td>Report to</td>
+				<td>
+					<a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
+					<span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Other clients using this reporting</td>
+				<td>
+					<ul  th:if="${not #lists.isEmpty(clients)}" >
+						<li th:each="client : ${clients}">
+							<a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>Reporting guidelines</td>
+				<td>
+					<a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
+					<span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
+					<span th:if="${obligation.validSince != null}" th:text="' [Valid since ' + ${obligation.validSince} + ']'"></span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Extra information</td>
+				<td th:utext="${obligation.reportingFormat}"></td>
+			</tr>
+			<tr class="even">
+				<td>Principle repository</td>
+				<td >
+					<a th:if="${obligation.locationPtr != null}" th:href="${obligation.locationPtr}">
+						<span th:if="${obligation.locationInfo != null}" th:text="${obligation.locationInfo}"></span>
+						<span th:unless="${obligation.locationInfo != null}" th:text="${obligation.locationPtr}"></span>
+					</a>
+					<span th:unless="${obligation.locationPtr != null}" th:text="${obligation.locationInfo}"></span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>Data used for</td>
+				<td>
+					<a th:if="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}" th:href="${obligation.dataUsedForUrl}"></a>
+					<span th:unless="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}"></span>
+				</td>
+			</tr>
+		</table>
+	 </div>
+     <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
+</html>

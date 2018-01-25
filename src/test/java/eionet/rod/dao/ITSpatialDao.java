@@ -4,18 +4,22 @@ import org.junit.runner.RunWith;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import eionet.rod.model.ObligationCountry;
 import eionet.rod.model.Spatial;
-
+import eionet.rod.service.SpatialService;
 import eionet.rod.util.exception.ResourceNotFoundException;
+
 
 
 /**
@@ -32,14 +36,16 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 public class ITSpatialDao {
     
 	@Autowired
-	private SpatialDao spatialDao;
+	private SpatialService spatialService;
 	
 		
     @Test
-    public void testfinId() throws ResourceNotFoundException
+    public void testfinId()
     {
-    	Spatial spatial = spatialDao.findId(1);
-    	System.out.println("Id: " + spatial.getSpatialId());
+    	Spatial spatial = spatialService.findOne(1);
+    	assertEquals("1",spatial.getSpatialId().toString());
+    	assertEquals("Austria",spatial.getName());
+
     }
 
     
@@ -47,26 +53,41 @@ public class ITSpatialDao {
     @Test
     public void testfinAll() throws ResourceNotFoundException
     {
-    	List<Spatial> allMembers = spatialDao.findAll();
-    	System.out.println("Id All: " + allMembers.size());
-
+    	List<Spatial> allMembers = spatialService.findAll();
+    	assertEquals(3 ,allMembers.size());
+    	assertEquals("2",allMembers.get(0).getSpatialId().toString());
+    	assertEquals("Albania", allMembers.get(0).getName());
+    	assertEquals("1",allMembers.get(1).getSpatialId().toString());
+    	assertEquals("Austria", allMembers.get(1).getName());
+    	assertEquals("3",allMembers.get(2).getSpatialId().toString());
+    	assertEquals("Francia", allMembers.get(2).getName());
     }
 
     @Test
     public void testfinAllMember() throws ResourceNotFoundException
     {
-    	List<Spatial> allMember = spatialDao.findAllMember("E");
-    	System.out.println("Id All Member: " + allMember.size());
-    	List<Spatial> allNoMember = spatialDao.findAllMember("N");
-    	System.out.println("Id All No Member: " + allNoMember.size());
+    	List<Spatial> allMember = spatialService.findAllMember("Y");
+    	assertEquals(2 ,allMember.size());
+    	List<Spatial> allNoMember = spatialService.findAllMember("N");
+    	assertEquals(1 ,allNoMember.size());
+    	List<Spatial> allMemberNull = spatialService.findAllMember("E");
+    	assertNull(allMemberNull);
     }
 
     @Test
     public void testfindObligationCountriesList() throws ResourceNotFoundException
     {
-    	List<ObligationCountry> obligationCountries = spatialDao.findObligationCountriesList(446);
+    	List<Spatial> spatialListY = new ArrayList<Spatial>();
+    	spatialListY.add(new Spatial(1, "Austria", "C", "AT", "Y"));
+    	spatialListY.add(new Spatial(2, "Albania", "C", "AL", "N"));
+    	spatialListY.add(new Spatial(3, "Francia", "C", "FR", "Y"));
+    	
+    	List<ObligationCountry> obligationCountries = spatialService.findObligationCountriesList(1);
     	for (int i = 0 ; i< obligationCountries.size(); i++) {
-    		System.out.println("issue: " + obligationCountries.get(i).getCountryName());
-    	}
+	    	System.out.println("country: " + obligationCountries.get(i).getCountryName());
+	    	 assertEquals(spatialListY.get(i).getName(),obligationCountries.get(i).getCountryName());
+	    }
+    	
     }
+   
 }

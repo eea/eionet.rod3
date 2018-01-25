@@ -18,10 +18,11 @@ public interface SpatialDao {
 
 	public List<Spatial> findAll();
 	
-	public Spatial findId(Integer id) throws ApplicationContextException;
+	public Spatial findId(Integer id);
 
 	public List<Spatial> findAllMember(String Member);
 	
 	public List<ObligationCountry> findObligationCountriesList(Integer obligationId);
+	
 	
 }

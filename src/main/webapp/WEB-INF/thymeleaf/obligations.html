@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+  <script>
+	 $(document).ready(function(){
+	    $('#obligationTable').DataTable({
+	    	"sDom": 'Tfrtipt',
+	    	"sPaginationType": "full_numbers"
+	    });
+	        
+	    
+	});
+	 
+</script>
+    <div id="container">
+     <div th:include="layout :: bannerFragment"></div>
+     <div id="workarea">
+   
+      
+     <div class="title">
+     <h1>Reporting obligations</h1>
+      	<a sec:authorize="hasRole('EDITOR')" class="new_link">
+      		+ New obligation
+    	</a>
+     </div>
+     <form method="POST" th:action="@{/obligations/search}" th:object="${obligation}" name="f">
+     <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+		<div id="drop-operations">
+	        <ul>
+	            <li class="search open"><a class="searchSection" href="#" title="Search reporting obligations">Search reporting obligations</a></li>
+	        </ul>
+    	</div>
+    <div id="filters">
+          <div class="filter">
+                    <div class="row">
+                        <div class="labeldiv">
+                            <label for="shortName">Country</label>
+                            <a class="helpButton" href="#"></a>
+                        </div>
+		      			<div class="input">
+							<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
+								<option value="0" label="Any country or territory"></option>
+								<option  th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name}"  th:selected="(${country.spatialId} == *{spatialId})"></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+                        <div class="labeldiv">
+                            <label for="shortName">Issue</label>
+                            <a class="helpButton" href="#"></a>
+                        </div>
+                        <div class="input">	
+							<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
+								<option value="0" label="Any issues"></option>
+				    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+                        <div class="labeldiv">
+                            <label for="shortName">Organization</label>
+                            <a class="helpButton" href="#"></a>
+                        </div>
+                        <div class="input">
+							<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+								<option value="0" label="Any organisation"></option>
+							    <option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+                        <div class="labeldiv">
+                            <label for="shortName">Include terminated obligations</label>
+                            <a class="helpButton" href="#"></a>
+                        </div>
+                        <div class="input inputcheck">
+                            <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Yes</label>
+                        </div>
+                    </div>
+             </div>
+				<p class="actions">
+                    <input class="mediumbuttonb searchButton" type="submit" value="Search" />
+                    <input class="mediumbuttonb" type="reset" value="Reset" />
+                </p>
+           </div>
+		
+		</form>
+		
+		<div style="clear: both;"></div>
+		
+     
+        <div th:if="${#lists.isEmpty(allObligations)}">There are no results.</div>
+        <div th:if="${not #lists.isEmpty(allObligations)}">
+	        <table id="obligationTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>Reporting obligations</th>
+			        <th>Legislative instrument</th>
+			        <th>Report to</th>
+			        <th>Deadline</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
+	        	<td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
+	        	<td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
+	        	<td th:text="${obligation.nextDeadline}"></td>
+	        </tr>
+	        </table>
+        </div>
+       
+      
+     </div>
+      
+	 <div th:replace="layout :: footerFragment"></div>
+    </div>
+  </body>
+</html>

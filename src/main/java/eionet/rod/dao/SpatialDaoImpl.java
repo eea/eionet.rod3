@@ -64,7 +64,24 @@ public class SpatialDaoImpl implements SpatialDao {
                 + "FROM T_SPATIAL "
 				+ "WHERE CAST(SPATIAL_ISMEMBERCOUNTRY as char) = ?"
                 + "ORDER BY name";
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<Spatial>(Spatial.class), Member);
+		
+		String queryCount = "SELECT Count(*) as spatialId "
+				+ "FROM T_SPATIAL "
+				+ "WHERE CAST(SPATIAL_ISMEMBERCOUNTRY as char) = ?";
+		
+		try {
+			Integer countMember = jdbcTemplate.queryForObject(queryCount, Integer.class, Member);
+			
+			if (countMember == 0) {
+
+				return null;
+			}else {
+				
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Spatial>(Spatial.class), Member);
+			}
+		} catch (DataAccessException e) {
+			throw new ResourceNotFoundException("You requested was not found in the database");
+		}
 	}
 
 	@Override
@@ -132,5 +149,5 @@ public class SpatialDaoImpl implements SpatialDao {
 			throw new ResourceNotFoundException("The obligation you requested with id " + obligationId + " was not found in the database");
 		}
 	}
-	
+			
 }

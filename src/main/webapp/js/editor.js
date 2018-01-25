@@ -45,13 +45,23 @@ function mvValues(selFrom, selTo, unit) {
 	}
 }
 
+function addClientValuesSel(selFrom, selTo){
+	for (i = 0; i < selTo.length; ++i) {
+		if (selFrom.value == selTo[i].value){
+			alert("No client can be participating both 'Report to' and 'Other clients using this reporting'." + '\n' + "To report it formally you must first remove it from list-box of the 'Others clients using this reporting'.");
+			return false;
+		}
+	}
+	return true;
+}
+
 function addClientValues(selFrom, selTo) {
 	var i, j, count = 0;
 	var optsLen;
 	var newVal, newText;
 
 	isChanged = true;
-
+	
 	var selected = new Array();
 
 	for (i = 0; i < selFrom.length; ++i) {
@@ -74,30 +84,36 @@ function addClientValues(selFrom, selTo) {
 					}
 			}
 			if (!exists) {
+				var existsClientReport = document.f.report_to.value;
 				selected[count++] = i;
 
 				newVal = selFrom[i].value;
+				
+				if (newVal != existsClientReport){
 
-				var pos = newVal.indexOf(':');
-				/*if (pos > 0) {
-					newVal = newVal.substr(0, pos);
-				} */
-
-				newText = selFrom[i].text;
-				pos = newText.indexOf('[');
-				if (pos > 1) {
-					newText = newText.substr(0, pos - 1); // strip leading space as well
+					var pos = newVal.indexOf(':');
+					/*if (pos > 0) {
+						newVal = newVal.substr(0, pos);
+					} */
+	
+					newText = selFrom[i].text;
+					pos = newText.indexOf('[');
+					if (pos > 1) {
+						newText = newText.substr(0, pos - 1); // strip leading space as well
+					}
+					/*if (unit != null && unit.text.length > 0) {
+						newVal = newVal + ':' + unit.value;
+						newText = newText + ' [' + unit.text + ']';
+					} */
+	
+					// add to
+					var opt = document.createElement("option");
+					selTo.add(opt);
+					opt.text = newText;
+					opt.value = newVal;
+				}else{
+					alert("No client can be participating both 'Report to' and 'Other clients using this reporting'." + '\n' + "To report it formally you must first remove it from list-box of the 'Report to'.");
 				}
-				/*if (unit != null && unit.text.length > 0) {
-					newVal = newVal + ':' + unit.value;
-					newText = newText + ' [' + unit.text + ']';
-				} */
-
-				// add to
-				var opt = document.createElement("option");
-				selTo.add(opt);
-				opt.text = newText;
-				opt.value = newVal;
 			}
 		}
 	}
@@ -137,12 +153,12 @@ function changed() {
 
 function changedReporting() {
 
-	var first = document.forms['f'].elements['obligation.firstReporting'];
-	var freq = document.forms['f'].elements['obligation.reportFreqMonths'];
-	var next = document.forms['f'].elements['obligation.nextDeadline'];
-	var to = document.forms['f'].elements['obligation.validTo'];
-	var terminate = document.forms['f'].elements['obligation.terminate'];
-	var next2 = document.forms['f'].elements['obligation.nextDeadline2'];
+	var first = document.forms['f'].elements['firstReporting'];
+	var freq = document.forms['f'].elements['reportFreqMonths'];
+	var next = document.forms['f'].elements['nextDeadline'];
+	var to = document.forms['f'].elements['validTo'];
+	var terminate = document.forms['f'].elements['terminate'];
+	var next2 = document.forms['f'].elements['nextDeadline2'];
 
 	changed();
 
@@ -416,7 +432,7 @@ function addValues(selFrom, selTo, unit,clist,volSelTo) {
 					opt.text = newText;
 					opt.value = newVal;
 				} else {
-					alert("       No country can be participating both formally and voluntarily." + '\n' + "To report it formally you must first remove it from voluntarily reporting list-box.")
+					alert("No country can be participating both formally and voluntarily." + '\n' + "To report it formally you must first remove it from voluntarily reporting list-box.")
 				}
 			}
 		}
@@ -558,7 +574,7 @@ function addFullValues(selFrom, selTo,clist,forSelTo) {
 					opt.text = newText;
 					opt.value = newVal;
 				} else {
-					alert("       No country can be participating both formally and voluntarily." + '\n' + "To report it voluntarily you must first remove it from formally reporting list-box.")
+					alert("No country can be participating both formally and voluntarily." + '\n' + "To report it voluntarily you must first remove it from formally reporting list-box.")
 				}
 			}
 		}
@@ -696,9 +712,9 @@ function chkUrl(fld) {
 function contReporting() {
 	var val = document.getElementById("report_freq_months").value;
 	if (val == "" || val == " ") {
-		document.getElementById("contReporting").style.display = 'block';
+		document.getElementById("contReporting").className = 'displayYes';
 	} else {
-		document.getElementById("contReporting").style.display = 'none';
+		document.getElementById("contReporting").className = 'displayNone';
 	}
 }
 

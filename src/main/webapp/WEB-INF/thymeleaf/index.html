@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="container">
-      <div th:include="layout :: bannerFragment">
+      <div th:include="layout :: bannerFragment" th:with="activeTab = 'home'">
       </div>
       <div id="workarea">
         <h1>What is ROD?</h1>
@@ -41,86 +41,91 @@ Eurostat, OECD, UN, UNECE, as well as the EEA itself. To learn more
 about ROD, the status of the contents and the intended users, please
 check out the general help section.
 </p>
-<form id="x1" action="/obligations" class="notprintable" method="get">
-  <table id="categorysearch">
-    <col style="width: 30%"/>
-    <col style="width: 65%"/>
-    <col style="width: 5%"/>
-    <tr>
-      <td colspan="2">
-        <b>Show reporting obligations</b>
-      </td>
-      <td class="center"> </td>
-    </tr>
-    <tr>
-      <td>
-        <label class="question">Country or territory</label>
-      </td>
-      <td>
-        <select name="country" size="1">
-          <option value="-1">Any country or territory</option>
-          <option value="3">Austria</option>
-          <option value="6">Bosnia and Herzegovina</option>
-          <option value="42">Kosovo under the UNSCR 1244/99</option>
-          <option value="24">The former Yugoslav Republic of Macedonia</option>
-          <option value="121">Vatican City</option>
-        </select>
-      </td>
-      <td rowspan="4" style="vertical-align:middle">
-        <input name="id" value="" type="hidden"/>
-        <input name="filter" value="GO" class="go_btn" type="submit"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label class="question">Issue</label>
-      </td>
-      <td>
-        <select style="width:223px" name="issue">
-          <option value="-1">All issues</option>
-          <option value="6">Air pollution</option>
-          <option value="14">Biodiversity Change and Nature</option>
-          <option value="10">Chemicals</option>
-          <option value="1">Climate Change</option>
-          <option value="8">Natural Resources</option>
-          <option value="7">Noise</option>
-          <option value="2">Ozone Depletion</option>
-          <option value="4">Soil</option>
-          <option value="12">Various other issues</option>
-          <option value="13">Waste</option>
-          <option value="15">Water</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label class="question">Organisation</label>
-      </td>
-      <td>
-        <select style="width:300px" name="client" size="1">
-          <option value="-1">Any organisation</option>
-          <option value="50">ACCOBAMS - ACCOBAMS Secretariat</option>
-          <option value="45">AEWA - UNEP/AEWA Secretariat</option>
-          <option value="68">Alpine Convention Secretariat</option>
-          <option value="63">Bern Convention</option>
-          <option value="84">Bonn Agreement Secretariat</option>
-          <option value="24">BSC - Black Sea Commission</option>
-          <option value="82">CAR/RCU - Caribbean Regional Co-ordinating Unit</option>
-          <option value="81">CAR/RCU - Conference of the Parties to the Cartagena Convent...</option>
-          <option value="42">CBD - Convention on Biological Diversity</option>
-          <option value="71">CCAMLR - Commission for the Conservation of Antarctic Marin...</option>
-          <option value="53">World Heritage Committee, UNESCO World Heritage Ce...</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>&#xA0;</td>
-      <td>
-        <input id="isterminated" name="terminated" value="Y" type="checkbox"/>
-        <label for="isterminated">Include terminated obligations</label>
-      </td>
-    </tr>
-  </table>
+
+  	<div id="drop-operations">
+            <ul>
+                <li class="search open"><a class="searchSection" href="#" title="Search reporting obligations">Search reporting obligations</a></li>
+                
+            </ul>
+    </div>
+    <form id="x1" action="/obligations" class="searchDatasetsForm" method="get">
+    	<div id="filters">
+    
+		    <table id="categorysearch" class="filter">
+		    <col style="width: 30%"/>
+		    <col style="width: 65%"/>
+		    <col style="width: 5%"/>
+		    <tr>
+		      <td class="label">
+		        <label>Country or territory</label>
+		      </td>
+		      <td class="input">
+		        <select name="country" size="1">
+		          <option value="-1">Any country or territory</option>
+		          <option value="3">Austria</option>
+		          <option value="6">Bosnia and Herzegovina</option>
+		          <option value="42">Kosovo under the UNSCR 1244/99</option>
+		          <option value="24">The former Yugoslav Republic of Macedonia</option>
+		          <option value="121">Vatican City</option>
+		        </select>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td class="label">
+		        <label>Issue</label>
+		      </td>
+		      <td class="input">
+		        <select style="width:223px" name="issue">
+		          <option value="-1">All issues</option>
+		          <option value="6">Air pollution</option>
+		          <option value="14">Biodiversity Change and Nature</option>
+		          <option value="10">Chemicals</option>
+		          <option value="1">Climate Change</option>
+		          <option value="8">Natural Resources</option>
+		          <option value="7">Noise</option>
+		          <option value="2">Ozone Depletion</option>
+		          <option value="4">Soil</option>
+		          <option value="12">Various other issues</option>
+		          <option value="13">Waste</option>
+		          <option value="15">Water</option>
+		        </select>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td class="label">
+		        <label>Organisation</label>
+		      </td>
+		      <td class="input">
+		        <select style="width:300px" name="client" size="1">
+		          <option value="-1">Any organisation</option>
+		          <option value="50">ACCOBAMS - ACCOBAMS Secretariat</option>
+		          <option value="45">AEWA - UNEP/AEWA Secretariat</option>
+		          <option value="68">Alpine Convention Secretariat</option>
+		          <option value="63">Bern Convention</option>
+		          <option value="84">Bonn Agreement Secretariat</option>
+		          <option value="24">BSC - Black Sea Commission</option>
+		          <option value="82">CAR/RCU - Caribbean Regional Co-ordinating Unit</option>
+		          <option value="81">CAR/RCU - Conference of the Parties to the Cartagena Convent...</option>
+		          <option value="42">CBD - Convention on Biological Diversity</option>
+		          <option value="71">CCAMLR - Commission for the Conservation of Antarctic Marin...</option>
+		          <option value="53">World Heritage Committee, UNESCO World Heritage Ce...</option>
+		        </select>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td class="label">&#xA0;</td>
+		      <td class="input">
+		        <input id="isterminated" name="terminated" value="Y" type="checkbox"/>
+		        <label for="isterminated">Include terminated obligations</label>
+		      </td>
+		    </tr>
+		  </table>
+		  <p class="actions">
+		  	<input name="id" value="" type="hidden"/>
+		    <input name="filter" value="Search" class="mediumbuttonb searchButton" type="submit"/>
+		    <input name="Reset" value="Reset" class="mediumbuttonb " type="reset"/>
+		  </p>
+		 </div>
 </form>
 
       </div>

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    
+    <T_ISSUE
+      PK_ISSUE_ID="1" 
+      ISSUE_NAME="Climate Change" 
+    />
+    
+    <T_ISSUE
+      PK_ISSUE_ID="2" 
+      ISSUE_NAME="Ozone Depletion" 
+    />
+     <T_RAISSUE_LNK
+      FK_ISSUE_ID="1" 
+      FK_RA_ID="1"
+   />
+   <T_RAISSUE_LNK
+      FK_ISSUE_ID="1" 
+      FK_RA_ID="2"
+   />
+   
+</dataset>

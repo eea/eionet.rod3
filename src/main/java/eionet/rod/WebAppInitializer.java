@@ -28,7 +28,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
         XmlWebApplicationContext appContext = new XmlWebApplicationContext();
         appContext.setConfigLocation("/WEB-INF/classes/spring-db-config.xml "
                                 + "/WEB-INF/classes/spring-init-config.xml "
-                                + "/WEB-INF/classes/spring-mvc-config.xml");
+                                + "/WEB-INF/classes/spring-mvc-config.xml "
+                                + "/WEB-INF/classes/spring-service-config.xml");
 
         // Listeners
         //SingleSignOutHttpSessionListener ssoListener = new SingleSignOutHttpSessionListener(appContext);

@@ -1,5 +1,6 @@
 package eionet.rod.controller;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -17,7 +18,7 @@ import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.annotation.Rollback;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,7 +27,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import org.springframework.web.context.WebApplicationContext;
 
+//import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
+import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
 
 import static org.junit.Assert.assertEquals;
@@ -60,7 +63,8 @@ public class ITSpatialController {
     @Autowired
     SpatialService spatialService;
 
-   
+    @Autowired
+    ObligationService obligationService;
     
     @Before
     public void setUp() throws Exception {
@@ -78,7 +82,6 @@ public class ITSpatialController {
      * Simple test to list countries.
      */
     @Test
-    @Rollback(true)
     public void listSpatial() throws Exception {
     	
     	List<Spatial> spatialListY = new ArrayList<Spatial>();
@@ -110,4 +113,26 @@ public class ITSpatialController {
         assertEquals(spatialListN.get(0).getName(), valN.get(0).getName());
         
     }
+    
+      
+    @Test
+    public void testspatial_deadlines() throws Exception {
+        this.mockMvc.perform(get("/spatial/1/deadlines")
+                .param("spatialId", "1"))
+        		.andExpect(status().isOk())
+        		.andExpect(view().name("deadlines"));
+    }
+    
+    @Test
+    public void testspatial_search_deadlines() throws Exception 
+    {
+    	this.mockMvc.perform(post("/spatial/1/deadlines/search")
+    			.param("issueId", "0")
+    			.param("deadlineId", "0")
+    			.param("clientId", "0")
+    			.with(csrf()))
+    			.andExpect(status().isOk())
+        		.andExpect(view().name("deadlines"));
+    }
+    
 }

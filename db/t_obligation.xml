@@ -19,12 +19,12 @@
       <column name="VALID_TO" value="9999-12-31"/>
       <column name="FK_DELIVERY_COUNTRY_IDS" value=",102,34,2,36,8,28,"/>
       <column name="NEXT_DEADLINE2" value="2018-12-31"/>
-      <column name="RM_NEXT_UPDATE" value="2010-07-30"/>
+      <!-- column name="RM_NEXT_UPDATE" value="2010-07-30"/>
       <column name="RM_VERIFIED" value="2009-12-01"/>
-      <column name="RM_VERIFIED_BY" value="B.J.K. ETC/SCP"/>
+      <column name="RM_VERIFIED_BY" value="B.J.K. ETC/SCP"/ -->
       <column name="LAST_HARVESTED" value="2017-11-06T10:14:35"/>
-      <column name="LEGAL_MORAL" value="L"/>
-      <column name="FK_CLIENT_ID" valueNumeric="6"/>
+      <!-- column name="LEGAL_MORAL" value="L"/>
+      <column name="FK_CLIENT_ID" valueNumeric="6"/ -->
       <column name="DESCRIPTION" value="UNEP Waste Reporting Obligation"/>
       <column name="RESPONSIBLE_ROLE_SUF" valueNumeric="1"/>
       <column name="COORDINATOR_ROLE_SUF" valueNumeric="1"/>
@@ -32,11 +32,11 @@
       <column name="EEA_CORE" valueNumeric="0"/>
       <column name="FLAGGED" valueNumeric="0"/>
       <column name="AUTHORITY" value="Article 13 (3)"/>
-      <column name="DPSIR_D" value="no"/>
+      <!-- column name="DPSIR_D" value="no"/>
       <column name="DPSIR_P" value="yes"/>
       <column name="DPSIR_S" value="no"/>
       <column name="DPSIR_I" value="no"/>
-      <column name="DPSIR_R" value="yes"/>
+      <column name="DPSIR_R" value="yes"/ -->
       <column name="CONTINOUS_REPORTING" value="no"/>
     </insert>
     <!--

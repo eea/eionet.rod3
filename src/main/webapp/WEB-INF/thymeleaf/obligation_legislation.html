@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+	<div th:include="layout :: bannerFragment" ></div>
+    <div id="workarea">
+		<h1 th:if="${obligation.oblTitle == null}">Legislation</h1>
+			<h1 th:unless="${obligation.oblTitle == null}" th:text="'Legislation for: ' + ${obligation.oblTitle}"></h1>
+		
+		<div id="tabbedmenu">
+			<ul>
+				<li><a th:href="@{'/obligations/' + ${obligationId}}">Overview</a></li>
+			  	<li id="currenttab"><span>Legislation</span></li>
+		  	</ul>
+	    </div>
+	    <br/>
+	    <br/>
+	    <span class="pagebanner">Legal framework</span>
+	    <table class="datatable results">
+			<tr class="odd">
+				<td>Legislative instrument title</td>
+				<td>
+					<a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
+					<span th:if="${obligation.authority != null}" th:text="' ' + ${obligation.authority}"></span>
+				</td>
+			</tr>
+			<tr class="even">
+				
+				<td>Sibling reporting obligations</td>
+				<td>
+					<ul th:if="${not #lists.isEmpty(siblingObligations)}" class="menu">
+						<li th:each="siblingObligation : ${siblingObligations}">
+							<a th:href="@{'/obligations/'+${siblingObligation.siblingOblId}}" th:text="${siblingObligation.siblingTitle}"></a>
+							<span th:if="${siblingObligation.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span>
+							<span th:if="${siblingObligation.authority != null}" th:text="${siblingObligation.authority}"></span>
+						</li>
+					</ul>
+				</td>
+				
+			</tr>
+			<tr class="odd">
+				<td>Participating countries/territories</td>
+				<td th:if="${not #lists.isEmpty(ObligationCountries)}">
+					<!-- a href="@{'/countrydeliveries?spatialId=' + ${ObligationCountry.countryId} + '&amp;actDetailsId=' + ${obligation.obligationId}" -->
+					<span th:each="ObligationCountry, itemStart : ${ObligationCountries}" th:utext="!${itemStart.last} ? ${ObligationCountry.countryName} + ', ' : ${ObligationCountry.countryName}" th:title="${ObligationCountry.voluntary == 'Y' ? 'Informal participation in the reporting obligation' : ''}"></span>
+					<!-- /a -->
+				</td>
+			</tr>
+			<tr class="even">
+				<td>Environmental issues</td>
+				<td th:if="${not #lists.isEmpty(issues)}">
+					<span th:each="issue, itemStart : ${issues}" th:utext="!${itemStart.last} ? ${issue.issueName} + ', ' : ${issue.issueName}"></span>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>General comments</td>
+				<td th:utext="${obligation.comment}"></td>
+			</tr>
+		</table>
+		
+	 
+	 
+	</div>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
+</html>
