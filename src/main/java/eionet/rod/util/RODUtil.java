@@ -251,4 +251,53 @@ public class RODUtil {
 
         return ret.toString();
     }
+    
+    /**
+     * Expects given string to be in date format like "dd/mm/yyyy", and returns corresponding value in the MySQL format:
+     * yyyy-mm-dd. Returns "NULL" if string is null or empty.
+     *
+     * @param date The string to parse.
+     * @return The result.
+     */
+    public static String strDate(String date) {
+        if (RODUtil.isNullOrEmpty(date)) {
+            return "NULL";
+        }
+
+        int len = date.length();
+
+        // formats the input string in the form yyyy-mm-dd to MySQL date format yyyy-mm-dd
+        //
+        // 0123456789
+        // WebROD format:yyyy-mm-dd 
+        // MySQL format: dd/mm/yyyy
+        //
+
+        if (len == 10) {
+            char y1 = date.charAt(0);
+            char y2 = date.charAt(1);
+            char y3 = date.charAt(2);
+            char y4 = date.charAt(3);
+            char m1 = date.charAt(5);
+            char m2 = date.charAt(6);
+            char d1 = date.charAt(8);
+            char d2 = date.charAt(9);
+            char s1 = date.charAt(4);
+            char s2 = date.charAt(7);
+
+            if (Character.isDigit(d1) && Character.isDigit(d2) && Character.isDigit(m1) && Character.isDigit(m2)
+                    && Character.isDigit(y1) && Character.isDigit(y2) && Character.isDigit(y3) && Character.isDigit(y4)
+                    && s1 == '-' && s2 == '-') {
+                StringBuffer ret = new StringBuffer(10);
+                ret.insert(0, d1).insert(1, d2).insert(2, '/').insert(3, m1).insert(4, m2).insert(5, '/').insert(6, y1)
+                        .insert(7, y2).insert(8, y3).insert(9, y4);
+
+                return ret.toString();
+            }
+        }
+
+        return "";
+    }
+    
+    
 }

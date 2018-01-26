@@ -393,8 +393,7 @@ public class ObligationsController {
     	
 		model.addAttribute("obligationId", obligations.getObligationId());
     	
-        model.addAttribute("obligation", obligations);
-      
+            
         //List of clients with status = C
         List<ClientDTO> allclients = clientService.getAllClients();
         model.addAttribute("allClients", allclients);
@@ -423,6 +422,35 @@ public class ObligationsController {
         model.addAttribute("obligationIssues", allSelectedIssues);
         
         obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
+        //change format of Dates to visualize dd/mm/yyyy
+        if (obligations.getFirstReporting() != null && obligations.getFirstReporting() != "") {
+        	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
+        }else {
+        	obligations.setFirstReporting(null);
+        }
+        if (obligations.getValidTo() != null && obligations.getValidTo() != "") {
+        	obligations.setValidTo(RODUtil.strDate(obligations.getValidTo()));
+        }else {
+        	obligations.setValidTo(null);
+        }
+        if (obligations.getNextDeadline2() != null && obligations.getNextDeadline2() != "") {
+        	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
+        }else {
+        	obligations.setNextDeadline2(null);
+        }
+        if (obligations.getNextReporting() != null && obligations.getNextReporting() != "") {
+        	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
+        }else {
+        	obligations.setNextReporting(null);
+        }
+        if (obligations.getValidSince() != null && obligations.getValidSince() != "") {
+        	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
+        }else {
+        	obligations.setValidSince(null);
+        }
+        
+        model.addAttribute("obligation", obligations);
+        
         model.addAttribute("id","edit");
         model.addAttribute("message", "data saved correctly");
         

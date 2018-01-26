@@ -8,447 +8,456 @@
 	<div th:replace="helpModal :: helpModalFragment"></div>
 	
 	<h1>Edit Reporting Obligation for</h1>
-	<form method="POST" th:action="@{'/obligations/' + ${id}}" th:object="${obligation}" name="f">
-	<span class="pagebanner">Identification</span>
-	<input type="hidden" name="id" th:value="${id}"/>
-	<input type="hidden" name="nextDeadline2" />
-	<input type="hidden" name="terminate" value="N"/>
-	<input type="hidden" name="sourceId" value="142"/>
-	<input type="hidden" name="obligationId" th:value="${obligationId}"/>
-	<table class="datatable results">
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="oblTitle">Title</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_TITLE')" title="Help on this field"></a></th>
-			<td>
-				<input type="text" class="smalltext inputwidth100" onchange="checkMdText(this); changed()" name="oblTitle" id="oblTitle" th:field="${obligation.oblTitle}"/>
-				<span id="oblTitleError" style="display:none">Field Mandatory!</span>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="description">Description</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_DESCRIPTION')" title="Help on this field"></a></th>
-			<td>
-				<textarea class="smalltext inputwidth100" onchange="checkMdText(this); changed()" name="description" id="description" th:field="*{description}"></textarea>
-				<span id="descError" style="display:none">Field Mandatory!</span>
-			</td>
-		</tr>
-	</table>
-	<br/>
-	<span class="pagebanner">Reporting dates</span>
-	<table class="datatable results">
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="firstReporting">Baseline reporting date</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_VALIDFROM')" title="Help on this field"></a></th>
-			<td  class="simple_attr_help">
-				<input type="text" class="smalltext" size="30" onchange="changedReporting()" name="firstReporting" id="firstReporting" th:field="*{firstReporting}"/> (dd/mm/yyyy)
-			</td>
+	<div class="panel-body">
+		<form method="POST" th:action="@{'/obligations/' + ${id}}" th:object="${obligation}" name="f" class="form-horizontal">
+		<span class="pagebanner">Identification</span>
+		<input type="hidden" name="id" th:value="${id}"/>
+		<input type="hidden" name="nextDeadline2" />
+		<input type="hidden" name="terminate" value="N"/>
+		<input type="hidden" name="sourceId" value="142"/>
+		<input type="hidden" name="obligationId" th:value="${obligationId}"/>
+				
+		<div class="datatable results">
 			
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="validTo">Valid to</label>
-				<a class="helpButton" onclick="helpFunction('HELP_RA_VALIDTO')" title="Help on this field"></a>
-			</th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext date" size="30" onchange="changedReporting()" name="validTo" id="validTo" th:field="*{validTo}"/> (dd/mm/yyyy)
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="report_freq_months">Reporting frequency in months</label>
-				<a class="helpButton" onclick="helpFunction('HELP_RA_REPORTINGFREQUENCYINMONTHS')" title="Help on this field"></a>
-			</th>
-			<td class="simple_attr_help">
-				<input type="text" class="date smalltext" size="30" onchange="changedReporting(); contReporting();" name="reportFreqMonths" th:field="*{reportFreqMonths}" id="report_freq_months"/> For one-time-only reporting, enter 0 and choose a reasonable Valid to
-				<br/>
-				<span id="freq_monthsError" style="display:none">Field Mandatory!</span>
-			</td>
-			
-		</tr>
-		<tr th:class="*{reportFreqMonths == null} ? 'displayYes' : 'displayNone'" id="contReporting">
-			<td scope="row"  class="scope-row simple_attr_title">&#160;</td>
-			<td class="simple_attr_help">
-				<input type="checkbox" name="continousReporting" onchange="contReportingChanged()" value="yes" checked="checked" id="continousReporting" th:field="*{continousReporting}"/> <label>continuous reporting</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="next_deadline">Next due date</label>
-				<a class="helpButton" onclick="helpFunction('HELP_RA_NEXTDUEDATE')" title="Help on this field"></a>
-			</th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext" size="30" id="next_deadline" onchange="changed()" name="nextDeadline"/> (calculated automatically)
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
+				<div class="form-group">
+					<div  class="col-lg-3 scope-row simple_attr_title">
+						<label for="oblTitle" class="control-label text-left">Title</label>
+					</div>
+					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_TITLE')" title="Help on this field"></a>
+					<div class="col-lg-8">
+						<input type="text" class="smalltext form-control" onchange="checkMdText(this); changed()" name="oblTitle" id="oblTitle" th:field="${obligation.oblTitle}"/>
+					</div>
+				 </div>
+				  
+				<div class="form-group">
+					<div class="col-xs-3 scope-row simple_attr_title" >
+						<label for="description" class="control-label text-left">Description</label>
+					</div>
+					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DESCRIPTION')" title="Help on this field"></a>
+					<div class="col-lg-8">
+						<textarea class="smalltext form-control" onchange="checkMdText(this); changed()" name="description" id="description" th:field="*{description}"></textarea>
+					</div>
+				</div>
+			</div>
+		
+		<br/>
+		<span class="pagebanner">Reporting dates</span>
+		<div class="datatable results">
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+						<label for="firstReporting" class="control-label text-left">Baseline reporting date</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VALIDFROM')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" size="30" onchange="changedReporting()" name="firstReporting" id="firstReporting" th:field="*{firstReporting}"/> (dd/mm/yyyy)
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="validTo" class="control-label text-left">Valid to</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VALIDTO')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext date form-control" size="30" onchange="changedReporting()" name="validTo" id="validTo" th:field="*{validTo}"/> (dd/mm/yyyy)
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="report_freq_months" class="control-label text-left">Reporting frequency in months</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGFREQUENCYINMONTHS')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text"  class="date smalltext form-control" size="30" onchange="changedReporting(); contReporting();" name="reportFreqMonths" th:field="*{reportFreqMonths}" id="report_freq_months"/> For one-time-only reporting, enter 0 and choose a reasonable Valid to
+				</div>
+				
+			</div>
+			<div th:class="*{reportFreqMonths == null} ? 'form-group displayYes' : 'form-group displayNone'" id="contReporting">
+				<div class="col-lg-4 scope-row simple_attr_title">&nbsp;</div>
+				<div class="col-lg-5 simple_attr_help">
+					<input type="checkbox" name="continousReporting" onchange="contReportingChanged()" value="yes" checked="checked" id="continousReporting" th:field="*{continousReporting}"/> <label>continuous reporting</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="next_deadline" class="control-label text-left">Next due date</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NEXTDUEDATE')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" size="30" id="next_deadline" onchange="changed()" name="nextDeadline"/> (calculated automatically)
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="advice-msg">
-	                <strong>IMPORTANT!</strong> Use the following field <strong>only</strong> if reporting dates (above fields) cannot be given in numerical date format but have to be given in text format (for example, 'ASAP').
-	            </div>
-            </td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="nextReporting">Reporting date</label>
-				<a class="helpButton" onclick="helpFunction('HELP_RA_REPORTINGDATETEXTFORMAT')" title="Help on this field"></a>
-			</th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext" size="30" name="nextReporting" id="nextReporting" onchange="changed()" th:field="*{nextReporting}"/>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label  for="dateComments">Date comments</label>
-				<a class="helpButton" onclick="helpFunction('HELP_RA_DATECOMMENTS')" title="Help on this field"></a>
-			</th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" onchange="changed()" name="dateComments" id="dateComments" th:field="*{dateComments}"/>
-			</td>
-		</tr>
-	</table>
-	<br/>
-	<span class="pagebanner">Clients</span>
-	<table class="datatable results">
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label  for="report_to">Report to</label><a class="helpButton" onclick="helpFunction('HELP_RO_REPORTTO')" title="Help on this field"></a></th>
-			<td>
-				<select th:field="*{clientId}" th:class="selectObligations" id="report_to" onchange="addClientValuesSel(document.f.report_to, document.f.selectedClients.options)" name="report_to">
-					<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
-            	</select>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label  for="client_list">Other clients using this reporting</label><a class="helpButton" onclick="helpFunction('HELP_RO_OTHERCLIENTS')" title="Help on this field"></a></th>
-          	<td></td>
-        </tr>
-		<tr>
-			<td colspan="2">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="width:47%; border:none">
-							<select name="selClients" multiple="multiple" id="client_list" style="width:100%" > 
-			    				<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.name}"></option>
-						  	</select>
-						</td>
-						<td style="width:6%; border:none">
-							<div class="arrow_btnbox">
-								<input value="-&gt;" onclick="addClientValues(document.f.selClients.options, document.f.selectedClients.options)" class="arrow_btn add" type="button" />
-							</div>
-							<div class="arrow_btnbox">
-								<input value="&lt;-" onclick="delValues(document.f.selectedClients.options)" class="arrow_btn delete" type="button" />
-							</div>
-						</td>
-						<td style="width:46%; border:none">
-							<select th:if="*{selectedClients} != null" name="selectedClients" multiple="multiple" id="selectedClients" style="width:100%" th:field="*{selectedClients}">
-								<option th:each="clientSelected : ${obligationClients}" th:value="${clientSelected.clientId}" th:text="${clientSelected.name}"></option>
-							</select>
-							<select th:unless="*{selectedClients} != null" name="selectedClients" multiple="multiple" id="selectedClients" style="width:100%" th:field="*{selectedClients}"></select>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	<br/>
-	<span class="pagebanner">How to report</span>
-	<table class="datatable results">
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="formatName">Name of reporting guidelines</label><a class="helpButton" onclick="helpFunction('HELP_RA_NAMEOFREPORTINGGUIDELINES')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="formatName" id="formatName" onchange="changed()" th:field="*{formatName}"/>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="reportFormatUrl">URL of reporting guidelines</label><a class="helpButton" onclick="helpFunction('HELP_RA_URLTOREPORTINGGUIDELINES')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="reportFormatUrl" id="reportFormatUrl" onchange="chkUrl(this); changed()" th:field="*{reportFormatUrl}"/>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="validSince">Format valid since</label><a class="helpButton" onclick="helpFunction('HELP_RA_FORMATVALIDSINCE')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext date" size="30" name="validSince" id="validSince" onchange="checkDateSimple(this); changed()" th:field="*{validSince}"/>  (dd/mm/yyyy)
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="reportingFormat">Reporting guidelines -Extra info</label><a class="helpButton" onclick="helpFunction('HELP_RA_REPORTINGGUIDELINES')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<textarea class="smalltext inputwidth100" name="reportingFormat" id="reportingFormat" onchange="changed()" th:field="*{reportingFormat}"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="locationInfo">Name of repository</label><a class="helpButton" onclick="helpFunction('HELP_RA_LOCATIONINFO')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="locationInfo" id="locationInfo" onchange="changed()" th:field="*{locationInfo}" />
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="locationPtr">URL to repository</label><a class="helpButton" onclick="helpFunction('HELP_RA_LOCATIONPTR')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="locationPtr" id="locationPtr" onchange="chkUrl(this); changed()" th:field="*{locationPtr}" />
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="dataUsedFor">Data used for (name)</label><a class="helpButton" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="dataUsedFor" id="dataUsedFor" onchange="changed()" th:field="*{dataUsedFor}" />
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label  for="dataUsedForUrl">Data used for (URL)</label><a class="helpButton" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="dataUsedForUrl" id="dataUsedForUrl" onchange="chkUrl(this); changed()" th:field="*{dataUsedForUrl}" />
-			</td>
-		</tr>
-	</table>
-	<br/>
-	<span class="pagebanner">Data providers</span>
-	<table class="datatable results">
-		<tr>
-			<th scope="row" colspan="2" class="scope-row simple_attr_title"><label  for="forCountries">Countries reporting formally</label><a class="helpButton" onclick="helpFunction('HELP_RA_SPATIALCOVERAGE')" title="Help on this field"></a></th>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="width:47%; border:none">
-							<script type="text/javascript">
-								clist.push("0:All EU Countries:C:");
-							</script>
-							<script th:inline="javascript" th:each="item : ${allcountries}" th:with="dataSpatial = ${item.spatialId} + ':' + ${item.name} + ':' + ${item.type} + ':' + ${item.twoLetter}">
-								//var availableTypes = /*[[${item.spatialId}]]*/
-								 var myObjs = [[${dataSpatial}]];
-                  				clist.push(myObjs);
-							</script>
-							<select name="forCountries" multiple="multiple" id="forCountries" style="width:100%"> 
-								<option value="0" label="All EU countries"></option>
-    							<option  th:each="country : ${allcountries}" th:value="${country.spatialId}" th:text="${obligation.truncateText(country.name)}"></option>
-			  				</select>
-			  				<script type="text/javascript">
-								fillclist('C',document.f.forCountries);
-							</script>
-						</td>
-						<td style="width:6%; border:none">
-							<div class="arrow_btnbox">
-                     			<input value="-&gt;" onclick="addValues(document.f.forCountries.options,document.f.selectedFormalCountries.options,null,clist,document.f.selectedVoluntaryCountries.options)" class="arrow_btn add" type="button" />
-                   			</div>
-                   			<div class="arrow_btnbox">
-                     			<input value="&lt;-" onclick="delValues(document.f.selectedFormalCountries.options)" class="arrow_btn delete" type="button" />
-                   			</div>
-						</td>
-						<td style="width:46%; border:none">
-							<select th:if="*{selectedFormalCountries} != null" name="selectedFormalCountries" multiple="multiple" id="selectedFormalCountries" style="width:100%" th:field="*{selectedFormalCountries}">
-								<option th:each="countrySelected : ${obligationCountries}" th:value="${countrySelected.spatialId}" th:text="${countrySelected.name}"></option>
-							</select>
-							<select th:unless="*{selectedFormalCountries} != null" name="selectedFormalCountries" multiple="multiple" id="selectedFormalCountries" style="width:100%" th:field="*{selectedFormalCountries}"></select>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label  for="volCountries">Countries reporting voluntary</label><a class="helpButton" onclick="helpFunction('HELP_RA_VOLUNTARYCOUNTRIES')" title="Help on this field"></a></th>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="width:47%; border:none">
-							<select name="volCountries" multiple="multiple" id="volCountries" style="width:100%"> 
-								<option value="0" label="All EU countries"></option>
-    							<option th:each="country : ${allcountries}" th:value="${country.spatialId}" th:text="${obligation.truncateText(country.name)}"></option>
-			  				</select>
-						</td>
-						<td style="width:6%; border:none">
-                       		<div class="arrow_btnbox">
-                         		<input value="-&gt;" onclick="addFullValues(document.f.volCountries.options,document.f.selectedVoluntaryCountries.options,clist,document.f.selectedFormalCountries.options)" class="arrow_btn add" type="button" />
-                       		</div>
-                       		<div class="arrow_btnbox">
-                         		<input value="&lt;-" onclick="delValues(document.f.selectedVoluntaryCountries.options)" class="arrow_btn delete" type="button" />
-                       		</div>
-                  		</td>
-                  		<td style="width:46%; border:none">
-							<select th:if="*{selectedVoluntaryCountries} != null" name="selectedVoluntaryCountries" multiple="multiple" id="selectedVoluntaryCountries" style="width:100%" th:field="*{selectedVoluntaryCountries}">
-								<option th:each="countryVoluntarySelected : ${obligationVoluntaryCountries}" th:value="${countryVoluntarySelected.spatialId}" th:text="${countryVoluntarySelected.name}"></option>
-							</select>
-							<select th:unless="*{selectedVoluntaryCountries} != null" name="selectedVoluntaryCountries" multiple="multiple" id="selectedVoluntaryCountries" style="width:100%" th:field="*{selectedVoluntaryCountries}"></select>
-						</td>
-                  		
-					</tr>
-					
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label  for="coordinatorRole">National Reporting coordinators</label><a class="helpButton" onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="border:none">
-							<label for="coordinatorRole">Role</label> <input type="text" class="smalltext" name="coordinatorRole" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
-							<input type="checkbox" name="coordinatorRoleSuf" value="1" checked="checked" id="coordinatorRoleSuf" th:field="*{coordinatorRoleSuf}"/> <label>do not append country suffix</label>
-						</td>
-					</tr>
-					<tr style="border:none">
-						<td style="border:none">
-							<span style="text-align: center; font-style: italic">
-			                      		- OR -
-			                </span>
-						</td>
-					</tr>
-					<tr style="border:none">
-						<td style="border:none">
-							<label for="coordinator">Name</label> <input type="text" class="smalltext" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
-							<input type="text" name="coordinatorUrl" onchange="chkUrl(this); changed()" id="coordinatorUrl" th:field="*{coordinatorUrl}"/>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label for="responsibleRole">National reporting contacts</label><a class="helpButton" onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="border:none">
-							<label for="responsibleRole">Role</label> <input type="text" class="smalltext" name="responsibleRole" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
-							<input type="checkbox" name="responsibleRoleSuf" value="1" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/> <label for="responsibleRoleSuf">do not append country suffix</label>
-						</td>
-					</tr>
-					<tr style="border:none">
-						<td style="border:none">
-							<span style="text-align: center; font-style: italic">
-			                      		- OR -
-			                </span>
-						</td>
-					</tr>
-					<tr style="border:none">
-						<td style="border:none">
-							<label for="nationalContact">Name</label> <input type="text" class="smalltext" name="nationalContact" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
-							<input type="text" name="nationalContactUrl" onchange="chkUrl(this); changed()" id="nationalContactUrl" th:field="*{nationalContactUrl}"/> 
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	<br/>
-	<span class="pagebanner">Data use</span>
-	<table class="datatable results">
-		<tr>
-			<th scope="row" class="scope-row simple_attr_title"><label for="selIssues">Environmental issues</label><a class="helpButton" onclick="helpFunction('HELP_RA_ENVIRONMENTALISSUES')" title="Help on this field"></a></th>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<table style="width:100%; border:none; border-collapse: initial">
-					<tr style="border:none">
-						<td style="width:47%; border:none">
-							<select name="selIssues" multiple="multiple" id="selIssues" style="width:100%"> 
-    							<option th:each="issue : ${issues}" th:value="${issue.issueId}" th:text="${issue.issueName}"></option>
-			  				</select>
-			  			</td>
-						<td style="width:6%; border:none">
-							<div class="arrow_btnbox">
-                 				<input value="-&gt;" onclick="addValuesEnv(document.f.selIssues.options, document.f.selectedIssues.options, null)" class="arrow_btn add" type="button" />
-               				</div>
-               				<div class="arrow_btnbox">
-                 				<input value="&lt;-" onclick="delValues(document.f.selectedIssues.options)" class="arrow_btn delete" type="button" />
-               				</div>
-         				</td>
-                  		<td style="width:46%; border:none">
-                  			<select th:if="*{selectedIssues} != null" name="selectedIssues" multiple="multiple" id="selectedIssues" style="width:100%" th:field="*{selectedIssues}">
-								<option th:each="issuesSelected : ${obligationIssues}" th:value="${issuesSelected.issueId}" th:text="${issuesSelected.issueName}"></option>
-							</select>						
-							<select th:unless="*{selectedIssues} != null" name="selectedIssues" multiple="multiple" id="selectedIssues" style="width:100%" th:field="*{selectedIssues}"></select>
-						</td>
-					</tr>	
-				</table>
-			</td>
-		</tr>
-		<!--  tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label for="parameters">Parameters</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_PARAMETERS')" title="Help on this field"></a></th>
-			<td><textarea class="smalltext inputwidth100" onchange="changed()" name="parameters" id="parameters" th:field="*{parameters}"></textarea></td>
-		</tr -->
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label>This obligation is</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_FLAGS')" title="Help on this field"></a></th>
-			<td>
-				<input type="checkbox" name="eeaPrimary" checked="checked" value="1" id="eeaPrimary" th:field="*{eeaPrimary}"/> <label for="eeaPrimary">Eionet core data flow</label>
-				<input type="checkbox" name="eeaCore" value="1" checked="checked" id="eeaCore" th:field="*{eeaCore}"/> <label for="eeaCore">used for EEA Core set of indicators</label>
-				<input type="checkbox" name="flagged" value="1" checked="checked" id="flagged" th:field="*{flagged}"/> <label for="flagged">Delivery process is managed by EEA</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label for="comment">General comments</label>
-			<a class="helpButton" onclick="helpFunction('HELP_RA_COMMENT')" title="Help on this field"></a></th>
-			<td><textarea class="smalltext inputwidth100" onchange="changed()" name="comment" id="comment" th:field="*{comment}"></textarea></td>
-		</tr>
-		<tr>
-			<th scope="row"  class="scope-row simple_attr_title"><label for="authority">Authority giving rise to the obligation</label><a class="helpButton" onclick="helpFunction('HELP_RA_AUTHORITY')" title="Help on this field"></a></th>
-			<td class="simple_attr_help">
-				<input type="text" class="smalltext inputwidth100" name="authority" id="authority" onchange="changed()" th:field="*{authority}" />
-			</td>
-		</tr>
-	</table>
-	<script type="text/javascript">
-		function selectAll(){
-			var errors = false;
+					<strong>IMPORTANT!</strong> Use the following field <strong>only</strong> if reporting dates (above fields) cannot be given in numerical date format but have to be given in text format (for example, 'ASAP').
+				</div>
+	        </div>
 			
-			if (document.getElementById("oblTitle").value == ''){
-				$('#oblTitleError').show();
-				errors = true
-			}else {
-				$('#oblTitleError').hide();
-			}
-			if (document.getElementById("description").value == ''){
-				$('#descError').show();
-				errors = true
-			}else{
-				$('#descError').hide();
-			}
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="nextReporting" class="control-label text-left">Reporting date</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGDATETEXTFORMAT')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text"class="smalltext form-control" size="30" name="nextReporting" id="nextReporting" onchange="changed()" th:field="*{nextReporting}"/>  (dd/mm/yyyy)
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="dateComments">Date comments</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATECOMMENTS')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext  form-control" onchange="changed()" name="dateComments" id="dateComments" th:field="*{dateComments}"/>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<span class="pagebanner">Clients</span>
+		<div class="datatable results">
+			<div class="form-group">
+					<div class="col-lg-3 scope-row simple_attr_title">
+						<label for="report_to" class="control-label text-left">Report to</label>
+					</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RO_REPORTTO')" title="Help on this field"></a>
+				<div class="col-lg-8">
+					<select th:field="*{clientId}" class="selectObligations form-control" id="report_to" onchange="addClientValuesSel(document.f.report_to, document.f.selectedClients.options)" name="report_to">
+						<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+	            	</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="client_list" class="control-label text-left">Other clients using this reporting</label>
+				</div>
+				<a class="helpButton" onclick="helpFunction('HELP_RO_OTHERCLIENTS')" title="Help on this field"></a>
+	        </div>
+			<div class="form-group">
+				<div class="col-lg-55">
+					<select name="selClients" multiple="multiple" id="client_list" class="form-control" > 
+				    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.name}"></option>
+					</select>
+				</div>
+				<div class="col-lg-1">
+					<div class="arrow_btnbox">
+						<input value="-&gt;" onclick="addClientValues(document.f.selClients.options, document.f.selectedClients.options)" class="arrow_btn add" type="button" />
+					</div>
+					<div class="arrow_btnbox">
+						<input value="&lt;-" onclick="delValues(document.f.selectedClients.options)" class="arrow_btn delete" type="button" />
+					</div>
+				</div>
+				<div class="col-lg-55">
+					<select th:if="*{selectedClients} != null" name="selectedClients" multiple="multiple" id="selectedClients" class=" form-control" th:field="*{selectedClients}">
+						<option th:each="clientSelected : ${obligationClients}" th:value="${clientSelected.clientId}" th:text="${clientSelected.name}"></option>
+					</select>
+					<select th:unless="*{selectedClients} != null" name="selectedClients" multiple="multiple" id="selectedClients" style="width:100%" th:field="*{selectedClients}" class=" form-control"></select>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<span class="pagebanner">How to report</span>
+		<div class="datatable results">
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="formatName" class="control-label text-left">Name of reporting guidelines</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NAMEOFREPORTINGGUIDELINES')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="formatName" id="formatName" onchange="changed()" th:field="*{formatName}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label  for="reportFormatUrl">URL of reporting guidelines</label></div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_URLTOREPORTINGGUIDELINES')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="reportFormatUrl" id="reportFormatUrl" onchange="chkUrl(this); changed()" th:field="*{reportFormatUrl}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="validSince" class="control-label text-left">Format valid since</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_FORMATVALIDSINCE')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext date form-control" size="30" name="validSince" id="validSince" onchange="checkDateSimple(this); changed()" th:field="*{validSince}"/>  (dd/mm/yyyy)
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="reportingFormat" class="control-label text-left">Reporting guidelines -Extra info</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGGUIDELINES')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<textarea class="smalltext form-control" name="reportingFormat" id="reportingFormat" onchange="changed()" th:field="*{reportingFormat}"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="locationInfo" class="control-label text-left">Name of repository</label>
+				</div>
+				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONINFO')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="locationInfo" id="locationInfo" onchange="changed()" th:field="*{locationInfo}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label  for="locationPtr">URL to repository</label></div>
+				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONPTR')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="locationPtr" id="locationPtr" onchange="chkUrl(this); changed()" th:field="*{locationPtr}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedFor">Data used for (name)</label></div>
+				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="dataUsedFor" id="dataUsedFor" onchange="changed()" th:field="*{dataUsedFor}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedForUrl">Data used for (URL)</label></div>
+				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="dataUsedForUrl" id="dataUsedForUrl" onchange="chkUrl(this); changed()" th:field="*{dataUsedForUrl}" />
+				</div>
+			</div>
+		</div>
+		<br/>
+		<span class="pagebanner">Data providers</span>
+		<div class="datatable results">
+			<div class="form-group">
+				<div class="col-lg-3 simple_attr_title">
+					<label for="forCountries" class="control-label text-left">Countries reporting formally</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_SPATIALCOVERAGE')" title="Help on this field"></a>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-55">
+					<script type="text/javascript">
+						clist.push("0:All EU Countries:C:");
+					</script>
+					<script th:inline="javascript" th:each="item : ${allcountries}" th:with="dataSpatial = ${item.spatialId} + ':' + ${item.name} + ':' + ${item.type} + ':' + ${item.twoLetter}">
+						//var availableTypes = /*[[${item.spatialId}]]*/
+						 var myObjs = [[${dataSpatial}]];
+						clist.push(myObjs);
+					</script>
+					<select name="forCountries" multiple="multiple" id="forCountries" class="form-control" > 
+						<option value="0" label="All EU countries"></option>
+						<option  th:each="country : ${allcountries}" th:value="${country.spatialId}" th:text="${obligation.truncateText(country.name)}"></option>
+					</select>
+					<script type="text/javascript">
+						fillclist('C',document.f.forCountries);
+					</script>
+				</div>
+				<div class="col-lg-1">
+					<div class="arrow_btnbox">
+						<input value="-&gt;" onclick="addValues(document.f.forCountries.options,document.f.selectedFormalCountries.options,null,clist,document.f.selectedVoluntaryCountries.options)" class="arrow_btn add" type="button">
+					</div>
+					<div class="arrow_btnbox">
+						<input value="&lt;-" onclick="delValues(document.f.selectedFormalCountries.options)" class="arrow_btn delete" type="button">
+					</div>
+				</div>
+				<div class="col-lg-55">
+					<select th:if="*{selectedFormalCountries} != null" name="selectedFormalCountries" multiple="multiple" id="selectedFormalCountries" style="width:100%" th:field="*{selectedFormalCountries}" class="form-control">
+						<option th:each="countrySelected : ${obligationCountries}" th:value="${countrySelected.spatialId}" th:text="${countrySelected.name}"></option>
+					</select>
+					<select th:unless="*{selectedFormalCountries} != null" name="selectedFormalCountries" multiple="multiple" id="selectedFormalCountries" style="width:100%" th:field="*{selectedFormalCountries}" class="form-control"></select>
+				</div>
+			</div>
 			
-			if (document.getElementById("report_freq_months").value == ''){
-				$('#freq_monthsError').show();
-				errors = true
-			}else{
-				$('#freq_monthsError').hide();
-			}
-						
-			if (!errors){
-				if (addClientValuesSel(document.f.report_to, document.f.selectedClients.options)){
-					selValues(document.f.selectedClients.options);
-					selValues(document.f.selectedFormalCountries.options);
-					selValues(document.f.selectedVoluntaryCountries.options);
-					selValues(document.f.selectedIssues.options);
-					isChanged = false;
-					document.forms['f'].submit();
-				}
-			}
-		
-		}
-		
-		function exit(){
-			var loc = window.location;
-		    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-		    var Urlfinal = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
-		    location.href = Urlfinal;
-		}
-		
-	</script>
-	<table>
-		<tr>
-			<td colspan="2">
-				<input th:if="${id == 'add'}" type="button" name="add" id="add" value="Add" class="btn" onclick="javascript:selectAll()"/>
-				<input th:unless="${id == 'add'}" type="button" name="edit" id="edit" value="Save changes" class="btn" onclick="javascript:selectAll()"/>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="volCountries" class="control-label text-left">Countries reporting voluntary</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VOLUNTARYCOUNTRIES')" title="Help on this field"></a>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-55">
+					<select name="volCountries" multiple="multiple" id="volCountries" class="form-control"> 
+						<option value="0" label="All EU countries"></option>
+						<option th:each="country : ${allcountries}" th:value="${country.spatialId}" th:text="${obligation.truncateText(country.name)}"></option>
+					</select>
+				</div>
+				<div class="col-lg-1">
+					<div class="arrow_btnbox">
+						<input value="-&gt;" onclick="addFullValues(document.f.volCountries.options,document.f.selectedVoluntaryCountries.options,clist,document.f.selectedFormalCountries.options)" class="arrow_btn add" type="button">
+					</div>
+					<div class="arrow_btnbox">
+						<input value="&lt;-" onclick="delValues(document.f.selectedVoluntaryCountries.options)" class="arrow_btn delete" type="button">
+					</div>
+				</div>
+	            <div class="col-lg-55">
+					<select th:if="*{selectedVoluntaryCountries} != null" name="selectedVoluntaryCountries" multiple="multiple" id="selectedVoluntaryCountries" style="width:100%" th:field="*{selectedVoluntaryCountries}" class="form-control">
+						<option th:each="countryVoluntarySelected : ${obligationVoluntaryCountries}" th:value="${countryVoluntarySelected.spatialId}" th:text="${countryVoluntarySelected.name}"></option>
+					</select>
+					<select th:unless="*{selectedVoluntaryCountries} != null" name="selectedVoluntaryCountries" multiple="multiple" id="selectedVoluntaryCountries" style="width:100%" th:field="*{selectedVoluntaryCountries}" class="form-control"></select>
+				</div>
+			</div>
 				
-				<input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>  
-				
-			</td>
-		</tr>
-	</table>	
-	</form>
-	
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="coordinatorRole" class="control-label text-left">National Reporting coordinators</label>
+				</div>
+				<a class="helpButton col-lg-1"  onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<div>
+						<label for="coordinatorRole" class="control-label">Role</label>
+						<input type="text" class="smalltext" name="coordinatorRole" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
+						<input type="checkbox" name="coordinatorRoleSuf" value="1" checked="checked" id="coordinatorRoleSuf" th:field="*{coordinatorRoleSuf}"/> 
+						<label class="control-label">do not append country suffix</label>
+					</div>
+					<div>
+						<span class="or">
+							- OR -
+						</span>
+					</div>
+					<div>
+						<label for="coordinator" class="control-label">Name</label>
+						<label for="coordinator">Name</label> <input type="text" class="smalltext" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
+						<input type="text" name="coordinatorUrl" onchange="chkUrl(this); changed()" id="coordinatorUrl" th:field="*{coordinatorUrl}"/>
+					</div>
+				</div>
+			</div>
 
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="responsibleRole" class="control-label text-left">National reporting contacts</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<div>
+						<label for="responsibleRole" class="control-label">Role</label>
+						<input type="text" class="smalltext" name="responsibleRole" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
+						<input type="checkbox" name="responsibleRoleSuf" value="1" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
+						<label class="control-label" for="responsibleRoleSuf">do not append country suffix</label>
+					</div>
+					<div>
+						<span class="or">
+							- OR -
+						</span>
+					</div>
+					<div>
+						<label for="nationalContact" class="control-label">Name</label>
+						<input type="text" class="smalltext" name="nationalContact" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
+						<input type="text" name="nationalContactUrl" onchange="chkUrl(this); changed()" id="nationalContactUrl" th:field="*{nationalContactUrl}"/> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<span class="pagebanner">Data use</span>
+		<div class="datatable results">
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="selIssues" class="control-label text-left">Environmental issues</label>
+				</div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_ENVIRONMENTALISSUES')" title="Help on this field"></a>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-55">
+					<select name="selIssues" multiple="multiple" id="selIssues" style="width:100%"> 
+						<option th:each="issue : ${issues}" th:value="${issue.issueId}" th:text="${issue.issueName}" class="form-control"></option>
+					</select>
+				</div>
+				<div class="col-lg-1">
+					<div class="arrow_btnbox">
+						<input value="-&gt;" onclick="addValuesEnv(document.f.selIssues.options, document.f.selectedIssues.options, null)" class="arrow_btn add" type="button" />
+					</div>
+					<div class="arrow_btnbox">
+						<input value="&lt;-" onclick="delValues(document.f.selectedIssues.options)" class="arrow_btn delete" type="button" />
+					</div>
+				</div>
+				<div class="col-lg-55">
+					<select th:if="*{selectedIssues} != null" name="selectedIssues" multiple="multiple" id="selectedIssues" style="width:100%" th:field="*{selectedIssues}" class="form-control">
+						<option th:each="issuesSelected : ${obligationIssues}" th:value="${issuesSelected.issueId}" th:text="${issuesSelected.issueName}"></option>
+					</select>						
+					<select th:unless="*{selectedIssues} != null" name="selectedIssues" multiple="multiple" id="selectedIssues" style="width:100%" th:field="*{selectedIssues}" class="form-control"></select>
+				</div>
+			</div>
+			<!-- 
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label for="parameters" class="control-label text-left">Parameters</label></div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_PARAMETERS')" title="Help on this field"></a></th>
+				<div class="col-lg-8>
+					<textarea class="smalltext inputwidth100" onchange="changed()" name="parameters" id="parameters" th:field="*{parameters}"></textarea>
+				</div>
+			</div>
+			 -->
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label class="control-label">This obligation is</label></div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_FLAGS')" title="Help on this field"></a>
+				<div class="col-lg-8">
+					<input type="checkbox" name="eeaPrimary" checked="checked" value="1" id="eeaPrimary" th:field="*{eeaPrimary}"/> <label for="eeaPrimary"  class="control-label">Eionet core data flow</label><br/>
+					<input type="checkbox" name="eeaCore" value="1" checked="checked" id="eeaCore" th:field="*{eeaCore}"/> <label for="eeaCore"  class="control-label">used for EEA Core set of indicators</label><br/>
+					<input type="checkbox" name="flagged" value="1" checked="checked" id="flagged" th:field="*{flagged}"/> <label for="flagged"  class="control-label">Delivery process is managed by EEA</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label for="comment">General comments</label></div>
+				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_COMMENT')" title="Help on this field"></a>
+				<div class="col-lg-8"><textarea class="smalltext form-control"  onchange="changed()" name="comment" id="comment" th:field="*{comment}"></textarea></div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title"><label for="authority">Authority giving rise to the obligation</label></div>
+				<a class="helpButton col-lg-1"onclick="helpFunction('HELP_RA_AUTHORITY')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<input type="text" class="smalltext form-control" name="authority" id="authority" onchange="changed()" th:field="*{authority}" />
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function selectAll(){
+				var errors = false;
+				
+				if (document.getElementById("oblTitle").value == ''){
+					checkMdText(document.getElementById("oblTitle"));
+					errors = true
+				}else {
+					$('#oblTitleError').hide();
+				}
+				if (document.getElementById("description").value == ''){
+					checkMdText(document.getElementById("description"));
+					errors = true
+				}else{
+					$('#descError').hide();
+				}
+				
+				if (document.getElementById("report_freq_months").value == ''){
+					checkMdText(document.getElementById("report_freq_months"));
+					errors = true
+				}else{
+					$('#freq_monthsError').hide();
+				}
+							
+				if (!errors){
+					if (addClientValuesSel(document.f.report_to, document.f.selectedClients.options)){
+						selValues(document.f.selectedClients.options);
+						selValues(document.f.selectedFormalCountries.options);
+						selValues(document.f.selectedVoluntaryCountries.options);
+						selValues(document.f.selectedIssues.options);
+						isChanged = false;
+						document.forms['f'].submit();
+					}
+				}
+			
+			}
+			
+			function exit(){
+				var loc = window.location;
+			    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+			    var Urlfinal = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+			    location.href = Urlfinal;
+			}
+			
+		</script>
+		<div>
+			<input th:if="${id == 'add'}" type="button" name="add" id="add" value="Add" class="btn btn-primary" onclick="javascript:selectAll()"/>
+			<input th:unless="${id == 'add'}" type="button" name="edit" id="edit" value="Save changes" class="btn btn-primary" onclick="javascript:selectAll()"/>
+			<input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>  
+					
+		</div>
+		</form>
+	</div>
 	</div>
     <div th:replace="layout :: footerFragment"></div>
 </div>

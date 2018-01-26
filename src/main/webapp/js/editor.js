@@ -712,9 +712,9 @@ function chkUrl(fld) {
 function contReporting() {
 	var val = document.getElementById("report_freq_months").value;
 	if (val == "" || val == " ") {
-		document.getElementById("contReporting").className = 'displayYes';
+		document.getElementById("contReporting").className = 'form-group displayYes';
 	} else {
-		document.getElementById("contReporting").className = 'displayNone';
+		document.getElementById("contReporting").className = 'form-group displayNone';
 	}
 }
 
