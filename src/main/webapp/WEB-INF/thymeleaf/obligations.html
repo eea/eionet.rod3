@@ -20,7 +20,8 @@
       
      <div class="title">
      <h1>Reporting obligations</h1>
-      	<a sec:authorize="hasRole('EDITOR')" class="new_link">
+      	<!--  a sec:authorize="hasRole('EDITOR')" class="new_link" -->
+      	<a class="new_link" th:href="@{'/obligations/add'}">
       		+ New obligation
     	</a>
      </div>

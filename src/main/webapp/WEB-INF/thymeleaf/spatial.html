@@ -9,66 +9,32 @@
      <h1>Countries and territories</h1>
      <p>This part of ROD helps administrations co-ordinate and manage their international reporting obligations. It provides information about when to report, who is responsible for reporting, and to which organisation the data set should be delivered. It is geared towards EEA member countries. You can browse deliveries by choosing a locality below or query the contents of ROD and CDR by using the advanced search.</p>
                
-     <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+     	<div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
         <div th:if="${#lists.isEmpty(allMember)}">There are no results.</div>
+        
         <div th:if="${not #lists.isEmpty(allMember)}">
 			<h3>EEA member countries</h3>
-	        <table id="tabCountries">
-	        
-	        <tr th:with="numEnd = ${allMemberColumn1 + allMemberColumn2}">
-	         	<td>
-	         	<ul class="menu">
-		        	<li th:each="j: ${#numbers.sequence(0, allMemberColumn1 -1)}" class="disabled">
-		  				<a th:text="${allMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allMember.get(j).spatialId}+'/deadlines'}"></a>
+	        <div id="tabCountries">
+	         	<ul class="menu" >
+		        	<li class="disabled" th:each="allMenberList : ${allMember}">
+		  				<a th:text="${allMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allMenberList.spatialId}+'/deadlines'}"></a>
 		  			</li>
 		  		</ul>
-				</td>
-				<td th:if="${allMemberColumn2 != 0}">
-				<ul class="menu">
-		        	<li th:each="j: ${#numbers.sequence(allMemberColumn1, numEnd -1)}" class="disabled">
-		  				<a th:text="${allMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allMember.get(j).spatialId}+'/deadlines'}"></a>
-		  			</li>
-		  		</ul>
-				</td>
-				<td th:if="${allMemberColumn3 != 0}" >
-				<ul th:with="numEnd1 = ${numEnd + allMemberColumn3}" class="menu">
-		        	<li th:each="j: ${#numbers.sequence(numEnd, numEnd1 -1)}" class="disabled">
-		  				<a th:text="${allMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allMember.get(j).spatialId}+'/deadlines'}"></a>
-		  			</li>
-		  		</ul>
-				</td>
-			</tr>
-	        </table>
-        </div>
-        <div th:if="${#lists.isEmpty(allNoMember)}">Table is empty.</div>
+			</div>
+	    </div>
+        
+        <div th:if="${#lists.isEmpty(allNoMember)}">There are no results.</div>
         <div th:if="${not #lists.isEmpty(allNoMember)}">
-       	<h3>Other countries and territories</h3>
-        <table  id="tabCountries">
-        <tr th:with="numEnd2 = ${allNoMemberColumn1 + allNoMemberColumn2}">
-         	<td>
-         	<ul class="menu">
-	        	<li th:each="j: ${#numbers.sequence(0,  allNoMemberColumn1 -1)}" class="disabled">
-	  				<a th:text="${allNoMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allNoMember.get(j).spatialId}+'/deadlines'}"></a>
-	  			</li>
-	  		</ul>
-			</td>
-			<td th:if="${allNoMemberColumn2 != 0}">
-			<ul class="menu">
-	        	<li th:each="j: ${#numbers.sequence(allNoMemberColumn1, numEnd2 -1)}" class="disabled">
-	  				<a th:text="${allNoMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allNoMember.get(j).spatialId}+'/deadlines'}"></a>
-	  			</li>
-	  		</ul>
-			</td>
-			<td th:if="${allNoMemberColumn3 != 0}" >
-			<ul  th:with="numEnd3 = ${numEnd2 + allNoMemberColumn3}" class="menu">
-	        	<li th:each="j: ${#numbers.sequence(numEnd2,   numEnd3 -1)}"  class="disabled">
-	  				<a th:text="${allNoMember.get(j).name}" class="link-folder" th:href="@{'/spatial/'+${allNoMember.get(j).spatialId}+'/deadlines'}"></a>
-	  			</li>
-	  		</ul>
-			</td>
-		</tr>
-        </table>
-      </div>
+			<h3>EEA member countries</h3>
+	        <div id="tabCountries">
+	         	<ul class="menu" >
+		        	<li class="disabled" th:each="allNoMenberList : ${allNoMember}">
+		  				<a th:text="${allNoMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allNoMenberList.spatialId}+'/deadlines'}"></a>
+		  			</li>
+		  		</ul>
+			</div>
+	    </div>
+
       
      </div>
       

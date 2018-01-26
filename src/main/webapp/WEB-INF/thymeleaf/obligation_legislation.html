@@ -17,18 +17,19 @@
 	    <br/>
 	    <br/>
 	    <span class="pagebanner">Legal framework</span>
-	    <table class="datatable results">
-			<tr class="odd">
-				<td>Legislative instrument title</td>
-				<td>
+	    <div class="form-horizontal">
+			<div class="datatable results">
+				<div class="form-group odd">
+				<div class="col-xs-4">Legislative instrument title</div>
+				
+				<div class="col-xs-8">
 					<a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
 					<span th:if="${obligation.authority != null}" th:text="' ' + ${obligation.authority}"></span>
-				</td>
-			</tr>
-			<tr class="even">
-				
-				<td>Sibling reporting obligations</td>
-				<td>
+				</div>
+			</div>
+			<div class="form-group even">
+				<div class="col-xs-4">Sibling reporting obligations</div>
+				<div class="col-xs-8">
 					<ul th:if="${not #lists.isEmpty(siblingObligations)}" class="menu">
 						<li th:each="siblingObligation : ${siblingObligations}">
 							<a th:href="@{'/obligations/'+${siblingObligation.siblingOblId}}" th:text="${siblingObligation.siblingTitle}"></a>
@@ -36,30 +37,30 @@
 							<span th:if="${siblingObligation.authority != null}" th:text="${siblingObligation.authority}"></span>
 						</li>
 					</ul>
-				</td>
+				</div>
 				
-			</tr>
-			<tr class="odd">
-				<td>Participating countries/territories</td>
-				<td th:if="${not #lists.isEmpty(ObligationCountries)}">
+			</div>
+			<div class="form-group odd">
+				<div class="col-xs-4">Participating countries/territories</div>
+				<div class="col-xs-8" th:if="${not #lists.isEmpty(ObligationCountries)}">
 					<!-- a href="@{'/countrydeliveries?spatialId=' + ${ObligationCountry.countryId} + '&amp;actDetailsId=' + ${obligation.obligationId}" -->
 					<span th:each="ObligationCountry, itemStart : ${ObligationCountries}" th:utext="!${itemStart.last} ? ${ObligationCountry.countryName} + ', ' : ${ObligationCountry.countryName}" th:title="${ObligationCountry.voluntary == 'Y' ? 'Informal participation in the reporting obligation' : ''}"></span>
 					<!-- /a -->
-				</td>
-			</tr>
-			<tr class="even">
-				<td>Environmental issues</td>
-				<td th:if="${not #lists.isEmpty(issues)}">
+				</div>
+			</div>
+			<div class="form-group even">
+				<div class="col-xs-4">Environmental issues</div>
+				<div class="col-xs-8" th:if="${not #lists.isEmpty(issues)}">
 					<span th:each="issue, itemStart : ${issues}" th:utext="!${itemStart.last} ? ${issue.issueName} + ', ' : ${issue.issueName}"></span>
-				</td>
-			</tr>
-			<tr class="odd">
-				<td>General comments</td>
-				<td th:utext="${obligation.comment}"></td>
-			</tr>
-		</table>
+				</div>
+			</div>
+			<div class="form-group odd">
+				<div class="col-xs-4">General comments</div>
+				<div class="col-xs-8" th:utext="${obligation.comment}"></div>
+			</div>
+		</div>
 		
-	 
+	 </div>
 	 
 	</div>
     <div th:replace="layout :: footerFragment"></div>

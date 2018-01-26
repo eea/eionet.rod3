@@ -97,12 +97,6 @@ public class ITSpatialController {
                 .andExpect(model().attributeExists("breadcrumbs"))
                 .andExpect(model().attributeExists("allMember"))
                 .andExpect(model().attributeExists("allNoMember"))
-                .andExpect(model().attributeExists("allMemberColumn1"))
-                .andExpect(model().attributeExists("allMemberColumn2"))
-                .andExpect(model().attributeExists("allMemberColumn3"))
-                .andExpect(model().attributeExists("allNoMemberColumn1"))
-                .andExpect(model().attributeExists("allNoMemberColumn2"))
-                .andExpect(model().attributeExists("allNoMemberColumn3"))
                 .andExpect(model().attributeExists("title"))
                 .andExpect(view().name("spatial"));
 
