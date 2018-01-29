@@ -10,7 +10,7 @@
 		
 		<div id="tabbedmenu">
 			<ul>
-				<li><a th:href="@{'/obligations/' + ${obligationId}}">Overview</a></li>
+				<li><span><a th:href="@{'/obligations/' + ${obligationId}}">Overview</a></span></li>
 			  	<li id="currenttab"><span>Legislation</span></li>
 		  	</ul>
 	    </div>
@@ -30,7 +30,7 @@
 			<div class="form-group even">
 				<div class="col-xs-4">Sibling reporting obligations</div>
 				<div class="col-xs-8">
-					<ul th:if="${not #lists.isEmpty(siblingObligations)}" class="menu">
+					<ul th:if="${not #lists.isEmpty(siblingObligations)}">
 						<li th:each="siblingObligation : ${siblingObligations}">
 							<a th:href="@{'/obligations/'+${siblingObligation.siblingOblId}}" th:text="${siblingObligation.siblingTitle}"></a>
 							<span th:if="${siblingObligation.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span>

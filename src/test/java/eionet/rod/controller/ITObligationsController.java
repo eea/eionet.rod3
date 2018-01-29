@@ -84,7 +84,6 @@ public class ITObligationsController {
     public void viewObligationID() throws Exception {
     	 this.mockMvc.perform(get("/obligations/1"))
          	.andExpect(status().isOk())
-         	.andExpect(model().attributeExists("obligationId"))
          	.andExpect(model().attributeExists("obligation"))
         	.andExpect(model().attributeExists("breadcrumbs"))
          	.andExpect(model().attributeExists("title"));

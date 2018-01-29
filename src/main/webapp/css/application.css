@@ -164,7 +164,9 @@
 	padding: 0 7px;
 	margin-bottom: 1em;
 }
-	
+	table.datatable.results{
+		padding: 0;
+	}
 span[id*="Error"]{
 	color: red;
 }
@@ -192,6 +194,9 @@ span[id*="Error"]{
 	.form-horizontal .form-group > div:last-child{
 		border-left: 1px solid #9ac4c6;
 	}
+		.form-horizontal .form-group > div.col-lg-55:last-child{
+			border-left: none;
+		}
 	.form-horizontal .form-group .simple_attr_title{
 		white-space: nowrap;
 		padding-left: 7px;
@@ -265,6 +270,7 @@ a.col-lg-1, a.col-xs-1{
 
 /* INICIO pestañas */
 #tabbedmenu{
+	background: none;
 	background-image: none;
 	border-bottom: 1px solid #9ac4c6;
 	margin-bottom: 3em;
@@ -272,24 +278,29 @@ a.col-lg-1, a.col-xs-1{
 	width: calc(100% + 30px);
 }
 	#tabbedmenu #currenttab{
+		background: none;
 		background-image: none;
 		border: 1px solid #9ac4c6;
 		border-bottom: 1px solid white;
 		margin-bottom: -1px;
 	}
 	#tabbedmenu li{
+		background: none;
 		background-image: none;
 		border-bottom: none;
 	}
 		#tabbedmenu li span, #tabbedmenu li .link-external{
+			background: none;
 			background-image: none;
 			padding: 0;
 		}
 		#tabbedmenu li span a, #tabbedmenu #currenttab span{
+			background: none;
 			background-image: none;
 			padding: 15px;
 		}
 	#tabbedmenu a{
+		background: none;
 		background-image: none;
 	}
 /* FIN pestañas */
@@ -318,3 +329,9 @@ a.col-lg-1, a.col-xs-1{
 		font-weight: bold;
 	}
 /* FIN clients */
+
+/* INICIO paginacion */
+.pagination>.active>span a, .pagination>.active>span:focus a, .pagination>.active>span:hover a{
+	color: #FFFFFF;
+}
+/* FIN paginacion */

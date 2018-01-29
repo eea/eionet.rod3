@@ -90,20 +90,20 @@ public class ITObligationsDao {
   	
     }
     
-
+    @Test
     public void testfindSiblingObligations() throws ResourceNotFoundException
     {
     	List<SiblingObligation> siblingObligations = obligationsService.findSiblingObligations(1);
     	System.out.print("size:" + siblingObligations.size());
     	System.out.print("obl:" + siblingObligations.get(0).getSiblingOblId());
     	System.out.print("fk_source:" + siblingObligations.get(0).getFkSourceId());
-//    	assertEquals("2",siblingObligations.get(0).getSiblingOblId());
-//    	assertEquals("1",siblingObligations.get(0).getFkSourceId());
-//    	assertEquals("Test 2 - Fuel Quality Directive Article 7a",siblingObligations.get(0).getSiblingTitle());
-//    	assertEquals("Y",siblingObligations.get(0).getTerminate());
-//    	assertEquals("Article 15",siblingObligations.get(0).getAuthority());
-//    	List<SiblingObligation> siblingObligationsNull = obligationsService.findSiblingObligations(12);
-//    	assertNull("Null", siblingObligationsNull);
+    	assertEquals("2",siblingObligations.get(0).getSiblingOblId());
+    	assertEquals("1",siblingObligations.get(0).getFkSourceId());
+    	assertEquals("Test 2 - Fuel Quality Directive Article 7a",siblingObligations.get(0).getSiblingTitle());
+    	assertEquals("Y",siblingObligations.get(0).getTerminate());
+    	assertEquals("Article 15",siblingObligations.get(0).getAuthority());
+    	List<SiblingObligation> siblingObligationsNull = obligationsService.findSiblingObligations(12);
+    	assertNull("Null", siblingObligationsNull);
     }
     
     @Test 

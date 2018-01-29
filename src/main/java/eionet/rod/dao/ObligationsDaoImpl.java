@@ -317,8 +317,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	       
 	        String queryCount = "SELECT Count(*) as siblingoblId "
 	    	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-	    	        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
-	    	        + "ORDER BY o2.TITLE";
+	    	        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
+
 
 	        
 	        try {
@@ -410,6 +410,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	/**
 	 * 
 	 */
+	@Override
 	public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allObligationsIssues) {
 
     	jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
@@ -445,11 +446,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
         	parameters.put("NEXT_DEADLINE2",null);
         }
         parameters.put("TERMINATE",obligation.getTerminate()); //obl
-        if (obligation.getNextReporting() != null && obligation.getNextReporting() != "") {
-        	parameters.put("NEXT_REPORTING",RODUtil.str2Date(obligation.getNextReporting()));
-        }else {
-        	parameters.put("NEXT_REPORTING",null);
-        }
+        parameters.put("NEXT_REPORTING",obligation.getNextReporting());
         parameters.put("DATE_COMMENTS",obligation.getDateComments());
         parameters.put("FORMAT_NAME",obligation.getFormatName());
         parameters.put("REPORT_FORMAT_URL",obligation.getReportFormatUrl());
@@ -542,6 +539,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	/**
 	 * 
 	 */
+    @Override
     public void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allObligationsIssues) {
     	
     	Calendar calendar = Calendar.getInstance();
@@ -571,11 +569,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
         }else {
         	obligations.setNextDeadline2(null);
         }
-        if (obligations.getNextReporting() != null && obligations.getNextReporting() != "") {
-        	obligations.setNextReporting(RODUtil.str2Date(obligations.getNextReporting()));
-        }else {
-        	obligations.setNextReporting(null);
-        }
+       
         if (obligations.getValidSince() != null && obligations.getValidSince() != "") {
         	obligations.setValidSince(RODUtil.str2Date(obligations.getValidSince()));
         }else {
