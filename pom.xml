@@ -382,15 +382,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>2.2.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.196</version>
         </dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.45</version>
+		</dependency>
 
 
         <dependency>
@@ -522,8 +522,8 @@
                           <TZ>Europe/Copenhagen</TZ>
                           <CATALINA_OPTS>-Dinitial.username=roug
                           -Dcas.service=http://localhost:4590
-                          -Ddb.driver=org.mariadb.jdbc.Driver
-                          -Ddb.url=jdbc:mariadb://database/rod3 -Ddb.username=roduser -Ddb.password=password
+                          -Ddb.driver=com.mysql.jdbc.Driver
+                          -Ddb.url=jdbc:mysql://database/rod3 -Ddb.username=roduser -Ddb.password=password
                           -Ddeploy.contexts=test
                           </CATALINA_OPTS>
                         </env>
@@ -549,7 +549,7 @@
 
                     <image>
                       <alias>database</alias>
-                      <name>mariadb:10.2.10</name>
+                      <name>mysql:5.7.21</name>
                       <run>
                         <ports>
                           <port>database.port:3306</port>
@@ -603,8 +603,8 @@
                 <version>2.20.1</version>
                 <configuration>
                   <systemPropertyVariables>
-                    <db.driver>org.mariadb.jdbc.Driver</db.driver>
-                    <db.url>jdbc:mariadb://${docker.host.address}:${database.port}/rod3</db.url>
+                    <db.driver>com.mysql.jdbc.Driver</db.driver>
+                    <db.url>jdbc:mysql://${docker.host.address}:${database.port}/rod3</db.url>
                     <db.username>roduser</db.username>
                     <db.password>password</db.password>
                   </systemPropertyVariables>
