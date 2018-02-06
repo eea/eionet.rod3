@@ -381,7 +381,7 @@
         </createIndex>
         <modifySql dbms="h2">
      		<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
-     		<replace replace="ENUM('yes', 'no')" with="VARCHAR(2)"/>
+     		<replace replace="ENUM('yes', 'no')" with="VARCHAR(3)"/>
      		<replace replace="ENUM('L', 'M','V')" with="VARCHAR(1)"/>
 		</modifySql>
    </changeSet>
@@ -1102,6 +1102,7 @@
   </changeSet>   
   
   <changeSet author="santamik" id="rev-55">
+  <validCheckSum>7:39b32e1685e3553e1d3b47614d197c2e</validCheckSum>
     <preConditions onFail="MARK_RAN">
       <tableExists tableName="T_SOURCE"/>
     </preConditions>  
@@ -1109,7 +1110,7 @@
       Refs #89744 Add Terminated column
     </comment>  
     <addColumn tableName="T_SOURCE">
-        <column name="TERMINATED" type="enum('Y','N')"/>
+        <column name="TERMINATE" type="enum('Y','N')"/>
     </addColumn>
     <modifySql dbms="h2">
     	<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
