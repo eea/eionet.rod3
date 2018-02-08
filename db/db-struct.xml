@@ -1420,4 +1420,13 @@
     </comment>  
     <dropColumn columnName="OVERLAP_URL" tableName="T_OBLIGATION"/>
   </changeSet>  
+  <changeSet author="santamik" id="rev-81">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_HISTORY"/>
+    </preConditions>
+    <comment>
+      Refs #8970 Delete T_HISTORY table
+    </comment>  
+    <dropTable tableName="T_HISTORY" />  
+  </changeSet>   
 </databaseChangeLog>
