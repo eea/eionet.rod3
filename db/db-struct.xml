@@ -1380,5 +1380,44 @@
       Refs #90026 Delete T_CLIENT_LNK table
     </comment>  
     <dropTable tableName="T_CLIENT_LNK" />  
-  </changeSet>   
+  </changeSet>
+  <changeSet author="santamik" id="rev-78">
+      <comment>Refs #89743 Relations between obligations</comment>
+      <createTable tableName="T_OBLIGATION_RELATION">
+          <column name="FK_RA_ID" type="INT">
+              <constraints nullable="false"/>
+          </column>
+          <column name="RELATION" type="enum('replaces','is-replaced-by','see-also', 'same-as')">
+              <constraints nullable="false"/>            
+          </column>
+          <column name="FK_RA_ID2" type="INT">
+              <constraints nullable="false"/>
+          </column>
+      </createTable>
+      <addPrimaryKey tableName="T_OBLIGATION_RELATION" columnNames="FK_RA_ID,FK_RA_ID2"/>
+  </changeSet>       
+  <changeSet author="santamik" id="rev-79">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="overlap_url"/>      
+      <tableExists tableName="T_OBLIGATION_RELATION"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Add data from overlap_url as 'see-also'
+    </comment>  
+    <sql>INSERT INTO T_OBLIGATION_RELATION (FK_RA_ID, RELATION, FK_RA_ID2)
+      SELECT PK_RA_ID,'see-also',replace(overlap_url, 'http://rod.eionet.europa.eu/obligations/', '')
+      FROM t_obligation
+      WHERE overlap_url like 'http://rod.eionet.europa.eu/obligations/%'</sql>
+  </changeSet>  
+  <changeSet author="santamik" id="rev-80">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_OBLIGATION"/>
+      <columnExists tableName="T_OBLIGATION" columnName="OVERLAP_URL"/>      
+    </preConditions>  
+    <comment>
+      Refs #89743 Remove OVERLAP_URL
+    </comment>  
+    <dropColumn columnName="OVERLAP_URL" tableName="T_OBLIGATION"/>
+  </changeSet>  
 </databaseChangeLog>
