@@ -1407,8 +1407,8 @@
     </comment>  
     <sql>INSERT INTO T_OBLIGATION_RELATION (FK_RA_ID, RELATION, FK_RA_ID2)
       SELECT PK_RA_ID,'see-also',replace(overlap_url, 'http://rod.eionet.europa.eu/obligations/', '')
-      FROM t_obligation
-      WHERE overlap_url like 'http://rod.eionet.europa.eu/obligations/%'</sql>
+      FROM T_OBLIGATION
+      WHERE OVERLAP_URL like 'http://rod.eionet.europa.eu/obligations/%'</sql>
   </changeSet>  
   <changeSet author="santamik" id="rev-80">
     <preConditions onFail="MARK_RAN">
