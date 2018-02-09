@@ -92,8 +92,8 @@ public class ITClientsController {
     @Test
     public void clientEdit() throws Exception {
     	this.mockMvc.perform(get("/clients/1/edit"))
-        	.andExpect(status().isOk());
-            //.andExpect(status().is3xxRedirection());
+        	//.andExpect(status().isOk());
+            .andExpect(status().is3xxRedirection());
     }
 
     /**
