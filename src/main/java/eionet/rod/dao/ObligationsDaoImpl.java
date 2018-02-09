@@ -1,6 +1,6 @@
 package eionet.rod.dao;
 
-import java.sql.DriverManager;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.dbunit.database.DatabaseDataSourceConnection;
+
 import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,7 +19,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
