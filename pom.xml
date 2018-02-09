@@ -539,7 +539,8 @@
                         </ports>
                         <wait>
                           <!-- Check for this URL to return a 200 return code .... -->
-                          <url>http://${docker.host.address}:${tomcat.port}/</url>
+                          <!-- <url>http://${docker.host.address}:${tomcat.port}/</url> -->
+                          <log>INFO: Server startup in</log>
                           <!-- ... but at max 300 seconds -->
                           <time>300000</time>
                         </wait>
