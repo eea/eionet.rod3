@@ -41,8 +41,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcInsert jdbcInsert;
-	private String dbname;
-	
+
 	
 	
 	@Resource
@@ -265,7 +264,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	@Override
 	public Obligations findOblId(Integer OblId) throws ApplicationContextException {
-		Obligations obligation = null;
+
 		String query = "SELECT OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "OB.EEA_PRIMARY as eeaPrimary, OB.EEA_CORE as eeaCore, OB.FLAGGED as flagged, OB.COORDINATOR as coordinator, OB.COORDINATOR_URL as coordinatorUrl, "
 				+ "OB.COORDINATOR_ROLE as coordinatorRole, OB.COORDINATOR_ROLE_SUF as coordinatorRoleSuf, OB.NATIONAL_CONTACT as nationalContact, OB.NATIONAL_CONTACT_URL as nationalContactUrl, OB.TERMINATE as terminate, " 

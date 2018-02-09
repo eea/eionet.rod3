@@ -5,8 +5,6 @@ package eionet.rod.dao;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContextException;
-
 import eionet.rod.model.ObligationCountry;
 import eionet.rod.model.Spatial;
 
