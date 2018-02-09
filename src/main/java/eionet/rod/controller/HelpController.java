@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import eionet.rod.dao.HelpDao;
 import eionet.rod.model.Help;
+import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 @Controller
@@ -23,6 +24,8 @@ public class HelpController {
     public @ResponseBody Help helpLoadData(@RequestParam("helpId") String helpId) {
         if (helpId != null) {
         	Help HelpData = helpDao.findId(helpId);
+        	String text = RODUtil.replaceTags(HelpData.getText());
+        	HelpData.setText(text);
         	
         	return HelpData;
         }else {

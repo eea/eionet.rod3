@@ -3,7 +3,7 @@ package eionet.rod.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.UserRequestPostProcessor.*;
+
 
 import javax.sql.DataSource;
 import org.dbunit.dataset.IDataSet;
@@ -11,7 +11,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.junit.Before;
-import org.junit.Ignore;
+
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +81,8 @@ public class ITClientsController {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("breadcrumbs"))
                 .andExpect(model().attributeExists("client"))
+                .andExpect(model().attributeExists("directObligations"))
+                .andExpect(model().attributeExists("indirectObligations"))
                 .andExpect(view().name("clientFactsheet"));
     }
 
@@ -89,8 +91,9 @@ public class ITClientsController {
      */
     @Test
     public void clientEdit() throws Exception {
-        this.mockMvc.perform(get("/clients/1/edit"))
-                .andExpect(status().is3xxRedirection());
+    	this.mockMvc.perform(get("/clients/1/edit"))
+        	.andExpect(status().isOk());
+            //.andExpect(status().is3xxRedirection());
     }
 
     /**

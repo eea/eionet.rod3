@@ -169,6 +169,7 @@ function changedReporting() {
 
 	fiDate = checkDateSimple(first);
 	toDate = checkDateSimple(to);
+	
 	fx = checkNumberSimple(freq);
 
 	// Provide default if to value not given

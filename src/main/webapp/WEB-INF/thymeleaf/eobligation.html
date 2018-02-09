@@ -8,7 +8,7 @@
 	<div th:replace="helpModal :: helpModalFragment"></div>
 	
 	<h1>Edit Reporting Obligation for</h1>
-	<div class="panel-body">
+
 		<form method="POST" th:action="@{'/obligations/' + ${id}}" th:object="${obligation}" name="f" class="form-horizontal">
 		<span class="pagebanner">Identification</span>
 		<input type="hidden" name="id" th:value="${id}"/>
@@ -20,22 +20,22 @@
 		<div class="datatable results">
 			
 				<div class="form-group">
-					<div  class="col-lg-3 scope-row simple_attr_title">
-						<label for="oblTitle" class="control-label text-left">Title</label>
+					<div  class="col-lg-3 simple_attr_title">
+						<label for="oblTitle" class="required">Title</label>
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_TITLE')" title="Help on this field"></a>
 					<div class="col-lg-8">
-						<input type="text" class="smalltext form-control" onchange="checkMdText(this); changed()" name="oblTitle" id="oblTitle" th:field="${obligation.oblTitle}"/>
+						<input type="text" class="smalltext form-control" maxlength="255" onchange="checkMdText(this); changed()" name="oblTitle" id="oblTitle" th:field="${obligation.oblTitle}"/>
 					</div>
 				 </div>
 				  
 				<div class="form-group">
 					<div class="col-xs-3 scope-row simple_attr_title" >
-						<label for="description" class="control-label text-left">Description</label>
+						<label for="description" class="required control-label text-left">Description</label>
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DESCRIPTION')" title="Help on this field"></a>
 					<div class="col-lg-8">
-						<textarea class="smalltext form-control" onchange="checkMdText(this); changed()" name="description" id="description" th:field="*{description}"></textarea>
+						<textarea class="smalltext form-control" onchange="checkMdText(this); changed()" name="description" id="description" th:field="*{description}" rows="5" ></textarea>
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGFREQUENCYINMONTHS')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text"  class="date smalltext form-control" size="30" onchange="changedReporting(); contReporting();" name="reportFreqMonths" th:field="*{reportFreqMonths}" id="report_freq_months"/> For one-time-only reporting, enter 0 and choose a reasonable Valid to
+					<input type="text"  class="date smalltext form-control" maxlength="25" size="30" onchange="changedReporting(); contReporting();" name="reportFreqMonths" th:field="*{reportFreqMonths}" id="report_freq_months"/> For one-time-only reporting, enter 0 and choose a reasonable Valid to
 				</div>
 				
 			</div>
@@ -99,7 +99,7 @@
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGDATETEXTFORMAT')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text"class="smalltext form-control" name="nextReporting" id="nextReporting" onchange="changed()" th:field="*{nextReporting}"/>
+					<input type="text"class="smalltext form-control" maxlength="255" name="nextReporting" id="nextReporting" onchange="changed()" th:field="*{nextReporting}"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -117,12 +117,12 @@
 		<div class="datatable results">
 			<div class="form-group">
 					<div class="col-lg-3 scope-row simple_attr_title">
-						<label for="report_to" class="control-label text-left">Report to</label>
+						<label for="report_to" class="required control-label text-left">Report to</label>
 					</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RO_REPORTTO')" title="Help on this field"></a>
 				<div class="col-lg-8">
 					<select th:field="*{clientId}" class="selectObligations form-control" id="report_to" onchange="addClientValuesSel(document.f.report_to, document.f.selectedClients.options)" name="report_to">
-						<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+						<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
 	            	</select>
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 			<div class="form-group">
 				<div class="col-lg-55">
 					<select name="selClients" multiple="multiple" id="client_list" class="form-control" > 
-				    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.name}"></option>
+				    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}"></option>
 					</select>
 				</div>
 				<div class="col-lg-1">
@@ -163,14 +163,14 @@
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NAMEOFREPORTINGGUIDELINES')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="formatName" id="formatName" onchange="changed()" th:field="*{formatName}"/>
+					<input type="text" class="smalltext form-control" maxlength="100" name="formatName" id="formatName" onchange="changed()" th:field="*{formatName}"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label  for="reportFormatUrl">URL of reporting guidelines</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_URLTOREPORTINGGUIDELINES')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="reportFormatUrl" id="reportFormatUrl" onchange="chkUrl(this); changed()" th:field="*{reportFormatUrl}"/>
+					<input type="text" class="smalltext form-control" maxlength="255" name="reportFormatUrl" id="reportFormatUrl" onchange="chkUrl(this); changed()" th:field="*{reportFormatUrl}"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -188,7 +188,7 @@
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGGUIDELINES')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<textarea class="smalltext form-control" name="reportingFormat" id="reportingFormat" onchange="changed()" th:field="*{reportingFormat}"></textarea>
+					<textarea class="smalltext form-control" name="reportingFormat" id="reportingFormat" onchange="changed()" th:field="*{reportingFormat}" rows="5" ></textarea>
 				</div>
 			</div>
 			<div class="form-group">
@@ -197,28 +197,28 @@
 				</div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONINFO')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="locationInfo" id="locationInfo" onchange="changed()" th:field="*{locationInfo}" />
+					<input type="text" class="smalltext form-control" maxlength="255" name="locationInfo" id="locationInfo" onchange="changed()" th:field="*{locationInfo}" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label  for="locationPtr">URL to repository</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONPTR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="locationPtr" id="locationPtr" onchange="chkUrl(this); changed()" th:field="*{locationPtr}" />
+					<input type="text" class="smalltext form-control" maxlength="255" name="locationPtr" id="locationPtr" onchange="chkUrl(this); changed()" th:field="*{locationPtr}" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedFor">Data used for (name)</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="dataUsedFor" id="dataUsedFor" onchange="changed()" th:field="*{dataUsedFor}" />
+					<input type="text" class="smalltext form-control" maxlength="255" name="dataUsedFor" id="dataUsedFor" onchange="changed()" th:field="*{dataUsedFor}" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedForUrl">Data used for (URL)</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="dataUsedForUrl" id="dataUsedForUrl" onchange="chkUrl(this); changed()" th:field="*{dataUsedForUrl}" />
+					<input type="text" class="smalltext form-control" maxlength="255" name="dataUsedForUrl" id="dataUsedForUrl" onchange="chkUrl(this); changed()" th:field="*{dataUsedForUrl}" />
 				</div>
 			</div>
 		</div>
@@ -302,7 +302,7 @@
 				<div class="col-lg-8 simple_attr_help">
 					<div>
 						<label for="coordinatorRole" class="control-label">Role</label>
-						<input type="text" class="smalltext" name="coordinatorRole" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
+						<input type="text" class="smalltext" name="coordinatorRole" maxlength="255" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
 						<input type="checkbox" name="coordinatorRoleSuf" value="1" checked="checked" id="coordinatorRoleSuf" th:field="*{coordinatorRoleSuf}"/> 
 						<label class="control-label">do not append country suffix</label>
 					</div>
@@ -313,7 +313,7 @@
 					</div>
 					<div>
 						<label for="coordinator" class="control-label">Name</label>
-						<label for="coordinator">Name</label> <input type="text" class="smalltext" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
+						<label for="coordinator">Name</label> <input type="text" class="smalltext" maxlength="255" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
 						<input type="text" name="coordinatorUrl" onchange="chkUrl(this); changed()" id="coordinatorUrl" th:field="*{coordinatorUrl}"/>
 					</div>
 				</div>
@@ -327,7 +327,7 @@
 				<div class="col-lg-8 simple_attr_help">
 					<div>
 						<label for="responsibleRole" class="control-label">Role</label>
-						<input type="text" class="smalltext" name="responsibleRole" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
+						<input type="text" class="smalltext" name="responsibleRole" maxlength="255" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
 						<input type="checkbox" name="responsibleRoleSuf" value="1" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
 						<label class="control-label" for="responsibleRoleSuf">do not append country suffix</label>
 					</div>
@@ -338,7 +338,7 @@
 					</div>
 					<div>
 						<label for="nationalContact" class="control-label">Name</label>
-						<input type="text" class="smalltext" name="nationalContact" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
+						<input type="text" class="smalltext" name="nationalContact" maxlength="255" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
 						<input type="text" name="nationalContactUrl" onchange="chkUrl(this); changed()" id="nationalContactUrl" th:field="*{nationalContactUrl}"/> 
 					</div>
 				</div>
@@ -379,7 +379,7 @@
 				<div class="col-lg-3 scope-row simple_attr_title"><label for="parameters" class="control-label text-left">Parameters</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_PARAMETERS')" title="Help on this field"></a></th>
 				<div class="col-lg-8>
-					<textarea class="smalltext inputwidth100" onchange="changed()" name="parameters" id="parameters" th:field="*{parameters}"></textarea>
+					<textarea class="smalltext inputwidth100" onchange="changed()" name="parameters" id="parameters" th:field="*{parameters}" rows="5" ></textarea>
 				</div>
 			</div>
 			 -->
@@ -395,13 +395,13 @@
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label for="comment">General comments</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_COMMENT')" title="Help on this field"></a>
-				<div class="col-lg-8"><textarea class="smalltext form-control"  onchange="changed()" name="comment" id="comment" th:field="*{comment}"></textarea></div>
+				<div class="col-lg-8"><textarea class="smalltext form-control"  onchange="changed()" name="comment" id="comment" th:field="*{comment}" rows="5" ></textarea></div>
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title"><label for="authority">Authority giving rise to the obligation</label></div>
 				<a class="helpButton col-lg-1"onclick="helpFunction('HELP_RA_AUTHORITY')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" name="authority" id="authority" onchange="changed()" th:field="*{authority}" />
+					<input type="text" class="smalltext form-control" maxlength="255" name="authority" id="authority" onchange="changed()" th:field="*{authority}" />
 				</div>
 			</div>
 		</div>
@@ -458,7 +458,7 @@
 		</div>
 		</form>
 	</div>
-	</div>
+
     <div th:replace="layout :: footerFragment"></div>
 </div>
 </body>

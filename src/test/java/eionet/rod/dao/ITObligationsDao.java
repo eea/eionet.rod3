@@ -1,12 +1,14 @@
 package eionet.rod.dao;
 
 import org.junit.runner.RunWith;
+import org.junit.Rule;
 //import org.junit.Rule;
 import org.junit.Test;
 //import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import org.junit.rules.ExpectedException;
 
 //import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +47,9 @@ public class ITObligationsDao {
 	@Autowired
 	private ObligationService obligationsService;
 	
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+	
 		
     @Test
     public void testfindAll() throws ResourceNotFoundException
@@ -72,22 +77,15 @@ public class ITObligationsDao {
     	assertNull(obligations.get(0).getClientName());
     }
     
-    @Test (expected = RuntimeException.class)
-    public void testfindOblId() throws ResourceNotFoundException
+    @Test
+    public void testfindOblId()
     {
     	Obligations obligation = obligationsService.findOblId(1);
     	assertEquals("1",obligation.getObligationId().toString());
     	assertEquals("Fuel Quality Directive Article 7a",obligation.getOblTitle());
-    	try {
-    		obligation = obligationsService.findOblId(12);
-    	}
-    	catch(ResourceNotFoundException re)
-    	{
-    	      String message = "The obligation you requested with id 12 was not found in the database";
-    	      assertEquals(message, re.getMessage());
-    	      throw re;
-    	}
-  	
+    	
+    	exception.expect(ResourceNotFoundException.class);	
+    	obligation = obligationsService.findOblId(12);
     }
     
     @Test
@@ -130,7 +128,7 @@ public class ITObligationsDao {
     }
     
     @Test
-    public void testinsertupdateObligation() //throws Exception
+    public void testinsertupdateObligation() throws ResourceNotFoundException
     {
     	//data obligations
     	Obligations obligation = new Obligations();
@@ -197,7 +195,22 @@ public class ITObligationsDao {
 	    	
     	obligationsService.updateObligations(obligation, null, spatials, spatialsVoluntary, issues);
     	
-    	//exception.expect(IOException.class);
+    	obligationsService.deleteObligations(intObligationId.toString());
+    	
+//    	try {
+    	exception.expect(ResourceNotFoundException.class);	
+    	obligation = obligationsService.findOblId(intObligationId);
+  	        
+//    	}
+//    	catch(ResourceNotFoundException re)
+//    	{
+//    	      String message = "The obligation you requested with id " + intObligationId + " was not found in the database";
+//    	      assertEquals(message, re.getMessage());
+//
+//    	      throw re;
+//    	}
+    	    	    	
+
    }
     
 }

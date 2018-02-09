@@ -6,93 +6,102 @@
      <div th:include="layout :: bannerFragment" ></div>
       <div id="workarea">
         <h1>Edit Client Organisation</h1>
-        <form action="clientEditForm.html" method="POST" th:action="@{'/clients/' + ${clientId} + '/edit'}" th:object="${client}" >
+        <form action="clientEditForm.html" method="POST" th:action="@{'/clients/' + ${clientId} + '/edit'}" th:object="${client}" class="form-horizontal">
           <input name="clientId" th:value="*{clientId}" value="55" type="hidden"/>
-          <table class="formtable">
-            <col style="width:160px"/>
-            <col style="width:490px"/>
-            <tr>
-              <td>
+          <input name="clientsHref" id="clientsHref" th:value="@{'/clients/'}" type="hidden"/>
+          
+          <div class="formtable datatable results">
+			<div class="form-group odd">
+              <div class="col-lg-4">
                 <label class="question" for="name">Name</label>
-              </td>
-              <td>
-                <input id="name" maxlength="255" name="name" th:field="*{name}" value="Biosafety Clearing House" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="name" maxlength="255" name="name" th:field="*{name}" value="Biosafety Clearing House" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group even">
+              <div class="col-lg-4">
                 <label class="question" for="shortname">Short Name</label>
-              </td>
-              <td>
-                <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group odd">
+              <div class="col-lg-4">
                 <label class="question" for="acronym">Acronym</label>
-              </td>
-              <td>
-                <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="BCH" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="BCH" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group even">
+              <div class="col-lg-4">
                 <label class="question" for="address">Address</label>
-              </td>
-              <td>
-                <input id="address" maxlength="255" name="address" th:field="*{address}"
-                    value="393 rue Saint-Jacques, suite 300" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="address" maxlength="255" name="address" th:field="*{address}" value="393 rue Saint-Jacques, suite 300" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group odd">
+              <div class="col-lg-4">
                 <label class="question" for="postalcode">Postal code</label>
-              </td>
-              <td>
-                <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="H2Y 1N9" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="H2Y 1N9" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group even">
+              <div class="col-lg-4">
                 <label class="question" for="city">City</label>
-              </td>
-              <td>
-                <input id="city" maxlength="255" name="city" th:field="*{city}" value="Montreal" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="city" maxlength="255" name="city" th:field="*{city}" value="Montreal" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group odd">
+              <div class="col-lg-4">
                 <label class="question" for="country">Country</label>
-              </td>
-              <td>
-                <input id="country" maxlength="255" name="country" th:field="*{country}" value="Canada" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="country" maxlength="255" name="country" th:field="*{country}" value="Canada" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group even">
+              <div class="col-lg-4">
+                <label class="question" for="email">Email</label>
+              </div>
+              <div class="col-lg-8">
+                <input id="email" maxlength="255" name="email" th:field="*{email}" value="email@random.com" type="email" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group odd">
+              <div class="col-lg-4">
                 <label class="question" for="homepage">Homepage</label>
-              </td>
-              <td>
-                <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="http://bch.biodiv.org/" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
+              </div>
+              <div class="col-lg-8">
+                <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="http://bch.biodiv.org/" type="text" class="form-control"/>
+              </div>
+           </div>
+           <div class="form-group even">
+              <div class="col-lg-4">
                 <label class="question" for="description">Description</label>
-              </td>
-              <td>
-                <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}">
-Affected of potentially affected States and the Biosafety Clearing House</textarea>
-              </td>
-            </tr>
-            <tr>
-              <td/>
-              <td>
-                <input style="width:6em" name="edit" value="OK" type="submit"/>
-                <input style="width:6em" name="cancel" value="Cancel" onclick="javascript:history.back()" type="button"/>
-              </td>
-            </tr>
-          </table>
+              </div>
+              <div class="col-lg-8">
+                <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}" class="form-control">Affected of potentially affected States and the Biosafety Clearing House</textarea>
+              </div>
+           </div>
+          </div>
+          <script type="text/javascript">
+			   	function exit(){
+					location.href = document.getElementById('clientsHref').value;
+				}
+		  </script>
+          <div>
+               <input name="edit" value="Save changes" type="submit" class="btn btn-primary"/>
+               <input name="cancel" value="Exit" onclick="exit()" type="button" class="btn btn-default"/>
+          </div>
+          
         </form>
       </div>
       <div id="pagefoot" th:include="layout :: footerFragment"></div>

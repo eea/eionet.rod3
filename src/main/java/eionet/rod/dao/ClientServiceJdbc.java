@@ -5,11 +5,14 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import eionet.rod.model.ClientDTO;
+import eionet.rod.model.InstrumentDTO;
+import eionet.rod.model.Obligations;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -46,7 +49,7 @@ public class ClientServiceJdbc implements ClientService {
     }
 
     @Override
-    public ClientDTO getById(Integer clientId) {
+    public ClientDTO getById(Integer clientId) throws ApplicationContextException {
         String query = "SELECT T_CLIENT.PK_CLIENT_ID AS clientId,"
                 + "CLIENT_NAME AS name, CLIENT_ACRONYM AS acronym,"
                 + "CLIENT_URL AS url, CLIENT_ADDRESS AS address, CLIENT_EMAIL AS email,"
@@ -54,9 +57,13 @@ public class ClientServiceJdbc implements ClientService {
                 + "FROM T_CLIENT "
                 + "WHERE T_CLIENT.PK_CLIENT_ID = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-        ClientDTO clientRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), clientId);
-        return clientRec;
+	    try {
+	        ClientDTO clientRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), clientId);
+	        return clientRec;
+	       
+	    } catch (DataAccessException e) {
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		}
     }
 
     @Override
@@ -157,5 +164,52 @@ public class ClientServiceJdbc implements ClientService {
 			throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
 		}
      }
+    
+    private static final String q_direct_obligations =
+        "SELECT PK_RA_ID as obligationId, FK_SOURCE_ID as sourceId, TITLE as oblTitle, TERMINATE as terminate " +
+        "FROM T_OBLIGATION, T_CLIENT_OBLIGATION_LNK " +
+        "WHERE PK_RA_ID = FK_RA_ID and STATUS='M' and " +
+        "FK_CLIENT_ID=? ORDER BY TITLE";
+    
+    public List<Obligations> getDirectObligations(Integer clientId){
+    	 
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.query(q_direct_obligations, new BeanPropertyRowMapper<Obligations>(Obligations.class),clientId);
+    }
+
+    private static final String q_indirect_obligations =
+    	"SELECT PK_RA_ID as obligationId, FK_SOURCE_ID as sourceId, TITLE as oblTitle, TERMINATE as terminate " +
+        "FROM T_OBLIGATION, T_CLIENT_OBLIGATION_LNK " +
+        "WHERE PK_RA_ID = FK_RA_ID and STATUS != 'M' and " +
+        "FK_CLIENT_ID=? ORDER BY TITLE";
+    
+    public List<Obligations> getIndirectObligations(Integer clientId){
+   	 
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.query(q_indirect_obligations, new BeanPropertyRowMapper<Obligations>(Obligations.class),clientId);
+    }
+
+    private static final String q_direct_instruments =
+    	"SELECT S.PK_SOURCE_ID as sourceId, S.ALIAS as sourceAlias, S.LEGAL_NAME as sourceLegalName, S.TITLE as sourceTitle " +
+    	"FROM T_SOURCE S, T_CLIENT_SOURCE_LNK CL " +
+        "WHERE CL.FK_CLIENT_ID=? AND CL.FK_SOURCE_ID=S.PK_SOURCE_ID and CL.STATUS = 'M' " +
+        "ORDER BY ALIAS";
+
+    public List<InstrumentDTO> getDirectInstruments(Integer clientId){
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.query(q_direct_instruments, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class),clientId);	
+    }
+    
+    
+    private static final String q_indirect_instruments =
+    		"SELECT S.PK_SOURCE_ID as sourceId, S.ALIAS as sourceAlias, S.LEGAL_NAME as sourceLegalName, S.TITLE as sourceTitle " +
+    	"FROM T_SOURCE S, T_CLIENT_SOURCE_LNK CL " +
+        "WHERE CL.FK_CLIENT_ID=? AND CL.FK_SOURCE_ID=S.PK_SOURCE_ID and CL.STATUS != 'M' " +
+        "ORDER BY ALIAS";
+    
+    public List<InstrumentDTO> getIndirectInstruments(Integer clientId) {
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate.query(q_indirect_instruments, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class),clientId);	
+    }
     
 }

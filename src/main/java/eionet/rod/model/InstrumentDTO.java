@@ -8,7 +8,7 @@ package eionet.rod.model;
 public class InstrumentDTO {
 
     //Fields from T_SOURCE table
-    private int sourceId;
+    private Integer sourceId;
     private String sourceTitle;
     private String sourceAlias;
     private String sourceLegalName;
@@ -21,12 +21,12 @@ public class InstrumentDTO {
     }
 
 
-    public int getSourceId() {
+    public Integer getSourceId() {
         return sourceId;
     }
 
 
-    public void setSourceId(int sourceId) {
+    public void setSourceId(Integer sourceId) {
         this.sourceId = sourceId;
     }
 

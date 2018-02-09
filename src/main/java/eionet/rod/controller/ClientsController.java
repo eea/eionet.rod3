@@ -2,22 +2,25 @@ package eionet.rod.controller;
 
 import eionet.rod.dao.ClientService;
 import eionet.rod.model.ClientDTO;
+import eionet.rod.model.InstrumentDTO;
+import eionet.rod.model.Obligations;
 import eionet.rod.model.BreadCrumb;
 import eionet.rod.util.BreadCrumbs;
+import eionet.rod.util.exception.ResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
+
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +37,17 @@ public class ClientsController {
      */
     @Autowired
     ClientService clientService;
-
+    
+    /**
+     * Page of error
+     * @return
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public String handleResourceNotFoundException() {
+        return "404";
+    }
+        
+    
     /**
      * View for all clients.
      *
@@ -45,6 +58,8 @@ public class ClientsController {
     @RequestMapping({"", "/", "/view"})
     public String viewClients(Model model, @RequestParam(required = false) String message) {
         BreadCrumbs.set(model, "Clients");
+        model.addAttribute("title","Clients");
+        model.addAttribute("activeTab", "clients");
         model.addAttribute("allClients", clientService.getAllClients());
         ClientDTO client = new ClientDTO();
         model.addAttribute("client", client);
@@ -59,9 +74,34 @@ public class ClientsController {
     public String clientFactsheet(
             @PathVariable("clientId") Integer clientId, final Model model) throws Exception {
         model.addAttribute("clientId", clientId);
+        
         ClientDTO client = clientService.getById(clientId);
         BreadCrumbs.set(model, clientsCrumb, new BreadCrumb(client.getName()));
+        
+        model.addAttribute("activeTab", "clients");
+       
+        model.addAttribute("title",client.getName());
+        
         model.addAttribute("client", client);
+        
+        List<Obligations> directObligations =  clientService.getDirectObligations(clientId);
+        
+        model.addAttribute("directObligations", directObligations);
+        
+        
+        List<Obligations> indirectObligations =  clientService.getIndirectObligations(clientId);
+        
+        model.addAttribute("indirectObligations", indirectObligations);
+        
+        
+        List<InstrumentDTO> directInstruments = clientService.getDirectInstruments(clientId);
+        
+        model.addAttribute("directInstruments", directInstruments);
+        
+        List<InstrumentDTO> indirectInstruments = clientService.getIndirectInstruments(clientId);
+        
+        model.addAttribute("indirectInstruments", indirectInstruments);
+        
         return "clientFactsheet";
     }
 
@@ -72,6 +112,10 @@ public class ClientsController {
     public String addClientForm(final Model model) {
         BreadCrumbs.set(model, clientsCrumb, new BreadCrumb("Add client"));
         ClientDTO client = new ClientDTO();
+        
+        model.addAttribute("title","Add client");
+        model.addAttribute("activeTab", "clients");
+        
         model.addAttribute("client", client);
         return "clientNewClient";
     }
@@ -109,6 +153,10 @@ public class ClientsController {
         BreadCrumbs.set(model, "Modify client");
         ClientDTO client = clientService.getById(clientId);
         model.addAttribute("client", client);
+        
+        model.addAttribute("title","Modify client");
+        model.addAttribute("activeTab", "clients");
+        
         if (message != null) model.addAttribute("message", message);
         return "clientEditForm";
     }

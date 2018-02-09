@@ -11,103 +11,126 @@
             <li><a href="clientEditform.html" th:href="@{'/clients/' + ${client.clientId} + '/edit'}">Edit client</a></li>
           </ul>
         </div>
-
+	<div class="form-horizontal">
         <h1>Reporting client or issuer details</h1>
         <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-        <table class="datatable results">
-          <col style="width:8em"/>
-          <col style="width:30em"/>
-          <tbody>
-            <tr class="odd">
-              <td scope="row">Name</td>
-              <td th:text="${client.name}">Council of the European Union</td>
-            </tr>
-            <tr class="even">
-              <td scope="row">Short Name</td>
-              <td th:text="${client.shortName}">Council</td>
-            </tr>
-            <tr class="odd">
-              <td scope="row">Acronym</td>
-              <td th:text="${client.acronym}">Council</td>
-            </tr>
-            <tr class="even">
-              <td scope="row">Address</td>
-              <td th:text="${client.address}"/>
-            </tr>
-            <tr class="odd">
-              <td scope="row">Postal code</td>
-              <td th:text="${client.postalCode}">9999</td>
-            </tr>
-            <tr class="even">
-              <td scope="row">City</td>
-              <td th:text="${client.city}">Copenhagen</td>
-            </tr>
-            <tr class="odd">
-              <td scope="row">Country</td>
-              <td th:text="${client.country}">Daisyland</td>
-            </tr>
-            <tr class="even">
-              <td scope="row">Homepage</td>
-              <td>
-                <a href="http://www.consilium.europa.eu/" th:href="${client.url}" th:text="${client.url}">
-                                    http://www.consilium.europa.eu/
-                            </a>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row">Description</td>
-              <td th:text="${client.description}">
-The Council is the EU institution making EU laws.
-                        </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="datatable results">
+			<div class="form-group odd">
+			  	<div class="col-xs-4">Name</div>
+             	<div class="col-xs-8"><span th:text="${client.name}"></span></div>
+             </div>
+            <div class="form-group even">
+				<div class="col-xs-4">Short Name</div>
+              	<div class="col-xs-8"><span th:text="${client.shortName}"></span></div>
+            </div>
+            <div class="form-group odd">
+			  	<div  class="col-xs-4">Acronym</div>
+              	<div class="col-xs-8"><span th:text="${client.acronym}"></span></div>
+            </div>
+            <div class="form-group even">
+				<div class="col-xs-4">Address</div>
+              	<div class="col-xs-8"><span th:text="${client.address}"/></span></div>
+            </div>
+            <div class="form-group odd">
+				<div  class="col-xs-4">Postal code</div>
+              	<div class="col-xs-8"><span th:text="${client.postalCode}"></span></div>
+            </div>
+            <div class="form-group even">
+				<div  class="col-xs-4">City</div>
+              <div class="col-xs-8"><span th:text="${client.city}"></span></div>
+            </div>
+            <div class="form-group odd">
+				<div class="col-xs-4">Country</div>
+              	<div class="col-xs-8"><span th:text="${client.country}"></span></div>
+            </div>
+            <div class="form-group odd">
+              <div class="col-xs-4">Email</div>
+              <div class="col-xs-8"><span th:text="${client.email}"></span></div>
+            </div>
+           <div class="form-group even">
+				<div  class="col-xs-4">Homepage</div>
+              	<div class="col-xs-8"><a href="http://www.consilium.europa.eu/" th:href="${client.url}" th:text="${client.url}"></a></div>
+            </div>
+            <div class="form-group odd">
+				<div class="col-xs-4">Description</div>
+              	<div class="col-xs-8"><span  th:text="${client.description}"></span></div>
+            </div>
+          
+        </div>
+        
+        <div th:if="${not #lists.isEmpty(directObligations)}">
         <h2>Direct Obligations</h2>
-        <table class="datatable" width="600">
+        <table class="datatable results">
           <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Title</th>
+            <th scope="col" class="col-xs-4">ID</th>
+            <th scope="col" class="col-xs-8">Title</th>
           </tr>
           </thead>
-          <tr>
-            <td class="odd">
-              <a href="/obligations/738">738</a>
-            </td>
-            <td>Implementation report
-                                        </td>
+          <tbody>
+          <tr th:each="directObl, iterStat : ${directObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+            <td><a th:href="@{'/obligations/' + ${directObl.obligationId}}" th:text="${directObl.obligationId}"></a></td>
+            <td><span th:text="${directObl.oblTitle}"></span><span th:if="${directObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
           </tr>
-          <tr class="even">
-            <td>
-              <a href="/obligations/733">733</a>
-            </td>
-            <td>Updated information on the measures taken
-                                        </td>
-          </tr>
+          </tbody>
         </table>
+        </div>
+        
+        <div th:if="${not #lists.isEmpty(indirectObligations)}">
+        <h2>Indirect Obligations</h2>
+        <table class="datatable results">
+          <thead>
+          <tr>
+            <th scope="col" class="col-xs-4">ID</th>
+            <th scope="col" class="col-xs-8">Title</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="indirectObl, iterStat : ${indirectObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+            <td><a th:href="@{'/obligations/' + ${indirectObl.obligationId}}" th:text="${indirectObl.obligationId}"></a></td>
+            <td><span th:text="${indirectObl.oblTitle}"></span><span th:if="${indirectObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
+   		<div th:if="${not #lists.isEmpty(directInstruments)}">
         <h2>Direct Instruments</h2>
-        <table class="datatable" width="600">
+        <table class="datatable results">
+         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Alias</th>
+            <th scope="col" class="col-xs-4">ID</th>
+            <th scope="col" class="col-xs-8">Alias</th>
           </tr>
+          </thead>
+          <tbody>
+          <tr th:each="directInstrument, iterStat : ${directInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+            <td><a th:href="@{'/instruments/' + ${directInstrument.sourceId}}" th:text="${directInstrument.sourceId}"></a></td>
+            <td><span th:text="${directInstrument.sourceAlias}"></span></td>
+          </tr>
+       
+          </tbody>
+         </table>
+         </div>
+
+		<div th:if="${not #lists.isEmpty(directInstruments)}">
+        <h2>Indirect Instruments</h2>
+        <table class="datatable results">
+         <thead>
           <tr>
-            <td>
-              <a href="/instruments/394">394</a>
-            </td>
-            <td>
-                                                                Council Decision of 24 July 1995 on the conclusion, on behalf of the Community, of the Convention on the protection and use of transboundary watercourses and international lakes
-                                        </td>
+            <th scope="col" class="col-xs-4">ID</th>
+            <th scope="col" class="col-xs-8">Alias</th>
           </tr>
-          <tr>
-            <td>
-              <a href="/instruments/287">287</a>
-            </td>
-            <td>
-                                                                Waste Shipments Regulation
-                                        </td>
+          </thead>
+          <tbody>
+          <tr th:each="indirectInstrument, iterStat : ${indirectInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+            <td><a th:href="@{'/instruments/' + ${indirectInstrument.sourceId}}" th:text="${indirectInstrument.sourceId}"></a></td>
+            <td><span th:text="${indirectInstrument.sourceAlias}"></span></td>
           </tr>
-        </table>
+       
+          </tbody>
+         </table>
+         </div>
+
       </div>
       <div id="pagefoot" th:include="layout :: footerFragment"></div>
     </div>

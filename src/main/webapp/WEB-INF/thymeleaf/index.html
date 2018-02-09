@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/print.css" media="print" />
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/handheld.css" media="handheld" />
-    <link rel="stylesheet" type="text/css" href="https://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui-1.10.3.custom.min.css" th:href="@{/css/jquery-ui-1.10.3.custom.min.css}" />
-    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
-    <script type="text/javascript" src="../../js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
-    <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js" th:src="@{/js/jquery-ui-1.10.3.custom.min.js}"></script>
-    <script type="text/javascript" src="../../js/pageops.js" th:src="@{/js/pageops.js}"></script>
-    <script type="text/javascript" src="../../js/mark_special_links.js" th:src="@{/js/mark_special_links.js}"></script>
-  </head>
+  <head th:include="layout :: headerFragment"></head>
   <body>
     <div id="container">
       <div th:include="layout :: bannerFragment" th:with="activeTab = 'home'">
       </div>
       <div id="workarea">
+      <div th:replace="helpModal :: helpModalFragment"></div>
         <h1>What is ROD?</h1>
         <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
 <p>
@@ -41,93 +31,86 @@ Eurostat, OECD, UN, UNECE, as well as the EEA itself. To learn more
 about ROD, the status of the contents and the intended users, please
 check out the general help section.
 </p>
-
-  	<div id="drop-operations">
-            <ul>
-                <li class="search open"><a class="searchSection" href="#" title="Search reporting obligations">Search reporting obligations</a></li>
-                
-            </ul>
-    </div>
-    <form id="x1" action="/obligations" class="searchDatasetsForm" method="get">
-    	<div id="filters">
-    
-		    <table id="categorysearch" class="filter">
-		    <col style="width: 30%"/>
-		    <col style="width: 65%"/>
-		    <col style="width: 5%"/>
-		    <tr>
-		      <td class="label">
-		        <label>Country or territory</label>
-		      </td>
-		      <td class="input">
-		        <select name="country" size="1">
-		          <option value="-1">Any country or territory</option>
-		          <option value="3">Austria</option>
-		          <option value="6">Bosnia and Herzegovina</option>
-		          <option value="42">Kosovo under the UNSCR 1244/99</option>
-		          <option value="24">The former Yugoslav Republic of Macedonia</option>
-		          <option value="121">Vatican City</option>
-		        </select>
-		      </td>
-		    </tr>
-		    <tr>
-		      <td class="label">
-		        <label>Issue</label>
-		      </td>
-		      <td class="input">
-		        <select style="width:223px" name="issue">
-		          <option value="-1">All issues</option>
-		          <option value="6">Air pollution</option>
-		          <option value="14">Biodiversity Change and Nature</option>
-		          <option value="10">Chemicals</option>
-		          <option value="1">Climate Change</option>
-		          <option value="8">Natural Resources</option>
-		          <option value="7">Noise</option>
-		          <option value="2">Ozone Depletion</option>
-		          <option value="4">Soil</option>
-		          <option value="12">Various other issues</option>
-		          <option value="13">Waste</option>
-		          <option value="15">Water</option>
-		        </select>
-		      </td>
-		    </tr>
-		    <tr>
-		      <td class="label">
-		        <label>Organisation</label>
-		      </td>
-		      <td class="input">
-		        <select style="width:300px" name="client" size="1">
-		          <option value="-1">Any organisation</option>
-		          <option value="50">ACCOBAMS - ACCOBAMS Secretariat</option>
-		          <option value="45">AEWA - UNEP/AEWA Secretariat</option>
-		          <option value="68">Alpine Convention Secretariat</option>
-		          <option value="63">Bern Convention</option>
-		          <option value="84">Bonn Agreement Secretariat</option>
-		          <option value="24">BSC - Black Sea Commission</option>
-		          <option value="82">CAR/RCU - Caribbean Regional Co-ordinating Unit</option>
-		          <option value="81">CAR/RCU - Conference of the Parties to the Cartagena Convent...</option>
-		          <option value="42">CBD - Convention on Biological Diversity</option>
-		          <option value="71">CCAMLR - Commission for the Conservation of Antarctic Marin...</option>
-		          <option value="53">World Heritage Committee, UNESCO World Heritage Ce...</option>
-		        </select>
-		      </td>
-		    </tr>
-		    <tr>
-		      <td class="label">&#xA0;</td>
-		      <td class="input">
-		        <input id="isterminated" name="terminated" value="Y" type="checkbox"/>
-		        <label for="isterminated">Include terminated obligations</label>
-		      </td>
-		    </tr>
-		  </table>
-		  <p class="actions">
-		  	<input name="id" value="" type="hidden"/>
-		    <input name="filter" value="Search" class="mediumbuttonb searchButton" type="submit"/>
-		    <input name="Reset" value="Reset" class="mediumbuttonb " type="reset"/>
-		  </p>
-		 </div>
-</form>
-
+  	
+    	<div id="drop-operations">
+	        <ul class="nav nav-tabs" role="tablist">
+				<li role="tab_item1" class="search active"><a href="#tab_item1" aria-controls="tab_item1" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search reporting obligations">Search reporting obligations</a></li>
+				<li role="tab_item2" class="search"><a href="#tab_item2" aria-controls="tab_item2" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search">Search</a></li>	            
+			</ul>	       
+	    </div>
+    	<div id="filters" class="tab-content">    	
+    		<div role="tabpanel" class="filter tab-pane active" id="tab_item1">
+    			<form th:action="@{/obligations/search}" th:object="${obligation}" method="POST" name="f">
+    			<div class="row">
+                    <div class="labeldiv">
+                        <label for="shortName">Country or territory</label>
+                        <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+                    </div>
+	      			<div class="input">
+						<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
+							<option value="0" label="Any country or territory"></option>
+							<option th:each="country : ${countries}" th:text="${country.name}" th:value="${country.spatialId}" th:selected="(${country.spatialId} == *{spatialId})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+                       <div class="labeldiv">
+                           <label for="shortName">Issue</label>
+                           <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+                       </div>
+                       <div class="input">	
+						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
+							<option value="0" label="All issues"></option>
+			    			<option th:each="issue : ${issues}" th:text="${issue.issueName}" th:value="${issue.issueId}" th:selected="(${issue.issueId} == *{issueId})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+                       <div class="labeldiv">
+                           <label for="shortName">Organisation</label>
+                           <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+                       </div>
+                       <div class="input">
+						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+							<option value="0" label="Any organisation"></option>
+						    <option th:each="client : ${clients}" th:text="${client.acronym != null and client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" 
+						    th:value="${client.clientId}" th:selected="(${client.clientId} == *{clientId})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+                    <div class="labeldiv">
+                        <label for="shortName">Include terminated obligations</label>
+                        <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+                    </div>
+                    <div class="input inputcheck">
+                        <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
+                    </div>
+                </div>
+                <p class="actions">
+					<input name="filter" value="Search" class="mediumbuttonb searchButton" type="submit"/>
+				    <input name="Reset" value="Reset" class="mediumbuttonb " type="reset"/>
+				</p>
+                </form>    
+		  </div>
+		  		
+		  <div role="tabpanel" class="filter tab-pane" id="tab_item2">
+		  	<form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
+				<div class="row">
+					<div class="labeldiv">	 
+						<label for="queryfld">ROD website</label>
+					</div>
+					<div class="input">
+						<input id="queryfld" maxlength="255" name="expression" value="" type="text" class="smalltext">
+					</div>
+				</div>
+				<p class="actions">
+					<input name="execute" value="GO" class="go_btn" type="submit">
+				</p>
+			</form>
+		  </div>	  
+		  
+		 </div>	
       </div>
     </div>
     <!-- container -->

@@ -298,6 +298,19 @@ public class RODUtil {
 
         return "";
     }
-    
+    /**
+     * Cut out the text into 80 characters
+     * @param truncateText
+     * @return
+     */
+    public static String truncateText(String truncateText) {
+        if (truncateText == null || "".equals(truncateText)) {
+            return "";
+        } else if (truncateText.length() >= 80) {
+            return truncateText.substring(0, 79) + "..."; //"…";
+        } else {
+            return truncateText;
+        }
+    }
     
 }

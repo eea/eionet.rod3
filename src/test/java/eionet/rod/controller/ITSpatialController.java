@@ -129,4 +129,14 @@ public class ITSpatialController {
         		.andExpect(view().name("deadlines"));
     }
     
+    @Test
+    public void testspatial_search_deadlinesWithoutCsrf() throws Exception 
+    {
+    	this.mockMvc.perform(post("/spatial/1/deadlines/search")
+    			.param("issueId", "0")
+    			.param("deadlineId", "0")
+    			.param("clientId", "0"))
+				.andExpect(status().is4xxClientError());
+    }
+    
 }

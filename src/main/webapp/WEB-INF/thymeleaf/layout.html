@@ -24,6 +24,7 @@
     <!-- link rel="stylesheet" type="text/css" href="https:////cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" media="datatable"/ -->
     <!-- script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script -->
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     
 
@@ -96,12 +97,15 @@
               <li th:class="${activeTab == 'spatial'}? 'current' : null"><a href="spatial.html" th:href="@{/spatial}">Countries/territories</a></li>
               <li th:class="${activeTab == 'obligations'}? 'current' : null"><a href="obligations.html" th:href="@{/obligations}">Obligations</a></li>
               <li th:class="${activeTab == 'clients'}? 'current' : null"><a href="clients.html" th:href="@{/clients}">Clients</a></li>
-              <li sec:authorize-url="/datasets">
+              <li th:class="${activeTab == 'instruments'}? 'current' : null"><a href="instruments.html" th:href="@{/instruments}">Legal instruments</a></li>
+              <li th:class="${activeTab == 'subscribe'}? 'current' : null"><a href="subscribe.html" th:href="@{/subscribe}">Subscribe</a></li>
+              <!--  li sec:authorize-url="/datasets">
                 <a href="obligations.html" th:href="@{/obligations}">Obligations</a>
-              </li>
+              </li -->
               <li sec:authorize="hasRole('ADMIN')"  th:class="${activeTab == 'users'}? 'current' : null">
                 <a href="users.html" th:href="@{/users/view}">User authorisations</a>
               </li>
+              <li th:class="${activeTab == 'analysis'}? 'current' : null"><a href="analysis.html" th:href="@{/analysis}">Database statistics</a></li>
             </ul>
           </div>
         </div>

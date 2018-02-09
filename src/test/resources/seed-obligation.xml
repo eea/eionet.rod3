@@ -1,15 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 
-	<T_SOURCE
-      PK_SOURCE_ID="1" 
-      FK_TYPE_ID="2" 
-      TITLE="Convention for the protection of the marine environment of the north-east Atlantic"
-      ALIAS="alias"
-      LAST_UPDATE="2014-02-19 23:00:00"
-      SOURCE_CODE="sourceCode"
-    />
-
   <T_OBLIGATION   
         PK_RA_ID ="1"
 		FK_SOURCE_ID="1"

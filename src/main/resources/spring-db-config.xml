@@ -34,5 +34,16 @@
     <bean id="clientService" class="eionet.rod.dao.ClientServiceJdbc">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    
+       <bean id="undoService" class="eionet.rod.dao.UndoServiceJdbc">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="sourceService" class="eionet.rod.dao.SourceServiceJdbc">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
 
+	<bean id="AnalysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>

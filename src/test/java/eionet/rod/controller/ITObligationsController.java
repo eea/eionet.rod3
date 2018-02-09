@@ -1,5 +1,7 @@
 package eionet.rod.controller;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -59,7 +61,7 @@ public class ITObligationsController {
             .addFilters(this.springSecurityFilterChain)
             .build();
         databaseTester = new DataSourceDatabaseTester(datasource);
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("seed-obligation.xml"));
+        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("seed-obligation-source.xml"));
         databaseTester.setDataSet(dataSet);
         databaseTester.onSetup();
        
@@ -69,7 +71,7 @@ public class ITObligationsController {
      * Simple test to list countries.
      */
     @Test
-    public void listObligations() throws Exception {
+    public void viewObligations() throws Exception {
         this.mockMvc.perform(get("/obligations"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("obligations"));
@@ -81,12 +83,13 @@ public class ITObligationsController {
      * Simple test to display one obligation by ID.
      */
     @Test
-    public void viewObligationID() throws Exception {
+    public void obligation_overview() throws Exception {
     	 this.mockMvc.perform(get("/obligations/1"))
          	.andExpect(status().isOk())
          	.andExpect(model().attributeExists("obligation"))
         	.andExpect(model().attributeExists("breadcrumbs"))
-         	.andExpect(model().attributeExists("title"));
+         	.andExpect(model().attributeExists("title"))
+         	.andExpect(view().name("obligation_overview"));
 
         
     }
@@ -98,12 +101,13 @@ public class ITObligationsController {
     public void viewLegislation() throws Exception {
     	 this.mockMvc.perform(get("/obligations/1/legislation"))
          	.andExpect(status().isOk())
-         	.andExpect(model().attributeExists("obligationId"))
          	.andExpect(model().attributeExists("obligation"))
          	.andExpect(model().attributeExists("breadcrumbs"))
           	.andExpect(model().attributeExists("issues"))
          	.andExpect(model().attributeExists("ObligationCountries"))
-         	.andExpect(model().attributeExists("title"));
+         	.andExpect(model().attributeExists("title"))
+         	.andExpect(model().attributeExists("activeTab"))
+         	.andExpect(view().name("obligation_legislation"));
         
     }
     
@@ -112,8 +116,128 @@ public class ITObligationsController {
     public void testaddObligation() throws Exception
     {
     	this.mockMvc.perform(get("/obligations/add"))
-    		.andExpect(status().isOk());
+    		.andExpect(status().isOk())
+    		.andExpect(model().attributeExists("activeTab"));
 
     }
+    
+    
+    @Test
+    public void searchObligation() throws Exception 
+    {
+    	this.mockMvc.perform(post("/obligations/search")
+    		.with(csrf()))
+			.andExpect(status().isOk()) 
+			.andExpect(view().name("obligations"));
+    }
+    
+    @Test 
+    public void editClientForm() throws Exception
+    {
+    	this.mockMvc.perform(get("/obligations/1/edit")
+	    	.with(user("editor").roles("EDITOR")))
+			.andExpect(status().isOk()) 
+			.andExpect(model().attributeExists("title"))
+			.andExpect(model().attributeExists("activeTab"))
+			.andExpect(view().name("eobligation"));
+    }
+    
+    @Test
+    public void obligation_add() throws Exception
+    {
+    	this.mockMvc.perform(get("/obligations/add")
+    	    	.with(user("editor").roles("EDITOR")))
+    			.andExpect(status().isOk()) 
+    			.andExpect(model().attributeExists("title"))
+    			.andExpect(model().attributeExists("activeTab"))
+    			.andExpect(view().name("eobligation"));
+    }
+    
+    
+    @Test
+    public void addObligation() throws Exception
+    {
+    	this.mockMvc.perform(post("/obligations/add")
+    			.param("id", "add")
+    			.param("sourceId","1")
+    			.param("clientId", "1")
+    			.param("oblTitle", "Test Yoly")
+    			.param("description", "Description yoly")
+    			.param("reportFreqMonths", "25")
+    			.with(user("editor").roles("EDITOR"))
+        		.with(csrf()))
+    			.andExpect(status().isOk());
+    			//.andExpect(redirectedUrl("/obligations/edit"));
+    }
+    
+    
+    @Test
+    public void addObligationWithooutCsrf() throws Exception
+    {
+    	this.mockMvc.perform(post("/obligations/add")
+    			.param("id", "add")
+    			.param("sourceId","1")
+    			.param("clientId", "1")
+    			.param("oblTitle", "Test Yoly")
+    			.param("description", "Description yoly")
+    			.param("reportFreqMonths", "25")
+    			.with(user("editor").roles("EDITOR")))
+    			.andExpect(status().is4xxClientError());
+    			
+    }
+    
+    @Test 
+    public void editObligation() throws Exception
+	{
+    	this.mockMvc.perform(post("/obligations/edit")
+    			.param("id", "edit")
+    			.param("obligationId","1")
+    			.param("sourceId","1")
+    			.param("clientId", "1")
+    			.param("oblTitle", "Test Yoly")
+    			.param("description", "Description yoly")
+    			.param("reportFreqMonths", "25")
+    			.param("terminate", "N")
+    			.with(user("editor").roles("EDITOR"))
+        		.with(csrf()))
+    			.andExpect(status().isOk());
+    			//.andExpect(view().name("eobligation"));
+    }
+    
+    @Test 
+    public void editObligationWithoutCsrf() throws Exception
+	{
+    	this.mockMvc.perform(post("/obligations/edit")
+    			.param("id", "edit")
+    			.param("obligationId","1"))
+        		.andExpect(status().is4xxClientError());
 
+    }
+    
+    @Test 
+    public void deleteObligationsWithoutCsrf() throws Exception
+	{
+    	this.mockMvc.perform(post("/obligations/delete")
+    			.param("spatialId", "0")
+    			.param("issueId","0")
+    			.param("clientId", "0")
+    			.param("hrefdelete", "/rod/obligations/")
+    			.param("delObligations","1"))
+        		.andExpect(status().is4xxClientError());
+
+    }
+    
+    public void deleteObligationsWithCsrf() throws Exception
+	{
+    	this.mockMvc.perform(post("/obligations/delete")
+    			.param("spatialId", "0")
+    			.param("issueId","0")
+    			.param("clientId", "0")
+    			.param("hrefdelete", "/rod/obligations/")
+    			.param("delObligations","1")
+		    	.with(user("editor").roles("EDITOR"))
+				.with(csrf()))
+				.andExpect(status().isOk());
+    }
+    
 }

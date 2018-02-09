@@ -30,7 +30,7 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 
 
 /**
- * Test the spatial dao.
+ * Test the issue dao.
  */
 
 

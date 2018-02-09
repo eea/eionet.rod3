@@ -1,12 +1,15 @@
 function helpFunction(helpID){
+	
+	 var URLHelp = document.getElementById('hrefHelpModal').value;
+	 
 	$.ajax({
-		url : '../help.do',
+		url : URLHelp,
 		data : {
 			helpId : helpID
 		},
 		success : function(responseText) {
 			$("#title-modal").attr('title', responseText.title);
-			$("#help-text").text(responseText.text);
+			$("#help-text").html(responseText.text);
 			$('#title-modal').dialog();
 		}
 	});

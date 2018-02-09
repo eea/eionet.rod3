@@ -7,90 +7,109 @@
       <div th:include="layout :: bannerFragment">
       </div>
       <div id="workarea">
-<h1>Add new client</h1>
-<div id="operations">
-    <ul>
-        <li><a href="clients.html" th:href="@{/clients/view}" >Back to clients</a></li>
-    </ul>
-</div>
-<form action="#" th:action="@{/clients/add}" th:object="${client}" method="post">
-    <table class="formtable">
-            <tr>
-              <td>
-                <label class="question" for="name">Name</label>
-              </td>
-              <td>
-                <input id="name" maxlength="255" name="name" th:field="*{name}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="shortname">Short Name</label>
-              </td>
-              <td>
-                <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="acronym">Acronym</label>
-              </td>
-              <td>
-                <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="address">Address</label>
-              </td>
-              <td>
-                <input id="address" maxlength="255" name="address" th:field="*{address}"
-                    value="393 rue Saint-Jacques, suite 300" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="postalcode">Postal code</label>
-              </td>
-              <td>
-                <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="city">City</label>
-              </td>
-              <td>
-                <input id="city" maxlength="255" name="city" th:field="*{city}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="country">Country</label>
-              </td>
-              <td>
-                <input id="country" maxlength="255" name="country" th:field="*{country}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="homepage">Homepage</label>
-              </td>
-              <td>
-                <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="" type="text" size="68"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="question" for="description">Description</label>
-              </td>
-              <td>
-                <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}"></textarea>
-              </td>
-            </tr>
-    </table>
-    <input type="submit" value="Add client"/>
-</form>
+		<h1>Add new client</h1>
+		<div id="operations">
+		    <ul>
+		        <li><a href="clients.html" th:href="@{/clients/view}" >Back to clients</a></li>
+		    </ul>
+		</div>
+		<div class="panel-body">
+		<form action="#" th:action="@{/clients/add}" th:object="${client}" method="post" class="form-horizontal">
+		 <input name="clientsHref" id="clientsHref" th:value="@{'/clients/'}" type="hidden"/>
+		    <div class="datatable results">
+		         <div class="form-group">
+					<div class="col-lg-3 scope-row simple_attr_title">
+						<label for="oblTitle" class="control-label text-left">Name</label>
+		              </div>
+		              <a class="helpButton col-lg-1" title="Help on this field"></a>
+		              <div class="col-lg-8">
+		                <input id="name" maxlength="255" name="name" th:field="*{name}" value="" type="text" class="smalltext form-control"/>
+		              </div>
+		         </div>
+		         <div class="form-group">
+					<div class="col-lg-3 scope-row simple_attr_title">
+						<label for="shortname" class="control-label text-left">Short Name</label>
+		            </div>
+		            <a class="helpButton col-lg-1" title="Help on this field"></a>
+		            <div class="col-lg-8">
+		                <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" class="smalltext form-control"/>
+		            </div>
+		          </div>
+		          <div class="form-group">
+					<div class="col-lg-3 scope-row simple_attr_title">
+		                <label class="control-label text-left" for="acronym">Acronym</label>
+		            </div>
+		            <a class="helpButton col-lg-1" title="Help on this field"></a>
+		           	<div class="col-lg-8">
+		                <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="" type="text" class="smalltext form-control"/>
+		            </div>
+		          </div>
+		          <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="address">Address</label>
+			            </div>
+			             <a class="helpButton col-lg-1" title="Help on this field"></a>
+			            <div class="col-lg-8">
+			                <input id="address" maxlength="255" name="address" th:field="*{address}" value="" type="text" class="smalltext form-control"/>
+			            </div>
+		           </div>
+		           <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="postalcode">Postal code</label>
+			             </div>
+			             <a class="helpButton col-lg-1" title="Help on this field"></a>
+			             <div class="col-lg-8">
+			                <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="" type="text" class="smalltext form-control"/>
+			              </div>
+			            </div>
+		            <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="city">City</label>
+			            </div>
+			            <a class="helpButton col-lg-1" title="Help on this field"></a>
+			           	 <div class="col-lg-8">
+			                <input id="city" maxlength="255" name="city" th:field="*{city}" value="" type="text" class="smalltext form-control"/>
+			             </div>
+		            </div>
+		             <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="country">Country</label>
+			            </div>
+			            <a class="helpButton col-lg-1" title="Help on this field"></a>
+			            <div class="col-lg-8">
+			                <input id="country" maxlength="255" name="country" th:field="*{country}" value="" type="text" class="smalltext form-control"/>
+			            </div>
+		            </div>
+		           <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="homepage">Homepage</label>
+		              </div>
+		              <a class="helpButton col-lg-1" title="Help on this field"></a>
+		              <div class="col-lg-8">
+		                <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="" type="text" class="smalltext form-control"/>
+		              </div>
+		            </div>
+		            <div class="form-group">
+						<div class="col-lg-3 scope-row simple_attr_title">
+			                <label class="control-label text-left" for="description">Description</label>
+		              	</div>
+		              	<a class="helpButton col-lg-1" title="Help on this field"></a>
+		             	<div class="col-lg-8">
+		             	   <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}" class="smalltext form-control"></textarea>
+		              	</div>
+		            </div>
+		    </div>
+		    <script type="text/javascript">
+			   	function exit(){
+					location.href = document.getElementById('clientsHref').value;
+				}
+		  	</script>
+		    <div>
+		    	<input type="submit" value="Add client" />
+		    	<input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>
+		    </div>  
+		</form>
+		</div>
       </div>
     </div>
     <!-- container -->

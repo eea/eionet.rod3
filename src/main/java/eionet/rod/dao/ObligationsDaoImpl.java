@@ -1,5 +1,6 @@
 package eionet.rod.dao;
 
+import java.sql.DriverManager;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.dbunit.database.DatabaseDataSourceConnection;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,6 +19,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
@@ -39,11 +42,15 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcInsert jdbcInsert;
+	private String dbname;
+	
+	
 	
 	@Resource
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		this.jdbcInsert = new SimpleJdbcInsert(dataSource);
+		//dbname = DriverManagerDataSource.class.get;
 	}
 
 	@Override
@@ -68,7 +75,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("No data in the database");
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
 	 
 	}
@@ -143,10 +150,14 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	@Override
 	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase) {
+		
+		
+		
 		String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, "
 				+ "OB.NEXT_DEADLINE as nextDeadline, "
-				//+ "CASE WHEN OB.NEXT_DEADLINE THEN (DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y')) ELSE '' END as nextDeadline, "
+				//+ "CASE WHEN OB.NEXT_DEADLINE != '0000-00-00' THEN OB.NEXT_DEADLINE ELSE '' END as nextDeadline, "
+				
 				//+ "IF(OB.NEXT_DEADLINE, DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y'), '') as nextDeadline, "
 				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting, OB.FK_DELIVERY_COUNTRY_IDS as hasDelivery "
 				+ "FROM T_OBLIGATION OB "
@@ -156,38 +167,41 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-				if ((!issueId.equals("0") && issueId != null) || (!clientId.equals("0")  && clientId != null) || (!spatialId.equals("0")  && spatialId != null) || (terminate != null && !terminate.equals("")) || (!deadlineCase.equals("0")  && deadlineCase != null)) {
+				if ((issueId != null && !issueId.equals("0")) || (clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (terminate != null && !terminate.equals("")) || (deadlineCase != null && !deadlineCase.equals("0"))) {
 					query += "WHERE ";
 				}
-				if (!clientId.equals("0")  && clientId != null) {
+				if (clientId != null && !clientId.equals("0")) {
 					query += "CLK.FK_CLIENT_ID = " + clientId;
 				}
-				if (!spatialId.equals("0")  && spatialId != null) {
-					if (!clientId.equals("0")  && clientId != null) {
+				if (spatialId != null && !spatialId.equals("0")) {
+					if (clientId != null && !clientId.equals("0")) {
 						query += " and ";	
 					}
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
-				if (!issueId.equals("0")  && issueId != null) {
-					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null)) {
+				if (issueId != null && !issueId.equals("0")) {
+					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0"))) {
 						query += " and ";	
 					}
 					query += "RAI.FK_ISSUE_ID = " + issueId;
 				}
 				if (terminate != null && !terminate.equals(""))  {
-					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null) || (!issueId.equals("0")  && issueId != null)) {
+					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (issueId != null && !issueId.equals("0"))) {
 						query += " and ";	
 					}
 					query += "OB.Terminate = '" + terminate + "'";
 				}
-				if (!deadlineCase.equals("0")  && deadlineCase != null) {
-					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null) || (!issueId.equals("0")  && issueId != null) || (terminate != null && !terminate.equals(""))) {
+				if (deadlineCase != null && !deadlineCase.equals("0")) {
+					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (issueId != null && !issueId.equals("0")) || (terminate != null && !terminate.equals(""))) {
 						query += " and ";	
 					}
 					String queryDeadline = handleDeadlines(deadlineCase) ;
 					query += queryDeadline;
 				}
+					
+				
                 query += " ORDER BY oblTitle";
+                
 		
 //		String queryCount = "SELECT COUNT(DISTINCT OB.PK_RA_ID) as obligationId "
 //				+ "FROM T_OBLIGATION OB "
@@ -243,7 +257,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 //			}
 //			
 //		} catch (DataAccessException e) {
-//			throw new ResourceNotFoundException("No data in the database");
+//			throw new ResourceNotFoundException("DataAccessException error: " + e);
 //		}
 		
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
@@ -252,6 +266,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	@Override
 	public Obligations findOblId(Integer OblId) throws ApplicationContextException {
+		Obligations obligation = null;
 		String query = "SELECT OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "OB.EEA_PRIMARY as eeaPrimary, OB.EEA_CORE as eeaCore, OB.FLAGGED as flagged, OB.COORDINATOR as coordinator, OB.COORDINATOR_URL as coordinatorUrl, "
 				+ "OB.COORDINATOR_ROLE as coordinatorRole, OB.COORDINATOR_ROLE_SUF as coordinatorRoleSuf, OB.NATIONAL_CONTACT as nationalContact, OB.NATIONAL_CONTACT_URL as nationalContactUrl, OB.TERMINATE as terminate, " 
@@ -299,7 +314,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The obligation you requested with id " + OblId + " was not found in the database");
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
 		
 	}
@@ -310,14 +325,14 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 public List<SiblingObligation> findSiblingObligations(Integer siblingoblId) {
 
 	        String query = "SELECT o2.PK_RA_ID as siblingoblId, o2.FK_SOURCE_ID as fkSourceId , o2.TITLE as siblingTitle, o2.AUTHORITY as authority, o2.TERMINATE as terminate "
-	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-	        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
-	        + "ORDER BY o2.TITLE";
+		        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
+		        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
+		        + "ORDER BY o2.TITLE";
 
 	       
 	        String queryCount = "SELECT Count(*) as siblingoblId "
-	    	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-	    	        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
+    	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
+	    	    + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
 
 
 	        
@@ -338,7 +353,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				}
 				
 			} catch (DataAccessException e) {
-				throw new ResourceNotFoundException("The obligation you requested with id " + siblingoblId + " was not found in the database");
+				throw new ResourceNotFoundException("DataAccessException error: " + e);
 			}
 	      
 	    }
@@ -370,7 +385,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("No data in the database");
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
         
 	}
@@ -402,7 +417,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("No data in the database");
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
         
 	}
@@ -412,118 +427,123 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 */
 	@Override
 	public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allObligationsIssues) {
-
-    	jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName("T_OBLIGATION").usingGeneratedKeyColumns(
-                "PK_RA_ID");
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("TITLE", obligation.getOblTitle()); //obl
-        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
-        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
-        if (obligation.getFirstReporting() != null && obligation.getFirstReporting() != "") {
-        	parameters.put("FIRST_REPORTING", RODUtil.str2Date(obligation.getFirstReporting()));
-        }else {
-        	parameters.put("FIRST_REPORTING", null);
-        }
-        if (obligation.getValidTo() != null && obligation.getValidTo() != "") {
-        	parameters.put("VALID_TO", RODUtil.str2Date(obligation.getValidTo()));
-        }else {
-        	parameters.put("VALID_TO", null);
-        }
-        if (obligation.getReportFreqMonths() == "" || obligation.getReportFreqMonths() == null) {
-        	parameters.put("REPORT_FREQ_MONTHS", null);
-        }else {
-        	parameters.put("REPORT_FREQ_MONTHS", Integer.parseInt(obligation.getReportFreqMonths()));
-        }
-        if (obligation.getNextDeadline() != null && obligation.getNextDeadline() != "") {
-        	parameters.put("NEXT_DEADLINE",RODUtil.str2Date(obligation.getNextDeadline()));
-        }else {
-        	parameters.put("NEXT_DEADLINE",null);
-        }
-        if (obligation.getNextDeadline2() != null && obligation.getNextDeadline2() != "") {
-        	parameters.put("NEXT_DEADLINE2",RODUtil.str2Date(obligation.getNextDeadline2()));
-        }else {
-        	parameters.put("NEXT_DEADLINE2",null);
-        }
-        parameters.put("TERMINATE",obligation.getTerminate()); //obl
-        parameters.put("NEXT_REPORTING",obligation.getNextReporting());
-        parameters.put("DATE_COMMENTS",obligation.getDateComments());
-        parameters.put("FORMAT_NAME",obligation.getFormatName());
-        parameters.put("REPORT_FORMAT_URL",obligation.getReportFormatUrl());
-        if (obligation.getValidSince() != null && obligation.getValidSince() != "") {
-        	parameters.put("VALID_SINCE",RODUtil.str2Date(obligation.getValidSince()));
-        }else {
-        	parameters.put("VALID_SINCE",null);
-        }
-        
-        parameters.put("REPORTING_FORMAT",obligation.getReportingFormat());
-        parameters.put("LOCATION_INFO",obligation.getLocationInfo());
-        parameters.put("LOCATION_PTR",obligation.getLocationPtr());
-        parameters.put("DATA_USED_FOR",obligation.getDataUsedFor());
-        parameters.put("DATA_USED_FOR_URL",obligation.getDataUsedForUrl());
-        parameters.put("COORDINATOR_ROLE",obligation.getCoordinatorRole());
-        if (obligation.getCoordinatorRoleSuf() == null) {
-        	parameters.put("COORDINATOR_ROLE_SUF",0); //obl
-        }else {
-        	parameters.put("COORDINATOR_ROLE_SUF",Integer.parseInt(obligation.getCoordinatorRoleSuf())); //obl
-        }
-        parameters.put("COORDINATOR",obligation.getCoordinator());
-        parameters.put("COORDINATOR_URL",obligation.getCoordinatorUrl());
-        parameters.put("RESPONSIBLE_ROLE",obligation.getResponsibleRole());
-        if (obligation.getResponsibleRoleSuf() == null) {
-        	parameters.put("RESPONSIBLE_ROLE_SUF",0); //obl
-        }else {
-        	parameters.put("RESPONSIBLE_ROLE_SUF",Integer.parseInt(obligation.getResponsibleRoleSuf())); //obl
-        }
-        parameters.put("NATIONAL_CONTACT",obligation.getNationalContact());
-        parameters.put("NATIONAL_CONTACT_URL",obligation.getNationalContactUrl());
-        parameters.put("PARAMETERS",obligation.getParameters());
-        parameters.put("EEA_PRIMARY",obligation.getEeaPrimary());
-        parameters.put("EEA_CORE",obligation.getEeaCore());
-        parameters.put("FLAGGED",obligation.getFlagged());
-        parameters.put("OVERLAP_URL",obligation.getOverlapUrl());
-        parameters.put("COMMENT",obligation.getComment());
-        parameters.put("AUTHORITY",obligation.getAuthority());
-        
-     // java.sql.Date
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
-        
-        parameters.put("LAST_UPDATE",ourJavaDateObject);
-        if (obligation.getContinousReporting() == null) {
-        	parameters.put("CONTINOUS_REPORTING","no");
-        }else {
-        	parameters.put("CONTINOUS_REPORTING",obligation.getContinousReporting());
-        }
-        
-        // execute insert
-        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
-                parameters));
-     // convert Number to Int using ((Number) key).intValue()
-        Integer obligationID = ((Number) key).intValue();
-        
-        //Insert client with status = M
-        String queryClientM = "INSERT INTO T_CLIENT_OBLIGATION_LNK (FK_CLIENT_ID, FK_RA_ID, STATUS) "
-                + " VALUES (?,?,?)";
-
-         jdbcTemplate.update(queryClientM,
-                obligation.getClientId(),
-                obligationID,
-                "M");
-              
-         //Insert clients with status = C
-         insertAllClients(allObligationClients,"C",obligationID);
-                          
-        //Insert formal countries with voluntary = N  
-         insertAllObligationsCountries(allObligationCountries, "N", obligationID);
+		try {
+	    	jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+	        jdbcInsert.withTableName("T_OBLIGATION").usingGeneratedKeyColumns(
+	                "PK_RA_ID");
+	        Map<String, Object> parameters = new HashMap<String, Object>();
+	        parameters.put("TITLE", obligation.getOblTitle()); //obl
+	        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
+	        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
+	        if (obligation.getFirstReporting() != null && obligation.getFirstReporting() != "") {
+	        	parameters.put("FIRST_REPORTING", RODUtil.str2Date(obligation.getFirstReporting()));
+	        }else {
+	        	parameters.put("FIRST_REPORTING", null);
+	        }
+	        if (obligation.getValidTo() != null && obligation.getValidTo() != "") {
+	        	parameters.put("VALID_TO", RODUtil.str2Date(obligation.getValidTo()));
+	        }else {
+	        	parameters.put("VALID_TO", null);
+	        }
+	        if (obligation.getReportFreqMonths() == "" || obligation.getReportFreqMonths() == null) {
+	        	parameters.put("REPORT_FREQ_MONTHS", null);
+	        }else {
+	        	parameters.put("REPORT_FREQ_MONTHS", Integer.parseInt(obligation.getReportFreqMonths()));
+	        }
+	        if (obligation.getNextDeadline() != null && obligation.getNextDeadline() != "") {
+	        	parameters.put("NEXT_DEADLINE",RODUtil.str2Date(obligation.getNextDeadline()));
+	        }else {
+	        	parameters.put("NEXT_DEADLINE",null);
+	        }
+	        if (obligation.getNextDeadline2() != null && obligation.getNextDeadline2() != "") {
+	        	parameters.put("NEXT_DEADLINE2",RODUtil.str2Date(obligation.getNextDeadline2()));
+	        }else {
+	        	parameters.put("NEXT_DEADLINE2",null);
+	        }
+	        parameters.put("TERMINATE",obligation.getTerminate()); //obl
+	        parameters.put("NEXT_REPORTING",obligation.getNextReporting());
+	        parameters.put("DATE_COMMENTS",obligation.getDateComments());
+	        parameters.put("FORMAT_NAME",obligation.getFormatName());
+	        parameters.put("REPORT_FORMAT_URL",obligation.getReportFormatUrl());
+	        if (obligation.getValidSince() != null && obligation.getValidSince() != "") {
+	        	parameters.put("VALID_SINCE",RODUtil.str2Date(obligation.getValidSince()));
+	        }else {
+	        	parameters.put("VALID_SINCE",null);
+	        }
+	        
+	        parameters.put("REPORTING_FORMAT",obligation.getReportingFormat());
+	        parameters.put("LOCATION_INFO",obligation.getLocationInfo());
+	        parameters.put("LOCATION_PTR",obligation.getLocationPtr());
+	        parameters.put("DATA_USED_FOR",obligation.getDataUsedFor());
+	        parameters.put("DATA_USED_FOR_URL",obligation.getDataUsedForUrl());
+	        parameters.put("COORDINATOR_ROLE",obligation.getCoordinatorRole());
+	        if (obligation.getCoordinatorRoleSuf() == null) {
+	        	parameters.put("COORDINATOR_ROLE_SUF",0); //obl
+	        }else {
+	        	parameters.put("COORDINATOR_ROLE_SUF",Integer.parseInt(obligation.getCoordinatorRoleSuf())); //obl
+	        }
+	        parameters.put("COORDINATOR",obligation.getCoordinator());
+	        parameters.put("COORDINATOR_URL",obligation.getCoordinatorUrl());
+	        parameters.put("RESPONSIBLE_ROLE",obligation.getResponsibleRole());
+	        if (obligation.getResponsibleRoleSuf() == null) {
+	        	parameters.put("RESPONSIBLE_ROLE_SUF",0); //obl
+	        }else {
+	        	parameters.put("RESPONSIBLE_ROLE_SUF",Integer.parseInt(obligation.getResponsibleRoleSuf())); //obl
+	        }
+	        parameters.put("NATIONAL_CONTACT",obligation.getNationalContact());
+	        parameters.put("NATIONAL_CONTACT_URL",obligation.getNationalContactUrl());
+	        parameters.put("PARAMETERS",obligation.getParameters());
+	        parameters.put("EEA_PRIMARY",obligation.getEeaPrimary());
+	        parameters.put("EEA_CORE",obligation.getEeaCore());
+	        parameters.put("FLAGGED",obligation.getFlagged());
+	        parameters.put("OVERLAP_URL",obligation.getOverlapUrl());
+	        parameters.put("COMMENT",obligation.getComment());
+	        parameters.put("AUTHORITY",obligation.getAuthority());
+	        
+	     // java.sql.Date
+	        Calendar calendar = Calendar.getInstance();
+	        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
+	        
+	        parameters.put("LAST_UPDATE",ourJavaDateObject);
+	        if (obligation.getContinousReporting() == null) {
+	        	parameters.put("CONTINOUS_REPORTING","no");
+	        }else {
+	        	parameters.put("CONTINOUS_REPORTING",obligation.getContinousReporting());
+	        }
+	        
+	        // execute insert
+	        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
+	                parameters));
+	     // convert Number to Int using ((Number) key).intValue()
+	        Integer obligationID = ((Number) key).intValue();
+	        
+	        //Insert client with status = M
+	        String queryClientM = "INSERT INTO T_CLIENT_OBLIGATION_LNK (FK_CLIENT_ID, FK_RA_ID, STATUS) "
+	                + " VALUES (?,?,?)";
+	
+	         jdbcTemplate.update(queryClientM,
+	                obligation.getClientId(),
+	                obligationID,
+	                "M");
+	              
+	         //Insert clients with status = C
+	         insertAllClients(allObligationClients,"C",obligationID);
+	                          
+	        //Insert formal countries with voluntary = N  
+	         insertAllObligationsCountries(allObligationCountries, "N", obligationID);
+	         
+	        //Insert voluntary countries with voluntary = Y
+	         insertAllObligationsCountries(allObligationVoluntaryCountries, "Y", obligationID);
+	                 
+	         //Insert Issues
+	         insertAllIssues(allObligationsIssues, obligationID);
+	         return obligationID;
+	         
+		}catch (DataAccessException e){
+			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		}
          
-        //Insert voluntary countries with voluntary = Y
-         insertAllObligationsCountries(allObligationVoluntaryCountries, "Y", obligationID);
-                 
-         //Insert Issues
-         insertAllIssues(allObligationsIssues, obligationID);
-         
-        return obligationID;
+   
     }
 	
 	/** */
@@ -661,6 +681,21 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 
         //Insert Issues
         insertAllIssues(allObligationsIssues, obligations.getObligationId());
+    	
+    }
+    
+    public void deleteObligations(String obligations) {
+    	String[] listObligations = obligations.split(",");
+    	
+    	for (int i = 0; i < listObligations.length; i++) {
+    		deleteCountries(Integer.parseInt(listObligations[i]), "N");
+    		deleteCountries(Integer.parseInt(listObligations[i]), "Y");
+    		deleteClients(Integer.parseInt(listObligations[i]), "M");
+    		deleteClients(Integer.parseInt(listObligations[i]), "C");
+    		deleteIssues(Integer.parseInt(listObligations[i]));
+      	}
+    	
+    	jdbcTemplate.update("DELETE FROM T_OBLIGATION where PK_RA_ID in (" + obligations + ")");
     	
     }
 	

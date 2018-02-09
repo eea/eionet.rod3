@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+    <div id="container">
+     <div th:include="layout :: bannerFragment" ></div>
+      <div id="workarea">
+      		 <div th:if="${message}" th:text="${message}" class="system-msg">Subscription successful</div>
+			
+			<h1>Get notifications in your email</h1>
+			<div class="advice-msg">
+				<strong>Note</strong>
+				<p>This will make an additional subscription even if you have subscribed before. To change
+					or delete your existing subscriptions, go to the <a
+						href="http://uns.eionet.europa.eu/subsc/edit?sid=111138205489">Unified Notification
+						Service (UNS)</a>.</p>
+			</div>
+
+			<form th:action="@{subscribe}" method="post" class="form-horizontal" th:object="${subscribe}">
+				<div class="formtable datatable results">
+
+						<div class="form-group">
+							<div  class="col-lg-4">
+								<strong>My interests:</strong>
+							</div>
+							<div class="col-lg-8">
+								<input id="deadlines" name="eventType" value="Approaching deadline" type="checkbox" th:field="*{eventTypeDeadline}"/>
+								<label for="deadlines">Approaching deadlines</label>
+								<br />
+								<input id="changes" name="eventType" value="Obligation change"	type="checkbox" th:field="*{eventTypeOblChange}"/>
+								<label for="changes">Changes to obligations</label>
+								<br />
+								<input id="newobl" name="eventType" value="New obligation" type="checkbox" th:field="*{eventTypeObligation}"/>
+								<label for="newobl">New obligations</label>
+								<br />
+								<input id="changes_inst" name="eventType" value="Instrument change"	type="checkbox" th:field="*{eventTypeInstrument}"/>
+								<label for="changes_inst">Changes to instruments</label>
+								<br />
+								<input id="newinst" name="eventType" value="New instrument" type="checkbox" th:field="*{eventTypeNewInstrument}"/>
+								<label for="newinst">New instrument</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								<strong>Coverage:</strong>
+							</div>
+							<div class="col-lg-8">
+								<select id="selectedCountry" class="form-control" name="selectedCountry" th:field="*{selectedCountry}"> 
+									<option value="">All countries or territories</option>
+									<option  th:each="country : ${allcountries}" th:value="${country.spatialId}" th:text="${subscribe.truncateText(country.name)}"></option>
+								</select>
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								<strong>Issue:</strong>
+							</div>
+							<div class="col-lg-8">
+								<select name="selectedIssue" class="form-control" id="selectedIssue" th:field="*{selectedIssue}"> 
+									<option value="">All issues</option>
+									<option th:each="issue : ${issues}" th:value="${issue.issueId}" th:text="${issue.issueName}" class="form-control" th:selected="(${issue.issueId} == *{selectedIssue})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								<strong>Organisation:</strong>
+							</div>
+							<div class="col-lg-8">
+								<select name="selectedClient" id="selectedClient" class="form-control" th:field="*{selectedClient}"> 
+									<option value="">All organisations</option>
+				    				<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != ''} ? ${client.acronym} + ' - ' + ${subscribe.truncateText(client.name)} : ${subscribe.truncateText(client.name)}" th:selected="(${client.clientId} == *{selectedClient})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								<strong>Obligation:</strong>
+							</div>
+							<div class="col-lg-8">
+								<select name="selectedObligation" id="selectedObligation" class="form-control" th:field="*{selectedObligation}">
+									<option value="">All obligations</option>
+									<option th:each="obligation : ${obligations}" th:value="${obligation.obligationId}" th:text="${obligation.oblTitle}" class="form-control" th:selected="(${obligation.obligationId} == *{selectedObligation})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								<strong>Instrument:</strong>
+							</div>
+							<div class="col-lg-8">
+
+								<select name="selectedInstrument" id="selectedInstrument" class="form-control">
+									<option value="">All instruments</option>
+									<option th:each="instrument : ${instruments}" th:value="${instrument.sourceId}" th:text="${subscribe.truncateText(instrument.sourceAlias)}" class="form-control" th:selected="(${instrument.sourceId} == *{selectedInstrument})"></option>
+								   
+								</select>
+
+							</div>
+						</div>
+				</div>
+
+				<div>
+					<input name="subscribe" value="Subscribe" type="submit" class="btn btn-primary" />
+				</div>
+				
+				
+			</form>
+		</div>  
+	<div id="pagefoot" th:include="layout :: footerFragment"></div>
+    </div>
+  </body>
+</html>

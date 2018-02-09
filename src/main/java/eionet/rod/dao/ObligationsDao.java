@@ -34,5 +34,7 @@ public interface ObligationsDao {
 	public List<Issue> findAllIssuesbyObligation(Integer ObligationID);
 	
 	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase);
+	
+	public void deleteObligations(String obligations);
 		
 }

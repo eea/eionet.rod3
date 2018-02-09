@@ -2,251 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:include="layout :: headerFragment"></head>
   <body>
+  <script>
+	 $(document).ready(function(){
+	    $('#clientsTable').DataTable({
+	    	"sDom": 'Tfrtipt',
+	    	"sPaginationType": "full_numbers"
+	    });
+	    
+	});
+	</script>
+  
   <div id="container">
     <div th:include="layout :: bannerFragment" ></div>
      <div id="workarea">
-        <div  sec:authorize="hasRole('EDITOR')" id="drop-operations">
-          <h2>Operations</h2>
-          <ul>
-            <li><a href="clientNewClient.html" th:href="@{/clients/add}">Add client</a></li>
-          </ul>
-        </div>
-
-        <h1>Clients</h1>
-        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-        <div th:if="${#lists.isEmpty(allClients)}">Table is empty.</div>
-        <div th:if="${not #lists.isEmpty(allClients)}">
-          <table class="datatable results">
-            <thead>
-              <tr>
-                <th class="sortable">
-                  <a href="#">Client name</a>
-                </th>
-                <th class="sortable">
-                  <a href="#">Client acronym</a>
-                </th>
-              </tr>
-            </thead>
-            <tbody th:remove="all-but-first">
-              <tr th:each="client, iterStat : ${allClients}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-                <td>
-                  <a th:href="@{'/clients/'+${client.clientId}}" href="clientfactsheet.html" th:text="${client.name}">ACCOBAMS Secretariat</a>
-                </td>
-                <td th:text="${client.acronym}">ACCOBAMS</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/68">Alpine Convention Secretariat</a>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/8">Arctic Council, AMAP Secretariat</a>
-                </td>
-                <td>AMAP</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/72">Baltic Marine Environment Protection Commission (Helsinki Commission)</a>
-                </td>
-                <td>HELCOM</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/83">Helsinki Commission</a>
-                </td>
-                <td>HELCOM</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/14">International Commission for the Protection of the Danube River</a>
-                </td>
-                <td>ICPDR</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/15">International Commission for the Protection of the Elbe</a>
-                </td>
-                <td>ICPE / IKSE / MKOL</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/79">International Cooperative Programme on Modelling and Mapping of Critical Levels and Loads and Air Pollution Effects, Risks and Trends</a>
-                </td>
-                <td>ICP M&amp;M</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/23">International Council for the Exploration of the Sea</a>
-                </td>
-                <td>ICES</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/25">International Maritime Organisation</a>
-                </td>
-                <td>IMO</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/66">International Whaling Commission</a>
-                </td>
-                <td>IWC</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/98">Joint Research Centre - European Commission</a>
-                </td>
-                <td>JRC</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/86">National Authorities, International Organisations, Public, Scientific Community etc</a>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/16">Oder Commission</a>
-                </td>
-                <td>ICPOAP</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/39">Organization for Economic Cooperation and Development</a>
-                </td>
-                <td>OECD</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/4">OSPAR Convention</a>
-                </td>
-                <td>OSPAR</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/69">Programme Co-ordinating Centre</a>
-                </td>
-                <td>PCC</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/49">Ramsar Bureau and the Scientific and Technical Review Panel</a>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/48">Ramsar Convention</a>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/37">Rhine Commission</a>
-                </td>
-                <td>ICPR (RHINE)</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/67">Scientific Committee, via the IWC Secretariat</a>
-                </td>
-                <td>SC-IWC</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/106">Secretariat of the Union for the Mediterranean</a>
-                </td>
-                <td>UfMS</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/73">The International Tropical Timber Organisation</a>
-                </td>
-                <td>ITTO</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/93">Trilateral Monitoring and Assessment Group</a>
-                </td>
-                <td>TMAP</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/35">UN Framework Convention on Climate Change</a>
-                </td>
-                <td>UNFCCC</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/74">UNCCD, Permanent Secretariat</a>
-                </td>
-                <td>UNCCD</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/34">UNECE Environment and Human Settlements Division</a>
-                </td>
-                <td>UNECE</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/1">UNEP - Ozone Secretariat</a>
-                </td>
-                <td>OZONE</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/44">UNEP-CMS Secretariat</a>
-                </td>
-                <td>CMS</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/45">UNEP/AEWA Secretariat</a>
-                </td>
-                <td>AEWA</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/46">UNEP/ASCOBANS Secretariat</a>
-                </td>
-                <td>ASCOBANS</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/54">UNESCO World Heritage Centre</a>
-                </td>
-                <td>UNESCO</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/11">United Nations</a>
-                </td>
-                <td>UN</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/51">United Nations Educational, Scientific and Cultural Organization</a>
-                </td>
-                <td>UNESCO</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/41">United Nations Environment Programme</a>
-                </td>
-                <td>UNEP</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="/clients/97">United Nations Statistics Division</a>
-                </td>
-                <td>UNSD</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+     
+     	<form  name="f">
+	        <div class="title">
+	        <h1>Clients</h1>
+	        <ul class="menu-operations">
+		     	<li><span>Operations</span>
+					<ul>
+		           		<li><a href="clientNewClient.html" th:href="@{/clients/add}">Add client</a></li>
+		          	</ul>
+		        </li>
+	        </ul>
+	        </div>
+	        
+       		<div class="clearfix margin-top-60">
+       	
+		        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+		        <div th:if="${#lists.isEmpty(allClients)}">There are no results.</div>
+		        <div th:if="${not #lists.isEmpty(allClients)}">
+		          
+		          <table id="clientsTable" class="datatable results table table-striped table-bordered">
+			        <thead>
+				        <tr>
+				        	<th>Client name</th>
+		                	<th>Client acronym</th>
+		                </tr>
+		               </thead>
+		           	  <tr th:each="client, iterStat : ${allClients}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+		              	<td>
+		                    <a th:href="@{'/clients/'+${client.clientId}}" href="clientfactsheet.html" th:text="${client.name}"></a>
+		               </td>
+		               <td class="col-xs-8" th:text="${client.acronym}"></td>
+		             </tr>  
+		            </table>
+		        </div>
+	      	</div>
+        </form>
       </div>
       <div id="pagefoot" th:include="layout :: footerFragment"></div>
     </div>

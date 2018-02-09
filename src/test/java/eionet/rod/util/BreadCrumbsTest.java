@@ -1,6 +1,5 @@
 package eionet.rod.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import eionet.rod.model.BreadCrumb;
 

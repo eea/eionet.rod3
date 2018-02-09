@@ -2,6 +2,7 @@ package eionet.rod.controller;
 
 import eionet.rod.model.BreadCrumb;
 import eionet.rod.model.ClientDTO;
+
 import eionet.rod.model.Issue;
 import eionet.rod.model.ObligationCountry;
 import eionet.rod.dao.ClientService;
@@ -37,7 +38,7 @@ import javax.validation.Valid;
 
 
 /**
- * Spatial managing controller.
+ * Obligation managing controller.
  */
 @Controller
 @RequestMapping("/obligations")
@@ -56,7 +57,7 @@ public class ObligationsController {
     
          
     /**
-     * Service for spatial management.
+     * Service for obligation management.
      */
     @Autowired
     ObligationService obligationsService;
@@ -108,6 +109,20 @@ public class ObligationsController {
         return "obligations";
     }
 
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	 @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	 public String deleteObligations(Obligations obligations, Model model) {
+		 if (obligations.getDelObligations() != null) {
+			 obligationsService.deleteObligations(obligations.getDelObligations());
+		 }
+
+		 return "redirect:view";
+	 }
+    
     /**
      * 
      * @param obligations
@@ -115,7 +130,7 @@ public class ObligationsController {
      * @return view obligations
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String searchObligation(Obligations obligations, Model model) {
+    public String searchObligation(Obligations obligations, Model model) {
     	
     	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0"));
 
@@ -140,6 +155,7 @@ public class ObligationsController {
          return "obligations";
     }
    
+         
     /**
      * obligations details by ID (overview)
      */
@@ -278,6 +294,8 @@ public class ObligationsController {
         List<Issue> allIssuesObligationEdit = obligationsService.findAllIssuesbyObligation(obligationId);
         model.addAttribute("obligationIssues", allIssuesObligationEdit);
         
+        model.addAttribute("title","Edit Reporting Obligation for");
+        
         model.addAttribute("id","edit");
         
         return "eobligation";
@@ -310,6 +328,7 @@ public class ObligationsController {
                 
        return "eobligation";
     }
+    
     /**
      * 
      * @param obligations
@@ -321,9 +340,7 @@ public class ObligationsController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addObligation(@Valid Obligations obligations, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		BreadCrumbs.set(model, obligationCrumb, new BreadCrumb("Edit reporting obligation for"));
-    	model.addAttribute("activeTab", "obligations");
-    	model.addAttribute("title","Edit Reporting Obligation for");
-           
+    	
         //List of clients with status = C
         List<ClientDTO> allclients = clientService.getAllClients();
         model.addAttribute("allClients", allclients);
@@ -361,7 +378,6 @@ public class ObligationsController {
 //				redirectAttributes.addFlashAttribute("oblTitle", "Field is mandatory!");
 //			}
 //
-			return "eobligation";
 		}else {
 			//insertamos y reenviamos a redirect:edit:id
         
@@ -372,8 +388,14 @@ public class ObligationsController {
 			model.addAttribute("obligation", obligations);
 
 			model.addAttribute("id","edit");
-			return "eobligation";
+			
 		}
+        
+		model.addAttribute("activeTab", "obligations");
+    	
+    	model.addAttribute("title","Edit Reporting Obligation for");
+        
+        return "eobligation";
 		
 	}
     
@@ -452,10 +474,11 @@ public class ObligationsController {
         model.addAttribute("obligation", obligations);
         
         model.addAttribute("id","edit");
-        model.addAttribute("message", "data saved correctly");
+        model.addAttribute("message", "Data saved correctly");
         
 		return "eobligation";
     }
+	
 		
 	/**
 	 * 

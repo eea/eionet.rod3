@@ -1,18 +1,15 @@
 package eionet.rod.dao;
  
-import java.util.List;
- 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
  
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class ITUserManagementService {
  

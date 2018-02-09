@@ -2,6 +2,8 @@ package eionet.rod.dao;
 
 import java.util.List;
 import eionet.rod.model.ClientDTO;
+import eionet.rod.model.InstrumentDTO;
+import eionet.rod.model.Obligations;
 
 /**
  * Service to store metadata for T_CLIENT using JDBC.
@@ -30,5 +32,13 @@ public interface ClientService {
      */
     
     List<ClientDTO> findOblClients(Integer raID, String c);
+    
+    List<Obligations> getDirectObligations(Integer clientId);
+    
+    List<Obligations> getIndirectObligations(Integer clientId);
+    
+    List<InstrumentDTO> getDirectInstruments(Integer clientId);
+    
+    List<InstrumentDTO> getIndirectInstruments(Integer clientId);
     
 }

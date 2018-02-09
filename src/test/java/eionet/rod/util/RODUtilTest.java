@@ -131,4 +131,10 @@ public class RODUtilTest {
     	assertEquals("NULL" ,RODUtil.strDate(""));
     }
     
+    @Test 
+    public void truncateText() {
+    	assertEquals("National Authorities, International Organisations, Public, Scientific Community...",RODUtil.truncateText("National Authorities, International Organisations, Public, Scientific Community etc"));
+    	assertEquals("Bonn Agreement Secretariat",RODUtil.truncateText("Bonn Agreement Secretariat"));
+    }
+    
  }

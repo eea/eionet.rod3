@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+	<div th:include="layout :: bannerFragment" ></div>
+    <div id="workarea">
+    	<div class="title">
+        <h1>Legislative instruments</h1>
+        <ul class="menu-operations">
+	     	<li><span>Operations</span>
+				<ul>
+	           		<li><a href="instrumentEditForm.html" th:href="@{/instruments/add}">Add instruments</a></li>
+	          	</ul>
+	        </li>
+        </ul>
+        </div>
+    	      
+      	<div id="hierarchy">
+			<div class="main">
+				<div class="eurlex">(Eur-lex categories)</div>
+				<div th:if="${hierarchyInstrument != null}" class="class_name">
+					<span th:if="${hierarchyInstrument.classificator != null}" th:text="${hierarchyInstrument.classificator} + ' '"></span>
+					<span th:text="${hierarchyInstrument.className}"></span><br/>
+					<a th:href="'/rod/instruments?id=' + ${hierarchyInstrument.parentId}">One level up</a>
+				</div>
+				<span th:utext="${hierarchyTree}"></span>
+				<ul class="topcategory">
+					<li th:each="instrument : ${hierarchyInstruments}">
+						<a class="normal_weight" th:href="'/rod/instruments/' + ${instrument.sourceId}" th:text="${instrument.sourceAlias}"></a>
+						<br/>
+						<a th:if="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}" th:href="${instrument.sourceUrl}">Link to legal text</a>
+						<span th:unless="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}">Link to legal text</span>
+						<br/>
+						Parent legislative instrument: 
+						<a class="normal_weight" th:if="${instrument.sourceParentId != null}" th:href="'/rod/instruments/' + ${instrument.sourceParentId}" th:text="${instrument.sourceParentAlias}"></a>
+					</li>
+				</ul>
+			</div>        
+    	</div>
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
+</html>

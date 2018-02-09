@@ -57,4 +57,8 @@ public class ObligationServiceImpl implements ObligationService {
 	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase){
 		return obligationsDao.findObligationList(clientId, issueId, spatialId, terminate, deadlineCase);
 	}
+	@Override
+	public void deleteObligations(String obligations) {
+		obligationsDao.deleteObligations(obligations);
+	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import eionet.rod.util.RODUtil;
 /**
  * @author ycarrasco
  *
@@ -15,6 +17,7 @@ public class Obligations {
 	private String oblTitle;
 	@NotNull @NotEmpty
 	private String description;
+	
 	private Integer obligationId;
 	private int eeaPrimary;
     private String overlapUrl;
@@ -25,6 +28,7 @@ public class Obligations {
     private String coordinatorRole;
     @NotNull @NotEmpty
     private String coordinatorRoleSuf;
+    
     private String nationalContact;
     private String nationalContactUrl;
     private String responsibleRole;
@@ -33,6 +37,7 @@ public class Obligations {
     
     @NotNull @NotEmpty
     private String terminate;
+    
     private String reportFreqMonths;
     private String nextDeadline;
     private String nextDeadline2;
@@ -90,6 +95,8 @@ public class Obligations {
     
     //field to deadline search
     private String deadlineId;
+    
+    private String delObligations;
     
     
 	public String getOblTitle() {
@@ -479,16 +486,6 @@ public class Obligations {
 		this.sourceAlias = sourceAlias;
 	}
 	
-	public String truncateText(String truncateText) {
-        if (truncateText == null || "".equals(truncateText)) {
-            return "Unknown";
-        } else if (truncateText.length() >= 80) {
-            return truncateText.substring(0, 79) + "..."; //"…";
-        } else {
-            return truncateText;
-        }
-    }
-
 	public String getParameters() {
 		return parameters;
 	}
@@ -561,6 +558,17 @@ public class Obligations {
 		this.hasDelivery = hasDelivery;
 	}
 
-	
+	public String getDelObligations() {
+		return delObligations;
+	}
+
+	public void setDelObligations(String delObligations) {
+		this.delObligations = delObligations;
+	}
+
+	public String truncateText(String truncateText) {
+	       return RODUtil.truncateText(truncateText);
+	}
+
 	
 }
