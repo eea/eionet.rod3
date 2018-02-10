@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -438,8 +441,16 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        }else {
 	        	parameters.put("FIRST_REPORTING", null);
 	        }
+                // VALID_TO is a DATE in the database. You can't give it a simple string as value.
+                // FIXME: Change validTo's type in Obligations class or make a new conversion method in RODUtil.
 	        if (obligation.getValidTo() != null && obligation.getValidTo() != "") {
-	        	parameters.put("VALID_TO", RODUtil.str2Date(obligation.getValidTo()));
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date validToDate = formatter.parse(RODUtil.str2Date(obligation.getValidTo()));
+                            parameters.put("VALID_TO", validToDate);
+                        } catch (ParseException e) {
+                            parameters.put("VALID_TO", null);
+                        }
 	        }else {
 	        	parameters.put("VALID_TO", null);
 	        }
