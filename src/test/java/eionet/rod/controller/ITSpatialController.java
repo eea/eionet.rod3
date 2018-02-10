@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.DataSourceDatabaseTester;
-import org.dbunit.IDatabaseTester;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -20,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
 
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -41,7 +38,7 @@ import static org.junit.Assert.assertEquals;
         "classpath:spring-db-config.xml",
         "classpath:spring-security.xml"})
 
-
+@Sql("/seed-spatial.sql")
 /**
  * Test the spatial controller.
  */
@@ -58,8 +55,6 @@ public class ITSpatialController {
     @Autowired
     private DataSource datasource;
 
-    private IDatabaseTester databaseTester;
-
     @Autowired
     SpatialService spatialService;
 
@@ -71,10 +66,6 @@ public class ITSpatialController {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
             .addFilters(this.springSecurityFilterChain)
             .build();
-        databaseTester = new DataSourceDatabaseTester(datasource);
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("seed-spatial.xml"));
-        databaseTester.setDataSet(dataSet);
-        databaseTester.onSetup();
     }
 
       

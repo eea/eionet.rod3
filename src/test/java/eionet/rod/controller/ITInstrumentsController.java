@@ -6,10 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import javax.sql.DataSource;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.DataSourceDatabaseTester;
-import org.dbunit.IDatabaseTester;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -18,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
 
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
         "classpath:spring-db-config.xml",
         "classpath:spring-security.xml"})
 
+@Sql("/seed-obligation-source.sql")
 /**
  * Test the intruments controller.
  */
@@ -48,20 +46,14 @@ public class ITInstrumentsController {
     @Autowired
     private DataSource datasource;
 
-    private IDatabaseTester databaseTester;
-    
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
             .addFilters(this.springSecurityFilterChain)
             .build();
-        databaseTester = new DataSourceDatabaseTester(datasource);
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("seed-obligation-source.xml"));
-        databaseTester.setDataSet(dataSet);
-        databaseTester.onSetup();
     }
 
-      
+
     /**
      * Simple test to view list of the instruments.
      */
@@ -74,15 +66,15 @@ public class ITInstrumentsController {
 	         .andExpect(model().attributeExists("activeTab"))
 	         .andExpect(view().name("instruments"));
     }
-    
+
     @Test
     public void sourceFactsheet() throws Exception {
     	 this.mockMvc.perform(get("/instruments/1")
     	 		.param("sourceId","1"))
     			.andExpect(status().isOk());
     }
-    
-    @Test 
+
+    @Test
     public void editInstrumentForm() throws Exception
 	{
     	this.mockMvc.perform(get("/instruments/edit?sourceId=1"))
@@ -90,18 +82,18 @@ public class ITInstrumentsController {
     			.andExpect(view().name("instrumentEditForm"));
     			
     }
-    
+
     @Test
     public void addInstrumentForm() throws Exception
     {
     	this.mockMvc.perform(get("/instruments/add")
     	    	.with(user("editor").roles("EDITOR")))
-    			.andExpect(status().isOk()) 
+    			.andExpect(status().isOk())
     			.andExpect(model().attributeExists("title"))
     			.andExpect(model().attributeExists("activeTab"))
     			.andExpect(view().name("instrumentEditForm"));
     }
-    
+
     @Test
     public void addInstrument() throws Exception
     {
@@ -124,8 +116,8 @@ public class ITInstrumentsController {
     			.andExpect(status().is3xxRedirection());
     	
     }
-    
-    @Test 
+
+    @Test
     public void deleteInstrumentsWithCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
@@ -135,8 +127,8 @@ public class ITInstrumentsController {
         		.andExpect(status().is3xxRedirection());
 
     }
-    
-    @Test 
+
+    @Test
     public void deleteInstrumentsWithoutCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
@@ -145,9 +137,9 @@ public class ITInstrumentsController {
         		.andExpect(status().is4xxClientError());
 
     }
-       
-    
-    @Test 
+
+
+    @Test
     public void editInstrument() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/edit")
@@ -171,6 +163,6 @@ public class ITInstrumentsController {
     			.with(csrf()))
     			.andExpect(status().is3xxRedirection());
     }
-    
-            
+
+
 }
