@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -39,6 +41,8 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Transactional
 public class ObligationsDaoImpl implements ObligationsDao {
 	
+    private Log logger = LogFactory.getLog(ObligationsDaoImpl.class);
+
 	public ObligationsDaoImpl() {
 	}
 	
@@ -76,6 +80,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
+            logger.error("Shadowed exception", e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
 	 
@@ -301,7 +306,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	             + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
 	             + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID " 
 				 + "WHERE PK_RA_ID = ? ";
-		
 		try {
 		
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, OblId);
@@ -315,6 +319,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
+            logger.error("Shadowed exception", e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
 		
