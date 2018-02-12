@@ -123,7 +123,7 @@ public class ClientServiceJdbc implements ClientService {
     	
     	String query = "SELECT OBCL.FK_CLIENT_ID AS clientId, CL.CLIENT_NAME as name "  
     			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "
-    			+ "LEFT JOIN t_client CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "  
+    			+ "LEFT JOIN T_CLIENT CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "  
     			+ "WHERE ";
     			if (status != null){
     				query = query + "STATUS='" + status + "' and ";
@@ -133,7 +133,7 @@ public class ClientServiceJdbc implements ClientService {
     	
     	String queryCount = "SELECT Count(*) AS clientId "
     			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "
-    			+ "LEFT JOIN t_client CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "
+    			+ "LEFT JOIN T_CLIENT CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "
     			+ "WHERE ";
  		    	if (status != null){
  		    		queryCount = queryCount + "STATUS='" + status + "' and ";
