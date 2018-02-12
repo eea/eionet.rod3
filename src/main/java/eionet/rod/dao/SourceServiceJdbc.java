@@ -202,7 +202,7 @@ public class SourceServiceJdbc implements SourceService {
 		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
 		jdbcInsert.withTableName("T_SOURCE").usingGeneratedKeyColumns(
                 "PK_SOURCE_ID");
-		
+			
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("TITLE", instrumentFactsheetRec.getSourceTitle());
 		parameters.put("ALIAS", instrumentFactsheetRec.getSourceAlias());
@@ -226,11 +226,11 @@ public class SourceServiceJdbc implements SourceService {
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
         
         parameters.put("LAST_UPDATE",ourJavaDateObject);
-        System.out.println("new sourceID: ANTES");
+        //System.out.println("new sourceID: ANTES");
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
                 parameters));
 		Integer sourceId = ((Number) key).intValue();
-		System.out.println("new sourceID:" + sourceId);
+		//System.out.println("new sourceID:" + sourceId);
 		/*String query = "INSERT INTO T_SOURCE (TITLE, ALIAS, SOURCE_CODE, TERMINATE, URL, "
 				+ "CELEX_REF, ISSUED_BY_URL, VALID_FROM, ABSTRACT, COMMENT, "
 				+ "EC_ENTRY_INTO_FORCE, EC_ACCESSION, SECRETARIAT, SECRETARIAT_URL, "
@@ -256,13 +256,13 @@ public class SourceServiceJdbc implements SourceService {
 				);	*/
 		
 		insertClient(sourceId, instrumentFactsheetRec.getClientId());
-		System.out.println("new sourceID: 1");
+		//System.out.println("new sourceID: 1");
 		insertParent(sourceId, instrumentFactsheetRec.getSourceLnkFKSourceParentId());
-		System.out.println("new sourceID: 2");
+		//System.out.println("new sourceID: 2");
 		instrumentFactsheetRec.setSourceId(sourceId);
-		System.out.println("new sourceID: 3");
+		//System.out.println("new sourceID: 3");
 		insertClassifications(instrumentFactsheetRec);
-		System.out.println("new sourceID: 4");
+		//System.out.println("new sourceID: 4");
 		return sourceId;
 	}
 	
@@ -379,9 +379,9 @@ public class SourceServiceJdbc implements SourceService {
 				+ "VALUES (?,?,?,?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		System.out.print("Size clasifications" + instrumentFactsheetRec.getSelectedClassifications().size());
+		//System.out.print("Size clasifications" + instrumentFactsheetRec.getSelectedClassifications().size());
 		
-		System.out.print("Query" + query);
+		//System.out.print("Query" + query);
 		
 		for (String classificationId : instrumentFactsheetRec.getSelectedClassifications()) {
 			jdbcTemplate.update(query,
