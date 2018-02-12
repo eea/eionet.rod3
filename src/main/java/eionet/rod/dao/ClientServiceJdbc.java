@@ -9,6 +9,8 @@ import eionet.rod.model.InstrumentDTO;
 import eionet.rod.model.Obligations;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import org.springframework.dao.DataAccessException;
  */
 @Service
 public class ClientServiceJdbc implements ClientService {
+
+    private Log logger = LogFactory.getLog(ClientServiceJdbc.class);
 
     //@Autowired
     private DataSource dataSource;
@@ -161,6 +165,7 @@ public class ClientServiceJdbc implements ClientService {
 			}
 			
 		} catch (DataAccessException e) {
+            logger.error("Shadowed exception", e);
 			throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
 		}
      }

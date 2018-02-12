@@ -4,12 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
-
 import javax.sql.DataSource;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.DataSourceDatabaseTester;
-import org.dbunit.IDatabaseTester;
 import org.junit.Before;
 
 import org.junit.runner.RunWith;
@@ -17,6 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
         "classpath:spring-db-config.xml",
         "classpath:spring-security.xml"})
 
-
+@Sql("/seed-clients.sql")
 /**
  * Test the clients controller.
  */
@@ -47,17 +43,11 @@ public class ITClientsController {
     @Autowired
     private DataSource dataSource;
 
-    private IDatabaseTester databaseTester;
-
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
             .addFilters(this.springSecurityFilterChain)
             .build();
-        databaseTester = new DataSourceDatabaseTester(dataSource);
-        IDataSet dataSet = new FlatXmlDataSetBuilder().build(getClass().getClassLoader().getResourceAsStream("seed-clients.xml"));
-        databaseTester.setDataSet(dataSet);
-        databaseTester.onSetup();
     }
 
     /**

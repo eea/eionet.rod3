@@ -27,7 +27,7 @@
 		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
 		<property name="prefix" value="/WEB-INF/thymeleaf/" />
 		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML5" />
+		<property name="templateMode" value="HTML" />
 		<property name="cacheable" value="true" />
                 <property name="characterEncoding" value="UTF-8"/>
 	</bean>

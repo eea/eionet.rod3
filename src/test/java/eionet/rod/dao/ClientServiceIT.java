@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -24,6 +25,7 @@ import eionet.rod.model.Obligations;
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
         "classpath:spring-db-config.xml"})
 
+@Sql("/seed-obligation-source.sql")
 /**
  * Test the client operations.
  */
