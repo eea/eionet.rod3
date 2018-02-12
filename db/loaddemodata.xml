@@ -21,8 +21,8 @@
     <loadData tableName="T_SPATIAL" separator="\t" file="db/t_spatial.tsv"/>
     <loadData tableName="HLP_SCREEN" separator="\t" file="db/hlp_screen.tsv"/>
   </changeSet>
-  <changeSet author="santamik" id="rev-2" context="demo">
-    <preConditions>
+  <changeSet author="santamik" id="rev-2">
+    <preConditions onFail="MARK_RAN">
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SOURCE_CLASS</sqlCheck>
     </preConditions>
 
