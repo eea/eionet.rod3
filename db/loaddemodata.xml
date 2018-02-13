@@ -36,7 +36,15 @@
 
     <comment>Load T_SOURCE_LNK</comment>
     <loadData tableName="T_SOURCE_LNK" separator="\t" file="db/t_source_lnk.tsv"/>
-  </changeSet>  
+  </changeSet>
+  <changeSet author="santamik" id="rev-4">
+    <preConditions onFail="MARK_RAN">
+      <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_ISSUE</sqlCheck>
+    </preConditions>
+
+    <comment>Load T_SOURCE_LNK</comment>
+    <loadData tableName="T_ISSUE" separator="\t" file="db/t_issue.tsv"/>
+  </changeSet>    
   <include file="db/t_client.xml"/>
   <include file="db/t_source.xml"/>
   <include file="db/t_obligation.xml"/>
