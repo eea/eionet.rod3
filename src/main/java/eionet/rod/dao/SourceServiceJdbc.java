@@ -3,7 +3,6 @@ package eionet.rod.dao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -137,7 +136,7 @@ public class SourceServiceJdbc implements SourceService {
 		
 		update = "UPDATE T_CLIENT_SOURCE_LNK "
 				+ "SET FK_CLIENT_ID=? "
-				+ "WHERE FK_SOURCE_ID=? AND STATUS = 'M'";
+				+ "WHERE FK_SOURCE_ID=?";
 		
 		jdbcTemplate.update(update,
 				instrumentFactsheetRec.getClientId(),
@@ -202,7 +201,7 @@ public class SourceServiceJdbc implements SourceService {
 		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
 		jdbcInsert.withTableName("T_SOURCE").usingGeneratedKeyColumns(
                 "PK_SOURCE_ID");
-			
+		
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("TITLE", instrumentFactsheetRec.getSourceTitle());
 		parameters.put("ALIAS", instrumentFactsheetRec.getSourceAlias());
@@ -221,16 +220,11 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("FK_CLIENT_ID", instrumentFactsheetRec.getClientId());
 		parameters.put("FK_TYPE_ID", 0);
 		parameters.put("LEGAL_NAME", "");
-		// java.sql.Date
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
-        
-        parameters.put("LAST_UPDATE",ourJavaDateObject);
-        //System.out.println("new sourceID: ANTES");
+		
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
                 parameters));
 		Integer sourceId = ((Number) key).intValue();
-		//System.out.println("new sourceID:" + sourceId);
+		//System.out.println(sourceId);
 		/*String query = "INSERT INTO T_SOURCE (TITLE, ALIAS, SOURCE_CODE, TERMINATE, URL, "
 				+ "CELEX_REF, ISSUED_BY_URL, VALID_FROM, ABSTRACT, COMMENT, "
 				+ "EC_ENTRY_INTO_FORCE, EC_ACCESSION, SECRETARIAT, SECRETARIAT_URL, "
@@ -256,13 +250,10 @@ public class SourceServiceJdbc implements SourceService {
 				);	*/
 		
 		insertClient(sourceId, instrumentFactsheetRec.getClientId());
-		//System.out.println("new sourceID: 1");
 		insertParent(sourceId, instrumentFactsheetRec.getSourceLnkFKSourceParentId());
-		//System.out.println("new sourceID: 2");
 		instrumentFactsheetRec.setSourceId(sourceId);
-		//System.out.println("new sourceID: 3");
 		insertClassifications(instrumentFactsheetRec);
-		//System.out.println("new sourceID: 4");
+		
 		return sourceId;
 	}
 	
@@ -378,10 +369,6 @@ public class SourceServiceJdbc implements SourceService {
 		String query = "INSERT INTO T_SOURCE_LNK (FK_SOURCE_CHILD_ID, FK_SOURCE_PARENT_ID, CHILD_TYPE, PARENT_TYPE) "
 				+ "VALUES (?,?,?,?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		
-		//System.out.print("Size clasifications" + instrumentFactsheetRec.getSelectedClassifications().size());
-		
-		//System.out.print("Query" + query);
 		
 		for (String classificationId : instrumentFactsheetRec.getSelectedClassifications()) {
 			jdbcTemplate.update(query,

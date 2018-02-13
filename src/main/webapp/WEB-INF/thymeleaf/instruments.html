@@ -22,18 +22,18 @@
 				<div th:if="${hierarchyInstrument != null}" class="class_name">
 					<span th:if="${hierarchyInstrument.classificator != null}" th:text="${hierarchyInstrument.classificator} + ' '"></span>
 					<span th:text="${hierarchyInstrument.className}"></span><br/>
-					<a th:href="'/rod/instruments?id=' + ${hierarchyInstrument.parentId}">One level up</a>
+					<a th:href="@{'/instruments?id='} + ${hierarchyInstrument.parentId}">One level up</a>
 				</div>
 				<span th:utext="${hierarchyTree}"></span>
 				<ul class="topcategory">
 					<li th:each="instrument : ${hierarchyInstruments}">
-						<a class="normal_weight" th:href="'/rod/instruments/' + ${instrument.sourceId}" th:text="${instrument.sourceAlias}"></a>
+						<a class="normal_weight" th:href="@{'/instruments/'} + ${instrument.sourceId}" th:text="${instrument.sourceAlias}"></a>
 						<br/>
 						<a th:if="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}" th:href="${instrument.sourceUrl}">Link to legal text</a>
 						<span th:unless="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}">Link to legal text</span>
 						<br/>
 						Parent legislative instrument: 
-						<a class="normal_weight" th:if="${instrument.sourceParentId != null}" th:href="'/rod/instruments/' + ${instrument.sourceParentId}" th:text="${instrument.sourceParentAlias}"></a>
+						<a class="normal_weight" th:if="${instrument.sourceParentId != null}" th:href="@{'/instruments/'} + ${instrument.sourceParentId}" th:text="${instrument.sourceParentAlias}"></a>
 					</li>
 				</ul>
 			</div>        

@@ -20,7 +20,7 @@
 	<form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
 		<div id="drop-operations">
 			<ul>
-				<li class="search open"><a class="searchSection" href="http://localhost:8080/rod/simpleSearch" title="Search">Search</a></li>
+				<li class="search open"><a class="searchSection" th:href="@{/simpleSearch}" title="Search">Search</a></li>
 			</ul>
 		</div>			
 		<div id="filters">

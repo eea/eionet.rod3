@@ -40,7 +40,7 @@
 						<ul>
 		              		<li th:each="classification : ${instrument.classifications}">
 		              			<span th:if="${classification.classificator != null}" th:text="${classification.classificator} + ' '"></span>
-		              			<a th:text="${classification.className}" th:href="'/rod/instruments?id=' + ${classification.classId}"></a>
+		              			<a th:text="${classification.className}" th:href="@{'/instruments?id='} + ${classification.classId}"></a>
 		              		</li>
 	              		</ul>
 	              	</div>
@@ -69,7 +69,7 @@
             <div class="even form-group">
 				  <div class="col-lg-4">Issued by</div>
 	              <div class="col-lg-8">
-	              	<a th:href="'/rod/clients/' + ${instrument.clientId}" th:text="${instrument.clientName}">Client name</a>
+	              	<a th:href="@{'/clients/'} + ${instrument.clientId}" th:text="${instrument.clientName}">Client name</a>
 	              </div>
             </div>
             <div class="odd form-group">
@@ -91,7 +91,7 @@
             <div class="even form-group">
 				  <div class="col-lg-4">Parent legislative instrument</div>
                	  <div class="col-lg-8">
-		              	<a th:if="${instrument.parent != null}" th:text="${instrument.parent.sourceAlias}" th:href="'/rod/instruments/' + ${instrument.parent.sourceId}">
+		              	<a th:if="${instrument.parent != null}" th:text="${instrument.parent.sourceAlias}" th:href="@{'/instruments/'} + ${instrument.parent.sourceId}">
 		              		Parent
 		             	</a>
              	 </div>
@@ -101,7 +101,7 @@
 	              <div class="col-lg-8">
 	              	<ul class="menu">
 	              		<li th:each="relatedInstrument : ${instrument.relatedInstruments}">
-	              			<a th:href="'/rod/instruments/' + ${relatedInstrument.sourceId}" th:text="${relatedInstrument.sourceAlias}">Related instrument</a>
+	              			<a th:href="@{'/instruments/'} + ${relatedInstrument.sourceId}" th:text="${relatedInstrument.sourceAlias}">Related instrument</a>
 	              		</li>
 	              	</ul>
 	              </div>
@@ -126,7 +126,7 @@
               <div class="col-lg-8">
               	<ul class="menu">
               		<li th:each="obligation : ${instrument.obligations}">
-              			<a th:href="'/rod/obligations/' + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
+              			<a th:href="@{'/obligations/'} + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
               			<span th:if="${obligation.terminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
               			<span th:if="${obligation.authority != null and !obligation.authority.isEmpty()}" th:text="'[' + ${obligation.authority} + ']'">Authority</span>
               		</li>
