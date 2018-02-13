@@ -34,7 +34,7 @@ public class SpatialDaoImpl implements SpatialDao {
 	public List<Spatial> findAll() {
 		String query = "SELECT PK_SPATIAL_ID AS spatialId, SPATIAL_NAME AS name, SPATIAL_TYPE AS type,"
                 + "SPATIAL_TWOLETTER AS twoLetter, CAST(SPATIAL_ISMEMBERCOUNTRY as char) AS memberCountry "
-                + "FROM T_SPATIAL "
+                + "FROM T_SPATIAL where SPATIAL_TYPE = 'C' "
                 + "ORDER BY name";
 		
 		String queryCount = "SELECT Count(*) as spatialId "
