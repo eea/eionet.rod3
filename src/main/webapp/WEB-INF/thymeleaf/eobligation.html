@@ -14,8 +14,8 @@
 		<input type="hidden" name="id" th:value="${id}"/>
 		<input type="hidden" name="nextDeadline2" />
 		<input type="hidden" name="terminate" value="N"/>
-		<input type="hidden" name="sourceId" value="142"/>
-		<input type="hidden" name="obligationId" th:value="${obligationId}"/>
+		<input type="hidden" name="sourceId" th:field="*{sourceId}" th:value="*{sourceId}"/>
+		<input type="hidden" name="obligationId" th:field="*{obligationId}" th:value="${obligationId}"/>
 				
 		<div class="datatable results">
 			
@@ -64,7 +64,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-lg-3 scope-row simple_attr_title">
-					<label for="report_freq_months" class="control-label text-left">Reporting frequency in months</label>
+					<label for="report_freq_months" class="required control-label text-left">Reporting frequency in months</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGFREQUENCYINMONTHS')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
@@ -313,7 +313,7 @@
 					</div>
 					<div>
 						<label for="coordinator" class="control-label">Name</label>
-						<label for="coordinator">Name</label> <input type="text" class="smalltext" maxlength="255" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
+						<input type="text" class="smalltext" maxlength="255" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
 						<input type="text" name="coordinatorUrl" onchange="chkUrl(this); changed()" id="coordinatorUrl" th:field="*{coordinatorUrl}"/>
 					</div>
 				</div>
@@ -328,7 +328,7 @@
 					<div>
 						<label for="responsibleRole" class="control-label">Role</label>
 						<input type="text" class="smalltext" name="responsibleRole" maxlength="255" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
-						<input type="checkbox" name="responsibleRoleSuf" value="1" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
+						<input type="checkbox" name="responsibleRoleSuf" value="Y" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
 						<label class="control-label" for="responsibleRoleSuf">do not append country suffix</label>
 					</div>
 					<div>
@@ -355,8 +355,8 @@
 			</div>
 			<div class="form-group">
 				<div class="col-lg-55">
-					<select name="selIssues" multiple="multiple" id="selIssues" style="width:100%"> 
-						<option th:each="issue : ${issues}" th:value="${issue.issueId}" th:text="${issue.issueName}" class="form-control"></option>
+					<select name="selIssues" multiple="multiple" id="selIssues" style="width:100%" class="form-control"> 
+						<option th:each="issue : ${issues}" th:value="${issue.issueId}" th:text="${issue.issueName}" ></option>
 					</select>
 				</div>
 				<div class="col-lg-1">
@@ -405,41 +405,95 @@
 				</div>
 			</div>
 		</div>
+		<br/>
+		<span class="pagebanner">Relation with other obligations</span>
+		<div class="datatable results">
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="selIssues" class="control-label text-left">Other obligations:</label>
+				</div>
+				<a class="helpButton col-lg-1"onclick="helpFunction('')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<select th:field="*{relObligationId}" class="selectObligations form-control" id="rel_Obligation" name="rel_Obligation">
+							<option value="0"></option>		
+							<option th:each="relObligation : ${relObligations}" th:if="${relObligation.obligationId} != *{obligationId}" th:value="${relObligation.obligationId}" th:text="${relObligation.oblTitle}" th:selected="(${relObligation.obligationId} == *{relObligationId})"></option>
+		           	</select>
+	           	</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-3 scope-row simple_attr_title">
+					<label for="selIssues" class="control-label text-left">Relations:</label>
+				</div>
+				<a class="helpButton col-lg-1"onclick="helpFunction('')" title="Help on this field"></a>
+				<div class="col-lg-8 simple_attr_help">
+					<select th:field="*{oblRelationId}" class="selectObligations form-control" id="relationObl" name="relationObl">
+							<option value="0"></option>		
+							<option value="replaces">Replaces</option>
+							<option value="is-replaced-by">Is replaced by</option>
+							<option value="see-also">See also</option>
+							<option value="same-as">Same as</option>
+		           	</select>
+	           	</div>
+			</div>
+		</div>
 		<script type="text/javascript">
 			function selectAll(){
 				var errors = false;
+		
+				errors = testrelation();
 				
-				if (document.getElementById("oblTitle").value == ''){
-					checkMdText(document.getElementById("oblTitle"));
-					errors = true
-				}else {
-					$('#oblTitleError').hide();
-				}
-				if (document.getElementById("description").value == ''){
-					checkMdText(document.getElementById("description"));
-					errors = true
-				}else{
-					$('#descError').hide();
-				}
-				
-				if (document.getElementById("report_freq_months").value == ''){
-					checkMdText(document.getElementById("report_freq_months"));
-					errors = true
-				}else{
-					$('#freq_monthsError').hide();
-				}
-							
 				if (!errors){
-					if (addClientValuesSel(document.f.report_to, document.f.selectedClients.options)){
-						selValues(document.f.selectedClients.options);
-						selValues(document.f.selectedFormalCountries.options);
-						selValues(document.f.selectedVoluntaryCountries.options);
-						selValues(document.f.selectedIssues.options);
-						isChanged = false;
-						document.forms['f'].submit();
+				
+					if (document.getElementById("oblTitle").value == ''){
+						checkMdText(document.getElementById("oblTitle"));
+						errors = true
+					}else {
+						$('#oblTitleError').hide();
+					}
+					if (document.getElementById("description").value == ''){
+						checkMdText(document.getElementById("description"));
+						errors = true
+					}else{
+						$('#descError').hide();
+					}
+					
+					if (document.getElementById("report_freq_months").value == ''){
+						checkMdText(document.getElementById("report_freq_months"));
+						errors = true
+					}else{
+						$('#freq_monthsError').hide();
+					}
+								
+					if (!errors){
+						if (addClientValuesSel(document.f.report_to, document.f.selectedClients.options)){
+							selValues(document.f.selectedClients.options);
+							selValues(document.f.selectedFormalCountries.options);
+							selValues(document.f.selectedVoluntaryCountries.options);
+							selValues(document.f.selectedIssues.options);
+							isChanged = false;
+							document.forms['f'].submit();
+						}
 					}
 				}
+				
+			}
 			
+			function testrelation(){
+				var relError = false; 
+				if (document.f.rel_Obligation.value != '0')
+				{
+					if (document.f.relationObl.value == '0'){
+						alert("The 'Relations' field must be filled.");
+						relError = true;
+					}
+					
+				}else{
+					if (document.f.relationObl.value != '0'){
+						alert("The 'Other obligations' field must be filled.");
+						relError = true;
+					}
+				}
+				return relError;
 			}
 			
 			function exit(){

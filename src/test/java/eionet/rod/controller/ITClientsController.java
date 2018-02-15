@@ -40,9 +40,6 @@ public class ITClientsController {
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
 
-    @Autowired
-    private DataSource dataSource;
-
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
@@ -82,7 +79,7 @@ public class ITClientsController {
     @Test
     public void clientEdit() throws Exception {
     	this.mockMvc.perform(get("/clients/1/edit"))
-            .andExpect(status().is3xxRedirection());
+            .andExpect(status().isOk());
     }
 
     /**
@@ -106,7 +103,7 @@ public class ITClientsController {
                 .param("name", "New Name")
                 .with(csrf()).with(user("editor").roles("EDITOR")))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/clients?message=Client+1+updated"))
+                .andExpect(redirectedUrl("/clients/1/edit?message=Client+1+updated"))
                 .andExpect(model().attributeExists("message"));
     }
 
@@ -129,7 +126,7 @@ public class ITClientsController {
      */
     @Test
     public void deleteWithoutAuth() throws Exception {
-        this.mockMvc.perform(get("/clients/delete")
+        this.mockMvc.perform(get("/clients/delete/1")
                 .param("clientId", "1"))
                 .andExpect(status().is3xxRedirection());
     }
@@ -140,11 +137,11 @@ public class ITClientsController {
      */
     @Test
     public void deleteWithAuth() throws Exception {
-        this.mockMvc.perform(get("/clients/delete")
+        this.mockMvc.perform(get("/clients/delete/1")
                 .param("clientId", "1")
                 .with(csrf()).with(user("editor").roles("EDITOR")))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("view?message=Client+1+deleted"))
+                .andExpect(redirectedUrl("/clients?message=Client+1+deleted"))
                 .andExpect(model().attributeExists("message"));
     }
 

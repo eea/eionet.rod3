@@ -82,36 +82,35 @@
 	        </ul>
     	</div>
     <div id="filters">
+    <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
           <div class="filter">
-
+					
                     <div class="row">
                         <div class="labeldiv">
                             <label for="shortName">Country</label>
-                            <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
                         </div>
 		      			<div class="input">
 							<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
 								<option value="0" label="Any country or territory"></option>
-								<option  th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} "  th:selected="(${country.spatialId} == *{spatialId})"></option>
+								<option  th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} "  th:selected="(${country.spatialId} == *{spatialId})"></option>								
 							</select>
 						</div>
 					</div>
 					<div class="row">
                         <div class="labeldiv">
                             <label for="shortName">Issue</label>
-                            <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
                         </div>
                         <div class="input">	
 							<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
 								<option value="0" label="Any issues"></option>
 				    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
+				    			<option value="NI" label="No issue allocated"></option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
                         <div class="labeldiv">
                             <label for="shortName">Organization</label>
-                            <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
                         </div>
                         <div class="input">
 							<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
@@ -123,7 +122,6 @@
 					<div class="row">
                         <div class="labeldiv">
                             <label for="shortName">Include terminated obligations</label>
-                            <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
                         </div>
                         <div class="input inputcheck">
                             <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Yes</label>

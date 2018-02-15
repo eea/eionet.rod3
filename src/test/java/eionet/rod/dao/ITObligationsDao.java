@@ -198,20 +198,18 @@ public class ITObligationsDao {
 
         obligationsService.deleteObligations(intObligationId.toString());
 
-//      try {
         exception.expect(ResourceNotFoundException.class);
         obligation = obligationsService.findOblId(intObligationId);
 
-//      }
-//      catch(ResourceNotFoundException re)
-//      {
-//            String message = "The obligation you requested with id " + intObligationId + " was not found in the database";
-//            assertEquals(message, re.getMessage());
-//
-//            throw re;
-//      }
-
-
    }
+    
+    @Test
+    public void testfindObligationRelation() throws ResourceNotFoundException
+    {
+    	Obligations oblRelation = obligationsService.findObligationRelation(1);
+    	 assertEquals("replaces", oblRelation.getOblRelationId());
+    	 assertEquals("2", oblRelation.getRelObligationId().toString());
+    	
+    }
 
 }

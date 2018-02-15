@@ -119,10 +119,26 @@ public class ObligationsController {
 		 if (obligations.getDelObligations() != null) {
 			 obligationsService.deleteObligations(obligations.getDelObligations());
 		 }
-
+		 model.addAttribute("message", "Obligations selected deleted.");
 		 return "redirect:view";
 	 }
     
+	 /**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	 @RequestMapping(value = "/delete/{obligationId}")
+	 public String deleteObligations(@PathVariable("obligationId") Integer obligationId, Model model) {
+		 if (obligationId != null) {
+			 obligationsService.deleteObligations(obligationId + ",");
+		 }
+		 
+		 model.addAttribute("message", "Obligation deleted.");
+		 return "redirect:/obligations";
+	 }
+	 
+	 
     /**
      * 
      * @param obligations
@@ -263,6 +279,12 @@ public class ObligationsController {
         List<String> selectedIssues= new ArrayList<String>();
         obligations.setSelectedIssues(selectedIssues);
         
+        Obligations obligationRelation = new Obligations();
+        obligationRelation = obligationsService.findObligationRelation(obligationId);
+        
+        obligations.setRelObligationId(obligationRelation.getRelObligationId());
+        obligations.setOblRelationId(obligationRelation.getOblRelationId());
+        
         model.addAttribute("obligation", obligations);
         
         //List of clients with status = C
@@ -294,6 +316,10 @@ public class ObligationsController {
         List<Issue> allIssuesObligationEdit = obligationsService.findAllIssuesbyObligation(obligationId);
         model.addAttribute("obligationIssues", allIssuesObligationEdit);
         
+        //all obligations except the edited.
+        List<Obligations> relObligations = obligationsService.findAll();
+        model.addAttribute("relObligations", relObligations);
+       
         model.addAttribute("title","Edit Reporting Obligation for");
         
         model.addAttribute("id","edit");
@@ -305,14 +331,14 @@ public class ObligationsController {
     /**
      * obligations details by ID (overview)
      */
-    @RequestMapping(value = "/add")
-    public String obligation_add(final Model model ) {
+    @RequestMapping(value = "/add/{sourceId}")
+    public String obligation_add(final Model model, @PathVariable("sourceId") String sourceId) {
     	BreadCrumbs.set(model, obligationCrumb, new BreadCrumb("Add obligation"));
     	model.addAttribute("activeTab", "obligations");
     	model.addAttribute("title","Edit Reporting Obligation for");
     	
     	Obligations obligation = new Obligations();
-    	  	
+    	obligation.setSourceId(sourceId);
         model.addAttribute("obligation", obligation);
        //List of clients with status = C
         List<ClientDTO> clients = clientService.getAllClients();
@@ -324,8 +350,11 @@ public class ObligationsController {
         List<Issue> issues = issueDao.findAllIssuesList();
         model.addAttribute("issues", issues);
         
+        List<Obligations> relObligations = obligationsService.findAll();
+        model.addAttribute("relObligations", relObligations);
+        
         model.addAttribute("id","add");
-                
+        
        return "eobligation";
     }
     
@@ -368,33 +397,38 @@ public class ObligationsController {
       //list of the issues selected
         List<Issue> allSelectedIssues = obligationIssuesSelected(obligations.getSelectedIssues());
         model.addAttribute("obligationIssues", allSelectedIssues);
-                
-        if (!bindingResult.hasErrors()) {
-		    
+        
+        List<Obligations> relObligations = obligationsService.findAll();
+        model.addAttribute("relObligations", relObligations);
+ 
+    	model.addAttribute("sourceId", obligations.getSourceId());
+    	
+		model.addAttribute("activeTab", "obligations");
+    	
+    	model.addAttribute("title","Edit Reporting Obligation for");
+
+        
+        if (bindingResult.hasErrors()) {
+        	
+    		model.addAttribute("obligation", obligations);
+    		model.addAttribute("obligation", obligations);
 	        model.addAttribute("id","add");
-//			
-//			if (obligations.getOblTitle() == "") {
-//				bindingResult.addError(new FieldError("oblTitle","oblTitle", "Field is mandatory!"));//TODO i18n
-//				redirectAttributes.addFlashAttribute("oblTitle", "Field is mandatory!");
-//			}
-//
+
 		}else {
 			//insertamos y reenviamos a redirect:edit:id
         
         	Integer obligationID = obligationsService.insertObligation(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
 			obligations.setObligationId(obligationID);
 			model.addAttribute("obligationId", obligationID);
-			
+		
 			model.addAttribute("obligation", obligations);
 
 			model.addAttribute("id","edit");
 			
+			model.addAttribute("message", "Obligation " + obligations.getOblTitle() + " added.");
+			
 		}
-        
-		model.addAttribute("activeTab", "obligations");
-    	
-    	model.addAttribute("title","Edit Reporting Obligation for");
-        
+             
         return "eobligation";
 		
 	}
@@ -443,6 +477,9 @@ public class ObligationsController {
         List<Issue> allSelectedIssues = obligationIssuesSelected(obligations.getSelectedIssues());
         model.addAttribute("obligationIssues", allSelectedIssues);
         
+        List<Obligations> relObligations = obligationsService.findAll();
+        model.addAttribute("relObligations", relObligations);
+        
         obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
         //change format of Dates to visualize dd/mm/yyyy
         if (obligations.getFirstReporting() != null && obligations.getFirstReporting() != "") {
@@ -474,7 +511,7 @@ public class ObligationsController {
         model.addAttribute("obligation", obligations);
         
         model.addAttribute("id","edit");
-        model.addAttribute("message", "Data saved correctly");
+        model.addAttribute("message", "Obligation " + obligations.getOblTitle() + " updated.");
         
 		return "eobligation";
     }

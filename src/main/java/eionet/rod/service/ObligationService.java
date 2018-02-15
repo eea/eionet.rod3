@@ -30,4 +30,6 @@ public interface ObligationService {
 	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase);
 	
 	void deleteObligations(String obligations);
+	
+	Obligations findObligationRelation(Integer obligationId);
 }

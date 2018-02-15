@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+	<div th:include="layout :: bannerFragment" ></div>
+    <div id="workarea">
+    	<div class="title">
+        <h1>Select legislative instrument to add reporting obligation to</h1>
+        <ul class="menu-operations">
+	     	<li><span>Operations</span>
+				<ul>
+	           		<li><a href="instrumentEditForm.html" th:href="@{/instruments/add}">Add instruments</a></li>
+	          	</ul>
+	        </li>
+        </ul>
+        </div>
+    	      
+      	<div id="hierarchy">
+			<div class="main">
+				<div th:if="${hierarchyInstrument != null}" class="class_name">
+					<span th:if="${hierarchyInstrument.classificator != null}" th:text="${hierarchyInstrument.classificator} + ' '"></span>
+					<a th:href="@{'/instruments?id='} + ${hierarchyInstrument.parentId} + '&amp;mode=X'" th:text="${hierarchyInstrument.className}"></a>
+				</div>
+				<span th:utext="${hierarchyTree}"></span>
+				<ul class="topcategory">
+					<li th:each="instrument : ${hierarchyInstruments}">
+						<a class="normal_weight" th:href="@{'/obligations/add/'} + ${instrument.sourceId}" th:text="${instrument.sourceAlias}"></a>
+					</li>
+				</ul>
+			</div>        
+    	</div>
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
+</html>

@@ -61,4 +61,9 @@ public class ObligationServiceImpl implements ObligationService {
 	public void deleteObligations(String obligations) {
 		obligationsDao.deleteObligations(obligations);
 	}
+	
+	@Override
+	public Obligations findObligationRelation(Integer obligationId) {
+		return obligationsDao.findObligationRelation(obligationId);
+	}
 }

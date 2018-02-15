@@ -43,7 +43,7 @@ public interface SourceService {
 	
 	void deleteClassifications(Integer sourceId);
 	
-	String getHierarchy(Integer id, boolean hasParent, String mode);
+	String getHierarchy(Integer id, boolean hasParent, String mode, String UrlInstruments);
 	
 	InstrumentsListDTO getHierarchyInstrument(Integer id);
 	

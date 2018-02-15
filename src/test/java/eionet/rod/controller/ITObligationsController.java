@@ -7,7 +7,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -47,9 +46,6 @@ public class ITObligationsController {
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
 
-    @Autowired
-    private DataSource datasource;
-
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
@@ -76,7 +72,6 @@ public class ITObligationsController {
     public void obligation_overview() throws Exception {
     	 this.mockMvc.perform(get("/obligations/1"))
          	.andExpect(status().isOk())
-         	.andExpect(model().attributeExists("obligation"))
         	.andExpect(model().attributeExists("breadcrumbs"))
          	.andExpect(model().attributeExists("title"))
          	.andExpect(view().name("obligation_overview"));
@@ -103,20 +98,14 @@ public class ITObligationsController {
     
     
     @Test
-    public void testaddObligation() throws Exception
-    {
-    	this.mockMvc.perform(get("/obligations/add"))
-    		.andExpect(status().isOk())
-    		.andExpect(model().attributeExists("activeTab"));
-
-    }
-    
-    
-    @Test
     public void searchObligation() throws Exception 
     {
     	this.mockMvc.perform(post("/obligations/search")
-    		.with(csrf()))
+			.param("spatialId", "0")
+			.param("issueId","NI")
+			.param("clientId", "0")
+			.param("_terminate", "on")
+			.with(csrf()))
 			.andExpect(status().isOk()) 
 			.andExpect(view().name("obligations"));
     }
@@ -127,7 +116,6 @@ public class ITObligationsController {
     	this.mockMvc.perform(get("/obligations/1/edit")
 	    	.with(user("editor").roles("EDITOR")))
 			.andExpect(status().isOk()) 
-			.andExpect(model().attributeExists("title"))
 			.andExpect(model().attributeExists("activeTab"))
 			.andExpect(view().name("eobligation"));
     }
@@ -135,7 +123,7 @@ public class ITObligationsController {
     @Test
     public void obligation_add() throws Exception
     {
-    	this.mockMvc.perform(get("/obligations/add")
+    	this.mockMvc.perform(get("/obligations/add/1")
     	    	.with(user("editor").roles("EDITOR")))
     			.andExpect(status().isOk()) 
     			.andExpect(model().attributeExists("title"))
@@ -228,6 +216,15 @@ public class ITObligationsController {
 		    	.with(user("editor").roles("EDITOR"))
 				.with(csrf()))
 				.andExpect(status().isOk());
+    }
+    
+    
+    @Test
+    public void deleteObligation() throws Exception
+    {
+    	this.mockMvc.perform(get("/obligations/delete/1")
+    	    	.with(user("editor").roles("EDITOR")))
+    			.andExpect(status().is3xxRedirection());
     }
     
 }

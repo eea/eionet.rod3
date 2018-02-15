@@ -6,6 +6,7 @@
      <div th:include="layout :: bannerFragment" ></div>
       <div id="workarea">
         <h1>Edit Client Organisation</h1>
+        
         <form action="clientEditForm.html" method="POST" th:action="@{'/clients/' + ${clientId} + '/edit'}" th:object="${client}" class="form-horizontal">
           <input name="clientId" th:value="*{clientId}" value="55" type="hidden"/>
           <input name="clientsHref" id="clientsHref" th:value="@{'/clients/'}" type="hidden"/>

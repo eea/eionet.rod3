@@ -19,23 +19,20 @@ public class Obligations {
 	private String description;
 	
 	private Integer obligationId;
-	private int eeaPrimary;
+	private Integer eeaPrimary;
     private String overlapUrl;
-    private int eeaCore;
-    private int flagged;
+    private Integer eeaCore;
+    private Integer flagged;
     private String coordinator;
     private String coordinatorUrl;
     private String coordinatorRole;
-    @NotNull @NotEmpty
     private String coordinatorRoleSuf;
     
     private String nationalContact;
     private String nationalContactUrl;
     private String responsibleRole;
-    @NotNull @NotEmpty
     private String responsibleRoleSuf;
     
-    @NotNull @NotEmpty
     private String terminate;
     
     private String reportFreqMonths;
@@ -98,6 +95,10 @@ public class Obligations {
     
     private String delObligations;
     
+    //Obligations relations table T_OBLIGATION_RELATION
+    private Integer relObligationId;
+    private String oblRelationId;
+    
     
 	public String getOblTitle() {
 		return oblTitle;
@@ -123,11 +124,11 @@ public class Obligations {
 		this.obligationId = obligationId;
 	}
 
-	public int getEeaPrimary() {
+	public Integer getEeaPrimary() {
 		return eeaPrimary;
 	}
 
-	public void setEeaPrimary(int eeaPrimary) {
+	public void setEeaPrimary(Integer eeaPrimary) {
 		this.eeaPrimary = eeaPrimary;
 	}
 
@@ -139,19 +140,19 @@ public class Obligations {
 		this.overlapUrl = overlapUrl;
 	}
 
-	public int getEeaCore() {
+	public Integer getEeaCore() {
 		return eeaCore;
 	}
 
-	public void setEeaCore(int eeaCore) {
+	public void setEeaCore(Integer eeaCore) {
 		this.eeaCore = eeaCore;
 	}
 
-	public int getFlagged() {
+	public Integer getFlagged() {
 		return flagged;
 	}
 
-	public void setFlagged(int flagged) {
+	public void setFlagged(Integer flagged) {
 		this.flagged = flagged;
 	}
 
@@ -566,9 +567,27 @@ public class Obligations {
 		this.delObligations = delObligations;
 	}
 
+	public Integer getRelObligationId() {
+		return relObligationId;
+	}
+
+	public void setRelObligationId(Integer relObligationId) {
+		this.relObligationId = relObligationId;
+	}
+
+	public String getOblRelationId() {
+		return oblRelationId;
+	}
+
+	public void setOblRelationId(String oblRelationId) {
+		this.oblRelationId = oblRelationId;
+	}
+	
 	public String truncateText(String truncateText) {
 	       return RODUtil.truncateText(truncateText);
 	}
+
+	
 
 	
 }

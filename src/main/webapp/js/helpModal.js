@@ -10,7 +10,10 @@ function helpFunction(helpID){
 		success : function(responseText) {
 			$("#title-modal").attr('title', responseText.title);
 			$("#help-text").html(responseText.text);
-			$('#title-modal').dialog();
+			$('#title-modal').dialog({
+				minWidth: 600,
+				minHeight: 200
+			});
 		}
 	});
 }

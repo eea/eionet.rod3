@@ -3,7 +3,7 @@ package eionet.rod.dao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ import eionet.rod.model.InstrumentDTO;
 import eionet.rod.model.InstrumentFactsheetDTO;
 import eionet.rod.model.InstrumentObligationDTO;
 import eionet.rod.model.InstrumentsListDTO;
-
+import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 /**
@@ -107,14 +107,25 @@ public class SourceServiceJdbc implements SourceService {
 	@Override
 	public void update(InstrumentFactsheetDTO instrumentFactsheetRec)  throws ResourceNotFoundException {
 		instrumentFactsheetRec = validateDates(instrumentFactsheetRec);
-		
+		if (instrumentFactsheetRec.getSourceValidFrom() != null) {
+			instrumentFactsheetRec.setSourceValidFrom(RODUtil.str2Date(instrumentFactsheetRec.getSourceValidFrom()));
+		}
+		if (instrumentFactsheetRec.getSourceEcEntryIntoForce() != null) {
+			instrumentFactsheetRec.setSourceEcEntryIntoForce(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcEntryIntoForce()));
+		}
+		if (instrumentFactsheetRec.getSourceEcAccession() != null) {
+			instrumentFactsheetRec.setSourceEcAccession(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcAccession()));
+		}
+				
 		String update = "UPDATE T_SOURCE SET TITLE=?, ALIAS=?, "
                 + "SOURCE_CODE=?, URL=?, CELEX_REF=?, ISSUED_BY_URL=?, "
                 + "VALID_FROM=?, ABSTRACT=?, COMMENT=?, EC_ENTRY_INTO_FORCE=?, EC_ACCESSION=?, "
-                + "SECRETARIAT=?, SECRETARIAT_URL=?, TERMINATE=?, FK_CLIENT_ID=? "
+                + "SECRETARIAT=?, SECRETARIAT_URL=?, TERMINATE=?, FK_CLIENT_ID=? , LAST_UPDATE=? "
                 + "WHERE PK_SOURCE_ID=?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-               
+        
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
         
 		jdbcTemplate.update(update,
 				instrumentFactsheetRec.getSourceTitle(),
@@ -132,6 +143,7 @@ public class SourceServiceJdbc implements SourceService {
 				instrumentFactsheetRec.getSourceSecretariatUrl(),
 				instrumentFactsheetRec.getSourceTerminate(),
 				instrumentFactsheetRec.getClientId(),
+				ourJavaDateObject,
 				instrumentFactsheetRec.getSourceId());	
 		
 		update = "UPDATE T_CLIENT_SOURCE_LNK "
@@ -195,7 +207,8 @@ public class SourceServiceJdbc implements SourceService {
 
 	@Override
 	public Integer insert(InstrumentFactsheetDTO instrumentFactsheetRec) {
-		instrumentFactsheetRec = validateDates(instrumentFactsheetRec);
+		//instrumentFactsheetRec = validateDates(instrumentFactsheetRec);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");	
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
@@ -210,17 +223,53 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("URL", instrumentFactsheetRec.getSourceUrl());
 		parameters.put("CELEX_REF", instrumentFactsheetRec.getSourceCelexRef());
 		parameters.put("ISSUED_BY_URL", instrumentFactsheetRec.getSourceIssuedByUrl());
-		parameters.put("VALID_FROM", instrumentFactsheetRec.getSourceValidFrom());
+		if (instrumentFactsheetRec.getSourceValidFrom() != null && instrumentFactsheetRec.getSourceValidFrom() !="") {
+			try {
+				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceValidFrom())).getTime());
+				parameters.put("VALID_FROM", date);
+			} catch (ParseException e) {
+				//e.printStackTrace();
+				parameters.put("VALID_FROM", null);
+			}
+		}else {
+			parameters.put("VALID_FROM", null);
+		}
 		parameters.put("ABSTRACT", instrumentFactsheetRec.getSourceAbstract());
 		parameters.put("COMMENT", instrumentFactsheetRec.getSourceComment());
-		parameters.put("EC_ENTRY_INTO_FORCE", instrumentFactsheetRec.getSourceEcEntryIntoForce());
-		parameters.put("EC_ACCESSION", instrumentFactsheetRec.getSourceEcAccession());
+		if (instrumentFactsheetRec.getSourceEcEntryIntoForce() != null && instrumentFactsheetRec.getSourceEcEntryIntoForce() !="") {
+			try {
+				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcEntryIntoForce())).getTime());
+				parameters.put("EC_ENTRY_INTO_FORCE", date);
+			} catch (ParseException e) {
+				//e.printStackTrace();
+				parameters.put("EC_ENTRY_INTO_FORCE", null);
+			}
+		}else {
+			parameters.put("EC_ENTRY_INTO_FORCE", null);
+		}
+		if (instrumentFactsheetRec.getSourceEcAccession() != null && instrumentFactsheetRec.getSourceEcAccession() !="") {
+			try {
+				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcAccession())).getTime());
+				parameters.put("EC_ACCESSION", date);
+			} catch (ParseException e) {
+				//e.printStackTrace();
+				parameters.put("EC_ACCESSION", null);
+			}
+		}else {
+			parameters.put("EC_ACCESSION", null);
+		}
 		parameters.put("SECRETARIAT", instrumentFactsheetRec.getSourceSecretariat());
 		parameters.put("SECRETARIAT_URL", instrumentFactsheetRec.getSourceSecretariatUrl());
 		parameters.put("FK_CLIENT_ID", instrumentFactsheetRec.getClientId());
 		parameters.put("FK_TYPE_ID", 0);
 		parameters.put("LEGAL_NAME", "");
-		
+	   
+		// java.sql.Date
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
+        
+        parameters.put("LAST_UPDATE",ourJavaDateObject);
+	       
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
                 parameters));
 		Integer sourceId = ((Number) key).intValue();
@@ -391,7 +440,7 @@ public class SourceServiceJdbc implements SourceService {
 	}
 		
 	@Override
-	public String getHierarchy(Integer id, boolean hasParent, String mode) {
+	public String getHierarchy(Integer id, boolean hasParent, String mode, String UrlInstruments) {
 		String newLine = "\n";
 		StringBuilder ret = new StringBuilder();
 		String query = "SELECT SC.PK_CLASS_ID AS classId, SC.CLASSIFICATOR AS classificator, SC.CLASS_NAME AS className, SL.FK_SOURCE_PARENT_ID AS parentId "
@@ -420,7 +469,7 @@ public class SourceServiceJdbc implements SourceService {
     				 ret.append("&amp;mode=X");
     			 }
     			 ret.append("'>").append(intrumentsListDTO.getClassName()).append("</a>").append(newLine);
-    			 ret.append(getHierarchy(intrumentsListDTO.getClassId(), true, mode));
+    			 ret.append(getHierarchy(intrumentsListDTO.getClassId(), true, mode, UrlInstruments));
     			 ret.append("</li>").append(newLine);
         	 }
         	 ret.append("</ul>").append(newLine);
@@ -475,17 +524,32 @@ public class SourceServiceJdbc implements SourceService {
 		
 	}
 	
-	public String dateParser(String dateString) throws ParseException {
+	/*public Date stringToDate(String date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date parsed;
+		Date parsedDate = null;
+		try {
+			parsed = format.parse(date);
+			parsedDate = new java.sql.Date(parsed.getTime());
+			return parsedDate;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return parsedDate;
+		
+	}*/
+	
+	/*public String dateParser(String dateString) throws ParseException {
 		if (dateString != null && !dateString.equals("")) {
-			SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = parser.parse(dateString);
 			return formatter.format(date);
 		} else {
 			return "";
 		}
 		
-	}
+	}*/
 
 	@Override
 	public void delete(Integer sourceId) {

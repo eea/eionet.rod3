@@ -5,7 +5,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -43,9 +42,6 @@ public class ITInstrumentsController {
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
 
-    @Autowired
-    private DataSource datasource;
-
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
@@ -77,7 +73,8 @@ public class ITInstrumentsController {
     @Test
     public void editInstrumentForm() throws Exception
 	{
-    	this.mockMvc.perform(get("/instruments/edit?sourceId=1"))
+    	this.mockMvc.perform(get("/instruments/edit?sourceId=1")
+    			.param("sourceId","1"))
     			.andExpect(status().isOk())
     			.andExpect(view().name("instrumentEditForm"));
     			

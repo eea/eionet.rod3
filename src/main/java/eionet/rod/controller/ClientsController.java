@@ -174,7 +174,7 @@ public class ClientsController {
             ClientDTO client, BindingResult bindingResult, ModelMap model) {
         clientService.update(client);
         model.addAttribute("message", "Client " + client.getClientId() + " updated");
-        return "redirect:/clients";
+        return "redirect:/clients/" + clientId + "/edit";
     }
 
     /**
@@ -184,14 +184,14 @@ public class ClientsController {
      * @param model - contains attributes for the view
      * @return view name
      */
-    @RequestMapping("/delete")
-    public String deleteClient(@RequestParam Integer clientId, Model model) {
+    @RequestMapping("/delete/{clientId}")
+    public String deleteClient(@PathVariable("clientId") Integer clientId, Model model) {
         if (!clientService.clientExists(clientId)){
             model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist");
         } else {
             clientService.deleteById(clientId);
             model.addAttribute("message", "Client " + clientId + " deleted");
         }
-        return "redirect:view";
+        return "redirect:/clients";
     }
 }

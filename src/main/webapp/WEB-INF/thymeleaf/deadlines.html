@@ -30,23 +30,23 @@
     	</div>
      
      	<div id="filters">
+     		<a class="helpButton" onclick="helpFunction('HELP_CSMAIN1')" title="Help on this field"></a>
         	<div class="filter">
             	<div class="row">
                 	<div class="labeldiv">
                     	 <label for="shortName">Select issue</label>
-                    	 <a class="helpButton" onclick="helpFunction('HELP_CSMAIN1')" title="Help on this field"></a>
                     </div>
 	                <div class="input">
 						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
 							<option value="0" label="Any issues"></option>
 			    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
+							<option value="NI" label="No issue allocated"></option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 	                <div class="labeldiv">
 	                    <label for="shortName">Select Deadline</label>
-	                    <a class="helpButton" onclick="helpFunction('HELP_CSMAIN1')" title="Help on this field"></a>
 	                </div>
 	                <div class="input">
 						<select name="deadlines"  id="deadlines" class="smalltext" th:field="*{deadlineId}">
@@ -61,12 +61,12 @@
 				<div class="row">
                 	<div class="labeldiv">
                     	<label for="shortName">Select Client</label>
-                    	<a class="helpButton" onclick="helpFunction('HELP_CSMAIN1')" title="Help on this field"></a>
                     </div>
 	      			<div class="input">
 						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
 							<option value="0" label="Any organisation"></option>
-					    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+					    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != null and client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+					    	
 						</select>
 					</div>
 				</div>

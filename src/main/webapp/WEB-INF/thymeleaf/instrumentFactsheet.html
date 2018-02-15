@@ -48,7 +48,7 @@
             <div class="even form-group">
 				  <div class="col-lg-4">Legal name</div>
               <div class="col-lg-8">
-              	<span class="link-do"><span class="link-external"><a th:href="${instrument.sourceUrl}" th:text="${instrument.sourceTitle}"></a></span></span>
+              	<span class="link-do"><span><a th:href="${instrument.sourceUrl}" th:text="${instrument.sourceTitle}"></a></span></span>
               </div>
             </div>
           	<div class="odd form-group">
@@ -75,7 +75,7 @@
             <div class="odd form-group">
 				<div class="col-lg-4">URL to issuer</div>
 				<div class="col-lg-8">
-					<span class="link-external" th:switch="${instrument.sourceIssuedByUrl}">
+					<span th:switch="${instrument.sourceIssuedByUrl}">
 		              	<a th:case="null" th:href="${instrument.clientUrl}" th:text="${instrument.clientUrl}">
 		              		URL to issuer
 		              	</a>
@@ -99,7 +99,7 @@
             <div class="odd form-group" th:if="${!instrument.relatedInstruments.isEmpty()}">
 				  <div class="col-lg-4">Related instrument(s)</div>
 	              <div class="col-lg-8">
-	              	<ul class="menu">
+	              	<ul>
 	              		<li th:each="relatedInstrument : ${instrument.relatedInstruments}">
 	              			<a th:href="@{'/instruments/'} + ${relatedInstrument.sourceId}" th:text="${relatedInstrument.sourceAlias}">Related instrument</a>
 	              		</li>
@@ -114,7 +114,7 @@
             </div>
             <div class="odd form-group">
 				  <div class="col-lg-4">Abstract</div>
-				  <div class="col-lg-8"><span th:text="${instrument.sourceAbstract}">Abstract</span></div>
+				  <div class="col-lg-8"><span th:utext="${instrument.sourceAbstract}">Abstract</span></div>
             </div>
         </div>
             
@@ -124,7 +124,7 @@
 			<div class="odd form-group">
 				  <div class="col-lg-4">Reporting obligations</div>
               <div class="col-lg-8">
-              	<ul class="menu">
+              	<ul>
               		<li th:each="obligation : ${instrument.obligations}">
               			<a th:href="@{'/obligations/'} + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
               			<span th:if="${obligation.terminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
@@ -136,7 +136,7 @@
             <div class="even form-group">
 				  <div class="col-lg-4">Comments</div>
 				  <div class="col-lg-8">
-              		<span th:text="${instrument.sourceComment}">Comments</span>
+              		<span th:utext="${instrument.sourceComment}">Comments</span>
               	  </div>
             </div>
             <div class="odd form-group">

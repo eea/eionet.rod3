@@ -19,18 +19,16 @@
               		</div>
               		<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_LEGALNAME')" title="Help on this field"></a>
 		            <div class="col-lg-8">
-		                <textarea id="sourceTitle" cols="55" rows="5" style="height:5em" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}">
-							Title
-						</textarea>
+		                <textarea id="sourceTitle" maxlength="255" cols="55" rows="5" style="height:5em" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}" th:required="required"></textarea>
 		            </div>
             	</div>
 	            <div class="form-group">
 					  <div class="col-lg-3">
-		             	   <label class="question" for="sourceAlias">Short Name</label>
+		             	   <label class="required question" for="sourceAlias">Short Name</label>
 		              </div>
 		              <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ALIASNAME')" title="Help on this field"></a>
 		              <div class="col-lg-8">
-		                	<input id="sourceAlias" maxlength="100" name="sourceAlias" th:field="*{sourceAlias}" type="text" size="68" class="form-control full"/>
+		                	<input id="sourceAlias" maxlength="100" name="sourceAlias" th:field="*{sourceAlias}" type="text" size="68" class="form-control full" th:required="required"/>
 		              </div>
 	            </div>
 	            <div class="form-group">
@@ -41,12 +39,6 @@
 	              <div class="col-lg-8" th:switch="${instrument.sourceTerminate}">
 	              	<input id="sourceCode" maxlength="255" name="sourceCode" th:field="*{sourceCode}" type="text"  class="form-control"/>
 	              	<label class="question" for="sourceTerminate">Terminate</label>
-	              	<span th:case="'N'"> 
-		              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" />
-		              	<label for="terminateYes">Yes</label>
-		              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" checked="checked" />
-		              	<label for="terminateNo">No</label>
-		            </span>
 		            <span th:case="'Y'">	                              
 		              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" checked="checked" />
 		              	<label for="terminateYes">Yes</label>
@@ -56,7 +48,7 @@
 		            <span th:case="*">	                              
 		              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" />
 		              	<label for="terminateYes">Yes</label>
-		              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" />
+		              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" checked="checked" />
 		              	<label for="terminateNo">No</label>
 		            </span>
 	              </div>
@@ -85,10 +77,10 @@
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ISSUEDBY')" title="Help on this field"></a>
 	              	<div class="col-lg-8">
-		              	<select id="clientId" name="clientId" class="full form-control" th:switch="${instrument.clientName}">
-		              	  <option th:case="null" th:disabled="disabled" th:selected="selected" value="">Choose a client</option>
-		              	  <option th:case="*" th:text="${instrument.truncateText(instrument.clientName)}" th:value="${instrument.clientId}" th:selected="selected"></option>
-						  <option th:each="client : ${clients}" th:if="${client.name != instrument.clientName}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}"></option>
+		              	<select id="clientId" name="clientId" class="full form-control" th:required="required" th:field="*{clientId}">
+		              	  <!-- <option th:if="${instrument.clientName != null}" th:text="${instrument.truncateText(instrument.clientName)}" th:value="${instrument.clientId}" th:selected="selected"></option> 
+						  <option th:each="client : ${clients}" th:if="${client.name != instrument.clientName}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}"></option> -->
+						  <option th:each="client : ${clients}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}" th:selected="*{clientId} == ${client.clientId}"></option>
 						</select>
 	              	</div>
 	            </div>
@@ -106,17 +98,17 @@
 	                	<label class="question" for="">Parent legislative instrument</label>
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_PARENTLEGALINSTRUMENT')" title="Help on this field"></a>
-		            <div class="col-lg-8">
-		              	<select id="sourceLnkFKSourceParentId" name="sourceLnkFKSourceParentId"  class="full form-control">              	  
-		              	  <option th:if="${instrument.parent != null}" th:selected="selected" th:text="${instrument.truncateText(instrument.parent.sourceAlias)}" th:value="${instrument.parent.sourceId}"></option>
+		            <div  class="col-lg-8">
+		              	<select id="sourceLnkFKSourceParentId" name="sourceLnkFKSourceParentId" class="full form-control" th:field="*{sourceLnkFKSourceParentId}">              	  
+		              	  <!-- <option th:if="${instrument.parent != null}" th:selected="selected" th:text="${instrument.truncateText(instrument.parent.sourceAlias)}" th:value="${instrument.parent.sourceId}"></option> -->
 		              	  <option value="-1">No parent</option>
-						  <option th:each="i : ${instruments}" th:if="${i.sourceId != instrument.sourceId}" th:text="${instrument.truncateText(i.sourceAlias)}" th:value="${i.sourceId}"></option>
+						  <option th:each="i : ${instruments}" th:if="${i.sourceId != instrument.sourceId}" th:text="${instrument.truncateText(i.sourceAlias)}" th:value="${i.sourceId}" th:selected="*{sourceLnkFKSourceParentId} == ${i.sourceId}"></option>
 						</select>
 		            </div>
 	            </div>
 	            <div class="form-group">
 				  	<div class="col-lg-3">
-			      		<label for="selSourceClasses" class="question">Eur-lex categories</label>
+			      		<label for="selSourceClasses" class="required question">Eur-lex categories</label>
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_CLASSIFICATION')" title="Help on this field"></a>
 					<div class="col-lg-8"></div>
@@ -149,7 +141,7 @@
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_VALIDFROM')" title="Help on this field"></a>
 	              	<div class="col-lg-8">
-		                <input id="sourceValidFrom" maxlength="255" name="sourceValidFrom" th:field="*{sourceValidFrom}" type="date" class="form-control"/> 
+		                <input id="sourceValidFrom" class="smalltext date form-control" size="30" name="sourceValidFrom" th:field="*{sourceValidFrom}"  onchange="checkDateSimple(this); changed()" type="text" /> 
 		                <span class="input-hint">(dd/mm/yyyy)</span>
 	               </div>
 	            </div>
@@ -185,7 +177,7 @@
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECENTRYINTOFORCE')" title="Help on this field"></a>
 	              	<div class="col-lg-8">
-	                	<input id="sourceEcEntryIntoForce" maxlength="255" name="sourceEcEntryIntoForce" th:field="*{sourceEcEntryIntoForce}" type="date" size="68"/>
+	                	<input id="sourceEcEntryIntoForce" class="smalltext date form-control" size="30"  name="sourceEcEntryIntoForce" th:field="*{sourceEcEntryIntoForce}" onchange="checkDateSimple(this); changed()" type="text"/>
 	                	<span class="input-hint">(dd/mm/yyyy)</span>
 	              	</div>
 	            </div>
@@ -195,7 +187,7 @@
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECACCESSION')" title="Help on this field"></a>
 	              	<div class="col-lg-8">
-	                	<input id="sourceEcAccession" maxlength="255" name="sourceEcAccession" th:field="*{sourceEcAccession}" type="date" size="68"/> 
+	                	<input id="sourceEcAccession"class="smalltext date form-control" size="30" name="sourceEcAccession" th:field="*{sourceEcAccession}" onchange="checkDateSimple(this); changed()" type="text"/> 
 						<span class="input-hint">(dd/mm/yyyy)</span>
 	              	</div>
 	            </div>

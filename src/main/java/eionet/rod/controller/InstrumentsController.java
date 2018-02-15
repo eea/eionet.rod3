@@ -3,6 +3,8 @@ package eionet.rod.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import eionet.rod.model.InstrumentClassificationDTO;
 import eionet.rod.model.InstrumentFactsheetDTO;
 import eionet.rod.model.InstrumentsListDTO;
 import eionet.rod.util.BreadCrumbs;
+import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 /**
@@ -48,7 +51,11 @@ public class InstrumentsController {
     
 	
 	@RequestMapping({"", "/", "/view"})
-	public String instrumentsHome(Model model, @RequestParam(required = false) Integer id) {
+	public String instrumentsHome(Model model, @RequestParam(required = false) Integer id, @RequestParam(required = false) String mode, HttpServletRequest request) {
+        
+		
+		String urlInstruments = request.getRequestURL().toString();
+		
 		BreadCrumbs.set(model, "Hierarchy");
 		if (id == null) {
 			id = 1;
@@ -58,15 +65,21 @@ public class InstrumentsController {
 		if (hierarchyInstrument == null) {
 			hasParent = false;
 		}
-		String mode = "";
-		String hierarchyTree = sourceService.getHierarchy(id, hasParent, mode);
+				
+		String hierarchyTree = sourceService.getHierarchy(id, hasParent, mode, urlInstruments);
 		List<HierarchyInstrumentDTO> hierarchyInstruments = sourceService.getHierarchyInstruments(id);
 		model.addAttribute("hierarchyInstrument", hierarchyInstrument);
 		model.addAttribute("hierarchyTree", hierarchyTree);
 		model.addAttribute("hierarchyInstruments", hierarchyInstruments);
 		model.addAttribute("activeTab", "instruments");
 		model.addAttribute("title","Legal instruments");
-		return "instruments";		
+		
+		if (mode != null && mode.equals("X")) {
+			return "instrumentsx";
+		} else {
+			return "instruments";
+		}
+				
 	}
 		
 	@RequestMapping(value = "/{sourceId}")
@@ -75,6 +88,17 @@ public class InstrumentsController {
 		
 		model.addAttribute("sourceId", sourceId);
 		InstrumentFactsheetDTO instrument = sourceService.getById(sourceId);
+		if (instrument.getSourceValidFrom() != null && !instrument.getSourceValidFrom().equals("")) {
+        	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
+        }
+        if (instrument.getSourceEcEntryIntoForce() != null && !instrument.getSourceEcEntryIntoForce().equals("")) {
+        	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
+        }
+        if (instrument.getSourceEcAccession() != null && !instrument.getSourceEcAccession().equals("")) {
+        	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
+        }
+        instrument.setSourceAbstract(RODUtil.replaceTags(instrument.getSourceAbstract()));
+        instrument.setSourceComment(RODUtil.replaceTags(instrument.getSourceComment()));
 		model.addAttribute("instrument", instrument);
 		BreadCrumbs.set(model, instrument.getSourceAlias());
 		model.addAttribute("activeTab", "instruments");
@@ -90,6 +114,20 @@ public class InstrumentsController {
         model.addAttribute("sourceId", sourceId);
         BreadCrumbs.set(model, "Edit a Legislative Instrument");
         InstrumentFactsheetDTO instrument = sourceService.getById(sourceId);
+        if (instrument.getParent() != null) {
+        	instrument.setSourceLnkFKSourceParentId(instrument.getParent().getSourceId());
+        }else {
+        	instrument.setSourceLnkFKSourceParentId(-1);
+        }
+        if (instrument.getSourceValidFrom() != null && !instrument.getSourceValidFrom().equals("")) {
+        	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
+        }
+        if (instrument.getSourceEcEntryIntoForce() != null && !instrument.getSourceEcEntryIntoForce().equals("")) {
+        	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
+        }
+        if (instrument.getSourceEcAccession() != null && !instrument.getSourceEcAccession().equals("")) {
+        	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
+        }
         model.addAttribute("instrument", instrument);
         List<ClientDTO> clients = clientService.getAllClients();
         model.addAttribute("clients", clients);
@@ -141,15 +179,15 @@ public class InstrumentsController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addInstrument(InstrumentFactsheetDTO instrument, BindingResult bindingResult, ModelMap model) {
-		Integer sourceId = sourceService.insert(instrument);
-		model.addAttribute("sourceId", sourceId);
+		Integer sourdeId = sourceService.insert(instrument);
+		model.addAttribute("sourceId", sourdeId);
 		return "redirect:edit";		
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteInstrument(InstrumentFactsheetDTO instrument) {
 		sourceService.delete(instrument.getSourceId());
-		return "redirect:view";
+		return "redirect:/instruments";
 	}
 	
 }

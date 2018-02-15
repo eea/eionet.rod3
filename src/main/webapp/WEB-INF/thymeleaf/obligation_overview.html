@@ -5,9 +5,19 @@
 <div id="container">
 	<div th:include="layout :: bannerFragment" ></div>
     <div id="workarea">
-	    <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
-			<h1 th:unless="${obligation.oblTitle == null}" th:text="'Reporting obligation for: ' + ${obligation.oblTitle}"></h1>
-	    
+    	<div class="title">
+		    <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
+		    	<h1 th:unless="${obligation.oblTitle == null}" th:text="'Reporting obligation for: ' + ${obligation.oblTitle}"></h1>
+		    <!--  sec:authorize="hasRole('EDITOR')" -->
+		    <ul class="menu-operations">
+		     	<li><span>Operations</span>
+					<ul>
+						<li><a th:href="@{'/obligations/'+ ${obligationId} +'/edit/'}">Edit obligation</a></li>
+		           		<li><a th:href="@{'/obligations/delete/' + ${obligationId}}">Delete obligation</a></li>
+		          	</ul>
+		        </li>
+	        </ul>
+        </div>
 	    <div id="tabbedmenu">
 		    <ul>
 			    <li id="currenttab"><span>Overview</span></li>
