@@ -1102,7 +1102,6 @@
   </changeSet>   
   
   <changeSet author="santamik" id="rev-55">
-  <validCheckSum>7:39b32e1685e3553e1d3b47614d197c2e</validCheckSum>
     <preConditions onFail="MARK_RAN">
       <tableExists tableName="T_SOURCE"/>
     </preConditions>  
@@ -1110,12 +1109,12 @@
       Refs #89744 Add Terminated column
     </comment>  
     <addColumn tableName="T_SOURCE">
-        <column name="TERMINATE" type="enum('Y','N')"/>
+        <column name="TERMINATED" type="enum('Y','N')"/>
     </addColumn>
     <modifySql dbms="h2">
     	<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
-	</modifySql>
-</changeSet>  
+	  </modifySql>
+  </changeSet>  
 
   <changeSet author="santamik" id="rev-56">
     <preConditions onFail="MARK_RAN">
@@ -1429,4 +1428,17 @@
     </comment>  
     <dropTable tableName="T_HISTORY" />  
   </changeSet>   
+  <changeSet author="santamik" id="rev-82">
+    <preConditions onFail="MARK_RAN">
+      <tableExists tableName="T_SOURCE"/>
+    </preConditions>  
+    <comment>
+      Rename terminated column
+    </comment>  
+    <renameColumn  
+      newColumnName="TERMINATE"
+      oldColumnName="TERMINATED"
+      tableName="T_SOURCE">
+    </renameColumn>
+  </changeSet>    
 </databaseChangeLog>
