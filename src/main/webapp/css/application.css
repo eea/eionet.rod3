@@ -1,4 +1,4 @@
-
+
 .sortable tr:nth-child(even) {background: #CCC}
 .sortable tr:nth-child(odd) {background: #FFF}
 
@@ -76,6 +76,7 @@
 /*-----------------------------------TRT---------------------------------------*/
 #workarea div.filter {
     background: none;
+	clear: both;
     width: 100%;
 }
 #workarea h1{
@@ -126,9 +127,19 @@
   padding-left: 0.5em;
   padding-top: 0.2em;
 }
-#drop-operations .search, #filters{
-  background-color: #fff !important;
+#drop-operations{
+	border-top: 0;
+	clear: both;
+    /* margin-left: -30px;
+    padding-left: 30px; */
+    max-width: 887px;
 }
+	form #drop-operations{
+		border-top: 1px solid #CFE3E4;
+	}
+	#drop-operations .search, #filters{
+	  background-color: #fff !important;
+	}
 .new_link{
   color: #00446A;
   cursor: pointer;
@@ -139,13 +150,6 @@
 	display: flex;
 	min-height: 3em;
 }
-/* #listItem, #workarea ul#listItem {
-	white-space: pre-line;
-}
-	#listItem:first-line, #workarea ul#listItem:first-line, #listItem:first-letter, #workarea ul#listItem:first-letter{
-		white-space: normal;
-		color: red
-	} */
 input[type=checkbox], input[type=radio]{
     margin-right: 4px;
 }
@@ -248,6 +252,33 @@ a.helpButton{
     margin-top: 12px;
 	padding-right: 7px;
 }
+	.text-center a.helpButton{
+		padding-right: 0px;
+	}
+		.text-center a.helpButton:after{
+			float: none;
+			margin-right: 0px;
+		}
+		
+	#filters a.helpButton {
+		float: right;
+		margin-bottom: 15px;
+		margin-right: -15px;
+		margin-top: -10px;
+		padding-right: 0;
+	}
+.ui-dialog .ui-dialog-titlebar-close{
+	height: auto;
+    line-height: 1;
+	padding: 0;
+}
+	.ui-dialog .ui-dialog-titlebar-close:before{
+		color: #222;
+		content: "\e014";
+		font-family: 'Glyphicons Halflings';
+		font-size: 12px;
+	}
+
 .advice-msg {
     margin-left: 15px;
     margin-right: 15px;
@@ -268,6 +299,16 @@ a.helpButton{
 .system-msg{
 	margin-bottom: 1em;
 }
+.col-lg-15, .col-xs-15{
+	float: left;
+    min-height: 1px;
+    padding-left: 15px;
+    position: relative;
+	width: 12.5%;
+}
+	.form-horizontal .control-label.col-lg-15, .form-horizontal .control-label.col-xs-15{
+		text-align: left;
+	}
 .col-lg-55, .col-xs-55{
 	float: left;
     min-height: 1px;
@@ -278,8 +319,14 @@ a.helpButton{
 }
 .or{
 	font-style: italic;
-	text-align: center;
 	line-height: 3em;
+}
+	.or.col-lg-15, .or.col-xs-15{
+		text-align: left;
+		padding-left: 0;
+	}
+.simple_attr_help label, .simple_attr_help .or{
+	padding-left: 0;
 }
 .arrow_btnbox{
 	margin-bottom: 5px;
@@ -297,10 +344,11 @@ a.helpButton{
 
 /* INICIO detail */
 .form-horizontal .results .form-group.even, .form-horizontal .results .form-group.odd{
-    padding-bottom: 0 !important;
-    padding-top: 0 !important;
+	display: -webkit-box;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
 }
 	.results .even div, .results .odd div {
 		border-left: 1px solid #9ac4c6;
@@ -330,7 +378,7 @@ a.helpButton{
 #tabbedmenu{
 	background: none;
 	background-image: none;
-	border-bottom: 1px solid #9ac4c6;
+	border-bottom: 1px solid #CFE3E4;
 	margin-bottom: 3em;
 	margin-top: 1em;
 	width: calc(100% + 30px);
@@ -338,7 +386,7 @@ a.helpButton{
 	#tabbedmenu #currenttab{
 		background: none;
 		background-image: none;
-		border: 1px solid #9ac4c6;
+		border: 1px solid #CFE3E4;
 		border-bottom: 1px solid white;
 		margin-bottom: -1px;
 	}
@@ -352,10 +400,11 @@ a.helpButton{
 			background-image: none;
 			padding: 0;
 		}
-		#tabbedmenu li span a, #tabbedmenu #currenttab span{
+		#tabbedmenu li span a, #tabbedmenu #currenttab span, #tabbedmenu li > a{
 			background: none;
 			background-image: none;
 			padding: 15px;
+			padding: 5px 15px;
 		}
 	#tabbedmenu a{
 		background: none;
@@ -364,17 +413,53 @@ a.helpButton{
 #drop-operations .nav-tabs{
 	border-bottom: none;
 }
+	#drop-operations .nav-tabs .link-external{
+		background: none;
+		background-image: none;
+		padding: 0;
+	}
 #drop-operations li.search{
     background: #F9FCFC;
+    border-bottom: 1px solid #CFE3E4;
+    bottom: 1px;
     z-index: 100;
 }	
-	#drop-operations li.search.active{
+	#drop-operations li.search.active, #drop-operations li.search.open{
 		border-bottom: 1px solid #ffffff;
 		border-top: 1px solid #CFE3E4;
 		border-left: 1px solid #CFE3E4;
 		border-right: 1px solid #CFE3E4;
+		position: initial;
 	}
-
+		#drop-operations li.search.active a, #drop-operations li.search.active a:active, #drop-operations li.search.active a:hover, #drop-operations li.search.active a:focus,
+		#drop-operations li.search.open a, #drop-operations li.search.open a:active, #drop-operations li.search.open a:hover, #drop-operations li.search.open a:focus{
+			border: none;
+		}
+.tab-content > span.link-external a.searchSection{
+	background: #fafafa;
+	border-top: 1px solid #CFE3E4;
+	border-bottom: 1px solid #CFE3E4;
+    border-radius: 4px;
+	color: #00446A;
+	display: block;
+    margin-bottom: 1em;
+    margin-top: -1px;
+    padding: 5px 10px;
+}
+	.tab-content > span.link-external a.searchSection:hover{
+		background: #f5f5f5;
+	}
+	.tab-content a.searchSection:before {
+		color: #B1B50F;
+		content: "\e90f";
+		display: inline;
+		font-size: 14px;
+		font-family: 'eea';
+		padding-right: 10px;
+	}
+	.tab-content a.searchSection:hover, .tab-content a.searchSection:focus {
+		text-decoration: none;
+	}
 /* FIN tabs */
 
 /* INICIO countries */
@@ -431,7 +516,9 @@ a.helpButton{
 	float: right;
 	list-style-image: none;
     list-style-type: none;
-	margin-top: -2.2em;
+	/* margin-top: -2.2em; */
+    margin-bottom: 0.4em;
+	margin-top: -0.4em;
 	width: 170px;
 }
 	.menu-operations > li{
@@ -498,6 +585,27 @@ a.helpButton{
 	}
 	#tabCountries .menu li {
 		width: 50%;
+	}
+		
+	#drop-operations{
+		margin-left: -30px;
+		padding-left: 30px;
+		max-width: auto;
+	}
+	#workarea #filters{
+		padding-bottom: 0px;
+		padding-top: 0px;
+		padding: 0;
+	}
+		#workarea #filters .link-external{
+			padding: 0;
+		}
+		#workarea #filters > div{
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+	.tab-content > span.link-external a.searchSection{
+		margin-bottom: -1px;
 	}
 }
 /* FIN responsive */
