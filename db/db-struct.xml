@@ -1438,7 +1438,6 @@
     <renameColumn  
       newColumnName="TERMINATE"
       oldColumnName="TERMINATED"
-      tableName="T_SOURCE">
-    </renameColumn>
+      tableName="T_SOURCE"/>
   </changeSet>    
 </databaseChangeLog>
