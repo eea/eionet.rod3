@@ -1113,8 +1113,8 @@
     </addColumn>
     <modifySql dbms="h2">
     	<replace replace="ENUM('Y', 'N')" with="VARCHAR(1)"/>
-	  </modifySql>
-  </changeSet>  
+	</modifySql>
+</changeSet>  
 
   <changeSet author="santamik" id="rev-56">
     <preConditions onFail="MARK_RAN">
@@ -1436,6 +1436,7 @@
       Rename terminated column
     </comment>  
     <renameColumn  
+      columnDataType="enum('Y','N')"
       newColumnName="TERMINATE"
       oldColumnName="TERMINATED"
       tableName="T_SOURCE"/>
