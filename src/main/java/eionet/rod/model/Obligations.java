@@ -353,9 +353,6 @@ public class Obligations {
 	}
 
 	public void setValidTo(String validTo) {
-		if (validTo.isEmpty()) {
-			validTo = null;
-		}
 		this.validTo = validTo;
 	}
 
