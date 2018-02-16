@@ -1,0 +1,7 @@
+Information on the on exceptions to the taking of Appendix I species (endangered migratory species) should be reported as soon as possible and included in the national report.
+
+ The development and adoption of the new reporting format for CMS Parties was a component of the CMS Information Management Plan (IMP).  The IMP aims to enhance the effectiveness and efficiency of CMS implementation, and to ensure an effective contribution by CMS to harmonised reporting and information management by biodiversity-related treaties.  A draft of the IMP was presented at the Sixth Meeting of the Conference of the Parties (November 1999) (document UNEP/CMS/Conf. 6.7 and Addendum), which issued Resolution 6.5 to provide recommendations and instructions on the implementation of the IMP.  To date, implementation of the IMP comprises three principal components: 1) the synthesis of Party Reports; 2) the new reporting format; and 3) the CMS Information Management System (CMS IMS).  The CMS IMS brings together information from Party reports, knowledge generated within CMS and other biodiversity agreements, and data from various expert organisations.  It is available on the CMS website (www.unep-wcmc.org/cms).
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

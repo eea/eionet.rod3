@@ -1,0 +1,4 @@
+Two codelists for groundwater can be obtained as Excel table from NRC EIONET Freshwater interest group library (subfolder Codelists of substances for water quality reporting):
+-Groundwater: Nutrients + specification of Preferred SoE Nutrients, Potentially Low Values and Potentially High Values (outliers),
+-Groundwater: Hazardous Substances + specification of Preferred SoE Haz.Subst., Potentially Low Values and Potentially High Values (outliers)
+at http://forum.eionet.europa.eu/nrc-eionet-freshwater/library/wise-soe-reporting-2013/codelists-substances-water-quality-reporting

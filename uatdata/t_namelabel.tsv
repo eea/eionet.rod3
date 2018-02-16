@@ -1,0 +1,60 @@
+NAME	LABEL
+dcterms:abstract	Abstract
+dcterms:accessRights	Access Rights
+dcterms:accrualMethod	Accrual Method
+dcterms:accrualPeriodicity	Accrual Periodicity
+dcterms:accrualPolicy	Accrual Policy
+dcterms:alternative	Alternative Title
+dcterms:audience	Audience
+dcterms:available	Date Available
+dcterms:bibliographicCitation	Bibliographic Citation
+dcterms:conformsTo	Conforms To
+dcterms:contributor	Contributor
+dcterms:coverage	Coverage
+dcterms:created	Date Created
+dcterms:creator	Creator
+dcterms:date	Date
+dcterms:dateAccepted	Date Accepted
+dcterms:dateCopyrighted	Date Copyrighted
+dcterms:dateSubmitted	Date Submitted
+dcterms:description	Description
+dcterms:educationLevel	Audience Education Level
+dcterms:extent	Extent
+dcterms:format	Format
+dcterms:hasFormat	Has Format
+dcterms:hasPart	Has Part
+dcterms:hasVersion	Has Version
+dcterms:identifier	Identifier
+dcterms:instructionalMethod	Instructional Method
+dcterms:isFormatOf	Is Format Of
+dcterms:isPartOf	Is Part Of
+dcterms:isReferencedBy	Is Referenced By
+dcterms:isReplacedBy	Is Replaced By
+dcterms:isRequiredBy	Is Required By
+dcterms:issued	Date Issued
+dcterms:isVersionOf	Is Version Of
+dcterms:language	Language
+dcterms:license	License
+dcterms:mediator	Mediator
+dcterms:medium	Medium
+dcterms:modified	Date Modified
+dcterms:provenance	Provenance
+dcterms:publisher	Publisher
+dcterms:references	References
+dcterms:relation	Relation
+dcterms:replaces	Replaces
+dcterms:requires	Requires
+dcterms:rights	Rights
+dcterms:rightsHolder	Rights Holder
+dcterms:source	Source
+dcterms:spatial	Spatial Coverage
+dcterms:subject	Subject
+dcterms:tableOfContents	Table Of Contents
+dcterms:temporal	Temporal Coverage
+dcterms:title	Title
+dcterms:type	Type
+dcterms:valid	Date Valid
+foaf:isPrimaryTopicOf	See also
+foaf:page	Web page
+owl:sameAs	Same As
+rdf:type	Type

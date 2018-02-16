@@ -1,0 +1,14 @@
+Gridded emissions data, every four years for reporting year minus 2 (X-2):
+
+SO2 (sulphur dioxide)
+NOx (nitrogen oxides)
+NMVOCs (non-methane volatile organic compounds)
+NH3 (ammonia)
+CO (carbon monoxide)
+Particulate matter (PM): particles with an aerodynamic diameter equal to or less than 2.5 micrometres (PM2.5); particles with an aerodynamic diameter equal to or less than 10 micrometres (PM10 
+
+Heavy metals (HMs): cadmium (Cd), mercury (Hg), lead (Pb)
+
+Persistent organic pollutants (POPs): total polycyclic aromatic hydrocarbons (PAHs), hexachlorobenzene (HCB), polychlorinated biphenyl(PCBs) dioxin/furans
+
+Black carbon (BC; if available)

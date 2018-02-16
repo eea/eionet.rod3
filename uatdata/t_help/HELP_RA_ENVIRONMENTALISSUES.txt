@@ -1,0 +1,5 @@
+Generally one or two environmental issues should be selected for a reporting obligation. 
+
+The left-hand select box displays the items that can be selected. Environmental issues can be managed by moving items to the right hand box. Select item(s) from the left-hand box and then click the "-->" button. Similarly, to remove items, select item(s) from the right-hand box and press the "<--" button. To select multiple items from a select box, a CTRL key has to be held down while the items are clicked with the mouse.
+
+The environmental issues are aligned with the themes used in the EEA Reference Centre and Data warehouse. They are not aligned with the Eur-lex classification used for legislative instruments.

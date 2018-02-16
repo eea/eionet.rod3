@@ -1,0 +1,6 @@
+Extra information regarding the European Union’s policy as well as a range of documents and information on licensing are available on the European Commission’s Ozone Layer Protection Homepage at 
+http://ec.europa.eu/clima/policies/ozone/ods/index_en.htm
+
+Further information regarding the Vienna Convention for the protection of the Ozone Layer and its Montreal Protocol on substances that deplete the Ozone Layer is available at the Ozone Secretariat website at http://ozone.unep.org/en/
+
+Since 2016 EEA uses the ODS Regulation Article 27 data flow as input to some graphics in relation to the indicator CLIM 049: http://www.eea.europa.eu/data-and-maps/indicators/production-and-consumption-of-ozone-2/assessment-2

@@ -1,0 +1,11 @@
+This obligation is still under the development and will only be active as from March 2019 delivery with reference to 2017 reporting year. 
+
+This obligation covers:
+
+1) Data to be reported by Member States according to Article 7 of Regulation 166/2006/EC on the European Pollutant Release and Transfer Register (E-PRTR)
+
+2) Data to be reported by Member States, on combustion plants, according to Article 72(3) and 72(4) of Directive 2010/75/EU on industrial emissions 
+
+This obligation brings together the previous separated obligations http://rod.eionet.europa.eu/obligations/538 and http://rod.eionet.europa.eu/obligations/9
+
+The administrative data of the facilities and plants to be reported is stored in the so-called EU registry of industrial sites which constitutes obligation http://rod.eionet.europa.eu/obligations/721

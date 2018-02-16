@@ -1,0 +1,3 @@
+Manual for Marine Monitoring in the COMBINE Programme of HELCOM (http://www.helcom.fi/groups/monas/CombineManual/en_GB/main/) defines the contributions made by all Contracting Parties and regulates all methods used. 
+Data reporting should be in accordance with the latest ICES Environmental Reporting Format (version 3.2.3) (http://www.ices.dk/env/repfor/ERF3.2.doc). The format is based on codes (ICES Reference Code utility (RECO) http://www.ices.dk/datacentre/reco/).   
+Together with the data a national data report is to be provided according to EC MON 2/97, 12/1, Annex 9(http://www.helcom.fi/stc/files/CombineManual/PartA/ANNEX9.pdf).

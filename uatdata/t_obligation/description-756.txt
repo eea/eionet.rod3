@@ -1,0 +1,17 @@
+Note: This reporting obligation will be integrated with the integrated reporting on E-PRTR and LCPs (http://rod.eionet.europa.eu/obligations/720) as from 2019. 
+
+For all combustion plants covered by Chapter III of Directive 2010/75/EU, Member States shall, from 1 January 2016, establish an annual inventory of the sulphur dioxide, nitrogen oxides and dust emissions and energy input.
+
+Taking into account the aggregation rules set out in Article 29, the competent authority shall obtain the following data for each combustion plant:
+
+(a) the total rated thermal input (MW) of the combustion plant;
+
+(b) the type of combustion plant: boiler, gas turbine, gas engine, diesel engine, other (specifying the type);
+
+(c) the date of the start of operation of the combustion plant;
+
+(d) the total annual emissions (tonnes per year) of sulphur dioxide, nitrogen oxides and dust (as total suspended particles);
+
+(e) the number of operating hours of the combustion plant;
+
+(f) the total annual amount of energy input, related to the net calorific value (TJ per year), broken down in terms of the following categories of fuel: coal, lignite, biomass, peat, other solid fuels (specifying the type), liquid fuels, natural gas, other gases (specifying the type).

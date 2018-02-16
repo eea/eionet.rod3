@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet author="roug" id="rev-1" context="uat">
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="Introduction"/>
+	<column name="SCREEN_ID" value="Home_page"/>
+	<column name="DESCRIPTION" value=""/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" valueClobFile="hlp_area/Home_page-Introduction.txt"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="Two_boxes"/>
+	<column name="SCREEN_ID" value="Home_page"/>
+	<column name="DESCRIPTION" value="The two boxes below the search form"/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" valueClobFile="hlp_area/Home_page-Two_boxes.txt"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="Disclaimer"/>
+	<column name="SCREEN_ID" value="documentation"/>
+	<column name="DESCRIPTION" value="Disclaimer"/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" valueClobFile="hlp_area/documentation-Disclaimer.txt"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="TestArea"/>
+	<column name="SCREEN_ID" value="TestScreen"/>
+	<column name="DESCRIPTION" value="Bl&#xE5;b&#xE6;rgr&#xF8;d"/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" value="&lt;p&gt;asdjkah jksjkdsa asdjahsjdh &amp;nbsp;sjdhjasd&lt;/p&gt;&lt;p&gt;&amp;lt;/textarea&amp;gt;&amp;lt;script&amp;gt;alert(&amp;quot;XSS!&amp;quot;)&amp;lt;/script&amp;gt;Test &amp;oslash;&amp;aelig;&amp;aring;&lt;/p&gt;"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="Help"/>
+	<column name="SCREEN_ID" value="documentation"/>
+	<column name="DESCRIPTION" value="What is ROD"/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" valueClobFile="hlp_area/documentation-Help.txt"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+
+  <insert tableName="HLP_AREA">
+	<column name="AREA_ID" value="RSSHelp"/>
+	<column name="SCREEN_ID" value="documentation"/>
+	<column name="DESCRIPTION" value="RSS XML/RPC data extraction"/>
+	<column name="LANGUAGE" value=""/>
+	<column name="HTML" valueClobFile="hlp_area/documentation-RSSHelp.txt"/>
+	<column name="MD5" value=""/>
+	<column name="POPUP_WIDTH" value="400"/>
+	<column name="POPUP_LENGTH" value="400"/>
+  </insert>
+</changeSet>
+</databaseChangeLog>

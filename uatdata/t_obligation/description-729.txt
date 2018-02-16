@@ -1,0 +1,6 @@
+For the purpose of prevention and mitigation of major accidents, Member States shall inform the Commission of major accidents meeting the criteria of Annex VI which have occurred within their territory. They shall provide it with the following details:
+(a) the Member State, the name and address of the authority responsible for the report;
+(b) the date, time and place of the accident, including the full name of the operator and the address of the establishment involved;
+(c) a brief description of the circumstances of the accident, including the dangerous substances involved, and the immediate effects on human health and the environment;
+(d) a brief description of the emergency measures taken and of the immediate precautions necessary to prevent recurrence;
+(e) the results of their analysis and recommendations.

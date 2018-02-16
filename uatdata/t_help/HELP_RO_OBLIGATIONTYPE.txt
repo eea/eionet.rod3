@@ -1,0 +1,10 @@
+This field should categorise the type of reporting obligation. One of the three options should be selected (Compulsory, expected or voluntary) depending on the legal framework and requirements.
+
+Compulsory
+Required reporting obligations must be submitted in order to be in compliance with the legal instrument. Typically the obligation will arise from the articles of the instrument with wording such as "shall", "requires", "will" or "must".The format and content of required reports may not carry the same level of obligation, since the report format may be specified in administrative decisions rather than ratified articles of the instrument. Hence the submission of a required report in an incomplete or incorrect format may not constitute lack of compliance. In applying this definition it is the level of compulsion of the reporting obligation itself that is paramount.
+
+Expected 
+A report that all parties under normal circumstances are expected to submit but with incomplete compulsion, i.e. failure to submit would not seem to constitute a lack of compliance with the instrument. The obligation may arise from articles of the instrument, but typically from subsequent decisions of the governing body (e.g. Conference of the Parties or EEA Management Board) and often will carry wording such as "should", "recommend" or "will endeavour". The use of "Expected" type of reporting may also be appropriate for use where the Instrument itself is a non-compulsory agreement for example, "Agenda 21" (obligation to report to the Commission on Sustainable Development), or the UNESCO Man and Biosphere programme.
+
+Voluntary
+A report that parties may submit at their own volition. These usually arise from governance or administrative decisions and are specifically identified as "voluntary" or employ phrases such as "may" or "might" or "parties are invited (or encouraged) to?". It is clear and obvious that failure to report does not contravene the terms of the Instrument.

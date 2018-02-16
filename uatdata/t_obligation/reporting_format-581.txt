@@ -1,0 +1,5 @@
+WFD reporting resources at ETC/ICM web site contains all needed support files for reporting including help documents and schemas.
+
+Guidance documents elaborated under the Common Implementation Strategy (CIS) n°15 to n°18 and n°26 should help to meet the requirements of the groundwater elements of the Water Framework Directive and the new Groundwater Directive (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a). See especially guidance n°17 on preventing or limiting direct and indirect inputs in the context of the Groundwater directive. It provides guidance on the implementation of the Water Framework Directive with respect to those obligations for preventing or limiting entry of pollutants into groundwater, as further developed in the Groundwater Directive. 
+
+Additional information can be found in the WFD CIS technical reports on the Groundwater CIRCA library (https://circabc.europa.eu/w/browse/1e3530ea-5c51-4868-b4ff-8285b5fb90c8).

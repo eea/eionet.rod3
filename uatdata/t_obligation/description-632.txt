@@ -1,0 +1,7 @@
+Data on:
+
+- Emissions: annual load of organic matter, nutrients and hazardous substances from point sources and diffuse sources, spatially aggregated at river basin district (RBD) or river basin district sub-unit level.
+
+- Direct discharges: annual load of organic matter, nutrients and hazardous substances directly discharged to transitional and coastal waters, aggregated at the water body level.
+
+- Riverine inputs: annual load of organic matter, nutrients and hazardous substances coming from riverine inputs, aggregated at the monitoring site level (Flux stations)

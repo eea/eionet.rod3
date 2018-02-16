@@ -1,0 +1,9 @@
+Regulation 166/2006/EC includes (Annex I) activity 5.g Independently operated waste water treatment plants (IOWWTPs) with a capacity threshold of 10000m3 per day.
+Footnote No 4 of Annex I of the Regulation stipulates that “the capacity threshold shall be reviewed by 2010 at the latest in the light of the results of the first reporting cycle”.
+In the light of this review, the Commission will assess the following reported information:
+For all existing IOWWTP (no capacity threshold):
+-	Location
+-	Permitted capacity in m3 per day
+-	Annual load of total organic carbon (TOC) in tonnes (reported as total C or COD/3)
+-	Annual load of zinc and compounds in kg
+-	Annual load of copper and compounds in kg

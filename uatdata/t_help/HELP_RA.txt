@@ -1,0 +1,5 @@
+This page shows the details of reporting obligations in ROD. It is in this view that the details of reporting obligation requirements are shown.
+
+The "D" buttons on the right hand side of the display open pop-up windows that display more detailed information on the line selected. For the directory contacts an Eionet username and password may be required to view the contact details.
+
+The green text buttons on the top right hand side of the page open windows showing more detiled information that is drawn from ROD and other Reportnet modules as well as opening printer friendly pages and page help.

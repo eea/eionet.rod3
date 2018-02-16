@@ -1,0 +1,7 @@
+Initials of the person that verified or updated the record and organisational identifier. Thematic experts carry out verification. Contents that are verified are accepted as correct until the update cycle date is reached. The process of updating verifies that records are correct and re-sets the update date for a suitable point in time in the future. This is the next update date.
+
+The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.
+
+   *   Next update: The date when the next regular update is due.
+   *   Verified: The date on which the record was verified or last updated by a thematic expert.
+   *   verified by: An identifier for the verifier.

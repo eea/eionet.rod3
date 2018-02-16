@@ -1,0 +1,11 @@
+Reporting on production, import, export, feedstock use and destruction of the substances listed in Annexes I or II to the F-Gas regulation. they affect to:
+
+- Each producer, importer and exporter that produced, imported or exported one metric tonne or 100 tonnes of CO2 equivalent or more of fluorinated greenhouse gases and gases listed in Annex II 
+
+- Each undertaking that destroyed 1 metric tonne or 1 000 tonnes of CO2 equivalent or more of fluorinated greenhouse gases and gases listed in Annex II 
+
+- Each undertaking that used 1 000 tonnes of CO2 equivalent or more of fluorinated greenhouse gases as feedstock 
+
+- Each undertaking that placed 500 tonnes of CO2 equivalent or more of fluorinated greenhouse gases and gases listed in Annex II contained in products or equipment on the EU market
+
+- Each importer of equipment that place on the market pre-charged equipment where hydrofluorocarbons contained in this equipment have not been placed on the EU market prior to the charging of the equipment

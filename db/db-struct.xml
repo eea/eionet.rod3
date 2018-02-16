@@ -953,6 +953,9 @@
     </createTable>
   </changeSet>
 
+  <!-- Test data for ROD3 development site. Must use context="uat" -->
+  <include file="uatdata/loaduatdata.xml"/>
+
   <changeSet author="santamik" id="rev-41">
     <preConditions onFail="MARK_RAN">
       <tableExists tableName="X_ACTIVITY"/>

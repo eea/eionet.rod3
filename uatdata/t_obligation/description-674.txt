@@ -1,0 +1,10 @@
+Article 10
+Primary validated assessment data and primary up-to-date assessment data
+1. In accordance with the procedure referred to in Article 5 of this Decision, Member States shall make available the information set out in Part E of Annex II on primary validated assessment data for all sampling points where measurement data is collected for the purpose of the assessment as indicated by Member States according to Article 9 for the pollutants listed in Parts B and C of Annex I.
+Where in a particular zone or agglomeration modelling techniques are applied, Member States shall make available the information set out in Part E of Annex II at the highest time resolution available.
+2. The primary validated assessment data shall be made available to the Commission for a full calendar year as complete time series no later than 9 months after the end of each calendar year.
+3. Member States shall, where they make use of the possibility provided for in Articles 20(2) and 21(3) of Directive 2008/50/EC, make available information on the quantification of the contribution from natural sources pursuant to Article 20(1) of Directive 2008/50/EC or from the winter-sanding or -salting of roads pursuant to Article 21(1) and (2) of Directive 2008/50/EC.
+The information shall include:
+(a) the spatial extent of the subtraction;
+(b) the quantity of the primary validated assessment data made available according to paragraph 1 of this Article that can be attributed to natural sources or winter-sanding or -salting;
+(c) the results of the application of the methods reported according to Article 8.

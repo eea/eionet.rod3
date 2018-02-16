@@ -1,0 +1,11 @@
+Consolidated version: http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:1977D0795:20040501:EN:PDF
+
+The decision establishes a common procedure for the exchange of information on the quality of surface fresh water in the Community.
+The information covered by the exchange of information shall be: (a) the results of the measurements carried out by the sampling or measuring stations; (b) a description of the sampling, sample preservation and measuring methods used and the frequency of sampling.
+
+The Decision is amended by:
+-Council Decision 81/856/EEC of 19 October 1981 adapting, consequent upon the accession of Greece, Decision 77/795/EEC. 
+-Commission Decision 84/422/EEC of 24 July 1984 amending Annex I to Council Decision 77/795/EEC. 
+-Council Decision 86/574/EEC of 24 November 1986 amending Decision 77/795/EEC. 
+-Commission Decision 90/2/EEC of 14 December 1989 amending Annex I to Council Decision 77/795/EEC.
+-Council Regulation (EC) No 807/2003 of 14 April 2003 adapting to Decision 1999/468/EC the provisions relating to committees which assist the Commission in the exercise of its implementing powers laid down in Council instruments adopted in accordance with the consultation procedure.

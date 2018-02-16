@@ -1,0 +1,15 @@
+The monitoring programmes are described in Marine Strategy Framework Directive (http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2008:164:0019:0040:EN:PDF) (Annex 5).
+
+Article 11 of the Marine Strategy Framework Directive (2008/56/EC) provides legally-binding requirements for Member States to establish and implement coordinated monitoring programmes for the ongoing assessment of the environmental status of marine waters. Member States are to notify the Commission under MSFD Article 11 of their monitoring programmes by 15 October 2014 so that the Commission can assess whether the elements notified constitute an appropriate framework to meet the requirements of the Directive.
+
+All data files (reports) should be uploaded to ReportNet (http://cdr.eionet.europa.eu/) (CDR). Under each Member State, a folder ‘Marine Strategy Framework Directive: monitoring programmes' has been created under the European Union (EU) obligations. Within each Member State folder, the following subfolders (sub-collections) are available to upload the files:
+a. One sub-collection folder for any text-based national 'paper' reports for Article 11 (to be submitted in pdf format)and if applicable the copy (snapshot) of information held in a web-based data system or other website ( if linked to in the tabular data).
+b. One sub-collection folder for geographic data if required  (i.e. an updated MSFD4Geo ML file and the associated geographic data (spatial data in grid or non-grid polygon format).
+c. One sub-collection folder for each Marine region and/or sub-region relevant to the Member State's marine waters, for uploading tabular data (i.e. the xml schemas for Article 11).
+
+Further details of the types of reports and their content are given in MSFD Article 11 Reporting Package (https://circabc.europa.eu/d/a/workspace/SpacesStore/2678a5fe-d8bc-4f62-aafe-d09c53294e0b/MSFD_Art11ReportingPackage_Final_Feb2014.doc)
+
+Helpdesk service and support
+a. In case of login problems or any other technical difficulties with Eionet web services, please contact Eionet Helpdesk (helpdesk@eionet.europa.eu).
+b. If you need national support for your work with ReportNet, please contact your Eionet National Focal Points (http://www.eionet.europa.eu/ldap-roles/?role_id=eionet).
+c. In case of problems with the reporting tools or questions related to the content of the data requested, please contact helpdesk (helpdeskWISEreporting@atkinsglobal.com)

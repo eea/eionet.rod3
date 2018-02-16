@@ -1,0 +1,28 @@
+Article 8
+Methods for the demonstration and subtraction of exceedances attributable to natural sources or to winter-sanding or -salting
+1. In accordance with the procedure referred to in Article 5 of this Decision, Member States shall make available the information set out in Part D of Annex II on the methods used for the demonstration and subtraction of exceedances attributable to natural sources or to winter-sanding or -salting applied within individual zones and agglomerations according to Articles 20 and 21 of Directive 2008/50/EC.
+2. Member States shall make the information referred to in paragraph 1 available to the Commission for a full calendar year no later than 9 months after the end of each calendar year.
+Article 9
+Assessment methods
+1. In accordance with the procedure referred to in Article 5 of this Decision, Member States shall make available the information set out in Part D of Annex II on the quality and traceability of the assessment methods applied.
+2. Member States shall make the information referred to in paragraph 1 available to the Commission for a full calendar year no later than 9 months after the end of each calendar year.
+3. Where in a particular zone or agglomeration fixed measurement is mandatory according to Article 4 of Directive 2004/107/EC and Articles 6 and 9 and Article 10(6) of Directive 2008/50/EC, the information shall include at least the following:
+(a) the measurement configuration;
+(b) the demonstration of equivalence where a non-reference method is used;
+(c) the sampling point location, its description and classification;
+(d) the documentation of data quality.
+4. Where in a particular zone or agglomeration indicative measurement is applied in accordance with Article 4 of Directive 2004/107/EC and Articles 6 and 9 and Article 10(6) of Directive 2008/50/EC, the information shall include at least the following:
+(a) the measurement method applied;
+(b) the sampling points and the coverage area;
+(c) the validation method;
+(d) the documentation of data quality.
+5. Where in a particular zone or agglomeration modelling techniques are applied in accordance with Article 4 of Directive 2004/107/EC and Articles 6 and 9 of Directive 2008/50/EC, the information shall include at least the following:
+(a) the description of the modelling system and its inputs;
+(b) the model validation through measurements;
+(c) the coverage area;
+(d) the documentation of data quality.
+6. Where in a particular zone or agglomeration objective estimation is applied in accordance with Article 4 of Directive 2004/107/EC and Articles 6 and 9 of Directive 2008/50/EC, the information shall include at least the following:
+(a) the description of the estimation method;
+(b) the documentation of data quality.
+7. Member States shall also make available the information set out in Part D of Annex II on the quality and traceability of the assessment methods applied, for the networks and stations selected by the Member States for the purpose of the reciprocal exchange of information as referred to in point (b) of Article 1 for the pollutants listed in Part B of Annex I and where available for the additional pollutants listed in Part C of Annex I and for the additional pollutants listed on the portal for that purpose. Paragraphs 1 to 6 of this Article shall apply to the exchanged information. 
+Delivery process is managed by EEA

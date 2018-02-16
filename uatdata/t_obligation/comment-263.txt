@@ -1,0 +1,5 @@
+If the assessment report indicates that the GMO(s)in question should be placed on the market, the competent authority should send the report to the notifier within 90 days of the receipt of notification.  If the assessment report indicates that the GMO(s) in question should not be placed on the market, the report must be sent to the Commission no earlier than 15 days after sending the assessment report to the notifier (which was sent within 90 days after the competent authority received the notification), and no later than 105 days after receipt of the notification.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

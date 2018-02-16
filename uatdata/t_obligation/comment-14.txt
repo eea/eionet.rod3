@@ -1,0 +1,3 @@
+The WISE-6 is managed through the Eionet NRC coastal, marine, maritime network. However, it overlaps with similar dataflows established under Helcom and OSPAR. To avoid double reporting, the EEA has adopted a practice where data reported under the Regional Sea Conventions (RSCs) mechanisms are incorporated into the WISE-6 by ICES. This is possible due to the open access data policy of these conventions.
+
+EEA Core Set of Indicators using WISE SoE Marine data (CSI 021 Nutrients in transitional, coastal and marine waters and CSI 023 Chlorophyll in transitional, coastal and marine waters) can be found at  https://www.eea.europa.eu/data-and-maps/indicators/#c5=&c0=10&b_start=0&c10=MAR

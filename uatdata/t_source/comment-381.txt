@@ -1,0 +1,5 @@
+“The EPER decision (and the register) has become obsolete following the creation of the European Pollutant Release and Transfer Register (E-PRTR) through Regulation 
+
+166/2006/EC of the European Parliament and of the Council of 18 January 2006 concerning the establishment of a European Pollutant Release and Transfer Register and
+
+amending Council Directives 91/689/EEC and 96/61/EC.  E-PRTR implements fully the obligations of the UN-ECE PRTR Protocol, which was signed in May 2003 and entered into force on 8 October 2009. The obligations under the E-PRTR Regulation extend beyond the scope of EPER mainly in terms of the number of industrial activities and substances which are covered by the reporting and the additional coverage of releases to land, off-site transfers of waste and releases from diffuse sources. The reporting is annual with the first reporting year being the year 2007. The data reported under the EPER decision have been integrated in the E-PRTR website.”

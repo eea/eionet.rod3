@@ -1,0 +1,5 @@
+The Montreux Record is maintained as part of the Ramsar Database and is subject to continuous review.  The Ramsar Sites Database is managed on behalf of the Ramsar Convention by Wetlands International under contract from the Ramsar Bureau.  The database provides an information service on Ramsar sites, including undertaking analysis and reporting to meetings of the Conference of the Parties on progress in implementing the Strategic Framework and Vision for the List of Wetlands of International Importance (Resolution VII.11) and other Resolutions of the Conference of the Parties.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

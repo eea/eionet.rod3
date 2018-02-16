@@ -1,0 +1,12 @@
+The letter of request is sent by EC, DG ENV and EEA to Nominated reporters under the Bathing Water Directive, Permanent Representations of EU Member States, Water Directors of EU Member States and Eionet National Focal Points every year with reference to templates to use, guidelines and other support files. The letter "WISE Bathing Water Directive data request 2011" is available at http://icm.eionet.europa.eu/announcements/ann1320071056     
+
+Member States must provide in digital format specified files as defined in Data Dictionary "WISE - Bathing Water Quality Reporting under Directive 76/160/EEC" or questionnaire in Annex VIII of the Commission Decision 92/446/EEC amended by Decision 95/337/EC http://eur-lex.europa.eu/LexUriServ/site/en/consleg/1992/D/01992D0446-19950824-en.pdf    
+
+There are two possibilities available to assist the Member States: 
+-prepared reporting templates via xls- or xml-schema according to the Data Dictionary at http://dd.eionet.europa.eu/dataset.jsp?ds_id=2943    
+-specific software BWATER data input tool via txt-schema according to the "Guidance on reporting for BWD-updated version of 2007" deriving from concerning questionnaire (accessible under 1st Workshop on reporting on new and old BWD 22/10/2007 at the Bathing Water Directive WFD CIRCA library http://circa.europa.eu/Public/irc/env/wfd/library?l=/framework_directive/bathing_directive/workshop_22102007/reporting_bwater&vm=compact&sb=Title 
+
+Additional information is available at:
+-DG ENV website related to BWD http://ec.europa.eu/environment/water/water-bathing/summary.html    
+-public EEA Circa interest group WISE Water Directives reporting, subfolder for the Bathing Water Directive further divided into reporting for individual bathing seasons and workshops on BWD reporting at http://forum.eionet.europa.eu/x_wise-reporting/library/bathing_directive 
+-public Bathing Water Directive WFD CIRCA library under workshops on BWD reporting at https://circabc.europa.eu/w/browse/c02b8470-af8a-475f-8f8b-d1b7fe98272c

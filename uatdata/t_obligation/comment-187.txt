@@ -1,0 +1,5 @@
+The topics covered by the thematic reports are decided upon by the Conference of the Parties.  To date, thematic reports have been required on the following topics: alien species (2000); benefit-sharing (2000); forest ecosystems (2001); mountain ecosystems (2002); protected areas or areas where special measures need to be taken to conserve biological diversity (2003); and transfer of technology and technology co-operation (2003).  In addition, a voluntary report on the implementation of the expanded programme of work on forest biological diversity (2003)and a report on the implementation of the Programme of Work for the Global Taxonomy Initiative (2004) have been requested.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

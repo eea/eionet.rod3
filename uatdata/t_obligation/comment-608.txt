@@ -1,0 +1,7 @@
+The analyses shall take into account elements regarding transitional, coastal and marine waters covered by relevant provisions of existing Community legislation, in particular Directive 2000/60/EC (Water Framework Directive), 92/43/EEC (Habitats Directive) and 79/409/EEC (Birds Directive). They shall also take into account, or use as their basis, other relevant international or regional assessments, such as those carried out jointly in the context of Regional Sea Conventions.
+
+WISE-MARINE is the formal compliance reporting tool for the Member States and the Commission on the MSFD.
+
+JRC maintains Environmental Marine Information System (EMIS) at http://emis.jrc.ec.europa.eu/index.php providing GIS web site on several physical and biological variables and indicators that are connected with marine eutrophication of European seas. 
+
+The European Atlas of the Seas at http://ec.europa.eu/maritimeaffairs/atlas/index_en.htm was developed by EC to raise awareness of Europe's oceans and seas, in the context of the EU's integrated maritime policy.

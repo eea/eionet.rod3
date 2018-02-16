@@ -1,0 +1,9 @@
+AAll the countries that have agreed to this reporting obligation should be listed in the right hand column. 
+
+The left-hand select box displays the items that can be selected. A country can be added to the right hand box selecting item(s) from the left-hand box and then clicking the "-->" button. Similarly, to remove countries, select item(s) from the right-hand box and press the "<--" button. To select multiple items from a select box, a CTRL key has to be held down while the items are clicked with the mouse.
+
+Countries selected then become participants in the reporting obligations for the period of time whilst they are selected. This caters for situations like accession countries, or where countries exit from an agreement. The reporting obligations still exist for the period of participation.
+
+This status does not infer anything about situations where, for example, a country has agreed to the obligation but has excluded part of its territory.
+
+Note: Particular attention should be paid not to assume that EU legislation only ever covers the EU member countries.

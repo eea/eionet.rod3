@@ -1,0 +1,7 @@
+Croatia is not obliged to report in 2013 as the reporting period is for 2012 data. 
+
+Identification of groundwater bodies using EUROWATERNET criteria and delivery of groundwater body description, pressures and quality data for WATERBASE.
+
+Interactive WISE SoE maps showing Nitrites, Ammonium and Nitrates in groundwater can be accessed on WISE map viewer "Water quality in groundwater" (http://www.eea.europa.eu/themes/water/interactive/water-quality-in-groundwater).
+
+EEA Core Set of Indicators using WISE SoE data on groundwater quality (CSI 020 Nutrients in freshwater) can be found at   http://www.eea.europa.eu/themes/water/indicators

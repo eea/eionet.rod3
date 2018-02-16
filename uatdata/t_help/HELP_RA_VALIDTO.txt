@@ -1,0 +1,7 @@
+"Valid to" is a date field that specifies how long the reporting obligation is going to be valid. After a value for the "Baseline reporting date" field has been entered the application suggests a default value of "31/12/9999" for the valid to date.
+
+If the reporting obligation is for a limited period, a one-off reporting or will be repealed then the end validity date should be entered.
+
+When a reporting obligation is no longer active, the user interface displays "terminated". The "valid to" date should be set as one year after the reporting date for one-off reporting.
+
+See "Baseline reporting date" text above.

@@ -1,0 +1,3 @@
+If the current legal instrument amends some existing act, or if it is subsidiary legislation dependent on the framework provided by another legal instrument (Ex a convention) then this relationship should be specified by selecting a "Parent legal instrument" from the list.
+
+The parent legal instrument needs to be entered first. If the parent legal instrument is not yet entered into the ROD, complete the current LI record first. Then create a new legislative instrument for the parent legislation. When this record is completed, return to the child legal instrument in edit mode and select the parent instrument from the list.

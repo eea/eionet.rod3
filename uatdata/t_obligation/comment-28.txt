@@ -1,0 +1,7 @@
+Croatia is not obliged to report in 2013 as the reporting period is for 2012 data. 
+
+Identification of river stations using EUROWATERNET criteria and delivery of station description, pressures and quality data for WATERBASE.
+
+Several interactive WISE SoE maps can be accessed on WISE map viewer "Water quality in rivers and lakes" and "Biological elements in rivers and lakes" showing mean annual Nitrate, mean annual Orthophosphate, mean annual BOD and mean annual Total Ammonium in rivers, Density of WISE SoE river stations, Macroinvertebrates and Phytobenthos in rivers measured at WISE SoE River monitoring stations (http://www.eea.europa.eu/themes/water/interactive/water-quality-in-rivers-and-lakes    and http://www.eea.europa.eu/themes/water/interactive/biological-water-quality-in-rivers).  
+
+EEA Core Set of Indicators using WISE SoE data on river quality (CSI 019 Oxygen consuming substances in rivers and CSI 020 Nutrients in freshwater) can be found at http://www.eea.europa.eu/themes/water/indicators

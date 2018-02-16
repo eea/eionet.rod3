@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update and liquibase:status
+      Potentially with -Dliquibase.dropFirst=true
+ -->
+
+  <include file="uatdata/t_client.xml"/>
+  <changeSet author="roug" id="rev-1" context="uat">
+    <comment>Load FULL dataset for User Acceptance Testing</comment>
+    <!-- The TSV file must have a header row with the correct column names -->
+    <loadData tableName="ACLS"            separator="\t" file="uatdata/acls.tsv"/>
+    <loadData tableName="ACL_ROWS"        separator="\t" file="uatdata/acl_rows.tsv"/>
+    <loadData tableName="T_LOOKUP"        separator="\t" file="uatdata/t_lookup.tsv"/>
+    <loadData tableName="T_SPATIAL"       separator="\t" file="uatdata/t_spatial.tsv"/>
+    <loadData tableName="HLP_SCREEN"      separator="\t" file="uatdata/hlp_screen.tsv"/>
+    <loadData tableName="T_RAISSUE_LNK"   separator="\t" file="uatdata/t_raissue_lnk.tsv"/>
+    <loadData tableName="T_RASPATIAL_LNK" separator="\t" file="uatdata/t_raspatial_lnk.tsv"/>
+    <loadData tableName="T_SOURCE_CLASS"  separator="\t" file="uatdata/t_source_class.tsv"/>
+    <loadData tableName="T_SOURCE_TYPE"   separator="\t" file="uatdata/t_source_type.tsv"/>
+    <loadData tableName="T_SOURCE_LNK"    separator="\t" file="uatdata/t_source_lnk.tsv"/>
+    <loadData tableName="T_ISSUE"         separator="\t" file="uatdata/t_issue.tsv"/>
+    <loadData tableName="T_ROLE"          separator="\t" file="uatdata/t_role.tsv"/>
+    <loadData tableName="T_CLIENT_LNK"    separator="\t" file="uatdata/t_client_lnk.tsv"/>
+    <loadData tableName="T_NAMELABEL"     separator="\t" file="uatdata/t_namelabel.tsv"/>
+    <loadData tableName="T_ATTRIBUTE"     separator="\t" file="uatdata/t_attribute.tsv"/>
+  </changeSet>    
+  <include file="uatdata/t_source.xml"/>
+  <include file="uatdata/t_obligation.xml"/>
+  <include file="uatdata/hlp_area.xml"/>
+  <include file="uatdata/t_help.xml"/>
+
+</databaseChangeLog>

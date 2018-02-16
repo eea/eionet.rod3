@@ -1,0 +1,8 @@
+DWD reporting resources include the support files for the reporting under the next request by the Commission (DWD Questionnaire 2011). The Commission letter launching this reporting exercise sets out the reference years for reporting (2008-2010) and provides the background of the main reporting requirements. The letter is available at http://icm.eionet.europa.eu/announcements          
+
+The support files consist of help (guidance) documents, schemas, Excel spreadsheets, etc.
+Drinking Water User Manual v1.0 provides support to the workflow for the DWD reporting and explains the main reporting steps for reporting information to the Commission in Reportnet. 
+A common structure to be used in the reporting was agreed in May 2007. The guidance document has been revised and divided into Guidance Document on reporting and Guidance Document on derogations. It presents a new, table-oriented way of reporting, in line with DWD and with the WISE approach for reporting.
+Schemas are developed to supply DWD reporting on the basis of the revised guidance document. Excel spreadsheets are used to import and structure MS data into the required format for the generation of the XML files. 
+
+Additional information related to DWD is available on DG ENV website    http://ec.europa.eu/environment/water/water-drink/reporting_en.html

@@ -1,0 +1,9 @@
+There are two ways to specify reporting due dates in ROD: 
+
+Text based ("ASAP", etc.) and numeric date based. Only one method can be used at once. This field is for the text-based format.
+
+Dates should, where possible use the numeric fields rather than this text field. This allows the deadlines to be sorted and used for notifications. If needed, additional comments can be added in the "dates comments" field. 
+
+Use of text dates should be avoided, however, it is accepted that in some instances no alternative is suitable. EITHER numeric OR text based dates can be entered ? but not both.
+
+To use text based due dates, simply enter a value for "Reporting date (text format)" field and leave the "Reporting frequency" field empty. The system will know you want to use text-based deadline.

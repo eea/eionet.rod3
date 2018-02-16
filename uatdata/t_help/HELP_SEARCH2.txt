@@ -1,0 +1,9 @@
+This query box generates a list of all reporting obligations (and reporting activities underneath them) that are categorised by the list of issues.
+
+By selecting an organisation from the last drop-down menu, the query generates a list of obligations that have to be delivered to that particular organisation (Report to).
+
+- Select the issue that you are interested in from the drop-down menu.
+
+-Select an organisation from the last drop-down menu if you want to get results relevant for a  particular organisation.
+
+Click on the GO button.

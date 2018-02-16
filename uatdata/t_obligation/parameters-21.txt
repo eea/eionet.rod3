@@ -1,0 +1,21 @@
+Pesticides(mass/volume)
+Phenols(mass/volume)
+CN-, cyanide (ion)(mass/volume)
+As (arsenic)(mass/volume)
+Cd (cadmium)(mass/volume)
+Cr (chromium)(mass/volume)
+Hg (mercury)(mass/volume)
+Pb (lead)(mass/volume)
+Mineral oil(mass/volume)
+Kjeldahl N (nitrogen)(mass/volume)
+NH4 +, ammonium (ion)(mass/volume)
+NO3 2-, nitrate (ion)(mass/volume)
+dissolved O2 (oxygen)(mass/volume)
+PO4 3- phosphate (ion)(mass/volume)
+Turbidity, visibility(length)
+Viruses(number/volume
+Bacteria(number/volume)
+pH
+colour
+transparency
+Surface-active substances reacting with methylene blue mg/l (Lauryl sulphate)

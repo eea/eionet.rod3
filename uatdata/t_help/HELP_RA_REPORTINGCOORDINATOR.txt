@@ -1,0 +1,7 @@
+This field should be filled with the details of the coordinator for the reporting for this obligation. This information can be entered into ROD in different ways. 
+
+Ideally, it should be a CIRCA role making use of country suffixes. The CIRCA role prefix (without the country-specific part) should be entered (for example eionet-pcp-acc). Generally, the "national contacts" role should be the NRC for Eionet dataflows and the "national coordinator" should be the PCP Eionet role.
+
+On saving a record in ROD, the role is checked against the CIRCA directory. Non-existent roles will result in an error message. A list of all roles in the directory can be found at: http://eea.eionet.eu.int:8980/Members/irc/eionet-circle/Home/central_dir_admin?fn=roles&rd=0&af=0&ud=0&od=0&act=srch&v=*
+
+Alternatively a central CIRCA role may be the contact point for the list of coordinators for all countries. The third option is that the name of the list with a URL pointing to where the list of contacts for this reporting obligation is available on the Internet can be used. These options and the 3 fields should cater for most situations.

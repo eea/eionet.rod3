@@ -1,0 +1,21 @@
+The baseline reporting date should contain the first reporting date (including any subsequent amendments to the date). 
+
+In many cases, it is a hypothetical start date for reporting that corresponds to the current reporting cycle. This field is not visible in the user interface but is used to calculate reporting dates, deadlines and notifications. 
+
+For newly introduced reporting obligations, the baseline reporting date may be in the future and will also then be the first reporting deadline.
+
+There are two ways to specify reporting due dates in ROD: text based ("ASAP", etc.) and numeric date based. This field is for numeric reporting dates.
+
+Dates should, where possible use the numeric fields. This allows the deadlines to be sorted and used for notifications. If needed additional comments can be added in the "dates comments" field. Use of text dates should be avoided, however, it is accepted that in some instances no alternative is suitable. 
+
+EITHER numeric OR text based dates can be entered but not both.
+
+The following additional guidance on dates is provided:
+
+Reporting that is due in a year with no month or date specified is set as being due at on 31 December of the year. If the month is specified, then the reporting is set as being due on the last day in the month. The "dates comments" field should indicate this with "year only specified" or "Year and month only specified" as appropriate.
+
+If reporting is due in time for a regular event, such as a 3 yearly conference of the parties to a convention, then a numeric date for the COP should be entered in the baseline date field, along with a frequency. In this example the frequency would be 36. A note in the date comments field should indicate something similar to  "Reporting submitted prior to 3 yearly COP depending on exact dates of COP".
+
+For numeric datesEnter a value for "Baseline reporting date" and then the "Reporting frequency in months" (whole number) fields. From these, "Next due date" is calculated. Some calendar rounding is automatically done in this calculation for leap years and so on.
+
+If reporting frequency in months is set to zero, the application assumes non-repeating reporting date (one-off) and uses "First reporting" date as the "Next due date". The "Next due date" will never be larger than "Valid to" date (no need to report if the obligation is no longer valid). The application recalculates the "Next due date" fields for all obligations every day, so they are always up to date. This is used to calculate the values displayed in the next reporting due field.

@@ -1,0 +1,6 @@
+From technical point of view CLC2012 is the same as CLC2006. Therefore it is not the purpose of this document to provide a complete guide to CLC2012. The document is complementary to CLC2006 Technical Guidelines published at: http://www.eea.europa.eu/publications/technical_report_2007_17  
+
+In addition to the Addendum, there are other important documents to be used (Table 2). 
+
+All documents can be downloaded (password required) from Eionet Forum NRC Land Cover Interest Group at:
+http://forum.eionet.europa.eu/nrc_land_covers/library/gio-land/corine-land-coverclc/technical-guidelines/

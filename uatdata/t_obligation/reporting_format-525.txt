@@ -1,0 +1,4 @@
+The main elements are defined in the Annex I to the Directive : delimitation of the District, designation of competent authority, and further detailed in the guidance. The 2004-2005 reporting sheets were agreed for the purpose of the electronic reporting in WISE linked to obligations under article 3 and article 5 of the WFD. The data were uploaded to the WISE-WFD prototype at JRC site and an XML scheme was provided. Reports have been moved to Central Data Repository (EEA Reportnet). 
+User Guide to the WFD Reporting Schemas v4.3 can be reached at http://icm.eionet.europa.eu/schemas/dir200060ec/resources/User%20Guide%20to%20the%20streamlined%20schemas%20v4.3.pdf 
+
+Additional information can be found in the WFD CIS Guidance Documents (especially n°1 to 5 and 9 and 10) on the WFD CIRCA library (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a).
