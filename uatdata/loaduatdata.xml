@@ -35,5 +35,6 @@
   <include file="uatdata/t_obligation.xml"/>
   <include file="uatdata/hlp_area.xml"/>
   <include file="uatdata/t_help.xml"/>
+  <include file="uatdata/uatusers.xml"/>
 
 </databaseChangeLog>

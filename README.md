@@ -9,7 +9,7 @@ Dependencies
 * Tomcat 8
 * Java 1.8
 * Spring 4
-* Thymeleaf 2.1.4
+* Thymeleaf 3
 * MySQL or H2 Database Engine
 
 Automated tests
@@ -43,17 +43,18 @@ The default configuration is to allow you to deploy to your own workstation dire
 On a CentOS system you can start Tomcat with the environment variable CATALINA_OPTS set to some value or add lines to /etc/sysconfig/tomcat that looks like this:
 ```
 CATALINA_OPTS="-Dcas.service=http://localhost:8080 -Dinitial.username=myname"
-CATALINA_OPTS="$CATALINA_OPTS -Ddb.url=jdbc:h2:tcp://localhost:8043//work/datalakedb -Dstorage.dir=/var/tmp -Dupload.dir=/var/tmp"
+CATALINA_OPTS="$CATALINA_OPTS -Ddb.url=jdbc:h2:tcp://localhost:8043//work/rod3 -Ddeploy.contexts=uat -Ddeploy.dropfirst=true"
 ```
 These are the properties you can set:
 ```
-db.driver
-db.url
-db.username
-db.password
+db.driver        # org.mariadb.jdbc.Driver
+db.url           # jdbc:mariadb://dbservice/rod3
+db.username      # rod3
+db.password      # secret
 upload.dir
-deploy.contexts
-initial.username
+deploy.contexts  # prod
+deploy.dropfirst # false
+initial.username # myuser
 initial.password # Not needed when integrated with CAS.
 cas.service
 cas.server.host
