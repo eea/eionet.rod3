@@ -440,7 +440,7 @@ public class SourceServiceJdbc implements SourceService {
 	}
 		
 	@Override
-	public String getHierarchy(Integer id, boolean hasParent, String mode, String UrlInstruments) {
+	public String getHierarchy(Integer id, boolean hasParent, String mode) {
 		String newLine = "\n";
 		StringBuilder ret = new StringBuilder();
 		String query = "SELECT SC.PK_CLASS_ID AS classId, SC.CLASSIFICATOR AS classificator, SC.CLASS_NAME AS className, SL.FK_SOURCE_PARENT_ID AS parentId "
@@ -469,7 +469,7 @@ public class SourceServiceJdbc implements SourceService {
     				 ret.append("&amp;mode=X");
     			 }
     			 ret.append("'>").append(intrumentsListDTO.getClassName()).append("</a>").append(newLine);
-    			 ret.append(getHierarchy(intrumentsListDTO.getClassId(), true, mode, UrlInstruments));
+    			 ret.append(getHierarchy(intrumentsListDTO.getClassId(), true, mode));
     			 ret.append("</li>").append(newLine);
         	 }
         	 ret.append("</ul>").append(newLine);

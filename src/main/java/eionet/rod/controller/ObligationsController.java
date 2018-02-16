@@ -79,13 +79,16 @@ public class ObligationsController {
      * @return view name
      */
     @RequestMapping({"", "/", "/view"})
-    public String viewObligations(Model model, @RequestParam(required = false) String message) {
+    public String viewObligations(Model model, @RequestParam(required = false) String message, @RequestParam(required = false) String anmode) {
         BreadCrumbs.set(model,"Reporting obligations");
         
         Obligations obligation = new Obligations();
+        String issueID = "0";
+        if (!RODUtil.isNullOrEmpty(anmode)) {
+        	issueID = anmode;
+        }
         
-        
-        model.addAttribute("allObligations", obligationsService.findObligationList("0","0","0","","0"));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0"));
 
         model.addAttribute("title","Reporting obligations");
         
@@ -130,11 +133,10 @@ public class ObligationsController {
 	 */
 	 @RequestMapping(value = "/delete/{obligationId}")
 	 public String deleteObligations(@PathVariable("obligationId") Integer obligationId, Model model) {
-		 if (obligationId != null) {
+		 if (!obligationId.equals(null)) {
 			 obligationsService.deleteObligations(obligationId + ",");
-		 }
-		 
-		 model.addAttribute("message", "Obligation deleted.");
+			 model.addAttribute("message", "Obligation deleted.");
+		 }		 
 		 return "redirect:/obligations";
 	 }
 	 
@@ -482,27 +484,27 @@ public class ObligationsController {
         
         obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
         //change format of Dates to visualize dd/mm/yyyy
-        if (obligations.getFirstReporting() != null && obligations.getFirstReporting() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
         	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
         }else {
         	obligations.setFirstReporting(null);
         }
-        if (obligations.getValidTo() != null && obligations.getValidTo() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
         	obligations.setValidTo(RODUtil.strDate(obligations.getValidTo()));
         }else {
         	obligations.setValidTo(null);
         }
-        if (obligations.getNextDeadline2() != null && obligations.getNextDeadline2() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
         	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
         }else {
         	obligations.setNextDeadline2(null);
         }
-        if (obligations.getNextReporting() != null && obligations.getNextReporting() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
         	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
         }else {
         	obligations.setNextReporting(null);
         }
-        if (obligations.getValidSince() != null && obligations.getValidSince() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
         	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
         }else {
         	obligations.setValidSince(null);

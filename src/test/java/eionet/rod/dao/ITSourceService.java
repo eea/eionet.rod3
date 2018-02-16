@@ -138,11 +138,11 @@ public class ITSourceService {
     	sourceService.deleteClassifications(instrumentFactsheetRec.getSourceId());
     	
     }
-//    @Test 
-//    public void testgetHierarchy() {
-//    	String result = sourceService.getHierarchy(1, false, "X", application url);
-//    	System.out.print("result" + result);
-//    }
+    @Test 
+    public void testgetHierarchy() {
+    	String result = sourceService.getHierarchy(1, false, "X");
+    	System.out.print("result" + result);
+    }
     
     
 }

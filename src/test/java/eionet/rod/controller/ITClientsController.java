@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
-import javax.sql.DataSource;
 import org.junit.Before;
 
 import org.junit.runner.RunWith;
@@ -79,7 +78,8 @@ public class ITClientsController {
     @Test
     public void clientEdit() throws Exception {
     	this.mockMvc.perform(get("/clients/1/edit"))
-            .andExpect(status().isOk());
+            //.andExpect(status().isOk());
+    		.andExpect(status().is3xxRedirection());
     }
 
     /**

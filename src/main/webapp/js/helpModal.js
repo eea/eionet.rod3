@@ -8,7 +8,9 @@ function helpFunction(helpID){
 			helpId : helpID
 		},
 		success : function(responseText) {
+			
 			$("#title-modal").attr('title', responseText.title);
+			$(".ui-dialog-title").text(responseText.title);
 			$("#help-text").html(responseText.text);
 			$('#title-modal').dialog({
 				minWidth: 600,

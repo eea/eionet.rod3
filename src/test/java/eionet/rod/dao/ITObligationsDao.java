@@ -67,7 +67,7 @@ public class ITObligationsDao {
     public void testfindObligationList () throws ResourceNotFoundException
     {
         List<Obligations> obligations = obligationsService.findObligationList("0","0","0","N","0");
-        System.out.print(obligations.size());
+        //System.out.print(obligations.size());
         assertEquals("1",obligations.get(0).getObligationId().toString());
         assertEquals("eionet-nrc-waterquality", obligations.get(0).getRespRoleId());
         assertEquals("Test client", obligations.get(0).getClientName());
@@ -93,9 +93,9 @@ public class ITObligationsDao {
     public void testfindSiblingObligations() throws ResourceNotFoundException
     {
         List<SiblingObligation> siblingObligations = obligationsService.findSiblingObligations(1);
-        System.out.print("size:" + siblingObligations.size());
-        System.out.print("obl:" + siblingObligations.get(0).getSiblingOblId());
-        System.out.print("fk_source:" + siblingObligations.get(0).getFkSourceId());
+        //System.out.print("size:" + siblingObligations.size());
+        //System.out.print("obl:" + siblingObligations.get(0).getSiblingOblId());
+        //System.out.print("fk_source:" + siblingObligations.get(0).getFkSourceId());
         assertEquals("2",siblingObligations.get(0).getSiblingOblId());
         assertEquals("1",siblingObligations.get(0).getFkSourceId());
         assertEquals("Test 2 - Fuel Quality Directive Article 7a",siblingObligations.get(0).getSiblingTitle());
@@ -109,7 +109,7 @@ public class ITObligationsDao {
     public void findAllCountriesByObligation()
     {
         List<Spatial> spatialNoVol = obligationsService.findAllCountriesByObligation(1,"N");
-        System.out.print(spatialNoVol.size());
+        //System.out.print(spatialNoVol.size());
 
         assertEquals("1",spatialNoVol.get(0).getSpatialId().toString());
         assertEquals("Austria",spatialNoVol.get(0).getName());

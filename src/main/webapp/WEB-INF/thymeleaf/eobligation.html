@@ -20,7 +20,7 @@
 		<div class="datatable results">
 			
 				<div class="form-group">
-					<div  class="col-lg-3 simple_attr_title">
+					<div  class="col-lg-3">
 						<label for="oblTitle" class="required">Title</label>
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_TITLE')" title="Help on this field"></a>
@@ -30,7 +30,7 @@
 				 </div>
 				  
 				<div class="form-group">
-					<div class="col-xs-3 scope-row simple_attr_title" >
+					<div class="col-xs-3 scope-row" >
 						<label for="description" class="required control-label text-left">Description</label>
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DESCRIPTION')" title="Help on this field"></a>
@@ -44,7 +44,7 @@
 		<span class="pagebanner">Reporting dates</span>
 		<div class="datatable results">
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 						<label for="firstReporting" class="control-label text-left">Baseline reporting date</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VALIDFROM')" title="Help on this field"></a>
@@ -54,7 +54,7 @@
 				
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="validTo" class="control-label text-left">Valid to</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VALIDTO')" title="Help on this field"></a>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="report_freq_months" class="required control-label text-left">Reporting frequency in months</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGFREQUENCYINMONTHS')" title="Help on this field"></a>
@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="next_deadline" class="control-label text-left">Next due date</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NEXTDUEDATE')" title="Help on this field"></a>
@@ -94,7 +94,7 @@
 	        </div>
 			
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="nextReporting" class="control-label text-left">Reporting date</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGDATETEXTFORMAT')" title="Help on this field"></a>
@@ -103,7 +103,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="dateComments">Date comments</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATECOMMENTS')" title="Help on this field"></a>
@@ -116,7 +116,7 @@
 		<span class="pagebanner">Clients</span>
 		<div class="datatable results">
 			<div class="form-group">
-					<div class="col-lg-3 scope-row simple_attr_title">
+					<div class="col-lg-3 scope-row ">
 						<label for="report_to" class="required control-label text-left">Report to</label>
 					</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RO_REPORTTO')" title="Help on this field"></a>
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="client_list" class="control-label text-left">Other clients using this reporting</label>
 				</div>
 				<a class="helpButton" onclick="helpFunction('HELP_RO_OTHERCLIENTS')" title="Help on this field"></a>
@@ -158,7 +158,7 @@
 		<span class="pagebanner">How to report</span>
 		<div class="datatable results">
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="formatName" class="control-label text-left">Name of reporting guidelines</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NAMEOFREPORTINGGUIDELINES')" title="Help on this field"></a>
@@ -167,14 +167,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label  for="reportFormatUrl">URL of reporting guidelines</label></div>
+				<div class="col-lg-3 scope-row "><label  for="reportFormatUrl">URL of reporting guidelines</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_URLTOREPORTINGGUIDELINES')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
 					<input type="text" class="smalltext form-control" maxlength="255" name="reportFormatUrl" id="reportFormatUrl" onchange="chkUrl(this); changed()" th:field="*{reportFormatUrl}"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="validSince" class="control-label text-left">Format valid since</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_FORMATVALIDSINCE')" title="Help on this field"></a>
@@ -183,7 +183,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="reportingFormat" class="control-label text-left">Reporting guidelines -Extra info</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGGUIDELINES')" title="Help on this field"></a>
@@ -192,7 +192,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row ">
 					<label for="locationInfo" class="control-label text-left">Name of repository</label>
 				</div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONINFO')" title="Help on this field"></a>
@@ -201,21 +201,21 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label  for="locationPtr">URL to repository</label></div>
+				<div class="col-lg-3 scope-row "><label  for="locationPtr">URL to repository</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_LOCATIONPTR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
 					<input type="text" class="smalltext form-control" maxlength="255" name="locationPtr" id="locationPtr" onchange="chkUrl(this); changed()" th:field="*{locationPtr}" />
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedFor">Data used for (name)</label></div>
+				<div class="col-lg-3 scope-row "><label  for="dataUsedFor">Data used for (name)</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
 					<input type="text" class="smalltext form-control" maxlength="255" name="dataUsedFor" id="dataUsedFor" onchange="changed()" th:field="*{dataUsedFor}" />
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label  for="dataUsedForUrl">Data used for (URL)</label></div>
+				<div class="col-lg-3 scope-row "><label  for="dataUsedForUrl">Data used for (URL)</label></div>
 				<a  class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_DATAUSEDFOR')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
 					<input type="text" class="smalltext form-control" maxlength="255" name="dataUsedForUrl" id="dataUsedForUrl" onchange="chkUrl(this); changed()" th:field="*{dataUsedForUrl}" />
@@ -226,7 +226,7 @@
 		<span class="pagebanner">Data providers</span>
 		<div class="datatable results">
 			<div class="form-group">
-				<div class="col-lg-3 simple_attr_title">
+				<div class="col-lg-3">
 					<label for="forCountries" class="control-label text-left">Countries reporting formally</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_SPATIALCOVERAGE')" title="Help on this field"></a>
@@ -266,7 +266,7 @@
 			</div>
 			
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="volCountries" class="control-label text-left">Countries reporting voluntary</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_VOLUNTARYCOUNTRIES')" title="Help on this field"></a>
@@ -295,50 +295,50 @@
 			</div>
 				
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-xs-3 scope-row">
 					<label for="coordinatorRole" class="control-label text-left">National Reporting coordinators</label>
 				</div>
-				<a class="helpButton col-lg-1"  onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
-				<div class="col-lg-8 simple_attr_help">
+				<a class="helpButton col-xs-1"  onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
+				<div class="col-xs-8 simple_attr_help">
 					<div>
-						<label for="coordinatorRole" class="control-label">Role</label>
-						<input type="text" class="smalltext" name="coordinatorRole" maxlength="255" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
+						<label for="coordinatorRole" class="control-label col-xs-15">Role</label>
+						<input type="text" class="smalltext" name="coordinatorRole" id="coordinatorRole"  onchange="changed()" th:field="*{coordinatorRole}" />
 						<input type="checkbox" name="coordinatorRoleSuf" value="1" checked="checked" id="coordinatorRoleSuf" th:field="*{coordinatorRoleSuf}"/> 
 						<label class="control-label">do not append country suffix</label>
 					</div>
 					<div>
-						<span class="or">
+						<span class="col-xs-12 or">
 							- OR -
 						</span>
 					</div>
 					<div>
-						<label for="coordinator" class="control-label">Name</label>
-						<input type="text" class="smalltext" maxlength="255" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
+						<label for="coordinator" class="control-label col-xs-15">Name</label>
+						<input type="text" class="smalltext" name="coordinator" id="coordinator" onchange="changed()" th:field="*{coordinator}" />
 						<input type="text" name="coordinatorUrl" onchange="chkUrl(this); changed()" id="coordinatorUrl" th:field="*{coordinatorUrl}"/>
 					</div>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-xs-3 scope-row">
 					<label for="responsibleRole" class="control-label text-left">National reporting contacts</label>
 				</div>
-				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
-				<div class="col-lg-8 simple_attr_help">
+				<a class="helpButton col-xs-1" onclick="helpFunction('HELP_RA_REPORTINGCOORDINATOR')" title="Help on this field"></a>
+				<div class="col-xs-8 simple_attr_help">
 					<div>
-						<label for="responsibleRole" class="control-label">Role</label>
-						<input type="text" class="smalltext" name="responsibleRole" maxlength="255" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
+						<label for="responsibleRole" class="control-label col-xs-15">Role</label>
+						<input type="text" class="smalltext" name="responsibleRole" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
 						<input type="checkbox" name="responsibleRoleSuf" value="Y" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
 						<label class="control-label" for="responsibleRoleSuf">do not append country suffix</label>
 					</div>
 					<div>
-						<span class="or">
+						<span class="col-xs-12 or">
 							- OR -
 						</span>
 					</div>
 					<div>
-						<label for="nationalContact" class="control-label">Name</label>
-						<input type="text" class="smalltext" name="nationalContact" maxlength="255" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
+						<label for="nationalContact" class="control-label col-xs-15">Name</label>
+						<input type="text" class="smalltext" name="nationalContact" id="nationalContact" onchange="changed()" th:field="*{nationalContact}" />
 						<input type="text" name="nationalContactUrl" onchange="chkUrl(this); changed()" id="nationalContactUrl" th:field="*{nationalContactUrl}"/> 
 					</div>
 				</div>
@@ -348,7 +348,7 @@
 		<span class="pagebanner">Data use</span>
 		<div class="datatable results">
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="selIssues" class="control-label text-left">Environmental issues</label>
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_ENVIRONMENTALISSUES')" title="Help on this field"></a>
@@ -376,7 +376,7 @@
 			</div>
 			<!-- 
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label for="parameters" class="control-label text-left">Parameters</label></div>
+				<div class="col-lg-3 scope-row"><label for="parameters" class="control-label text-left">Parameters</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_PARAMETERS')" title="Help on this field"></a></th>
 				<div class="col-lg-8>
 					<textarea class="smalltext inputwidth100" onchange="changed()" name="parameters" id="parameters" th:field="*{parameters}" rows="5" ></textarea>
@@ -384,7 +384,7 @@
 			</div>
 			 -->
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label class="control-label">This obligation is</label></div>
+				<div class="col-lg-3 scope-row"><label class="control-label">This obligation is</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_FLAGS')" title="Help on this field"></a>
 				<div class="col-lg-8">
 					<input type="checkbox" name="eeaPrimary" checked="checked" value="1" id="eeaPrimary" th:field="*{eeaPrimary}"/> <label for="eeaPrimary"  class="control-label">Eionet core data flow</label><br/>
@@ -393,7 +393,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title"><label for="comment">General comments</label></div>
+				<div class="col-lg-3 scope-row"><label for="comment">General comments</label></div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_COMMENT')" title="Help on this field"></a>
 				<div class="col-lg-8"><textarea class="smalltext form-control"  onchange="changed()" name="comment" id="comment" th:field="*{comment}" rows="5" ></textarea></div>
 			</div>
@@ -409,7 +409,7 @@
 		<span class="pagebanner">Relation with other obligations</span>
 		<div class="datatable results">
 			<div class="form-group">
-				<div class="col-lg-3 scope-row simple_attr_title">
+				<div class="col-lg-3 scope-row">
 					<label for="selIssues" class="control-label text-left">Other obligations:</label>
 				</div>
 				<a class="helpButton col-lg-1"onclick="helpFunction('')" title="Help on this field"></a>

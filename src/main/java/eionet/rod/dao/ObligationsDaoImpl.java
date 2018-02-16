@@ -72,7 +72,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class);
 		
-			if (countObligation == 0) {
+			if (countObligation.equals(0)) {
 				throw new ResourceNotFoundException("No data in the database");
 			}else {
 			
@@ -127,7 +127,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
             }
         }
 
-        if (deadlineCase == null || !deadlineCase.equals("0")) {
+        if (!RODUtil.isNullOrEmpty(deadlineCase) || !deadlineCase.equals("0")) {
             date1=cnvDate(date1);
             date2=cnvDate(date2);
             ret = " ((NEXT_DEADLINE >= '" + date1 + "' AND NEXT_DEADLINE <= '" + date2 + "') OR (NEXT_DEADLINE2 >= '" + date1 + "' AND NEXT_DEADLINE2 <= '" + date2 + "')) ";
@@ -180,38 +180,38 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-				if ((issueId != null && !issueId.equals("0")) || (clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (terminate != null && !terminate.equals("")) || (deadlineCase != null && !deadlineCase.equals("0"))) {
+				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0"))) {
 					query += "WHERE ";
 				}
-				if (clientId != null && !clientId.equals("0")) {
+				if (!clientId.equals(null) && !clientId.equals("0")) {
 					query += "CLK.FK_CLIENT_ID = " + clientId;
 				}
-				if (spatialId != null && !spatialId.equals("0")) {
-					if (clientId != null && !clientId.equals("0")) {
+				if (!spatialId.equals(null) && !spatialId.equals("0")) {
+					if (!clientId.equals(null) && !clientId.equals("0")) {
 						query += " and ";	
 					}
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
-				if (issueId != null && !issueId.equals("0") && !issueId.equals("NI")) {
-					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0"))) {
+				if (!issueId.equals(null) && !issueId.equals("0") && !issueId.equals("NI")) {
+					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0"))) {
 						query += " and ";	
 					}
 					query += "RAI.FK_ISSUE_ID = " + issueId;
 				} else if (issueId.equals("NI")) {
-					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0"))) {
+					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0"))) {
 						query += " and ";	
 					}
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
 					query += "OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2)";
 				}
-				if (terminate != null && !terminate.equals(""))  {
-					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (issueId != null && !issueId.equals("0"))) {
+				if (!RODUtil.isNullOrEmpty(terminate))  {
+					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!issueId.equals(null) && !issueId.equals("0"))) {
 						query += " and ";	
 					}
 					query += "OB.Terminate = '" + terminate + "'";
 				}
-				if (deadlineCase != null && !deadlineCase.equals("0")) {
-					if ((clientId != null && !clientId.equals("0")) || (spatialId != null && !spatialId.equals("0")) || (issueId != null && !issueId.equals("0")) || (terminate != null && !terminate.equals(""))) {
+				if (!deadlineCase.equals(null) && !deadlineCase.equals("0")) {
+					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!issueId.equals(null) && !issueId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate))) {
 						query += " and ";	
 					}
 					String queryDeadline = handleDeadlines(deadlineCase) ;
@@ -325,7 +325,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, OblId);
 		
-			if (countObligation == 0) {
+			if (countObligation.equals(0)) {
 				throw new ResourceNotFoundException("The obligation you requested with id " + OblId + " was not found in the database");
 			}else {
 		
@@ -361,7 +361,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	    		
 				Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class);
 			
-				if (countObligation == 0) {
+				if (countObligation.equals(0)) {
 					
 					List<SiblingObligation> SiblingObligations = null;
 					return SiblingObligations;
@@ -400,7 +400,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
 			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, voluntary, ObligationID);
 		
-			if (countSpatial == 0) {
+			if (countSpatial.equals(0)) {
 				return null;
 			}else {
 			
@@ -434,7 +434,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
     		
 			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, ObligationID);
 		
-			if (countSpatial == 0) {
+			if (countSpatial.equals(0)) {
 				return null;
 			}else {
 			
@@ -465,9 +465,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        parameters.put("TITLE", obligation.getOblTitle()); //obl
 	        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
 	        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
-	        if (obligation.getFirstReporting() != null && obligation.getFirstReporting() != "") {
+	        if (!RODUtil.isNullOrEmpty(obligation.getFirstReporting())) {
 	        	try {
-	                java.sql.Date date = new java.sql.Date (format.parse(obligation.getFirstReporting()).getTime());
+	        		
+	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getFirstReporting())).getTime());
 	                parameters.put("FIRST_REPORTING", date);
 	            } catch (ParseException e) {
 	                parameters.put("FIRST_REPORTING", null);
@@ -477,9 +478,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        }
 	        
             // VALID_TO is a DATE in the database. You can't give it a simple string as value.
-            if (obligation.getValidTo() != null && obligation.getValidTo() != "") {
+            if (!RODUtil.isNullOrEmpty(obligation.getValidTo())) {
 	            try {
-	                java.sql.Date date = new java.sql.Date (format.parse(obligation.getValidTo()).getTime());
+	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getValidTo())).getTime());
 	                parameters.put("VALID_TO", date);
 	            } catch (ParseException e) {
 	                parameters.put("VALID_TO", null);
@@ -488,15 +489,15 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        	parameters.put("VALID_TO",null);
 	        }  
 	        
-	        if (obligation.getReportFreqMonths() == "" || obligation.getReportFreqMonths() == null) {
+	        if (obligation.getReportFreqMonths().isEmpty() || obligation.getReportFreqMonths() == null) {
 	        	parameters.put("REPORT_FREQ_MONTHS", null);
 	        }else {
 	        	parameters.put("REPORT_FREQ_MONTHS", Integer.parseInt(obligation.getReportFreqMonths()));
 	        }
 	        
-	        if (obligation.getNextDeadline() != null && obligation.getNextDeadline() != "") {
+	        if (!RODUtil.isNullOrEmpty(obligation.getNextDeadline())) {
 		        try {
-	                java.sql.Date date = new java.sql.Date (format.parse(obligation.getNextDeadline()).getTime());
+	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getNextDeadline())).getTime());
 	                parameters.put("NEXT_DEADLINE", date);
 	            } catch (ParseException e) {
 	                parameters.put("NEXT_DEADLINE", null);
@@ -505,9 +506,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        	parameters.put("NEXT_DEADLINE",null);
 	        }    
 	        
-	        if (obligation.getNextDeadline2() != null && obligation.getNextDeadline2() != "") {
+	        if (!RODUtil.isNullOrEmpty(obligation.getNextDeadline2())) {
 		        try {
-	                java.sql.Date date = new java.sql.Date (format.parse(obligation.getNextDeadline2()).getTime());
+	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getNextDeadline2())).getTime());
 	                parameters.put("NEXT_DEADLINE2", date);
 	            } catch (ParseException e) {
 	                parameters.put("NEXT_DEADLINE2", null);
@@ -522,9 +523,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        parameters.put("FORMAT_NAME",obligation.getFormatName());
 	        parameters.put("REPORT_FORMAT_URL",obligation.getReportFormatUrl());
 	       
-	        if (obligation.getValidSince() != null && obligation.getValidSince() != "") {
+	        if (!RODUtil.isNullOrEmpty(obligation.getValidSince())) {
 	        	try {
-	                java.sql.Date date = new java.sql.Date (format.parse(obligation.getValidSince()).getTime());
+	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getValidSince())).getTime());
 	                parameters.put("VALID_SINCE", date);
 	            } catch (ParseException e) {
 	                parameters.put("VALID_SINCE", null);
@@ -632,32 +633,32 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	Calendar calendar = Calendar.getInstance();
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
     	
-        if (obligations.getFirstReporting() != null && obligations.getFirstReporting() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
         	obligations.setFirstReporting(RODUtil.str2Date(obligations.getFirstReporting()));
         }else {
         	obligations.setFirstReporting(null);
         }
-        if (obligations.getValidTo() != null && obligations.getValidTo() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
         	obligations.setValidTo(RODUtil.str2Date(obligations.getValidTo()));
         }else {
         	obligations.setValidTo(null);
         }
         Integer setReportFreqMonths = null;
-        if (obligations.getReportFreqMonths() != "") {
+        if (!obligations.getReportFreqMonths().isEmpty()) {
         	setReportFreqMonths = Integer.parseInt(obligations.getReportFreqMonths());
         }
-        if (obligations.getNextDeadline() != null && obligations.getNextDeadline() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
         	obligations.setNextDeadline(RODUtil.str2Date(obligations.getNextDeadline()));
         }else {
         	obligations.setNextDeadline(null);
         }
-        if (obligations.getNextDeadline2() != null && obligations.getNextDeadline2() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
         	obligations.setNextDeadline2(RODUtil.str2Date(obligations.getNextDeadline2()));
         }else {
         	obligations.setNextDeadline2(null);
         }
        
-        if (obligations.getValidSince() != null && obligations.getValidSince() != "") {
+        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
         	obligations.setValidSince(RODUtil.str2Date(obligations.getValidSince()));
         }else {
         	obligations.setValidSince(null);
@@ -667,10 +668,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
         	setCoordinatorRoleSuf =  Integer.parseInt(obligations.getCoordinatorRoleSuf()); //obl
         }
         Integer setResponsibleRoleSuf = 0;
-        if (obligations.getResponsibleRoleSuf() != null) {
+        if (!obligations.getResponsibleRoleSuf().equals(null)) {
         	setResponsibleRoleSuf = Integer.parseInt(obligations.getResponsibleRoleSuf()); //obl
         }
-        if (obligations.getContinousReporting() == null) {
+        if (obligations.getContinousReporting().equals(null)) {
         	obligations.setContinousReporting("no");
         }else {
         	obligations.setContinousReporting(obligations.getContinousReporting());
@@ -863,7 +864,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @param obligationID
      */
     private void insertObligationRelations(Integer relObligationId, String oblRelationId, Integer obligationID) {
-    	if (relObligationId != null && relObligationId != 0) {
+    	if (relObligationId != null && !relObligationId.equals(0)) {
     		String queryOblRelation = "INSERT INTO T_OBLIGATION_RELATION (FK_RA_ID,RELATION,FK_RA_ID2) "
 	                + " VALUES (?,?,?)";
 	       	 jdbcTemplate.update(queryOblRelation,
@@ -905,7 +906,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
 		
-			if (countObligation == 0) {
+			if (countObligation.equals(0)) {
 				Obligations obligation = new Obligations();
 				obligation.setRelObligationId(0);
 				obligation.setOblRelationId("0");

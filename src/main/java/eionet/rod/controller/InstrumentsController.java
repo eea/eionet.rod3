@@ -53,9 +53,6 @@ public class InstrumentsController {
 	@RequestMapping({"", "/", "/view"})
 	public String instrumentsHome(Model model, @RequestParam(required = false) Integer id, @RequestParam(required = false) String mode, HttpServletRequest request) {
         
-		
-		String urlInstruments = request.getRequestURL().toString();
-		
 		BreadCrumbs.set(model, "Hierarchy");
 		if (id == null) {
 			id = 1;
@@ -66,7 +63,7 @@ public class InstrumentsController {
 			hasParent = false;
 		}
 				
-		String hierarchyTree = sourceService.getHierarchy(id, hasParent, mode, urlInstruments);
+		String hierarchyTree = sourceService.getHierarchy(id, hasParent, mode);
 		List<HierarchyInstrumentDTO> hierarchyInstruments = sourceService.getHierarchyInstruments(id);
 		model.addAttribute("hierarchyInstrument", hierarchyInstrument);
 		model.addAttribute("hierarchyTree", hierarchyTree);
@@ -88,13 +85,13 @@ public class InstrumentsController {
 		
 		model.addAttribute("sourceId", sourceId);
 		InstrumentFactsheetDTO instrument = sourceService.getById(sourceId);
-		if (instrument.getSourceValidFrom() != null && !instrument.getSourceValidFrom().equals("")) {
+		if (!RODUtil.isNullOrEmpty(instrument.getSourceValidFrom())) {
         	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
         }
-        if (instrument.getSourceEcEntryIntoForce() != null && !instrument.getSourceEcEntryIntoForce().equals("")) {
+        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcEntryIntoForce())) {
         	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
         }
-        if (instrument.getSourceEcAccession() != null && !instrument.getSourceEcAccession().equals("")) {
+        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcAccession())) {
         	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
         }
         instrument.setSourceAbstract(RODUtil.replaceTags(instrument.getSourceAbstract()));
@@ -119,13 +116,13 @@ public class InstrumentsController {
         }else {
         	instrument.setSourceLnkFKSourceParentId(-1);
         }
-        if (instrument.getSourceValidFrom() != null && !instrument.getSourceValidFrom().equals("")) {
+        if (!RODUtil.isNullOrEmpty(instrument.getSourceValidFrom())) {
         	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
         }
-        if (instrument.getSourceEcEntryIntoForce() != null && !instrument.getSourceEcEntryIntoForce().equals("")) {
+        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcEntryIntoForce())) {
         	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
         }
-        if (instrument.getSourceEcAccession() != null && !instrument.getSourceEcAccession().equals("")) {
+        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcAccession())) {
         	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
         }
         model.addAttribute("instrument", instrument);
@@ -137,9 +134,11 @@ public class InstrumentsController {
         List<InstrumentClassificationDTO> selClassifications = sourceService.getAllClassifications();        
         for (int i = 0; instrument.getClassifications().size() > i; i++) {
         	for (int j = 0; selClassifications.size() > j; j++) {
-        		if (selClassifications.get(j).getClassId() == instrument.getClassifications().get(i).getClassId()) {
-        			selClassifications.remove(j);
-            	}
+        		if (instrument.getClassifications().get(i).getClassId() != null) {
+	        		if (selClassifications.get(j).getClassId().equals(instrument.getClassifications().get(i).getClassId())) {
+	        			selClassifications.remove(j);
+	            	}
+        		}
         	}
         	
         }

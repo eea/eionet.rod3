@@ -10,16 +10,16 @@
         <h1 th:text="${instrument.sourceTitle != null} ? ${instrument.sourceTitle} : 'Add instrument'">Edit Instrument</h1>
         <form action="instrumentEditForm.html" method="POST" th:action="@{/instruments/} + ${form}" th:object="${instrument}" name="f" class="form-horizontal">
          <input name="sourceId" th:value="*{sourceId}" value="55" type="hidden"/>
-          <input type="hidden" name="hrefInstruments" id="hrefInstruments" th:value="@{'/instruments/'}">
+          <input type="hidden" name="hrefInstruments" id="hrefInstruments" th:value="@{'/instruments'}">
          	<fieldset><legend>Identification</legend>   
             <div class="datatable results">
 				<div class="form-group ">
-				  	<div class="col-lg-3  simple_attr_title">
+				  	<div class="col-lg-3">
 						<label class="required question" for="sourceTitle">Legal name</label>
               		</div>
               		<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_LEGALNAME')" title="Help on this field"></a>
 		            <div class="col-lg-8">
-		                <textarea id="sourceTitle" maxlength="255" cols="55" rows="5" style="height:5em" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}" th:required="required"></textarea>
+		                <textarea id="sourceTitle" cols="55" rows="5" style="height:5em" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}" th:required="required"></textarea>
 		            </div>
             	</div>
 	            <div class="form-group">
@@ -32,25 +32,32 @@
 		              </div>
 	            </div>
 	            <div class="form-group">
+					  <div class="col-lg-3">
+		             	   <label class="question">Terminated</label>
+		              </div>
+		              <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_DRAFT')" title="Help on this field"></a>
+		              <div class="col-lg-8" th:switch="${instrument.sourceTerminate}">
+		                	<span th:case="'Y'">	                              
+				              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" checked="checked" />
+				              	<label for="terminateYes">Yes</label>
+				              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" />
+				              	<label for="terminateNo">No</label>
+				            </span>
+				            <span th:case="*">	                              
+				              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" />
+				              	<label for="terminateYes">Yes</label>
+				              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" checked="checked" />
+				              	<label for="terminateNo">No</label>
+				            </span>
+		              </div>
+	            </div>
+	            <div class="form-group">
 					<div class="col-lg-3">
 	                	<label class="question" for="sourceCode">Identification number</label>
 	              	</div>
 	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_IDENTIFICATIONNUMBER')" title="Help on this field"></a>
-	              <div class="col-lg-8" th:switch="${instrument.sourceTerminate}">
-	              	<input id="sourceCode" maxlength="255" name="sourceCode" th:field="*{sourceCode}" type="text"  class="form-control"/>
-	              	<label class="question" for="sourceTerminate">Terminate</label>
-		            <span th:case="'Y'">	                              
-		              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" checked="checked" />
-		              	<label for="terminateYes">Yes</label>
-		              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" />
-		              	<label for="terminateNo">No</label>
-		            </span>
-		            <span th:case="*">	                              
-		              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" />
-		              	<label for="terminateYes">Yes</label>
-		              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" checked="checked" />
-		              	<label for="terminateNo">No</label>
-		            </span>
+	              <div class="col-lg-8">
+	              	<input id="sourceCode" maxlength="255" name="sourceCode" th:field="*{sourceCode}" type="text"  class="form-control"/>		            
 	              </div>
 	            </div>
 	            <div class="form-group">
