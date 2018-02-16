@@ -19,24 +19,24 @@ import eionet.rod.model.Spatial;
  */
 public interface ObligationsDao {
 
-	public List<Obligations> findAll();
+	List<Obligations> findAll();
 	
-	public Obligations findOblId(Integer obligationId) throws ApplicationContextException;
+	Obligations findOblId(Integer obligationId) throws ApplicationContextException;
 	
-	public List<SiblingObligation> findSiblingObligations(Integer obligationId);
+	List<SiblingObligation> findSiblingObligations(Integer obligationId);
 	
-	public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
+	Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
 	
-	public void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
+	void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
 	
-	public List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary);
+	List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary);
 	
-	public List<Issue> findAllIssuesbyObligation(Integer ObligationID);
+	List<Issue> findAllIssuesbyObligation(Integer ObligationID);
 	
-	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase);
+	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase);
 	
-	public void deleteObligations(String obligations);
+	void deleteObligations(String obligations);
 	
-	public Obligations findObligationRelation(Integer obligationId);
+	Obligations findObligationRelation(Integer obligationId);
 		
 }

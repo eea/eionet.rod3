@@ -156,7 +156,7 @@ public class SourceServiceJdbc implements SourceService {
 		
 		String delete = "DELETE FROM T_SOURCE_LNK WHERE FK_SOURCE_CHILD_ID = ? "
 				+ "AND CHILD_TYPE='S' AND PARENT_TYPE='S'";
-		jdbcTemplate.update(delete, instrumentFactsheetRec.getSourceId());;
+		jdbcTemplate.update(delete, instrumentFactsheetRec.getSourceId());
 		
 		if (instrumentFactsheetRec.getSourceLnkFKSourceParentId() != -1) {
 			

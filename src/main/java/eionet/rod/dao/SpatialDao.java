@@ -14,13 +14,13 @@ import eionet.rod.model.Spatial;
  */
 public interface SpatialDao {
 
-	public List<Spatial> findAll();
+	List<Spatial> findAll();
 	
-	public Spatial findId(Integer id);
+	Spatial findId(Integer id);
 
-	public List<Spatial> findAllMember(String Member);
+	List<Spatial> findAllMember(String Member);
 	
-	public List<ObligationCountry> findObligationCountriesList(Integer obligationId);
+	List<ObligationCountry> findObligationCountriesList(Integer obligationId);
 	
 	
 }
