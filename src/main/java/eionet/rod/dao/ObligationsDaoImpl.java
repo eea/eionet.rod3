@@ -668,10 +668,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
         	setCoordinatorRoleSuf =  Integer.parseInt(obligations.getCoordinatorRoleSuf()); //obl
         }
         Integer setResponsibleRoleSuf = 0;
-        if (!obligations.getResponsibleRoleSuf().equals(null)) {
+        if (obligations.getResponsibleRoleSuf() != null) {
         	setResponsibleRoleSuf = Integer.parseInt(obligations.getResponsibleRoleSuf()); //obl
         }
-        if (obligations.getContinousReporting().equals(null)) {
+        if (obligations.getContinousReporting() == null) {
         	obligations.setContinousReporting("no");
         }else {
         	obligations.setContinousReporting(obligations.getContinousReporting());
