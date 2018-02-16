@@ -175,6 +175,8 @@ public class ITObligationsController {
     			.param("oblTitle", "Test Yoly")
     			.param("description", "Description yoly")
     			.param("reportFreqMonths", "25")
+    			.param("validTo", "31/12/9999")
+    			.param("nextDeadline","")
     			.param("terminate", "N")
     			.with(user("editor").roles("EDITOR"))
         		.with(csrf()))

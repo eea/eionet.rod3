@@ -512,8 +512,6 @@ public class ObligationsController {
         
         model.addAttribute("obligation", obligations);
         
-        System.out.print("lllllll");
-        
         model.addAttribute("id","edit");
         model.addAttribute("message", "Obligation " + obligations.getOblTitle() + " updated.");
         
