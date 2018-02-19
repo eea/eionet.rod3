@@ -217,12 +217,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					query += "OB.Terminate = '" + terminate + "'";
 				}
 				if (!deadlineCase.equals(null) && !deadlineCase.equals("0")) {
-					if (includeAnd) {
-						query += " and ";	
-					}
+					
 					includeAnd = true;
 					String queryDeadline = handleDeadlines(deadlineCase) ;
-					query += queryDeadline;
+					if (includeAnd && queryDeadline != "") {
+						query += " and " + queryDeadline;	
+					}
+					
 				}
 				if (!RODUtil.isNullOrEmpty(anmode) && !anmode.equals("NI")) {
 					if (includeAnd) {
