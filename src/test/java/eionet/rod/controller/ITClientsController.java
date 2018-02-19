@@ -166,7 +166,7 @@ public class ITClientsController {
     public void deleteIdsWithoutAuth() throws Exception {
         this.mockMvc.perform(get("/clients/delete")
                 .param("delClients", "1,"))
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is3xxRedirection());
     }
 
 }
