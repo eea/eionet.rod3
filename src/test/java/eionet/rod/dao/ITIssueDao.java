@@ -50,9 +50,6 @@ public class ITIssueDao {
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
 
-    @Autowired
-    private DataSource dataSource;
-
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)

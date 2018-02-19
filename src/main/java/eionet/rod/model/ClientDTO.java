@@ -26,6 +26,8 @@ public class ClientDTO {
     private List<ObligationFactsheetDTO> indirectObligations;
     private List<InstrumentDTO> directInstruments;
     private List<InstrumentDTO> indirectInstruments;
+    
+    private String delClients;
 
     /**
      * Constructor.
@@ -153,6 +155,14 @@ public class ClientDTO {
     public void setIndirectInstruments(List<InstrumentDTO> indirectInstruments) {
         this.indirectInstruments = indirectInstruments;
     }
+
+	public String getDelClients() {
+		return delClients;
+	}
+
+	public void setDelClients(String delClients) {
+		this.delClients = delClients;
+	}
 
 
 }

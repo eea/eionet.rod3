@@ -194,4 +194,20 @@ public class ClientsController {
         }
         return "redirect:/clients";
     }
+    
+    /**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	 @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	 public String deleteClients(ClientDTO client, Model model) {
+		 if (client.getDelClients() != null) {
+			 clientService.deleteByIds(client.getDelClients());
+			 model.addAttribute("message", "Clients selected deleted.");
+		 }
+		 
+		 return "redirect:view";
+	 }
+    
 }

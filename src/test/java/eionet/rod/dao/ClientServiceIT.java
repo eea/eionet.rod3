@@ -45,6 +45,8 @@ public class ClientServiceIT {
         getDirectIndirectObligations(clientService);
         
         getDirectIndirectInstruments(clientService);
+        
+        insertSelectbyIDs(clientService);
 
     }
 
@@ -77,6 +79,11 @@ public class ClientServiceIT {
         //exception.expect(IOException.class);
         // Can't delete twice.
         //clientService.deleteById(newId);
+    }
+    
+    private void insertSelectbyIDs(ClientService clientService){
+    	String clientsIds = "1,2,";
+    	clientService.deleteByIds(clientsIds);
     }
     
     private void getDirectIndirectObligations(ClientService clientService) {

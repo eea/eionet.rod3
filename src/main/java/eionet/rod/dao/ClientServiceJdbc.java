@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.InstrumentDTO;
 import eionet.rod.model.Obligations;
+import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 import org.apache.commons.logging.Log;
@@ -86,6 +87,22 @@ public class ClientServiceJdbc implements ClientService {
         String query = "DELETE FROM T_CLIENT WHERE PK_CLIENT_ID = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(query, clientId);
+    }
+    
+    
+    @Override
+    public void deleteByIds(String clientIds) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        String[] listClients = null;
+        if (!RODUtil.isNullOrEmpty(clientIds)){
+         
+        	listClients = clientIds.split(",");
+	    	
+	    	for (int i = 0; i < listClients.length; i++) {
+	    		jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID =" + listClients[i]);
+	    	}
+        }
+    	
     }
 
     @Override

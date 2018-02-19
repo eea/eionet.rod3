@@ -10,27 +10,60 @@
 	    });
 	    
 	});
+	 
+	 function deleteClients(){
+		    var deleteList = '';
+		    var firstelem = false;
+		    $("input[name=myCheck]").each(function (index) {  
+		       if($(this).is(':checked')){
+		    		if (firstelem){
+		    		   deleteList += ',';  
+		       		}
+		    	   	deleteList += $(this).val();
+		    	   	firstelem = true;
+		       }
+		    });
+		    document.getElementById('delClients').value = deleteList;
+		    if (firstelem){
+		    	
+		    	if (window.confirm("Do you really want to delete the seleted clients?")) 
+		    	{	
+				    document.getElementById('delClients').value=deleteList;
+				    
+				    document.forms['f'].action= document.getElementById('hrefdelete').value + "delete";
+				    document.forms['f'].method = 'POST';
+		 		    document.forms['f'].submit();
+		    	}
+		    }else{
+		    	alert("You must select the clients to delete.")
+		    }
+
+		}
+	 
 	</script>
   
   <div id="container">
     <div th:include="layout :: bannerFragment" ></div>
      <div id="workarea">
      
-     	<form  name="f">
+     	<form method="POST" th:action="@{/obligations/search}" th:object="${obligation}" name="f" >
+     		<input type="hidden" name="delClients" id="delClients">
+     		<input type="hidden" name="hrefdelete" id="hrefdelete" th:value="@{'/clients/'}">
 	        <div class="title">
 	        <h1>Clients</h1>
+	        <!-- sec:authorize="hasRole('EDITOR')" -->
 	        <ul class="menu-operations">
 		     	<li><span>Operations</span>
-					<ul>
-		           		<li><a href="clientNewClient.html" th:href="@{/clients/add}">Add client</a></li>
-		           		<li><a href="clientNewClient.html" th:href="@{/clients/delete}">Delete clients</a></li>
-		          	</ul>
+		     		<ul>
+		           		<li><a onclick="deleteClients()">Delete clients</a></li>
+		           		<li><a href="clientNewClient.html" th:href="@{/clients/add}">New client</a></li>
+		           	</ul>
 		        </li>
 	        </ul>
 	        </div>
 	        
        		<div class="clearfix margin-top-60">
-       	
+       			
 		        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
 		        <div th:if="${#lists.isEmpty(allClients)}">There are no results.</div>
 		        <div th:if="${not #lists.isEmpty(allClients)}">
@@ -38,11 +71,14 @@
 		          <table id="clientsTable" class="datatable results table table-striped table-bordered">
 			        <thead>
 				        <tr>
+				        	<th></th>
 				        	<th>Client name</th>
 		                	<th>Client acronym</th>
 		                </tr>
 		               </thead>
 		           	  <tr th:each="client, iterStat : ${allClients}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+		              	<!-- sec:authorize="hasRole('EDITOR')" -->
+	        			<td><input type="checkbox" id="myCheck" name="myCheck" th:value="${client.clientId}"/></td>
 		              	<td>
 		                    <a th:href="@{'/clients/'+${client.clientId}}" href="clientfactsheet.html" th:text="${client.name}"></a>
 		               </td>

@@ -144,5 +144,29 @@ public class ITClientsController {
                 .andExpect(redirectedUrl("/clients?message=Client+1+deleted"))
                 .andExpect(model().attributeExists("message"));
     }
+    
+    /**
+     * Login and delete a client
+     */
+    @Test
+    public void deleteIds() throws Exception {
+        this.mockMvc.perform(post("/clients/delete")
+                .param("delClients", "1,")
+                .with(csrf()).with(user("editor").roles("EDITOR")))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("view?message=Clients+selected+deleted."))
+                .andExpect(model().attributeExists("message"));
+    }
+    
+
+    /**
+     * Delete a clients without login.
+     */
+    @Test
+    public void deleteIdsWithoutAuth() throws Exception {
+        this.mockMvc.perform(get("/clients/delete")
+                .param("delClients", "1,"))
+                .andExpect(status().is4xxClientError());
+    }
 
 }
