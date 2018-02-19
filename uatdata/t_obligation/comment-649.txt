@@ -1,0 +1,16 @@
+The 5-year BSC reports (State of the Black Sea Environment, Implementation of the Black Sea Strategic Action Plan, Marine Litter Report) are available at http://www.blacksea-commission.org/_publications.asp  
+
+BSC prepares also annual report on reported data.  
+
+BCS Information System (http://www.blacksea-commission.org/_bsis.asp) 
+Black Sea GIS (http://www.blacksea-commission.org/_bsgis2.asp) 
+BSIMAP (http://www.blacksea-commission.org/_bsimap.asp) 
+
+BSC is in process of development of its own indicators trying to be in line with the EEA indicators. The list of agreed indicators are: 
+1. Riverine loads to coastal waters, nutrients and hazardous substances. 
+2. Accidental oil spills, others than oil.
+3. Urban Waste Water Treatment Plants - loads. 
+4. Amount of treated versus untreated waters. 
+5. Industrial Pollution Sources - loads.
+
+Overlapping with reporting obligations under ICPDR, EC Directives, etc. for Bulgaria and Romania.

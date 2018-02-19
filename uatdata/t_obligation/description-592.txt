@@ -1,0 +1,4 @@
+The reporting format at Appendix 2 of OSPAR Recommendation 2003/4 is amended to include, at the end of section II of the implementation report on effectiveness, the following new paragraphs:
+“If possible, please give information on the societal and cultural practices associated with cremation in your country which are relevant for the assessment of the reported data and information on the dispersal of mercury from crematoria, for example:
+-	what is the scale of cremation compared to burial?
+-	are crematoria small, with a low level of activity or located in local churchyards, or large installations serving a substantial area? (It may be helpful to give an indication of the average size of population served by a crematorium).

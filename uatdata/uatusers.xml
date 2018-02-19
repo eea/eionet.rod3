@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!-- Users nominated to test the new application -->
+
+  <changeSet author="roug" id="rev-1" context="uat">
+
+    <insert tableName="users">
+      <column name="username" value="peifer"/>
+      <column name="password" value=""/>
+      <column name="enabled" valueBoolean="1"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="peifer"/>
+      <column name="authority" value="ROLE_ADMIN"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="peifer"/>
+      <column name="authority" value="ROLE_EDITOR"/>
+    </insert>
+
+    <insert tableName="users">
+      <column name="username" value="simoens"/>
+      <column name="password" value=""/>
+      <column name="enabled" valueBoolean="1"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="simoens"/>
+      <column name="authority" value="ROLE_ADMIN"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="simoens"/>
+      <column name="authority" value="ROLE_EDITOR"/>
+    </insert>
+
+    <insert tableName="users">
+      <column name="username" value="melleilk"/>
+      <column name="password" value=""/>
+      <column name="enabled" valueBoolean="1"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="melleilk"/>
+      <column name="authority" value="ROLE_ADMIN"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="melleilk"/>
+      <column name="authority" value="ROLE_EDITOR"/>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>

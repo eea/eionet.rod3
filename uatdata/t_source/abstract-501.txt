@@ -1,0 +1,7 @@
+This Decision establishes a mechanism for:
+- monitoring all anthropogenic greenhouse gas emissions not controlled by the Montreal Protocol in the Member States; and
+- evaluating progress towards meeting commitments in respect of these emissions.
+
+Member States shall each year, not later than 31 December, report to the Commission their anthropogenic CO2 emissions and removals by sinks for the previous calendar year. Other greenhouse gases shall also be reported by the 31 December each year: final data for the previous year but one and provisional data for the previous year.
+
+Member States shall also report by 31 December on the most recent projected emissions by sources and removals by sinks of the greenhouse gases listed in Annex A to the Kyoto Protocol for the period 2008 to 2012 and, as far as possible, for 2005.

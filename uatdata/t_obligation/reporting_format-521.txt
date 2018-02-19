@@ -1,0 +1,10 @@
+WFD reporting resources at ETC/ICM web site contains all needed support files for reporting including help documents and schemas.  
+
+Additional information on schemas can be reached at two meetings: 
+-Water Framework Directive Reporting Training Course: Copenhagen, 4.2.2010 (http://forum.eionet.europa.eu/x_wise-reporting/library/framework_directive), 
+-Expert meeting on streamlining & consolidation of WFD reporting schemas: Prague 11.06.2008 (https://circabc.europa.eu/w/browse/5b70d16b-70c8-4cbc-a6a6-d8546750d45b).
+
+Updated WISE GIS guidance (no. 22) is available on the WFD CIRCA library  (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a). 
+The purpose of updating the Guidance is to support the development of WISE by providing guidelines and technical specifications, IT tools, services and digital resources to be used by the data providers and WISE developers to ensure satisfaction and availability of water information at the European level for the users.
+
+Additional information can be also found in other published WFD CIS Guidance Documents (e.g. n°8 on public participation in RBMP). See also WFD workshops, especially Workshop on River Basin Management Planning, Bonn - 8/9 May 2006 (https://circabc.europa.eu/w/browse/5a98063c-988c-443e-b54f-ded2bdaff267).

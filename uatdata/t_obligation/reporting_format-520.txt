@@ -1,0 +1,9 @@
+The monitoring reporting sheets cover the surface and groundwater monitoring programmes identified in Annex V. 
+
+The Reporting sheets covering the requirements for Article 8 were converted to electronic schemas 
+and the MS reported on that Article in 2007. 
+
+Guidance documents elaborated under the Common Implementation Strategy (CIS) should help the reporting, for this obligation see especially guidance n°7 MONITORING and n°15 GROUNDWATER MONITORING on the WFD CIRCA library  (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a). 
+A Water Information System for Europe (WISE) should also help the reporting. This is the first WFD report submitted only electronically through WISE by using EEA Reportnet (Central Data Repository). The Article 8 XML schemas are available at http://water.eionet.europa.eu/schemas/dir200060ec    
+Additional information on schemas can be found at Expert meeting on streamlining & consolidation of WFD reporting schemas: Prague 11.06.2008
+(https://circabc.europa.eu/w/browse/5b70d16b-70c8-4cbc-a6a6-d8546750d45b).

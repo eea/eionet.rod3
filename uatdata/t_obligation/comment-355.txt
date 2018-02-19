@@ -1,0 +1,5 @@
+Information and environmental data obtained from the Joint Questionnaire is used and published by the OECD in the Compendium of Environment Data, which is a regular OECD publication that is compiled every two years.  The Compendium has been published since 1985 and aims at presenting the best internationally available data on the environment and related areas. It was last published in 2003.  OECD also uses the data to update its database (SIREN).  For Eurostat and countries of the EU, the questionnaire provides data for related Eurostat and EEA publications and for ongoing work on environmental indicators.  The data will also contribute at international level to the work of the European Commission on environmental policies.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

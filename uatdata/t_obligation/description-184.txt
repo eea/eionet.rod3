@@ -1,0 +1,5 @@
+Data on freshwater resources availability, abstraction and use at regional spatial scale are collected through the WISE-SoE data flow. These data are primarily used to formulate indicators (EEA's Core Set of Indicators) that assess the state, trends in water related pressures and monitor the progress of European policy objectives. 
+
+The information needed in relation to water quantity is generally described as drivers, pressures, state, impact and response. In general there is a need for coherent European indicators describing water availability/scarcity in connection with water use and water efficiency. The indicators help to assess the extent, impact and intensity of the problem caused by particular socio-economic sectors (e.g. freshwater abstraction by agriculture).
+
+Formerly State & Quantity of Water Resources (EWN-4).

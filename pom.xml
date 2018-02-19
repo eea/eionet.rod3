@@ -126,7 +126,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <webResources>
                         <resource>
@@ -136,6 +136,10 @@
                                 <include>*.xml</include>
                                 <include>*.tsv</include>
                             </includes>
+                        </resource>
+                        <resource>
+                            <directory>${basedir}/uatdata</directory>
+                            <targetPath>WEB-INF/classes/uatdata</targetPath>
                         </resource>
                     </webResources>
                 </configuration>

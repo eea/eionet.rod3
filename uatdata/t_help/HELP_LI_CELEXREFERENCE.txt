@@ -1,0 +1,18 @@
+Every document in the Celex database has a unique identification number known as the Celex document number. This can be found on the legal text, in the Eurlex database, or in Celex and should be entered in this field for all documents legislative instrument records that are in Celex.
+
+This field should be left blank for legislative instruments not in Celex.
+
+The Celex number is an alphanumeric sequence consisting of four principal elements. These are:
+*   the sector (one character) [S];
+*   the year (four digits) [YYYY];
+*   the type of document code (one or two-character code) [T(T)];
+*   a sequential number representing the original reference number of the act where possible (natural number) [NNN(N)]. Example: 41993Y0517(01)
+
+
+Notes:The year represents:* for Sectors 1 and 2, the year of signature or the year of publication* for Sectors 3 and 4, the year of adoption;* for Sector 5, Commission documents, the year of the final (FIN) document;* for European Parliament documents, the parliamentary year during which the document of the part-session or the question was introduced;* for ESC documents (AC, IC), the year of adoption;* for Sector 6 documents, the year the case was lodged;* for Sector 7 documents, the year of adoption of corresponding directive.
+
+* Articles of a treaty may be treated as separate documentary units and each  given a 3-digit number;* a document number may be followed by a series number in parentheses indicating that several agreements were signed or published on the same day, for example 21986A0331(01).
+
+* In Sector 7, documents are attributed the same CELEX number as that of the corresponding directive in Sector 3 except that the initial number 3 is replaced with a 7.
+
+* The CELEX document number is used as the basis for cross-referencing of documents in the database as well as for implementing hypertext links.

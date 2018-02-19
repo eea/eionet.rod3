@@ -1,0 +1,4 @@
+The data requested concerns the number of people affected by different noise levels:
+Population living in dwellings exposed to noise exceeding various levels, population living in areas exposed to various levels of daytime road traffic noise, population living in areas exposed to various noise levels around airports. For a detailed specification, please refere to the reporting template.
+
+National contacts list: http://circa.europa.eu/Public/irc/dsis/pip/library?l=/eurostatoecdsjointsquest/jq2002/2002nationalscoordinator/_EN_1.0_&a=d

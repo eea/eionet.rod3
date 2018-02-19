@@ -1,0 +1,9 @@
+This Directive concerns the drawing up of programmes in order to achieve the following objectives: 
+- reduction of the heavy-metal content of batteries and accumulators, 
+- promotion of marketing of batteries and accumulators containing smaller quantities of dangerous substances and/or less polluting substances, 
+- gradual reduction, in household waste, of spent batteries and accumulators covered by Annex I, 
+- promotion of research aimed at reducing the dangerous-substance content and favouring the use of less polluting substitute substances in batteries and accumulators, and research into methods of recycling, 
+- separate disposal of spent batteries and accumulators covered by Annex I 
+(1. Batteries and accumulators put on the market as from 01/01/1999,containing more than 0,0005% of mercury by weight. 
+2. Batteries and accumulators put on the market as from 18/09/1992 and containing - more than 25 mg mercury per cell, except alkaline manganese batteries, - more than 0,025 % cadmium by weight, - more than 0,4 % lead by weight. 
+3. Alkaline manganese batteries containing more than 0,025 % mercury by weight placed on the market as from 18/09/92).

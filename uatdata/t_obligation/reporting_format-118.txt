@@ -1,0 +1,3 @@
+A monitoring network was put in place in 1991 with 12 stations and 17 parameters, in 1993, 16 stations and 54 parameters and the years following led to 17 stations and more than 100 parameters with sampling and analysis: Since 2001 12 stations (7 in Germany and 5 in the Czech Republic).
+The monitoring stations are equipped with sensors for on-line measurement of some physical and chemical parameters, biological test systems, sampling facilities for monthly samples and weekly samples of mixed probes for laboratory analysis (international standards : ISO, CEN), PC systems for data storage and processing as well as telecommunication lines to regional centres.
+Data are published in annual yearbook of water quality and every 2 years in reports.

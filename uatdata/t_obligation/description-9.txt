@@ -1,0 +1,11 @@
+This obligation includes in a single reporting channel the data on:
+
+1) Summary of the emission inventory for all combustion plants with a rated thermal input of 50MW or more showing refinery data separately according to Annex VIIIB to the LCP Directive.
+
+2) Plants declared for eligibility under article 4(4) along with the record of the used and unused time allowed for the plants remaining operational life
+
+3) Plants applying Article 5 or the provisions of the Nota Bene in Annex III or the footnotes in Annex VI.A of the LCP Directive shall report thereon annually to the Commission.
+
+This reporting is currently using an XML-based submission assisted by a web-form. 
+
+The Commission has set a common deadline for this reporting every 31 March so that reporting coincides with E-PRTR reporting. The reference year is year -2.

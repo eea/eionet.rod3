@@ -1,0 +1,9 @@
+The register of protected areas should be maintained up to date.
+
+The reporting on RBD, human activity and economy is called Article 5 report and was due for each RBD on 22/12/2004, with a summary sent to the Commission 3 month later. The Commission has agreed with MS to have an Electronic Reporting in WISE in 2006. The reporting is based on guidance documents elaborated under the Common Implementation Strategy (CIS), see especially IMPRESS, WATECO, GIS and Groundwater in Drinking Water Protected Areas on the WFD CIRCA library (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a). A Water Information System for Europe (WISE) and an Electronic Reporting Tool should also help the reporting. A guidance document including Reporting Sheets for 2005 Reporting was elaborated  to adapt the reporting to these needs. 
+
+The Article 5 XML schemas are available at http://water.eionet.europa.eu/schemas/dir200060ec , while User Guide to the WFD Reporting Schemas v4.3 can be reached at http://icm.eionet.europa.eu/schemas/dir200060ec/resources/User%20Guide%20to%20the%20streamlined%20schemas%20v4.3.pdf        
+Additional information on schemas can be found at Expert meeting on streamlining & consolidation of WFD reporting schemas: Prague 11.06.2008
+(https://circabc.europa.eu/w/browse/5b70d16b-70c8-4cbc-a6a6-d8546750d45b).  
+
+Reports have been moved from WISE-WFD prototype (JRC) to Central Data Repository (EEA Reportnet).

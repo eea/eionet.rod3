@@ -1,0 +1,13 @@
+Annual report should contain a summary of the information specified in sub-paragraph (b) of paragraph 6 of this Article: 'the number and type of permits and certificates granted; the States with which such trade occurred; the numbers or quantities and types of specimens, names of species as included in Appendices I, II and III and, where applicable, the size and sex of the specimens in question.
+
+Information from the annual reports is fed into the database maintained for the CITES Secretariat by UNEP World Conservation Monitoring Centre (UNEP-WCMC).  This database provides the basis for reports to various fora, comparative trade analysis, the review of significant trade, quota management, the identification of Parties with high trade volumes under the National Legislation Project, and assessment of overall compliance with and enforcement of the Convention.  CITES trade data is publicly available and specific requests for information should be directed to UNEP-WCMC (www.unep-wcmc.org).
+
+The Secretariat maintains a table of annual report submissions, which is available on-line (www.cites.org/common/resources/annual_reports.pdf).  The reports themselves are not available on the CITES website.
+
+Further general information on the submission of annual reports can be found in reports prepared for meetings of the Conference of the Parties to CITES (e.g. document CoP12 Doc. 22.1) and the Standing Committee (e.g. document SC49 Doc. 15), which are available on-line.
+
+At its 49th meeting, the Standing Committee established a working group to undertake a review of reporting requirements under the Convention.  The aim of this review is to identify and analyse the causes of non-compliance with reporting requirements and to propose ways to turn reports into useful management tools for Parties (Decision 12.87 and document SC49 Doc. 15).
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

@@ -1,0 +1,11 @@
+To test reporting of primary up-to-date assessment data -measurements in period Article 10
+Primary validated assessment data and primary up-to-date assessment data
+...
+4. Member States shall also make available the information set out in Part E of Annex II on primary up-to-date assessment data for the networks and stations selected by the Member States for the specific purpose of making available up-to-date information amongst the networks and stations selected by the Member States for the purpose of the reciprocal exchange of information as referred to in point (b) of Article 1 for the pollutants listed in Part B of Annex I and where available for the additional pollutants listed in Part C of Annex I and for the additional pollutants listed on the portal for that purpose.
+...
+6. The primary up-to-date assessment data pursuant to paragraph 4 shall be made available to the Commission on a provisional basis with the frequency appropriate to each pollutant assessment method and within a reasonable timeframe after the data has been made available to the public according to Article 26 of Directive 2008/50/EC, for the pollutants specified for that purpose in Part B of Annex I to this Decision.
+The information shall include:
+(a) assessed concentration levels;
+(b) a status indication on the quality control.
+7. The primary up-to-date information made available pursuant to paragraph 4 shall be coherent with the information made available pursuant to Articles 6, 7 and 9.
+8. Member States may update the primary up-to-date assessment data made available pursuant to paragraph 4 following further quality control. The updated information shall replace the original information and its status shall be clearly indicated.

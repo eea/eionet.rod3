@@ -1,0 +1,21 @@
+Annual emissions data, from 1990 to reporting year minus 2 (X-2) (Annex I, Table A.):
+
+SO2 (sulphur dioxide)
+NOx (nitrogen oxides)
+NMVOCs (non-methane volatile organic compounds)
+NH3 (ammonia)
+CO (carbon monoxide)
+
+Heavy metals (HMs): cadmium (Cd), mercury (Hg), lead (Pb)
+
+Persistent organic pollutants (POPs): total polycyclic aromatic hydrocarbons (PAHs), benzo(a)pyrene (BaP), benzo(b)fluoranthene, benzo(f)fluoranthene, indeno(1,2,3-cd)pyrene, dioxin/furans, polychlorinated biphenyl(PCBs), hexachlorobenzene (HCB)
+
+Annual, from 2000 to reporting year minus 2 (X-2) (Annex I, Table A):
+
+Particulate matter (PM): particles with an aerodynamic diameter equal to or less than 2.5 micrometres (PM2.5); particles with an aerodynamic diameter equal to or less than 10 micrometres (PM10); black carbon (BC; if available)
+
+Annual, from 1990 (TSP from 2000) to reporting year minus 2 (X-2)(Annex I, Table B):
+
+HMs: arsenic (As), chromium (Cr), copper (Cu), nickel (Ni),selenium (Se) and zinc (Zn) and their compounds
+
+Total suspended particles (TSP)

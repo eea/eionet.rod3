@@ -1,0 +1,5 @@
+Reactive Monitoring is foreseen in the procedures for the eventual deletion of properties from the World Heritage List as set out in paragraphs 48-56 of the Operational Guidelines.  It is also foreseen in reference to properties inscribed, or to be inscribed, on the List of World Heritage in Danger, as set out in paragraphs 86-93 of the Operational Guidelines.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

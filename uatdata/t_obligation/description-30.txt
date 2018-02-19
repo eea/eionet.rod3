@@ -1,0 +1,5 @@
+NOTE (2015-07-31): This reporting obligation has been discontinued. Information on water quality in groundwater is now collected via WISE SoE Water Quality (WISE-4).
+
+Data on groundwater bodies are collected through the WISE-SoE data collection process. WISE SoE was previously known as EUROWATERNET (EWN) and EIONET-Water.
+
+The data requested on groundwater include the physical characteristics of the groundwater bodies, proxy pressures on the groundwater area, as well as chemical quality data on nutrients and organic matter, and hazardous substances in groundwater.

@@ -1,0 +1,7 @@
+This field should be filled from the list of organisations in the drop down list. If the issuing organisation for the legislation is not listed, create a new organisation using the "new" button. 
+
+Please think carefully whether you need to create a new organisation before doing so. Please enter all details for the new organisation in the window that opens.
+
+Note: The "issued by" organisation has a separate field from the "report to" or client organisation in ROD. 
+
+The "issued by" field is for the organisation responsible for the legislation, whereas the "report to" field is for the organisation responsible for receiving the flow of information under the reporting obligation. Often these are the same organisation.

@@ -1,0 +1,5 @@
+NOTE (2015-07-31): This reporting obligation has been discontinued. Information on water quality in lakes (including biological data) is now collected via WISE SoE Water Quality (WISE-4).
+
+Data on lakes are collected through the WISE-SoE data collection process. WISE SoE was previously known as EUROWATERNET (EWN) and EIONET-Water. Biological quality elements in lakes are integrated into reporting of Lakes water quality starting from 2012 reporting period.
+
+The data requested on lakes includes the physical characteristics of the lake monitoring stations, proxy pressures on the upstream catchment areas, as well as chemical quality data on nutrients and organic matter, and hazardous substances in lakes. It also includes the biological data (primarily calculated as national Ecological Quality Ratios and additional metrics data), as well as information on the national classification systems for each Biological Quality Element and waterbody type.

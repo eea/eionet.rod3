@@ -1,0 +1,10 @@
+Countries have password-protected access to their individual files of questionnaire that are pre-filled with country-specific data before the reporting is launched. The 2012 questionnaire is valid since 09/10/2012  and can be accessed here:
+ http://circa.europa.eu/Members/irc/dsis/envir/library?l=/joint_questionnaire_4/jointsquestionnaires2004&vm=detailed&sb=Title
+  
+The Data Collection Manual for the OECD/Eurostat Joint Questionnaire on Inland Waters Tables 1 – 7 (Version 2.3, September 2010) is made to help the filling of the various tables of the questionnaire. The manual is also available in protected Joint Questionnaire CIRCA site at  http://circa.europa.eu/Members/irc/dsis/envir/library?l=/joint_questionnaire_4/jointsquestionnaires2004_2/2008_jq/manuals&vm=detailed&sb=Title  
+
+Both the questionnaire and the manual undergo changes/adaptations from one reporting exercise to the next (clarifications, eliminations of errors, sometimes additions of new variables, re-structuring of tables etc).  
+
+All countries are requested to send their replies via eDAMIS, Eurostat's single entry point for reporting. Respective instructions have been supplied to all NSI (National Statistical Institutes) of ESS (European Statistical System) countries. 
+
+The questionnaire is based on clearly defined tables including definitions and formats requested. It consists of data and textual information (footnotes).

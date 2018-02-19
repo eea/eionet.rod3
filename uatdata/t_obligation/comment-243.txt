@@ -1,0 +1,7 @@
+Additional information on biennial reports can be found in reports prepared for meetings of the Conference of the Parties to CITES (e.g. document CoP12 Doc. 22.2) and the Standing Committee (e.g. document SC49 Doc. 15).
+
+At its 49th meeting, the Standing Committee established a working group to undertake a review of reporting requirements under the Convention.  The aim of this review is to identify and analyse the causes of non-compliance with reporting requirements and to propose ways to turn reports into useful management tools for Parties (Decision 12.87 and document SC49 Doc. 15).  Consequently, work is currently underway to develop a new reporting format for biennial reports.  In undertaking this work, Document CoP12 Doc. 22.2 states that, in order to reduce the reporting burden on Parties, consideration should be given to: 1) keeping the biennial report short and simple with a focus of priority topics; 2) after an initial biennial report, only highlighting any legislative amendments or changes in CITES authorities and new activities; and 3) using a more structured approach consistent with agreed guidelines to facilitate more comparative analysis.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

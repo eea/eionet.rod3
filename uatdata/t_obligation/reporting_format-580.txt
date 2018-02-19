@@ -1,0 +1,10 @@
+WFD reporting resources at ETC/ICM web site contains all needed support files for reporting including help documents and schemas.
+
+Summary of the information on threshold values, of the assessment of groundwater chemical status and of the trend assessment and the reasons for the starting points for trend reversals shall be published in the WFD river basin management plans (Article 13 report).  
+
+Annex II (Part A, C): guidelines for the establishment of threshold values and information on threshold values (Article 3). 
+Annex III: the procedure for assessing groundwater chemical status (Article 4). 
+Annex IV (Part A): the procedure for the identification of significant and sustained upward trends by designing a monitoring programme (Article 5). 
+
+Guidance documents elaborated under the Common Implementation Strategy (CIS) n°15 to n°18 and n°26 by Working Group on Groundwater should help to meet the requirements of the groundwater elements of the Water Framework Directive and the new Groundwater Directive (https://circabc.europa.eu/w/browse/a3c92123-1013-47ff-b832-16e1caaafc9a). 
+Additional information can be found in the WFD CIS technical reports on the Groundwater CIRCA library (https://circabc.europa.eu/w/browse/1e3530ea-5c51-4868-b4ff-8285b5fb90c8).

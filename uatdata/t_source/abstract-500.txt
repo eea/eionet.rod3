@@ -1,0 +1,3 @@
+This Directive shall apply to combustion plants, the rated thermal input of which is equal to or greater than 50 MW, irrespective of the type of fuel used (solid, liquid or gaseous). Its purpose is to limit the emissions of sulphur dioxide, nitrogen oxides and dust emitted from these plants.
+ 
+New reporting obligations concerning the emission inventories apply since 2004 as set out in Annex VIII(B) of the Directive.

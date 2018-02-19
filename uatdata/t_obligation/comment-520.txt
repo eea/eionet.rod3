@@ -1,0 +1,7 @@
+The second WFD implementation report published by the Commission on monitoring networks can be found at http://ec.europa.eu/environment/water/water-framework/implrep2007/index_en.htm    
+
+Maps on surface water and groundwater monitoring stations can be found at: 
+-WFD: Surface Water Viewer http://www.eea.europa.eu/themes/water/interactive/soe-wfd/wfd-surface-water-viewer 
+-WFD: Ground Water Viewer http://www.eea.europa.eu/themes/water/interactive/soe-wfd/wfd-ground-water-viewer 
+  
+See for the 2006/118/EC Groundwater Daughter Directive to WFD for further requirements on groundwater monitoring.

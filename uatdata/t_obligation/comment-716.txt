@@ -1,0 +1,7 @@
+As of 2015, this reporting obligation includes all the WISE spatial reference data previously reported annually under the following reporting obligations:
+- River quality (EWN-1): http://rod.eionet.europa.eu/obligations/28
+- Lake quality (EWN-2): http://rod.eionet.europa.eu/obligations/29
+- Groundwater quality (EWN-3): http://rod.eionet.europa.eu/obligations/30
+- State & Quantity of Water Resources (EWN-4): http://rod.eionet.europa.eu/obligations/184
+
+Furthermore it allows the voluntary submission of updates to the WISE reference spatial data sets.

@@ -1,0 +1,6 @@
+(a)Coordinates (latitude and longitude);
+(b)Stack height class;
+(c) Emissions of the specified substances;
+(d) Where available, the E-PRTR facility identification codes (FacilityID) or the EU Emissions Trading System identifier;
+(e) Emissions must be consistent with the annual inventory submitted under the Convention, in accordance with these Guidelines;
+(f) A clear explanation of the process and source sector must be given, including their relationship to the aggregated GNFR sector presented in annex V, to avoid double counting.

@@ -1,0 +1,11 @@
+See also "Baseline reporting date" help text.
+
+Values entered in the "Baseline reporting date" field and the "Reporting frequency in months" field. Are used to calculate the "Next due date" according to the following rules (assuming "today" is 05-12-2002 in our example):
+
+If the day of the starting date is < 28, a number of months specified in reporting frequency is added to the starting date repeatedly, until "Next due date" is in the future. For example, with 15-09-2002 start date and reporting frequency of 3 months, next reporting will be 15-12-2002.
+
+If the day of the starting date is >= 28, a number of months specified in reporting frequency is added to the starting date, until "Next due date" is in the future1, and the day set to the end of the month. For example, with 30-11-2002 start date and reporting frequency of 3 months, next reporting will be 28-02-2003.
+
+If reporting frequency in months is set to zero, the application assumes non-repeating reporting date (one-off) and uses "First reporting" date as the "Next due date". The "Next due date" will never be larger than "Valid to" date (no need to report if the obligation is no longer valid). 
+
+The application recalculates the "Next due date" fields for all obligations every day, so they are always up to date.

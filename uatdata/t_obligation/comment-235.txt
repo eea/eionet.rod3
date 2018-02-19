@@ -1,0 +1,5 @@
+Properties nominated for inscription must be of "outstanding universal value".  Articles 1 and 2 define outstanding universal value of cultural and natural properties respectively.  These definitions are interpreted by the World Heritage Committee by using two sets of criteria, one for cultural property and the other for natural property.  The criteria and conditions of authenticity or integrity adopted by the Committee for this purpose are set out in paragraphs 24 and 44 of the Operational Guidelines.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

@@ -1,0 +1,4 @@
+For register of protected areas, EEA maintains a biodiversity information system (not compulsory) at http://eunis.eea.europa.eu/  that provides information on species, habitats and sites in the context of European legislation. 
+
+Official WFD reports including Article 5 reports are publicly available at https://circabc.europa.eu/w/browse/15c1ebb9-16a0-4585-98cf-974d4f1c7e15  The first WFD implementation report published by the Commission on the transposition in national legislation, Article 3 and Article 5 report can be found at http://ec.europa.eu/environment/water/water-framework/implrep2007/index_en.htm   
+Two WFD Article 5 maps can be accessed on WISE map viewer at http://www.eea.europa.eu/themes/water/mapviewers/art5-risk  and   http://www.eea.europa.eu/themes/water/mapviewers/art5-hmwb

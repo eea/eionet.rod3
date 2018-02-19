@@ -1,0 +1,10 @@
+As of 2016, WISE SoE Water Quality (WISE-4) supports the following reporting obligations:
+- Environmental Quality Standards Directive - Watch list: http://rod.eionet.europa.eu/obligations/747 
+
+As of 2015, WISE SoE Water Quality (WISE-4) supersedes the following reporting obligations:
+- River quality (EWN-1): http://rod.eionet.europa.eu/obligations/28
+- Lake quality (EWN-2): http://rod.eionet.europa.eu/obligations/29
+- Groundwater quality (EWN-3): http://rod.eionet.europa.eu/obligations/30
+
+A formal request is sent to NFPs and NRCs every year with reference to reporting guidelines and templates available through Reportnet Data Dictionary.
+More information is available at http://cdr.eionet.europa.eu/help/WISE_SoE/wise4

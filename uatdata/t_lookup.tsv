@@ -1,0 +1,43 @@
+C_TERM	CATEGORY	C_VALUE
+Yes	1	Y
+No	1	N
+Compulsory	2	L
+Expected	2	M
+Normal	C	NULL
+Started	S	NULL
+Active	S	NULL
+Suspended	S	NULL
+Ended	S	NULL
+Chemicals	P	C
+daily	F	NULL
+weekly	F	NULL
+monthly	F	NULL
+bimonthly	F	NULL
+quarterly	F	NULL
+annually	F	NULL
+every 2nd year	F	NULL
+Natural lakes	ST	L
+Seas	ST	S
+Reservoirs	ST	O
+River Basins	ST	R
+Countries	ST	C
+Species	P	S
+every 3rd year	F	NULL
+every 4th year	F	NULL
+every 5th year	F	NULL
+Voluntary request	2	V
+Data	I	D
+Administrative	I	A
+Compliance	I	C
+Regulatory	I	R
+Spatial	I	S
+State of the environment	I	E
+Text report	I	T
+Air	DGS	A
+Biotechnology	DGS	B
+Chemicals	DGS	C
+IPPPC	DGS	I
+Nature and Biodiversity	DGS	N
+Noise	DGS	0
+Waste and Resources	DGS	R
+Water	DGS	W

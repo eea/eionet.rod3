@@ -1,0 +1,7 @@
+Croatia is not obliged to report in 2013 as the reporting period is for 2012 data. 
+
+Identification of lake stations using EUROWATERNET criteria and delivery of station description, pressures and quality data for WATERBASE.
+
+Interactive WISE SoE maps showing mean annual Phosphorous, Macrophytes and Phytoplankton in lakes measured at WISE SoE lake monitoring stations can be accessed on WISE map viewer "Water quality in rivers and lakes« and "Biological elements in rivers and lakes" (http://www.eea.europa.eu/themes/water/interactive/water-quality-in-rivers-and-lakes    and http://www.eea.europa.eu/themes/water/interactive/biological-water-quality-in-rivers).
+
+EEA Core Set of Indicators using WISE SoE data on lake quality (CSI 020 Nutrients in freshwater) can be found at http://www.eea.europa.eu/themes/water/indicators

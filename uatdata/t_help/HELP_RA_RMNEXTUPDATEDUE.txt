@@ -1,0 +1,7 @@
+This should be entered as 12 months from the point in time when verification or updating took place unless there is some reason to undertake an update earlier (change in legislation or reporting requirements foreseen).
+
+The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.
+
+   *   Next update: The date when the next regular update is due.
+   *   Verified: The date on which the record was verified or last updated by a thematic expert.
+   *   verified by: An identifier for the verifier.

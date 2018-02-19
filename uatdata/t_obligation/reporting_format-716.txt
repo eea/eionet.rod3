@@ -1,0 +1,10 @@
+There is a partial overlap with the following reporting obligations: 
+
+- Water Framework Directive - River Basin Management Plans - 2016 Spatial data  (http://rod.eionet.europa.eu/obligations/717)
+
+Detailed reporting guidance on the structure of the spatial data sets is available in http://cdr.eionet.europa.eu/help/WISE_SoE/wise5
+
+Information already reported under the WFD 2016 Reporting does not need to be resubmitted under WISE-5.
+
+Data Providers are requested to use the WISE-5 reporting in order to keep updated the spatial reference data relevant for the different WISE SoE reporting obligations. 
+Data must be submitted as full data sets (no incremental updates).

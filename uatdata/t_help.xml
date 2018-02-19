@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet author="roug" id="rev-1" context="uat">
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO_RECOGNIZED"/>
+	<column name="HELP_TITLE" value=""/>
+	<column name="HELP_TEXT" value=""/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_PARAMETERS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Parameters"/>
+	<column name="HELP_TEXT" value="Information about specific parameters collected by a reporting obligation may be entered here.&#10;&#10;Summary parameters can be entered as text variables for Eionet dataflows. Beyond this, this field is not being actively managed pending integration with the Data dictionary."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_MAIN"/>
+	<column name="HELP_TITLE" value="Test"/>
+	<column name="HELP_TEXT" value="Test2"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RORA"/>
+	<column name="HELP_TITLE" value="Search Obligations"/>
+	<column name="HELP_TEXT" value="Use this form to search for reporting obligations. Possible filters for the search are:&#10;&#10;* Environmental issues&#10;* Spatial coverage attributes: countries&#10;* Specific parameter groups"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_MAIN_ENVIRONMENTALISSUES"/>
+	<column name="HELP_TITLE" value="Environmental Issues"/>
+	<column name="HELP_TEXT" value="Use this drop down list to select an environmental issue. Generally 1 environmental issue is attibuted to each reporting activity. Reporting obligations inherit all the environmental issues from the reporting activities under them."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO_REPORTTO"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Report to client"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RO_REPORTTO.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO_OBLIGATIONTYPE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Obligation type"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RO_OBLIGATIONTYPE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_SPATIALCOVERAGE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Countries reporting formally"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_SPATIALCOVERAGE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_TITLE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Title"/>
+	<column name="HELP_TEXT" value="This is a short identifier for the reporting obligation. The field should show the name that is commonly used for this obligation and ideally reflect the type of reporting or information collected."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_VALIDTO"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Valid to"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_VALIDTO.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_RESPONSIBLEFORREPORTING"/>
+	<column name="HELP_TITLE" value="Reporting obligation - National reporting contacts"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_RESPONSIBLEFORREPORTING.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_VALIDFROM"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Baseline reporting date"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_VALIDFROM.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_REPORTINGDATETEXTFORMAT"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Text dates"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_REPORTINGDATETEXTFORMAT.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_REPORTINGFREQUENCYINMONTHS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Reporting frequency"/>
+	<column name="HELP_TEXT" value="See &quot;Baseline reporting date&quot; text above.&#10;&#10;Enter a value as a whole number for the number of months between reporting due dates. For annual reporting this would be 12, for three yearly reporting, 36.&#10;&#10;If reporting frequency in months is set to zero, the application assumes non-repeating date and uses &quot;Baseline reporting date&quot; as the &quot;Next due date&quot;."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_LOCATIONINFO"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Name of repository"/>
+	<column name="HELP_TEXT" value="The name of the repository where countries make deliveries (for electronic reporting) should be entered here."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_NEXTDUEDATE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Next due date"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_NEXTDUEDATE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_ENVIRONMENTALISSUES"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Environmental issues"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_ENVIRONMENTALISSUES.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_REPORTINGGUIDELINES"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Reporting guidelines Extra info"/>
+	<column name="HELP_TEXT" value="This field displays extra information about the reporting guidelines. (older versions, format of submissions, extra URLs (not dynamic) etc)."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_COMMENT"/>
+	<column name="HELP_TITLE" value="Reporting obligation - General comments"/>
+	<column name="HELP_TEXT" value="General comments about the reporting obligation. This field was previously used to give a general description of the reporting activity. General descriptive text should be moved to the description field."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_OVERLAPURL"/>
+	<column name="HELP_TITLE" value="reporting obligation - URL of overlapping obligation"/>
+	<column name="HELP_TEXT" value="If the reporting process for this reporting obligation overlaps with the reporting process for another obligation, then the ROD URL for that reporting obligation should be entered here. An Example could be where reporting to an international convention overlaps in content or process with reporting for an EU directive.&#10;&#10;A URL should be entered if the reporting obligation overlaps. &#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI"/>
+	<column name="HELP_TITLE" value="Legal Instruments"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_ECENTRYINTOFORCE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - EC Entry into force"/>
+	<column name="HELP_TEXT" value="For conventions ratified by the EC / EU, the date on which convention entered into force for the EC / EU should be entered here. The date directives enter into force is 20 days after the date of publication in the Official Journal if nothing else is mentioned."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_CLASSIFICATION"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Eur-lex Categories"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_CLASSIFICATION.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_VALIDFROM"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Valid from"/>
+	<column name="HELP_TEXT" value="The date on which the legislation enters into force: the date on which the act became operative. The date directives enter into force is 20 days after the date of publication in the Official Journal if nothing else is mentioned.&#10;&#10;This date is for reference and analysis only, and is not used in any calculations for reporting obligation deadlines."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_ABSTRACT"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Abstract"/>
+	<column name="HELP_TEXT" value="A short abstract about the legislation should be put here. The focus should be on defining what the legislation covers from a reporting obligation perspective. Where possible the text should be taken directly from an authoritative summary such as from the objective in EU legislative texts."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_COMMENT"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Comments"/>
+	<column name="HELP_TEXT" value="Put any additional comments or remarks here. Comments are often anticipated revision dates, notes about the relationship between this instrument and other legislation, the history of significant changes, etc."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_PARENTLEGALINSTRUMENT"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Parent legal instrument"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_PARENTLEGALINSTRUMENT.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_LEGALNAME"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Legal Name"/>
+	<column name="HELP_TEXT" value="The full legal name of the legislative instrument."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_ALIASNAME"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Short name"/>
+	<column name="HELP_TEXT" value="The short name by which the legislative instrument is known. Example: Birds directive."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_CELEXREFERENCE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Celex reference"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_CELEXREFERENCE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_RMVERIFIED"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Verified date"/>
+	<column name="HELP_TEXT" value="The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier.&#10;&#10;This field is for the date of last verification (This is the same as the last update date if updated by an appointed thematic expert)"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_ISSUEDBY"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Issued by"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_ISSUEDBY.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_URLTOOFFICIALSOURCE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - URL to official source"/>
+	<column name="HELP_TEXT" value="A web link to the Eur-lex entry or the text of conventions and other international agreements should be entered here. Where possible this should be to a stable non-password protected URL that links to pdf files displaying all tables and annexes.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_URLTOISSUER"/>
+	<column name="HELP_TITLE" value="Legislative instrument - URL to issuer"/>
+	<column name="HELP_TEXT" value="The URL to issuer's web page for this specific legal instrument should be entered here.&#10;&#10;The URL entered in this field should be different from the organisational url entered in the issuer?s details. The URL in this field should point to an introductory information page about the legislative instrument, if one exists.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_SEARCH1"/>
+	<column name="HELP_TITLE" value="Show reporting obligations"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_SEARCH1.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_HIERARCHY"/>
+	<column name="HELP_TITLE" value="Legislative instruments - Eur-lex categories"/>
+	<column name="HELP_TEXT" value="This page shows a clickable categories based on the Eurlex classification. The list is used to navigate  to legislative instruments. &#10;&#10;More information about the Eur-lex categories can be found at: http://europa.eu.int/eur-lex/en/lif/index.html. &#10;&#10;In ROD, the classification also includes &quot;Conventions&quot; and &quot;Other legislation&quot; to cater for legislative instruments not in Eur-lex."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_SEARCH2"/>
+	<column name="HELP_TITLE" value="Show reporting obligations or activities (Report to)"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_SEARCH2.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_GENERAL"/>
+	<column name="HELP_TITLE" value="General ROD help"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_GENERAL.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_DRAFT"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Draft"/>
+	<column name="HELP_TEXT" value="Normally &quot;No&quot;. Only &quot;Yes&quot; for new legislation not finalised."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_IDENTIFICATIONNUMBER"/>
+	<column name="HELP_TITLE" value="Legislative instrument - ID number"/>
+	<column name="HELP_TEXT" value="The ID number for the legal instrument. For EU legislation, this is normally also in the title. Ex. 92/72/EEC.&#10;&#10;Some instruments do not have an ID number."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_RMVERIFIEDBY"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Verified by"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_RMVERIFIEDBY.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_RMNEXTUPDATEDUE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - next update due"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_LI_RMNEXTUPDATEDUE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA"/>
+	<column name="HELP_TITLE" value="Reporting obligation - General help"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_LOCATIONPTR"/>
+	<column name="HELP_TITLE" value="Reporting obligation - URL to principle repository"/>
+	<column name="HELP_TEXT" value="This field is for the url to the repository where countries make deliveries in response to the reporting obligations. This may be a CDR url, a CIRCA url, an ftp address, a url to a web form, to a database, a downloadable application or some other Internet service.&#10;&#10;URLs in ROD should start with the full address. Example: http://www"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_FLAGS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Flags"/>
+	<column name="HELP_TEXT" value="Priority dataflow flag:&#10;This tick-box should be selected if the reporting obligation is a priority dataflow for the EEA.&#10;&#10;Core set of indictors flag:&#10;This tick-box should be selected if the reporting obligation is used to create an indicator that is used in the EEA core set of indicators.&#10;&#10;Delivery process is managed by EEA  flag:&#10;This tick-box should be selected if reporting under this obligation is an EEA managed data flow (EDF)."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_DATECOMMENTS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Date comments"/>
+	<column name="HELP_TEXT" value="If the reporting dates can be entered as numerical dates but also require some explanatory text, then enter these additional notes here."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_RMNEXTUPDATEDUE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Next update due"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_RMNEXTUPDATEDUE.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_RMVERIFIEDBY"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Verified by"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_RMVERIFIEDBY.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_RMVERIFIED"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Verified"/>
+	<column name="HELP_TEXT" value="The footer of each record in ROD displays quality information relating to each record. This display determines the status of each record.&#10;&#10;   *   Next update: The date when the next regular update is due.&#10;   *   Verified: The date on which the record was verified or last updated by a thematic expert.&#10;   *   verified by: An identifier for the verifier.&#10;&#10;This field is for the date of last verification (This is the same as the last update date if updated by an appointed thematic expert)"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO"/>
+	<column name="HELP_TITLE" value="Reporting obligation - General help"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RO.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_CSMAIN"/>
+	<column name="HELP_TITLE" value="Country deadlines"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_CSMAIN.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_SECRETARIATHOMEPAGE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - URL to Secretariat homepage"/>
+	<column name="HELP_TEXT" value="URL of the convention secretariat homepage. URLs in ROD should start with the full address. Example: http://www"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_SECRETARIAT"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Convention secretariat"/>
+	<column name="HELP_TEXT" value="Name of the convention secretariat."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO_OTHERCLIENTS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Other clients using this reporting"/>
+	<column name="HELP_TEXT" value="This field identifies organisations that make use of the information collected under this reporting obligation but who are not the official client organisation. Usually these organisations are actively involved in the reporting obligation.&#10;&#10;This is similar to being a &quot;cc&quot; recipient on an email."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_ECACCESSION"/>
+	<column name="HELP_TITLE" value="Legislative instrument - EC accession"/>
+	<column name="HELP_TEXT" value="For conventions where the EC or EU is a party to the convention, the date of EC accession to a convention. leave blank if not applicable."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_CSINDEX_SEARCH"/>
+	<column name="HELP_TITLE" value="Deadlines Advanced Search"/>
+	<column name="HELP_TEXT" value="This form allows the list of deadlines to be refined to only show deadlines for a certain period or for an issue or organisation.&#10;&#10;Note that text deadlines will appear in all lists generated, as the application does not know when these are calendared for."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_VOLUNTARYCOUNTRIES"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Countries reporting voluntarily"/>
+	<column name="HELP_TEXT" value="This field is for countries who are not officially involved in the reporting obligation but who report on a voluntary basis as a gesture of goodwill or for some other reason.&#10;&#10;Examples include:&#10;* Norway for some EU reporting obligations&#10;* Andorra for EEA reporting&#10;* EU Accession countries for EU reporting obligations&#10;&#10;This field should only be filled at a country's request or for EEA member countries participating in Eionet priority dataflows who are not formally listed as reporters under the obligation."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_NAMEOFREPORTINGGUIDELINES"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Name of reporting guidelines"/>
+	<column name="HELP_TEXT" value="The name of the reporting guidelines that will appear as the hyperlink text for the link to the guidance document. &#10;&#10;See URL to reporting guidelines."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_URLTOREPORTINGGUIDELINES"/>
+	<column name="HELP_TITLE" value="Reporting obligation - URL to reporting guidelines"/>
+	<column name="HELP_TEXT" value="The URL linking to the guidelines homepage or document. (This is sometimes password protected). The url should not return an error page.&#10;&#10;URLs in ROD should start with the full address. (Example: http://www)"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RO_INFOTYPE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Type of information reported"/>
+	<column name="HELP_TEXT" value="This field is a drop down list where the type of information to be reported can be identified. (Administrative, compliance, data regulatory, spatial, state of the environment, text report). Non of these is precisely defined."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_INDICATORS"/>
+	<column name="HELP_TITLE" value="Reporting obligation - indicators"/>
+	<column name="HELP_TEXT" value="Leave blank."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_FORMATVALIDSINCE"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Format valid since"/>
+	<column name="HELP_TEXT" value="The date on which the reporting guidelines became valid should be entered here. This prevents problems with versions of guidelines. ROD should point to the latest version required for the current or forthcoming reporting cycle."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_CSMAIN1"/>
+	<column name="HELP_TITLE" value="Deadline list refinements"/>
+	<column name="HELP_TEXT" value="This form allows the list of deadlines to be refined to only show deadlines for a certain period or for an issue or organisation.&#10;&#10;Note that text deadlines will appear in all lists generated, as the application does not know when these are calendared for."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_DESCRIPTION"/>
+	<column name="HELP_TITLE" value="Reporting obligation - description"/>
+	<column name="HELP_TEXT" value="This is for a short description of the reporting obligation to expand on the title. Guide length: three lines or less."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_REPORTINGCOORDINATOR"/>
+	<column name="HELP_TITLE" value="Reporting obligation - National reporting coordinators"/>
+	<column name="HELP_TEXT" valueClobFile="t_help/HELP_RA_REPORTINGCOORDINATOR.txt"/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_AUTHORITY"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Authority giving rise to the obligation"/>
+	<column name="HELP_TEXT" value="This field should contain the &quot;authority&quot; for the obligation ? e.g. what Article, Decision, Recommendation, etc. gives rise to the Obligation. This is separate and distinct from any &quot;reporting guidelines&quot; or &quot;formats&quot; and is not an organisation. (Example: Article 1, paragraph ii).&#10;&#10;This field may not be appropriate for all obligations. If this information is in the title of the reporting obligation, it should be removed form the title and placed in this field."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_RA_VALIDATEDBY"/>
+	<column name="HELP_TITLE" value="Reporting obligation - Validated by"/>
+	<column name="HELP_TEXT" value="Initials of the person that validated the record and organizational identifier. Validation is a quality assurance carried out by the owners of the reporting obligations in ROD. Legislative authoritative bodies carry out validation for their own reporting obligations. The validated status of records in ROD is not currently displayed."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_DGENVREVIEW"/>
+	<column name="HELP_TITLE" value="Legislative instrument - DG Env review of reporting theme"/>
+	<column name="HELP_TEXT" value="As part of the preparation for the DG Environment framework directive on the review of reporting, EU environmental legislation was classified according to one of 9 themes. Reporting to DG Environment should be correctly classified according to the correct theme."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_GSCOPE"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Geographic scope"/>
+	<column name="HELP_TEXT" value="A few words on the geographical area of coverage of the instrument should be entered here. Examples: European Union; Arctic; Worldwide; North Sea; Baltic Sea; North East Atlantic; etc."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_LI_RMVALIDATEDBY"/>
+	<column name="HELP_TITLE" value="Legislative instrument - Validated by"/>
+	<column name="HELP_TEXT" value="Initials of the person that validated the record and organizational identifier. Validation is a quality assurance carried out by the owners of the reporting obligations in ROD. Legislative authoritative bodies carry out validation for their own reporting obligations. The validated status of records in ROD is not currently displayed."/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_ANALYSIS_EEACORE"/>
+	<column name="HELP_TITLE" value=""/>
+	<column name="HELP_TEXT" value=""/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_ANALYSIS_EIONETPRIORITY"/>
+	<column name="HELP_TITLE" value=""/>
+	<column name="HELP_TEXT" value=""/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_ANALYSIS_OVERLAPPING"/>
+	<column name="HELP_TITLE" value=""/>
+	<column name="HELP_TEXT" value=""/>
+  </insert>
+
+  <insert tableName="T_HELP">
+	<column name="PK_HELP_ID" value="HELP_ANALYSIS_FLAGGED"/>
+	<column name="HELP_TITLE" value="Reporting obligation where the delivery process is managed by EEA"/>
+	<column name="HELP_TEXT" value="Also known as: EEA managed data flow (EDF)."/>
+  </insert>
+</changeSet>
+</databaseChangeLog>

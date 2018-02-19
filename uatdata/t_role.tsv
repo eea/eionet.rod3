@@ -1,0 +1,41 @@
+ROLE_NAME	ROLE_EMAIL	ROLE_URL	ROLE_ID	ROLE_MEMBERS_URL	LAST_HARVESTED	STATUS
+EIONET PCPs and NRCs for Water Emissions 		NULL	eionet-nrc-wateremissions	NULL	2017-11-06 10:14:43	1
+WISE SoE - Biological data in transitional and coastal waters (WISE-2) Reporters		NULL	reportnet-awp-wise2-reporter	NULL	2017-11-06 10:14:43	1
+EU Registry on industrial sites Reporters		NULL	extranet-euregistry-reporter	NULL	2017-11-06 10:14:43	1
+Nationally designated areas (CDDA) Reporters		NULL	reportnet-awp-cdda-reporter	NULL	2017-11-06 10:14:41	1
+Data reporters		NULL	extranet-msfdreporter-data	NULL	2017-11-06 10:14:41	1
+AQ Plans and Programmes - national providers		NULL	extranet-aqipr-h2k	NULL	2017-11-06 10:14:42	1
+WISE SoE - Water quality in transitional, coastal and marine waters (WISE-6) Reporters		NULL	reportnet-awp-wise6-reporter	NULL	2017-11-06 10:14:42	1
+Large combustion plants (LCP) Directive Reporters		NULL	extranet-lcp-reporter	NULL	2017-11-06 10:14:42	1
+Data Reporters of the Habitats and Birds Derogation Reporting System		NULL	extranet-habides-reporter	NULL	2017-11-06 10:14:42	1
+WISE SoE - Water Quantity (WISE-3) Reporters		NULL	reportnet-awp-wise3-reporter	NULL	2017-11-06 10:14:42	1
+Emissions Trading Directive Article 21 Reporters		NULL	extranet-ets-art21reporter	NULL	2017-11-06 10:14:42	1
+Validated data flows – national providers		NULL	extranet-aqipr-val	NULL	2017-11-06 10:14:42	1
+WISE - Spatial Data (WISE-5) Reporters		NULL	reportnet-awp-wise5-reporter	NULL	2017-11-06 10:14:42	1
+E-PRTR Data Reporters		NULL	extranet-eprtr-eprtrdat	NULL	2017-11-06 10:14:42	1
+E-PRTR and LCP Data Reporters		NULL	extranet-eprtrlcp-data	NULL	2017-11-06 10:14:40	1
+Convention on Long-range Transboundary Air Pollution (CLRTAP) Reporters		NULL	extranet-clrtap-reporter	NULL	2017-11-06 10:14:40	1
+Natura 2000 Reporters		NULL	extranet-natura2000-reporter	NULL	2017-11-06 10:14:41	1
+Urban Waste Water Treatment Directive - Data Reporters		NULL	extranet-uwwtd-data	NULL	2017-11-06 10:14:41	1
+Nitrates Directive Reporters		NULL	extranet-nid-reporter	NULL	2017-11-06 10:14:39	1
+Corine Land Cover (CLC) Reporters		NULL	reportnet-awp-clc-reporter	NULL	2017-11-06 10:14:39	1
+EIONET PCPs and NRCs for Mitigation of air pollution and climate change		NULL	eionet-nrc-mitigation	NULL	2017-11-06 10:14:39	1
+CO2 Monitoring for vehicles Reporters		NULL	extranet-co2monitoring-reporter	NULL	2017-11-06 10:14:40	1
+Water Framework Directive - Data reporters		NULL	extranet-wfd-data	NULL	2017-11-06 10:14:40	1
+WISE - National reporting coordinators		NULL	extranet-wise-nfp	NULL	2017-11-06 10:14:39	1
+WISE SoE - Water Quality (WISE-4) Reporters		NULL	reportnet-awp-wise4-reporter	NULL	2017-11-06 10:14:38	1
+Fuel Quality Directive (FQD) Reporters		NULL	extranet-fqd-reporter	NULL	2017-11-06 10:14:38	1
+Bathing Water Directive - Data reporters		NULL	extranet-bwd-data	NULL	2017-11-06 10:14:38	1
+WISE SoE - Emissions (WISE-1) Reporters		NULL	reportnet-awp-wise1-reporter	NULL	2017-11-06 10:14:37	1
+National Focal Points		NULL	eionet-nfp	NULL	2017-11-06 10:14:37	1
+Reporters under the INSPIRE Directive		NULL	extranet-inspire-reporter	NULL	2017-11-06 10:14:37	1
+MMR reporters		NULL	extranet-mmr-reporter	NULL	2017-11-06 10:14:38	1
+E-PRTR Reporters on practice and measures		NULL	extranet-eprtr-eprtrpam	NULL	2017-11-06 10:14:36	1
+Floods Directive - Data reporters		NULL	extranet-floods-data	NULL	2017-11-06 10:14:37	1
+EIONET PCPs and NRCs for Water quality and ecological status		NULL	eionet-nrc-waterquality	NULL	2017-11-06 10:14:35	1
+UTD Data Providers		NULL	extranet-aqipr-utd	NULL	2017-11-06 10:14:36	1
+Environmental Noise Directive Data Reporters		NULL	extranet-noise-reporter	NULL	2017-11-06 10:14:36	1
+National Emission Ceilings Directive Reporters		NULL	extranet-necd-reporter	NULL	2017-11-06 10:14:36	1
+Birds Directive Article 12 Data Reporters		NULL	extranet-birds-art12data	NULL	2017-11-06 10:14:36	1
+Habitats Directive Article 17 Data Reporters		NULL	extranet-habitats-art17data	NULL	2017-11-06 10:14:36	1
+Drinking Water Directive - Data Reporters		NULL	extranet-dwd-data	NULL	2017-11-06 10:14:35	1

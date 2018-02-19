@@ -1,0 +1,7 @@
+This is the organisation to which the reported data set should be sent. 
+
+This may be the same as the issuer of the legislation or can be different.This field should be filled from the list of organisations in the drop down list. If the "report to" organisation for the obligation is not listed, create a new organisation using the "new" button. 
+
+Please consider carefully whether you need to create a new organisation before doing so. Please enter all details for the new organisation in the window that opens.
+
+Note: The "issued by" organisation has a separate field from the "report to" or client organisation. The "issued by" field is for the organisation responsible for the legislation, whereas the "report to" field is for the organisation responsible for receiving the flow of information under the reporting obligation. Often these are the same organisation.

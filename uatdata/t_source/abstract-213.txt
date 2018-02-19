@@ -1,0 +1,5 @@
+This Directive concerns the reference methods of measurement and frequencies of sampling and analysis for the parameters listed in Annex II to Directive 75/440/EEC.
+The Directive has been amended by:
+-Council Directive 81/855/EEC of 19 October 1981 adapting, consequent upon the accession of Greece.
+-Directive 91/692/EEC of 23 December 1991 standardizing and rationalizing reports on the implementation of certain Directives relating to the environment further amended by Regulation 1882/2003/EC of the European Parliament and of the Council of 29 September 2003 adapting to Council Decision 1999/468/EC (Celex N°31999D0468) the provisions relating to committees which assist the Commission in the exercise of its implementing powers laid down in instruments subject to the procedure referred to in Article 251 of the EC Treaty.
+-Council Regulation 807/2003/EC of 14 April 2003 adapting to Decision 1999/468/EC the provisions relating to committees which assist the Commission in the exercise of its implementing powers laid down in Council instruments adopted in accordance with the consultation procedure (unanimity).

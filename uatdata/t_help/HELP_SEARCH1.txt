@@ -1,0 +1,11 @@
+The query form will generate a list of reporting obligations. The list can be refined by selecting any combination from the three drop down lists.
+
+For example, select a country from the countries drop-down menu if you are only interested getting results relevant for a  particular country.
+
+Select the issue that you are interested in to generate a list of all reporting obligations for that issue.
+
+Select an organisation to see all the reporting obligations for that organisation.
+
+Click on the GO button to generate the list.
+
+Naturally if an item from all three list boxes is selected, then the list will only list reporting obligaitons that are for that specific organisation, country and issue together.

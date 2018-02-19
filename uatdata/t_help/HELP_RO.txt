@@ -1,0 +1,6 @@
+Reporting obligation is taken to mean:
+Any requirement to provide specified information to (or to "inform") the secretariat, coordinating body or governing body of the instrument - whether or not there is a prescribed format or fixed frequency, or whether or not the word "report" is used. 
+
+ROD focuses on environmental reporting for EEA member countries to international organisations. Coverage extends to pan European reporting.
+
+Excluded from ROD are requirements for proposals or the seeking of permits, requirements for specific actions to be taken (as opposed to reporting on actions taken), and administrative processes such as notifications of contact points, instances of issuance of permits (rather than reports that summarise permits issued), notifications of legal transposition and implementation measures.

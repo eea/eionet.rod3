@@ -1,0 +1,7 @@
+This Reporting is conducted through a web-form in CDR. The User manual is available at http://cdr.eionet.europa.eu/help/lcp 
+
+This reporting obligation includes the information that was also provided according to:
+- http://rod.eionet.europa.eu/obligations/586
+- http://rod.eionet.europa.eu/obligations/631
+
+The submission of the information through this reporting channel satisfies the legal requirements. However, the other two reporting obligations (586 and 631) are still open so that MS can report this information for the years 2014 and 2015 before the deadline (without using the web-form).

@@ -1,0 +1,5 @@
+NOTE (2015-07-31): This reporting obligation has been discontinued. Information on water quality in rivers (including biological data) is now collected via WISE SoE Water Quality (WISE-4).
+
+Data on rivers are collected through the WISE-SoE data collection process. WISE SoE was previously known as EUROWATERNET (EWN) and EIONET-Water. Biological quality elements in rivers are integrated into reporting of Rivers water quality starting from 2012 reporting period.
+
+The data requested on rivers includes the physical characteristics of the river monitoring stations, proxy pressures on the upstream catchment areas, as well as chemical quality data on nutrients and organic matter, and hazardous substances in rivers. It also includes the biological data (primarily calculated as national Ecological Quality Ratios), as well as information on the national classification systems for each Biological Quality Element and waterbody type.

@@ -1,0 +1,47 @@
+Atmospheric emissions from waste incineration should not exceed the following levels at 11% O2 (ndg):
+
+
+Parameter A (mg/m³) 
+Dust 10 
+CO 50 
+HCI 10 
+HF 1 
+SO2 50 
+NOx (as NO2) 200 
+For existing plants with a nominal capacity exceeding 6 tonnes per hour or new incineration plant 
+NOx (as NO2) 400 
+For existing plants with a nominal capacity of 6 tonnes per hour or less 
+Cd + TI 0,05 
+Hg 0,05 
+Sb+As+Pb+Cr+Co+Cu+Mn+Ni+V 0,5 
+Dioxins and furans 0,1 ng TEQ/ m3 
+ 
+
+
+Measurements should be based on internationally accepted methods. Emission levels in the table are daily average values for all parameters except metals and dioxins/furans which are based on ”spot-sample-values” in accordance with requirements specified in the EU Directive 2000/76/EC on incineration of waste.
+
+ 
+
+
+
+Discharges of waste water from cleaning of exhaust gases should not exceed the following levels (24 h samples) in column A:
+
+
+Parameter A (mg/l) B Sampling 
+Total suspended solids 30 Based on spot daily or flow proportional sample 
+Hg 0,03 Monthly measurement of a flow proportional representative sample of the discharge over a period of 24 hours with one measurement per year exceeding the values given, or no more than 5 % where more than 20 samples are assessed per year 
+Cd 0,05 
+TI 0,05 
+As 0,15 
+Pb 0,2 
+Cr 0,5 
+Cu 0,5 
+Ni 0,5 
+Zn 1,5 
+Dioxins and furans 0,3 ng/l At least every 6 months measurements of a flow proportional representative sample of the discharge over a period of 24 hours. However, one measurement at least every 3 months should be carried out fore the first 12 months of operation. 
+ 
+
+
+pH-level for water should not be below 7,0.
+
+Measurements should be based on internationally accepted methods and in accordance with requirements specified in the EU Directive 2000/76/EC on incineration of waste.

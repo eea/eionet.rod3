@@ -1,0 +1,19 @@
+This page shows deadlines that countries have for reporting obligations. This functionality in ROD works best when the deadlines are entered as numeric dates.
+
+Explanation of columns:
+
+* Reporting obligation
+Reporting obligation is taken to mean:
+Any requirement to provide specified information to (or to "inform") the secretariat, coordinating body or governing body of the instrument, or their representatives, whether or not there is a prescribed format or fixed frequency, or whether or not the word "report" is used. ROD focuses on environmental reporting for EEA member countries to international organisations. 
+
+* Reporting to
+This is the organisation to which the reported data is sent. This may be the same as the issuer of the legislation or can be different.
+
+* Deadline and Next Deadline
+The next reporting due date. The next deadline field is the following deadline (Only for numeric dates).
+
+* Responsible
+This links to the nominated national contact for the reporting obligation in the Directory. This field is only populated when the roles are entered and populated in the directory.
+
+* Deliveries
+This provides a link to the status of deliveries page in ROD. This page harvests information from CDR, the principle repository for European environmental reporting.

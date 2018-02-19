@@ -1,0 +1,3 @@
+Data reporting by Member States according to Article 7 of Regulation 166/2006/EC covering data reported by operators to the Member States according to Article 5.1 (releases to air, water and land; off-side transfers of waste; and off-side transfers of pollutants in waste water) and 5.2 (information on releases and transfers resulting as totals of all deliberate, accidental, routine and non-routine activities).
+
+The European Pollutant Release and Transfer Register which will be available on the Internet (http://prtr.ec.europa.eu/)  will also cover releases of pollutants from diffuse sources were such information exists and has been reported by the Member States.

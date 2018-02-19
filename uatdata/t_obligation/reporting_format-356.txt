@@ -1,0 +1,5 @@
+The joint OECD/Eurostat questionnaire on environmental data was initially developed by the OECD Working Group on Environmental Information and Outlooks (WGEIO). 
+
+The questionnaire as a whole is continuously being reviewed and revised, with different schedules for individual sections (e.g. forests) depending on developments at international and EU levels. Revisions of the questionnaire are processed within the framework of joint OECD/Eurostat meetings, with the participation of other relevant international bodies, e.g. UN Economic Commission for Europe (UN-ECE), UN Food and Agriculture Organisation (FAO), convention secretariats, the European Environment Agency (EEA), etc.
+
+Since 2002, only the 'Land section' of the Joint Questionnaire on the State of the Environment collects information on land use change - forest being one of the land classes. Other forestry data are provided through the ITTO/FAO/ECE/Eurostat Joint Forest Sector Questionnaire process.

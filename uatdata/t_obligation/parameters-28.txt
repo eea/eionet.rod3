@@ -1,0 +1,6 @@
+Two codelists for rivers and lakes can be obtained as Excel table from NRC EIONET Freshwater interest group library (subfolder Codelists of substances for water quality reporting):
+-Rivers and Lakes: Nutrients + specification of Preferred SoE Nutrients and Potentially High Mean Values (outliers),  
+-Rivers and Lakes: Hazardous Substances + specification of Preferred SoE Haz.Subst
+at http://forum.eionet.europa.eu/nrc-eionet-freshwater/library/wise-soe-reporting-2013/codelists-substances-water-quality-reporting      
+
+The codelists of determinands relating to biological metrics and biological quality elements are available at http://dd.eionet.europa.eu/dataelements/latest/DeterminandBiology and http://dd.eionet.europa.eu/dataelements/latest/BQE

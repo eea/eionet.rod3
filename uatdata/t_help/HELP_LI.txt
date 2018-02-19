@@ -1,0 +1,3 @@
+The ROD database contains records at two levels. The highest level is the legislative instrument level. before a new reporting obligation can be entered, a new legal instrument record must be entered. This legal instrument record is the legal basis for one or more reporting obligations. Before entering a new legal instrument, confirm that it has not already been entered by searching ROD. 
+
+The information entered into ROD about the legal instrument should be taken from authoritative sources such as Celex or Convention websites. If the current legal instrument amends some existing act, then this relationship can be specified by selecting a "Parent legal instrument" from the list.

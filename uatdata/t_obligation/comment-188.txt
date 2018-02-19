@@ -1,0 +1,5 @@
+Given that the national report on the implementation of the CBD is four-yearly, it has been suggested by the Intergovernmental Committee for the Cartagena Protocol on Biosafety (UNEP/CBD/ICCP/2/4) that an alternating cycle of reporting under the Convention and under the Protocol be established in order to reduce the reporting burden on Parties.
+
+EEA maintains a biodiversity information system at
+http://eunis.eea.eu.int/ that provides information on species, habitats
+and sites in the context of European legislation.

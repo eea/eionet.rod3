@@ -1,0 +1,7 @@
+The right-hand select box should be filled with the Eur-lex categories for EU legislation linked to the instrument being edited. 
+
+The left-hand select box displays the items that can be selected. A legal instrument can be classified by selecting item(s) from the left-hand box and then clicking the "-->" button. Similarly, to remove categories, select item(s) from the right-hand box and press the "<--" button. To select multiple items from the select box, a CTRL key has to be held down while the items are clicked with the mouse. 
+
+The classification is based on the Eur-lex classification, which can be browsed at http://europa.eu.int/eur-lex/en/lif/index.html to check how an instrument should be classified.
+
+In addition, in ROD, the classification also includes "Conventions" and Other legislation" to cater for legislative instruments not in Eur-lex.
