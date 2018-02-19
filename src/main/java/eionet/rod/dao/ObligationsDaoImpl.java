@@ -224,7 +224,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					String queryDeadline = handleDeadlines(deadlineCase) ;
 					query += queryDeadline;
 				}
-				if (!RODUtil.isNullOrEmpty(anmode)) {
+				if (!RODUtil.isNullOrEmpty(anmode) && !anmode.equals("NI")) {
 					if (includeAnd) {
 						query += " and ";	
 					}
