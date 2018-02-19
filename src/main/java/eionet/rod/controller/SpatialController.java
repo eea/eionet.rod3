@@ -78,7 +78,7 @@ public class SpatialController {
     @RequestMapping(value = "/{spatialId}/deadlines", method = RequestMethod.GET)
     public String spatial_deadlines(@PathVariable("spatialId") Integer spatialId, final Model model) throws Exception {
            
-        model.addAttribute("allObligations",obligationsService.findObligationList("0","0",spatialId.toString(),"N","0"));
+        model.addAttribute("allObligations",obligationsService.findObligationList("0","0",spatialId.toString(),"N","0",null));
         
         
         Spatial countryName = spatialService.findOne(spatialId);
@@ -116,7 +116,7 @@ public class SpatialController {
     @RequestMapping(value = "/{spatialId}/deadlines/search", method = RequestMethod.POST)
     public String spatial_search_deadlines(@PathVariable("spatialId") Integer spatialId, Obligations obligation, final Model model) throws Exception {
            
-        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),obligation.getIssueId(),spatialId.toString(),"N",obligation.getDeadlineId()));
+        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),obligation.getIssueId(),spatialId.toString(),"N",obligation.getDeadlineId(),null));
         
         Spatial countryName = spatialService.findOne(spatialId);
         model.addAttribute("countryName", countryName.getName());

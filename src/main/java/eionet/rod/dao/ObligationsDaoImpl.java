@@ -162,8 +162,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @see eionet.rod.dao.ObligationsDao#findObligationList(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
 	@Override
-	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase) {
+	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode) {
 		
+		boolean includeAnd = false;
 		
 		
 		String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
@@ -180,44 +181,67 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0"))) {
+				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0")) || !RODUtil.isNullOrEmpty(anmode)) {
 					query += "WHERE ";
 				}
 				if (!clientId.equals(null) && !clientId.equals("0")) {
 					query += "CLK.FK_CLIENT_ID = " + clientId;
+					includeAnd = true;
 				}
 				if (!spatialId.equals(null) && !spatialId.equals("0")) {
-					if (!clientId.equals(null) && !clientId.equals("0")) {
+					if (includeAnd) {
 						query += " and ";	
 					}
+					includeAnd = true;
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
 				if (!issueId.equals(null) && !issueId.equals("0") && !issueId.equals("NI")) {
-					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0"))) {
+					if (includeAnd) {
 						query += " and ";	
 					}
+					includeAnd = true;
 					query += "RAI.FK_ISSUE_ID = " + issueId;
 				} else if (issueId.equals("NI")) {
-					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0"))) {
+					if (includeAnd) {
 						query += " and ";	
 					}
+					includeAnd = true;
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
 					query += "OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2)";
 				}
 				if (!RODUtil.isNullOrEmpty(terminate))  {
-					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!issueId.equals(null) && !issueId.equals("0"))) {
+					if (includeAnd) {
 						query += " and ";	
 					}
+					includeAnd = true;
 					query += "OB.Terminate = '" + terminate + "'";
 				}
 				if (!deadlineCase.equals(null) && !deadlineCase.equals("0")) {
-					if ((!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!issueId.equals(null) && !issueId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate))) {
+					if (includeAnd) {
 						query += " and ";	
 					}
+					includeAnd = true;
 					String queryDeadline = handleDeadlines(deadlineCase) ;
 					query += queryDeadline;
 				}
-					
+				if (!RODUtil.isNullOrEmpty(anmode)) {
+					if (includeAnd) {
+						query += " and ";	
+					}
+					if (anmode.equals("C"))
+					{
+						query += " EEA_CORE=1 ";
+					}
+					if (anmode.equals("P"))
+					{
+						query += " EEA_PRIMARY=1 ";
+					}
+					if (anmode.equals("F"))
+					{
+						query += " FLAGGED=1 ";
+					}
+				}
+				
 				
                 query += " ORDER BY oblTitle";
                 

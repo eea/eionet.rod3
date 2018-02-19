@@ -85,10 +85,13 @@ public class ObligationsController {
         Obligations obligation = new Obligations();
         String issueID = "0";
         if (!RODUtil.isNullOrEmpty(anmode)) {
-        	issueID = anmode;
+        	if (anmode.equals("NI")) {
+	        	issueID = anmode;
+	        	obligation.setIssueId(issueID);
+	        }
         }
         
-        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0"));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0",anmode));
 
         model.addAttribute("title","Reporting obligations");
         
@@ -150,7 +153,7 @@ public class ObligationsController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchObligation(Obligations obligations, Model model) {
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0"));
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null));
 
          model.addAttribute("title","Reporting obligations");
          
@@ -272,6 +275,31 @@ public class ObligationsController {
         BreadCrumbs.set(model, obligationCrumb, new BreadCrumb("Edit obligation"));
         Obligations obligations = obligationsService.findOblId(obligationId);
         
+        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
+        	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
+        }else {
+        	obligations.setFirstReporting(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
+        	obligations.setValidTo(RODUtil.strDate(obligations.getValidTo()));
+        }else {
+        	obligations.setValidTo(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
+        	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
+        }else {
+        	obligations.setNextDeadline2(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
+        	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
+        }else {
+        	obligations.setNextReporting(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
+        	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
+        }else {
+        	obligations.setValidSince(null);
+        }
        
         //init var ListBox
         List<String> selectedClients = new ArrayList<String>();
