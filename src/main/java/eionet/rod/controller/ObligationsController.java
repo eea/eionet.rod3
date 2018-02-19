@@ -207,7 +207,9 @@ public class ObligationsController {
         
         obligation.setSourceAlias(RODUtil.replaceTags(obligation.getSourceAlias()));
         obligation.setSourceTitle(RODUtil.replaceTags(obligation.getSourceTitle()));
-       
+        
+        Obligations obligationRelation = obligationsService.findObligationRelation(obligationId);
+        model.addAttribute("obligationRelation", obligationRelation);
       
         //List of clients with status = C
         String status = "C";

@@ -893,9 +893,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
      */
     @Override
     public Obligations findObligationRelation(Integer obligationId) {
-    	String query = "SELECT FK_RA_ID2 AS relObligationId, RELATION AS oblRelationId "
-                + "FROM T_OBLIGATION_RELATION "
-    			+ "WHERE FK_RA_ID = ? ";
+    	String query = "SELECT OBR.FK_RA_ID2 AS relObligationId, OBR.RELATION AS oblRelationId, OB.TITLE AS oblRelationTitle "
+                + "FROM T_OBLIGATION_RELATION OBR INNER JOIN T_OBLIGATION OB "
+                + "ON OBR.FK_RA_ID2=OB.PK_RA_ID "
+    			+ "WHERE OBR.FK_RA_ID = ? ";
 
 		
 		String queryCount = "SELECT Count(*) as relObligationId "
@@ -910,6 +911,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				Obligations obligation = new Obligations();
 				obligation.setRelObligationId(0);
 				obligation.setOblRelationId("0");
+				obligation.setOblRelationTitle("");
 				
 				return obligation;
 			}else {

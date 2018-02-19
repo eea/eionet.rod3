@@ -99,6 +99,8 @@ public class Obligations {
     private Integer relObligationId;
     private String oblRelationId;
     
+    private String oblRelationTitle;
+    
     
 	public String getOblTitle() {
 		return oblTitle;
@@ -584,7 +586,12 @@ public class Obligations {
 	       return RODUtil.truncateText(truncateText);
 	}
 
-	
+	public String getOblRelationTitle() {
+		return oblRelationTitle;
+	}
 
+	public void setOblRelationTitle(String oblRelationTitle) {
+		this.oblRelationTitle = oblRelationTitle;
+	}
 	
 }

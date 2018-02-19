@@ -46,6 +46,17 @@
 					<a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
 				</div>
 			</div>
+			<div class="form-group even" th:if="${obligationRelation.relObligationId != 0}">
+					<div class="col-xs-4" th:switch="${obligationRelation.oblRelationId}">
+						<span th:case="'replaces'">Replaces</span>
+						<span th:case="'is-replaced-by'">Is replaced by</span>
+						<span th:case="'see-also'">See also</span>
+						<span th:case="'same-as'">Same as</span>
+					</div>
+				<div class="col-xs-8">
+					<a th:href="@{'/obligations/'+ ${obligationRelation.relObligationId}}" th:utext="${obligationRelation.oblRelationTitle}"></a>
+				</div>
+			</div>
 		</div>
 		<br/>
 		<br/>
