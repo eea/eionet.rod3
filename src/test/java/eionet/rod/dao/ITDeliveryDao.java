@@ -57,9 +57,9 @@ public class ITDeliveryDao {
     public void testfindAllDelivery() throws ResourceNotFoundException
     {
     	List<Delivery> deliveries = deliveryService.getAllDelivery("1", "1");
-    	System.out.println(deliveries.size());
-    	//assertEquals("END - Austria - DF2 - 2015",deliveries.get(0).getDeliveryTitle());
-   	
+    	//System.out.println(deliveries.size());
+    	assertEquals("END - Austria - DF2 - 2015",deliveries.get(0).getDeliveryTitle());
+    	assertEquals(1,deliveries.size());
     }
     
     
