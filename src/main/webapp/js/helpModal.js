@@ -9,12 +9,13 @@ function helpFunction(helpID){
 		},
 		success : function(responseText) {
 			
-			$("#title-modal").attr('title', responseText.title);
-			$(".ui-dialog-title").text(responseText.title);
-			$("#help-text").html(responseText.text);
+			$("#title-modal").attr('title', "Rod - Help");
+			//$(".ui-dialog-title").text(responseText.title);
+			$("#help-text").html("<strong>" + responseText.title + "</strong><br/><br/>" + responseText.text);
 			$('#title-modal').dialog({
-				minWidth: 600,
-				minHeight: 200
+				width: 390,
+				minHeight: 200,
+				position: [0]
 			});
 		}
 	});
