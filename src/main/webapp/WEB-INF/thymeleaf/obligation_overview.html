@@ -22,12 +22,13 @@
 		    <ul>
 			    <li id="currenttab"><span>Overview</span></li>
 			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/legislation'}">Legislation</a></span></li>
+			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/deliveries'}">Deliveries</a></span></li>
 		    </ul>
 	    </div>
 		
 		<div class="form-horizontal">
 			<div class="datatable results">
-				<div class="form-group odd">
+			<div class="form-group odd">
 				<div class="col-xs-4">Title</div>
 				<div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
 			</div>

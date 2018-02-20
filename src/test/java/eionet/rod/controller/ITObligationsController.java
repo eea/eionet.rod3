@@ -96,6 +96,22 @@ public class ITObligationsController {
         
     }
     
+    /**
+     * Simple test to display legislation by obligationID.
+     */
+    @Test
+    public void viewDelivery() throws Exception {
+    	 this.mockMvc.perform(get("/obligations/1/deliveries"))
+         	.andExpect(status().isOk())
+         	.andExpect(model().attributeExists("obligation"))
+         	.andExpect(model().attributeExists("breadcrumbs"))
+         	.andExpect(model().attributeExists("deliveries"))
+         	.andExpect(model().attributeExists("title"))
+         	.andExpect(model().attributeExists("activeTab"))
+         	.andExpect(view().name("obligation_deliveries"));
+        
+    }
+    
     
     @Test
     public void searchObligation() throws Exception 

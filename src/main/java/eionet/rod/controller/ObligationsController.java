@@ -3,6 +3,7 @@ package eionet.rod.controller;
 import eionet.rod.model.BreadCrumb;
 import eionet.rod.model.ClientDTO;
 
+import eionet.rod.model.Delivery;
 import eionet.rod.model.Issue;
 import eionet.rod.model.ObligationCountry;
 import eionet.rod.dao.ClientService;
@@ -10,6 +11,7 @@ import eionet.rod.dao.IssueDao;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
+import eionet.rod.service.DeliveryService;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
@@ -70,6 +72,9 @@ public class ObligationsController {
     
     @Autowired
     ClientService clientService;
+	
+	@Autowired
+    DeliveryService deliveryService;
 
     /**
      * View for all obligations.
@@ -86,8 +91,8 @@ public class ObligationsController {
         String issueID = "0";
         if (!RODUtil.isNullOrEmpty(anmode)) {
         	if (anmode.equals("NI")) {
-	        	issueID = anmode;
-	        	obligation.setIssueId(issueID);
+        		issueID = anmode;
+        		obligation.setIssueId(issueID);
 	        }
         }
         
@@ -260,6 +265,26 @@ public class ObligationsController {
     	return "obligation_legislation";
     }
     
+	 /**
+     * obligation deliveries
+     */
+    @RequestMapping(value = "/{obligationId}/deliveries")
+    public String obligation_deliveries(@PathVariable("obligationId") Integer obligationId, final Model model) throws Exception {
+    	model.addAttribute("obligationId", obligationId);
+    	
+    	Obligations obligation = obligationsService.findOblId(obligationId);
+        BreadCrumbs.set(model, obligationCrumb, new BreadCrumb(obligation.getOblTitle()));
+        model.addAttribute("obligation", obligation);
+        model.addAttribute("title",RODUtil.replaceTags(obligation.getOblTitle())); 
+        
+        List<Delivery> deliveries =  deliveryService.getAllDelivery(obligationId.toString(), null);
+        model.addAttribute("deliveries", deliveries);
+        
+    	model.addAttribute("activeTab", "obligations");
+        
+    	return "obligation_deliveries";
+    }
+	
     /**
      * 
      * @param obligationId

@@ -15,8 +15,57 @@
   <div id="container">
     <div th:include="layout :: bannerFragment" ></div>
      <div id="workarea">
+     	<div class="title">
+     		<h1 th:text="'Status of deliveries: ' + ${country.name}"></h1>
+     	</div>
 		<form  name="f">
-		     
+		    <div class="form-horizontal">
+				<div class="datatable results">
+					<div class="form-group odd">
+						<div class="col-xs-4">Reporting obligation</div>
+						<div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
+					</div>
+					<div class="form-group even">
+						<div class="col-xs-4 ">Reporting frequency</div>
+						<div class="col-xs-8">
+							<span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated" ></span>
+							<span th:unless="${obligation.terminate} != 'N'">
+								<th:block th:switch="${obligation.reportFreqMonths}">
+									<span th:case="''" th:text="''"></span>
+									<span th:case="'0'" th:text="'One time only'"></span>
+									<span th:case="'1'" th:text="'Monthly'"></span>
+									<span th:case="'12'" th:text="Annually"></span>
+									<span th:case="*" th:text="'Every ' + ${obligation.reportFreqMonths} + ' months'"></span>
+								</th:block>
+							</span>
+						</div>
+					</div>
+					<div class="form-group odd">
+						<div class="col-xs-4">Client organisation</div>
+						<div class="col-xs-8">
+							<a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
+							<span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
+						</div>
+					</div>
+					<div class="form-group even">
+						<div class="col-xs-4">Other clients using this reporting</div>
+						<div class="col-xs-8">
+							<ul  th:if="${not #lists.isEmpty(clients)}" >
+								<li th:each="client : ${clients}">
+									<a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group odd">
+						<div class="col-xs-4">Reporting guidelines</div>
+						<div class="col-xs-8">
+							<a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
+							<span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
 		     
 		     <div class="clearfix margin-top-60">
        	

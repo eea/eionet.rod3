@@ -13,6 +13,10 @@ public class Delivery {
     private String deliveryCoverage;
     private String deliveryCoverageNote;
     
+    //Fields from T_SPATIAL table
+    private Integer spatialId;
+    private String spatialName;
+    
     
 	public Integer getDeliveryFKObligationId() {
 		return deliveryFKObligationId;
@@ -67,6 +71,18 @@ public class Delivery {
 	}
 	public void setDeliveryCoverageNote(String deliveryCoverageNote) {
 		this.deliveryCoverageNote = deliveryCoverageNote;
+	}
+	public Integer getSpatialId() {
+		return spatialId;
+	}
+	public void setSpatialId(Integer spatialId) {
+		this.spatialId = spatialId;
+	}
+	public String getSpatialName() {
+		return spatialName;
+	}
+	public void setSpatialName(String spatialName) {
+		this.spatialName = spatialName;
 	}
 	
 }
