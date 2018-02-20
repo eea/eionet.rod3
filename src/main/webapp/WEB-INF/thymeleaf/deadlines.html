@@ -40,6 +40,7 @@
 						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
 							<option value="0" label="Any issues"></option>
 			    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
+			    			<option value="NI" label="No issue allocated"></option>
 						</select>
 					</div>
 				</div>

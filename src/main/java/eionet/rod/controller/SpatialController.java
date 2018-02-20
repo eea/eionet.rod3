@@ -115,8 +115,16 @@ public class SpatialController {
     
     @RequestMapping(value = "/{spatialId}/deadlines/search", method = RequestMethod.POST)
     public String spatial_search_deadlines(@PathVariable("spatialId") Integer spatialId, Obligations obligation, final Model model) throws Exception {
-           
-        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),obligation.getIssueId(),spatialId.toString(),"N",obligation.getDeadlineId(),null));
+        
+    	String anmode = null;
+    	String issue = "0";
+    	if (!obligation.getIssueId().equals("NI")) {
+    		issue = obligation.getIssueId();
+       	}else {
+       		anmode = obligation.getIssueId();
+       	}
+    	
+        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,spatialId.toString(),"N",obligation.getDeadlineId(),anmode));
         
         Spatial countryName = spatialService.findOne(spatialId);
         model.addAttribute("countryName", countryName.getName());
@@ -140,5 +148,38 @@ public class SpatialController {
         return "deadlines";
     	
     }
+    
+    @RequestMapping(value = "/deadlines/search", method = RequestMethod.POST)
+    public String search_deadlines(Obligations obligation, final Model model) throws Exception {
+           
+       if (obligation.getSpatialId() != null) {
+	        Spatial countryName = spatialService.findOne(Integer.parseInt(obligation.getSpatialId()));
+	        model.addAttribute("countryName", countryName.getName());
+	        model.addAttribute("title","Reporting deadlines: " +  countryName.getName()); 
+	        BreadCrumbs.set(model, spatialCrumb, new BreadCrumb("Reporting deadlines: " +  countryName.getName()));
+       }else {
+        	model.addAttribute("title","Reporting deadlines"); 
+	        BreadCrumbs.set(model, spatialCrumb, new BreadCrumb("Reporting deadlines"));
+       }
+       model.addAttribute("countryId", obligation.getSpatialId());
+       model.addAttribute("obligation",obligation);
+       
+       //Countries/territories
+       List<Spatial> countries = spatialService.findAll();
+       model.addAttribute("allCountries", countries);
+       
+       //Environmental issues
+       List<Issue> issues = issueDao.findAllIssuesList();
+       model.addAttribute("allIssues", issues);
+    	
+       //Countries/territories
+       List<ClientDTO> clients = clientService.getAllClients();
+       model.addAttribute("allClients", clients);
+       model.addAttribute("activeTab", "spatial");
+        
+       return "deadlines";
+    	
+    }
+    
     
 }
