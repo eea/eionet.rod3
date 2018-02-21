@@ -152,6 +152,8 @@ public class SearchController {
         Obligations obligation = new Obligations();
         model.addAttribute("obligation", obligation);
         
+        model.addAttribute("resultMessage", "0");
+        
         return "search";
     	
     }
@@ -190,6 +192,8 @@ public class SearchController {
     	
     	model.addAttribute("activeTab", "search");
         
+    	 model.addAttribute("resultMessage", "1");
+    	
     	return "search";
     	
     }

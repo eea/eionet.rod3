@@ -96,7 +96,9 @@
 
 		</form>
 		
-		<div th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></div>
+		<div th:if="${resultMessage == '1'}">
+			<span th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></span>
+		</div>
         <div th:if="${not #lists.isEmpty(allObligations)}">
 	        <table id="searchTable" class="datatable results table table-striped table-bordered">
 	        <thead>
