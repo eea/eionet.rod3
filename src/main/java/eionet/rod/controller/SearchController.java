@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,7 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import eionet.rod.dao.ClientService;
+import eionet.rod.dao.IssueDao;
+
+import eionet.rod.model.ClientDTO;
+import eionet.rod.model.Issue;
+import eionet.rod.model.Obligations;
+import eionet.rod.model.Spatial;
+import eionet.rod.service.ObligationService;
+import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
+
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
@@ -21,6 +32,18 @@ import eionet.sparqlClient.helpers.ResultValue;
 @Controller
 public class SearchController {
 	
+	@Autowired
+    SpatialService spatialService;
+
+    @Autowired
+    IssueDao issueDao;
+    
+    @Autowired
+    ClientService clientService;
+    
+    @Autowired
+    ObligationService obligationsService;
+
 	private QueryResult result;
 	
 	@RequestMapping(value = "/simpleSearch")
@@ -102,5 +125,74 @@ public class SearchController {
 		System.out.println(expression);
 		return "simpleSearch";    	
     }*/
+	
+	
+	 
+    @RequestMapping(value = "/advancedSearch")
+    public String search_deadlines(final Model model) throws Exception {
+       
+    	model.addAttribute("title","Advanced search");
+        BreadCrumbs.set(model, "Advanced search");
+        
+    	model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0",null,"0",null, null,null));
+    	
+        //Countries/territories
+        List<Spatial> countries = spatialService.findAll();
+        model.addAttribute("allCountries", countries);
+       
+        //Environmental issues
+        List<Issue> issues = issueDao.findAllIssuesList();
+        model.addAttribute("allIssues", issues);
+    	
+        //Countries/territories
+        List<ClientDTO> clients = clientService.getAllClients();
+        model.addAttribute("allClients", clients);
+        model.addAttribute("activeTab", "search");
+        
+        Obligations obligation = new Obligations();
+        model.addAttribute("obligation", obligation);
+        
+        return "search";
+    	
+    }
+	
+    @RequestMapping(value = "/advancedSearch", method = RequestMethod.POST)
+    public String search_deadlines(Obligations obligation, final Model model) throws Exception {
+    
+    	model.addAttribute("title","Advanced search");
+    	BreadCrumbs.set(model, "Advanced search");
+   
+    	String anmode = null;
+    	String issue = "0";
+    	if (!obligation.getIssueId().equals("NI")) {
+    		issue = obligation.getIssueId();
+       	}else {
+       		anmode = obligation.getIssueId();
+       	}
+    	
+    	String deadline = "5";
+    	
+    	model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,obligation.getSpatialId().toString(),null,deadline,anmode, obligation.getNextDeadlineFrom(), obligation.getNextDeadlineTo()));
+        
+    	model.addAttribute("obligation",obligation);
+     	
+    	//Countries/territories
+    	List<Spatial> countries = spatialService.findAll();
+    	model.addAttribute("allCountries", countries);
+       
+    	//Environmental issues
+    	List<Issue> issues = issueDao.findAllIssuesList();
+    	model.addAttribute("allIssues", issues);
+    	
+    	//Countries/territories
+    	List<ClientDTO> clients = clientService.getAllClients();
+    	model.addAttribute("allClients", clients);
+    	
+    	model.addAttribute("activeTab", "search");
+        
+    	return "search";
+    	
+    }
+    
 	
 }

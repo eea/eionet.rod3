@@ -109,8 +109,10 @@
 	        		<span th:if="${obligation.respRoleId == null}" th:utext="${countryName}"></span>
 	        	</td>
 	        	<td>
-	        		<a th:if="${obligation.hasDelivery != ''}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligation.obligationId} + '&spatialId=' +  ${countryId}}"></a>
-	        		<span th:unless="${obligation.hasDelivery != ''}" th:text="'None'"></span>
+	        		<a th:if="${obligation.hasDelivery == '1'}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligation.obligationId} + '&spatialId=' +  ${countryId}}"></a>
+	        		<span th:if="${obligation.hasDelivery == ''}" th:text="'None'"></span>
+	        		<span th:if="${obligation.hasDelivery == null}" th:text="'None'"></span>
+	        		<span th:if="${obligation.hasDelivery == '0'}" th:text="'None'"></span>
 	        	</td>
 	        </tr>
 	        </table>

@@ -96,7 +96,7 @@ public class ObligationsController {
 	        }
         }
         
-        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0",anmode));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0",anmode, null, null));
 
         model.addAttribute("title","Reporting obligations");
         
@@ -158,7 +158,7 @@ public class ObligationsController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchObligation(Obligations obligations, Model model) {
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null));
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null, null, null));
 
          model.addAttribute("title","Reporting obligations");
          
@@ -314,6 +314,11 @@ public class ObligationsController {
         	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
         }else {
         	obligations.setNextDeadline2(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
+        	obligations.setNextDeadline(RODUtil.strDate(obligations.getNextDeadline()));
+        }else {
+        	obligations.setNextDeadline(null);
         }
         if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
         	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
@@ -553,6 +558,11 @@ public class ObligationsController {
         	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
         }else {
         	obligations.setNextDeadline2(null);
+        }
+        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
+        	obligations.setNextDeadline(RODUtil.strDate(obligations.getNextDeadline()));
+        }else {
+        	obligations.setNextDeadline(null);
         }
         if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
         	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));

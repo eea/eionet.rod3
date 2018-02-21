@@ -101,6 +101,11 @@ public class Obligations {
     
     private String oblRelationTitle;
     
+    //advanded Search
+    private String nextDeadlineFrom;
+    private String nextDeadlineTo;
+    private String deliveryCountryId;
+    private String deliveryCountryName;
     
 	public String getOblTitle() {
 		return oblTitle;
@@ -592,6 +597,38 @@ public class Obligations {
 
 	public void setOblRelationTitle(String oblRelationTitle) {
 		this.oblRelationTitle = oblRelationTitle;
+	}
+
+	public String getNextDeadlineFrom() {
+		return nextDeadlineFrom;
+	}
+
+	public void setNextDeadlineFrom(String nextDeadlineFrom) {
+		this.nextDeadlineFrom = nextDeadlineFrom;
+	}
+
+	public String getNextDeadlineTo() {
+		return nextDeadlineTo;
+	}
+
+	public void setNextDeadlineTo(String nextDeadlineTo) {
+		this.nextDeadlineTo = nextDeadlineTo;
+	}
+
+	public String getDeliveryCountryId() {
+		return deliveryCountryId;
+	}
+
+	public void setDeliveryCountryId(String deliveryCountryId) {
+		this.deliveryCountryId = deliveryCountryId;
+	}
+
+	public String getDeliveryCountryName() {
+		return deliveryCountryName;
+	}
+
+	public void setDeliveryCountryName(String deliveryCountryName) {
+		this.deliveryCountryName = deliveryCountryName;
 	}
 	
 }

@@ -95,10 +95,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * @param date2
 	 * @return
 	 */
-	private String handleDeadlines(String deadlineCase) {
+	private String handleDeadlines(String deadlineCase, String date1, String date2) {
         String ret = "";
-        String date1 ="";
-        String date2 = "";
+       
         if ( deadlineCase != null ) { //selected in combo
             Calendar today = Calendar.getInstance();
             //next month
@@ -128,9 +127,37 @@ public class ObligationsDaoImpl implements ObligationsDao {
         }
 
         if (!RODUtil.isNullOrEmpty(deadlineCase) || !deadlineCase.equals("0")) {
-            date1=cnvDate(date1);
-            date2=cnvDate(date2);
-            ret = " ((NEXT_DEADLINE >= '" + date1 + "' AND NEXT_DEADLINE <= '" + date2 + "') OR (NEXT_DEADLINE2 >= '" + date1 + "' AND NEXT_DEADLINE2 <= '" + date2 + "')) ";
+           
+        	if (!RODUtil.isNullOrEmpty(date1))
+        			date1=cnvDate(date1);
+        	if (!RODUtil.isNullOrEmpty(date2))
+        		date2=cnvDate(date2);
+            
+        	if (!RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+            	
+            	ret ="((";
+            	String ret2 ="";
+            	String ret1 ="";
+            	String ret3 = " ) OR ( ";
+            	if (!RODUtil.isNullOrEmpty(date1) ) {
+            		ret1 += "NEXT_DEADLINE >= '" + date1 + "' ";
+            		ret2 += "NEXT_DEADLINE2 >= '" + date1 + "' "; 
+            	}
+            	if (!RODUtil.isNullOrEmpty(date2) ) {
+            		if(!RODUtil.isNullOrEmpty(ret1))
+            			ret1 += " AND ";
+            		ret1 += "NEXT_DEADLINE <= '" + date2 + "' ";
+            		if(!RODUtil.isNullOrEmpty(ret2))
+            			ret2 += " AND ";
+            		
+            		ret2 += "NEXT_DEADLINE2 <= '" + date2 + "' ";
+            	}
+            	
+            	ret += ret1 + ret3 + ret2;
+            	
+            	ret +="))";
+            	//ret = " ((NEXT_DEADLINE >= '" + date1 + "' AND NEXT_DEADLINE <= '" + date2 + "') OR (NEXT_DEADLINE2 >= '" + date1 + "' AND NEXT_DEADLINE2 <= '" + date2 + "')) ";
+            }
         }
 
         return ret;
@@ -162,10 +189,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @see eionet.rod.dao.ObligationsDao#findObligationList(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
 	@Override
-	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode) {
+	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2) {
 		
 		boolean includeAnd = false;
-		
+		boolean includeWhere = true;
 		
 		String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, "
@@ -173,7 +200,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				//+ "CASE WHEN OB.NEXT_DEADLINE != '0000-00-00' THEN OB.NEXT_DEADLINE ELSE '' END as nextDeadline, "
 				
 				//+ "IF(OB.NEXT_DEADLINE, DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y'), '') as nextDeadline, "
-				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting, OB.FK_DELIVERY_COUNTRY_IDS as hasDelivery "
+				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting, "
+				+ "OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery, RAS.FK_SPATIAL_ID as deliveryCountryId, "
+				+ "(SELECT SPATIAL_NAME FROM T_SPATIAL WHERE T_SPATIAL.PK_SPATIAL_ID = RAS.FK_SPATIAL_ID ) as deliveryCountryName "
 				+ "FROM T_OBLIGATION OB "
                 + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
                 + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
@@ -181,53 +210,81 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0")) || !RODUtil.isNullOrEmpty(anmode)) {
-					query += "WHERE ";
-				}
+//				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0")) || !RODUtil.isNullOrEmpty(anmode)) {
+//					query += "WHERE ";
+//				}
 				if (!clientId.equals(null) && !clientId.equals("0")) {
-					query += "CLK.FK_CLIENT_ID = " + clientId;
+					
+					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
+					includeWhere = false;
 					includeAnd = true;
 				}
 				if (!spatialId.equals(null) && !spatialId.equals("0")) {
-					if (includeAnd) {
-						query += " and ";	
+					if (includeWhere) {
+						query += " WHERE ";
+						includeWhere = false;
+						includeAnd = true;
+					}else if (includeAnd) {
+						query += " AND ";
+						includeAnd = true;
 					}
-					includeAnd = true;
+				
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
 				if (!issueId.equals(null) && !issueId.equals("0") && !issueId.equals("NI")) {
-					if (includeAnd) {
-						query += " and ";	
+					if (includeWhere) {
+						query += " WHERE ";
+						includeWhere = false;
+						includeAnd = true;
+					}else if (includeAnd) {
+						query += " AND ";
+						includeAnd = true;
 					}
-					includeAnd = true;
 					query += "RAI.FK_ISSUE_ID = " + issueId;
 				} else if (issueId.equals("NI")) {
-					if (includeAnd) {
-						query += " and ";	
+					if (includeWhere) {
+						query += " WHERE ";
+						includeWhere = false;
+						includeAnd = true;
+					}else if (includeAnd) {
+						query += " AND ";
+						includeAnd = true;
 					}
-					includeAnd = true;
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
-					query += "OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2)";
+					query += " OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
 				}
 				if (!RODUtil.isNullOrEmpty(terminate))  {
-					if (includeAnd) {
-						query += " and ";	
+					if (includeWhere) {
+						query += " WHERE ";
+						includeWhere = false;
+						includeAnd = true;
+					}else if (includeAnd) {
+						query += " AND ";
+						includeAnd = true;
 					}
-					includeAnd = true;
-					query += "OB.Terminate = '" + terminate + "'";
+					query += " OB.Terminate = '" + terminate + "'";
 				}
-				if (!deadlineCase.equals(null) && !deadlineCase.equals("0")) {
-					
-					includeAnd = true;
-					String queryDeadline = handleDeadlines(deadlineCase) ;
-					if (includeAnd && queryDeadline != "") {
-						query += " and " + queryDeadline;	
+				if (!deadlineCase.equals(null) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+					String queryDeadline = handleDeadlines(deadlineCase, date1, date2) ;
+					if (queryDeadline != "") {
+						if (includeWhere) {
+							query += " WHERE ";
+							includeWhere = false;
+							includeAnd = true;
+						}else if (includeAnd) {
+							query += " AND ";
+							includeAnd = true;
+						}
+						query += queryDeadline;	
 					}
 					
 				}
-				if (!RODUtil.isNullOrEmpty(anmode) && !anmode.equals("NI")) {
-					if (includeAnd) {
-						query += " and ";	
+				if (!RODUtil.isNullOrEmpty(anmode) &&  !anmode.equals("NI")) {
+					if (includeWhere) {
+						query += " WHERE ";
+						includeWhere = false;
+					}else if (includeAnd) {
+						query += " AND ";
 					}
 					if (anmode.equals("C"))
 					{

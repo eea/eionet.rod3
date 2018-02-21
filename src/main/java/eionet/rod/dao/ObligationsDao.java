@@ -33,7 +33,7 @@ public interface ObligationsDao {
 	
 	List<Issue> findAllIssuesbyObligation(Integer ObligationID);
 	
-	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode);
+	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2);
 	
 	void deleteObligations(String obligations);
 	
