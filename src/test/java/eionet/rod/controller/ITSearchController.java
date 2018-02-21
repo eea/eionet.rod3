@@ -82,16 +82,32 @@ public class ITSearchController {
     public void advancedSearchHome() throws Exception {
         this.mockMvc.perform(get("/advancedSearch"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("search"))
-                .andExpect(content().contentType("text/html;charset=UTF-8"));
+                .andExpect(view().name("search"));
     }
     
     @Test
     public void advancedSearch() throws Exception {
-        this.mockMvc.perform(post("/advancedSearch"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("search"))
-                .andExpect(content().contentType("text/html;charset=UTF-8"));
+        this.mockMvc.perform(post("/advancedSearch")
+        		.param("spatialId", "0")
+    			.param("issueId","NI")
+    			.param("clientId", "0")
+    			.param("nextDeadlineFrom", "")
+    			.param("nextDeadlineTo", "")
+        		.with(csrf()))        
+        		.andExpect(status().isOk());
+    }
+    
+    @Test 
+    public void advancedSearchWithoutCsrf() throws Exception
+	{
+  		this.mockMvc.perform(post("/advancedSearch")
+  				.param("spatialId", "0")
+    			.param("issueId","NI")
+    			.param("clientId", "0")
+    			.param("nextDeadlineFrom", "")
+    			.param("nextDeadlineTo", ""))
+        		.andExpect(status().is4xxClientError());
+
     }
     
 }
