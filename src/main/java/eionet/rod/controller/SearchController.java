@@ -134,7 +134,7 @@ public class SearchController {
     	model.addAttribute("title","Advanced search");
         BreadCrumbs.set(model, "Advanced search");
         
-    	model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0",null,"0",null, null,null));
+    	//model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0",null,"0",null, null,null));
     	
         //Countries/territories
         List<Spatial> countries = spatialService.findAll();

@@ -62,6 +62,14 @@
 				</div>
 				
 			<script type="text/javascript">
+				 $(document).ready(function(){
+				    $('#searchTable').DataTable({
+				    	"sDom": 'Tfrtipt',
+				    	"sPaginationType": "full_numbers"
+				    });
+				    
+				});
+				
 				function validateDate(){
 					var errors = false;
 					if (checkDateFormat(document.getElementById("nextDeadlineFrom").value) == 1  ){
@@ -90,10 +98,10 @@
 		
 		<div th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></div>
         <div th:if="${not #lists.isEmpty(allObligations)}">
-	        <table id="obligationTable" class="datatable results table table-striped table-bordered">
+	        <table id="searchTable" class="datatable results table table-striped table-bordered">
 	        <thead>
 		        <tr>
-			        <th>Reporting obligations</th>
+			        <th>Reporting obligation</th>
 			        <th>Reporting to</th>
 			        <th>Deadline</th>
 			        <th>Responsible</th>
