@@ -95,4 +95,22 @@ public class ITSearchInjection {
            //assertFalse("SQL injection: Found 'anotherpassword' in output", "anotherpassword".equals(o.getClientName()));
         }
     }
+
+
+    /**
+     * The original alert from the EU Computer Emergency Response Team for ROD2.
+     * Their proof of concept was specific to MySQL, and kept as is.
+     *
+     * This gets blocked at the controller level now.
+     */
+    @Test
+    public void injectInstrumentsList() throws Exception {
+        String idParam = "-15 UNION SELECT 1,2,make_set(6,@:=0x0a,(select(1)"
+                + "from(information_schema.columns) SELECT where@:="
+                + "make_set(511,@,0x3c6c693e,table_name,column_name)),@),4,5"
+                + " SELECT ,6,7,8--";
+         this.mockMvc.perform(get("/instruments")
+                 .param("id", idParam))
+                 .andExpect(status().is4xxClientError());
+    }
 }
