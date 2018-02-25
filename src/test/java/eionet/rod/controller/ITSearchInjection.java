@@ -68,6 +68,7 @@ public class ITSearchInjection {
      * In a correct implementation the result should be a code 4XX and the SQL should not have run.
      */
     @Test
+    @SuppressWarnings("unchecked")
     public void injectInNextDeadlineTo() throws Exception {
         String date2 = "01/03/1900-01-31')) UNION SELECT 1,username,2,0,'',3,'2000-01-01',4,password,6,7,8,9,10,11 FROM users; -- ";
         MvcResult res = this.mockMvc.perform(post("/advancedSearch")
