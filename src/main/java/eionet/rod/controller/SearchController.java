@@ -23,7 +23,7 @@ import eionet.rod.model.Spatial;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
-
+import eionet.rod.util.exception.ResourceNotFoundException;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
@@ -50,6 +50,7 @@ public class SearchController {
     public String simpleSearchHome(@RequestParam(required = false, value="expression") String expression, Model model) {
 		model.addAttribute("title","Search");
         BreadCrumbs.set(model, "Search");
+        model.addAttribute("activeTab", "home");
 		if (expression != null) {
 			String query = "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
                 + "PREFIX dct: <http://purl.org/dc/terms/> "
@@ -134,7 +135,7 @@ public class SearchController {
     	model.addAttribute("title","Advanced search");
         BreadCrumbs.set(model, "Advanced search");
         
-    	//model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0",null,"0",null, null,null));
+    	//model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0","N","0",null, null,null));
     	
         //Countries/territories
         List<Spatial> countries = spatialService.findAll();
@@ -147,7 +148,7 @@ public class SearchController {
         //Countries/territories
         List<ClientDTO> clients = clientService.getAllClients();
         model.addAttribute("allClients", clients);
-        model.addAttribute("activeTab", "search");
+        model.addAttribute("activeTab", "advancedSearch");
         
         Obligations obligation = new Obligations();
         model.addAttribute("obligation", obligation);
@@ -159,7 +160,7 @@ public class SearchController {
     }
 	
     @RequestMapping(value = "/advancedSearch", method = RequestMethod.POST)
-    public String search_deadlines(Obligations obligation, final Model model) throws Exception {
+    public String search_deadlines(Obligations obligation, final Model model) throws ResourceNotFoundException {
     
     	model.addAttribute("title","Advanced search");
     	BreadCrumbs.set(model, "Advanced search");
@@ -190,7 +191,7 @@ public class SearchController {
     	List<ClientDTO> clients = clientService.getAllClients();
     	model.addAttribute("allClients", clients);
     	
-    	model.addAttribute("activeTab", "search");
+    	model.addAttribute("activeTab", "advancedSearch");
         
     	 model.addAttribute("resultMessage", "1");
     	

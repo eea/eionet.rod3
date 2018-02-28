@@ -36,6 +36,9 @@ public class InstrumentFactsheetDTO {
     //Fields from T_SOURCE_LNK table
     private Integer sourceLnkFKSourceParentId;
     private Integer sourceLnkFKSourceChildId;
+    private String sourceChildType;
+    private String sourceParentType;
+    private Integer sourceLnkPKSourceId;
     
     private List<InstrumentClassificationDTO> classifications;
     private List<String> selectedClassifications;
@@ -273,6 +276,30 @@ public class InstrumentFactsheetDTO {
 	
 	public String truncateText(String truncateText) {
 	       return RODUtil.truncateText(truncateText);
+	}
+
+	public String getSourceChildType() {
+		return sourceChildType;
+	}
+
+	public void setSourceChildType(String sourceChildType) {
+		this.sourceChildType = sourceChildType;
+	}
+
+	public String getSourceParentType() {
+		return sourceParentType;
+	}
+
+	public void setSourceParentType(String sourceParentType) {
+		this.sourceParentType = sourceParentType;
+	}
+
+	public Integer getSourceLnkPKSourceId() {
+		return sourceLnkPKSourceId;
+	}
+
+	public void setSourceLnkPKSourceId(Integer sourceLnkPKSourceId) {
+		this.sourceLnkPKSourceId = sourceLnkPKSourceId;
 	}
     
 }

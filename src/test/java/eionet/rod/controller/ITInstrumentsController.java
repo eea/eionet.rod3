@@ -118,7 +118,7 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
-    			.param("sourceId", "4")
+    			.param("sourceId", "2")
     			.with(user("editor").roles("EDITOR"))
         		.with(csrf()))
         		.andExpect(status().is3xxRedirection());
@@ -129,7 +129,7 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithoutCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
-    			.param("sourceId", "4")
+    			.param("sourceId", "2")
     			.with(user("editor").roles("EDITOR")))
         		.andExpect(status().is4xxClientError());
 

@@ -1,6 +1,8 @@
 package eionet.rod.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import eionet.rod.model.HierarchyInstrumentDTO;
 import eionet.rod.model.InstrumentClassificationDTO;
 import eionet.rod.model.InstrumentFactsheetDTO;
 import eionet.rod.model.InstrumentObligationDTO;
+import eionet.rod.model.InstrumentsListDTO;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 
@@ -143,8 +147,21 @@ public class ITSourceService {
     @Test 
     public void testgetHierarchy() {
     	String result = sourceService.getHierarchy(1, false, "X");
-    	System.out.print("result" + result);
+    	assertEquals(0,result.length());
+    	result = sourceService.getHierarchy(2, false, "X");
+    	assertNotNull(result);
     }
     
     
+    @Test 
+    public void testgetHierarchyInstrument() {
+    	InstrumentsListDTO result = sourceService.getHierarchyInstrument(1);
+    	assertEquals("2",result.getParentId().toString());
+    }
+
+    @Test
+    public void testgetHierarchyInstruments() {
+    	List<HierarchyInstrumentDTO> intruments = sourceService.getHierarchyInstruments(1);
+    	assertNotEquals(0,intruments.size());
+    }
 }

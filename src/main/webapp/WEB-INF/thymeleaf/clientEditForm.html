@@ -14,10 +14,10 @@
           <div class="formtable datatable results">
 			<div class="form-group odd">
               <div class="col-lg-4">
-                <label class="question" for="name">Name</label>
+                <label class="question required" for="name" >Name</label>
               </div>
               <div class="col-lg-8">
-                <input id="name" maxlength="255" name="name" th:field="*{name}" value="Biosafety Clearing House" type="text" class="form-control"/>
+                <input id="name" maxlength="255" name="name" th:field="*{name}" onchange="checkMdText(this); changed()" value="Biosafety Clearing House" type="text" class="form-control"/>
               </div>
            </div>
            <div class="form-group even">

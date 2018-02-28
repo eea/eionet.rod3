@@ -508,7 +508,7 @@ public class SourceServiceJdbc implements SourceService {
 		return hierarchyInstruments;		
 	}
 	
-	public InstrumentFactsheetDTO validateDates(InstrumentFactsheetDTO instrumentFactsheetRec) {
+	private InstrumentFactsheetDTO validateDates(InstrumentFactsheetDTO instrumentFactsheetRec) {
 		if (instrumentFactsheetRec.getSourceValidFrom().equals("")) {
 			instrumentFactsheetRec.setSourceValidFrom(null);
 		} 

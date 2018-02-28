@@ -2,7 +2,9 @@ package eionet.rod.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class RODUtil {
@@ -229,28 +231,28 @@ public class RODUtil {
         return s == null || s.length() == 0;
     }
     
-    /**
-     * Surrounds given string with apostrophes and also escapes any apostrophes inside the text for SQL.
-     *
-     * @param in The text to parse.
-     * @return The result.
-     */
-    public static String strLiteral(String in) {
-        in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer("'");
-
-        for (int i = 0; i < in.length(); i++) {
-            char c = in.charAt(i);
-            if (c == '\'') {
-                ret.append("''");
-            } else {
-                ret.append(c);
-            }
-        }
-        ret.append('\'');
-
-        return ret.toString();
-    }
+//    /**
+//     * Surrounds given string with apostrophes and also escapes any apostrophes inside the text for SQL.
+//     *
+//     * @param in The text to parse.
+//     * @return The result.
+//     */
+//    public static String strLiteral(String in) {
+//        in = (in != null ? in : "");
+//        StringBuffer ret = new StringBuffer("'");
+//
+//        for (int i = 0; i < in.length(); i++) {
+//            char c = in.charAt(i);
+//            if (c == '\'') {
+//                ret.append("''");
+//            } else {
+//                ret.append(c);
+//            }
+//        }
+//        ret.append('\'');
+//
+//        return ret.toString();
+//    }
     
     /**
      * Expects given string to be in date format like "dd/mm/yyyy", and returns corresponding value in the MySQL format:
@@ -311,6 +313,25 @@ public class RODUtil {
         } else {
             return truncateText;
         }
+    }
+    
+    public static String miliseconds2Date(long ts) {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    	Date resultdate = new Date(ts);
+    	return sdf.format(resultdate);    	
+    }
+    
+    public static boolean validaFecha(String fecha) {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        boolean result = true;
+        try {
+			java.sql.Date date = new java.sql.Date (sdf.parse(fecha).getTime());
+			result = true;
+		} catch (ParseException e1) {
+			result = false;
+		}
+       return result;
     }
     
 }

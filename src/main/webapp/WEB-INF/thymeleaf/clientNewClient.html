@@ -19,11 +19,11 @@
 		    <div class="datatable results">
 		         <div class="form-group">
 					<div class="col-lg-3 scope-row simple_attr_title">
-						<label for="oblTitle" class="control-label text-left">Name</label>
+						<label for="oblTitle" class="control-label text-left required">Name</label>
 		              </div>
 		              <a class="helpButton col-lg-1" title="Help on this field"></a>
 		              <div class="col-lg-8">
-		                <input id="name" maxlength="255" name="name" th:field="*{name}" value="" type="text" class="smalltext form-control"/>
+		                <input id="name" maxlength="255" name="name" th:field="*{name}" onchange="checkMdText(this); changed()" value="" type="text" class="smalltext form-control"/>
 		              </div>
 		         </div>
 		         <div class="form-group">

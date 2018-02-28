@@ -124,7 +124,7 @@ public class SpatialController {
        		anmode = obligation.getIssueId();
        	}
     	
-        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,spatialId.toString(),null,obligation.getDeadlineId(),anmode, null, null));
+        model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,spatialId.toString(),"N",obligation.getDeadlineId(),anmode, null, null));
         
         Spatial countryName = spatialService.findOne(spatialId);
         model.addAttribute("countryName", countryName.getName());

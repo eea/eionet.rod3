@@ -111,7 +111,10 @@
 		        </tr>
 	        </thead>
 	        <tr th:each="obligations, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td><a th:href="@{'/obligations/'+${obligations.obligationId}}" th:text="${obligations.oblTitle}"></a></td>
+	        	<td>
+	        		<a th:href="@{'/obligations/'+${obligations.obligationId}}" th:text="${obligations.oblTitle}"></a>
+	        		<!-- a th:href="@{'/instruments/'+${obligations.sourceId}}"  th:utext="${obligations.sourceTitle}"></a -->
+	        	</td>
 	        	<td><a th:href="@{'/clients/'+${obligations.clientId}}" th:text="${obligations.clientName}"></a></td>
 	        	<td>
 	        		<span th:if="${obligations.nextDeadline} != ''" th:text="${obligations.nextDeadline}" ></span>

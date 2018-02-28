@@ -20,8 +20,7 @@
 	      		<span th:text="${instrument.sourceAlias}">Alias</span> 
 	      		<span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
 	      	</h1>
-      		<!--  sec:authorize="hasRole('EDITOR')" -->
-	     	<ul class="menu-operations">
+      		<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
 	     		<li><span>Operations</span>
 					<ul>
 						<li><a href="instrumentEditform.html" th:href="@{'/instruments/edit?sourceId=' + *{sourceId}}">Edit instrument</a></li>

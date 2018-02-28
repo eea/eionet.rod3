@@ -51,8 +51,7 @@
      		<input type="hidden" name="hrefdelete" id="hrefdelete" th:value="@{'/clients/'}">
 	        <div class="title">
 	        <h1>Clients</h1>
-	        <!-- sec:authorize="hasRole('EDITOR')" -->
-	        <ul class="menu-operations">
+	        <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
 		     	<li><span>Operations</span>
 		     		<ul>
 		           		<li><a onclick="deleteClients()">Delete clients</a></li>
@@ -71,14 +70,14 @@
 		          <table id="clientsTable" class="datatable results table table-striped table-bordered">
 			        <thead>
 				        <tr>
-				        	<th></th>
+				        	<th sec:authorize="hasRole('EDITOR')"></th>
 				        	<th>Client name</th>
 		                	<th>Client acronym</th>
 		                </tr>
 		               </thead>
 		           	  <tr th:each="client, iterStat : ${allClients}" th:class="${iterStat.odd} ? 'even' : 'odd'">
 		              	<!-- sec:authorize="hasRole('EDITOR')" -->
-	        			<td><input type="checkbox" id="myCheck" name="myCheck" th:value="${client.clientId}"/></td>
+	        			<td sec:authorize="hasRole('EDITOR')" ><input type="checkbox" id="myCheck" name="myCheck" th:value="${client.clientId}"/></td>
 		              	<td>
 		                    <a th:href="@{'/clients/'+${client.clientId}}" href="clientfactsheet.html" th:text="${client.name}"></a>
 		               </td>

@@ -61,9 +61,8 @@
    	 <div th:replace="helpModal :: helpModalFragment"></div>
       
      <div class="title">
-     <h1>Reporting obligations</h1>
-     	<!--  sec:authorize="hasRole('EDITOR')" -->
-     	<ul class="menu-operations">
+     <h1 th:text="${titleObl}"></h1>
+     	<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
      		<li><span>Operations</span>
 				<ul>
 					<li><a onclick="deleteObl()">Delete obligations</a></li>
@@ -124,7 +123,7 @@
                             <label for="shortName"></label>
                         </div>
                         <div class="input inputcheck">
-                            <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Show only terminated obligations</label>
+                            <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
                         </div>
                     </div>
              </div>
@@ -144,7 +143,7 @@
 	        <table id="obligationTable" class="datatable results table table-striped table-bordered">
 	        <thead>
 		        <tr>
-		        	<th></th>
+		        	<th sec:authorize="hasRole('EDITOR')"></th>
 			        <th>Reporting obligation</th>
 			        <th>Legislative instrument</th>
 			        <th>Report to</th>
@@ -152,8 +151,7 @@
 		        </tr>
 	        </thead>
 	        <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<!-- td sec:authorize="hasRole('EDITOR')" -->
-	        	<td><input type="checkbox" id="myCheck" name="myCheck" th:value="${obligation.obligationId}"/></td>
+	        	<td sec:authorize="hasRole('EDITOR')"><input type="checkbox" id="myCheck" name="myCheck" th:value="${obligation.obligationId}"/></td>
 	        	<td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
 	        	<td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
 	        	<td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>

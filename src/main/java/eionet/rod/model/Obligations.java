@@ -55,6 +55,11 @@ public class Obligations {
     private String comment;
     private String parameters;
     private String hasDelivery;
+    
+    private String reportFreqDetail;
+    private String lastUpdate; 
+    private String reportFreq;
+    private String lastHarvested;
         
     //Fields from t_role table
     private String coordRoleId;
@@ -89,6 +94,9 @@ public class Obligations {
     
     //Fields from T_SPATIAL table to search
     private String spatialId;
+    
+    //Fields from T_RASPATIAL_LNK table
+    String voluntary;
     
     //field to deadline search
     private String deadlineId;
@@ -629,6 +637,46 @@ public class Obligations {
 
 	public void setDeliveryCountryName(String deliveryCountryName) {
 		this.deliveryCountryName = deliveryCountryName;
+	}
+
+	public String getVoluntary() {
+		return voluntary;
+	}
+
+	public void setVoluntary(String voluntary) {
+		this.voluntary = voluntary;
+	}
+
+	public String getReportFreqDetail() {
+		return reportFreqDetail;
+	}
+
+	public void setReportFreqDetail(String reportFreqDetail) {
+		this.reportFreqDetail = reportFreqDetail;
+	}
+
+	public String getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(String lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public String getReportFreq() {
+		return reportFreq;
+	}
+
+	public void setReportFreq(String reportFreq) {
+		this.reportFreq = reportFreq;
+	}
+
+	public String getLastHarvested() {
+		return lastHarvested;
+	}
+
+	public void setLastHarvested(String lastHarvested) {
+		this.lastHarvested = lastHarvested;
 	}
 	
 }

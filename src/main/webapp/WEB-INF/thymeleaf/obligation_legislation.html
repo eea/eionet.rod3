@@ -8,8 +8,7 @@
 		<div class="title">
 			<h1 th:if="${obligation.oblTitle == null}">Legislation</h1>
 				<h1 th:unless="${obligation.oblTitle == null}" th:text="'Legislation for: ' + ${obligation.oblTitle}"></h1>
-			<!--  sec:authorize="hasRole('EDITOR')" -->
-			<ul class="menu-operations">
+			<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
 		     	<li><span>Operations</span>
 					<ul>
 						<li><a th:href="@{'/obligations/'+ ${obligationId} +'/edit/'}">Edit obligation</a></li>
@@ -24,6 +23,7 @@
 				<li><span><a th:href="@{'/obligations/' + ${obligationId}}">Overview</a></span></li>
 			  	<li id="currenttab"><span>Legislation</span></li>
 			  	<li><span><a th:href="@{'/obligations/' + ${obligationId} + '/deliveries'}">Deliveries</a></span></li>
+			  	<li><span><a th:href="@{'/obligations/' + ${obligationId} + '/history'}">History</a></span></li>
 		  	</ul>
 	    </div>
 	    <br/>

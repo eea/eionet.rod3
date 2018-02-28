@@ -6,11 +6,14 @@ import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Delivery;
 import eionet.rod.model.Issue;
 import eionet.rod.model.ObligationCountry;
+import eionet.rod.IAuthenticationFacade;
 import eionet.rod.dao.ClientService;
 import eionet.rod.dao.IssueDao;
+import eionet.rod.dao.UndoService;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
+import eionet.rod.model.UndoDTO;
 import eionet.rod.service.DeliveryService;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
@@ -23,6 +26,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -75,6 +79,11 @@ public class ObligationsController {
 	
 	@Autowired
     DeliveryService deliveryService;
+	@Autowired
+	UndoService undoService;
+	
+	@Autowired
+    IAuthenticationFacade authenticationFacade;
 
     /**
      * View for all obligations.
@@ -93,10 +102,24 @@ public class ObligationsController {
         	if (anmode.equals("NI")) {
         		issueID = anmode;
         		obligation.setIssueId(issueID);
+        		model.addAttribute("activeTab", "obligations");
+        		model.addAttribute("titleObl","Reporting obligations");
+	        }else if (anmode.equals("P")) {
+        		model.addAttribute("activeTab", "CoreData");
+        		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
+	        } if (anmode.equals("F")) {
+        		model.addAttribute("activeTab", "EEAData");
+        		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
+	        }else {
+	        	model.addAttribute("activeTab", "obligations");
+	        	model.addAttribute("titleObl","Reporting obligations");
 	        }
+        }else {
+        	model.addAttribute("activeTab", "obligations");
+        	model.addAttribute("titleObl","Reporting obligations");
         }
         
-        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","","0",anmode, null, null));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","N","0",anmode, null, null));
 
         model.addAttribute("title","Reporting obligations");
         
@@ -112,7 +135,7 @@ public class ObligationsController {
     	List<ClientDTO> clients = clientService.getAllClients();
     	model.addAttribute("allClients", clients);
     	
-        model.addAttribute("activeTab", "obligations");
+        
         
         model.addAttribute("obligation",obligation);
         
@@ -128,6 +151,11 @@ public class ObligationsController {
 	 @RequestMapping(value = "/delete", method = RequestMethod.POST)
 	 public String deleteObligations(Obligations obligations, Model model) {
 		 if (obligations.getDelObligations() != null) {
+			 String[] listObligations = obligations.getDelObligations().split(",");
+			 Authentication authentication = authenticationFacade.getAuthentication();
+			 for (int i = 0; i < listObligations.length; i++) {
+				 processEditDelete("D", authentication.getName(), Integer.parseInt(listObligations[i]));
+			 }
 			 obligationsService.deleteObligations(obligations.getDelObligations());
 		 }
 		 model.addAttribute("message", "Obligations selected deleted.");
@@ -142,6 +170,8 @@ public class ObligationsController {
 	 @RequestMapping(value = "/delete/{obligationId}")
 	 public String deleteObligations(@PathVariable("obligationId") Integer obligationId, Model model) {
 		 if (!obligationId.equals(null)) {
+			 Authentication authentication = authenticationFacade.getAuthentication();
+			 processEditDelete("D", authentication.getName(), obligationId);
 			 obligationsService.deleteObligations(obligationId + ",");
 			 model.addAttribute("message", "Obligation deleted.");
 		 }		 
@@ -284,7 +314,32 @@ public class ObligationsController {
         
     	return "obligation_deliveries";
     }
-	
+ 
+    /**
+     * obligation history	
+     */
+    @RequestMapping(value = "/{obligationId}/history")
+    public String obligation_history(@PathVariable("obligationId") Integer obligationId, final Model model) {
+    	model.addAttribute("obligationId", obligationId);
+    	
+    	Obligations obligation = obligationsService.findOblId(obligationId);
+    	BreadCrumbs.set(model, obligationCrumb, new BreadCrumb(obligation.getOblTitle()));
+    	model.addAttribute("obligation", obligation);
+    	model.addAttribute("title",RODUtil.replaceTags(obligation.getOblTitle())); 
+    	
+    	List<UndoDTO> versions = undoService.getPreviousActionsReportSpecific(obligationId, "T_OBLIGATION", "PK_RA_ID", "U");
+    	if (versions != null) {
+    		for (int i = 0; i < versions.size(); i++) {
+    			String date = RODUtil.miliseconds2Date(versions.get(i).getUndoTime());
+    			versions.get(i).setDate(date);
+    		}
+    	}
+    	model.addAttribute("versions", versions);
+    	
+    	model.addAttribute("activeTab", "obligations");
+    	
+    	return "obligation_history";
+    }	
     /**
      * 
      * @param obligationId
@@ -320,11 +375,7 @@ public class ObligationsController {
         }else {
         	obligations.setNextDeadline(null);
         }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
-        	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
-        }else {
-        	obligations.setNextReporting(null);
-        }
+        
         if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
         	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
         }else {
@@ -542,7 +593,10 @@ public class ObligationsController {
         List<Obligations> relObligations = obligationsService.findAll();
         model.addAttribute("relObligations", relObligations);
         
-        obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
+		Authentication authentication = authenticationFacade.getAuthentication();
+        processEditDelete("U", authentication.getName(), obligations.getObligationId());
+        
+		obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
         //change format of Dates to visualize dd/mm/yyyy
         if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
         	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
@@ -563,11 +617,6 @@ public class ObligationsController {
         	obligations.setNextDeadline(RODUtil.strDate(obligations.getNextDeadline()));
         }else {
         	obligations.setNextDeadline(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextReporting())) {
-        	obligations.setNextReporting(RODUtil.strDate(obligations.getNextReporting()));
-        }else {
-        	obligations.setNextReporting(null);
         }
         if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
         	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
@@ -658,6 +707,52 @@ public class ObligationsController {
 		       }
 	       }
 	    return allSelectedIssues;
+	}
+	private void processEditDelete(String state, String userName, Integer obligationId) {
+		
+		long ts = System.currentTimeMillis();
+		
+		if (state != null && state.equals("U")) {
+			undoService.insertIntoUndo(obligationId, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
+		}
+		
+		String url = "obligations/" + obligationId;
+		undoService.insertIntoUndo(ts, "T_OBLIGATION", "REDIRECT_URL", "L", "y", "n", url, 0, "n");
+		undoService.insertIntoUndo(ts, "T_OBLIGATION", "A_USER", "K", "y", "n", userName, 0, "n");
+		undoService.insertIntoUndo(ts, "T_OBLIGATION", "TYPE", "T", "y", "n", "A", 0, "n");
+		
+		if (state != null && state.equals("D")) {
+			String aclPath = "/obligations/" + obligationId;
+			undoService.insertIntoUndo(ts, "T_OBLIGATION", "ACL", "ACL", "y", "n", aclPath, 0, "n");
+		}
+		
+		delActivity(state, "y", obligationId, ts);
+		
+	}
+	
+	private void delActivity(String op, String show, Integer obligationId, long ts) {
+		
+		undoService.insertTransactionInfo(obligationId, "A", "T_RAISSUE_LNK", "FK_RA_ID", ts, "");
+		undoService.insertTransactionInfo(obligationId, "A", "T_RASPATIAL_LNK", "FK_RA_ID", ts, "");
+		//undoService.insertTransactionInfo(sourceId, "A", "T_INFO_LNK", "FK_RA_ID", ts, "");
+		undoService.insertTransactionInfo(obligationId, "A", "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "");
+		undoService.insertTransactionInfo(obligationId, "A", "T_OBLIGATION", "PK_RA_ID", ts, "");
+		undoService.insertTransactionInfo(obligationId, "A", "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "");
+		undoService.insertTransactionInfo(obligationId, "A", "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "");
+		
+		undoService.insertIntoUndo(obligationId, op, "T_RAISSUE_LNK", "FK_RA_ID", ts, "", show);
+		undoService.insertIntoUndo(obligationId, op, "T_RASPATIAL_LNK", "FK_RA_ID", ts, "", show);
+		//undoService.insertIntoUndo(sourceId, op, "T_INFO_LNK", "FK_RA_ID", ts, "", show);
+		undoService.insertIntoUndo(obligationId, op, "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "", show);
+		undoService.insertIntoUndo(obligationId, op, "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "", show);
+		
+		if (op != null && op.equals("D")) {
+			//FALTAN LOS ACLS
+			undoService.insertIntoUndo(obligationId, "D", "T_OBLIGATION", "PK_RA_ID", ts, "", show);
+		}
+		
+		undoService.insertIntoUndo(obligationId, op, "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "", show);
+		
 	}
 		
 }

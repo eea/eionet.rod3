@@ -1,19 +1,23 @@
 package eionet.rod.dao;
 
 
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
+
 import javax.sql.DataSource;
 
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -189,13 +193,15 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @see eionet.rod.dao.ObligationsDao#findObligationList(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
 	@Override
-	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2) {
+	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2) throws ResourceNotFoundException {
 		
 		boolean includeAnd = false;
 		boolean includeWhere = true;
+
+		MapSqlParameterSource parms = new MapSqlParameterSource();
 		
 		String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
-				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, "
+				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, SO.SOURCE_CODE as sourceCode, "
 				+ "OB.NEXT_DEADLINE as nextDeadline, "
 				//+ "CASE WHEN OB.NEXT_DEADLINE != '0000-00-00' THEN OB.NEXT_DEADLINE ELSE '' END as nextDeadline, "
 				
@@ -210,24 +216,29 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-//				if ((!issueId.equals(null) && !issueId.equals("0")) || (!clientId.equals(null) && !clientId.equals("0")) || (!spatialId.equals(null) && !spatialId.equals("0")) || (!RODUtil.isNullOrEmpty(terminate)) || (!deadlineCase.equals(null) && !deadlineCase.equals("0")) || !RODUtil.isNullOrEmpty(anmode)) {
-//					query += "WHERE ";
-//				}
+
 				if (!clientId.equals(null) && !clientId.equals("0")) {
 					
 					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
 					includeWhere = false;
 					includeAnd = true;
+
+					parms.addValue("CLK.FK_CLIENT_ID", clientId);
+
 				}
 				if (!spatialId.equals(null) && !spatialId.equals("0")) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
 						includeAnd = true;
+
 					}else if (includeAnd) {
 						query += " AND ";
 						includeAnd = true;
+
 					}
+
+					parms.addValue("RAS.FK_SPATIAL_ID",spatialId);
 				
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
@@ -236,10 +247,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 						query += " WHERE ";
 						includeWhere = false;
 						includeAnd = true;
+
 					}else if (includeAnd) {
 						query += " AND ";
 						includeAnd = true;
+
 					}
+
 					query += "RAI.FK_ISSUE_ID = " + issueId;
 				} else if (issueId.equals("NI")) {
 					if (includeWhere) {
@@ -253,18 +267,32 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
 					query += " OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
 				}
-				if (!RODUtil.isNullOrEmpty(terminate))  {
+				if (!RODUtil.isNullOrEmpty(terminate) && terminate.equals("Y"))  {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
 						includeAnd = true;
+					
 					}else if (includeAnd) {
 						query += " AND ";
 						includeAnd = true;
+						
 					}
 					query += " OB.Terminate = '" + terminate + "'";
 				}
 				if (!deadlineCase.equals(null) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+					if (!RODUtil.isNullOrEmpty(date1)) {
+						boolean datetrue = RODUtil.validaFecha(date1);
+						if (!datetrue) {
+							throw new ResourceNotFoundException("Date error: " + date1);
+						}
+					}
+					if (!RODUtil.isNullOrEmpty(date2)) {
+						boolean datetrue = RODUtil.validaFecha(date2);
+						if (!datetrue) {
+							throw new ResourceNotFoundException("Date error: " + date2);
+						}
+					}
 					String queryDeadline = handleDeadlines(deadlineCase, date1, date2) ;
 					if (queryDeadline != "") {
 						if (includeWhere) {
@@ -301,9 +329,19 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				}
 				
 				
+//				String yourQuery = query;
+//				
+//				final String regex = "^(SELECT)(?:[^;']|(?:'[^']+'))+;\\s*$"; //(?m)^(SELECT).*;$
+//
+//				Pattern p = Pattern.compile(regex, Pattern.MULTILINE);
+//				Matcher matcher = p.matcher(query);
+//				
+//				while (matcher.find()) {
+//					System.out.print("PASO");
+//				}
+				
                 query += " ORDER BY oblTitle";
                 
-		
 //		String queryCount = "SELECT COUNT(DISTINCT OB.PK_RA_ID) as obligationId "
 //				+ "FROM T_OBLIGATION OB "
 //                + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
@@ -361,8 +399,19 @@ public class ObligationsDaoImpl implements ObligationsDao {
 //			throw new ResourceNotFoundException("DataAccessException error: " + e);
 //		}
 		
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
+        try {
+        		
+			List<Obligations> allobligation = jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
+			
+			return allobligation; //jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class),new Object[] { parameters });
+        } catch (DataAccessException e) {
+		
+        	throw new ResourceNotFoundException("DataAccessException error: " + e);
+		}
 	}
+	
+	
+	
 	
 	/***
 	 * Find obligation by id
@@ -375,6 +424,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "OB.COORDINATOR_ROLE as coordinatorRole, OB.COORDINATOR_ROLE_SUF as coordinatorRoleSuf, OB.NATIONAL_CONTACT as nationalContact, OB.NATIONAL_CONTACT_URL as nationalContactUrl, OB.TERMINATE as terminate, " 
 				+ "OB.NEXT_REPORTING as nextReporting, "
 				+ "OB.NEXT_DEADLINE as nextDeadline, "
+				+ "OB.FIRST_REPORTING as firstReporting, OB.VALID_TO as validTo, OB.NEXT_DEADLINE2 as nextDeadline2, "
 				//+ "CASE WHEN OB.NEXT_DEADLINE THEN (DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y')) ELSE '' END as nextDeadline, "
 				//+ "IF(OB.NEXT_DEADLINE, DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y'), '') as nextDeadline, "
 				+ "OB.REPORT_FREQ_MONTHS as reportFreqMonths, OB.DATE_COMMENTS as dateComments, OB.FORMAT_NAME as formatName, OB.REPORT_FORMAT_URL as reportFormatUrl, "
@@ -429,19 +479,19 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
 	        String query = "SELECT o2.PK_RA_ID as siblingoblId, o2.FK_SOURCE_ID as fkSourceId , o2.TITLE as siblingTitle, o2.AUTHORITY as authority, o2.TERMINATE as terminate "
 		        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-		        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
+		        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = ? AND o2.PK_RA_ID != ? AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
 		        + "ORDER BY o2.TITLE";
 
 	       
 	        String queryCount = "SELECT Count(*) as siblingoblId "
     	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-	    	    + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = " + siblingoblId + " AND o2.PK_RA_ID != " + siblingoblId + " AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
+	    	    + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = ? AND o2.PK_RA_ID != ? AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
 
 
 	        
 	        try {
 	    		
-				Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class);
+				Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class,siblingoblId,siblingoblId);
 			
 				if (countObligation.equals(0)) {
 					
@@ -451,7 +501,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					//throw new ResourceNotFoundException("The obligation you requested with id " + siblingoblId + " was not found in the database");
 				}else {
 			
-					return jdbcTemplate.query(query, new BeanPropertyRowMapper<SiblingObligation>(SiblingObligation.class));
+					return jdbcTemplate.query(query, new BeanPropertyRowMapper<SiblingObligation>(SiblingObligation.class), siblingoblId, siblingoblId);
 
 				}
 				
@@ -864,7 +914,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @param voluntary
      */
     private void deleteCountries(Integer obligationID, String voluntary) {
-    	jdbcTemplate.update("DELETE FROM T_RASPATIAL_LNK where FK_RA_ID = " + obligationID + " and VOLUNTARY = '" + voluntary + "'");
+    	String queryDelete ="DELETE FROM T_RASPATIAL_LNK where FK_RA_ID = ? and VOLUNTARY = ?";
+    	jdbcTemplate.update(queryDelete, obligationID, voluntary);
     }
     
     
@@ -893,7 +944,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @param status
      */
     private void deleteClients(Integer obligationID, String status) {
-    	jdbcTemplate.update("DELETE FROM T_CLIENT_OBLIGATION_LNK where FK_RA_ID = " + obligationID + " and status = '" + status + "'");
+    	String queryDelete="DELETE FROM T_CLIENT_OBLIGATION_LNK where FK_RA_ID = ? and status = ?";
+    	jdbcTemplate.update(queryDelete, obligationID,status);
     }
     
     /**
@@ -919,7 +971,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
      * @param obligationID
      */
     private void deleteIssues(Integer obligationsId) {
-    	jdbcTemplate.update("DELETE FROM T_RAISSUE_LNK where FK_RA_ID = " + obligationsId);
+    	String queryDelete ="DELETE FROM T_RAISSUE_LNK where FK_RA_ID = ?";
+    	jdbcTemplate.update(queryDelete,obligationsId);
     }
     
     /**

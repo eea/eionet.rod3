@@ -4,7 +4,7 @@
   <body>
   <script>
 	 $(document).ready(function(){
-	    $('#deliveriesTable').DataTable({
+	    $('#historyTable').DataTable({
 	    	"sDom": 'Tfrtipt',
 	    	"sPaginationType": "full_numbers"
 	    });
@@ -17,7 +17,7 @@
      <div id="workarea">      
 	 	<div class="title">
 		    <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
-		    	<h1 th:unless="${obligation.oblTitle == null}" th:text="'Deliveries for ' + ${obligation.oblTitle}"></h1>
+		    	<h1 th:unless="${obligation.oblTitle == null}" th:text="'History of ' + ${obligation.oblTitle}"></h1>
 		     <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
 		     	<li><span>Operations</span>
 					<ul>
@@ -31,31 +31,29 @@
 		    <ul>
 			    <li><span><a th:href="@{'/obligations/' + ${obligationId}}">Overview</a></span></li>
 			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/legislation'}">Legislation</a></span></li>
-			    <li id="currenttab"><span>Deliveries</span></li>
-			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/history'}">History</a></span></li>
+			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/deliveries'}">Deliveries</a></span></li>
+			    <li id="currenttab"><span>History</span></li>
 		    </ul>
 	    </div>
          
          <div style="clear: both;"></div>
          
-         <div th:if="${#lists.isEmpty(deliveries)}">There are no results.</div>
-        <div th:if="${not #lists.isEmpty(deliveries)}">
-	        <table id="deliveriesTable" class="datatable results table table-striped table-bordered">
+         <div th:if="${#lists.isEmpty(versions)}">There are no results.</div>
+        <div th:if="${not #lists.isEmpty(versions)}">
+	        <table id="historyTable" class="datatable results table table-striped table-bordered">
 	        <thead>
 		        <tr>
-			        <th>Delivery Title</th>
-			        <th>Delivery Date</th>
-			        <th>Period covered</th>
-			        <th>Coverage</th>
-			        <th>Coverage note</th>
+			        <th>Time</th>
+			        <th>Object</th>
+			        <th>Operation</th>
+			        <th>User</th>
 		        </tr>
 	        </thead>
-	        <tr th:each="delivery, iterStat : ${deliveries}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td><a th:href="${delivery.deliveryUrl}" th:text="${delivery.deliveryTitle}"></a></td>
-	        	<td><span th:text="${delivery.deliveryUploadDate}"></span></td>
-	        	<td><span th:text="${delivery.deliveryCoverage}"></span></td>
-	        	<td><a th:href="@{'/countrydeliveries?actDetailsId=' + ${obligationId} + '&spatialId=' + ${delivery.spatialId}}" th:text="${delivery.spatialName}"></a></td>
-	        	<td><span th:text="${delivery.deliveryCoverageNote}"></span></td>
+	        <tr th:each="version, iterStat : ${versions}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><span th:text="${version.date}"></span></td>	        	
+	        	<td><a href="#" th:text="'/obligations/' + ${obligationId}"></a></td>
+	        	<td><span>UPDATE</span></td>
+	        	<td><span th:text="${version.value}"></span></td>
 	        </tr>
 	        </table>
         </div>

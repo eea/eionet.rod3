@@ -2,7 +2,7 @@ package eionet.rod.model;
 
 public class UndoDTO {
 	
-	private Integer undoTime;
+	private long undoTime;
     private String table;
     private String column;
     private String operation;
@@ -10,7 +10,8 @@ public class UndoDTO {
     private String primaryKey;
     private String value;
     private Integer subTransNr;
-    private String show;    
+    private String show; 
+    private String date;
     
     /**
      * Constructor.
@@ -18,11 +19,11 @@ public class UndoDTO {
 	public UndoDTO() {
 	}
 
-	public Integer getUndoTime() {
+	public long getUndoTime() {
 		return undoTime;
 	}
 
-	public void setUndoTime(Integer undoTime) {
+	public void setUndoTime(long undoTime) {
 		this.undoTime = undoTime;
 	}
 
@@ -90,5 +91,12 @@ public class UndoDTO {
 		this.show = show;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 }

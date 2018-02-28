@@ -14,8 +14,15 @@
         <security:intercept-url pattern="/login" access="isAuthenticated()"/>
         <security:intercept-url pattern="/users/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/clients/{clientId}/edit" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/clients/delete/{clientId}" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/clients/delete" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/clients/add" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/obligations/{obligationId}/edit" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/obligations/add/{sourceId}" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/obligations/delete/{obligationId}" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/instruments/edit?sourceId={sourceId}" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/instruments/delete" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/instruments/add" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/**" access="permitAll()"/>
         <security:custom-filter position="CAS_FILTER" ref="casFilter" />
         <security:logout logout-success-url="/logout"/>

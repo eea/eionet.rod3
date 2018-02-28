@@ -84,7 +84,7 @@
 				</div>
 				<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_NEXTDUEDATE')" title="Help on this field"></a>
 				<div class="col-lg-8 simple_attr_help">
-					<input type="text" class="smalltext form-control" size="30" id="next_deadline" onchange="changed()" name="nextDeadline"/> (calculated automatically)
+					<input type="text" class="smalltext form-control" size="30" id="next_deadline" onchange="changed()" name="nextDeadline" th:field="*{nextDeadline}"/> (calculated automatically)
 				</div>
 			</div>
 			<div class="form-group">
@@ -328,7 +328,7 @@
 					<div>
 						<label for="responsibleRole" class="control-label col-xs-15">Role</label>
 						<input type="text" class="smalltext" name="responsibleRole" id="responsibleRole"  onchange="changed()" th:field="*{responsibleRole}" />
-						<input type="checkbox" name="responsibleRoleSuf" value="Y" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
+						<input type="checkbox" name="responsibleRoleSuf" value="1" checked="checked" id="responsibleRoleSuf" th:field="*{responsibleRoleSuf}"/>
 						<label class="control-label" for="responsibleRoleSuf">do not append country suffix</label>
 					</div>
 					<div>
