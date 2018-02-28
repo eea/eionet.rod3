@@ -175,7 +175,6 @@ INSERT INTO T_DELIVERY (RA_URL, TITLE, UPLOAD_DATE, DELIVERY_URL, TYPE, FORMAT, 
    VALUES ('http://cdr.eionet.europa.eu', 'END - Austria - DF2 - 2015', '2015-11-26', 'http://cdr.eionet.europa.eu', 'P1Y', null, 1, 1, 'Austria', 'only for geometry correction', null);
    
 DELETE FROM T_UNDO;
-ALTER TABLE T_UNDO ALTER COLUMN VALUE VARCHAR(2000);
 
 INSERT INTO T_UNDO
 (UNDO_TIME,
