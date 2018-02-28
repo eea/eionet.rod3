@@ -175,26 +175,3 @@ INSERT INTO T_DELIVERY (RA_URL, TITLE, UPLOAD_DATE, DELIVERY_URL, TYPE, FORMAT, 
    VALUES ('http://cdr.eionet.europa.eu', 'END - Austria - DF2 - 2015', '2015-11-26', 'http://cdr.eionet.europa.eu', 'P1Y', null, 1, 1, 'Austria', 'only for geometry correction', null);
    
 DELETE FROM T_UNDO;
-
-INSERT INTO T_UNDO
-(UNDO_TIME,
-TAB,
-COL,
-OPERATION,
-QUOTES,
-P_KEY,
-VALUE,
-SUB_TRANS_NR,
-SHOW_OBJECT)
-VALUES
-(1519715675389,
-'T_CLIENT_OBLIGATION_LNK',
-'FK_CLIENT_ID',
-'U',
-'n',
-'y',
-'arroyyol',
-0,
-'y');
-
-
