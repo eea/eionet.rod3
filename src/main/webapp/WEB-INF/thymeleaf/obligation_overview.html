@@ -110,8 +110,8 @@
 				<div class="col-xs-8">
 					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated"  class="terminated"></span>
 					<span th:unless="${obligation.terminate} != 'N'">
-						<span th:if="${obligation.nextDeadline} != ''" th:text="${obligation.nextDeadline}" ></span>
-						<span th:unless="${obligation.nextDeadline} != ''" th:text="${obligation.nextReporting}" ></span>
+						<span th:if="${obligation.nextDeadline} != null" th:text="${obligation.nextDeadline}" ></span>
+						<span th:unless="${obligation.nextDeadline} != null" th:text="${obligation.nextReporting}" ></span>
 					</span>
 				</div>
 			</div>
