@@ -380,6 +380,7 @@ public class UndoServiceJdbc implements UndoService {
 						value = obligation.getFormatName();
 						quotes = "y";
 						isPrimary = "n";
+						break;
 					case "REPORT_FORMAT_URL":
 						value = obligation.getReportFormatUrl();
 						quotes = "y";
@@ -486,6 +487,7 @@ public class UndoServiceJdbc implements UndoService {
 						value = obligation.getComment();
 						quotes = "y";
 						isPrimary = "n";
+						break;
 					case "AUTHORITY":
 						value = obligation.getAuthority();
 						quotes = "y";
