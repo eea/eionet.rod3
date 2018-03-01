@@ -1444,4 +1444,11 @@
       oldColumnName="TERMINATED"
       tableName="T_SOURCE"/>
   </changeSet>    
+ <changeSet author="santamik" id="rev-83" dbms="h2">
+    <modifyDataType 
+            columnName="VALUE"
+            newDataType="TEXT"
+            tableName="T_UNDO"/> 
+  
+ </changeSet>  
 </databaseChangeLog>
