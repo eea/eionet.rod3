@@ -188,12 +188,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
     }
 	
     
+      
     /***
      * find all obligations by issue, country, deadline case and terminated yes or not(non-Javadoc)
      * @see eionet.rod.dao.ObligationsDao#findObligationList(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
 	@Override
-	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2) throws ResourceNotFoundException {
+	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage) throws ResourceNotFoundException {
 		
 		boolean includeAnd = false;
 		boolean includeWhere = true;
@@ -206,17 +207,37 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				//+ "CASE WHEN OB.NEXT_DEADLINE != '0000-00-00' THEN OB.NEXT_DEADLINE ELSE '' END as nextDeadline, "
 				
 				//+ "IF(OB.NEXT_DEADLINE, DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y'), '') as nextDeadline, "
-				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting, "
-				+ "OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery, RAS.FK_SPATIAL_ID as deliveryCountryId, "
-				+ "(SELECT SPATIAL_NAME FROM T_SPATIAL WHERE T_SPATIAL.PK_SPATIAL_ID = RAS.FK_SPATIAL_ID ) as deliveryCountryName "
-				+ "FROM T_OBLIGATION OB "
-                + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
-                + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
-                + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID "
-				+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
-				+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
-				+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
+				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
+				if (deadlinePage) {
+					query += ", OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery "
+							+ ", RAS.FK_SPATIAL_ID as deliveryCountryId, "
+							+ "(SELECT SPATIAL_NAME FROM T_SPATIAL WHERE T_SPATIAL.PK_SPATIAL_ID = RAS.FK_SPATIAL_ID ) as deliveryCountryName ";
+				}
+				query+= "FROM "
+						+ " T_OBLIGATION OB "
+		                + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
+		                + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
+		                + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID "
+						+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
+						+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
+						+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
 
+//				StringBuilder q_obligations_list = new StringBuilder();
+//				if (!RODUtil.nullString(issueId) && !issueId.equals("0")) {
+//		            q_obligations_list.append("(");
+//		        }
+//		        q_obligations_list.append("(T_RASPATIAL_LNK RAS LEFT JOIN T_SPATIAL SP ON RAS.FK_SPATIAL_ID=SP.PK_SPATIAL_ID) "
+//		        + "JOIN T_OBLIGATION OB ON RAS.FK_RA_ID=OB.PK_RA_ID "
+//		        + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
+//		        + "LEFT JOIN T_ROLE RRO ON OB.RESPONSIBLE_ROLE=RRO.ROLE_ID "
+//		        + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID "
+//		        + "LEFT JOIN T_CLIENT CL ON CL.PK_CLIENT_ID = CLK.FK_CLIENT_ID ");
+//		        if (!RODUtil.nullString(issueId) && !issueId.equals("0")) {
+//		            q_obligations_list.append(") JOIN T_RAISSUE_LNK RAI ON OB.PK_RA_ID=RAI.FK_RA_ID ");
+//		        }
+//		
+//		        query += q_obligations_list.toString();
+		
 				if (!clientId.equals(null) && !clientId.equals("0")) {
 					
 					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
@@ -282,13 +303,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				}
 				if (!deadlineCase.equals(null) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
 					if (!RODUtil.isNullOrEmpty(date1)) {
-						boolean datetrue = RODUtil.validaFecha(date1);
+						boolean datetrue = RODUtil.validateDate(date1);
 						if (!datetrue) {
 							throw new ResourceNotFoundException("Date error: " + date1);
 						}
 					}
 					if (!RODUtil.isNullOrEmpty(date2)) {
-						boolean datetrue = RODUtil.validaFecha(date2);
+						boolean datetrue = RODUtil.validateDate(date2);
 						if (!datetrue) {
 							throw new ResourceNotFoundException("Date error: " + date2);
 						}

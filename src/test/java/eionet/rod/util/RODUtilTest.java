@@ -136,5 +136,27 @@ public class RODUtilTest {
     	assertEquals("National Authorities, International Organisations, Public, Scientific Community...",RODUtil.truncateText("National Authorities, International Organisations, Public, Scientific Community etc"));
     	assertEquals("Bonn Agreement Secretariat",RODUtil.truncateText("Bonn Agreement Secretariat"));
     }
+    @Test 
+    public void isNullorEmptyText() {
+    	assertEquals(true,RODUtil.isNullOrEmpty(null));
+    	assertEquals(false,RODUtil.isNullOrEmpty("Bonn Agreement Secretariat"));
+    }
+    
+    @Test
+    public void miliseconds2DateTest() {
+    	String ss = "1519733894881";
+    	long ts = Long.parseLong(ss);
+    	assertEquals("2018-02-27 13:18:14",RODUtil.miliseconds2Date(ts));
+    }
+    
+    @Test
+	public void testDateIsValid() {
+		assertTrue(RODUtil.validateDate("32/02/2012"));
+	}
+
+	@Test
+	public void testDayIsInvalid() {
+		assertFalse(RODUtil.validateDate("32-02-2012"));
+	}
     
  }

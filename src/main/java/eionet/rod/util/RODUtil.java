@@ -321,12 +321,12 @@ public class RODUtil {
     	return sdf.format(resultdate);    	
     }
     
-    public static boolean validaFecha(String fecha) {
+    public static boolean validateDate(String dateValid) {
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         boolean result = true;
         try {
-			java.sql.Date date = new java.sql.Date (sdf.parse(fecha).getTime());
+			sdf.parse(dateValid);
 			result = true;
 		} catch (ParseException e1) {
 			result = false;
@@ -334,4 +334,5 @@ public class RODUtil {
        return result;
     }
     
+       
 }

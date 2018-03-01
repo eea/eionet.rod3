@@ -175,7 +175,7 @@ public class SearchController {
     	
     	String deadline = "5";
     	
-    	model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,obligation.getSpatialId().toString(),null,deadline,anmode, obligation.getNextDeadlineFrom(), obligation.getNextDeadlineTo()));
+    	model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,obligation.getSpatialId().toString(),null,deadline,anmode, obligation.getNextDeadlineFrom(), obligation.getNextDeadlineTo(), true));
         
     	model.addAttribute("obligation",obligation);
      	

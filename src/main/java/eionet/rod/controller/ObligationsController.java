@@ -119,7 +119,7 @@ public class ObligationsController {
         	model.addAttribute("titleObl","Reporting obligations");
         }
         
-        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","N","0",anmode, null, null));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","N","0",anmode, null, null, false));
 
         model.addAttribute("title","Reporting obligations");
         
@@ -188,7 +188,7 @@ public class ObligationsController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchObligation(Obligations obligations, Model model) {
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null, null, null));
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null, null, null, false));
 
          model.addAttribute("title","Reporting obligations");
          
