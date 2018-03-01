@@ -714,14 +714,17 @@ public class UndoServiceJdbc implements UndoService {
 							value = id.toString();
 							quotes = "n";
 							isPrimary = "y";
+							break;
 						case "RELATION":
 							value = obligation.getOblRelationId();
 							quotes = "y";
 							isPrimary = "n";
+							break;
 						case "FK_RA_ID2":
 							value = obligation.getRelObligationId().toString();
 							quotes = "n";
 							isPrimary = "y";
+							break;
 					}
 					
 					jdbcTemplate.update(insert,
