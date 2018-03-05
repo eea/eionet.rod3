@@ -17,7 +17,7 @@
         	<div class="filter">
         		 <div class="row">
                         <div class="labeldiv">
-                            <label for="shortName">Country or territory</label>
+                            <label for="selCountries">Country or territory</label>
                         </div>
 		      			<div class="input">
 							<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
@@ -29,7 +29,7 @@
 					</div>
             	<div class="row">
                 	<div class="labeldiv">
-                    	 <label for="shortName">Issue</label>
+                    	 <label for="selIssues">Issue</label>
                     </div>
 	                <div class="input">
 						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
@@ -42,7 +42,7 @@
 				
 				<div class="row">
                 	<div class="labeldiv">
-                    	<label for="shortName">Organisation</label>
+                    	<label for="selClients">Organisation</label>
                     </div>
 	      			<div class="input">
 						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
@@ -54,7 +54,7 @@
 				
 				<div class="row">
 					<div class="labeldiv">
-                    	<label for="shortName">Next deadline</label>
+                    	<label for="nextDeadlineFrom">Next deadline</label>
                     </div>
                    	<div class="input">
                    	<input type="text"  value="nextDeadlineFrom" id="nextDeadlineFrom" th:field="*{nextDeadlineFrom}" onchange="checkDateFormat(this.value); changed()"> - <input type="text" value="nextDeadlineTo" id="nextDeadlineTo" onchange="checkDateFormat(this.value); changed()" th:field="*{nextDeadlineTo}"> (dd/mm/yyyy)  
