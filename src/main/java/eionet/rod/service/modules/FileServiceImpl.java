@@ -12,7 +12,7 @@ public class FileServiceImpl implements FileServiceIF  {
 	
 	private ResourceBundle props;
 	
-	public final String PROP_FILE = "application";
+	public static final String PROP_FILE = "application";
 
 	/**
      * Creates new FileServiceImpl

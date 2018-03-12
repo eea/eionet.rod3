@@ -24,7 +24,7 @@ public class VersionsController {
 		
 		List<UndoDTO> versions = undoService.getPreviousActionsGeneral();
 		if (versions != null) {
-			UndoDTO undo = new UndoDTO();
+			UndoDTO undo;
 			for (int i = 0; i < versions.size(); i++) {
 				undo = versions.get(i);
 				undo.setDate(RODUtil.miliseconds2Date(undo.getUndoTime()));

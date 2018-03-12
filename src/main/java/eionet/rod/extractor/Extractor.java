@@ -144,7 +144,8 @@ public class Extractor implements ExtractorConstants {
     }
     private String cDT() {
         Date d = new Date();
-        return new String("[" + d.toString() + "] ");
+        String dateString = "[" + d.toString() + "] ";
+        return dateString;
     }
 
     // Cleanup after everything is done

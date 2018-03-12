@@ -128,17 +128,17 @@
 #workarea #rightcolumn{
 	margin-right: -30px;
 }
-	#workarea #rightcolumn h2{
-		background-color: #eef7f9;
-		font-size: 110%;
-		font-weight: 500;
-		margin-bottom: 0;
-		margin-top: 0;
-		text-align: center;
-	}
-	#workarea #rightcolumn .link-external{
-	    padding-left: 0px;
-	}
+#workarea #rightcolumn h2{
+	background-color: #eef7f9;
+	font-size: 110%;
+	font-weight: 500;
+	margin-bottom: 0;
+	margin-top: 0;
+	text-align: center;
+}
+#workarea #rightcolumn .link-external{
+    padding-left: 0px;
+}
 
 .inputcheck{
   background: #fff;

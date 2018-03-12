@@ -7,6 +7,7 @@ import java.util.List;
 import org.openrdf.query.TupleQueryResult;
 
 import eionet.rod.model.Delivery;
+import eionet.rod.util.exception.ServiceException;
 
 /**
  * 
@@ -23,6 +24,6 @@ public interface DeliveryService {
 	
 	void backUpDeliveries();
 	
-	int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId);
+	int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) throws ServiceException;
 	
 }

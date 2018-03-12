@@ -167,7 +167,11 @@ public class RODUtil {
     public static boolean isURL(String s) {
         try {
             URL url = new URL(s);
-            return url != null;
+            if (!RODUtil.isNullOrEmpty(url.toString())) {
+            	return true;
+            }else {
+            	return false;
+            }
         } catch (MalformedURLException e) {
             return false;
         }

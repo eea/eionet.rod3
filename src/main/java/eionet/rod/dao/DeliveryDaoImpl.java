@@ -32,6 +32,7 @@ import eionet.rod.model.Delivery;
 
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
+import eionet.rod.util.exception.ServiceException;
 
 
 @Repository
@@ -43,8 +44,6 @@ public class DeliveryDaoImpl implements DeliveryDao{
 	private static String obligationsPrefix = "/obligations/";
     private static String spatialsPrefix = "/spatial/";
 	
-	private static DateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
 	public DeliveryDaoImpl() {
 	}
 	
@@ -106,6 +105,10 @@ public class DeliveryDaoImpl implements DeliveryDao{
 	
 	private static final String qCommitDeliveries = "DELETE " + "FROM T_DELIVERY " + "WHERE STATUS=0";
 
+	 /** */
+    private static final String qMarkCountries = "" + "UPDATE T_OBLIGATION "
+            + "SET LAST_HARVESTED = {fn now()}, FK_DELIVERY_COUNTRY_IDS = ? " + "WHERE PK_RA_ID = ?;";
+    	
     /*
      * (non-Javadoc)
      *
@@ -129,7 +132,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
                     HashSet<Integer> countryIdsSet = entry.getValue();
                     if (countryIdsSet != null && !countryIdsSet.isEmpty()) {
                         String countryIds = "," + cnvHashSet(countryIdsSet, ",") + ",";
-                        markCountries(Integer.valueOf(obligId), countryIds);
+                       // markCountries(Integer.parseInt(obligId), countryIds);
+                        jdbcTemplate.update(qMarkCountries, countryIds, Integer.parseInt(obligId));
                     }
                 }
             }
@@ -139,8 +143,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
             throw new ResourceNotFoundException(sqle.getMessage());
         } 
     }
-    
-    
+       
     protected String cnvHashSet(HashSet<Integer> hash, String separator) {
 
         // quick fix
@@ -161,22 +164,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
         return s.toString();
     }
     
-    /** */
-    private static final String qMarkCountries = "" + "UPDATE T_OBLIGATION "
-            + "SET LAST_HARVESTED = {fn now()}, FK_DELIVERY_COUNTRY_IDS = ? " + "WHERE PK_RA_ID = ?;";
-    
-    /**
-    *
-    * @param raId
-    * @param cIds
-    * @param connection
-    * @throws Exception
-    */
-   protected void markCountries(Integer raId, String cIds)  {
-	   jdbcTemplate.update(qMarkCountries, cIds, raId.intValue());
-   }
-	
-	
+   
    private static final String qBackUpDeliveries = "UPDATE T_DELIVERY SET STATUS=0";
 
    /*
@@ -206,7 +194,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
     * @see eionet.rod.services.modules.db.dao.IDeliveryDao#saveDeliveries(TupleQueryResult, HashMap<String,HashSet<Integer>>)
     */
    @Override
-   public int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) {
+   public int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) throws ServiceException {
 
        int batchCounter = 0;
 
@@ -214,17 +202,15 @@ public class DeliveryDaoImpl implements DeliveryDao{
            return batchCounter;
        }
 
-
        try {
   
-            for (int row = 0; bindings.hasNext(); row++) {
+    	   while (bindings.hasNext()) {
                BindingSet pairs = bindings.next();
                //System.out.print(row);
                String link = pairs.getValue("link").stringValue();
                if (link == null || link.trim().length() == 0) {
                    link = "No URL";
                }
-               int pp = row;
                String title = (pairs.getValue("title") != null) ? pairs.getValue("title").stringValue() : "";
                String locality = (pairs.getValue("locality") != null) ? pairs.getValue("locality").stringValue() : "";
                String obligation = (pairs.getValue("obligation") != null) ? pairs.getValue("obligation").stringValue() : "";
@@ -233,6 +219,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
                String note = (pairs.getValue("note") != null) ? pairs.getValue("note").stringValue() : "";
                Date date = null;
                try {
+            	   DateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                    date = isoDateFormat.parse(sdate);
                } catch (ParseException pe) {
                }

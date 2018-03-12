@@ -241,7 +241,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 //		
 //		        query += q_obligations_list.toString();
 		
-				if (!clientId.equals(null) && !clientId.equals("0")) {
+				if (!RODUtil.isNullOrEmpty(clientId) && !clientId.equals("0")) {
 					
 					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
 					includeWhere = false;
@@ -250,7 +250,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					parms.addValue("CLK.FK_CLIENT_ID", clientId);
 
 				}
-				if (!spatialId.equals(null) && !spatialId.equals("0")) {
+				if (!RODUtil.isNullOrEmpty(spatialId) && !spatialId.equals("0")) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -266,7 +266,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
-				if (!issueId.equals(null) && !issueId.equals("0") && !issueId.equals("NI")) {
+				if (!RODUtil.isNullOrEmpty(issueId) && !issueId.equals("0") && !issueId.equals("NI")) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -304,7 +304,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					}
 					query += " OB.Terminate = '" + terminate + "'";
 				}
-				if (!deadlineCase.equals(null) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+				if (!RODUtil.isNullOrEmpty(deadlineCase) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
 					if (!RODUtil.isNullOrEmpty(date1)) {
 						boolean datetrue = RODUtil.validateDate(date1);
 						if (!datetrue) {
@@ -318,7 +318,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 						}
 					}
 					String queryDeadline = handleDeadlines(deadlineCase, date1, date2) ;
-					if (queryDeadline != "") {
+					if (!queryDeadline.isEmpty()) {
 						if (includeWhere) {
 							query += " WHERE ";
 							includeWhere = false;
