@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+      <div th:replace="helpModal :: helpModalFragment"></div>
+        <h1>What is ROD?</h1>
+		<p>
+		ROD is the EEA's reporting obligations database. It contains records describing environmental reporting obligations that countries have towards international organisations. 
+		ROD is part of Reportnet. Reportnet is group of web applications and processes developed by the EEA to support international environmental reporting.
+		</p>
+		<h2>What are reporting obligations?</h2>
+		<p>
+		Reporting obligations are requirement to provide information agreed between countries and international bodies, such as the EEA or international conventions. 
+		Reporting obligations provide the basis for most environmental information flows.
+		</p>
+		<p>
+		A reporting obligation is taken to mean any requirement to provide specified information to a secretariat, coordinating body or governing body of a legal instrument, 
+		or their representatives, whether or not there is a prescribed format or fixed frequency, or whether or not the word 'report' is used. Reporting obligations can be 'compulsory', 
+		'expected' or 'voluntary' depending on whether information must be submitted in order to be in compliance with the legal instrument or is just submitted by countries at their 
+		own volition.
+		</p>
+		
+		<h2>What does ROD cover?</h2>
+		<p>
+		ROD includes all environmental reporting obligations that EEA member countries have towards the Environment DG, European marine conventions, Eurostat, OECD, UN, UNECE, 
+		As well as the EEA itself.
+		</p>
+		<p>
+		Excluded from ROD are non-environmental reporting, requirements for proposals or the seeking of permits, requirements for specific actions to be taken 
+		(as opposed to reporting on actions taken), and administrative processes such as notifications of contact points, instances of issuance/withdrawal of permits 
+		(rather than reports that summarise permits issued), notifications of legal transposition and implementation measures.		
+		</p>
+		
+		<h2>Why is ROD needed?</h2>
+		<p>
+		Reporting obligations agreed between EU and international bodies and countries provide the framework for most environmental information flows. 
+		This framework has grown in Europe as reporting requirements for separate laws or sectors have been agreed to, often independently from one another. 
+		Duplication of efforts, together with a lack of a transparent, need-based approach to information flows, has contributed to poor response rates to many reporting obligations.
+		</p>
+		<p>
+		ROD provides an overview inventory of reporting obligations. The database can be used to:		
+		</p>
+		<ul>
+			<li>assist in the analysis of the reporting obligationss' burden of member countries;</li>
+			<li>support member countries in planning and fulfilling reporting obligations;</li>
+			<li>assist in streamlining the flow of data to the EEA and other international organisations.</li>
+		</ul>
+		
+		<h2>Who are ROD users?</h2>
+		<p>
+		Rod is targeted towards three kinds of users:		
+		</p>
+		<ul>
+			<li>people involved in environmental policy development who are gathering information about an environmental issue (what information is reported where?);</li>
+			<li>country representatives who are involved in environmental reporting (when is reporting due and what do I need to do?);</li>
+			<li>people involved in environmental reporting from the perspective of the international organisations receiving and making use of the data.</li>
+		</ul>
+		
+		<h2>How is the information structured?</h2>
+		<p>
+		The ROD database contains records at two levels. The upper level is the legislative instrument (LI) level. The lower level is the reporting obligation (RO) level. 
+		A legislative instrument record is the legal basis for one or more reporting obligations.		
+		</p>
+		
+		<h2>How can I use ROD?</h2>
+		<p>
+		Here are some examples of the kind of questions that ROD can help answer and how to find the information.				
+		</p>
+		<p>
+		<b><span class="question">Question:</span> When does Italy next have to report waste statistics to Eurostat?</b>
+		</p>
+		<p>	
+		<b class="option">Option 1: </b>On the ROD front page > Deadlines > Italy > Advanced search > select 'Waste' from the issues list.
+		</p>
+		<p>
+		<b class="option">Option 2: </b>On the ROD front page: select 'Italy' from the countries list, select 'Waste' from the issues list and 'Eurostat' from the reporting to list. 
+		Click on the 'Go' icon. Select the reporting obligation from the list.			
+		</p>
+		
+		<hr/>
+		
+		<p>
+		<b><span class="question">Question:</span> What does Helcom collect information on?</b>
+		</p>
+		<p>	
+		<b class="option">Option: </b>On the ROD front page: select 'Helcom' from the organisations list. Click on the 'Go' icon.
+		</p>
+		
+		<hr/>
+		
+		<p>
+		<b><span class="question">Question:</span> What do countries have to report on GMOs?</b>
+		</p>
+		<p>	
+		<b class="option">Option 1: </b>On the ROD front page: select 'Various other issues' from the 'issues' list. Click on the 'Go' icon. 
+		Select links to the reporting obligations on GMOs from the list that appears.
+		</p>
+		<p>
+		<b class="option">Option 2: </b>Search the contents of ROD using Google for 'GMO'.	
+		</p>
+		
+		<hr/>
+		
+		<p>
+		<b><span class="question">Question:</span> What are the current reporting guidelines for the UNFCCC greenhouse gas inventories?</b>
+		</p>
+		<p>	
+		<b class="option">Option: </b> On the ROD front page: select 'Climate change' form the issues list, select 'UNFCCC' from the organisations list. 
+		Click on the 'Go' icon. On the resulting list, click on the 'Greenhouse gas inventories' reporting obligation to open the reporting obligation record page. 
+		Check that the record is valid in the footer. Select the link to the reporting guidelines.
+		</p>
+		
+		<h2>Dates in ROD</h2>
+		<p>
+		There are two ways to specify reporting due dates in ROD: text based ('ASAP', etc.) and numeric date based.
+		</p>
+		<p>
+		Where possible numeric dates are used. This allows the deadlines to be sorted and used for notifications. If needed additional comments are added in the 'dates comments' field. 
+		In some instances numeric dates cannot be used, so a text deadline is used.
+		</p>
+		<p>
+		For the numeric dates, the following guidelines are adhered to.
+		</p>
+		<p>
+		Reporting that is due in a year with no month or date specified is set as being due at on 31 December of the year. If the month is specified, then the reporting 
+		is set as being due on the last day in the month. The 'dates comments' field may be used to indicate this with text such as 'year only specified' or 'Year and month 
+		only specified' as appropriate.
+		</p>
+		<p>
+		If reporting is due in time for a regular event, such as a three-yearly conference of the parties (COP) to a convention, then a numeric date for the COP is normally 
+		entered in the baseline date field, along with a frequency. A note in the 'date comments' field will indicate something similar to 'Reporting submitted prior to three 
+		yearly COP depending on exact dates of COP'.
+		</p>
+		<p>
+		Some calendar rounding is automatically done in this calculation for leap years and so on. Deadlines that have just passed are also shown for a brief period following 
+		their expiry. The ROD application recalculates the 'Next due date' fields for all obligations every day, so they are always up to date.
+		</p>
+		
+		<h2>Where did the drive to create ROD come from?</h2>
+		<p>
+		The drive to create ROD came from several directions. The European Parliament and member country representatives to the EEA requested an overview of environmental 
+		reporting obligations.
+		</p>
+		<p>
+		The EU's Sixth Environmental Action Programme recognized the need to revise the reporting system in order to achieve a clearer specification of policy-relevant 
+		information needs to increase transparency and to remove overlaps.
+		</p>
+		<p>
+		The programme highlighted that solutions enabling a more transparent and efficient flow should be enabled, and that suitable IT developments should be exploited.
+		</p>
+		<p>
+		Lastly the EEA itself makes use of ROD to identify and gain access to suitable datasets for use in its assessments.
+		</p>
+		
+		<h2>Where can I get more information about ROD?</h2>
+		<p>
+		A FAQ is maintained by the Eionet Helpdesk at: <a href="http://nmc.eionet.europa.eu/faq/">http://nmc.eionet.europa.eu/faq/</a>. If the FAQ does not answer your question 
+		then please contact the Helpdesk.
+		</p>
+		<p>
+		Presentation material and process documents to support ROD are available at: <a href="http://eea.eionet.europa.eu/Members/irc/eionet-circle/eionet-telematics/library?l=/reportnet/rod">
+		http://eea.eionet.europa.eu/Members/irc/eionet-circle/eionet-telematics/library?l=/reportnet/rod</a>
+		</p>
+		<p>
+		A quick reference guide for ROD is available.
+		</p>
+		<p>
+		Detailed descriptions for each field in ROD can also be viewed by logged in users.
+		</p>
+		<p>
+		<a th:href="@{/RSSHelp}">RSS XML/RPC data extraction help</a>
+		</p>
+
+     </div>
+   </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment"></div>
+  </body>
+</html>

@@ -63,22 +63,22 @@ public class ITHarvesterController {
     /**
     * Simple test.
     */
-   @Test
-   public void viewHarvestPost() throws Exception {
-	   this.mockMvc.perform(post("/harvester")
-               .param("mode", "0")
-               .with(csrf()).with(user("editor").roles("EDITOR")))
-               .andExpect(status().isOk())
-               .andExpect(model().attributeExists("message"));
-   }
-   
-   @Test
-   public void viewHarvestPostWithoutCSRF() throws Exception {
-	   this.mockMvc.perform(post("/harvester")
-               	.param("mode", "0")
-               	.with(user("editor").roles("EDITOR")))
-       			.andExpect(status().is4xxClientError());
-   }
+//   @Test
+//   public void viewHarvestPost() throws Exception {
+//	   this.mockMvc.perform(post("/harvester")
+//               .param("mode", "0")
+//               .with(csrf()).with(user("editor").roles("EDITOR")))
+//               .andExpect(status().isOk())
+//               .andExpect(model().attributeExists("message"));
+//   }
+//   
+//   @Test
+//   public void viewHarvestPostWithoutCSRF() throws Exception {
+//	   this.mockMvc.perform(post("/harvester")
+//               	.param("mode", "0")
+//               	.with(user("editor").roles("EDITOR")))
+//       			.andExpect(status().is4xxClientError());
+//   }
    
    @Test
    public void viewHarvestPost_mode2() throws Exception {

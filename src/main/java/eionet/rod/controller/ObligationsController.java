@@ -638,7 +638,7 @@ public class ObligationsController {
 	 * @return List<Spatial> allObligationCountries
 	 */
 	private  List<Spatial> formalObligationCountriesSelected (List<String> selectedFormalCountries){
-		Spatial obligationCountry = new Spatial();
+		Spatial obligationCountry;
 		List<Spatial> allObligationCountries = new ArrayList<Spatial>();
 	       if (selectedFormalCountries != null) {
 		       for (int i = 0 ; i < selectedFormalCountries.size(); i++) {
@@ -654,7 +654,7 @@ public class ObligationsController {
      * @return List<ClientDTO> allObligationClients
      */
 	private  List<ClientDTO> formalObligationClientsSelected (List<String> selectedclients){
-		ClientDTO obligationClient = new ClientDTO();
+		ClientDTO obligationClient;
 		List<ClientDTO> allObligationClients = new ArrayList<ClientDTO>();
 		   if (selectedclients != null) {
 		       for (int i = 0 ; i < selectedclients.size(); i++) {
@@ -681,7 +681,7 @@ public class ObligationsController {
      * @return List<Spatial> allObligationVoluntaryCountries
      */
 	private List<Spatial> voluntaryObligationCountriesSelected (List<String> selectedVoluntaryCountries){
-		Spatial obligationCountry = new Spatial();
+		Spatial obligationCountry;
 		List<Spatial> allObligationVoluntaryCountries = new ArrayList<Spatial>();
 	       if (selectedVoluntaryCountries != null) {
 		       for (int i = 0 ; i < selectedVoluntaryCountries.size(); i++) {
@@ -697,7 +697,7 @@ public class ObligationsController {
 	 * @return List<Issue> allSelectedIssues
 	 */
 	private List<Issue> obligationIssuesSelected (List<String> selectedIssues){
-		Issue selectedIssue = new Issue();
+		Issue selectedIssue;
 		List<Issue> allSelectedIssues = new ArrayList<Issue>();
 	       if (selectedIssues != null) {
 		       for (int i = 0 ; i < selectedIssues.size(); i++) {

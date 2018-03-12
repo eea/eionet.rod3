@@ -111,6 +111,7 @@
               </li>
               <li th:class="${activeTab == 'analysis'}? 'current' : null"><a href="analysis.html" th:href="@{/analysis}">Database statistics</a></li>
               <li th:class="${activeTab == 'advancedSearch'}? 'current' : null"><a href="search.html" th:href="@{/advancedSearch}">Advanced search</a></li>
+              <li th:class="${activeTab == 'help'}? 'current' : null"><a href="help.html" th:href="@{/help}">Help</a></li>
             </ul>
           </div>
         </div>
@@ -158,7 +159,7 @@ of the art customer service.
     </div>
     <!-- container -->
     <div id="pagefoot" th:fragment="footerFragment">
-		<p><a href="/disclaimer">Disclaimer</a> | <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20Data%20Dictionary%20website">Feedback</a> | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a></p>
+		<p><a th:href="@{/disclaimer}">Disclaimer</a> | <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20Data%20Dictionary%20website">Feedback</a> | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a></p>
         <p><a href="http://www.eea.europa.eu/"><b>European Environment Agency</b></a>
         <br/>Kgs. Nytorv 6, DK-1050 Copenhagen K, Denmark - Phone: +45 3336 7100</p>
 	</div>

@@ -71,7 +71,8 @@ public class UndoInfoController {
 			case "UN":
 				model.addAttribute("operation", "UNDO");	
 				break;
-			default: break;
+			default: 
+				break;
 		}			
 		
 		List<UndoDTO> undoList = undoService.getUndoList(ts, tab, op);

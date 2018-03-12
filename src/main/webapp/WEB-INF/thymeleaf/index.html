@@ -3,116 +3,121 @@
   <head th:include="layout :: headerFragment"></head>
   <body>
     <div id="container">
-      <div th:include="layout :: bannerFragment" th:with="activeTab = 'home'">
-      </div>
-      <div id="workarea">
-      <div th:replace="helpModal :: helpModalFragment"></div>
-        <h1>What is ROD?</h1>
-        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-<p>
-ROD is the EEA's reporting obligations database. It contains records
-describing environmental reporting obligations that countries have towards
-international organisations. ROD is part of Reportnet. Reportnet is
-group of web applications and processes developed by the EEA to support
-international environmental reporting.
-</p>
-<h2>What are reporting obligations?</h2>
-<p>
-Reporting obligations are requirements to provide information
-agreed between countries and international bodies such as the EEA or
-international conventions. Reporting obligations provide the basis for
-most environmental information flows.
-</p>
-<h2>What does ROD cover?</h2>
-<p>
-ROD includes all environmental reporting obligations that EEA member
-countries have towards DG environment, European marine conventions,
-Eurostat, OECD, UN, UNECE, as well as the EEA itself. To learn more
-about ROD, the status of the contents and the intended users, please
-check out the general help section.
-</p>
-  	
-    	<div id="drop-operations">
-	        <ul class="nav nav-tabs" role="tablist">
-				<li role="tab_item1" class="search active"><a href="#tab_item1" aria-controls="tab_item1" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search reporting obligations">Search reporting obligations</a></li>
-				<li role="tab_item2" class="search"><a href="#tab_item2" aria-controls="tab_item2" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search">Search</a></li>	            
-			</ul>	       
-	    </div>
-    	<div id="filters" class="tab-content">
-    		    	
-    		<div role="tabpanel" class="filter tab-pane active" id="tab_item1">
-    			<a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
-    			<div style="clear:both"></div>
-    			<form th:action="@{/obligations/search}" th:object="${obligation}" method="POST" name="f">
-    			<div class="row">
-                    <div class="labeldiv">
-                        <label for="shortName">Country or territory</label>
-                    </div>
-	      			<div class="input">
-						<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
-							<option value="0" label="Any country or territory"></option>
-							<option th:each="country : ${countries}" th:text="${country.name}" th:value="${country.spatialId}" th:selected="(${country.spatialId} == *{spatialId})"></option>							
-						</select>
-					</div>
-				</div>
-				<div class="row">
-                       <div class="labeldiv">
-                           <label for="shortName">Issue</label>
-                       </div>
-                       <div class="input">	
-						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
-							<option value="0" label="All issues"></option>
-			    			<option th:each="issue : ${issues}" th:text="${issue.issueName}" th:value="${issue.issueId}" th:selected="(${issue.issueId} == *{issueId})"></option>
-			    			<option value="NI" label="No issue allocated"></option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-                       <div class="labeldiv">
-                           <label for="shortName">Organisation</label>
-                       </div>
-                       <div class="input">
-						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
-							<option value="0" label="Any organisation"></option>
-						    <option th:each="client : ${clients}" th:text="${client.acronym != null and client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" 
-						    th:value="${client.clientId}" th:selected="(${client.clientId} == *{clientId})"></option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-                    <div class="labeldiv">
-                        <label for="shortName"></label>
-                    </div>
-                    <div class="input inputcheck">
-                        <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
-                    </div>
-                </div>
-                <p class="actions">
-					<input name="filter" value="Search" class="mediumbuttonb searchButton" type="submit"/>
-				    <input name="Reset" value="Reset" class="mediumbuttonb " type="reset"/>
+      <div th:include="layout :: bannerFragment" th:with="activeTab = 'home'"></div>
+      
+	 <div th:replace="helpModal :: helpModalFragment"></div>
+     <div id="workarea">
+     	<div class="leftworkarea">
+	        <h1>What is ROD?</h1>
+	        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+				<p>
+				ROD is the EEA's reporting obligations database. It contains records
+				describing environmental reporting obligations that countries have towards
+				international organisations. ROD is part of Reportnet. Reportnet is
+				group of web applications and processes developed by the EEA to support
+				international environmental reporting.
 				</p>
-                </form>    
-		  </div>
-		  		
-		  <div role="tabpanel" class="filter tab-pane" id="tab_item2">
-		  	<form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
-				<div class="row">
-					<div class="labeldiv">	 
-						<label for="queryfld">ROD website</label>
-					</div>
-					<div class="input">
-						<input id="queryfld" maxlength="255" name="expression" value="" type="text" class="smalltext">
-					</div>
-				</div>
-				<p class="actions">
-					<input name="execute" value="Search" class="go_btn" type="submit">
+				<h2>What are reporting obligations?</h2>
+				<p>
+				Reporting obligations are requirements to provide information
+				agreed between countries and international bodies such as the EEA or
+				international conventions. Reporting obligations provide the basis for
+				most environmental information flows.
 				</p>
-			</form>
-		  </div>	  
-		  
-		 </div>	
-      </div>
-    </div>
+				<h2>What does ROD cover?</h2>
+				<p>
+				ROD includes all environmental reporting obligations that EEA member
+				countries have towards DG environment, European marine conventions,
+				Eurostat, OECD, UN, UNECE, as well as the EEA itself. To learn more
+				about ROD, the status of the contents and the intended users, please
+				check out the general help section.
+				</p>
+				  	
+		    	<div id="drop-operations">
+			        <ul class="nav nav-tabs" role="tablist">
+						<li role="tab_item1" class="search active"><a href="#tab_item1" aria-controls="tab_item1" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search reporting obligations">Search reporting obligations</a></li>
+						<li role="tab_item2" class="search"><a href="#tab_item2" aria-controls="tab_item2" role="tab" data-toggle="tab" aria-expanded="false" class="searchSection" title="Search">Search</a></li>	            
+					</ul>	       
+			    </div>
+		    	<div id="filters" class="tab-content">
+		    		    	
+		    		<div role="tabpanel" class="filter tab-pane active" id="tab_item1">
+		    			<a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+		    			<div style="clear:both"></div>
+		    			<form th:action="@{/obligations/search}" th:object="${obligation}" method="POST" name="f">
+		    			<div class="row">
+		                    <div class="labeldiv">
+		                        <label for="shortName">Country or territory</label>
+		                    </div>
+			      			<div class="input">
+								<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
+									<option value="0" label="Any country or territory"></option>
+									<option th:each="country : ${countries}" th:text="${country.name}" th:value="${country.spatialId}" th:selected="(${country.spatialId} == *{spatialId})"></option>							
+								</select>
+							</div>
+						</div>
+						<div class="row">
+		                       <div class="labeldiv">
+		                           <label for="shortName">Issue</label>
+		                       </div>
+		                       <div class="input">	
+								<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
+									<option value="0" label="All issues"></option>
+					    			<option th:each="issue : ${issues}" th:text="${issue.issueName}" th:value="${issue.issueId}" th:selected="(${issue.issueId} == *{issueId})"></option>
+					    			<option value="NI" label="No issue allocated"></option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+		                       <div class="labeldiv">
+		                           <label for="shortName">Organisation</label>
+		                       </div>
+		                       <div class="input">
+								<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+									<option value="0" label="Any organisation"></option>
+								    <option th:each="client : ${clients}" th:text="${client.acronym != null and client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" 
+								    th:value="${client.clientId}" th:selected="(${client.clientId} == *{clientId})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+		                    <div class="labeldiv">
+		                        <label for="shortName"></label>
+		                    </div>
+		                    <div class="input inputcheck">
+		                        <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
+		                    </div>
+		                </div>
+		                <p class="actions">
+							<input name="filter" value="Search" class="mediumbuttonb searchButton" type="submit"/>
+						    <input name="Reset" value="Reset" class="mediumbuttonb " type="reset"/>
+						</p>
+		                </form>    
+				  </div>
+				  		
+				  <div role="tabpanel" class="filter tab-pane" id="tab_item2">
+				  	<form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
+						<div class="row">
+							<div class="labeldiv">	 
+								<label for="queryfld">ROD website</label>
+							</div>
+							<div class="input">
+								<input id="queryfld" maxlength="255" name="expression" value="" type="text" class="smalltext">
+							</div>
+						</div>
+						<p class="actions">
+							<input name="execute" value="Search" class="go_btn" type="submit">
+						</p>
+					</form>
+				  </div>	  
+				  
+			 	</div>	
+	     	</div>
+	     	<div th:if="${news != null}" id="rightcolumn" class="quickjumps">
+				<span name="rightColumn" id="rightColumn" th:field="${news}" th:utext="${news}"></span>
+	 		</div>
+	     </div>
+	     </div>
     <!-- container -->
     <div id="pagefoot" th:include="layout :: footerFragment">
     Footer

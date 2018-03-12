@@ -243,7 +243,7 @@ public class UndoServiceJdbc implements UndoService {
 			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<InstrumentFactsheetDTO>(InstrumentFactsheetDTO.class), id);
 			for (int j = 0; j < columns.size(); j++) {
 				String column = columns.get(j);
-				
+				aux = true;
 				switch (column) {
 					case "FK_CLIENT_ID":
 						value = instrument.getClientId().toString();
@@ -260,21 +260,25 @@ public class UndoServiceJdbc implements UndoService {
 						quotes = "y";
 						isPrimary = "y";
 						break;
+					default: 
+						aux = false;
+						break;
 				}
 				
 				//isPrimary = isPrimaryKey(table, column);
-				
-				jdbcTemplate.update(insert,
-						ts,
-						table,
-						column,
-						state,
-						quotes,
-						isPrimary,
-						value,
-					    rowCnt,
-					    show
-						);				
+				if (aux) {
+					jdbcTemplate.update(insert,
+							ts,
+							table,
+							column,
+							state,
+							quotes,
+							isPrimary,
+							value,
+						    rowCnt,
+						    show
+							);
+				}
 			}
 		} else if (table.equals("T_SOURCE_LNK")) {
 			sql_stmt = "SELECT PK_SOURCE_LNK_ID AS sourceLnkPKSourceId, FK_SOURCE_CHILD_ID AS sourceLnkFKSourceChildId, CHILD_TYPE AS sourceChildType, "
@@ -286,7 +290,7 @@ public class UndoServiceJdbc implements UndoService {
 					InstrumentFactsheetDTO instrument = instruments.get(i);
 					for (int j = 0; j < columns.size(); j++) {
 						String column = columns.get(j);
-						
+						aux = true;
 						switch (column) {
 							case "PK_SOURCE_LNK_ID":
 								value = instrument.getSourceLnkPKSourceId().toString();
@@ -313,21 +317,25 @@ public class UndoServiceJdbc implements UndoService {
 								quotes = "y";
 								isPrimary = "n";
 								break;
+							default:
+								aux = false;
+								break;
 						}
 			
 						//isPrimary = isPrimaryKey(table, column);
-						
-						jdbcTemplate.update(insert,
-								ts,
-								table,
-								column,
-								state,
-								quotes,
-								isPrimary,
-								value,
-							    rowCnt,
-							    show
-								);
+						if (aux) {
+							jdbcTemplate.update(insert,
+									ts,
+									table,
+									column,
+									state,
+									quotes,
+									isPrimary,
+									value,
+								    rowCnt,
+								    show
+									);
+						}
 					}
 					rowCnt++;
 				}
@@ -599,7 +607,7 @@ public class UndoServiceJdbc implements UndoService {
 					Obligations obligation = obligations.get(i);
 					for (int j = 0; j < columns.size(); j++) {
 						String column = columns.get(j);
-						
+						aux = true;
 						switch (column) {
 							case "FK_ISSUE_ID":
 								value = obligation.getIssueId().toString();
@@ -611,21 +619,25 @@ public class UndoServiceJdbc implements UndoService {
 								quotes = "n";
 								isPrimary = "y";
 								break;
+							default:
+								aux = false;
+								break;
 						}
 						
 						//isPrimary = isPrimaryKey(table, column);
-						
-						jdbcTemplate.update(insert,
-								ts,
-								table,
-								column,
-								state,
-								quotes,
-								isPrimary,
-								value,
-							    rowCnt,
-							    show
-								);
+						if (aux) {
+							jdbcTemplate.update(insert,
+									ts,
+									table,
+									column,
+									state,
+									quotes,
+									isPrimary,
+									value,
+								    rowCnt,
+								    show
+									);
+						}
 						
 					}
 					rowCnt++;
@@ -642,7 +654,7 @@ public class UndoServiceJdbc implements UndoService {
 					Obligations obligation = obligations.get(i);
 					for (int j = 0; j < columns.size(); j++) {
 						String column = columns.get(j);
-						
+						aux = true;
 						switch (column) {
 							case "FK_SPATIAL_ID":
 								value = obligation.getSpatialId().toString();
@@ -659,21 +671,25 @@ public class UndoServiceJdbc implements UndoService {
 								quotes = "y";
 								isPrimary = "y";
 								break;
+							default:
+								aux = false;
+								break;
 						}
 						
 						//isPrimary = isPrimaryKey(table, column);
-						
-						jdbcTemplate.update(insert,
-								ts,
-								table,
-								column,
-								state,
-								quotes,
-								isPrimary,
-								value,
-							    rowCnt,
-							    show
-								);
+						if (aux) {
+							jdbcTemplate.update(insert,
+									ts,
+									table,
+									column,
+									state,
+									quotes,
+									isPrimary,
+									value,
+								    rowCnt,
+								    show
+									);
+						}
 							
 					}
 					rowCnt++;
@@ -690,6 +706,7 @@ public class UndoServiceJdbc implements UndoService {
 					Obligations obligation = obligations.get(i);
 					for (int j = 0; j < columns.size(); j++) {
 						String column = columns.get(j);
+						aux = true;
 						switch (column) {
 							case "FK_CLIENT_ID":
 								value = obligation.getClientLnkFKClientId();
@@ -706,21 +723,25 @@ public class UndoServiceJdbc implements UndoService {
 								quotes = "y";
 								isPrimary = "y";
 								break;
+							default:
+								aux = false;
+								break;
 						}
 						
 						//isPrimary = isPrimaryKey(table, column);
-						
-						jdbcTemplate.update(insert,
-								ts,
-								table,
-								column,
-								state,
-								quotes,
-								isPrimary,
-								value,
-							    rowCnt,
-							    show
-								);
+						if (aux) {
+							jdbcTemplate.update(insert,
+									ts,
+									table,
+									column,
+									state,
+									quotes,
+									isPrimary,
+									value,
+								    rowCnt,
+								    show
+									);
+						}
 						
 					}
 					rowCnt++;
@@ -738,6 +759,7 @@ public class UndoServiceJdbc implements UndoService {
 				Obligations obligation = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<Obligations>(Obligations.class), id);
 				for (int j = 0; j < columns.size(); j++) {
 					String column = columns.get(j);
+					aux = true;
 					switch (column) {
 						case "FK_RA_ID":
 							value = id.toString();
@@ -754,19 +776,23 @@ public class UndoServiceJdbc implements UndoService {
 							quotes = "n";
 							isPrimary = "y";
 							break;
+						default:
+							aux = false;
+							break;
 					}
-					
-					jdbcTemplate.update(insert,
-							ts,
-							table,
-							column,
-							state,
-							quotes,
-							isPrimary,
-							value,
-						    rowCnt,
-						    show
-							);					
+					if (aux) {
+						jdbcTemplate.update(insert,
+								ts,
+								table,
+								column,
+								state,
+								quotes,
+								isPrimary,
+								value,
+							    rowCnt,
+							    show
+								);	
+					}
 				
 				}
 			}
