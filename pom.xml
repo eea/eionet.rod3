@@ -316,6 +316,38 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        
+        <dependency>
+           <groupId>eionet</groupId>
+           <artifactId>eionet-dir</artifactId>
+           <version>3.1-SNAPSHOT</version> <!-- Use prerelease -->
+       </dependency>
+       
+       <dependency>
+           <groupId>javax.mail</groupId>
+           <artifactId>mail</artifactId>
+           <version>1.4.1</version>
+       </dependency>
+       
+        <dependency>
+            <groupId>eionet</groupId>
+            <artifactId>rpcclient</artifactId>
+            <version>3.1-SNAPSHOT</version>
+        </dependency>
+        
+        <!-- RDF utilities -->
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-runtime</artifactId>
+            <version>2.6.10</version>
+        </dependency>
+        
+         <dependency>
+            <groupId>eionet</groupId>
+            <artifactId>acl</artifactId>
+            <version>3.1-SNAPSHOT</version> <!-- Use prerelease -->
+        </dependency>
+        
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
