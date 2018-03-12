@@ -4,8 +4,10 @@ import java.util.List;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Roles;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
+
 /**
  * 
  * @author ycarrasco
@@ -32,4 +34,8 @@ public interface ObligationService {
 	void deleteObligations(String obligations);
 	
 	Obligations findObligationRelation(Integer obligationId);
+
+	List<ClientDTO> findAllClientsByObligation(Integer obligationID);
+	
+	List<Roles> getRespRoles();
 }

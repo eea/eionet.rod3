@@ -84,8 +84,8 @@ public class ITSpatialDao {
     	
     	List<ObligationCountry> obligationCountries = spatialService.findObligationCountriesList(1);
     	for (int i = 0 ; i< obligationCountries.size(); i++) {
-	    	System.out.println("country: " + obligationCountries.get(i).getCountryName());
-	    	 assertEquals(spatialListY.get(i).getName(),obligationCountries.get(i).getCountryName());
+	    	//System.out.println("country: " + obligationCountries.get(i).getCountryName());
+	    	assertEquals(spatialListY.get(i).getName(),obligationCountries.get(i).getCountryName());
 	    }
     	
     }

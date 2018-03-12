@@ -11,14 +11,16 @@ public interface UndoService {
 	
 	void insertIntoUndo(Integer id, String state, String table, String id_field, long ts, String extraSQL, String show);
 	
-	void deleteByPK(Integer undoTime, String table, String column, String operation, Integer subTransNr);
-	
-	void update(UndoDTO undoRec);
-	
 	void insertTransactionInfo(Integer id, String state, String table, String id_field, long ts, String extraSQL);
 	
 	void addObligationIdsIntoUndo(Integer id, long ts, String table);
 	
 	List<UndoDTO> getPreviousActionsReportSpecific(Integer id, String tab, String id_field, String operation);
+	
+	List<UndoDTO> getUndoList(long ts, String table, String op);
+	
+	List<UndoDTO> getPreviousActionsGeneral();
+	
+	boolean isDelete(String table, String column, Integer id);
 	
 }

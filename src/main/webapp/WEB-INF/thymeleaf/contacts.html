@@ -2,14 +2,104 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:include="layout :: headerFragment"></head>
   <body>
+    <script>
+		 $(document).ready(function(){
+		    $('#subrolesTable').DataTable({
+		    	"sDom": 'Tfrtipt',
+		    	"sPaginationType": "full_numbers"
+		    });
+		    
+		    $('#membersTable').DataTable({
+		    	"sDom": 'Tfrtipt',
+		    	"sPaginationType": "full_numbers"
+		    });
+		    
+		});
+	 
+	</script>
   <div id="container">
 	<div th:include="layout :: bannerFragment" ></div>
 	<div id="workarea">
 	<div th:replace="helpModal :: helpModalFragment"></div>
 	
-	<h1>Edit Reporting Obligation for</h1>
+	<span th:if="${dirRole} == null">
+		<span th:if="${isDirectoryError} == true">Technical error when getting the requested role's description from Eionet's directory service!</span>
+		<span th:if="${isDirectoryError} == false">Found no description for the requested role in Eionet's directory service!</span>
+	</span>
 	
-	
+	<div th:unless="${dirRole} == null">
+		<div class="title">
+			<h1 th:text="${dirRole.description != null} ? ${dirRole.description} : ${dirRole.roleId}"></h1>
+		</div>
+		<div class="form-horizontal">
+			<div class="datatable results">
+				<div class="odd form-group">
+				  <div class="col-lg-4">Role name</div>
+	              <div class="col-lg-8">
+	              	<span th:text="${dirRole.name}"></span> 
+	              </div>
+	            </div>
+	            <div class="even form-group">
+				  <div class="col-lg-4">Parent role</div>
+	              <div class="col-lg-8">
+	              	<a th:if="${parentRoleId != null}" th:href="@{/contacts} + '?roleId=' + ${parentRoleId}" th:text="${parentRoleId}"></a> 
+	              	<span th:if="${parentRoleId == null}">N/A</span>
+	              </div>
+	            </div>
+	            <div class="odd form-group">
+				  <div class="col-lg-4">Eionet site directory</div>
+	              <div class="col-lg-8">
+	              	<a th:href="${dirRole.membersUrl}">Additional details for authenticated users</a> 
+	              </div>
+	            </div>
+			</div>
+		</div>
+		
+		<div th:if="${#lists.isEmpty(dirRole.subroles) and #lists.isEmpty(dirRole.members)}">No sub-roles and no members found!</div>
+		
+        <div th:if="${not #lists.isEmpty(dirRole.subroles)}">
+	        <table id="subrolesTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>Sub-roles:</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="subrole, iterStat : ${dirRole.subroles}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><a th:href="@{'/contacts?roleId=' + ${subrole.id}}" th:text="${subrole.id} + ' (' + ${subrole.description} + ')'"></a></td>
+	        </tr>
+	        </table>
+        </div>
+        
+        <div th:if="${not #lists.isEmpty(dirRole.members)}">
+	        <table id="membersTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>Members:</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="member, iterStat : ${dirRole.members}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td>
+	        		<b th:if="${not #strings.isEmpty(member.fullName)}" th:text="${member.fullName}"></b>
+	        		<span th:if="${not #strings.isEmpty(member.description) and member.description != ' '}">
+	        			<br/><span th:text="${member.description}"></span>
+	        		</span>
+	        		<span th:if="${not #strings.isEmpty(member.phone)}">
+	        			<br/><span th:text="${'Tel: ' + member.phone}"></span>
+	        		</span>
+	        		<span th:if="${not #strings.isEmpty(member.fax)}" th:text="${'Fax: ' + member.fax}"></span>
+	        		<span th:if="${member.organisation != null}">
+		        		<span th:if="${(not #strings.isEmpty(member.organisation.name)) and (not #strings.isEmpty(member.organisation.url))}">
+		        			<br/><a th:href="${member.organisation.url}" th:text="${member.organisation.name}"></a>
+		        		</span>
+		        		<span th:if="${(not #strings.isEmpty(member.organisation.name)) and (#strings.isEmpty(member.organisation.url))}">
+		        			<br/><span th:text="${member.organisation.name}"></span>
+		        		</span>
+		        	</span>
+	        	</td>
+	        </tr>
+	        </table>
+        </div>
+	</div>
 	
 	</div>
     <div th:replace="layout :: footerFragment"></div>

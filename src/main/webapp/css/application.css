@@ -251,6 +251,7 @@ span[id*="Error"]{
 a.helpButton{
     margin-top: 12px;
 	padding-right: 7px;
+	cursor: pointer;
 }
 	.text-center a.helpButton{
 		padding-right: 0px;
@@ -570,6 +571,20 @@ a.helpButton{
 				color: #455b6b;
 			}
 /* FIN search */
+
+/* INICIO undoinfo */
+
+.currentValueDif {
+	background-color: #FFFFCC;
+}
+
+.added {
+	background-color: #CCFFCC;
+}
+
+.removed {
+	background-color: #FFCCCC;
+}
 
 /* INICIO responsive */
 

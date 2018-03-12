@@ -32,7 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Sql("/seed-help.sql")
 /**
- * Test the spatial controller.
+ * Test the help controller.
  */
 public class ITHelpController {
 

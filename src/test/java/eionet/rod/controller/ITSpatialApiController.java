@@ -37,7 +37,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @Sql("/seed-spatial.sql")
 /**
- * Test the clients controller.
+ * Test the spatial Api controller.
  */
 public class ITSpatialApiController {
 
@@ -73,7 +73,7 @@ public class ITSpatialApiController {
     	
         String expected = "{\"spatialId\":1,\"name\":\"Austria\",\"type\":\"C\",\"twoLetter\":\"AT\",\"memberCountry\":\"Y\"}";
                       
-        System.out.println("result by All: " + result.getResponse().getContentAsString());
+       // System.out.println("result by All: " + result.getResponse().getContentAsString());
 
         assertThat(result.getResponse().getContentAsString(),result.getResponse().getContentAsString().length() != 0 );
         
@@ -93,7 +93,7 @@ public class ITSpatialApiController {
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
-		System.out.println("result by ID: " + result.getResponse().getContentAsString());
+		//System.out.println("result by ID: " + result.getResponse().getContentAsString());
 		String expected = "{\"spatialId\":1,\"name\":\"Austria\",\"type\":\"C\",\"twoLetter\":\"AT\",\"memberCountry\":\"Y\"}";
 
 		assertEquals(expected, result.getResponse().getContentAsString());

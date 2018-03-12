@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.rules.ExpectedException;
 
 //import java.io.IOException;
@@ -210,6 +212,14 @@ public class ITObligationsDao {
     	 assertEquals("replaces", oblRelation.getOblRelationId());
     	 assertEquals("2", oblRelation.getRelObligationId().toString());
     	
+    }
+    
+    @Test
+    public void testfindAllClientsByObligation() {
+    	List<ClientDTO> clients = obligationsService.findAllClientsByObligation(1);
+    	assertEquals(2, clients.size());
+    	assertTrue(clients.get(0).getName().contains("Test client"));
+    	assertNull( obligationsService.findAllClientsByObligation(175));
     }
 
 }

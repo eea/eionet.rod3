@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContextException;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Roles;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
 
@@ -38,5 +39,9 @@ public interface ObligationsDao {
 	void deleteObligations(String obligations);
 	
 	Obligations findObligationRelation(Integer obligationId);
+	
+	List<Roles> getRespRoles();
+
+	List<ClientDTO> findAllClientsByObligation(Integer ObligationID);
 		
 }

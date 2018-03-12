@@ -26,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Sql("/seed-obligation-source.sql")
 /**
- * Test the simple doc controller.
+ * Test the search controller.
  */
 public class ITSearchController {
 

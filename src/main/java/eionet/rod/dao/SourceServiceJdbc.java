@@ -48,7 +48,8 @@ public class SourceServiceJdbc implements SourceService {
                 + "ALIAS AS sourceAlias, CELEX_REF AS sourceCelexRef, SOURCE_CODE AS sourceCode,"
                 + "VALID_FROM AS sourceValidFrom, ABSTRACT AS sourceAbstract, COMMENT AS sourceComment, ISSUED_BY_URL AS sourceIssuedByUrl,"
                 + "EC_ENTRY_INTO_FORCE AS sourceEcEntryIntoForce, EC_ACCESSION AS sourceEcAccession, SECRETARIAT AS sourceSecretariat,"
-                + "SECRETARIAT_URL AS sourceSecretariatUrl, TERMINATE AS sourceTerminate "
+                + "SECRETARIAT_URL AS sourceSecretariatUrl, TERMINATE AS sourceTerminate, "
+                + "FK_TYPE_ID AS sourceFkTypeId, LEGAL_NAME AS sourceLegalName, LAST_MODIFIED AS sourceLastModified, ISSUED_BY AS sourceIssuedBy, LAST_UPDATE AS sourceLastUpdate "
                 + "FROM T_SOURCE "
                 + "WHERE T_SOURCE.PK_SOURCE_ID = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

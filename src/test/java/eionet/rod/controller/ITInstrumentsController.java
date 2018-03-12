@@ -118,7 +118,7 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
-    			.param("sourceId", "2")
+    			.param("sourceId", "1")
     			.with(user("editor").roles("EDITOR"))
         		.with(csrf()))
         		.andExpect(status().is3xxRedirection());
@@ -129,7 +129,7 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithoutCsrf() throws Exception
 	{
     	this.mockMvc.perform(post("/instruments/delete")
-    			.param("sourceId", "2")
+    			.param("sourceId", "1")
     			.with(user("editor").roles("EDITOR")))
         		.andExpect(status().is4xxClientError());
 
@@ -141,20 +141,25 @@ public class ITInstrumentsController {
 	{
     	this.mockMvc.perform(post("/instruments/edit")
     			.param("sourceId","1")
+    			.param("hrefInstruments", "/rod/instruments")
     			.param("sourceTitle", "Basel Convention on the control of transboundary movements of hazardous wastes and their disposal")
-    			.param("sourceAlias", "Basel Conventions")
+    			.param("sourceAlias", "Basel Convention")
     			.param("sourceCode", "")
     			.param("sourceUrl", "")
     			.param("sourceCelexRef", "")
-    			.param("clientId", "2")
+    			.param("clientId", "1")
     			.param("sourceIssuedByUrl", "")
     			.param("sourceLnkFKSourceParentId","1")
     			.param("_selectedClassifications", "1")
     			.param("selectedClassifications", "1")
     			.param("selectedClassifications", "2")
     			.param("sourceValidFrom","")
+    			.param("sourceAbstract", "")
+    			.param("sourceComment", "")
 				.param("SourceEcAccession","")
 				.param("sourceEcEntryIntoForce","")
+				.param("sourceSecretariat", "")
+				.param("sourceSecretariatUrl", "")
     			.param("edit","Save changes")
     			.with(user("editor").roles("EDITOR"))
     			.with(csrf()))

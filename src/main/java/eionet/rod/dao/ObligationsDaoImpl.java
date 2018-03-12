@@ -2,6 +2,7 @@ package eionet.rod.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +32,12 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Roles;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
+
 
 /**
  * @author ycarrasco
@@ -453,6 +456,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				//+ "DATE_FORMAT(OB.VALID_SINCE, '%d/%m/%Y') as validSince, "
 				+ "OB.VALID_SINCE as validSince, "
 				+ "OB.AUTHORITY as authority, OB.COMMENT as comment, "
+				+ "OB.REPORT_FREQ_DETAIL AS reportFreqDetail, OB.LAST_UPDATE AS lastUpdate, OB.REPORT_FREQ AS reportFreq, OB.LAST_HARVESTED AS lastHarvested, "
+				+ "OB.FK_DELIVERY_COUNTRY_IDS AS deliveryCountryId, OB.CONTINOUS_REPORTING AS continousReporting, "
 				+ "CRO.ROLE_ID AS coordRoleId, CRO.ROLE_NAME AS coordRoleName, CRO.ROLE_URL AS coordRoleUrl, "
 				+ "RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.RESPONSIBLE_ROLE as responsibleRole,OB.RESPONSIBLE_ROLE_SUF as responsibleRoleSuf, "
 				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, "
@@ -1081,4 +1086,103 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		}
     }
     
+    //ROLES
+    private static final String qResponsibleRole =
+            "SELECT DISTINCT RESPONSIBLE_ROLE as roleName "
+            + "FROM T_OBLIGATION "
+            + "WHERE RESPONSIBLE_ROLE IS NOT NULL AND RESPONSIBLE_ROLE <> '' ";
+
+        private static final String qCountryResponsibleRole =
+            "SELECT DISTINCT a.RESPONSIBLE_ROLE AS roleName "
+            + "FROM T_OBLIGATION a, T_SPATIAL s,  T_RASPATIAL_LNK sl "
+            + "WHERE  a.RESPONSIBLE_ROLE_SUF=1 "
+            + "AND sl.FK_RA_ID=a.PK_RA_ID "
+            + "AND sl.FK_SPATIAL_ID = s.PK_SPATIAL_ID "
+            + "AND a.RESPONSIBLE_ROLE IS NOT NULL "
+            + "AND a.RESPONSIBLE_ROLE <> '' "
+            + "AND s.SPATIAL_TYPE = 'C' "
+            + "AND s.SPATIAL_TWOLETTER IS NOT NULL "
+            + "AND TRIM(s.SPATIAL_TWOLETTER) <> '' ";
+
+        private static final String qCoordinatorRole =
+            "SELECT DISTINCT COORDINATOR_ROLE as roleName "
+            + "FROM T_OBLIGATION "
+            + "WHERE COORDINATOR_ROLE IS NOT NULL "
+            + "AND COORDINATOR_ROLE <> '' ";
+
+        private static final String qCountryCoordinatorRole =
+            "SELECT DISTINCT a.COORDINATOR_ROLE as roleName "
+            + "FROM T_OBLIGATION a, T_SPATIAL s,  T_RASPATIAL_LNK sl "
+            + "WHERE  a.COORDINATOR_ROLE_SUF=1 "
+            + "AND sl.FK_RA_ID=a.PK_RA_ID "
+            + "AND sl.FK_SPATIAL_ID = s.PK_SPATIAL_ID "
+            + "AND a.COORDINATOR_ROLE IS NOT NULL "
+            + "AND a.COORDINATOR_ROLE <> '' "
+            + "AND s.SPATIAL_TYPE = 'C' "
+            + "AND s.SPATIAL_TWOLETTER IS NOT NULL AND "
+            + "TRIM(s.SPATIAL_TWOLETTER) <> '' ";
+
+        private static String[] respRolesQueries = { qResponsibleRole, qCountryResponsibleRole, qCoordinatorRole, qCountryCoordinatorRole };
+
+    
+        public List<Roles> getRespRoles() {
+        	List<Roles> rolesAdd = new ArrayList<Roles>();
+        	try {
+        	
+	   		    for (int i = 0; i < respRolesQueries.length; i++) {
+	   		    	List<Roles> result = null;
+	            	result = jdbcTemplate.query(respRolesQueries[i], new BeanPropertyRowMapper<Roles>(Roles.class));
+	            	for (int j = 0; j < result.size(); j++) {
+	            		rolesAdd.add(result.get(j));
+	                }
+	            
+	            }
+	   		 
+        	}catch (Exception e) {
+				System.out.print(e.getMessage());
+			}
+        	return rolesAdd;
+        }
+        
+        protected void addRoles(List<Roles> rolesResult) {
+        	List<Roles> rolesAdd = null;
+        	Roles rolesnew = new Roles();
+        	try {
+            for (int i = 0; i < rolesResult.size(); i++) {
+            	String rolename = rolesResult.get(i).getRoleName();
+            	rolesnew.setRoleName(rolesResult.get(i).getRoleName());
+            	rolesAdd.add(rolesnew);
+            }
+        	}catch (Exception e) {
+				System.out.print(e.getMessage());
+			}
+            
+        }
+       
+ 
+    /**
+	 * Find all clients relationed with the obligation
+	 */
+    @Override
+    public List<ClientDTO> findAllClientsByObligation(Integer obligationId) {
+    	String query = "SELECT CL.PK_CLIENT_ID AS clientId, CL.CLIENT_NAME AS name "
+    			+ "FROM T_CLIENT AS CL INNER JOIN T_CLIENT_OBLIGATION_LNK AS COL "
+    			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
+    			+ "WHERE COL.FK_RA_ID=?";
+    	
+    	String queryCount = "SELECT Count(*) "
+    			+ "FROM T_CLIENT AS CL INNER JOIN T_CLIENT_OBLIGATION_LNK AS COL "
+    			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
+    			+ "WHERE COL.FK_RA_ID=?";
+    	
+    	Integer countClients = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
+    	
+    	if (countClients == 0) {
+    		return null;
+    	} else {
+    		List<ClientDTO> clients = jdbcTemplate.query(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), obligationId);
+    		return clients;
+    	}    	
+    	
+    }	   
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+  <script>
+	 $(document).ready(function(){
+	    $('#versionsTable').DataTable({
+	    	"sDom": 'Tfrtipt',
+	    	"sPaginationType": "full_numbers"
+	    });
+	    
+	});
+	 
+</script>
+    <div id="container">
+     <div th:include="layout :: bannerFragment"></div>
+     <div id="workarea">      
+	 	<div class="title">
+		    <h1>Previous Versions</h1>		     
+        </div>
+                  
+        <div th:if="${#lists.isEmpty(versions)}">There are no results.</div>
+        <div th:if="${not #lists.isEmpty(versions)}">
+	        <table id="versionsTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>Time</th>
+			        <th>Object</th>
+			        <th>Operation</th>
+			        <th>User</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="version, iterStat : ${versions}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><span th:text="${version.date}"></span></td>	        	
+	        	<td th:switch="${version.tab}">
+	        		<a th:case="'T_OBLIGATION'" th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=' + ${version.tab} + '&op=' + ${version.operation} + '&id=' + ${version.value} + '&user=' + ${version.userName}}" th:text="'/obligations/' + ${version.value}"></a>
+	        		<a th:case="'T_SOURCE'" th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=' + ${version.tab} + '&op=' + ${version.operation} + '&id=' + ${version.value} + '&user=' + ${version.userName}}" th:text="'/instruments/' + ${version.value}"></a>
+	        	</td>
+	        	<td th:switch="${version.operation}">
+	        		<span th:case="'U'">UPDATE</span>
+	        		<span th:case="'D'">DELETE</span>
+	        		<span th:case="'UN'">UNDO</span>
+	        	</td>
+	        	<td><span th:text="${version.userName}"></span></td>
+	        </tr>
+	        </table>
+        </div>
+         
+     </div>
+    <div th:replace="layout :: footerFragment"></div>
+    </div>
+  </body>
+</html>

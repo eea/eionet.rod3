@@ -3,8 +3,8 @@ package eionet.rod.model;
 public class UndoDTO {
 	
 	private long undoTime;
-    private String table;
-    private String column;
+    private String tab;
+    private String col;
     private String operation;
     private String quotes;
     private String primaryKey;
@@ -12,6 +12,7 @@ public class UndoDTO {
     private Integer subTransNr;
     private String show; 
     private String date;
+    private String userName;
     
     /**
      * Constructor.
@@ -27,20 +28,20 @@ public class UndoDTO {
 		this.undoTime = undoTime;
 	}
 
-	public String getTable() {
-		return table;
+	public String getTab() {
+		return tab;
 	}
 
-	public void setTable(String table) {
-		this.table = table;
+	public void setTab(String tab) {
+		this.tab = tab;
 	}
 
-	public String getColumn() {
-		return column;
+	public String getCol() {
+		return col;
 	}
 
-	public void setColumn(String column) {
-		this.column = column;
+	public void setCol(String col) {
+		this.col = col;
 	}
 
 	public String getOperation() {
@@ -97,6 +98,14 @@ public class UndoDTO {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

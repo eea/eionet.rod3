@@ -10,8 +10,10 @@ import eionet.rod.dao.ObligationsDao;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Roles;
 import eionet.rod.model.SiblingObligation;
 import eionet.rod.model.Spatial;
+
 
 @Service(value = "obligationService")
 @Transactional
@@ -66,4 +68,13 @@ public class ObligationServiceImpl implements ObligationService {
 	public Obligations findObligationRelation(Integer obligationId) {
 		return obligationsDao.findObligationRelation(obligationId);
 	}
+	@Override
+	public List<Roles> getRespRoles() {
+		return obligationsDao.getRespRoles();
+	}
+	@Override
+	public List<ClientDTO> findAllClientsByObligation(Integer obligationID) {
+		return obligationsDao.findAllClientsByObligation(obligationID);
+	}
+	
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 import static org.junit.Assert.assertFalse;
@@ -86,6 +85,7 @@ public class ITSearchInjection {
             return;
         }
         List<Obligations> allObligations = (List<Obligations>)model.get("allObligations");
+        
         // No "allObligations" in model means this issue is fixed
         if (allObligations == null) {
             return;

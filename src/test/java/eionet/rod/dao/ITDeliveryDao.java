@@ -1,13 +1,20 @@
 package eionet.rod.dao;
 
 import org.junit.runner.RunWith;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
+import org.openrdf.repository.sparql.SPARQLRepository;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -19,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import eionet.rod.model.Delivery;
 import eionet.rod.service.DeliveryService;
+import eionet.rod.service.FileServiceIF;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 
@@ -62,5 +70,35 @@ public class ITDeliveryDao {
     	assertEquals(1,deliveries.size());
     }
     
+    @Test
+    public void testRollBackDeliveries() throws DataAccessException
+    {
+    	try {
+    	deliveryService.rollBackDeliveries();
+    	} catch (DataAccessException sqle) {
+            throw new ResourceNotFoundException(sqle.getMessage());
+        } 
+    }
+    
+    @Test
+    public void testCommitDeliveries() throws DataAccessException
+    {
+    	try {
+    		HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<String, HashSet<Integer>>();
+	    	deliveryService.commitDeliveries(savedCountriesByObligationId);
+    	} catch (DataAccessException sqle) {
+            throw new ResourceNotFoundException(sqle.getMessage());
+        } 
+    }
+    
+    @Test
+    public void testBackUpDeliveries() throws DataAccessException
+    {
+    	try {
+    		deliveryService.backUpDeliveries();
+    	} catch (DataAccessException sqle) {
+            throw new ResourceNotFoundException(sqle.getMessage());
+        } 
+    }
     
 }

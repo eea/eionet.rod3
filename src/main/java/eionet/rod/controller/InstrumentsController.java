@@ -163,7 +163,7 @@ public class InstrumentsController {
 		Authentication authentication = authenticationFacade.getAuthentication();
 		processEditDelete("U", authentication.getName(), instrument.getSourceId());
 		sourceService.update(instrument);
-        model.addAttribute("sourceId", instrument.getSourceId());        
+		model.addAttribute("sourceId", instrument.getSourceId());        
         return "redirect:edit";
     }
 	
@@ -205,13 +205,14 @@ public class InstrumentsController {
 	 private void processEditDelete(String state, String userName, Integer sourceId) {
 		 
 		 long ts = System.currentTimeMillis();
-		 
+
 		 if (state != null && state.equals("U")) {
 			 undoService.insertIntoUndo(sourceId, "U", "T_SOURCE", "PK_SOURCE_ID", ts, "", "y");
 			 undoService.insertIntoUndo(sourceId, "U", "T_CLIENT_SOURCE_LNK", "FK_SOURCE_ID", ts, "", "y");
 		 }
 		 
 		 String url = "instruments/" + sourceId;
+		 
 		 undoService.insertIntoUndo(ts, "T_SOURCE", "REDIRECT_URL", "L", "y", "n", url, 0, "n");
 		 undoService.insertIntoUndo(ts, "T_SOURCE", "A_USER", "K", "y", "n", userName, 0, "n");
 		 undoService.insertIntoUndo(ts, "T_SOURCE", "TYPE", "T", "y", "n", "L", 0, "n");
@@ -220,18 +221,17 @@ public class InstrumentsController {
             String acl_path = "/instruments/" + sourceId;
             undoService.insertIntoUndo(ts, "T_SOURCE", "ACL", "ACL", "y", "n", acl_path, 0, "n");
         }
-		 	 
+ 
 		 delActivity(state, sourceId, ts);
 		 
 	 }
 	 
 	 private void delActivity(String op, Integer sourceId, long ts) {
-		 
+		 	
 		 undoService.insertTransactionInfo(sourceId, "A", "T_CLIENT_SOURCE_LNK", "FK_SOURCE_ID", ts, "");
 		 undoService.insertTransactionInfo(sourceId, "A", "T_SOURCE_LNK", "FK_SOURCE_CHILD_ID", ts, "AND CHILD_TYPE='S'");
 		 undoService.insertTransactionInfo(sourceId, "A", "T_SOURCE_LNK", "FK_SOURCE_PARENT_ID", ts, "AND PARENT_TYPE='S'");
 		 undoService.insertTransactionInfo(sourceId, "A", "T_SOURCE", "PK_SOURCE_ID", ts, "");
-		 
 		 undoService.insertIntoUndo(sourceId, op, "T_SOURCE_LNK", "FK_SOURCE_CHILD_ID", ts, "AND CHILD_TYPE='S'", "y");
 		 
 		 if (op != null && op.equals("D")) {
@@ -239,7 +239,7 @@ public class InstrumentsController {
 			 undoService.insertIntoUndo(sourceId, op, "T_SOURCE_LNK", "FK_SOURCE_PARENT_ID", ts, "AND PARENT_TYPE='S'", "y");
 			 undoService.addObligationIdsIntoUndo(sourceId, ts, "T_SOURCE");
 			 undoService.insertIntoUndo(sourceId, "D", "T_SOURCE", "PK_SOURCE_ID", ts, "", "y");
-			 
+		 
 		 }
 		 
 	 }

@@ -32,19 +32,19 @@
 	      			<div class="col-xs-2 text-center"><span th:if="${analysis.overlapRa > 0}"><a th:href="@{obligations?anmode=O}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center"><a class="helpButton" onclick="helpFunction('HELP_ANALYSIS_OVERLAPPING')" title="Help on this field"></a></div>
 	      		</div-->
-	      		<div class="form-group even">
+	      		<div class="form-group odd">
 	      			<div class="col-xs-8">Number of reporting obligations where the delivery process is managed by EEA</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.flaggedRa}"></span></div>
 	      			<div class="col-xs-2 text-center"><span th:if="${analysis.flaggedRa > 0}"><a th:href="@{obligations?anmode=F}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center"><a class="helpButton" onclick="helpFunction('HELP_ANALYSIS_FLAGGED')" title="Help on this field"></a></div>
 	      		</div>
-	      		<div class="form-group odd">
+	      		<div class="form-group even">
 	      			<div class="col-xs-8">Most recent ROD updates	</div>
 	      			<div class="col-xs-1 text-center">100</div>
 	      			<div class="col-xs-2 text-center"><a href="#">Show list</a></div>
 	      			<div class="col-xs-1 text-center">&nbsp;</div>
 	      		</div>
-	      		<div class="form-group even">
+	      		<div class="form-group odd">
 	      			<div class="col-xs-8">No issue allocated</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.noIssue}"></span></div>
 	      			<div class="col-xs-2 text-center"><span th:if="${analysis.noIssue > 0}"><a th:href="@{obligations?anmode=NI}">Show list</a></span></div>

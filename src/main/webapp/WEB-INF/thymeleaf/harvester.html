@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+	<div th:include="layout :: bannerFragment"></div>
+    <div id="workarea" sec:authorize="hasRole('EDITOR')">
+    	<div th:replace="helpModal :: helpModalFragment"></div>
+    	 <div class="title">
+			<h1>Harvest deliveries and roles</h1>
+			<div th:if="${message}" th:text="${message}" class="system-msg"></div>
+			<!-- ul>
+		     	 <li><a href="history">Show harvesting history</a></li>
+		    </ul -->
+	     </div>
+	     <h2>Select the data you want to be harvested</h2>
+		<form method="POST" th:action="@{/harvester}" name="f" >
+			<div>
+				<input th:if="${mode == '0'}" type="radio" name="mode" value="0" id="mode_0" checked="checked"/>
+					<input th:unless="${mode == '0'}" type="radio" name="mode" value="0" id="mode_0"/><label for="mode_0">All</label>
+				<input th:if="${mode == '1'}" type="radio" name="mode" value="1" id="mode_1" checked="checked"/>
+					<input th:unless="${mode == '1'}" type="radio" name="mode" value="1" id="mode_1"/><label for="mode_1">Deliveries</label>
+				<input th:if="${mode == '2'}" type="radio" name="mode" value="2" id="mode_2" checked="checked"/>
+					<input th:unless="${mode == '2'}" type="radio" name="mode" value="2" id="mode_2"/><label for="mode_2">Roles</label>
+			
+				<input type="submit" name="harvest" value="Harvest" class="btn btn-primary" />
+			</div>
+			<div class="form-group">
+				<div class="advice-msg">
+					<strong>Note</strong>
+					<p>It will take some to harvest the data. Please be patient</p>
+				</div>
+			</div>
+		</form>	
+	
+	</div>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
+</html>

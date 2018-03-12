@@ -31,6 +31,9 @@ public class Subscribe {
     private List<String> instruments;
     private String selectedInstrument;
 	
+    public Subscribe() {    	
+    }
+    
     public String getId() {
 		return id;
 	}

@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
         "classpath:spring-security.xml"})
 
 /**
- * Test the simple doc controller.
+ * Test the user controller.
  */
 public class UserControllerMoreIT {
 

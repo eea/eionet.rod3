@@ -1,13 +1,16 @@
 package eionet.rod.controller;
 
 import eionet.rod.dao.ClientService;
+import eionet.rod.dao.HelpDao;
 import eionet.rod.dao.IssueDao;
 import eionet.rod.model.ClientDTO;
+import eionet.rod.model.Documentation;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,9 @@ public class SimplePageController {
     @Autowired
     ClientService clientService;
     
+    @Autowired
+    HelpDao helpdao;
+    
     /**
      * Frontpage.
      *
@@ -56,6 +62,16 @@ public class SimplePageController {
         model.addAttribute("activeTab", "/");
 		model.addAttribute("title","EEA - Reporting Obligations Database");
 		BreadCrumbs.set(model, "EEA - Reporting Obligations Database");
+		
+		Documentation doc = helpdao.getDoc("two_boxes");
+		if (doc != null) {
+			model.addAttribute("news", doc.getHtml());
+		}else {
+			model.addAttribute("news",null);
+		}
+		
+		
+		
         return "index";
     }
 

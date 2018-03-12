@@ -124,7 +124,8 @@ INSERT INTO T_SOURCE SET
       LEGAL_NAME = 'Basel Convention on the control of transboundary movements of hazardous wastes and their disposal',
       ALIAS='Basel Convention',
       LAST_UPDATE='2017-12-21',
-      TERMINATE ='N';
+      TERMINATE ='N',
+      FK_CLIENT_ID='1';
 
 INSERT INTO T_SOURCE SET
       PK_SOURCE_ID='2',
@@ -134,7 +135,8 @@ INSERT INTO T_SOURCE SET
       LEGAL_NAME = 'Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community',
       ALIAS='Exchange of information Decision on fresh water (consolidated)',
       LAST_UPDATE='2017-12-21',
-      TERMINATE ='N';
+      TERMINATE ='N',
+      FK_CLIENT_ID='2';
 
 DELETE FROM T_CLIENT_SOURCE_LNK;
 INSERT INTO T_CLIENT_SOURCE_LNK (FK_CLIENT_ID, FK_SOURCE_ID, STATUS) VALUES (1,1,'M'),(2,2,'C');

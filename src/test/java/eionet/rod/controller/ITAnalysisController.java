@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Sql("/seed-obligation-source.sql")
 /**
- * Test the spatial controller.
+ * Test the analysis controller.
  */
 public class ITAnalysisController {
 

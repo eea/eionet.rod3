@@ -46,4 +46,5 @@
 	<bean id="AnalysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
     	<property name="dataSource" ref="dataSource"/>
     </bean>
+       
 </beans>

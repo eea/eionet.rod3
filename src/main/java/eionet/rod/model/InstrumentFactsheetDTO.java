@@ -22,6 +22,11 @@ public class InstrumentFactsheetDTO {
     private String sourceSecretariatUrl;
     private String sourceIssuedByUrl;
     private String sourceTerminate;
+    private Integer sourceFkTypeId;
+    private String sourceLegalName;
+    private String sourceLastModified;
+    private String sourceIssuedBy;
+    private String sourceLastUpdate;
     
     //Fields from T_CLIENT_SOURCE_LNK table
     private Integer clientSourceLnkFKClientId;
@@ -300,6 +305,46 @@ public class InstrumentFactsheetDTO {
 
 	public void setSourceLnkPKSourceId(Integer sourceLnkPKSourceId) {
 		this.sourceLnkPKSourceId = sourceLnkPKSourceId;
+	}
+
+	public Integer getSourceFkTypeId() {
+		return sourceFkTypeId;
+	}
+
+	public void setSourceFkTypeId(Integer sourceFkTypeId) {
+		this.sourceFkTypeId = sourceFkTypeId;
+	}
+
+	public String getSourceLegalName() {
+		return sourceLegalName;
+	}
+
+	public void setSourceLegalName(String sourceLegalName) {
+		this.sourceLegalName = sourceLegalName;
+	}
+
+	public String getSourceLastModified() {
+		return sourceLastModified;
+	}
+
+	public void setSourceLastModified(String sourceLastModified) {
+		this.sourceLastModified = sourceLastModified;
+	}
+
+	public String getSourceIssuedBy() {
+		return sourceIssuedBy;
+	}
+
+	public void setSourceIssuedBy(String sourceIssuedBy) {
+		this.sourceIssuedBy = sourceIssuedBy;
+	}
+
+	public String getSourceLastUpdate() {
+		return sourceLastUpdate;
+	}
+
+	public void setSourceLastUpdate(String sourceLastUpdate) {
+		this.sourceLastUpdate = sourceLastUpdate;
 	}
     
 }

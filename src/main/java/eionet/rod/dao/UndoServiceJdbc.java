@@ -44,7 +44,7 @@ public class UndoServiceJdbc implements UndoService {
 				);
 	}
 
-	@Override
+	/*@Override
 	public void deleteByPK(Integer undoTime, String table, String column, String operation, Integer subTransNr) {
 		String query = "DELETE FROM T_UNDO WHERE UNDO_TIME = ? AND TAB = ? AND "
 				+ "COL = ? AND OPERATION = ? AND SUB_TRANS_NR = ?";
@@ -65,12 +65,12 @@ public class UndoServiceJdbc implements UndoService {
 	        		undoRec.getValue(),
 	        		undoRec.getShow(),
 	        		undoRec.getUndoTime(),
-	        		undoRec.getTable(),
-	        		undoRec.getColumn(),
+	        		undoRec.getTab(),
+	        		undoRec.getCol(),
 	        		undoRec.getOperation(),
 	        		undoRec.getSubTransNr()
 	        		);
-	}
+	}*/
 
 	@Override
 	public void insertIntoUndo(Integer id, String state, String table, String id_field, long ts, String extraSQL, String show) {
@@ -99,11 +99,11 @@ public class UndoServiceJdbc implements UndoService {
 	                + "ALIAS AS sourceAlias, CELEX_REF AS sourceCelexRef, SOURCE_CODE AS sourceCode,"
 	                + "VALID_FROM AS sourceValidFrom, ABSTRACT AS sourceAbstract, COMMENT AS sourceComment, ISSUED_BY_URL AS sourceIssuedByUrl,"
 	                + "EC_ENTRY_INTO_FORCE AS sourceEcEntryIntoForce, EC_ACCESSION AS sourceEcAccession, SECRETARIAT AS sourceSecretariat,"
-	                + "SECRETARIAT_URL AS sourceSecretariatUrl, TERMINATE AS sourceTerminate "
+	                + "SECRETARIAT_URL AS sourceSecretariatUrl, TERMINATE AS sourceTerminate, FK_TYPE_ID AS sourceFkTypeId, FK_CLIENT_ID AS clientId, "
+	                + "LEGAL_NAME AS sourceLegalName, LAST_MODIFIED AS sourceLastModified, ISSUED_BY AS sourceIssuedBy, LAST_UPDATE AS sourceLastUpdate "
 	                + "FROM " + table + " WHERE " + id_field + " = ?" + " " + extraSQL;
 			
 			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<InstrumentFactsheetDTO>(InstrumentFactsheetDTO.class), id);
-					
 			for (int j = 0; j < columns.size(); j++) {
 				aux = true;
 				String column = columns.get(j);
@@ -184,6 +184,36 @@ public class UndoServiceJdbc implements UndoService {
 						quotes = "y";
 						isPrimary = "n";
 						break;
+					case "FK_TYPE_ID":
+						value = instrument.getSourceFkTypeId().toString();
+						quotes = "n";
+						isPrimary = "n";
+						break;
+					case "LAST_MODIFIED":
+						value = instrument.getSourceLastModified();
+						quotes = "y";
+						isPrimary = "n";
+						break;
+					case "ISSUED_BY":
+						value = instrument.getSourceIssuedBy();
+						quotes = "y";
+						isPrimary = "n";
+						break;
+					case "FK_CLIENT_ID":
+						value = instrument.getClientId().toString();
+						quotes = "n";
+						isPrimary = "n";
+						break;
+					case "LAST_UPDATE":
+						value = instrument.getSourceLastUpdate();
+						quotes = "y";
+						isPrimary = "n";
+						break;
+					case "LEGAL_NAME":
+						value = instrument.getSourceLegalName();
+						quotes = "y";
+						isPrimary = "n";
+						break;
 					default:
 						aux = false;
 						break;
@@ -198,7 +228,7 @@ public class UndoServiceJdbc implements UndoService {
 							state,
 							quotes,
 							isPrimary,
-							value != null ? value : "null",
+							value,
 						    rowCnt,
 						    show
 							);
@@ -241,7 +271,7 @@ public class UndoServiceJdbc implements UndoService {
 						state,
 						quotes,
 						isPrimary,
-						value != null ? value : "null",
+						value,
 					    rowCnt,
 					    show
 						);				
@@ -294,7 +324,7 @@ public class UndoServiceJdbc implements UndoService {
 								state,
 								quotes,
 								isPrimary,
-								value != null ? value : "null",
+								value,
 							    rowCnt,
 							    show
 								);
@@ -327,8 +357,10 @@ public class UndoServiceJdbc implements UndoService {
 					+ "WHERE PK_RA_ID = ?";
 			Obligations obligation = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<Obligations> (Obligations.class), id);
 			
+			System.out.print("DENTRO UNDO");
+			
 			for (int j = 0; j < columns.size(); j++) {
-				aux = true;
+				aux = true;				
 				String column = columns.get(j);
 				switch (column) {
 					case "PK_RA_ID":
@@ -542,6 +574,7 @@ public class UndoServiceJdbc implements UndoService {
 						aux = false;
 						break;
 				}
+				System.out.print("INSERT UNDO: " + column);
 				//System.out.println(value);
 				if (aux) {
 					jdbcTemplate.update(insert,
@@ -551,7 +584,7 @@ public class UndoServiceJdbc implements UndoService {
 							state,
 							quotes,
 							isPrimary,
-							value != null ? value : "null",
+							value,
 						    rowCnt,
 						    show
 							);
@@ -592,7 +625,7 @@ public class UndoServiceJdbc implements UndoService {
 								state,
 								quotes,
 								isPrimary,
-								value != null ? value : "null",
+								value,
 							    rowCnt,
 							    show
 								);
@@ -640,7 +673,7 @@ public class UndoServiceJdbc implements UndoService {
 								state,
 								quotes,
 								isPrimary,
-								value != null ? value : "null",
+								value,
 							    rowCnt,
 							    show
 								);
@@ -687,7 +720,7 @@ public class UndoServiceJdbc implements UndoService {
 								state,
 								quotes,
 								isPrimary,
-								value != null ? value : "null",
+								value,
 							    rowCnt,
 							    show
 								);
@@ -701,7 +734,6 @@ public class UndoServiceJdbc implements UndoService {
 	                + "FROM T_OBLIGATION_RELATION "
 	                + "WHERE FK_RA_ID = ? ";
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, id);
-			
 			if (countObligation > 0) {
 				sql_stmt = "SELECT RELATION AS oblRelationId, FK_RA_ID2 AS relObligationId "
 						+ "FROM T_OBLIGATION_RELATION "
@@ -734,7 +766,7 @@ public class UndoServiceJdbc implements UndoService {
 							state,
 							quotes,
 							isPrimary,
-							value != null ? value : "null",
+							value,
 						    rowCnt,
 						    show
 							);					
@@ -834,6 +866,64 @@ public class UndoServiceJdbc implements UndoService {
 			return null;
 		}
 				
+	}
+
+	@Override
+	public List<UndoDTO> getUndoList(long ts, String table, String op) {
+		String query = "SELECT COL AS col, VALUE AS value, SUB_TRANS_NR AS subTransNr "
+				+ "FROM T_UNDO WHERE UNDO_TIME=? AND TAB=? AND OPERATION=?";
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<UndoDTO> undoList = jdbcTemplate.query(query, new BeanPropertyRowMapper<UndoDTO> (UndoDTO.class), ts, table, op);
+		
+		return undoList;
+	}
+
+	@Override
+	public List<UndoDTO> getPreviousActionsGeneral() {
+		String query = "SELECT U1.UNDO_TIME AS undoTime, U1.TAB AS tab, U1.VALUE AS value, U1.OPERATION AS operation, U2.VALUE as userName "
+				+ "FROM T_UNDO U1 INNER JOIN T_UNDO U2 "
+				+ "ON U1.UNDO_TIME = U2.UNDO_TIME "
+				+ "AND U1.TAB = U2.TAB "
+				+ "WHERE (U1.COL='PK_RA_ID' OR U1.COL='PK_SOURCE_ID') "
+				+ "AND (U1.OPERATION='U' OR U1.OPERATION='D' OR U1.OPERATION='UN' OR U1.OPERATION='UD' OR U1.OPERATION='UDD') "
+				+ "AND U1.SHOW_OBJECT='y' "
+				+ "AND U2.COL = 'A_USER' "
+				+ "ORDER BY U1.UNDO_TIME DESC";
+		
+		String queryCount = "SELECT COUNT(*) "
+				+ "FROM T_UNDO "
+				+ "WHERE (COL='PK_RA_ID' OR COL='PK_SOURCE_ID') "
+				+ "AND (OPERATION='U' OR OPERATION='D' OR OPERATION='UN' OR OPERATION='UD' OR OPERATION='UDD') "
+				+ "AND SHOW_OBJECT='y'";
+		
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		Integer countVersions = jdbcTemplate.queryForObject(queryCount, Integer.class); 
+		if (countVersions == 0) {
+			return null;
+		} else {
+			List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<UndoDTO> (UndoDTO.class));
+			return versions;
+		}
+		
+	}
+
+	@Override
+	public boolean isDelete(String table, String column, Integer id) {
+		String query = "SELECT COUNT(*) FROM T_UNDO "
+				+ "WHERE TAB=? AND COL=? AND VALUE=? AND OPERATION='D'";
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		Integer count = jdbcTemplate.queryForObject(query, Integer.class, table, column, id); 
+		
+		if (count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 	
 }
