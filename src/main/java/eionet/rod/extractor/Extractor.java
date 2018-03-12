@@ -344,7 +344,7 @@ public class Extractor implements ExtractorConstants {
             TupleQueryResult countTupleQueryResult = conn.prepareTupleQuery(QueryLanguage.SPARQL, countQuery).evaluate();
             if (countTupleQueryResult.hasNext()) {
                 BindingSet bindingSet = countTupleQueryResult.next();
-                resultsSize = Integer.valueOf(bindingSet.getValue("count").stringValue());
+                resultsSize = Integer.parseInt(bindingSet.getValue("count").stringValue());
             }
 
             if (resultsSize > 0) {

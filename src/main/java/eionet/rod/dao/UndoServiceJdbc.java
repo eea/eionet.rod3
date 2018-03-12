@@ -357,8 +357,6 @@ public class UndoServiceJdbc implements UndoService {
 					+ "WHERE PK_RA_ID = ?";
 			Obligations obligation = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<Obligations> (Obligations.class), id);
 			
-			System.out.print("DENTRO UNDO");
-			
 			for (int j = 0; j < columns.size(); j++) {
 				aux = true;				
 				String column = columns.get(j);
@@ -574,7 +572,6 @@ public class UndoServiceJdbc implements UndoService {
 						aux = false;
 						break;
 				}
-				System.out.print("INSERT UNDO: " + column);
 				//System.out.println(value);
 				if (aux) {
 					jdbcTemplate.update(insert,

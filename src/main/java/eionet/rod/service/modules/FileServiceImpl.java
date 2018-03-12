@@ -136,7 +136,7 @@ public class FileServiceImpl implements FileServiceIF  {
                 }
 
                 try {
-                    value = Long.valueOf(propValue) * coefficient;
+                    value = Long.parseLong(propValue) * coefficient;
                 } catch (Exception e) {
                     // Ignore exceptions resulting from string-to-integer conversion here.
                 }
