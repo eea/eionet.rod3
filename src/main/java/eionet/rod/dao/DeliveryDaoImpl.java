@@ -217,11 +217,12 @@ public class DeliveryDaoImpl implements DeliveryDao{
                String period = (pairs.getValue("period") != null) ? pairs.getValue("period").stringValue() : "";
                String sdate = (pairs.getValue("date") != null) ? pairs.getValue("date").stringValue() : "";
                String note = (pairs.getValue("note") != null) ? pairs.getValue("note").stringValue() : "";
-               Date date = null;
+               Date date;
                try {
             	   DateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                    date = isoDateFormat.parse(sdate);
                } catch (ParseException pe) {
+            	   date = null;
                }
 
                String countryId = null;
