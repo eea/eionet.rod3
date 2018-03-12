@@ -121,6 +121,25 @@
     width: 100%;
 }
 
+#workarea .leftworkarea{
+	float: left;
+	width: calc(100% - 180px);
+}
+#workarea #rightcolumn{
+	margin-right: -30px;
+}
+	#workarea #rightcolumn h2{
+		background-color: #eef7f9;
+		font-size: 110%;
+		font-weight: 500;
+		margin-bottom: 0;
+		margin-top: 0;
+		text-align: center;
+	}
+	#workarea #rightcolumn .link-external{
+	    padding-left: 0px;
+	}
+
 .inputcheck{
   background: #fff;
   border: 1px solid #9ac4c6;
@@ -585,6 +604,27 @@ a.helpButton{
 .removed {
 	background-color: #FFCCCC;
 }
+
+.question {
+	color: #993300;
+}
+
+.option {
+	color: #006666;
+}
+
+pre {
+    font-family: Monaco, "Courier New", Courier, monospace;
+    font-size: 100%;
+    padding: 1em;
+    color: black;
+    background-color: #eef7f9;
+    overflow: auto;
+    border-style: none;
+    border-radius: 0;
+    padding-bottom: 0;
+}
+
 
 /* INICIO responsive */
 
