@@ -1143,22 +1143,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
         	return rolesAdd;
         }
-        
-        protected void addRoles(List<Roles> rolesResult) {
-        	List<Roles> rolesAdd = null;
-        	Roles rolesnew = new Roles();
-        	try {
-            for (int i = 0; i < rolesResult.size(); i++) {
-            	String rolename = rolesResult.get(i).getRoleName();
-            	rolesnew.setRoleName(rolesResult.get(i).getRoleName());
-            	rolesAdd.add(rolesnew);
-            }
-        	}catch (Exception e) {
-				System.out.print(e.getMessage());
-			}
-            
-        }
-       
+                      
  
     /**
 	 * Find all clients relationed with the obligation

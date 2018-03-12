@@ -357,7 +357,7 @@ public class Extractor implements ExtractorConstants {
                 int offset = 0;
                 int saveCount = 0;
                 //only for testing
-                resultsSize = 1001;
+                //resultsSize = 1001;
                 
                 while (offset <= resultsSize) {
                     String limitedQuery = query + " LIMIT " + chunkSize + " OFFSET " + offset;

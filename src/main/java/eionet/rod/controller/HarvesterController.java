@@ -33,7 +33,9 @@ public class HarvesterController {
 			String userName = authentication.getName();
 			
 	        if (RODUtil.isNullOrEmpty(userName)) {
-	        	 message = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
+	        	String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
+	        	model.addAttribute("message", messageLogin);
+	        	return "harvester";
 	        }
 	        
 	        model.addAttribute("mode" , "");
@@ -48,8 +50,9 @@ public class HarvesterController {
 	    Authentication authentication = authenticationFacade.getAuthentication();
 		String userName = authentication.getName();
         if (RODUtil.isNullOrEmpty(userName)) {
-        	 message = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
-            return "harvester";
+        	String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
+       	 	model.addAttribute("message", messageLogin);
+       	 	return "harvester";
         }
 
         try {
@@ -57,7 +60,8 @@ public class HarvesterController {
 //            AccessControlListIF acl = AccessController.getAcl(Constants.ACL_HARVEST_NAME);
 //            boolean perm = acl.checkPermission(userName, Constants.ACL_INSERT_PERMISSION);
 //            if (!perm) {
-//            	message = "Insufficient permissions" + " - " + Constants.SEVERITY_WARNING;
+//            	String messagePerm = "Insufficient permissions" + " - " + Constants.SEVERITY_WARNING;
+//    			model.addAttribute("message", messagePerm);    	
 //            	return "harvester";
 //            }
 
@@ -69,9 +73,12 @@ public class HarvesterController {
             
             model.addAttribute("mode" , mode);
             
-            message = "Harvested!"; // See log for details";
+            String messageResult = "Harvested!"; // See log for details";
+            model.addAttribute("message", messageResult);
         } catch (Exception e) {
-            message = e.toString() + " - " + Constants.SEVERITY_WARNING;
+        	
+        	String messageExcep = e.toString() + " - " + Constants.SEVERITY_WARNING;
+            model.addAttribute("message", messageExcep);
         }
 
         if(message != null) model.addAttribute("message", message);

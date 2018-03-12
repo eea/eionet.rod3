@@ -71,6 +71,7 @@ public class UndoInfoController {
 			case "UN":
 				model.addAttribute("operation", "UNDO");	
 				break;
+			default: break;
 		}			
 		
 		List<UndoDTO> undoList = undoService.getUndoList(ts, tab, op);
@@ -547,6 +548,7 @@ public class UndoInfoController {
 					case "same-as":
 						undoObligationsString.append(" (").append("Same as").append(")");
 						break;
+					default: break;
 				}
 				model.addAttribute("undoObligations", undoObligationsString.toString());
 			} else {
@@ -570,6 +572,7 @@ public class UndoInfoController {
 					case "same-as":
 						currentObligationsString.append(" (").append("Same as").append(")");
 						break;
+					default: break;
 				}
 				model.addAttribute("currentObligations", currentObligationsString.toString());
 			} else {

@@ -169,7 +169,7 @@ public class ObligationsController {
 	 */
 	 @RequestMapping(value = "/delete/{obligationId}")
 	 public String deleteObligations(@PathVariable("obligationId") Integer obligationId, Model model) {
-		 if (!obligationId.equals(null)) {
+		 if (obligationId != null) {
 			 Authentication authentication = authenticationFacade.getAuthentication();
 			 processEditDelete("D", authentication.getName(), obligationId);
 			 obligationsService.deleteObligations(obligationId + ",");
@@ -392,8 +392,7 @@ public class ObligationsController {
         List<String> selectedIssues= new ArrayList<String>();
         obligations.setSelectedIssues(selectedIssues);
         
-        Obligations obligationRelation = new Obligations();
-        obligationRelation = obligationsService.findObligationRelation(obligationId);
+        Obligations obligationRelation = obligationsService.findObligationRelation(obligationId);
         
         obligations.setRelObligationId(obligationRelation.getRelObligationId());
         obligations.setOblRelationId(obligationRelation.getOblRelationId());
