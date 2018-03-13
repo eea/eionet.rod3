@@ -7,7 +7,6 @@ import java.util.List;
 import org.openrdf.query.TupleQueryResult;
 
 import eionet.rod.model.Delivery;
-import eionet.rod.util.exception.ServiceException;
 
 public interface DeliveryDao {
 
@@ -19,7 +18,7 @@ public interface DeliveryDao {
 	
 	void backUpDeliveries();
 	
-	int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) throws ServiceException;
+	int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId);
 }
 
 

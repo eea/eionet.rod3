@@ -155,5 +155,14 @@ public class ITUndoService {
     	
     }
     
+    @Test
+    public void testGetUpdateHistory() {
+    	
+    	List<UndoDTO> history = undoService.getUpdateHistory("");
+    	assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
+    	assertEquals(history.get(0).getOperation(), "U");
+    	
+    }
+    
        
 }

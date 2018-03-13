@@ -32,7 +32,6 @@ import eionet.rod.model.Delivery;
 
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
-import eionet.rod.util.exception.ServiceException;
 
 
 @Repository
@@ -194,7 +193,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
     * @see eionet.rod.services.modules.db.dao.IDeliveryDao#saveDeliveries(TupleQueryResult, HashMap<String,HashSet<Integer>>)
     */
    @Override
-   public int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) throws ServiceException {
+   public int saveDeliveries(TupleQueryResult bindings, HashMap<String, HashSet<Integer>> savedCountriesByObligationId) {
 
        int batchCounter = 0;
 
@@ -262,7 +261,9 @@ public class DeliveryDaoImpl implements DeliveryDao{
                    }
                }
            }
-
+       }catch (RuntimeException e) {
+    	   logger.error(e.getMessage(), e);
+           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.toString());
        } catch (Exception e) {
            logger.error(e.getMessage(), e);
            throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.toString());

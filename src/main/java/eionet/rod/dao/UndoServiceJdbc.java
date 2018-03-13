@@ -948,5 +948,52 @@ public class UndoServiceJdbc implements UndoService {
 		}
 		
 	}
+
+	@Override
+	public List<UndoDTO> getUpdateHistory(String extraSQL) {
+		String query = "SELECT U1.UNDO_TIME AS undoTime, U1.TAB AS tab, U1.VALUE AS value, U1.OPERATION AS operation, U2.VALUE as userName, U3.VALUE AS description "
+				+ "FROM T_UNDO U1 INNER JOIN T_UNDO U2 "
+				+ "ON U1.UNDO_TIME = U2.UNDO_TIME "
+				+ "AND U1.TAB = U2.TAB "
+				+ "INNER JOIN T_UNDO U3 "
+				+ "ON U1.UNDO_TIME = U3.UNDO_TIME "
+				+ "AND U1.TAB = U3.TAB "
+				+ "WHERE (U1.COL='PK_RA_ID' OR U1.COL='PK_SOURCE_ID') "
+				+ "AND (U1.OPERATION='U' OR U1.OPERATION='D' OR U1.OPERATION='UN' OR U1.OPERATION='UD' OR U1.OPERATION='UDD') "
+				+ "AND U1.SHOW_OBJECT='y' "
+				+ "AND U2.COL = 'A_USER' "
+				+ "AND U3.COL = 'TITLE' "
+				+ extraSQL 
+				+ "ORDER BY U1.UNDO_TIME DESC "
+				+ "LIMIT 100";
+		
+		String queryCount = "SELECT COUNT(*) "
+				+ "FROM T_UNDO U1 INNER JOIN T_UNDO U2 " + 
+				"ON U1.UNDO_TIME = U2.UNDO_TIME " + 
+				"AND U1.TAB = U2.TAB " + 
+				"INNER JOIN T_UNDO U3 " + 
+				"ON U1.UNDO_TIME = U3.UNDO_TIME " + 
+				"AND U1.TAB = U3.TAB " + 
+				"WHERE (U1.COL='PK_RA_ID' OR U1.COL='PK_SOURCE_ID') " + 
+				"AND (U1.OPERATION='U' OR U1.OPERATION='D' OR U1.OPERATION='UN' OR U1.OPERATION='UD' OR U1.OPERATION='UDD') " + 
+				"AND U1.SHOW_OBJECT='y' " + 
+				"AND U2.COL = 'A_USER' " +
+				extraSQL + 
+				"AND U3.COL = 'TITLE'";
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		Integer countHistory = jdbcTemplate.queryForObject(queryCount, Integer.class); 
+		
+		if (countHistory == 0) {
+			return null;
+		} else {
+			List<UndoDTO> history = jdbcTemplate.query(query, new BeanPropertyRowMapper<UndoDTO> (UndoDTO.class));
+			return history;
+		}
+		
+	}
 	
 }
+	
+

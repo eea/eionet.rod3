@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment"></head>
+  <body>
+  <script>
+	 $(document).ready(function(){
+	    $('#historyTable').DataTable({
+	    	"sDom": 'Tfrtipt',
+	    	"sPaginationType": "full_numbers"
+	    });
+	    
+	});
+	 
+</script>
+    <div id="container">
+     <div th:include="layout :: bannerFragment"></div>
+     <div id="workarea">      
+	 	<div class="title">
+		    <h1>Most recent ROD updates</h1>		     
+        </div>
+                  
+        <div th:if="${#lists.isEmpty(history)}">There are no results.</div>
+        <div th:if="${not #lists.isEmpty(history)}">
+	        <table id="historyTable" class="datatable results table table-striped table-bordered">
+	        <thead>
+		        <tr>
+			        <th>#</th>
+			        <th>Description</th>
+			        <th>Object</th>
+			        <th>User</th>
+			        <th>Action type</th>
+			        <th>Log time</th>
+		        </tr>
+	        </thead>
+	        <tr th:each="hist, iterStat : ${history}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+	        	<td><span th:text="${iterStat.index + 1}"></span></td>	
+	        	<td th:switch="${hist.tab}">
+	        		<a th:case="'T_OBLIGATION'" th:href="@{/obligations/} + ${hist.value}" th:text="${hist.description}"></a>
+	        		<a th:case="'T_SOURCE'" th:href="@{/instruments/} + ${hist.value}" th:text="${hist.description}"></a>
+	        	</td>        	
+	        	<td th:switch="${hist.tab}">
+	        		<a th:case="'T_OBLIGATION'" th:href="@{'/updatehistory?id=' + ${hist.value} + '&object=A'}" th:text="'/obligations/' + ${hist.value}"></a>
+	        		<a th:case="'T_SOURCE'" th:href="@{'/updatehistory?id=' + ${hist.value} + '&object=S'}" th:text="'/instruments/' + ${hist.value}"></a>
+	        	</td>
+	        	<td><a th:href="@{/updatehistory} + '?username=' + ${hist.userName}" th:text="${hist.userName}"></a></td>
+	        	<td th:switch="${hist.operation}">
+	        		<span th:case="'U'">UPDATE</span>
+	        		<span th:case="'D'">DELETE</span>
+	        		<span th:case="'UN'">UNDO</span>
+	        	</td>
+	        	<td><span th:text="${hist.date}"></span></td>
+	        </tr>
+	        </table>
+        </div>
+         
+     </div>
+    <div th:replace="layout :: footerFragment"></div>
+    </div>
+  </body>
+</html>

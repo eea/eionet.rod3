@@ -1,5 +1,7 @@
 package eionet.rod.model;
 
+import eionet.rod.util.RODUtil;
+
 public class UndoDTO {
 	
 	private long undoTime;
@@ -13,6 +15,7 @@ public class UndoDTO {
     private String show; 
     private String date;
     private String userName;
+    private String description;
     
     /**
      * Constructor.
@@ -106,6 +109,18 @@ public class UndoDTO {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String truncateText(String truncateText) {
+	       return RODUtil.truncateText(truncateText);
 	}
 
 }

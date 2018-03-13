@@ -23,4 +23,6 @@ public interface UndoService {
 	
 	boolean isDelete(String table, String column, Integer id);
 	
+	List<UndoDTO> getUpdateHistory(String extraSQL);
+	
 }
