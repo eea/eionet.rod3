@@ -43,8 +43,7 @@ public class ITUpdateHistoryController {
 	    public void viewHistory() throws Exception  {
 	    	this.mockMvc.perform(get("/updatehistory"))
 	    	.andExpect(status().isOk())
-	    	.andExpect(model().attributeExists("history"))
-	        .andExpect(model().attributeExists("activeTab"))
+	    	.andExpect(model().attributeExists("activeTab"))
 	        .andExpect(model().attributeExists("title"))
 	        .andExpect(view().name("updatehistory"));
 	    }
