@@ -605,11 +605,12 @@ a.helpButton{
 	background-color: #FFCCCC;
 }
 
-.question {
+.helpQuestion {
 	color: #993300;
 }
 
-.option {
+
+.helpOption {
 	color: #006666;
 }
 
