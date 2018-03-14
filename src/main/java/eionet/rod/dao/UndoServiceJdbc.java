@@ -228,7 +228,7 @@ public class UndoServiceJdbc implements UndoService {
 							state,
 							quotes,
 							isPrimary,
-							value,
+							value != null ? value : "",
 						    rowCnt,
 						    show
 							);
@@ -589,7 +589,7 @@ public class UndoServiceJdbc implements UndoService {
 							state,
 							quotes,
 							isPrimary,
-							value,
+							value != null ? value : "",
 						    rowCnt,
 						    show
 							);

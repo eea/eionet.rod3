@@ -101,45 +101,77 @@ public class UndoInfoController {
 					currentValues.add(obligation.getDateComments());
 					currentValues.add(obligation.getDescription());
 					if (obligation.getEeaCore() == null) {
-						currentValues.add(null);
+						currentValues.add("");
 					} else {
 						currentValues.add(obligation.getEeaCore().toString());
 					}
 					if (obligation.getEeaPrimary() == null) {
-						currentValues.add(null);
+						currentValues.add("");
 					} else {
 						currentValues.add(obligation.getEeaPrimary().toString());
 					}
-					currentValues.add(obligation.getFirstReporting());
+					if (obligation.getFirstReporting() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getFirstReporting());
+					}
 					currentValues.add(obligation.getDeliveryCountryId());
 					currentValues.add(obligation.getSourceId());
 					if (obligation.getFlagged() == null) {
-						currentValues.add(null);
+						currentValues.add("");
 					} else {
 						currentValues.add(obligation.getFlagged().toString());
 					}
 					currentValues.add(obligation.getFormatName());
-					currentValues.add(obligation.getLastHarvested());
-					currentValues.add(obligation.getLastUpdate());
+					if (obligation.getLastHarvested() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getLastHarvested());
+					}
+					if (obligation.getLastUpdate() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getLastUpdate());
+					}
 					currentValues.add(obligation.getLocationInfo());
 					currentValues.add(obligation.getLocationPtr());
 					currentValues.add(obligation.getNationalContact());
 					currentValues.add(obligation.getNationalContactUrl());
-					currentValues.add(obligation.getNextDeadline());
-					currentValues.add(obligation.getNextDeadline2());
+					if (obligation.getNextDeadline() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getNextDeadline());
+					}
+					if (obligation.getNextDeadline2() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getNextDeadline2());
+					}
 					currentValues.add(obligation.getNextReporting());
 					currentValues.add(obligation.getObligationId().toString());
 					currentValues.add(obligation.getReportingFormat());
 					currentValues.add(obligation.getReportFormatUrl());
 					currentValues.add(obligation.getReportFreq());
-					currentValues.add(obligation.getReportFreqDetail());
+					if (obligation.getReportFreqDetail() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getReportFreqDetail());
+					}
 					currentValues.add(obligation.getReportFreqMonths());
 					currentValues.add(obligation.getResponsibleRole());
 					currentValues.add(obligation.getResponsibleRoleSuf());
 					currentValues.add(obligation.getTerminate());
 					currentValues.add(obligation.getOblTitle());
-					currentValues.add(obligation.getValidSince());
-					currentValues.add(obligation.getValidTo());
+					if (obligation.getValidSince() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getValidSince());
+					}
+					if (obligation.getValidTo() == null) {
+						currentValues.add("");
+					} else {
+						currentValues.add(obligation.getValidTo());
+					}
 					
 				} else {
 					
@@ -155,36 +187,36 @@ public class UndoInfoController {
 					currentValues.add("");
 					
 					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add(null);
-					currentValues.add(null);
-					currentValues.add(null);
-					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add("");
-					
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add(null);
+					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					
 					currentValues.add("");
-					currentValues.add(null);
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add(null);
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
 					
 				}
 				
@@ -610,14 +642,34 @@ public class UndoInfoController {
 					currentValues.add(instrument.getSourceAlias());
 					currentValues.add(instrument.getSourceCelexRef());
 					currentValues.add(instrument.getSourceComment());
-					currentValues.add(instrument.getSourceEcAccession());
-					currentValues.add(instrument.getSourceEcEntryIntoForce());
+					if (instrument.getSourceEcAccession() != null) {
+						currentValues.add(instrument.getSourceEcAccession());
+					} else {
+						currentValues.add("");
+					}
+					if (instrument.getSourceEcEntryIntoForce() != null) {
+						currentValues.add(instrument.getSourceEcEntryIntoForce());
+					} else {
+						currentValues.add("");
+					}					
 					currentValues.add(instrument.getClientId().toString());
 					currentValues.add(instrument.getSourceFkTypeId().toString());
-					currentValues.add(instrument.getSourceIssuedBy());
-					currentValues.add(instrument.getSourceIssuedByUrl());	
-					currentValues.add(instrument.getSourceLastModified());
-					currentValues.add(instrument.getSourceLastUpdate());
+					if (instrument.getSourceIssuedBy() != null) {
+						currentValues.add(instrument.getSourceIssuedBy());
+					} else {
+						currentValues.add("");
+					}
+					currentValues.add(instrument.getSourceIssuedByUrl());
+					if (instrument.getSourceLastModified() != null) {
+						currentValues.add(instrument.getSourceLastModified());
+					} else {
+						currentValues.add("");
+					}
+					if (instrument.getSourceLastUpdate() != null) {
+						currentValues.add(instrument.getSourceLastUpdate());
+					} else {
+						currentValues.add("");
+					}
 					currentValues.add(instrument.getSourceLegalName());
 					currentValues.add(instrument.getSourceId().toString());
 					currentValues.add(instrument.getSourceSecretariat());
@@ -626,21 +678,23 @@ public class UndoInfoController {
 					currentValues.add(instrument.getSourceTerminate());
 					currentValues.add(instrument.getSourceTitle());
 					currentValues.add(instrument.getSourceUrl());
-					currentValues.add(instrument.getSourceValidFrom());
+					if (instrument.getSourceValidFrom() != null) {
+						currentValues.add(instrument.getSourceValidFrom());
+					} else {
+						currentValues.add("");
+					}
 					
 				} else {
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
-					currentValues.add(null);
-					currentValues.add(null);
 					currentValues.add("");
 					currentValues.add("");
-					currentValues.add(null);
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
 					currentValues.add("");	
-					currentValues.add(null);
-					currentValues.add(null);
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
@@ -649,7 +703,9 @@ public class UndoInfoController {
 					currentValues.add("");
 					currentValues.add("");
 					currentValues.add("");
-					currentValues.add(null);
+					currentValues.add("");
+					currentValues.add("");
+					currentValues.add("");
 				}
 				
 			}

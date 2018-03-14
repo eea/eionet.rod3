@@ -72,6 +72,20 @@
       <column name="authority" value="ROLE_EDITOR"/>
     </insert>
     
+    <insert tableName="users">
+      <column name="username" value="perezdav"/>
+      <column name="password" value=""/>
+      <column name="enabled" valueBoolean="1"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="perezdav"/>
+      <column name="authority" value="ROLE_ADMIN"/>
+    </insert>
+    <insert tableName="authorities">
+      <column name="username" value="perezdav"/>
+      <column name="authority" value="ROLE_EDITOR"/>
+    </insert>
+    
   </changeSet>
 
 </databaseChangeLog>
