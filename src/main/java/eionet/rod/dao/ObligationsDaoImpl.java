@@ -291,7 +291,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
 					query += " OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
 				}
-				if (!RODUtil.isNullOrEmpty(terminate) && terminate.equals("Y"))  {
+				if (!RODUtil.isNullOrEmpty(terminate) && terminate.equals("N"))  {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;

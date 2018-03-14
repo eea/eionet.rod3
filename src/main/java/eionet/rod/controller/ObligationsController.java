@@ -187,8 +187,12 @@ public class ObligationsController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchObligation(Obligations obligations, Model model) {
+    	String terminate = obligations.getTerminate();
+    	if(RODUtil.isNullOrEmpty(obligations.getTerminate()) ) {
+    		terminate = "N";
+    	}
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),obligations.getTerminate(),"0",null, null, null, false));
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),terminate,"0",null, null, null, false));
 
          model.addAttribute("title","Reporting obligations");
          
