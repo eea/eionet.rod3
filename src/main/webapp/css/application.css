@@ -626,6 +626,9 @@ pre {
     padding-bottom: 0;
 }
 
+#imageTop {
+    top: 31px !important;
+}
 
 /* INICIO responsive */
 
@@ -664,4 +667,6 @@ pre {
 		margin-bottom: -1px;
 	}
 }
+
 /* FIN responsive */
+
