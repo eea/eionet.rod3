@@ -75,9 +75,9 @@ public class ITObligationsDao {
         assertEquals("Test client", obligations.get(0).getClientName());
 
         obligations = obligationsService.findObligationList("0","0","0","Y","0",null, null, null,false);
-        assertEquals("2",obligations.get(0).getObligationId().toString());
+        assertEquals("1",obligations.get(0).getObligationId().toString());
         assertEquals("eionet-nrc-waterquality", obligations.get(0).getRespRoleId());
-        assertNull(obligations.get(0).getClientName());
+        assertEquals("Test client",obligations.get(0).getClientName());
     }
 
     @Test
