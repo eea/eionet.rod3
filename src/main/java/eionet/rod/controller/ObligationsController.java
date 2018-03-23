@@ -1074,7 +1074,7 @@ public class ObligationsController {
 		
 		undoList = undoService.getUndoInformation(ts, "U", "T_RAISSUE_LNK");
 		List<Issue> obligationIssues = obligationsService.findAllIssuesbyObligation(obligationID);
-		Issue issue = new Issue();		
+		Issue issue;		
 		StringBuffer addedIssues = new StringBuffer();
 		StringBuffer removedIssues = new StringBuffer();
 		List<String>  undoIssues = new ArrayList<String>();
@@ -1131,7 +1131,7 @@ public class ObligationsController {
     	
     	undoList = undoService.getUndoInformation(ts, "U", "T_CLIENT_OBLIGATION_LNK");
 		List<ClientDTO> obligationClients = obligationsService.findAllClientsByObligation(obligationID);
-		ClientDTO client = new ClientDTO();
+		ClientDTO client;
 		StringBuffer addedClients = new StringBuffer();
 		StringBuffer removedClients = new StringBuffer();
 		List<String>  undoClients = new ArrayList<String>();
