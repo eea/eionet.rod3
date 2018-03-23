@@ -1296,7 +1296,7 @@ public class ObligationsController {
 	private String getSuffixValue(String value)throws ServiceException
 	{
 		String ret = null;
-		int b = new Integer(value).intValue();
+		int b = Integer.parseInt(value); //new Integer(value).intValue();
 		if (b==0)
 		{
 			ret = "checked";
@@ -1312,7 +1312,7 @@ public class ObligationsController {
 	{
 		
 		String ret = null;
-		int b = new Integer(value).intValue();
+		int b = Integer.parseInt(value); //new Integer(value).intValue();
 		if (b == 0)
 		{
 			ret = "unchecked";
@@ -1499,7 +1499,7 @@ public class ObligationsController {
 				
 	}
 	
-	private void sendEvent(boolean isUpdate, Obligations pObligations, Integer pObligationsID, long ts) throws ServiceException
+	private void sendEvent(boolean isUpdate, Obligations pObligations, Integer obligation_id, long ts) throws ServiceException
 	{
 		String userName = getUserName();
 		FileServiceIF fileService = RODServices.getFileService();
@@ -1512,7 +1512,7 @@ public class ObligationsController {
 			long timestamp = System.currentTimeMillis();
 			String events = "http://rod.eionet.europa.eu/events/" + timestamp;
 			
-			int obligation_id = Integer.valueOf(pObligationsID).intValue();
+			//int obligation_id = Integer.valueOf(pObligationsID).intValue();
 			
 			if (isUpdate)
 			{
