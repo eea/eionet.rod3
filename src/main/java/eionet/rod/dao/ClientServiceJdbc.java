@@ -234,4 +234,17 @@ public class ClientServiceJdbc implements ClientService {
         return jdbcTemplate.query(q_indirect_instruments, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class),clientId);	
     }
     
+    public String getOrganisationNameByID(String clientId)
+    {
+    	String query = 
+			"SELECT CONCAT(CLIENT_ACRONYM, '-', CLIENT_NAME) AS name "+
+    		"FROM T_CLIENT "+
+    		"WHERE PK_CLIENT_ID ="+clientId;	
+    	
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    	String name = (String)jdbcTemplate.queryForObject(query, String.class);
+    	
+    	return name != null ? name : "";
+    }
+    
 }

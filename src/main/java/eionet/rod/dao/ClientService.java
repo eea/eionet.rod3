@@ -44,4 +44,6 @@ public interface ClientService {
     
     List<InstrumentDTO> getIndirectInstruments(Integer clientId);
     
+    String getOrganisationNameByID(String clientId);
+    
 }

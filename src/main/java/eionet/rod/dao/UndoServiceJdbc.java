@@ -994,6 +994,30 @@ public class UndoServiceJdbc implements UndoService {
 		
 	}
 	
+	@Override
+	public List<UndoDTO> getUndoInformation(long ts, String op, String tab) {
+		String query = "SELECT UNDO_TIME AS undoTime, TAB AS tab, COL AS col, OPERATION AS operation, QUOTES AS quotes, P_KEY AS primaryKey, "
+				+ "VALUE AS value, SUB_TRANS_NR AS subTransNr "
+				+ "FROM T_UNDO " 
+				+ "WHERE undo_time=? AND operation=? AND tab=? " 
+				+ "ORDER BY undo_time, tab, sub_trans_nr";
+		
+		String queryCount = "SELECT COUNT(*) "
+				+ "FROM T_UNDO " 
+				+ "WHERE undo_time=? AND operation=? AND tab=?";
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		Integer countUndoInformation = jdbcTemplate.queryForObject(queryCount, Integer.class, ts, op, tab);
+		if (countUndoInformation == 0) {
+			return null;
+		} else {
+			List<UndoDTO> undoList = jdbcTemplate.query(query, new BeanPropertyRowMapper<UndoDTO> (UndoDTO.class), ts, op, tab);			
+			return undoList;
+		}	
+		
+	}
+	
 }
 	
 

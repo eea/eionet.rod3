@@ -25,4 +25,6 @@ public interface UndoService {
 	
 	List<UndoDTO> getUpdateHistory(String extraSQL);
 	
+	List<UndoDTO> getUndoInformation(long ts, String op, String tab);
+	
 }

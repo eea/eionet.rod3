@@ -3,7 +3,9 @@ package eionet.rod.dao;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -136,10 +138,10 @@ public class ITUndoService {
     public void testIsDelete() {
     	
     	boolean isDelete = undoService.isDelete("T_SOURCE", "PK_SOURCE_ID", 1);
-    	assertEquals(isDelete, true);
+    	assertTrue(isDelete);
     	
     	isDelete = undoService.isDelete("T_OBLIGATION", "PK_RA_ID", 1);
-    	assertEquals(isDelete, false);
+    	assertFalse(isDelete);
     	
     }
     
@@ -164,5 +166,21 @@ public class ITUndoService {
     	
     }
     
+    @Test
+    public void testGetUndoInformation() {
+    	
+    	String ts = "1519895729320";
+    	
+    	List<UndoDTO> undoList = undoService.getUndoInformation(Long.parseLong(ts), "U", "T_OBLIGATION");
+    	
+    	for (int i = 0; i < undoList.size(); i++) {
+    		if (undoList.get(i).getCol().equals("DATE_COMMENTS")) {
+    			assertEquals(undoList.get(i).getValue(), "For Member States that acceeded to the EU on 1 January 2007 (Bulgaria, Romania) the reporting concerning the period 2004-2006 is voluntary.");
+    		} else if (undoList.get(i).getCol().equals("FIRST_REPORTING")) {
+    			assertEquals(undoList.get(i).getValue(), "2005-10-31");
+    		}
+    	}
+    	
+    }
        
 }

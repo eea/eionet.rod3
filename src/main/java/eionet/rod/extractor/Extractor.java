@@ -55,7 +55,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
-
+import org.apache.commons.lang.StringUtils;
 import org.openrdf.query.BindingSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -246,7 +246,7 @@ public class Extractor implements ExtractorConstants {
             actionText += " - roles ";
             try {
 //
-               // StringBuilder errMsg = new StringBuilder();
+                StringBuilder errMsg = new StringBuilder();
                 List<Roles> respRoles = obligationService.getRespRoles();
 
                 // remove leftovers from previous harvest
@@ -258,7 +258,7 @@ public class Extractor implements ExtractorConstants {
                     try {
                         saveRole(respRoles.get(i).getRoleName());
                     } catch (Exception e) {
-                       
+                    	 errMsg.append('\n').append(e.getMessage());
                     }
                 } // roles.next()
 
@@ -268,6 +268,10 @@ public class Extractor implements ExtractorConstants {
                     log("* Roles OK");
                 }
 
+                if (StringUtils.isNotBlank(errMsg.toString())) {
+                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
+                }
+                
                 // persons + org name
 
             } catch (Exception e) {
