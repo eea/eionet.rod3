@@ -215,20 +215,20 @@ public class Extractor implements ExtractorConstants {
 //        // extractor.out.println(extractor.cDT() + "Extractor v1.1 - processing... Please wait.");
 //        log(cDT() + "Extractor v1.1 - processing... Please wait.");
 
-        String userFullName = userName;
+        //String userFullName = userName;
        // long a = System.currentTimeMillis();
 
-        if (!userName.equals(SYSTEM_USER)) {
+//        if (!userName.equals(SYSTEM_USER)) {
+//
+//            try {
+//                // userFullName = DirectoryService.getFullName(userName);
+//                //userFullName = AuthMechanism.getFullName(userFullName);
+//            } catch (SignOnException se) {
+//                log("Error getting full name " + se.toString());
+//            }
+//        }
 
-            try {
-                // userFullName = DirectoryService.getFullName(userName);
-                userFullName = AuthMechanism.getFullName(userFullName);
-            } catch (SignOnException se) {
-                log("Error getting full name " + se.toString());
-            }
-        }
-
-        String actionText = "Harvesting - ";
+        //String actionText = "Harvesting - ";
         long a = System.currentTimeMillis();
 
         /***************************************************
@@ -237,13 +237,13 @@ public class Extractor implements ExtractorConstants {
 
         // Get delivery list from Content Registry and save it also
         if (mode == ALL_DATA || mode == DELIVERIES) {
-            actionText += " deliveries ";
+           // actionText += " deliveries ";
             extractDeliveries();
         }
 
         // Get roles from Eionet Directory and save them, too
         if (mode == ALL_DATA || mode == ROLES) {
-            actionText += " - roles ";
+            //actionText += " - roles ";
             try {
 //
                 StringBuilder errMsg = new StringBuilder();
@@ -268,9 +268,9 @@ public class Extractor implements ExtractorConstants {
                     log("* Roles OK");
                 }
 
-                if (StringUtils.isNotBlank(errMsg.toString())) {
-                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
-                }
+//                if (StringUtils.isNotBlank(errMsg.toString())) {
+//                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
+//                }
                 
                 // persons + org name
 
