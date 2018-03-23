@@ -50,6 +50,5 @@ public interface SourceService {
 	List<HierarchyInstrumentDTO> getHierarchyInstruments(Integer id);
 	
 	void delete(Integer sourceId);
-	String getDGEnvName(String value);
 		
 }

@@ -565,16 +565,5 @@ public class SourceServiceJdbc implements SourceService {
 		delete = "DELETE FROM T_SOURCE_LNK WHERE FK_SOURCE_CHILD_ID=?";
 		jdbcTemplate.update(delete, sourceId);
 	}
-	@Override
-	public String getDGEnvName(String value) {
-		String query = 
-			"SELECT C_TERM AS name "+
-			"FROM T_LOOKUP "+
-			"WHERE C_VALUE= "+value+" AND CATEGORY='DGS'";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		String name = (String)jdbcTemplate.queryForObject(query, String.class);
-		
-		return name != null? name : "";
-	}
 
 }

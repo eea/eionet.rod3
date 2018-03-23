@@ -33,6 +33,9 @@ public class ClientServiceIT {
 
     @Autowired
     private WebApplicationContext ctx;
+    
+    @Autowired
+    private ClientService clientService;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -108,6 +111,12 @@ public class ClientServiceIT {
     	assertEquals(1, indirectInstruments.size());
     	assertEquals("2", indirectInstruments.get(0).getSourceId().toString());
 
+    }
+    
+    @Test
+    public void testGetOrganisationNameByID() {
+    	String organisationName = clientService.getOrganisationNameByID("1");
+    	assertEquals("TC-Test client", organisationName);
     }
     
 }

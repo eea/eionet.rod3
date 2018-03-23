@@ -295,10 +295,6 @@ public class InstrumentsController {
              label = "'Issuer' changed ";
          } else if (col != null && col.equalsIgnoreCase("ISSUED_BY_URL")) {
              label = "'URL to issuer' changed ";
-         } else if (col != null && col.equalsIgnoreCase("DGENV_REVIEW")) {
-             label = "'DG Env review of reporting theme' changed ";
-             value = sourceService.getDGEnvName(value);
-             currentValue = sourceService.getDGEnvName(currentValue);
          } else if (col != null && col.equalsIgnoreCase("VALID_FROM")) {
              label = "'Valid from' changed ";
          } else if (col != null && col.equalsIgnoreCase("GEOGRAPHIC_SCOPE")) {
