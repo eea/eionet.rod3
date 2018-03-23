@@ -31,6 +31,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -536,7 +537,6 @@ public class ObligationsController {
         if (bindingResult.hasErrors()) {
         	
     		model.addAttribute("obligation", obligations);
-    		model.addAttribute("obligation", obligations);
 	        model.addAttribute("id","add");
 
 		}else {
@@ -612,7 +612,7 @@ public class ObligationsController {
         
         List<Obligations> relObligations = obligationsService.findAll();
         model.addAttribute("relObligations", relObligations);
-        
+
 		Authentication authentication = authenticationFacade.getAuthentication();
 		long ts = System.currentTimeMillis();
         processEditDelete("U", authentication.getName(), obligations.getObligationId(), ts);
@@ -1504,7 +1504,7 @@ public class ObligationsController {
 		String userName = getUserName();
 		FileServiceIF fileService = RODServices.getFileService();
 		
-				
+		try {		
 			Vector<Vector<String>> lists = new Vector<Vector<String>>();
 			Vector<String> list = new Vector<String>();
 			long timestamp = System.currentTimeMillis();
@@ -1611,8 +1611,10 @@ public class ObligationsController {
 			{
 				UNSEventSender.makeCall(lists);
 			}
-			
-					
+		}catch (RuntimeException e) {
+			throw new ResourceNotFoundException(e.getMessage());
+		}
+		
 		
 	}
 		
