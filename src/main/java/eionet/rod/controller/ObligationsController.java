@@ -1504,9 +1504,7 @@ public class ObligationsController {
 		String userName = getUserName();
 		FileServiceIF fileService = RODServices.getFileService();
 		
-		try
-		{
-			
+				
 			Vector<Vector<String>> lists = new Vector<Vector<String>>();
 			Vector<String> list = new Vector<String>();
 			long timestamp = System.currentTimeMillis();
@@ -1614,10 +1612,8 @@ public class ObligationsController {
 				UNSEventSender.makeCall(lists);
 			}
 			
-		} catch (Exception e)
-		{
-			
-		}
+					
+		
 	}
 		
 }
