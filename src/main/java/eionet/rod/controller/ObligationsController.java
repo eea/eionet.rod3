@@ -107,6 +107,7 @@ public class ObligationsController {
         Obligations obligation = new Obligations();
         String issueID = "0";
         if (!RODUtil.isNullOrEmpty(anmode)) {
+        	model.addAttribute("anmode", anmode);
         	if (anmode.equals("NI")) {
         		issueID = anmode;
         		obligation.setIssueId(issueID);
@@ -115,7 +116,7 @@ public class ObligationsController {
 	        }else if (anmode.equals("P")) {
         		model.addAttribute("activeTab", "CoreData");
         		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
-	        } if (anmode.equals("F")) {
+	        }else if (anmode.equals("F")) {
         		model.addAttribute("activeTab", "EEAData");
         		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
 	        }else {
@@ -197,12 +198,35 @@ public class ObligationsController {
      */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchObligation(Obligations obligations, Model model) {
+    	BreadCrumbs.set(model,"Reporting obligations");
     	String terminate = obligations.getTerminate();
     	if(RODUtil.isNullOrEmpty(obligations.getTerminate()) ) {
     		terminate = "N";
     	}
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),terminate,"0",null, null, null, false));
+    	if (!RODUtil.isNullOrEmpty(obligations.getAnmode())) {
+        	model.addAttribute("anmode", obligations.getAnmode());
+        	if (obligations.getAnmode().equals("NI")) {
+        		obligations.setIssueId(obligations.getAnmode());
+        		model.addAttribute("activeTab", "obligations");
+        		model.addAttribute("titleObl","Reporting obligations");
+	        }else if (obligations.getAnmode().equals("P")) {
+        		model.addAttribute("activeTab", "CoreData");
+        		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
+	        }else if (obligations.getAnmode().equals("F")) {
+        		model.addAttribute("activeTab", "EEAData");
+        		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
+	        }else {
+	        	model.addAttribute("activeTab", "obligations");
+	        	model.addAttribute("titleObl","Reporting obligations");
+	        }
+        }else {
+        	obligations.setAnmode(null);
+        	model.addAttribute("activeTab", "obligations");
+        	model.addAttribute("titleObl","Reporting obligations");
+        }
+    	
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),terminate,"0",obligations.getAnmode(), null, null, false));
 
          model.addAttribute("title","Reporting obligations");
          
@@ -218,7 +242,7 @@ public class ObligationsController {
      	List<ClientDTO> clients = clientService.getAllClients();
      	model.addAttribute("allClients", clients);
      	
-         model.addAttribute("activeTab", "obligations");
+        //model.addAttribute("activeTab", "obligations");
          
          model.addAttribute("obligation",obligations);
          

@@ -74,6 +74,7 @@
      <form method="POST" th:action="@{/obligations/search}" th:object="${obligation}" name="f" >
      <input type="hidden" name="delObligations" id="delObligations">
      <input type="hidden" name="hrefdelete" id="hrefdelete" th:value="@{'/obligations/'}">
+     <input type="hidden" name="anmode" id="anmode" th:value="${anmode}">
      <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
 		<div id="drop-operations">
 	        <ul>

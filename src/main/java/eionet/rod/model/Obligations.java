@@ -114,6 +114,7 @@ public class Obligations {
     private String nextDeadlineTo;
     private String deliveryCountryId;
     private String deliveryCountryName;
+    private String anmode;
     
 	public String getOblTitle() {
 		return oblTitle;
@@ -677,6 +678,14 @@ public class Obligations {
 
 	public void setLastHarvested(String lastHarvested) {
 		this.lastHarvested = lastHarvested;
+	}
+
+	public String getAnmode() {
+		return anmode;
+	}
+
+	public void setAnmode(String anmode) {
+		this.anmode = anmode;
 	}
 	
 }
