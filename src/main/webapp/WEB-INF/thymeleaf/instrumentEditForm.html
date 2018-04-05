@@ -19,7 +19,7 @@
               		</div>
               		<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_LEGALNAME')" title="Help on this field"></a>
 		            <div class="col-lg-8">
-		                <textarea id="sourceTitle" cols="55" rows="5" style="height:5em" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}" th:required="required"></textarea>
+		                <textarea id="sourceTitle" cols="55" rows="5" style="height:5em" onchange="checkMdText(this); changed()" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}"></textarea>
 		            </div>
             	</div>
 	            <div class="form-group">
@@ -28,7 +28,7 @@
 		              </div>
 		              <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ALIASNAME')" title="Help on this field"></a>
 		              <div class="col-lg-8">
-		                	<input id="sourceAlias" maxlength="100" name="sourceAlias" th:field="*{sourceAlias}" type="text" size="68" class="form-control full" th:required="required"/>
+		                	<input id="sourceAlias" maxlength="100" name="sourceAlias" onchange="checkMdText(this); changed()" th:field="*{sourceAlias}" type="text" size="68" class="form-control full"/>
 		              </div>
 	            </div>
 	            <div class="form-group">
@@ -220,16 +220,33 @@
           </fieldset>
           <script type="text/javascript">
 				function selectAll(){
-					selValues(document.f.selectedClassifications.options);
-					isChanged = false;
+					var errors = false;
+					
+					if (document.getElementById("sourceTitle").value == ''){
+						checkMdText(document.getElementById("sourceTitle"));
+						errors = true
+					}
+					
+					if (document.getElementById("sourceAlias").value == ''){
+						checkMdText(document.getElementById("sourceAlias"));
+						errors = true
+					}
+					
+					if (!errors) {
+						selValues(document.f.selectedClassifications.options);
+						isChanged = false;
+						document.forms['f'].submit();
+					}
+					
 				}
 				function exit(){
 					location.href = document.getElementById('hrefInstruments').value;
 				}
 			</script>
           <div>
-                <input th:if="${instrument.sourceId} == null" name="add" value="Add" type="submit" onclick="javascript:selectAll()" class="btn btn-primary"/>
-                <input th:unless="${instrument.sourceId} == null" name="edit" value="Save changes" type="submit" onclick="javascript:selectAll()" class="btn btn-primary"/>
+                
+                <input th:if="${instrument.sourceId} == null" name="add" value="Add" type="button" onclick="javascript:selectAll()" class="btn btn-primary"/>
+                <input th:unless="${instrument.sourceId} == null" name="edit" value="Save changes" type="button" onclick="javascript:selectAll()" class="btn btn-primary"/>
                 <input name="cancel" value="Exit" onclick="exit()" type="button" class="btn btn-default"/>
           </div>
           

@@ -8,11 +8,6 @@
       </div>
       <div id="workarea">
 		<h1>Add new client</h1>
-		<div id="operations">
-		    <ul>
-		        <li><a href="clients.html" th:href="@{/clients/view}" >Back to clients</a></li>
-		    </ul>
-		</div>
 		<div class="panel-body">
 		<form action="#" th:action="@{/clients/add}" th:object="${client}" method="post" class="form-horizontal">
 		 <input name="clientsHref" id="clientsHref" th:value="@{'/clients'}" type="hidden"/>

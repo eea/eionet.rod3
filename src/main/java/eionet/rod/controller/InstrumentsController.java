@@ -195,9 +195,9 @@ public class InstrumentsController {
         List<String> selectedClassifications = new ArrayList<String>();
         instrument.setSelectedClassifications(selectedClassifications);
         model.addAttribute("instrument", instrument);
-        BreadCrumbs.set(model, "Edit a Legislative Instrument");
+        BreadCrumbs.set(model, "Create a Legislative Instrument");
         model.addAttribute("activeTab", "instruments");
-        model.addAttribute("title","Legal instruments");
+        model.addAttribute("title","Create a Legislative Instrument");
         if (message != null) model.addAttribute("message", message);
         return "instrumentEditForm";		
 	}

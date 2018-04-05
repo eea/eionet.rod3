@@ -16,6 +16,7 @@
 		<input type="hidden" name="terminate" value="N"/>
 		<input type="hidden" name="sourceId" th:field="*{sourceId}" th:value="*{sourceId}"/>
 		<input type="hidden" name="obligationId" th:field="*{obligationId}" th:value="${obligationId}"/>
+		<input type="hidden" name="hrefObligations" id="hrefObligations" th:value="@{'/obligations'}">
 				
 		<div class="datatable results">
 			
@@ -447,21 +448,15 @@
 					if (document.getElementById("oblTitle").value == ''){
 						checkMdText(document.getElementById("oblTitle"));
 						errors = true
-					}else {
-						$('#oblTitleError').hide();
 					}
 					if (document.getElementById("description").value == ''){
 						checkMdText(document.getElementById("description"));
 						errors = true
-					}else{
-						$('#descError').hide();
 					}
 					
 					if (document.getElementById("report_freq_months").value == ''){
 						checkMdText(document.getElementById("report_freq_months"));
 						errors = true
-					}else{
-						$('#freq_monthsError').hide();
 					}
 								
 					if (!errors){
@@ -497,10 +492,11 @@
 			}
 			
 			function exit(){
-				var loc = window.location;
+				/*var loc = window.location;
 			    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
 			    var Urlfinal = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
-			    location.href = Urlfinal;
+			    location.href = Urlfinal;*/
+				location.href = document.getElementById('hrefObligations').value;
 			}
 			
 		</script>
