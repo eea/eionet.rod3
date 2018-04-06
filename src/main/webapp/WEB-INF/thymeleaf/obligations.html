@@ -149,6 +149,7 @@
 			        <th>Legislative instrument</th>
 			        <th>Report to</th>
 			        <th>Deadline</th>
+			        <th th:if="${deliveryColumn == '1'}">Deliveries</th>
 		        </tr>
 	        </thead>
 	        <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
@@ -157,7 +158,12 @@
 	        	<td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
 	        	<td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
 	        	<td th:text="${obligation.nextDeadline != null} ? ${obligation.nextDeadline} : ${obligation.nextReporting}"></td>
-						
+				<td th:if="${deliveryColumn == '1'}">
+	        		<a th:if="${obligation.hasDelivery == '1'}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligation.obligationId}}"></a>
+	        		<span th:if="${obligation.hasDelivery == ''}" th:text="'None'"></span>
+	        		<span th:if="${obligation.hasDelivery == null}" th:text="'None'"></span>
+	        		<span th:if="${obligation.hasDelivery == '0'}" th:text="'None'"></span>
+	        	</td>	
 	        </tr>
 	        </table>
         </div>

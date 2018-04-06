@@ -31,7 +31,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -106,6 +105,8 @@ public class ObligationsController {
         
         Obligations obligation = new Obligations();
         String issueID = "0";
+        boolean deliveries = false;
+        String deliveryColumn = "0";
         if (!RODUtil.isNullOrEmpty(anmode)) {
         	model.addAttribute("anmode", anmode);
         	if (anmode.equals("NI")) {
@@ -116,9 +117,14 @@ public class ObligationsController {
 	        }else if (anmode.equals("P")) {
         		model.addAttribute("activeTab", "CoreData");
         		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
+        		deliveries = true;
+        		deliveryColumn = "1";
 	        }else if (anmode.equals("F")) {
         		model.addAttribute("activeTab", "EEAData");
         		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
+	        }else if (anmode.equals("C")) {
+        		model.addAttribute("activeTab", "obligations");
+        		model.addAttribute("titleObl","Reporting obligations : EEA Core set of indicators");
 	        }else {
 	        	model.addAttribute("activeTab", "obligations");
 	        	model.addAttribute("titleObl","Reporting obligations");
@@ -128,9 +134,11 @@ public class ObligationsController {
         	model.addAttribute("titleObl","Reporting obligations");
         }
         
-        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","N","0",anmode, null, null, false));
+        model.addAttribute("allObligations", obligationsService.findObligationList("0",issueID,"0","N","0",anmode, null, null, deliveries));
 
         model.addAttribute("title","Reporting obligations");
+        
+        model.addAttribute("deliveryColumn",deliveryColumn);
         
       //Environmental issues
     	List<Issue> issues = issueDao.findAllIssuesList();
@@ -203,7 +211,8 @@ public class ObligationsController {
     	if(RODUtil.isNullOrEmpty(obligations.getTerminate()) ) {
     		terminate = "N";
     	}
-    	
+    	boolean deliveries = false;
+    	String deliveryColumn = "0";
     	if (!RODUtil.isNullOrEmpty(obligations.getAnmode())) {
         	model.addAttribute("anmode", obligations.getAnmode());
         	if (obligations.getAnmode().equals("NI")) {
@@ -213,9 +222,14 @@ public class ObligationsController {
 	        }else if (obligations.getAnmode().equals("P")) {
         		model.addAttribute("activeTab", "CoreData");
         		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
+        		deliveryColumn = "1";
+        		deliveries = true;
 	        }else if (obligations.getAnmode().equals("F")) {
         		model.addAttribute("activeTab", "EEAData");
         		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
+	        }else if (obligations.getAnmode().equals("C")) {
+        		model.addAttribute("activeTab", "obligations");
+        		model.addAttribute("titleObl","Reporting obligations : EEA Core set of indicators");
 	        }else {
 	        	model.addAttribute("activeTab", "obligations");
 	        	model.addAttribute("titleObl","Reporting obligations");
@@ -226,9 +240,11 @@ public class ObligationsController {
         	model.addAttribute("titleObl","Reporting obligations");
         }
     	
-    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),terminate,"0",obligations.getAnmode(), null, null, false));
+    	 model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(),obligations.getIssueId(),obligations.getSpatialId(),terminate,"0",obligations.getAnmode(), null, null, deliveries));
 
          model.addAttribute("title","Reporting obligations");
+         
+         model.addAttribute("deliveryColumn",deliveryColumn);
          
        //Environmental issues
      	List<Issue> issues = issueDao.findAllIssuesList();
