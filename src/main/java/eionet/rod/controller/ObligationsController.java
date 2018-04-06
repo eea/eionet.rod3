@@ -117,7 +117,6 @@ public class ObligationsController {
 	        }else if (anmode.equals("P")) {
         		model.addAttribute("activeTab", "CoreData");
         		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
-        		deliveries = true;
         		deliveryColumn = "1";
 	        }else if (anmode.equals("F")) {
         		model.addAttribute("activeTab", "EEAData");
@@ -223,7 +222,6 @@ public class ObligationsController {
         		model.addAttribute("activeTab", "CoreData");
         		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
         		deliveryColumn = "1";
-        		deliveries = true;
 	        }else if (obligations.getAnmode().equals("F")) {
         		model.addAttribute("activeTab", "EEAData");
         		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
