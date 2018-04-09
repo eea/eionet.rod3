@@ -51,7 +51,7 @@
 	        </thead>
 	        <tr th:each="version, iterStat : ${versions}" th:class="${iterStat.odd} ? 'even' : 'odd'">
 	        	<td><span th:text="${version.date}"></span></td>	        	
-	        	<td><a href="#" th:text="'/obligations/' + ${obligationId}"></a></td>
+	        	<td><a th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=T_OBLIGATION&op=U&id=' +${obligationId} + '&user=' + ${version.value}}" th:text="'/obligations/' + ${obligationId}"></a></td>
 	        	<td><span>UPDATE</span></td>
 	        	<td><span th:text="${version.value}"></span></td>
 	        </tr>

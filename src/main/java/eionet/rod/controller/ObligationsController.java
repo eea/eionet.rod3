@@ -25,9 +25,14 @@ import eionet.rod.util.RODServices;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import eionet.rod.util.exception.ServiceException;
+import eionet.sparqlClient.helpers.QueryExecutor;
+import eionet.sparqlClient.helpers.QueryResult;
+import eionet.sparqlClient.helpers.ResultValue;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -91,6 +96,8 @@ public class ObligationsController {
 	
 	@Autowired
     IAuthenticationFacade authenticationFacade;
+	
+	private QueryResult result;
 
     /**
      * View for all obligations.
@@ -345,6 +352,74 @@ public class ObligationsController {
     	model.addAttribute("activeTab", "obligations");
         
     	return "obligation_legislation";
+    }
+    
+    @RequestMapping(value = "/{obligationId}/products")
+    public String obligation_products(@PathVariable("obligationId") Integer obligationId, final Model model) throws Exception {
+    	Obligations obligation = obligationsService.findOblId(obligationId);
+        BreadCrumbs.set(model, obligationCrumb, new BreadCrumb(obligation.getOblTitle()));
+        model.addAttribute("obligation", obligation);
+        model.addAttribute("title",RODUtil.replaceTags(obligation.getOblTitle())); 
+    	
+        model.addAttribute("activeTab", "home");
+		
+			String query = "PREFIX data: <http://www.eea.europa.eu/portal_types/Data#> "
+	                + "PREFIX dct: <http://purl.org/dc/terms/> "
+	                + "SELECT DISTINCT ?product ?title xsd:date(?effective) as ?published WHERE { "
+	                + "?product data:reportingObligations \"" + obligationId + "\" ; "
+	                + "dct:title ?title ; "
+	                + "dct:issued ?effective "
+	                + "} ORDER BY DESC(?published) ";
+			
+			String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
+			QueryExecutor executor = new QueryExecutor();
+            executor.executeQuery(CRSparqlEndpoint, query);
+            result = executor.getResults();
+            ArrayList<ArrayList<String>> lists = removeDuplicates();
+            model.addAttribute("listItem", lists);
+            //model.addAttribute("expression", expression);
+		
+            model.addAttribute("activeTab", "obligations");
+		return "obligation_products";    	
+    }
+    
+    private ArrayList<ArrayList<String>> removeDuplicates() {
+        List<String> existingSubjects = new ArrayList<String>();
+		ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
+        if (result != null && result.getRows() != null) {
+            ArrayList<HashMap<String, ResultValue>> rows = result.getRows();
+            for (Iterator<HashMap<String, ResultValue>> it = rows.iterator(); it.hasNext(); ){
+                HashMap<String, ResultValue> row = it.next();
+                
+                String product;
+                if ( row.get("product") != null) {
+                	product = row.get("product").toString();
+                } else {
+                	product = null;
+                }       
+                String title;
+                if ( row.get("title") != null) {
+                	title = row.get("title").toString();
+                } else {
+                	title = null;
+                }
+                String published = row.get("published").toString();
+                if ( row.get("published") != null) {
+                	published = row.get("published").toString();
+                } else {
+                	published = null;
+                }
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(product);
+                list.add(title);
+                list.add(published);
+                if (product != null && !existingSubjects.contains(product)) {
+                    existingSubjects.add(product);
+                    lists.add(list);
+                }
+            }
+        }
+        return lists;
     }
     
 	 /**
@@ -697,7 +772,6 @@ public class ObligationsController {
 		return "eobligation";
     }
 	
-		
 	/**
 	 * 
 	 * @param selectedFormalCountries

@@ -55,9 +55,7 @@
 			<div class="form-group odd">
 				<div class="col-xs-4">Participating countries/territories</div>
 				<div class="col-xs-8" th:if="${not #lists.isEmpty(ObligationCountries)}">
-					<!-- a href="@{'/countrydeliveries?spatialId=' + ${ObligationCountry.countryId} + '&amp;actDetailsId=' + ${obligation.obligationId}" -->
-					<span th:each="ObligationCountry, itemStart : ${ObligationCountries}" th:utext="!${itemStart.last} ? ${ObligationCountry.countryName} + ', ' : ${ObligationCountry.countryName}" th:title="${ObligationCountry.voluntary == 'Y' ? 'Informal participation in the reporting obligation' : ''}"></span>
-					<!-- /a -->
+					<a th:each="ObligationCountry, itemStart : ${ObligationCountries}" th:href="@{'/countrydeliveries?spatialId=' + ${ObligationCountry.countryId} + '&amp;actDetailsId=' + ${obligation.obligationId}}" th:utext="!${itemStart.last} ? ${ObligationCountry.countryName} + ', ' : ${ObligationCountry.countryName}" th:title="${ObligationCountry.voluntary == 'Y' ? 'Informal participation in the reporting obligation' : ''}"></a>
 				</div>
 			</div>
 			<div class="form-group even">
