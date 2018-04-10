@@ -99,6 +99,8 @@ public class ObligationsController {
 	
 	private QueryResult result;
 
+	FileServiceIF fileSrv;
+	
     /**
      * View for all obligations.
      *
@@ -371,9 +373,11 @@ public class ObligationsController {
 	                + "dct:issued ?effective "
 	                + "} ORDER BY DESC(?published) ";
 			
-			String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
+			fileSrv = RODServices.getFileService();
+			String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
+			//String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
 			QueryExecutor executor = new QueryExecutor();
-            executor.executeQuery(CRSparqlEndpoint, query);
+            executor.executeQuery(endpointURL, query);
             result = executor.getResults();
             ArrayList<ArrayList<String>> lists = removeDuplicates();
             model.addAttribute("listItem", lists);

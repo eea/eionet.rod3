@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import eionet.rod.Constants;
 import eionet.rod.dao.ClientService;
 import eionet.rod.dao.IssueDao;
 
@@ -20,10 +21,13 @@ import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
+import eionet.rod.service.FileServiceIF;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
+import eionet.rod.util.RODServices;
 import eionet.rod.util.exception.ResourceNotFoundException;
+import eionet.rod.util.exception.ServiceException;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
@@ -46,6 +50,8 @@ public class SearchController {
 
 	private QueryResult result;
 	
+	FileServiceIF fileSrv;
+	
 	@RequestMapping(value = "/simpleSearch")
     public String simpleSearchHome(@RequestParam(required = false, value="expression") String expression, Model model) {
 		model.addAttribute("title","Search");
@@ -64,12 +70,22 @@ public class SearchController {
                 + "OPTIONAL { { ?subject dct:title ?name } UNION { ?subject foaf:name ?name } } "
                 + "}";
 			
-			String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
-			QueryExecutor executor = new QueryExecutor();
-            executor.executeQuery(CRSparqlEndpoint, query);
-            result = executor.getResults();
-            ArrayList<ArrayList<String>> lists = removeDuplicates();
-            model.addAttribute("listItem", lists);
+			
+			try {
+				fileSrv = RODServices.getFileService();
+				String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
+				//String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
+				QueryExecutor executor = new QueryExecutor();
+	            executor.executeQuery(endpointURL, query);
+	            result = executor.getResults();
+	            ArrayList<ArrayList<String>> lists = removeDuplicates();
+	            model.addAttribute("listItem", lists);
+			} catch (ServiceException e) {
+				String messageExcep = e.toString();
+	            model.addAttribute("message", messageExcep);
+	            
+			}
+			
             model.addAttribute("expression", expression);
 		}
 		return "simpleSearch";    	

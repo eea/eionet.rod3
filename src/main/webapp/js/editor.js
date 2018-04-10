@@ -292,6 +292,7 @@ function checkDateSimple(field) {
 
 	if(s.length != 10 || !re.test(s)) {
 		setwarning(field, "Invalid date format. Date needs to be in dd/mm/yyyy format.");
+		field.value = "31/12/9999";
 		return false;
 	}
 	rVal.dx = RegExp.$1;
