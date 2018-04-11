@@ -224,7 +224,7 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("URL", instrumentFactsheetRec.getSourceUrl());
 		parameters.put("CELEX_REF", instrumentFactsheetRec.getSourceCelexRef());
 		parameters.put("ISSUED_BY_URL", instrumentFactsheetRec.getSourceIssuedByUrl());
-		if (RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceValidFrom())) {
+		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceValidFrom())) {
 			try {
 				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceValidFrom())).getTime());
 				parameters.put("VALID_FROM", date);
@@ -237,7 +237,7 @@ public class SourceServiceJdbc implements SourceService {
 		}
 		parameters.put("ABSTRACT", instrumentFactsheetRec.getSourceAbstract());
 		parameters.put("COMMENT", instrumentFactsheetRec.getSourceComment());
-		if (RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcEntryIntoForce())) {
+		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcEntryIntoForce())) {
 			try {
 				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcEntryIntoForce())).getTime());
 				parameters.put("EC_ENTRY_INTO_FORCE", date);
@@ -248,7 +248,7 @@ public class SourceServiceJdbc implements SourceService {
 		}else {
 			parameters.put("EC_ENTRY_INTO_FORCE", null);
 		}
-		if (RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcAccession())) {
+		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcAccession())) {
 			try {
 				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcAccession())).getTime());
 				parameters.put("EC_ACCESSION", date);
