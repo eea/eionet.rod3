@@ -301,6 +301,7 @@ function checkDateSimple(field) {
 
 	if(rVal.mx < 1 || rVal.mx > 12) {
 		setwarning(field, "Invalid date.");
+		field.value = "31/12/9999";
 		return false;
 	}
 	else if ((rVal.dx < 1) ||
@@ -308,6 +309,7 @@ function checkDateSimple(field) {
 				((rVal.mx == 4 || rVal.mx == 6 || rVal.mx == 9 || rVal.mx == 11) && rVal.dx > 30) ||
 				(rVal.mx == 2 && rVal.dx > 29)) {
 		setwarning(field, "Invalid date.");
+		field.value = "31/12/9999";
 		return false;
 	}
 	clearwarning(field);
@@ -389,20 +391,25 @@ function addValues(selFrom, selTo, unit,clist,volSelTo) {
 			}
 		}
 	}
-
 	for (i = 0; i < selFrom.length; ++i) {
+		
 		if (selFrom[i].selected) {
+
 			var exists;
 			exists = false;
 			existsVolunt = false;
 			for (j = 0;j < selTo.length; ++j) {
 				var x;
 				u = new String(selTo[j].value);
+				if (u.valueOf() == selFrom[i].value) {
+					exists = true;
+					break;
+				}
 			}
+
 			for (z = 0;z < volSelTo.length; ++z) {
 				var st,id;
 				id = new String(volSelTo[z].value);
-
 				if (id.valueOf() == selFrom[i].value) {
 					existsVolunt = true;
 					break;
