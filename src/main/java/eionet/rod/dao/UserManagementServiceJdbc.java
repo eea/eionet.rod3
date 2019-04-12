@@ -26,13 +26,13 @@ public class UserManagementServiceJdbc extends JdbcUserDetailsManager
     /** The users table has only the people with roles, so we fake the check as we're using CAS. */
     @Override
     public UserDetails loadUserByUsername(String username) {
-        Set<GrantedAuthority> dbAuthsSet = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> dbAuthsSet = new HashSet<>();
 
         if (getEnableAuthorities()) {
             dbAuthsSet.addAll(loadUserAuthorities(username));
         }
 
-        List<GrantedAuthority> dbAuths = new ArrayList<GrantedAuthority>(dbAuthsSet);
+        List<GrantedAuthority> dbAuths = new ArrayList<>(dbAuthsSet);
         return new User(username, "", true, true, true, true, dbAuths);
     }
 

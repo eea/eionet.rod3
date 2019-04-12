@@ -58,7 +58,7 @@ public class SourceServiceJdbc implements SourceService {
 		
 		try {
 		
-			instrumentFactsheetRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<InstrumentFactsheetDTO>(InstrumentFactsheetDTO.class), sourceId);
+			instrumentFactsheetRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), sourceId);
 			
 			List<InstrumentObligationDTO> obligations = getObligationsById(sourceId);
 	
@@ -100,7 +100,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "WHERE S.PK_SOURCE_ID = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		return jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentObligationDTO>(InstrumentObligationDTO.class), sourceId);
+		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentObligationDTO.class), sourceId);
 		
 		
 	}
@@ -198,8 +198,7 @@ public class SourceServiceJdbc implements SourceService {
 		
 		Integer countClients= jdbcTemplate.queryForObject(queryCount, Integer.class, sourceId);
 		if (countClients  != 0 ) {
-			ClientDTO clientRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), sourceId);
-			return clientRec;
+			return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(ClientDTO.class), sourceId);
 		}else {
 			return null;
 		}
@@ -216,7 +215,7 @@ public class SourceServiceJdbc implements SourceService {
 		jdbcInsert.withTableName("T_SOURCE").usingGeneratedKeyColumns(
                 "PK_SOURCE_ID");
 		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("TITLE", instrumentFactsheetRec.getSourceTitle());
 		parameters.put("ALIAS", instrumentFactsheetRec.getSourceAlias());
 		parameters.put("SOURCE_CODE", instrumentFactsheetRec.getSourceCode());
@@ -273,7 +272,7 @@ public class SourceServiceJdbc implements SourceService {
 	       
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
                 parameters));
-		Integer sourceId = ((Number) key).intValue();
+		Integer sourceId = key.intValue();
 		//System.out.println(sourceId);
 		/*String query = "INSERT INTO T_SOURCE (TITLE, ALIAS, SOURCE_CODE, TERMINATE, URL, "
 				+ "CELEX_REF, ISSUED_BY_URL, VALID_FROM, ABSTRACT, COMMENT, "
@@ -344,7 +343,7 @@ public class SourceServiceJdbc implements SourceService {
 		String query = "SELECT T_SOURCE.PK_SOURCE_ID AS sourceId, ALIAS AS sourceAlias "                
                 + "FROM T_SOURCE ORDER BY sourceAlias";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		return jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentFactsheetDTO>(InstrumentFactsheetDTO.class));
+		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class));
 	}
 	
 
@@ -356,7 +355,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "SELECT FK_SOURCE_PARENT_ID FROM T_SOURCE_LNK WHERE FK_SOURCE_CHILD_ID=? "
 				+ "AND CHILD_TYPE='S' AND PARENT_TYPE='S')";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class), sourceId);
+		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentDTO.class), sourceId);
 		if (instruments != null && instruments.size() > 0) {
 			instrumentDTORec = instruments.get(0);
 		}
@@ -367,7 +366,7 @@ public class SourceServiceJdbc implements SourceService {
 	
 	
 	private List<InstrumentDTO> getRelatedInstruments(Integer sourceId) {
-		List<InstrumentDTO> relatedInstruments = new ArrayList<InstrumentDTO>();
+		List<InstrumentDTO> relatedInstruments = new ArrayList<>();
 		InstrumentDTO relatedInstrument = null;
 		List<InstrumentFactsheetDTO> instruments = null;
 		
@@ -376,13 +375,13 @@ public class SourceServiceJdbc implements SourceService {
 				+ "AND CHILD_TYPE='S' AND PARENT_TYPE='S'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentFactsheetDTO>(InstrumentFactsheetDTO.class), sourceId);
+		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), sourceId);
 		if (instruments != null && instruments.size() > 0) {
 			
 			for (InstrumentFactsheetDTO instrument : instruments) {
 				query = "SELECT PK_SOURCE_ID AS sourceId, ALIAS AS sourceAlias "
 						+ "FROM T_SOURCE WHERE PK_SOURCE_ID=?";
-				relatedInstrument = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class), instrument.getSourceLnkFKSourceChildId());
+				relatedInstrument = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(InstrumentDTO.class), instrument.getSourceLnkFKSourceChildId());
 				relatedInstruments.add(relatedInstrument);
 			}
 			
@@ -400,7 +399,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "ON SL.FK_SOURCE_CHILD_ID = S.PK_SOURCE_ID "
 				+ "WHERE S.PK_SOURCE_ID=? AND SL.CHILD_TYPE='S' AND SL.PARENT_TYPE='C'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		classifications = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentClassificationDTO>(InstrumentClassificationDTO.class), sourceId);
+		classifications = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentClassificationDTO.class), sourceId);
 		return classifications;		
 	}
 	
@@ -410,7 +409,7 @@ public class SourceServiceJdbc implements SourceService {
 		String query = "SELECT PK_CLASS_ID AS classId, CLASSIFICATOR AS classificator, CLASS_NAME AS className "
 				+ "FROM T_SOURCE_CLASS WHERE CLASS_NAME != '' ORDER BY CLASSIFICATOR";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		classifications = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentClassificationDTO>(InstrumentClassificationDTO.class));
+		classifications = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentClassificationDTO.class));
 		return classifications;
 	}
 	
@@ -450,7 +449,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "AND SL.FK_SOURCE_CHILD_ID=SC.PK_CLASS_ID AND SL.CHILD_TYPE='C' AND SL.PARENT_TYPE='C' "
 				+ "ORDER BY SC.CLASSIFICATOR";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<InstrumentsListDTO> intrumentsListDTOs = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentsListDTO>(InstrumentsListDTO.class), id);
+		List<InstrumentsListDTO> intrumentsListDTOs = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentsListDTO.class), id);
 		String style = "category";
         if (!hasParent) {
             style = "topcategory";
@@ -486,7 +485,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "WHERE SC.PK_CLASS_ID=? AND SC.PK_CLASS_ID=SL.FK_SOURCE_CHILD_ID AND SL.CHILD_TYPE='C' AND SL.PARENT_TYPE='C' "
 				+ "ORDER BY SC.CLASSIFICATOR";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<InstrumentsListDTO> hierarchyInstrument = jdbcTemplate.query(query, new BeanPropertyRowMapper<InstrumentsListDTO>(InstrumentsListDTO.class), id);
+		List<InstrumentsListDTO> hierarchyInstrument = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentsListDTO.class), id);
 		if (hierarchyInstrument != null && hierarchyInstrument.size() > 0) {
 			return hierarchyInstrument.get(0);
 		} else {
@@ -505,8 +504,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "WHERE SL1.PARENT_TYPE = 'C' AND SL1.FK_SOURCE_PARENT_ID=? "
 				+ "ORDER BY S1.ALIAS";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<HierarchyInstrumentDTO> hierarchyInstruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<HierarchyInstrumentDTO>(HierarchyInstrumentDTO.class), id);
-		return hierarchyInstruments;		
+		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(HierarchyInstrumentDTO.class), id);
 	}
 	
 	private InstrumentFactsheetDTO validateDates(InstrumentFactsheetDTO instrumentFactsheetRec) {

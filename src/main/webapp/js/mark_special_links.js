@@ -10,7 +10,7 @@ var bugRiddenCrashPronePieceOfJunk = (
     navigator.userAgent.indexOf('MSIE 5') != -1
     &&
     navigator.userAgent.indexOf('Mac') != -1
-)
+);
 
 // check for W3CDOM compatibility
 var W3CDOM = (!bugRiddenCrashPronePieceOfJunk &&
@@ -19,8 +19,7 @@ var W3CDOM = (!bugRiddenCrashPronePieceOfJunk &&
 
 function getContentArea(){
     if(W3CDOM){
-        var node=document.getElementById('workarea');
-        return node
+        return document.getElementById('workarea');
     }
 }
 
@@ -31,8 +30,7 @@ function wrapNode(node, wrappertype, wrapperclass){
     wrapper.className = wrapperclass;
     var innerNode = node.parentNode.replaceChild(wrapper,node);
     wrapper.appendChild(innerNode);
-};
-
+}
 function scanforlinks() {
     contentarea = getContentArea(); 
     scanforlinksinarea(contentarea);

@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -44,8 +45,8 @@ public class ITHelpDao {
     	
     	String expectedTitle = "Legislative instrument";
     	String expectedText ="The focus should be on defining what";
-    	
-    	assertTrue(help != null);
+
+        assertNotNull(help);
     	assertTrue(help.getText().contains(expectedText));
     	assertTrue(help.getTitle().contains(expectedTitle));
     	//System.out.println("Help Text: " + help.getText());

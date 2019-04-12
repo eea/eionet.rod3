@@ -89,6 +89,7 @@ public class ITObligationsDao {
 
         exception.expect(ResourceNotFoundException.class);
         obligation = obligationsService.findOblId(12);
+        // todo implement
     }
 
     @Test
@@ -146,12 +147,12 @@ public class ITObligationsDao {
         obligation.setReportFreqMonths("5");
 
         //data ClientDTO
-        List<ClientDTO> clients = new ArrayList<ClientDTO>();
+        List<ClientDTO> clients = new ArrayList<>();
         ClientDTO client = new ClientDTO();
         client.setClientId(1);
         clients.add(client);
 
-        List<Spatial> spatials = new ArrayList<Spatial>();
+        List<Spatial> spatials = new ArrayList<>();
         Spatial spatial = new Spatial();
         spatial.setSpatialId(1);
         spatials.add(spatial);
@@ -159,13 +160,13 @@ public class ITObligationsDao {
         spatial.setSpatialId(2);
         spatials.add(spatial);
 
-        List<Spatial> spatialsVoluntary = new ArrayList<Spatial>();
+        List<Spatial> spatialsVoluntary = new ArrayList<>();
         Spatial spatialVoluntary = new Spatial();
         spatialVoluntary.setSpatialId(3);
         spatialsVoluntary.add(spatialVoluntary);
 
 
-        List<Issue> issues = new ArrayList<Issue>();
+        List<Issue> issues = new ArrayList<>();
         Issue issue = new Issue();
         issue.setIssueId(1);
         issues.add(issue);
@@ -181,17 +182,17 @@ public class ITObligationsDao {
         obligation.setDescription("Update Test Dscription Obligation");
         obligation.setReportFreqMonths("10");
 
-        spatials = new ArrayList<Spatial>();
+        spatials = new ArrayList<>();
         spatial = new Spatial();
         spatial.setSpatialId(1);
         spatials.add(spatial);
 
-        spatialsVoluntary = new ArrayList<Spatial>();
+        spatialsVoluntary = new ArrayList<>();
         spatialVoluntary = new Spatial();
         spatialVoluntary.setSpatialId(2);
         spatialsVoluntary.add(spatialVoluntary);
 
-        issues = new ArrayList<Issue>();
+        issues = new ArrayList<>();
         issue = new Issue();
         issue.setIssueId(2);
         issues.add(issue);
@@ -202,7 +203,7 @@ public class ITObligationsDao {
 
         exception.expect(ResourceNotFoundException.class);
         obligation = obligationsService.findOblId(intObligationId);
-
+        // todo implement
    }
     
     @Test

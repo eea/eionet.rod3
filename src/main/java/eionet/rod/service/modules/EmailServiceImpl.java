@@ -68,12 +68,10 @@ public class EmailServiceImpl implements EmailServiceIF {
 
         if (ccSysAdmin) {
             String[] sysAdmins = getSysAdmins();
-            if (sysAdmins != null) {
-                for (int i = 0; i < sysAdmins.length; i++) {
-                    String sysAdmin = sysAdmins[i].trim();
-                    if (sysAdmin.length() > 0) {
-                        message.addRecipient(Message.RecipientType.CC, new InternetAddress(sysAdmin));
-                    }
+            for (String sysAdmin1 : sysAdmins) {
+                String sysAdmin = sysAdmin1.trim();
+                if (sysAdmin.length() > 0) {
+                    message.addRecipient(Message.RecipientType.CC, new InternetAddress(sysAdmin));
                 }
             }
         }

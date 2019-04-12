@@ -85,7 +85,7 @@ public class SubscribeController {
 	  
 	  /**
 	     * 
-	     * @param obligations
+	     * @param subscribe
 	     * @param model
 	     * @return view obligations
 	     */

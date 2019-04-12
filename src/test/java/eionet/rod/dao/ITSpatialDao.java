@@ -77,7 +77,7 @@ public class ITSpatialDao {
     @Test
     public void testfindObligationCountriesList() throws ResourceNotFoundException
     {
-    	List<Spatial> spatialListY = new ArrayList<Spatial>();
+    	List<Spatial> spatialListY = new ArrayList<>();
     	spatialListY.add(new Spatial(1, "Austria", "C", "AT", "Y"));
     	spatialListY.add(new Spatial(2, "Albania", "C", "AL", "N"));
     	spatialListY.add(new Spatial(3, "Francia", "C", "FR", "Y"));

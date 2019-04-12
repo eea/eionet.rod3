@@ -48,7 +48,7 @@ public class SpatialDaoImpl implements SpatialDao {
 				throw new ResourceNotFoundException("No data in the database");
 			}else {
 			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Spatial>(Spatial.class));
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class));
 
 			}
 			
@@ -77,7 +77,7 @@ public class SpatialDaoImpl implements SpatialDao {
 				return null;
 			}else {
 				
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Spatial>(Spatial.class), Member);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), Member);
 			}
 		} catch (DataAccessException e) {
 			throw new ResourceNotFoundException("You requested was not found in the database");
@@ -106,7 +106,7 @@ public class SpatialDaoImpl implements SpatialDao {
 			
 			}else {
 		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Spatial>(Spatial.class), spatialId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Spatial.class), spatialId);
 
 			}
 			
@@ -135,13 +135,12 @@ public class SpatialDaoImpl implements SpatialDao {
 			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
 		
 			if (countSpatial == 0) {
-				
-				List<ObligationCountry> ObligationCountries = null;
-				return ObligationCountries;
+
+				return null;
 				
 			}else {
 		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<ObligationCountry>(ObligationCountry.class), obligationId);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ObligationCountry.class), obligationId);
 
 			}
 			

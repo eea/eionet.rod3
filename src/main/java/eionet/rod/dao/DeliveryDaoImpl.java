@@ -80,7 +80,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
         query += " ORDER BY T_DELIVERY.UPLOAD_DATE DESC";
 
 		try {
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper<Delivery>(Delivery.class));
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Delivery.class));
 		}catch (DataAccessException ex) {
 	    	logger.error(ex.getMessage(), ex);
 			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage());
@@ -123,15 +123,13 @@ public class DeliveryDaoImpl implements DeliveryDao{
 
             if (deliveredCountriesByObligations != null && !deliveredCountriesByObligations.isEmpty()) {
 
-                Iterator<Entry<String, HashSet<Integer>>> entries = deliveredCountriesByObligations.entrySet().iterator();
-                while (entries.hasNext()) {
+                for (Entry<String, HashSet<Integer>> entry : deliveredCountriesByObligations.entrySet()) {
 
-                    Entry<String, HashSet<Integer>> entry = entries.next();
                     String obligId = entry.getKey();
                     HashSet<Integer> countryIdsSet = entry.getValue();
                     if (countryIdsSet != null && !countryIdsSet.isEmpty()) {
                         String countryIds = "," + cnvHashSet(countryIdsSet, ",") + ",";
-                       // markCountries(Integer.parseInt(obligId), countryIds);
+                        // markCountries(Integer.parseInt(obligId), countryIds);
                         jdbcTemplate.update(qMarkCountries, countryIds, Integer.parseInt(obligId));
                     }
                 }
@@ -150,7 +148,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
             return "";
         }
 
-        StringBuffer s = new StringBuffer();
+        StringBuilder s = new StringBuilder();
         for (Iterator<Integer> it = hash.iterator(); it.hasNext(); ) {
             Integer id = it.next();
             if (id != null)
@@ -253,7 +251,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
                     	   
                            HashSet<Integer> savedCountries = savedCountriesByObligationId.get(obligationId);
                            if (savedCountries == null) {
-                               savedCountries = new HashSet<Integer>();
+                               savedCountries = new HashSet<>();
                                savedCountriesByObligationId.put(obligationId, savedCountries);
                            }
                            savedCountries.add(Integer.parseInt(countryId));
@@ -261,13 +259,10 @@ public class DeliveryDaoImpl implements DeliveryDao{
                    }
                }
            }
-       }catch (RuntimeException e) {
+       } catch (Exception e) {
     	   logger.error(e.getMessage(), e);
            throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.toString());
-       } catch (Exception e) {
-           logger.error(e.getMessage(), e);
-           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.toString());
-       } 
+       }
 
        return batchCounter;
    }

@@ -1,8 +1,8 @@
 package eionet.rod.model;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -33,7 +33,7 @@ public class BreadCrumbTest {
     @Test
     public void nullLink() {
         BreadCrumb obj = new BreadCrumb("supercalifragilisticexpialidocious");
-        assertEquals(null, obj.getLink());
+        assertNull(obj.getLink());
         assertEquals("supercalifragilisticexpi...", obj.getLinktext());
     }
 

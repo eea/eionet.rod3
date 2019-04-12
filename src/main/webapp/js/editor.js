@@ -364,7 +364,7 @@ function addValues(selFrom, selTo, unit,clist,volSelTo) {
 	eu28 = { AT:1,BE:1,BG:1,HR:1,CY:1,CZ:1,
 		 DE:1,DK:1,EE:1,ES:1,FI:1,FR:1,GB:1,GR:1,
 		 HU:1,IE:1,IT:1,LT:1,LU:1,LV:1,MT:1,NL:1,
-		 PL:1,PT:1,RO:1,SE:1,SI:1,SK:1 }
+		 PL:1,PT:1,RO:1,SE:1,SI:1,SK:1 };
 
 	for (k = 0; k < selFrom.length; ++k) {
 		if (selFrom[k].selected) {

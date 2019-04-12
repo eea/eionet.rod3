@@ -1,6 +1,7 @@
 package eionet.rod.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class UndoInfoController {
 		List<UndoDTO> undoList = undoService.getUndoList(ts, tab, op);
 		model.addAttribute("undoList", undoList);
 		
-		ArrayList<String> currentValues = new ArrayList<String>();
+		ArrayList<String> currentValues = new ArrayList<>();
 		
 		if (tab.equals("T_OBLIGATION")) {
 			
@@ -86,7 +87,7 @@ public class UndoInfoController {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_RA_ID", id);
 				
-				if (isDelete == false) {
+				if (!isDelete) {
 					Obligations obligation = obligationsService.findOblId(id);					
 					
 					currentValues.add(obligation.getAuthority());	
@@ -223,17 +224,17 @@ public class UndoInfoController {
 			}						
 			
 			List<UndoDTO> undoCountries = undoService.getUndoList(ts, "T_RASPATIAL_LNK", op);
-			HashMap<Integer, String> fkSpatialIds = new HashMap<Integer, String>();
-			HashMap<Integer, String> voluntaries = new HashMap<Integer, String>();
-			StringBuffer undoCountriesString = new StringBuffer();
-			StringBuffer undoCountriesVolString = new StringBuffer();
+			HashMap<Integer, String> fkSpatialIds = new HashMap<>();
+			HashMap<Integer, String> voluntaries = new HashMap<>();
+			StringBuilder undoCountriesString = new StringBuilder();
+			StringBuilder undoCountriesVolString = new StringBuilder();
 			if (undoCountries != null && !op.equals("D")) {
-				for (int i = 0; i < undoCountries.size(); i++) {
-					if (undoCountries.get(i).getCol().equals("FK_SPATIAL_ID")) {
-						fkSpatialIds.put(undoCountries.get(i).getSubTransNr(), undoCountries.get(i).getValue());
+				for (UndoDTO undoCountry : undoCountries) {
+					if (undoCountry.getCol().equals("FK_SPATIAL_ID")) {
+						fkSpatialIds.put(undoCountry.getSubTransNr(), undoCountry.getValue());
 					}
-					if (undoCountries.get(i).getCol().equals("VOLUNTARY")) {
-						voluntaries.put(undoCountries.get(i).getSubTransNr(), undoCountries.get(i).getValue());
+					if (undoCountry.getCol().equals("VOLUNTARY")) {
+						voluntaries.put(undoCountry.getSubTransNr(), undoCountry.getValue());
 					}
 				}
 				
@@ -261,7 +262,7 @@ public class UndoInfoController {
 			}
 			
 			List<Spatial> currentCountries = obligationsService.findAllCountriesByObligation(id, "N");
-			StringBuffer currentCountriesString = new StringBuffer();
+			StringBuilder currentCountriesString = new StringBuilder();
 			if (currentCountries != null) {			
 				for (int i = 0; i < currentCountries.size(); i++) {
 					currentCountriesString.append(currentCountries.get(i).getName());
@@ -275,7 +276,7 @@ public class UndoInfoController {
 			}
 			
 			List<Spatial> currentCountriesVol = obligationsService.findAllCountriesByObligation(id, "Y");
-			StringBuffer currentCountriesVolString = new StringBuffer();
+			StringBuilder currentCountriesVolString = new StringBuilder();
 			if (currentCountriesVol != null) {			
 				for (int i = 0; i < currentCountriesVol.size(); i++) {
 					currentCountriesVolString.append(currentCountriesVol.get(i).getName());
@@ -288,8 +289,8 @@ public class UndoInfoController {
 				model.addAttribute("currentCountriesVol", "");
 			}
 			
-			StringBuffer addedCountries = new StringBuffer(); 		
-			StringBuffer removedCountries = new StringBuffer();
+			StringBuilder addedCountries = new StringBuilder();
+			StringBuilder removedCountries = new StringBuilder();
 			if (undoCountries == null && currentCountries == null) {
 				model.addAttribute("addedCountries", "");
 				model.addAttribute("removedCountries", "");
@@ -301,31 +302,26 @@ public class UndoInfoController {
 				model.addAttribute("removedCountries", "");
 			} else {
 				String[] currentCountriesStringList = currentCountriesString.toString().split(", ");
-				ArrayList<String> current = new ArrayList<String>();
+				ArrayList<String> current = new ArrayList<>();
 				String[] undoCountriesStringList  = undoCountriesString.toString().split(", ");
-				ArrayList<String> undo = new ArrayList<String>();
-				
-				for (int i = 0; i < currentCountriesStringList.length; i++) {
-					current.add(currentCountriesStringList[i]);
-				}
-				
-				for (int i = 0; i < undoCountriesStringList.length; i++) {
-					undo.add(undoCountriesStringList[i]);
-				}
-				
-				for (int i = 0; i < undo.size(); i++) {
-					if (!current.contains(undo.get(i))) {
-						removedCountries.append(undo.get(i)).append(", ");
+
+				current.addAll(Arrays.asList(currentCountriesStringList));
+
+				ArrayList<String> undo = new ArrayList<>(Arrays.asList(undoCountriesStringList));
+
+				for (String s1 : undo) {
+					if (!current.contains(s1)) {
+						removedCountries.append(s1).append(", ");
 					}
 				}
 				String removedCountriesString = "";
 				if (removedCountries.length() > 1) {
 					removedCountriesString = removedCountries.substring(0, removedCountries.length()-2);
 				}
-				
-				for (int i = 0; i < current.size(); i++) {
-					if (!undo.contains(current.get(i))) {
-						addedCountries.append(current.get(i)).append(", ");
+
+				for (String s : current) {
+					if (!undo.contains(s)) {
+						addedCountries.append(s).append(", ");
 					}
 				}
 				String addedCountriesString = "";
@@ -338,8 +334,8 @@ public class UndoInfoController {
 				
 			}
 			
-			StringBuffer addedCountriesVol = new StringBuffer(); 		
-			StringBuffer removedCountriesVol = new StringBuffer();
+			StringBuilder addedCountriesVol = new StringBuilder();
+			StringBuilder removedCountriesVol = new StringBuilder();
 			if (undoCountries == null && currentCountriesVol == null) {
 				model.addAttribute("addedCountriesVol", "");
 				model.addAttribute("removedCountriesVol", "");
@@ -351,31 +347,25 @@ public class UndoInfoController {
 				model.addAttribute("removedCountriesVol", "");
 			} else {
 				String[] currentCountriesVolStringList = currentCountriesVolString.toString().split(", ");
-				ArrayList<String> current = new ArrayList<String>();
 				String[] undoCountriesVolStringList  = undoCountriesVolString.toString().split(", ");
-				ArrayList<String> undo = new ArrayList<String>();
-				
-				for (int i = 0; i < currentCountriesVolStringList.length; i++) {
-					current.add(currentCountriesVolStringList[i]);
-				}
-				
-				for (int i = 0; i < undoCountriesVolStringList.length; i++) {
-					undo.add(undoCountriesVolStringList[i]);
-				}
-				
-				for (int i = 0; i < undo.size(); i++) {
-					if (!current.contains(undo.get(i))) {
-						removedCountriesVol.append(undo.get(i)).append(", ");
+
+				ArrayList<String> current = new ArrayList<>(Arrays.asList(currentCountriesVolStringList));
+
+				ArrayList<String> undo = new ArrayList<>(Arrays.asList(undoCountriesVolStringList));
+
+				for (String s1 : undo) {
+					if (!current.contains(s1)) {
+						removedCountriesVol.append(s1).append(", ");
 					}
 				}
 				String removedCountriesVolString = "";
 				if (removedCountriesVol.length() > 1) {
 					removedCountriesVolString = removedCountriesVol.substring(0, removedCountriesVol.length()-2);
 				}
-				
-				for (int i = 0; i < current.size(); i++) {
-					if (!undo.contains(current.get(i))) {
-						addedCountriesVol.append(current.get(i)).append(", ");
+
+				for (String s : current) {
+					if (!undo.contains(s)) {
+						addedCountriesVol.append(s).append(", ");
 					}
 				}
 				String addedCountriesVolString = "";
@@ -390,16 +380,16 @@ public class UndoInfoController {
 			
 			List<UndoDTO> undoIssues = undoService.getUndoList(ts, "T_RAISSUE_LNK", op);
 			//ArrayList<Issue> undoIssues = new ArrayList<Issue>();
-			StringBuffer undoIssuesString = new StringBuffer();
-			if (undoIssues != null && !op.equals("D")) {					
-				for (int i = 0; i < undoIssues.size(); i++ ) {
-					if (undoIssues.get(i).getCol().equals("FK_ISSUE_ID")) {
-						Issue issue = issueService.findById(Integer.parseInt(undoIssues.get(i).getValue()));
+			StringBuilder undoIssuesString = new StringBuilder();
+			if (undoIssues != null && !op.equals("D")) {
+				for (UndoDTO undoIssue : undoIssues) {
+					if (undoIssue.getCol().equals("FK_ISSUE_ID")) {
+						Issue issue = issueService.findById(Integer.parseInt(undoIssue.getValue()));
 						//undoIssues.add(issue);
 						undoIssuesString.append(issue.getIssueName());
 						undoIssuesString.append(", ");
 					}
-					
+
 				}
 				if (undoIssuesString.length() > 1) {
 					undoIssuesString.replace(undoIssuesString.length()-2, undoIssuesString.length(), "");
@@ -410,7 +400,7 @@ public class UndoInfoController {
 			}
 			
 			List<Issue> currentIssues = obligationsService.findAllIssuesbyObligation(id);
-			StringBuffer currentIssuesString = new StringBuffer();
+			StringBuilder currentIssuesString = new StringBuilder();
 			if (currentIssues != null) {			
 				for (int i = 0; i < currentIssues.size(); i++) {
 					currentIssuesString.append(currentIssues.get(i).getIssueName());
@@ -423,8 +413,8 @@ public class UndoInfoController {
 				model.addAttribute("currentIssues", "");
 			}
 			
-			StringBuffer addedIssues = new StringBuffer(); 		
-			StringBuffer removedIssues = new StringBuffer();
+			StringBuilder addedIssues = new StringBuilder();
+			StringBuilder removedIssues = new StringBuilder();
 			if (undoIssues == null && currentIssues == null) {
 				model.addAttribute("addedIssues", "");
 				model.addAttribute("removedIssues", "");
@@ -436,31 +426,25 @@ public class UndoInfoController {
 				model.addAttribute("removedIssues", "");
 			} else {
 				String[] currentIssuesStringList = currentIssuesString.toString().split(", ");
-				ArrayList<String> current = new ArrayList<String>();
 				String[] undoIssuesStringList  = undoIssuesString.toString().split(", ");
-				ArrayList<String> undo = new ArrayList<String>();
-				
-				for (int i = 0; i < currentIssuesStringList.length; i++) {
-					current.add(currentIssuesStringList[i]);
-				}
-				
-				for (int i = 0; i < undoIssuesStringList.length; i++) {
-					undo.add(undoIssuesStringList[i]);
-				}
-				
-				for (int i = 0; i < undo.size(); i++) {
-					if (!current.contains(undo.get(i))) {
-						removedIssues.append(undo.get(i)).append(", ");
+
+				ArrayList<String> current = new ArrayList<>(Arrays.asList(currentIssuesStringList));
+
+				ArrayList<String> undo = new ArrayList<>(Arrays.asList(undoIssuesStringList));
+
+				for (String s1 : undo) {
+					if (!current.contains(s1)) {
+						removedIssues.append(s1).append(", ");
 					}
 				}
 				String removedIssuesString = "";
 				if (removedIssues.length() > 1) {
 					removedIssuesString = removedIssues.substring(0, removedIssues.length()-2);
 				}
-				
-				for (int i = 0; i < current.size(); i++) {
-					if (!undo.contains(current.get(i))) {
-						addedIssues.append(current.get(i)).append(", ");
+
+				for (String s : current) {
+					if (!undo.contains(s)) {
+						addedIssues.append(s).append(", ");
 					}
 				}
 				String addedIssuesString = "";
@@ -473,15 +457,15 @@ public class UndoInfoController {
 			}
 			
 			List<UndoDTO> undoClients = undoService.getUndoList(ts, "T_CLIENT_OBLIGATION_LNK", op);
-			StringBuffer undoClientsString = new StringBuffer();
-			if (undoClients != null && !op.equals("D")) {					
-				for (int i = 0; i < undoClients.size(); i++ ) {
-					if (undoClients.get(i).getCol().equals("FK_CLIENT_ID")) {
-						ClientDTO client = clientService.getById((Integer.parseInt(undoClients.get(i).getValue())));
+			StringBuilder undoClientsString = new StringBuilder();
+			if (undoClients != null && !op.equals("D")) {
+				for (UndoDTO undoClient : undoClients) {
+					if (undoClient.getCol().equals("FK_CLIENT_ID")) {
+						ClientDTO client = clientService.getById((Integer.parseInt(undoClient.getValue())));
 						undoClientsString.append(client.getName());
 						undoClientsString.append(", ");
 					}
-					
+
 				}
 				if (undoClientsString.length() > 1) {
 					undoClientsString.replace(undoClientsString.length()-2, undoClientsString.length(), "");
@@ -492,7 +476,7 @@ public class UndoInfoController {
 			}
 			
 			List<ClientDTO> currentClients = obligationsService.findAllClientsByObligation(id);
-			StringBuffer currentClientsString = new StringBuffer();
+			StringBuilder currentClientsString = new StringBuilder();
 			if (currentClients != null) {			
 				for (int i = 0; i < currentClients.size(); i++) {
 					currentClientsString.append(currentClients.get(i).getName());
@@ -505,8 +489,8 @@ public class UndoInfoController {
 				model.addAttribute("currentClients", "");
 			}
 			
-			StringBuffer addedClients = new StringBuffer(); 		
-			StringBuffer removedClients = new StringBuffer();
+			StringBuilder addedClients = new StringBuilder();
+			StringBuilder removedClients = new StringBuilder();
 			if (undoClients == null && currentClients == null) {
 				model.addAttribute("addedClients", "");
 				model.addAttribute("removedClients", "");
@@ -518,31 +502,25 @@ public class UndoInfoController {
 				model.addAttribute("removedClients", "");
 			} else {
 				String[] currentClientsStringList = currentClientsString.toString().split(", ");
-				ArrayList<String> current = new ArrayList<String>();
 				String[] undoClientsStringList  = undoClientsString.toString().split(", ");
-				ArrayList<String> undo = new ArrayList<String>();
-				
-				for (int i = 0; i < currentClientsStringList.length; i++) {
-					current.add(currentClientsStringList[i]);
-				}
-				
-				for (int i = 0; i < undoClientsStringList.length; i++) {
-					undo.add(undoClientsStringList[i]);
-				}
-				
-				for (int i = 0; i < current.size(); i++) {
-					if (!undo.contains(current.get(i))) {
-						addedClients.append(current.get(i)).append(", ");
+
+				ArrayList<String> current = new ArrayList<>(Arrays.asList(currentClientsStringList));
+
+				ArrayList<String> undo = new ArrayList<>(Arrays.asList(undoClientsStringList));
+
+				for (String s1 : current) {
+					if (!undo.contains(s1)) {
+						addedClients.append(s1).append(", ");
 					}
 				}
 				String addedClientsString = "";
 				if (addedClients.length() > 1) {
 					addedClientsString = addedClients.substring(0, addedClients.length()-2);
 				}
-				
-				for (int i = 0; i < undo.size(); i++) {
-					if (!current.contains(undo.get(i))) {
-						removedClients.append(undo.get(i)).append(", ");
+
+				for (String s : undo) {
+					if (!current.contains(s)) {
+						removedClients.append(s).append(", ");
 					}
 				}
 				String removedClientsString = "";
@@ -556,16 +534,16 @@ public class UndoInfoController {
 			}
 			
 			List<UndoDTO> undoObligations = undoService.getUndoList(ts, "T_OBLIGATION_RELATION", op);
-			StringBuffer undoObligationsString = new StringBuffer();
+			StringBuilder undoObligationsString = new StringBuilder();
 			String relation = "";
-			Obligations obligationRelation = new Obligations();
+			Obligations obligationRelation;
 			if (undoObligations != null && !op.equals("D")) {
-				for (int i = 0; i < undoObligations.size(); i++) {
-					if (undoObligations.get(i).getCol().equals("FK_RA_ID2")) {
-						obligationRelation = obligationsService.findOblId((Integer.parseInt(undoObligations.get(i).getValue())));
-						undoObligationsString.append(obligationRelation.getOblTitle());					
-					} else if (undoObligations.get(i).getCol().equals("RELATION")) {
-						relation = undoObligations.get(i).getValue();
+				for (UndoDTO undoObligation : undoObligations) {
+					if (undoObligation.getCol().equals("FK_RA_ID2")) {
+						obligationRelation = obligationsService.findOblId((Integer.parseInt(undoObligation.getValue())));
+						undoObligationsString.append(obligationRelation.getOblTitle());
+					} else if (undoObligation.getCol().equals("RELATION")) {
+						relation = undoObligation.getValue();
 					}
 				}
 				switch (relation) {
@@ -589,7 +567,7 @@ public class UndoInfoController {
 			}
 			
 			obligationRelation = obligationsService.findObligationRelation(id);
-			StringBuffer currentObligationsString = new StringBuffer();
+			StringBuilder currentObligationsString = new StringBuilder();
 			if (obligationRelation.getRelObligationId() != 0) {
 				currentObligationsString.append(obligationRelation.getOblRelationTitle());
 				switch (obligationRelation.getOblRelationId()) {
@@ -634,7 +612,7 @@ public class UndoInfoController {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_SOURCE_ID", id);
 				
-				if (isDelete == false) {
+				if (!isDelete) {
 			
 					InstrumentFactsheetDTO instrument = sourceService.getById(id);
 					

@@ -1,10 +1,6 @@
 package eionet.rod.dao;
 
 import org.junit.runner.RunWith;
-import org.openrdf.query.QueryLanguage;
-import org.openrdf.query.TupleQuery;
-import org.openrdf.query.TupleQueryResult;
-import org.openrdf.repository.sparql.SPARQLRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +22,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import eionet.rod.model.Delivery;
 import eionet.rod.service.DeliveryService;
-import eionet.rod.service.FileServiceIF;
 import eionet.rod.util.exception.ResourceNotFoundException;
 
 
@@ -84,7 +79,7 @@ public class ITDeliveryDao {
     public void testCommitDeliveries() throws DataAccessException
     {
     	try {
-    		HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<String, HashSet<Integer>>();
+    		HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
 	    	deliveryService.commitDeliveries(savedCountriesByObligationId);
     	} catch (DataAccessException sqle) {
             throw new ResourceNotFoundException(sqle.getMessage());

@@ -18,7 +18,7 @@ public class AuthorisationTest {
 	 
 	 @Test
      public void instanticateClassWithParams() {
-		 List<String> authorisations = new ArrayList<String>();
+		 List<String> authorisations = new ArrayList<>();
 		 authorisations.add("authorisation1");
 		 authorisations.add("authorisation2");
 		 Authorisation obj = new Authorisation("userId", authorisations);

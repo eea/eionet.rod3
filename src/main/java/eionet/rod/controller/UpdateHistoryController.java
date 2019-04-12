@@ -24,7 +24,7 @@ public class UpdateHistoryController {
 	@RequestMapping({"", "/"}) 
 	public String updateHistoryHome(Model model, @RequestParam(required = false) Integer id, @RequestParam(required = false) String object, @RequestParam(required = false) String username) {
 		
-		List<UndoDTO> history = new ArrayList<UndoDTO>();
+		List<UndoDTO> history;
 		
 		if (object != null) {
 			if (object.equals("S")) {
@@ -39,9 +39,9 @@ public class UpdateHistoryController {
 		}
 		
 		if (history != null) {
-			for (int i = 0; i < history.size(); i++) {
-				history.get(i).setDate(RODUtil.miliseconds2Date(history.get(i).getUndoTime()));
-				history.get(i).setDescription(history.get(i).truncateText(history.get(i).getDescription()));
+			for (UndoDTO undoDTO : history) {
+				undoDTO.setDate(RODUtil.miliseconds2Date(undoDTO.getUndoTime()));
+				undoDTO.setDescription(undoDTO.truncateText(undoDTO.getDescription()));
 			}
 		}
 		model.addAttribute("history", history);

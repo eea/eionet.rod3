@@ -39,7 +39,8 @@ public class DeliveryController {
      * View for all deliveries.
      *
      * @param model - contains attributes for the view
-     * @param message
+     * @param actDetailsId
+     * @param spatialId
      * @return view name
      */
     @RequestMapping({"", "/", "/view"})

@@ -63,8 +63,7 @@ public class ClientServiceJdbc implements ClientService {
                 + "WHERE T_CLIENT.PK_CLIENT_ID = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	    try {
-	        ClientDTO clientRec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), clientId);
-	        return clientRec;
+            return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(ClientDTO.class), clientId);
 	       
 	    } catch (DataAccessException e) {
 			throw new ResourceNotFoundException("DataAccessException error: " + e);
@@ -79,7 +78,7 @@ public class ClientServiceJdbc implements ClientService {
                 + "FROM T_CLIENT "
                 + "ORDER BY name";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class));
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class));
     }
 
     @Override
@@ -97,10 +96,10 @@ public class ClientServiceJdbc implements ClientService {
         if (!RODUtil.isNullOrEmpty(clientIds)){
          
         	listClients = clientIds.split(",");
-	    	
-	    	for (int i = 0; i < listClients.length; i++) {
-	    		jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID =" + listClients[i]);
-	    	}
+
+            for (String listClient : listClients) {
+                jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID =" + listClient);
+            }
         }
     	
     }
@@ -170,14 +169,13 @@ public class ClientServiceJdbc implements ClientService {
 			Integer countObligationClients = jdbcTemplate.queryForObject(queryCount, Integer.class, raID);
 		
 			if (countObligationClients == 0) {
-				List<ClientDTO> clients = null;
-				return clients;
+                return null;
 							
 				//throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
 		
 			}else {
 		
-				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), raID);
+				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), raID);
 
 			}
 			
@@ -196,7 +194,7 @@ public class ClientServiceJdbc implements ClientService {
     public List<Obligations> getDirectObligations(Integer clientId){
     	 
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return jdbcTemplate.query(q_direct_obligations, new BeanPropertyRowMapper<Obligations>(Obligations.class),clientId);
+        return jdbcTemplate.query(q_direct_obligations, new BeanPropertyRowMapper<>(Obligations.class),clientId);
     }
 
     private static final String q_indirect_obligations =
@@ -208,7 +206,7 @@ public class ClientServiceJdbc implements ClientService {
     public List<Obligations> getIndirectObligations(Integer clientId){
    	 
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return jdbcTemplate.query(q_indirect_obligations, new BeanPropertyRowMapper<Obligations>(Obligations.class),clientId);
+        return jdbcTemplate.query(q_indirect_obligations, new BeanPropertyRowMapper<>(Obligations.class),clientId);
     }
 
     private static final String q_direct_instruments =
@@ -219,7 +217,7 @@ public class ClientServiceJdbc implements ClientService {
 
     public List<InstrumentDTO> getDirectInstruments(Integer clientId){
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return jdbcTemplate.query(q_direct_instruments, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class),clientId);	
+        return jdbcTemplate.query(q_direct_instruments, new BeanPropertyRowMapper<>(InstrumentDTO.class),clientId);
     }
     
     
@@ -231,7 +229,7 @@ public class ClientServiceJdbc implements ClientService {
     
     public List<InstrumentDTO> getIndirectInstruments(Integer clientId) {
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        return jdbcTemplate.query(q_indirect_instruments, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class),clientId);	
+        return jdbcTemplate.query(q_indirect_instruments, new BeanPropertyRowMapper<>(InstrumentDTO.class),clientId);
     }
     
     public String getOrganisationNameByID(String clientId)
@@ -242,7 +240,7 @@ public class ClientServiceJdbc implements ClientService {
     		"WHERE PK_CLIENT_ID ="+clientId;	
     	
     	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-    	String name = (String)jdbcTemplate.queryForObject(query, String.class);
+    	String name = jdbcTemplate.queryForObject(query, String.class);
     	
     	return name != null ? name : "";
     }

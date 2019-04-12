@@ -141,7 +141,7 @@ public class ClientsController {
 
     /**
      * Form for editing existing client.
-     * @param clientName
+     * @param clientId
      * @param model - contains attributes for the view
      * @param message
      * @return view name
@@ -180,7 +180,7 @@ public class ClientsController {
     /**
      * Deletes client.
      * TODO: Use POST
-     * @param clientName
+     * @param clientId
      * @param model - contains attributes for the view
      * @return view name
      */

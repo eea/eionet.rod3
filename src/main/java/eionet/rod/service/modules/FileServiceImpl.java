@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileServiceIF  {
     public boolean getBooleanProperty(String propName) throws ServiceException {
         try {
             String s = props.getString(propName);
-            return Boolean.valueOf(s).booleanValue();
+            return Boolean.valueOf(s);
         } catch (MissingResourceException mre) {
             throw new ServiceException("Property value for key " + propName + " not found");
         }
@@ -107,39 +107,37 @@ public class FileServiceImpl implements FileServiceIF  {
             String propValue = props.getString(key);
 
             int coefficient = 1;
-            if (propValue != null) {
 
-                propValue = propValue.replace(" ", "").toLowerCase();
+            propValue = propValue.replace(" ", "").toLowerCase();
 
-                if (propValue.length() > 1 && propValue.endsWith("ms")
-                        && propValue.replace("ms", "").length() == propValue.length() - 2) {
-                    coefficient = 1;
-                    propValue = propValue.replace("ms", "");
-                }
+            if (propValue.length() > 1 && propValue.endsWith("ms")
+                    && propValue.replace("ms", "").length() == propValue.length() - 2) {
+                coefficient = 1;
+                propValue = propValue.replace("ms", "");
+            }
 
-                if (propValue.length() > 1 && propValue.endsWith("s")
-                        && propValue.replace("s", "").length() == propValue.length() - 1) {
-                    coefficient = 1000;
-                    propValue = propValue.replace("s", "");
-                }
+            if (propValue.length() > 1 && propValue.endsWith("s")
+                    && propValue.replace("s", "").length() == propValue.length() - 1) {
+                coefficient = 1000;
+                propValue = propValue.replace("s", "");
+            }
 
-                if (propValue.length() > 1 && propValue.endsWith("m")
-                        && propValue.replace("m", "").length() == propValue.length() - 1) {
-                    coefficient = 1000 * 60;
-                    propValue = propValue.replace("m", "");
-                }
+            if (propValue.length() > 1 && propValue.endsWith("m")
+                    && propValue.replace("m", "").length() == propValue.length() - 1) {
+                coefficient = 1000 * 60;
+                propValue = propValue.replace("m", "");
+            }
 
-                if (propValue.length() > 1 && propValue.endsWith("h")
-                        && propValue.replace("h", "").length() == propValue.length() - 1) {
-                    coefficient = 1000 * 60 * 60;
-                    propValue = propValue.replace("h", "");
-                }
+            if (propValue.length() > 1 && propValue.endsWith("h")
+                    && propValue.replace("h", "").length() == propValue.length() - 1) {
+                coefficient = 1000 * 60 * 60;
+                propValue = propValue.replace("h", "");
+            }
 
-                try {
-                    value = Long.parseLong(propValue) * coefficient;
-                } catch (Exception e) {
-                    // Ignore exceptions resulting from string-to-integer conversion here.
-                }
+            try {
+                value = Long.parseLong(propValue) * coefficient;
+            } catch (Exception e) {
+                // Ignore exceptions resulting from string-to-integer conversion here.
             }
         }
 

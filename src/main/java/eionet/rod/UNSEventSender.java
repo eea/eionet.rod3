@@ -40,7 +40,7 @@ public class UNSEventSender {
 			server.setBasicAuthentication(fileSrv.getStringProperty(FileServiceIF.UNS_USERNAME), fileSrv.getStringProperty(FileServiceIF.UNS_PWD));
 			
 			Vector<Vector<String>> sanitizedNotifications = sanitizeNotifications(notifications);
-			Vector<Object> params = new Vector<Object>();
+			Vector<Object> params = new Vector<>();
 			params.add(channel_name);
 			params.add(sanitizedNotifications);
 			
@@ -64,11 +64,11 @@ public class UNSEventSender {
 		
 		if (notifications == null)
 		{
-			return new Vector<Vector<String>>();
+			return new Vector<>();
 		}
 		
 		// Now vector for the sanitized notifications.
-		Vector<Vector<String>> result = new Vector<Vector<String>>();
+		Vector<Vector<String>> result = new Vector<>();
 		
 		// Loop through the vector of notifications.
 		// Each notification is a vector too, containing 3 elements, representing an RDF triple (i.e. subject, predicate, object).
@@ -78,10 +78,10 @@ public class UNSEventSender {
 			if (notification == null)
 			{
 				// Lets replace a null notification with an empty vector, to avoid null-pointer exceptions.
-				result.add(new Vector<String>());
+				result.add(new Vector<>());
 			}else
 			{
-				Vector<String> sanitizedNotification = new Vector<String>();
+				Vector<String> sanitizedNotification = new Vector<>();
 				for (String subjectOrPredicateOrObject: notification)
 				{
 					// If a subject/predicate/object is null, replace it with empty string.

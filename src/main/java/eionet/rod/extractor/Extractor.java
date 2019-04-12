@@ -23,8 +23,6 @@
 
 package eionet.rod.extractor;
 
-import eionet.acl.AuthMechanism;
-import eionet.acl.SignOnException;
 //import eionet.acl.AuthMechanism;
 //import eionet.acl.SignOnException;
 import eionet.directory.DirServiceException;
@@ -55,8 +53,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.openrdf.query.BindingSet;
+        import org.openrdf.query.BindingSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,8 +141,7 @@ public class Extractor implements ExtractorConstants {
     }
     private String cDT() {
         Date d = new Date();
-        String dateString = "[" + d.toString() + "] ";
-        return dateString;
+        return "[" + d.toString() + "] ";
     }
 
     // Cleanup after everything is done
@@ -254,13 +250,13 @@ public class Extractor implements ExtractorConstants {
 
                 roleService.backUpRoles();
 
-                for (int i = 0; i < respRoles.size(); i++) {
+                for (Roles respRole : respRoles) {
                     try {
-                        saveRole(respRoles.get(i).getRoleName());
+                        saveRole(respRole.getRoleName());
                     } catch (Exception e) {
-                    	 errMsg.append('\n').append(e.getMessage());
+                        errMsg.append('\n').append(e.getMessage());
                     }
-                } // roles.next()
+                }
 
                 roleService.commitRoles();
 
@@ -268,6 +264,7 @@ public class Extractor implements ExtractorConstants {
                     log("* Roles OK");
                 }
 
+                // todo use the errMsg somehow?
 //                if (StringUtils.isNotBlank(errMsg.toString())) {
 //                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
 //                }
@@ -353,7 +350,7 @@ public class Extractor implements ExtractorConstants {
             }
 
             if (resultsSize > 0) {
-                HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<String, HashSet<Integer>>();
+                HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
                 
                 // back up currently existing deliveries
                 deliveryService.backUpDeliveries();
@@ -417,7 +414,7 @@ public class Extractor implements ExtractorConstants {
     /**
      * Get the role from the directory service and save it to database.
      *
-     * @param roleId
+     * @param roleName
      * @throws ServiceException
      */
     public void saveRole(String roleName) {

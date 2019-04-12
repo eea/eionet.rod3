@@ -75,11 +75,11 @@ public class ITSpatialController {
     @Test
     public void listSpatial() throws Exception {
     	
-    	List<Spatial> spatialListY = new ArrayList<Spatial>();
+    	List<Spatial> spatialListY = new ArrayList<>();
     	spatialListY.add(new Spatial(1, "Austria", "C", "AT", "Y"));
     	spatialListY.add(new Spatial(3, "Francia", "C", "FR", "Y"));
     	
-    	List<Spatial> spatialListN = new ArrayList<Spatial>();
+    	List<Spatial> spatialListN = new ArrayList<>();
     	spatialListN.add(new Spatial(2, "Albania", "C", "AL", "N"));
     	
     	

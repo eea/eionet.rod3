@@ -245,7 +245,7 @@
 			</script>
           <div>
                 
-                <input th:if="${instrument.sourceId} == null" name="add" value="Add" type="button" onclick="javascript:selectAll()" class="btn btn-primary"/>
+                <input th:if="${instrument.sourceId} == null" name="add" value="Add" type="button" onclick="selectAll()" class="btn btn-primary"/>
                 <input th:unless="${instrument.sourceId} == null" name="edit" value="Save changes" type="button" onclick="javascript:selectAll()" class="btn btn-primary"/>
                 <input name="cancel" value="Exit" onclick="exit()" type="button" class="btn btn-default"/>
           </div>

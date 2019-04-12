@@ -46,7 +46,7 @@ public class InitialUser {
             return;
         }
         if (!userManagementService.userExists(initialUsername)) {
-            ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>(1);
+            ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(1);
             for (UserRole authority : UserRole.values()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority.toString()));
             }

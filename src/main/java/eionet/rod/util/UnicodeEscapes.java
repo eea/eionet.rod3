@@ -13,7 +13,7 @@ import java.util.Hashtable;
 public class UnicodeEscapes {
 
     /** */
-    private Hashtable<String, String> unicodeEscapes = new Hashtable<String, String>();
+    private Hashtable<String, String> unicodeEscapes = new Hashtable<>();
 
     /**
      *
@@ -281,7 +281,7 @@ public class UnicodeEscapes {
      */
     public int getDecimal(String ent) {
 
-        String sDecimal = (String) unicodeEscapes.get(ent);
+        String sDecimal = unicodeEscapes.get(ent);
         if (sDecimal == null)
             return -1;
         return Integer.parseInt(sDecimal);

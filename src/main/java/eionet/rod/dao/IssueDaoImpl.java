@@ -50,13 +50,12 @@ public class IssueDaoImpl implements IssueDao{
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, IssueOblId);
 		
 			if (countObligation == 0) {
-				
-				List<Issue> Issues = null;
-				return Issues;
+
+				return null;
 
 			}else {
 		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Issue>(Issue.class), IssueOblId);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), IssueOblId);
 
 			}
 			
@@ -80,13 +79,12 @@ public class IssueDaoImpl implements IssueDao{
 			Integer countIssues = jdbcTemplate.queryForObject(queryCount, Integer.class);
 		
 			if (countIssues == 0) {
-				
-				List<Issue> Issues = null;
-				return Issues;
+
+				return null;
 
 			}else {
 		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Issue>(Issue.class));
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class));
 
 			}
 			
@@ -116,7 +114,7 @@ public class IssueDaoImpl implements IssueDao{
 				throw new ResourceNotFoundException("The Issue with id " + IssueId +"  not found in the database");
 			}else {
 		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Issue>(Issue.class), IssueId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), IssueId);
 
 			}
 			

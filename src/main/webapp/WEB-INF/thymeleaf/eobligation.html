@@ -501,7 +501,7 @@
 			
 		</script>
 		<div>
-			<input th:if="${id == 'add'}" type="button" name="add" id="add" value="Add" class="btn btn-primary" onclick="javascript:selectAll()"/>
+			<input th:if="${id == 'add'}" type="button" name="add" id="add" value="Add" class="btn btn-primary" onclick="selectAll()"/>
 			<input th:unless="${id == 'add'}" type="button" name="edit" id="edit" value="Save changes" class="btn btn-primary" onclick="javascript:selectAll()"/>
 			<input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>  
 					

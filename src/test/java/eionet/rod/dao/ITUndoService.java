@@ -68,14 +68,14 @@ public class ITUndoService {
     	
     	List<UndoDTO> undoList = undoService.getUndoList(ts, "T_OBLIGATION", "U");
     	Obligations obligation = obligationsService.findOblId(1);
-    	
-    	for (int i = 0; i < undoList.size(); i++) {
-    		if (undoList.get(i).getCol().equals("TITLE")) {
-    			assertEquals(undoList.get(i).getValue(), obligation.getOblTitle());
-    		} else if (undoList.get(i).getCol().equals("COMMENT")) {
-    			assertEquals(undoList.get(i).getValue(), obligation.getComment());
-    		}
-    	}
+
+		for (UndoDTO undoDTO : undoList) {
+			if (undoDTO.getCol().equals("TITLE")) {
+				assertEquals(undoDTO.getValue(), obligation.getOblTitle());
+			} else if (undoDTO.getCol().equals("COMMENT")) {
+				assertEquals(undoDTO.getValue(), obligation.getComment());
+			}
+		}
     	
     }
     
@@ -112,14 +112,14 @@ public class ITUndoService {
     	String ts = "1519895729320";
     	    	    	
     	List<UndoDTO> undoList = undoService.getUndoList(Long.parseLong(ts), "T_OBLIGATION", "U");
-    	
-    	for (int i = 0; i < undoList.size(); i++) {
-    		if (undoList.get(i).getCol().equals("COORDINATOR")) {
-    			assertEquals(undoList.get(i).getValue(), "Country contacts");
-    		} else if (undoList.get(i).getCol().equals("DATA_USED_FOR")) {
-    			assertEquals(undoList.get(i).getValue(), "http://www.pops.int/documents/implementation/nips/submissions/default.htm");
-    		}
-    	}
+
+		for (UndoDTO undoDTO : undoList) {
+			if (undoDTO.getCol().equals("COORDINATOR")) {
+				assertEquals(undoDTO.getValue(), "Country contacts");
+			} else if (undoDTO.getCol().equals("DATA_USED_FOR")) {
+				assertEquals(undoDTO.getValue(), "http://www.pops.int/documents/implementation/nips/submissions/default.htm");
+			}
+		}
     	
     }
     
@@ -172,14 +172,14 @@ public class ITUndoService {
     	String ts = "1519895729320";
     	
     	List<UndoDTO> undoList = undoService.getUndoInformation(Long.parseLong(ts), "U", "T_OBLIGATION");
-    	
-    	for (int i = 0; i < undoList.size(); i++) {
-    		if (undoList.get(i).getCol().equals("DATE_COMMENTS")) {
-    			assertEquals(undoList.get(i).getValue(), "For Member States that acceeded to the EU on 1 January 2007 (Bulgaria, Romania) the reporting concerning the period 2004-2006 is voluntary.");
-    		} else if (undoList.get(i).getCol().equals("FIRST_REPORTING")) {
-    			assertEquals(undoList.get(i).getValue(), "2005-10-31");
-    		}
-    	}
+
+		for (UndoDTO undoDTO : undoList) {
+			if (undoDTO.getCol().equals("DATE_COMMENTS")) {
+				assertEquals(undoDTO.getValue(), "For Member States that acceeded to the EU on 1 January 2007 (Bulgaria, Romania) the reporting concerning the period 2004-2006 is voluntary.");
+			} else if (undoDTO.getCol().equals("FIRST_REPORTING")) {
+				assertEquals(undoDTO.getValue(), "2005-10-31");
+			}
+		}
     	
     }
        

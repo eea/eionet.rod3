@@ -138,8 +138,8 @@ public class RODUtilTest {
     }
     @Test 
     public void isNullorEmptyText() {
-    	assertEquals(true,RODUtil.isNullOrEmpty(null));
-    	assertEquals(false,RODUtil.isNullOrEmpty("Bonn Agreement Secretariat"));
+        assertTrue(RODUtil.isNullOrEmpty(null));
+        assertFalse(RODUtil.isNullOrEmpty("Bonn Agreement Secretariat"));
     }
     
     @Test

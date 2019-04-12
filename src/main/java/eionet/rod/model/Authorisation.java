@@ -17,7 +17,7 @@ public class Authorisation {
      * Constructor of empty object.
      */
     public Authorisation() {
-        this.authorisations = new ArrayList<String>();
+        this.authorisations = new ArrayList<>();
     }
 
     /**

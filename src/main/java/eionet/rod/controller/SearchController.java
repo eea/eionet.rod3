@@ -2,7 +2,6 @@ package eionet.rod.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import eionet.rod.Constants;
 import eionet.rod.dao.ClientService;
 import eionet.rod.dao.IssueDao;
 
@@ -98,32 +96,31 @@ public class SearchController {
     }	
 	
 	private ArrayList<ArrayList<String>> removeDuplicates() {
-        List<String> existingSubjects = new ArrayList<String>();
-		ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
+        List<String> existingSubjects = new ArrayList<>();
+		ArrayList<ArrayList<String>> lists = new ArrayList<>();
         if (result != null && result.getRows() != null) {
             ArrayList<HashMap<String, ResultValue>> rows = result.getRows();
-            for (Iterator<HashMap<String, ResultValue>> it = rows.iterator(); it.hasNext(); ){
-                HashMap<String, ResultValue> row = it.next();
+            for (HashMap<String, ResultValue> row : rows) {
                 String found = row.get("found").toString();
                 if (found.length() > 400) {
-                	found = found.substring(0, 400);
-                	found = found.concat("...");
+                    found = found.substring(0, 400);
+                    found = found.concat("...");
                 }
                 String subject;
-                if ( row.get("subject") != null) {
-                	subject = row.get("subject").toString();
+                if (row.get("subject") != null) {
+                    subject = row.get("subject").toString();
                 } else {
-                	subject = null;
-                }       
+                    subject = null;
+                }
                 String name;
-                if ( row.get("name") != null) {
-                	name = row.get("name").toString();
+                if (row.get("name") != null) {
+                    name = row.get("name").toString();
                 } else {
-                	name = null;
+                    name = null;
                 }
                 String type = row.get("type").toString();
-                type = type.substring(type.indexOf("#")+1);
-                ArrayList<String> list = new ArrayList<String>();
+                type = type.substring(type.indexOf("#") + 1);
+                ArrayList<String> list = new ArrayList<>();
                 list.add(found);
                 list.add(subject);
                 list.add(name);
@@ -191,7 +188,7 @@ public class SearchController {
     	
     	String deadline = "5";
     	
-    	model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue,obligation.getSpatialId().toString(),null,deadline,anmode, obligation.getNextDeadlineFrom(), obligation.getNextDeadlineTo(), true));
+    	model.addAttribute("allObligations",obligationsService.findObligationList(obligation.getClientId(),issue, obligation.getSpatialId(),null,deadline,anmode, obligation.getNextDeadlineFrom(), obligation.getNextDeadlineTo(), true));
         
     	model.addAttribute("obligation",obligation);
      	

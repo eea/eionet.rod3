@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 public class RODUtil {
 	
@@ -44,7 +45,7 @@ public class RODUtil {
 	public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
 
         in = (in != null ? in : "");
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
         for (int i = 0; i < in.length(); i++) {
             char c = in.charAt(i);
             if (c == '<') {
@@ -73,9 +74,9 @@ public class RODUtil {
                 } else {
                     ret.append("&amp;");
                 }
-            } else if (c == '\n' && dontCreateHTMLLineBreaks == false) {
+            } else if (c == '\n' && !dontCreateHTMLLineBreaks) {
                 ret.append("<br/>");
-            } else if (c == '\r' && in.charAt(i + 1) == '\n' && dontCreateHTMLLineBreaks == false) {
+            } else if (c == '\r' && in.charAt(i + 1) == '\n' && !dontCreateHTMLLineBreaks) {
                 ret.append("<br/>");
                 i = i + 1;
             } else {
@@ -84,7 +85,7 @@ public class RODUtil {
         }
 
         String retString = ret.toString();
-        if (dontCreateHTMLAnchors == false) {
+        if (!dontCreateHTMLAnchors) {
             retString = setAnchors(retString, false, 50);
         }
 
@@ -102,7 +103,7 @@ public class RODUtil {
      */
     public static String setAnchors(String s, boolean newWindow, int cutLink) {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(s, " \t\n\r\f|(|)<>", true);
         while (st.hasMoreTokens()) {
@@ -110,7 +111,7 @@ public class RODUtil {
             if (!isURL(token)) {
                 buf.append(token);
             } else {
-                StringBuffer _buf = new StringBuffer("<a ");
+                StringBuilder _buf = new StringBuilder("<a ");
                 if (newWindow) {
                     _buf.append("target=\"_blank\" ");
                 }
@@ -119,7 +120,7 @@ public class RODUtil {
                 _buf.append("\">");
 
                 if (cutLink < token.length()) {
-                    _buf.append(token.substring(0, cutLink)).append("...");
+                    _buf.append(token, 0, cutLink).append("...");
                 } else {
                     _buf.append(token);
                 }
@@ -167,16 +168,13 @@ public class RODUtil {
     public static boolean isURL(String s) {
         try {
             URL url = new URL(s);
-            if (!RODUtil.isNullOrEmpty(url.toString())) {
-            	return true;
-            }else {
-            	return false;
-            }
+            return !RODUtil.isNullOrEmpty(url.toString());
         } catch (MalformedURLException e) {
             return false;
         }
     }
-    
+
+    // todo why do these exist?
       
     /**
      * Expects given string to be in date format like "dd/mm/yyyy", and returns corresponding value in the MySQL format:
@@ -214,7 +212,7 @@ public class RODUtil {
             if (Character.isDigit(d1) && Character.isDigit(d2) && Character.isDigit(m1) && Character.isDigit(m2)
                     && Character.isDigit(y1) && Character.isDigit(y2) && Character.isDigit(y3) && Character.isDigit(y4)
                     && s1 == '/' && s2 == '/') {
-                StringBuffer ret = new StringBuffer(10);
+                StringBuilder ret = new StringBuilder(10);
                 ret.insert(0, y1).insert(1, y2).insert(2, y3).insert(3, y4).insert(4, '-').insert(5, m1).insert(6, m2)
                         .insert(7, '-').insert(8, d1).insert(9, d2);
 
@@ -294,7 +292,7 @@ public class RODUtil {
             if (Character.isDigit(d1) && Character.isDigit(d2) && Character.isDigit(m1) && Character.isDigit(m2)
                     && Character.isDigit(y1) && Character.isDigit(y2) && Character.isDigit(y3) && Character.isDigit(y4)
                     && s1 == '-' && s2 == '-') {
-                StringBuffer ret = new StringBuffer(10);
+                StringBuilder ret = new StringBuilder(10);
                 ret.insert(0, d1).insert(1, d2).insert(2, '/').insert(3, m1).insert(4, m2).insert(5, '/').insert(6, y1)
                         .insert(7, y2).insert(8, y3).insert(9, y4);
 
@@ -318,24 +316,24 @@ public class RODUtil {
             return truncateText;
         }
     }
+
+    private static SimpleDateFormat ymdhmsFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
     public static String miliseconds2Date(long ts) {
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    	ymdhmsFormat.setTimeZone(TimeZone.getTimeZone("Europe/Copenhagen"));
     	Date resultdate = new Date(ts);
-    	return sdf.format(resultdate);    	
+    	return ymdhmsFormat.format(resultdate);
     }
+
+    private static SimpleDateFormat dmyDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     public static boolean validateDate(String dateValid) {
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        boolean result = true;
         try {
-			sdf.parse(dateValid);
-			result = true;
+			dmyDateFormat.parse(dateValid);
 		} catch (ParseException e1) {
-			result = false;
+			return false;
 		}
-       return result;
+       return true;
     }
     
        

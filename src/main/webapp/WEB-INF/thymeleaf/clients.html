@@ -79,7 +79,7 @@
 		              	<!-- sec:authorize="hasRole('EDITOR')" -->
 	        			<td sec:authorize="hasRole('EDITOR')" ><input type="checkbox" id="myCheck" name="myCheck" th:value="${client.clientId}"/></td>
 		              	<td>
-		                    <a th:href="@{'/clients/'+${client.clientId}}" href="clientfactsheet.html" th:text="${client.name}"></a>
+		                    <a th:href="@{'/clients/'+${client.clientId}}" href="clientFactsheet.html" th:text="${client.name}"></a>
 		               </td>
 		               <td class="col-xs-8" th:text="${client.acronym}"></td>
 		             </tr>  

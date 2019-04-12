@@ -30,7 +30,7 @@ public class ITRoleDao {
 	@Test
 	public void testSaveBackUpCommitRoles() {
 		
-		Hashtable<String, Object> role = new Hashtable<String, Object>();
+		Hashtable<String, Object> role = new Hashtable<>();
 		
 		role.put("ID", "eionet-nfp");
 		role.put("URL", "");

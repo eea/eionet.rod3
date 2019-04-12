@@ -11,213 +11,213 @@ public interface FileServiceIF {
 	/**
      * DB connection URL for DB connection.
      */
-    static final String DB_URL = "db.url";
+    String DB_URL = "db.url";
 
     /**
      * DB driver.
      */
-    static final String DB_DRV = "db.drv";
+    String DB_DRV = "db.drv";
 
     /**
      * DB user id for the extractor.
      */
-    static final String DB_USER_ID = "db.usr";
+    String DB_USER_ID = "db.usr";
 
     /**
      * User PWD for DB connection.
      */
-    static final String DB_USER_PWD = "db.pwd";
+    String DB_USER_PWD = "db.pwd";
 
     /**
      * DB connection URL for DB connection.
      */
-    static final String DB_TEST_URL = "db.unitest.url";
+    String DB_TEST_URL = "db.unitest.url";
 
     /**
      * DB driver.
      */
-    static final String DB_TEST_DRV = "db.unitest.drv";
+    String DB_TEST_DRV = "db.unitest.drv";
 
     /**
      * DB user id for the extractor.
      */
-    static final String DB_TEST_USER_ID = "db.unitest.usr";
+    String DB_TEST_USER_ID = "db.unitest.usr";
 
     /**
      * User PWD for DB connection.
      */
-    static final String DB_TEST_USER_PWD = "db.unitest.pwd";
+    String DB_TEST_USER_PWD = "db.unitest.pwd";
 
     /**
      * RO namespace.
      */
-    static final String RO_NAMESPACE = "rod.url.ro_namespace";
+    String RO_NAMESPACE = "rod.url.ro_namespace";
 
     /**
      * Namespace for RA titles.
      */
-    static final String RA_NAMESPACE = "ra.namespace";
+    String RA_NAMESPACE = "ra.namespace";
 
     /**
      * Namespace for countries.
      */
-    static final String COUNTRY_NAMESPACE = "country.namespace";
+    String COUNTRY_NAMESPACE = "country.namespace";
 
     /**
      * Namespace for T_SPATIAL.
      */
-    static final String SPATIAL_NAMESPACE = "spatial.namespace";
+    String SPATIAL_NAMESPACE = "spatial.namespace";
 
     /**
      * Namespace for T_ISSUE.
      */
-    static final String ISSUE_NAMESPACE = "issue.namespace";
+    String ISSUE_NAMESPACE = "issue.namespace";
 
     /**
      * Namespace for T_CLIENT.
      */
-    static final String ORGANISATION_NAMESPACE = "organisation.namespace";
+    String ORGANISATION_NAMESPACE = "organisation.namespace";
 
     /**
      * Namespace for Delivery.
      */
-    static final String DELIVERY_NAMESPACE = "delivery.namespace";
+    String DELIVERY_NAMESPACE = "delivery.namespace";
 
     /**
      * List of delivery namespaces
      */
-    static final String DELIVERY_NAMESPACES = "delivery.namespaces";
+    String DELIVERY_NAMESPACES = "delivery.namespaces";
 
     /**
      * namespace separator used for separating namespaces in DELIVERY_NAMESPACES.
      */
-    static final String NAMESPACE_SEPARATOR = "namespace.separator";
+    String NAMESPACE_SEPARATOR = "namespace.separator";
 
     /**
      * Content Registry SPARQL endpoint.
      */
-    static final String CR_SPARQL_ENDPOINT = "cr.sparql.endpoint";
+    String CR_SPARQL_ENDPOINT = "cr.sparql.endpoint";
 
     /**
      * Title Predicate for rdf type.
      */
-    static final String PRED_RDF_TYPE = "pred.rdf-type";
+    String PRED_RDF_TYPE = "pred.rdf-type";
 
     /**
      * Percent of reporting frequence for approaching deadlines.
      */
-    static final String PERCENT_OF_FREQ = "percent.of.freq";
+    String PERCENT_OF_FREQ = "percent.of.freq";
 
     /**
      * Datefile for DeadlinesDaemon.
      */
-    static final String DEADLINES_DAEMON_DATEFILE = "deadlines.daemon.datefile";
+    String DEADLINES_DAEMON_DATEFILE = "deadlines.daemon.datefile";
 
     /**
      * DPSIR values Excel file.
      */
-    static final String DPSIR_VALUES_FILE = "dpsir.values.file";
+    String DPSIR_VALUES_FILE = "dpsir.values.file";
 
     /**
      * XML-RPC server URL for UNS subscription.
      */
-    static final String UNS_XMLRPC_SERVER_URL = "uns.xml.rpc.server.url";
+    String UNS_XMLRPC_SERVER_URL = "uns.xml.rpc.server.url";
 
     /**
      * Channel name for UNS subscription method.
      */
-    static final String UNS_CHANNEL_NAME = "uns.channel.name";
+    String UNS_CHANNEL_NAME = "uns.channel.name";
 
     /**
      * Event type predicate for UNS subscription method.
      */
-    static final String UNS_EVENTTYPE_PREDICATE = "uns.eventtype.predicate";
+    String UNS_EVENTTYPE_PREDICATE = "uns.eventtype.predicate";
 
     /**
      * Country predicate for UNS subscription method.
      */
-    static final String UNS_COUNTRY_PREDICATE = "uns.country.predicate";
+    String UNS_COUNTRY_PREDICATE = "uns.country.predicate";
 
     /**
      * Issue predicate for UNS subscription method.
      */
-    static final String UNS_ISSUE_PREDICATE = "uns.issue.predicate";
+    String UNS_ISSUE_PREDICATE = "uns.issue.predicate";
 
     /**
      * Obligation predicate for UNS subscription method.
      */
-    static final String UNS_OBLIGATION_PREDICATE = "uns.obligation.predicate";
+    String UNS_OBLIGATION_PREDICATE = "uns.obligation.predicate";
 
     /**
      * Instrument predicate for UNS subscription method.
      */
-    static final String UNS_INSTRUMENT_PREDICATE = "uns.instrument.predicate";
+    String UNS_INSTRUMENT_PREDICATE = "uns.instrument.predicate";
 
     /**
      * Organisation predicate for UNS subscription method.
      */
-    static final String UNS_ORGANISATION_PREDICATE = "uns.organisation.predicate";
+    String UNS_ORGANISATION_PREDICATE = "uns.organisation.predicate";
 
     /**
      * UNS subscriptions URL.
      */
-    static final String UNS_MY_SUBSCRIPTIONS_URL = "uns.my.subscriptions.url";
+    String UNS_MY_SUBSCRIPTIONS_URL = "uns.my.subscriptions.url";
 
     /**
      * username for UNS subscriptions.
      */
-    static final String UNS_USERNAME = "uns.username";
+    String UNS_USERNAME = "uns.username";
 
     /**
      * password for UNS subscriptions.
      */
-    static final String UNS_PWD = "uns.pwd";
+    String UNS_PWD = "uns.pwd";
 
     /**
      * UNS xmlrpc function that is called for making subscription.
      */
-    static final String UNS_MAKE_SUBSCRIPTION = "uns.make.subsription.function";
+    String UNS_MAKE_SUBSCRIPTION = "uns.make.subsription.function";
 
     /**
      * UNS xmlrpc function that is called for sending notifications.
      */
-    static final String UNS_SEND_NOTIFICATION = "uns.send.notification.function";
+    String UNS_SEND_NOTIFICATION = "uns.send.notification.function";
 
     /**
      * Undo - number of records per page.
      */
-    static final String UNDO_STEP = "undo.step";
+    String UNDO_STEP = "undo.step";
 
     /**
      * Undo - number of records per page.
      */
-    static final String HISTORY_UNDO_STEP = "history.undo.step";
+    String HISTORY_UNDO_STEP = "history.undo.step";
 
 
     /**
      * mail for sysadmins.
      */
-    static final String MAIL_SYSADMINS = "mail.sysadmins";
+    String MAIL_SYSADMINS = "mail.sysadmins";
 
     /**
      * flag showing if smtp auth needed.
      */
-    static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
+    String MAIL_SMTP_AUTH = "mail.smtp.auth";
 
     /**
      * mail host.
      */
-    static final String MAIL_HOST = "mail.host";
+    String MAIL_HOST = "mail.host";
 
     /**
      * username if auth is switched on.
      */
-    static final String MAIL_USER = "mail.user";
+    String MAIL_USER = "mail.user";
 
     /**
      * mail password.
      */
-    static final String MAIL_PASSWORD = "mail.password";
+    String MAIL_PASSWORD = "mail.password";
 
     /**
      * Returns String type property from the properties file.

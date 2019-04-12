@@ -38,7 +38,7 @@ public class UserController {
 
     @ModelAttribute("allRoles")
     public List<String> allRoles() {
-        ArrayList<String> grantedAuthorities = new ArrayList<String>();
+        ArrayList<String> grantedAuthorities = new ArrayList<>();
         for (UserRole authority : UserRole.values()) {
             grantedAuthorities.add(authority.toString());
         }
@@ -76,7 +76,7 @@ public class UserController {
             return "redirect:view";
         }
 
-        ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+        ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (user.getAuthorisations() != null) {
             for (String authority : user.getAuthorisations()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority));
@@ -116,7 +116,7 @@ public class UserController {
         BreadCrumbs.set(model, "Modify user");
         UserDetails userDetails = userManagementService.loadUserByUsername(userName);
 
-        ArrayList<String> userRoles = new ArrayList<String>();
+        ArrayList<String> userRoles = new ArrayList<>();
         for (GrantedAuthority authority : userDetails.getAuthorities()) {
             userRoles.add(authority.getAuthority());
         }
@@ -136,7 +136,7 @@ public class UserController {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editUser(Authorisation user, BindingResult bindingResult, ModelMap model) {
-        ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+        ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (user.getAuthorisations() != null) {
             for (String authority : user.getAuthorisations()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority));

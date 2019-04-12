@@ -83,7 +83,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				throw new ResourceNotFoundException("No data in the database");
 			}else {
 			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class));
 
 			}
 			
@@ -97,7 +97,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	/**
 	 * cases of deadlines
-	 * @param dlCase
+	 * @param deadlineCase
 	 * @param date1
 	 * @param date2
 	 * @return
@@ -108,29 +108,31 @@ public class ObligationsDaoImpl implements ObligationsDao {
         if ( deadlineCase != null ) { //selected in combo
             Calendar today = Calendar.getInstance();
             //next month
-            if (deadlineCase.equals("1")) {
-                date1=getDate(today);
-                today.add(Calendar.MONTH, 1);
-                date2=getDate(today);
-            }
-            //next 3 months
-            else if (deadlineCase.equals("2")) {
-                date1=getDate(today);
-                today.add(Calendar.MONTH, 3);
-                date2=getDate(today);
-            }
-            //next 6 months
-            else if (deadlineCase.equals("3")) {
-                date1=getDate(today);
-                today.add(Calendar.MONTH, 6);
-                date2=getDate(today);
-            }
-            //passed
-            else if (deadlineCase.equals("4")) {
-                date2=getDate(today);
-                today.add(Calendar.MONTH, -3);
-                date1=getDate(today);
-            }
+			switch (deadlineCase) {
+				case "1":
+					date1 = getDate(today);
+					today.add(Calendar.MONTH, 1);
+					date2 = getDate(today);
+					break;
+				//next 3 months
+				case "2":
+					date1 = getDate(today);
+					today.add(Calendar.MONTH, 3);
+					date2 = getDate(today);
+					break;
+				//next 6 months
+				case "3":
+					date1 = getDate(today);
+					today.add(Calendar.MONTH, 6);
+					date2 = getDate(today);
+					break;
+				//passed
+				case "4":
+					date2 = getDate(today);
+					today.add(Calendar.MONTH, -3);
+					date1 = getDate(today);
+					break;
+			}
         }
 
         if (!RODUtil.isNullOrEmpty(deadlineCase) || !deadlineCase.equals("0")) {
@@ -424,10 +426,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 //		}
 		
         try {
-        		
-			List<Obligations> allobligation = jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
-			
-			return allobligation; //jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class),new Object[] { parameters });
+
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class)); //jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class),new Object[] { parameters });
         } catch (DataAccessException e) {
 		
         	throw new ResourceNotFoundException("DataAccessException error: " + e);
@@ -487,7 +487,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				throw new ResourceNotFoundException("The obligation you requested with id " + OblId + " was not found in the database");
 			}else {
 		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Obligations>(Obligations.class), OblId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), OblId);
 
 			}
 			
@@ -520,14 +520,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class,siblingoblId,siblingoblId);
 			
 				if (countObligation.equals(0)) {
-					
-					List<SiblingObligation> SiblingObligations = null;
-					return SiblingObligations;
+
+					return null;
 					
 					//throw new ResourceNotFoundException("The obligation you requested with id " + siblingoblId + " was not found in the database");
 				}else {
 			
-					return jdbcTemplate.query(query, new BeanPropertyRowMapper<SiblingObligation>(SiblingObligation.class), siblingoblId, siblingoblId);
+					return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(SiblingObligation.class), siblingoblId, siblingoblId);
 
 				}
 				
@@ -562,7 +561,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				return null;
 			}else {
 			
-				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<Spatial>(Spatial.class), voluntary, ObligationID);
+				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), voluntary, ObligationID);
 
 			}
 			
@@ -596,7 +595,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				return null;
 			}else {
 			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Issue>(Issue.class), ObligationID);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), ObligationID);
 
 			}
 			
@@ -619,7 +618,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	    	jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
 	        jdbcInsert.withTableName("T_OBLIGATION").usingGeneratedKeyColumns(
 	                "PK_RA_ID");
-	        Map<String, Object> parameters = new HashMap<String, Object>();
+	        Map<String, Object> parameters = new HashMap<>();
 	        parameters.put("TITLE", obligation.getOblTitle()); //obl
 	        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
 	        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
@@ -737,7 +736,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
 	                parameters));
 	     // convert Number to Int using ((Number) key).intValue()
-	        Integer obligationID = ((Number) key).intValue();
+	        Integer obligationID = key.intValue();
 	        
 	        //Insert client with status = M
 	        String queryClientM = "INSERT INTO T_CLIENT_OBLIGATION_LNK (FK_CLIENT_ID, FK_RA_ID, STATUS) "
@@ -919,16 +918,16 @@ public class ObligationsDaoImpl implements ObligationsDao {
     @Override
     public void deleteObligations(String obligations) {
     	String[] listObligations = obligations.split(",");
-    	
-    	for (int i = 0; i < listObligations.length; i++) {
-    		deleteCountries(Integer.parseInt(listObligations[i]), "N");
-    		deleteCountries(Integer.parseInt(listObligations[i]), "Y");
-    		deleteClients(Integer.parseInt(listObligations[i]), "M");
-    		deleteClients(Integer.parseInt(listObligations[i]), "C");
-    		deleteIssues(Integer.parseInt(listObligations[i]));
-    		deleteObligationRelations(Integer.parseInt(listObligations[i]));
-    		jdbcTemplate.update("DELETE FROM T_OBLIGATION where PK_RA_ID =" + listObligations[i]);
-      	}
+
+		for (String listObligation : listObligations) {
+			deleteCountries(Integer.parseInt(listObligation), "N");
+			deleteCountries(Integer.parseInt(listObligation), "Y");
+			deleteClients(Integer.parseInt(listObligation), "M");
+			deleteClients(Integer.parseInt(listObligation), "C");
+			deleteIssues(Integer.parseInt(listObligation));
+			deleteObligationRelations(Integer.parseInt(listObligation));
+			jdbcTemplate.update("DELETE FROM T_OBLIGATION where PK_RA_ID =" + listObligation);
+		}
     	
     	
     	
@@ -955,12 +954,12 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	if (allObligationCountries != null) {
 	    	String queryContryN = "INSERT INTO T_RASPATIAL_LNK (FK_SPATIAL_ID, FK_RA_ID, VOLUNTARY) "
 	                + " VALUES (?,?,?)";
-	        for (int i= 0; i< allObligationCountries.size() ; i++) {
-	       	 jdbcTemplate.update(queryContryN,
-	       			 allObligationCountries.get(i).getSpatialId(),
-	                    obligationID,
-	                    strVoluntary); 
-	        }
+			for (Spatial allObligationCountry : allObligationCountries) {
+				jdbcTemplate.update(queryContryN,
+						allObligationCountry.getSpatialId(),
+						obligationID,
+						strVoluntary);
+			}
         }
     }
     
@@ -984,17 +983,17 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	if (allObligationClients != null){
 	    	String queryClientC = "INSERT INTO T_CLIENT_OBLIGATION_LNK (FK_CLIENT_ID, FK_RA_ID, STATUS) "
 	                + " VALUES (?,?,?)";
-	        for (int i= 0; i< allObligationClients.size() ; i++) {
-	       	 jdbcTemplate.update(queryClientC,
-	       			allObligationClients.get(i).getClientId(),
-	                    obligationID,
-	                    strStatus); 
-	        }
+			for (ClientDTO allObligationClient : allObligationClients) {
+				jdbcTemplate.update(queryClientC,
+						allObligationClient.getClientId(),
+						obligationID,
+						strStatus);
+			}
     	}
     }
     /**
      * Delete obligation issues
-     * @param obligationID
+     * @param obligationsId
      */
     private void deleteIssues(Integer obligationsId) {
     	String queryDelete ="DELETE FROM T_RAISSUE_LNK where FK_RA_ID = ?";
@@ -1010,11 +1009,11 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	if (allObligationsIssues != null) {
 	    	String queryIssues = "INSERT INTO T_RAISSUE_LNK (FK_ISSUE_ID, FK_RA_ID) "
 	                + " VALUES (?,?)";
-	        for (int i= 0; i< allObligationsIssues.size() ; i++) {
-	       	 jdbcTemplate.update(queryIssues,
-	       			allObligationsIssues.get(i).getIssueId(),
-	       			obligationIssueID); 
-	        }
+			for (Issue allObligationsIssue : allObligationsIssues) {
+				jdbcTemplate.update(queryIssues,
+						allObligationsIssue.getIssueId(),
+						obligationIssueID);
+			}
     	}
     }
     
@@ -1037,8 +1036,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
     
     /**
      * Delete Relation with other obligation
-     * @param relObligationId
-     * @param oblRelationId
      * @param obligationID
      */
     private void deleteObligationRelations(Integer obligationID) {
@@ -1050,7 +1047,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
     }
     /**
      * Find relations with other obligations
-     * @param obligationID
+     * @param obligationId
      */
     @Override
     public Obligations findObligationRelation(Integer obligationId) {
@@ -1077,7 +1074,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				return obligation;
 			}else {
 			
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Obligations>(Obligations.class), obligationId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), obligationId);
 
 			}
 			
@@ -1126,18 +1123,11 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
     
         public List<Roles> getRespRoles() {
-        	List<Roles> rolesAdd = new ArrayList<Roles>();
+        	List<Roles> rolesAdd = new ArrayList<>();
         	try {
-        	
-	   		    for (int i = 0; i < respRolesQueries.length; i++) {
-	   		    	List<Roles> result = null;
-	            	result = jdbcTemplate.query(respRolesQueries[i], new BeanPropertyRowMapper<Roles>(Roles.class));
-	            	for (int j = 0; j < result.size(); j++) {
-	            		rolesAdd.add(result.get(j));
-	                }
-	            
-	            }
-	   		 
+				for (String respRolesQuery : respRolesQueries) {
+					rolesAdd.addAll(jdbcTemplate.query(respRolesQuery, new BeanPropertyRowMapper<>(Roles.class)));
+				}
         	}catch (Exception e) {
 				System.out.print(e.getMessage());
 			}
@@ -1165,8 +1155,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	if (countClients == 0) {
     		return null;
     	} else {
-    		List<ClientDTO> clients = jdbcTemplate.query(query, new BeanPropertyRowMapper<ClientDTO>(ClientDTO.class), obligationId);
-    		return clients;
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), obligationId);
     	}    	
     	
     }	   

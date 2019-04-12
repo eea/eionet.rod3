@@ -46,7 +46,7 @@ public class ContactsController {
 		 String url = request.getHeader("Referer");
 		 
 		 if (url != null) {
-			 url = url.substring(url.lastIndexOf("/")+1, url.length());
+			 url = url.substring(url.lastIndexOf("/")+1);
 			 if (url.equals("deadlines")) {
 				 model.addAttribute("activeTab", "spatial");
 			 } else {

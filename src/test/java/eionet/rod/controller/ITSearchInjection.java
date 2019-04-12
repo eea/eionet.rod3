@@ -3,11 +3,13 @@ package eionet.rod.controller;
 import eionet.rod.model.Obligations;
 import java.util.Map;
 import java.util.List;
+
+import static org.junit.Assert.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
-import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -92,7 +94,7 @@ public class ITSearchInjection {
         }
         for (Obligations o : allObligations) {
            //System.out.println("!!! " + o.getOblTitle() + ":" + o.getClientName());
-           assertFalse("SQL injection: Found 'mypassword' in output", "mypassword".equals(o.getClientName()));
+            assertNotEquals("SQL injection: Found 'mypassword' in output", "mypassword", o.getClientName());
            //assertFalse("SQL injection: Found 'anotherpassword' in output", "anotherpassword".equals(o.getClientName()));
         }
     }

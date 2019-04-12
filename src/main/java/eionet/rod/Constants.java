@@ -34,167 +34,167 @@ package eionet.rod;
 
 public interface Constants {
 
-    public static final String ACL_RA_NAME = "/obligations";
-    public static final String ACL_RO_NAME = "/obligations";
-    public static final String ACL_LI_NAME = "/instruments";
-    public static final String ACL_ADMIN_NAME = "/Admin";
-    public static final String ACL_HARVEST_NAME = "/Admin/Harvest";
-    public static final String ACL_CLIENT_NAME = "/Client";
-    public static final String ACL_HELP_NAME = "/Admin/Helptext";
+    String ACL_RA_NAME = "/obligations";
+    String ACL_RO_NAME = "/obligations";
+    String ACL_LI_NAME = "/instruments";
+    String ACL_ADMIN_NAME = "/Admin";
+    String ACL_HARVEST_NAME = "/Admin/Harvest";
+    String ACL_CLIENT_NAME = "/Client";
+    String ACL_HELP_NAME = "/Admin/Helptext";
 
-    public static final String ACL_VIEW_PERMISSION = "v";
-    public static final String ACL_INSERT_PERMISSION = "i";
-    public static final String ACL_UPDATE_PERMISSION = "u";
-    public static final String ACL_DELETE_PERMISSION = "d";
-    public static final String ACL_CONTROL_PERMISSION = "c";
+    String ACL_VIEW_PERMISSION = "v";
+    String ACL_INSERT_PERMISSION = "i";
+    String ACL_UPDATE_PERMISSION = "u";
+    String ACL_DELETE_PERMISSION = "d";
+    String ACL_CONTROL_PERMISSION = "c";
 
     // index servlet constants
-    public static final String INDEX_XSL = "index.xsl";
-    public static final String INDEX_QUERY = "index.xrs";
+    String INDEX_XSL = "index.xsl";
+    String INDEX_QUERY = "index.xrs";
     // reporting obligation browse servlet constants
-    public static final String RORABROWSE_XSL = "rorabrowse.xsl";
-    public static final String RORABROWSE_QUERY = "rorabrowse.xrs";
+    String RORABROWSE_XSL = "rorabrowse.xsl";
+    String RORABROWSE_QUERY = "rorabrowse.xrs";
     // show servlet constants
-    public static final String SOURCE_XSL = "source.xsl";
-    public static final String SOURCE_QUERY = "source.xrs";
-    public static final String HIERARCHY_XSL = "hierarchy.xsl";
-    public static final String HIERARCHY_QUERY = "hierarchy.xrs";
-    public static final String HIERARCHYX_XSL = "hierarchyx.xsl";
+    String SOURCE_XSL = "source.xsl";
+    String SOURCE_QUERY = "source.xrs";
+    String HIERARCHY_XSL = "hierarchy.xsl";
+    String HIERARCHY_QUERY = "hierarchy.xrs";
+    String HIERARCHYX_XSL = "hierarchyx.xsl";
 
-    public static final String ACTIVITY_XSL = "activity.xsl";
-    public static final String ACTIVITY_QUERY = "activity.xrs";
+    String ACTIVITY_XSL = "activity.xsl";
+    String ACTIVITY_QUERY = "activity.xrs";
 
-    public static final String VERSIONS_QUERY = "versions.xrs";
+    String VERSIONS_QUERY = "versions.xrs";
 
-    public static final String HISTORY_QUERY = "history.xrs";
-    public static final String HARVESTING_HISTORY_QUERY = "harvesthistory.xrs";
-    public static final String HISTORY_XSL = "history.xsl";
-    public static final String ACTION_HIST_XSL = "actionhist.xsl";
+    String HISTORY_QUERY = "history.xrs";
+    String HARVESTING_HISTORY_QUERY = "harvesthistory.xrs";
+    String HISTORY_XSL = "history.xsl";
+    String ACTION_HIST_XSL = "actionhist.xsl";
 
-    public static final String PARAMETERS_QUERY = "parameters.xrs";
-    public static final String PARAMETERS_XSL = "parameters.xsl";
+    String PARAMETERS_QUERY = "parameters.xrs";
+    String PARAMETERS_XSL = "parameters.xsl";
 
     // show mode constants
-    public static final String SOURCE_MODE = "S";
-    public static final String HIERARCHY_MODE = "C";
-    public static final String HIERARCHYX_MODE = "X";
-    public static final String ACTIVITY_MODE = "A";
-    public static final String PARAMETERS_MODE = "M";
+    String SOURCE_MODE = "S";
+    String HIERARCHY_MODE = "C";
+    String HIERARCHYX_MODE = "X";
+    String ACTIVITY_MODE = "A";
+    String PARAMETERS_MODE = "M";
 
     // editor
-    public static final String E_SOURCE_XSL = "esource.xsl";
-    public static final String E_SOURCE_QUERY = "esource.xrs";
-    public static final String E_REPORTING_XSL = "ereporting.xsl";
-    public static final String E_REPORTING_QUERY = "ereporting.xrs";
-    public static final String E_ACTIVITY_XSL = "eactivity.xsl";
-    public static final String E_ACTIVITY_QUERY = "eactivity.xrs";
+    String E_SOURCE_XSL = "esource.xsl";
+    String E_SOURCE_QUERY = "esource.xrs";
+    String E_REPORTING_XSL = "ereporting.xsl";
+    String E_REPORTING_QUERY = "ereporting.xrs";
+    String E_ACTIVITY_XSL = "eactivity.xsl";
+    String E_ACTIVITY_QUERY = "eactivity.xrs";
 
-    public static final String ID_PARAM = "id";
-    public static final String MODE_PARAM = "mode";
-    public static final String AID_PARAM = "aid";
-    public static final String ENTITY_PARAM = "entity";
-    public static final String SV_PARAM = "sv";
+    String ID_PARAM = "id";
+    String MODE_PARAM = "mode";
+    String AID_PARAM = "aid";
+    String ENTITY_PARAM = "entity";
+    String SV_PARAM = "sv";
 
     // Filter parameters for Reporting Obligation
-    public static final String SHOWFILTER = "showfilters";
-    public static final String ENV_ISSUE_FILTER = "env_issue";
-    public static final String COUNTRY_FILTER = "country";
-    public static final String RIVER_FILTER = "river";
-    public static final String SEA_FILTER = "sea";
-    public static final String LAKE_FILTER = "lake";
-    public static final String PARAM_GROUP_FILTER = "param_group";
-    public static final String ROTYPE_FILTER = "type";
-    public static final String SOURCE_FILTER = "source";
-    public static final String CLIENT_FILTER = "client";
-    public static final String TERMINATED_FILTER = "terminated";
+    String SHOWFILTER = "showfilters";
+    String ENV_ISSUE_FILTER = "env_issue";
+    String COUNTRY_FILTER = "country";
+    String RIVER_FILTER = "river";
+    String SEA_FILTER = "sea";
+    String LAKE_FILTER = "lake";
+    String PARAM_GROUP_FILTER = "param_group";
+    String ROTYPE_FILTER = "type";
+    String SOURCE_FILTER = "source";
+    String CLIENT_FILTER = "client";
+    String TERMINATED_FILTER = "terminated";
 
     // Spatial attribute types
-    public static final String SPATIAL_COUNTRY = "C";
-    public static final String SPATIAL_SEA = "S";
-    public static final String SPATIAL_RIVER = "R";
-    public static final String SPATIAL_LAKE = "L";
-    public static final String SPATIAL_RESERVOIR = "O";
+    String SPATIAL_COUNTRY = "C";
+    String SPATIAL_SEA = "S";
+    String SPATIAL_RIVER = "R";
+    String SPATIAL_LAKE = "L";
+    String SPATIAL_RESERVOIR = "O";
 
     /** */
-    public static final int SEVERITY_INFO = 1;
-    public static final int SEVERITY_CAUTION = 2;
-    public static final int SEVERITY_WARNING = 3;
-    public static final int SEVERITY_VALIDATION = 4;
+    int SEVERITY_INFO = 1;
+    int SEVERITY_CAUTION = 2;
+    int SEVERITY_WARNING = 3;
+    int SEVERITY_VALIDATION = 4;
 
     // Prop names
-    static final String ROD_URL_EVENTS = "rod.url.events";
+    String ROD_URL_EVENTS = "rod.url.events";
     // static final String ROD_URL_OBLIGATIONS ="rod.url.obligations";
-    static final String ROD_URL_ACTIVITIES = "rod.url.activities";
-    static final String ROD_URL_INSTRUMENTS = "rod.url.instruments";
+    String ROD_URL_ACTIVITIES = "rod.url.activities";
+    String ROD_URL_INSTRUMENTS = "rod.url.instruments";
 
     /** Specifies session attribute name where last action URL is kept. */
-    static final String LAST_ACTION_URL_SESSION_ATTR = "ActionEventInterceptor#lastActionUrl";
+    String LAST_ACTION_URL_SESSION_ATTR = "ActionEventInterceptor#lastActionUrl";
 
     /**
      * Properties file name
      */
 
-    public static final String PROP_FILE = "rod";
+    String PROP_FILE = "rod";
 
     /**
      * Parameter in the props file for LI namespace
      */
-    public static final String ROD_LI_NS = "instruments.namespace";
+    String ROD_LI_NS = "instruments.namespace";
 
     /**
      * Parameter in the props file for CL namespace
      */
-    public static final String ROD_CL_NS = "clients.namespace";
+    String ROD_CL_NS = "clients.namespace";
 
     /**
      * Parameter in the props file for issues namespace
      */
-    public static final String ROD_ISSUES_NS = "issues.namespace";
+    String ROD_ISSUES_NS = "issues.namespace";
 
     /**
      * Parameter in the props file for the domain of WebROD
      */
-    public static final String ROD_URL_NS = "rod.url.namespace";
+    String ROD_URL_NS = "rod.url.namespace";
     /**
 *
 */
-    public static final String ROD_URL_RO_NS = "rod.url.ro_namespace";
+    String ROD_URL_RO_NS = "rod.url.ro_namespace";
 
     /**
      * Parameter in the props file for the domain of WebROD
      */
-    public static final String ROD_URL_DOMAIN = "rod.url.domain";
+    String ROD_URL_DOMAIN = "rod.url.domain";
 
     /**
      * Servlet name showing RA
      */
-    public static final String URL_SERVLET = "/obligations";
+    String URL_SERVLET = "/obligations";
     /**
      * RA ID in Url
      */
-    public static final String URL_ACTIVITY_ID = "id";
+    String URL_ACTIVITY_ID = "id";
 
     /**
      * AID for RA in url
      */
-    public static final String URL_ACTIVITY_AID = "aid";
+    String URL_ACTIVITY_AID = "aid";
 
     /**
      * Mode, for RA Mode=A in url
      */
 
-    public static final String URL_ACTIVITY_AMODE = "mode=A";
+    String URL_ACTIVITY_AMODE = "mode=A";
 
     /**
      * Mode, for RA Mode=R in url
      */
 
-    public static final String URL_ACTIVITY_RMODE = "mode=R";
+    String URL_ACTIVITY_RMODE = "mode=R";
 
     /**
      * FiledName for timestamp
      */
 
-    public static final String TIMESTAMP_FILEDNAME = "LAST_UPDATE";
+    String TIMESTAMP_FILEDNAME = "LAST_UPDATE";
 
 }

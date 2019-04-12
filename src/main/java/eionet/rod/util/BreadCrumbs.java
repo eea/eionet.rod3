@@ -1,6 +1,7 @@
 package eionet.rod.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.ui.Model;
 import eionet.rod.model.BreadCrumb;
@@ -43,14 +44,12 @@ public class BreadCrumbs {
      * Create a indefinite list of breadcrumbs.
      */
     public static void set(Model model, BreadCrumb... crumbs) {
-        List<BreadCrumb> breadcrumbList = new ArrayList<BreadCrumb>();
+        List<BreadCrumb> breadcrumbList = new ArrayList<>();
 
         //breadcrumbList.add(eionetCrumb);
         breadcrumbList.add(homeCrumb);
 
-        for (BreadCrumb crumb : crumbs) {
-            breadcrumbList.add(crumb);
-        }
+        breadcrumbList.addAll(Arrays.asList(crumbs));
         model.addAttribute("breadcrumbs", breadcrumbList);
     }
 

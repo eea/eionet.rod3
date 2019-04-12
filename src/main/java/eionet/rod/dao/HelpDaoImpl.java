@@ -51,9 +51,8 @@ private JdbcTemplate jdbcTemplate;
 				//throw new ResourceNotFoundException("The help ID you requested: " + helpId + " was not found in the database");
 			
 			}else {
-		
-				Help help =  jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Help>(Help.class), helpId);
-		        return help;
+
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Help.class), helpId);
 
 			}
 		
@@ -74,8 +73,7 @@ private JdbcTemplate jdbcTemplate;
 	public Documentation getDoc(String area_id) throws ResourceNotFoundException {
 	
 	    try {
-	    	Documentation doc = jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<Documentation>(Documentation.class), area_id);
-	    	return doc;
+			return jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<>(Documentation.class), area_id);
 	    } catch (DataAccessException sqle) {
 	        return null;
 	    } 

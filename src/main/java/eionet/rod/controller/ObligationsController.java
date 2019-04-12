@@ -32,7 +32,6 @@ import eionet.sparqlClient.helpers.ResultValue;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -118,25 +117,31 @@ public class ObligationsController {
         String deliveryColumn = "0";
         if (!RODUtil.isNullOrEmpty(anmode)) {
         	model.addAttribute("anmode", anmode);
-        	if (anmode.equals("NI")) {
-        		issueID = anmode;
-        		obligation.setIssueId(issueID);
-        		model.addAttribute("activeTab", "obligations");
-        		model.addAttribute("titleObl","Reporting obligations");
-	        }else if (anmode.equals("P")) {
-        		model.addAttribute("activeTab", "CoreData");
-        		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
-        		deliveryColumn = "1";
-	        }else if (anmode.equals("F")) {
-        		model.addAttribute("activeTab", "EEAData");
-        		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
-	        }else if (anmode.equals("C")) {
-        		model.addAttribute("activeTab", "obligations");
-        		model.addAttribute("titleObl","Reporting obligations : EEA Core set of indicators");
-	        }else {
-	        	model.addAttribute("activeTab", "obligations");
-	        	model.addAttribute("titleObl","Reporting obligations");
-	        }
+            switch (anmode) {
+                case "NI":
+                    issueID = anmode;
+                    obligation.setIssueId(issueID);
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations");
+                    break;
+                case "P":
+                    model.addAttribute("activeTab", "CoreData");
+                    model.addAttribute("titleObl", "Reporting obligations : Eionet core data flows");
+                    deliveryColumn = "1";
+                    break;
+                case "F":
+                    model.addAttribute("activeTab", "EEAData");
+                    model.addAttribute("titleObl", "Reporting obligations : Delivery process is managed by EEA");
+                    break;
+                case "C":
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations : EEA Core set of indicators");
+                    break;
+                default:
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations");
+                    break;
+            }
         }else {
         	model.addAttribute("activeTab", "obligations");
         	model.addAttribute("titleObl","Reporting obligations");
@@ -179,9 +184,9 @@ public class ObligationsController {
 			 String[] listObligations = obligations.getDelObligations().split(",");
 			 Authentication authentication = authenticationFacade.getAuthentication();
 			 long ts = System.currentTimeMillis();
-			 for (int i = 0; i < listObligations.length; i++) {
-				 processEditDelete("D", authentication.getName(), Integer.parseInt(listObligations[i]), ts);
-			 }
+             for (String listObligation : listObligations) {
+                 processEditDelete("D", authentication.getName(), Integer.parseInt(listObligation), ts);
+             }
 			 obligationsService.deleteObligations(obligations.getDelObligations());
 		 }
 		 model.addAttribute("message", "Obligations selected deleted.");
@@ -223,24 +228,30 @@ public class ObligationsController {
     	String deliveryColumn = "0";
     	if (!RODUtil.isNullOrEmpty(obligations.getAnmode())) {
         	model.addAttribute("anmode", obligations.getAnmode());
-        	if (obligations.getAnmode().equals("NI")) {
-        		obligations.setIssueId(obligations.getAnmode());
-        		model.addAttribute("activeTab", "obligations");
-        		model.addAttribute("titleObl","Reporting obligations");
-	        }else if (obligations.getAnmode().equals("P")) {
-        		model.addAttribute("activeTab", "CoreData");
-        		model.addAttribute("titleObl","Reporting obligations : Eionet core data flows"); 
-        		deliveryColumn = "1";
-	        }else if (obligations.getAnmode().equals("F")) {
-        		model.addAttribute("activeTab", "EEAData");
-        		model.addAttribute("titleObl","Reporting obligations : Delivery process is managed by EEA");
-	        }else if (obligations.getAnmode().equals("C")) {
-        		model.addAttribute("activeTab", "obligations");
-        		model.addAttribute("titleObl","Reporting obligations : EEA Core set of indicators");
-	        }else {
-	        	model.addAttribute("activeTab", "obligations");
-	        	model.addAttribute("titleObl","Reporting obligations");
-	        }
+            switch (obligations.getAnmode()) {
+                case "NI":
+                    obligations.setIssueId(obligations.getAnmode());
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations");
+                    break;
+                case "P":
+                    model.addAttribute("activeTab", "CoreData");
+                    model.addAttribute("titleObl", "Reporting obligations : Eionet core data flows");
+                    deliveryColumn = "1";
+                    break;
+                case "F":
+                    model.addAttribute("activeTab", "EEAData");
+                    model.addAttribute("titleObl", "Reporting obligations : Delivery process is managed by EEA");
+                    break;
+                case "C":
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations : EEA Core set of indicators");
+                    break;
+                default:
+                    model.addAttribute("activeTab", "obligations");
+                    model.addAttribute("titleObl", "Reporting obligations");
+                    break;
+            }
         }else {
         	obligations.setAnmode(null);
         	model.addAttribute("activeTab", "obligations");
@@ -388,32 +399,30 @@ public class ObligationsController {
     }
     
     private ArrayList<ArrayList<String>> removeDuplicates() {
-        List<String> existingSubjects = new ArrayList<String>();
-		ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
+        List<String> existingSubjects = new ArrayList<>();
+		ArrayList<ArrayList<String>> lists = new ArrayList<>();
         if (result != null && result.getRows() != null) {
             ArrayList<HashMap<String, ResultValue>> rows = result.getRows();
-            for (Iterator<HashMap<String, ResultValue>> it = rows.iterator(); it.hasNext(); ){
-                HashMap<String, ResultValue> row = it.next();
-                
+            for (HashMap<String, ResultValue> row : rows) {
                 String product;
-                if ( row.get("product") != null) {
-                	product = row.get("product").toString();
+                if (row.get("product") != null) {
+                    product = row.get("product").toString();
                 } else {
-                	product = null;
-                }       
+                    product = null;
+                }
                 String title;
-                if ( row.get("title") != null) {
-                	title = row.get("title").toString();
+                if (row.get("title") != null) {
+                    title = row.get("title").toString();
                 } else {
-                	title = null;
+                    title = null;
                 }
-                String published = row.get("published").toString();
-                if ( row.get("published") != null) {
-                	published = row.get("published").toString();
+                String published;
+                if (row.get("published") != null) {
+                    published = row.get("published").toString();
                 } else {
-                	published = null;
+                    published = null;
                 }
-                ArrayList<String> list = new ArrayList<String>();
+                ArrayList<String> list = new ArrayList<>();
                 list.add(product);
                 list.add(title);
                 list.add(published);
@@ -460,10 +469,10 @@ public class ObligationsController {
     	
     	List<UndoDTO> versions = undoService.getPreviousActionsReportSpecific(obligationId, "T_OBLIGATION", "PK_RA_ID", "U");
     	if (versions != null) {
-    		for (int i = 0; i < versions.size(); i++) {
-    			String date = RODUtil.miliseconds2Date(versions.get(i).getUndoTime());
-    			versions.get(i).setDate(date);
-    		}
+            for (UndoDTO version : versions) {
+                String date = RODUtil.miliseconds2Date(version.getUndoTime());
+                version.setDate(date);
+            }
     	}
     	model.addAttribute("versions", versions);
     	
@@ -514,13 +523,13 @@ public class ObligationsController {
         }
        
         //init var ListBox
-        List<String> selectedClients = new ArrayList<String>();
+        List<String> selectedClients = new ArrayList<>();
         obligations.setSelectedClients(selectedClients);
-        List<String> selectedVoluntaryCountries= new ArrayList<String>();
+        List<String> selectedVoluntaryCountries= new ArrayList<>();
         obligations.setSelectedVoluntaryCountries(selectedVoluntaryCountries);
-        List<String> selectedFormalCountries= new ArrayList<String>();
+        List<String> selectedFormalCountries= new ArrayList<>();
         obligations.setSelectedFormalCountries(selectedFormalCountries);
-        List<String> selectedIssues= new ArrayList<String>();
+        List<String> selectedIssues= new ArrayList<>();
         obligations.setSelectedIssues(selectedIssues);
         
         Obligations obligationRelation = obligationsService.findObligationRelation(obligationId);
@@ -783,12 +792,12 @@ public class ObligationsController {
 	 */
 	private  List<Spatial> formalObligationCountriesSelected (List<String> selectedFormalCountries){
 		Spatial obligationCountry;
-		List<Spatial> allObligationCountries = new ArrayList<Spatial>();
+		List<Spatial> allObligationCountries = new ArrayList<>();
 	       if (selectedFormalCountries != null) {
-		       for (int i = 0 ; i < selectedFormalCountries.size(); i++) {
-		    	   obligationCountry = spatialService.findOne(Integer.parseInt(selectedFormalCountries.get(i)));
-		    	   allObligationCountries.add(obligationCountry);
-		       }
+               for (String selectedFormalCountry : selectedFormalCountries) {
+                   obligationCountry = spatialService.findOne(Integer.parseInt(selectedFormalCountry));
+                   allObligationCountries.add(obligationCountry);
+               }
 	       }
 	    return allObligationCountries;
 	}
@@ -799,13 +808,13 @@ public class ObligationsController {
      */
 	private  List<ClientDTO> formalObligationClientsSelected (List<String> selectedclients){
 		ClientDTO obligationClient;
-		List<ClientDTO> allObligationClients = new ArrayList<ClientDTO>();
+		List<ClientDTO> allObligationClients = new ArrayList<>();
 		   if (selectedclients != null) {
-		       for (int i = 0 ; i < selectedclients.size(); i++) {
-		           obligationClient = clientService.getById(Integer.parseInt(selectedclients.get(i)));
-		           allObligationClients.add(obligationClient);
+               for (String selectedclient : selectedclients) {
+                   obligationClient = clientService.getById(Integer.parseInt(selectedclient));
+                   allObligationClients.add(obligationClient);
 
-		    }
+               }
 		}
 //	        if (selectedclients != null) {
 //	            for (int i = 0 ; i < selectedclients.size(); i++) {
@@ -826,12 +835,12 @@ public class ObligationsController {
      */
 	private List<Spatial> voluntaryObligationCountriesSelected (List<String> selectedVoluntaryCountries){
 		Spatial obligationCountry;
-		List<Spatial> allObligationVoluntaryCountries = new ArrayList<Spatial>();
+		List<Spatial> allObligationVoluntaryCountries = new ArrayList<>();
 	       if (selectedVoluntaryCountries != null) {
-		       for (int i = 0 ; i < selectedVoluntaryCountries.size(); i++) {
-		    	   obligationCountry = spatialService.findOne(Integer.parseInt(selectedVoluntaryCountries.get(i)));
-		    	   allObligationVoluntaryCountries.add(obligationCountry);
-		       }
+               for (String selectedVoluntaryCountry : selectedVoluntaryCountries) {
+                   obligationCountry = spatialService.findOne(Integer.parseInt(selectedVoluntaryCountry));
+                   allObligationVoluntaryCountries.add(obligationCountry);
+               }
 	       }
 	    return allObligationVoluntaryCountries;
 	}
@@ -842,12 +851,12 @@ public class ObligationsController {
 	 */
 	private List<Issue> obligationIssuesSelected (List<String> selectedIssues){
 		Issue selectedIssue;
-		List<Issue> allSelectedIssues = new ArrayList<Issue>();
+		List<Issue> allSelectedIssues = new ArrayList<>();
 	       if (selectedIssues != null) {
-		       for (int i = 0 ; i < selectedIssues.size(); i++) {
-		    	   selectedIssue = issueDao.findById(Integer.parseInt(selectedIssues.get(i)));
-		    	   allSelectedIssues.add(selectedIssue);
-		       }
+               for (String selectedIssue1 : selectedIssues) {
+                   selectedIssue = issueDao.findById(Integer.parseInt(selectedIssue1));
+                   allSelectedIssues.add(selectedIssue);
+               }
 	       }
 	    return allSelectedIssues;
 	}
@@ -899,178 +908,175 @@ public class ObligationsController {
 	private String getUserName()
 	{
 		Authentication authentication = authenticationFacade.getAuthentication();
-		String userName = authentication.getName();
-		
-		return userName;
+
+        return authentication.getName();
 	}	
 	
 	private Vector<String> getChanges(Integer obligationID, long ts) throws ServiceException {
-		Vector<String> res_vec = new Vector<String>();
+		Vector<String> res_vec = new Vector<>();
 		List<UndoDTO> undoList = undoService.getUndoInformation(ts, "U", "T_OBLIGATION");
 		Obligations obligation = obligationsService.findOblId(obligationID);
 		String value = "";
-		UndoDTO undo = new UndoDTO();
-		
-		for (int i = 0; i < undoList.size(); i++) {
-			undo = undoList.get(i);
-			boolean aux = true; 
-			
-			switch (undo.getCol()) {
-			case "PK_RA_ID":
-				value = obligationID.toString();
-				break;
-			case "TITLE":
-				value = obligation.getOblTitle();
-				break;
-			case "DESCRIPTION":
-				value = obligation.getDescription();
-				break;
-			case "FIRST_REPORTING":
-				value = obligation.getFirstReporting();
-				break;
-			case "VALID_TO":
-				value = obligation.getValidTo();
-				break;
-			case "REPORT_FREQ_MONTHS":
-				value = obligation.getReportFreqMonths();
-				break;
-			case "NEXT_DEADLINE":
-				value = obligation.getNextDeadline();
-				break;
-			case "NEXT_REPORTING":
-				value = obligation.getNextReporting();
-				break;
-			case "DATE_COMMENTS":
-				value = obligation.getDateComments();
-				break;
-			case "FORMAT_NAME":
-				value = obligation.getFormatName();
-				break;
-			case "REPORT_FORMAT_URL":
-				value = obligation.getReportFormatUrl();
-				break;
-			case "VALID_SINCE":
-				value = obligation.getValidSince();
-				break;
-			case "REPORTING_FORMAT":
-				value = obligation.getReportingFormat();
-				break;
-			case "LOCATION_INFO":
-				value = obligation.getLocationInfo();
-				break;
-			case "LOCATION_PTR":
-				value = obligation.getLocationPtr();
-				break;
-			case "DATA_USED_FOR":
-				value = obligation.getDataUsedFor();
-				break;
-			case "DATA_USED_FOR_URL":
-				value = obligation.getDataUsedForUrl();
-				break;
-			case "COORDINATOR_ROLE":
-				value = obligation.getCoordinatorRole();
-				break;
-			case "COORDINATOR_ROLE_SUF":
-				value = obligation.getCoordinatorRoleSuf();
-				break;
-			case "COORDINATOR":
-				value = obligation.getCoordinator();
-				break;
-			case "COORDINATOR_URL":
-				value = obligation.getCoordinatorUrl();
-				break;
-			case "RESPONSIBLE_ROLE":
-				value = obligation.getResponsibleRole();
-				break;
-			case "RESPONSIBLE_ROLE_SUF":
-				value = obligation.getResponsibleRoleSuf();
-				break;
-			case "NATIONAL_CONTACT":
-				value = obligation.getNationalContact();
-				break;
-			case "NATIONAL_CONTACT_URL":
-				value = obligation.getNationalContactUrl();
-				break;
-			case "EEA_PRIMARY":
-				if (obligation.getEeaPrimary() != null) {
-					value = obligation.getEeaPrimary().toString();
-				} else {
-					value = null;
-				}		
-				break;
-			case "EEA_CORE":
-				if (obligation.getEeaCore() != null) {
-					value = obligation.getEeaCore().toString();
-				} else {
-					value = null;
-				}		
-				break;
-			case "FLAGGED":
-				if (obligation.getFlagged() != null) {
-					value = obligation.getFlagged().toString();
-				} else {
-					value = null;
-				}		
-				break;
-			case "COMMENT":
-				value = obligation.getComment();
-				break;
-			case "AUTHORITY":
-				value = obligation.getAuthority();
-				break;
-			case "FK_SOURCE_ID":
-				value = obligation.getSourceId();
-				break;
-			case "REPORT_FREQ_DETAIL":
-				value = obligation.getReportFreqDetail();
-				break;
-			case "LAST_UPDATE":
-				value = obligation.getLastUpdate();
-				break;
-			case "TERMINATE":
-				value = obligation.getTerminate();
-				break;
-			case "REPORT_FREQ":
-				value = obligation.getTerminate();
-				break;
-			case "FK_DELIVERY_COUNTRY_IDS":
-				value = obligation.getDeliveryCountryId();
-				break;
-			case "NEXT_DEADLINE2":
-				value = obligation.getNextDeadline2();
-				break;
-			case "LAST_HARVESTED":
-				value = obligation.getLastHarvested();
-				break;
-			case "CONTINOUS_REPORTING":
-				value = obligation.getContinousReporting();
-				break;
-			default:
-				aux = false;
-				break;
-			}
-				
-			if (aux) {
-				String undoValue = undo.getValue();	
-				
-				if (value != null) {
-					if (value.trim().equals("")) {
-						value = null;
-					}
-				}
-				
-				if (undoValue != null) {
-					if (undoValue.trim().equals("")) {
-						undoValue = null;
-					}
-				}
-				boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
-				if (!diff) {
-					String label = getLabel(undo.getCol(), undoValue, value);
-					res_vec.add(label);
-				}
-			}
-		}		
+
+        for (UndoDTO undo : undoList) {
+            boolean aux = true;
+
+            switch (undo.getCol()) {
+                case "PK_RA_ID":
+                    value = obligationID.toString();
+                    break;
+                case "TITLE":
+                    value = obligation.getOblTitle();
+                    break;
+                case "DESCRIPTION":
+                    value = obligation.getDescription();
+                    break;
+                case "FIRST_REPORTING":
+                    value = obligation.getFirstReporting();
+                    break;
+                case "VALID_TO":
+                    value = obligation.getValidTo();
+                    break;
+                case "REPORT_FREQ_MONTHS":
+                    value = obligation.getReportFreqMonths();
+                    break;
+                case "NEXT_DEADLINE":
+                    value = obligation.getNextDeadline();
+                    break;
+                case "NEXT_REPORTING":
+                    value = obligation.getNextReporting();
+                    break;
+                case "DATE_COMMENTS":
+                    value = obligation.getDateComments();
+                    break;
+                case "FORMAT_NAME":
+                    value = obligation.getFormatName();
+                    break;
+                case "REPORT_FORMAT_URL":
+                    value = obligation.getReportFormatUrl();
+                    break;
+                case "VALID_SINCE":
+                    value = obligation.getValidSince();
+                    break;
+                case "REPORTING_FORMAT":
+                    value = obligation.getReportingFormat();
+                    break;
+                case "LOCATION_INFO":
+                    value = obligation.getLocationInfo();
+                    break;
+                case "LOCATION_PTR":
+                    value = obligation.getLocationPtr();
+                    break;
+                case "DATA_USED_FOR":
+                    value = obligation.getDataUsedFor();
+                    break;
+                case "DATA_USED_FOR_URL":
+                    value = obligation.getDataUsedForUrl();
+                    break;
+                case "COORDINATOR_ROLE":
+                    value = obligation.getCoordinatorRole();
+                    break;
+                case "COORDINATOR_ROLE_SUF":
+                    value = obligation.getCoordinatorRoleSuf();
+                    break;
+                case "COORDINATOR":
+                    value = obligation.getCoordinator();
+                    break;
+                case "COORDINATOR_URL":
+                    value = obligation.getCoordinatorUrl();
+                    break;
+                case "RESPONSIBLE_ROLE":
+                    value = obligation.getResponsibleRole();
+                    break;
+                case "RESPONSIBLE_ROLE_SUF":
+                    value = obligation.getResponsibleRoleSuf();
+                    break;
+                case "NATIONAL_CONTACT":
+                    value = obligation.getNationalContact();
+                    break;
+                case "NATIONAL_CONTACT_URL":
+                    value = obligation.getNationalContactUrl();
+                    break;
+                case "EEA_PRIMARY":
+                    if (obligation.getEeaPrimary() != null) {
+                        value = obligation.getEeaPrimary().toString();
+                    } else {
+                        value = null;
+                    }
+                    break;
+                case "EEA_CORE":
+                    if (obligation.getEeaCore() != null) {
+                        value = obligation.getEeaCore().toString();
+                    } else {
+                        value = null;
+                    }
+                    break;
+                case "FLAGGED":
+                    if (obligation.getFlagged() != null) {
+                        value = obligation.getFlagged().toString();
+                    } else {
+                        value = null;
+                    }
+                    break;
+                case "COMMENT":
+                    value = obligation.getComment();
+                    break;
+                case "AUTHORITY":
+                    value = obligation.getAuthority();
+                    break;
+                case "FK_SOURCE_ID":
+                    value = obligation.getSourceId();
+                    break;
+                case "REPORT_FREQ_DETAIL":
+                    value = obligation.getReportFreqDetail();
+                    break;
+                case "LAST_UPDATE":
+                    value = obligation.getLastUpdate();
+                    break;
+                case "TERMINATE":
+                    value = obligation.getTerminate();
+                    break;
+                case "REPORT_FREQ":
+                    value = obligation.getTerminate();
+                    break;
+                case "FK_DELIVERY_COUNTRY_IDS":
+                    value = obligation.getDeliveryCountryId();
+                    break;
+                case "NEXT_DEADLINE2":
+                    value = obligation.getNextDeadline2();
+                    break;
+                case "LAST_HARVESTED":
+                    value = obligation.getLastHarvested();
+                    break;
+                case "CONTINOUS_REPORTING":
+                    value = obligation.getContinousReporting();
+                    break;
+                default:
+                    aux = false;
+                    break;
+            }
+
+            if (aux) {
+                String undoValue = undo.getValue();
+
+                if (value != null) {
+                    if (value.trim().equals("")) {
+                        value = null;
+                    }
+                }
+
+                if (undoValue != null) {
+                    if (undoValue.trim().equals("")) {
+                        undoValue = null;
+                    }
+                }
+                boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
+                if (!diff) {
+                    String label = getLabel(undo.getCol(), undoValue, value);
+                    res_vec.add(label);
+                }
+            }
+        }
 		
 		undoList = undoService.getUndoInformation(ts, "U", "T_RASPATIAL_LNK");
 		List<Spatial> formallyCountries = obligationsService.findAllCountriesByObligation(obligationID, "N");
@@ -1080,55 +1086,55 @@ public class ObligationsController {
 		StringBuffer removedVoluntaryCountries = new StringBuffer();
 		StringBuffer addedFormallyCountries = new StringBuffer();
 		StringBuffer removedFormallyCountries = new StringBuffer();
-		List<String>  undoVoluntaryCountries = new ArrayList<String>();
-		List<String>  undoFormallyCountries = new ArrayList<String>();
-		List<String> currentVoluntaryCountries = new ArrayList<String>();
-		List<String> currentFormallyCountries = new ArrayList<String>();
-		List<String>  voluntary = new ArrayList<String>();
+		List<String>  undoVoluntaryCountries = new ArrayList<>();
+		List<String>  undoFormallyCountries = new ArrayList<>();
+		List<String> currentVoluntaryCountries = new ArrayList<>();
+		List<String> currentFormallyCountries = new ArrayList<>();
+		List<String>  voluntary = new ArrayList<>();
 		
-		if (undoList != null) {			
-			for (int i = 0; i < undoList.size(); i++) {
-				if (undoList.get(i).getCol().equals("VOLUNTARY")) {
-					voluntary.add(undoList.get(i).getValue());					
-				}
-			}
+		if (undoList != null) {
+            for (UndoDTO undoDTO : undoList) {
+                if (undoDTO.getCol().equals("VOLUNTARY")) {
+                    voluntary.add(undoDTO.getValue());
+                }
+            }
 		}		
 		
 		int countVoluntary = 0;
-		if (undoList != null) {			
-			for (int i = 0; i < undoList.size(); i++) {
-				if (undoList.get(i).getCol().equals("FK_SPATIAL_ID")) {						
-					country = spatialService.findOne(Integer.parseInt(undoList.get(i).getValue()));
-					if (voluntary.get(countVoluntary).equals("N")) {
-						undoFormallyCountries.add(country.getName());
-					} else {
-						undoVoluntaryCountries.add(country.getName());
-					}
-					countVoluntary++;
-				}
-				
-			}
+		if (undoList != null) {
+            for (UndoDTO undoDTO : undoList) {
+                if (undoDTO.getCol().equals("FK_SPATIAL_ID")) {
+                    country = spatialService.findOne(Integer.parseInt(undoDTO.getValue()));
+                    if (voluntary.get(countVoluntary).equals("N")) {
+                        undoFormallyCountries.add(country.getName());
+                    } else {
+                        undoVoluntaryCountries.add(country.getName());
+                    }
+                    countVoluntary++;
+                }
+
+            }
 		}
 		
 		if (formallyCountries != null) {
-			for (int i = 0; i < formallyCountries.size(); i++) {
-				currentFormallyCountries.add(formallyCountries.get(i).getName());
-			}
+            for (Spatial formallyCountry : formallyCountries) {
+                currentFormallyCountries.add(formallyCountry.getName());
+            }
 		}
 		
 		if (voluntaryCountries != null) {
-			for (int i = 0; i < voluntaryCountries.size(); i++) {
-				currentVoluntaryCountries.add(voluntaryCountries.get(i).getName());
-			}
+            for (Spatial voluntaryCountry : voluntaryCountries) {
+                currentVoluntaryCountries.add(voluntaryCountry.getName());
+            }
 		}
 		
 		if (currentFormallyCountries.size() > 0) {
-			for (int i = 0; i < currentFormallyCountries.size(); i++) {
-				if (!undoFormallyCountries.contains(currentFormallyCountries.get(i))) {
-					addedFormallyCountries.append(currentFormallyCountries.get(i));
-					addedFormallyCountries.append(", ");
-				}
-			}
+            for (String currentFormallyCountry : currentFormallyCountries) {
+                if (!undoFormallyCountries.contains(currentFormallyCountry)) {
+                    addedFormallyCountries.append(currentFormallyCountry);
+                    addedFormallyCountries.append(", ");
+                }
+            }
 			if (addedFormallyCountries.length() > 0) {
 				addedFormallyCountries = addedFormallyCountries.replace(addedFormallyCountries.length()-2, addedFormallyCountries.length(), "");
 			}
@@ -1136,12 +1142,12 @@ public class ObligationsController {
 		}
 		
 		if (undoFormallyCountries.size() > 0) {
-			for (int i = 0; i < undoFormallyCountries.size(); i++) {
-				if (!currentFormallyCountries.contains(undoFormallyCountries.get(i))) {
-					removedFormallyCountries.append(undoFormallyCountries.get(i));
-					removedFormallyCountries.append(", ");
-				}
-			}
+            for (String undoFormallyCountry : undoFormallyCountries) {
+                if (!currentFormallyCountries.contains(undoFormallyCountry)) {
+                    removedFormallyCountries.append(undoFormallyCountry);
+                    removedFormallyCountries.append(", ");
+                }
+            }
 			if (removedFormallyCountries.length() > 0) {
 				removedFormallyCountries = removedFormallyCountries.replace(removedFormallyCountries.length()-2, removedFormallyCountries.length(), "");
 			}
@@ -1149,12 +1155,12 @@ public class ObligationsController {
 		}
 		
 		if (currentVoluntaryCountries.size() > 0) {
-			for (int i = 0; i < currentVoluntaryCountries.size(); i++) {
-				if (!undoVoluntaryCountries.contains(currentVoluntaryCountries.get(i))) {
-					addedVoluntaryCountries.append(currentVoluntaryCountries.get(i));
-					addedVoluntaryCountries.append(", ");
-				}
-			}
+            for (String currentVoluntaryCountry : currentVoluntaryCountries) {
+                if (!undoVoluntaryCountries.contains(currentVoluntaryCountry)) {
+                    addedVoluntaryCountries.append(currentVoluntaryCountry);
+                    addedVoluntaryCountries.append(", ");
+                }
+            }
 			if (addedVoluntaryCountries.length() > 0) {
 				addedVoluntaryCountries = addedVoluntaryCountries.replace(addedVoluntaryCountries.length()-2, addedVoluntaryCountries.length(), "");
 			}
@@ -1162,12 +1168,12 @@ public class ObligationsController {
 		}
 		
 		if (undoVoluntaryCountries.size() > 0) {
-			for (int i = 0; i < undoVoluntaryCountries.size(); i++) {
-				if (!currentVoluntaryCountries.contains(undoVoluntaryCountries.get(i))) {
-					removedVoluntaryCountries.append(undoVoluntaryCountries.get(i));
-					removedVoluntaryCountries.append(", ");
-				}
-			}
+            for (String undoVoluntaryCountry : undoVoluntaryCountries) {
+                if (!currentVoluntaryCountries.contains(undoVoluntaryCountry)) {
+                    removedVoluntaryCountries.append(undoVoluntaryCountry);
+                    removedVoluntaryCountries.append(", ");
+                }
+            }
 			if (removedVoluntaryCountries.length() > 0) {
 				removedVoluntaryCountries = removedVoluntaryCountries.replace(removedVoluntaryCountries.length()-2, removedVoluntaryCountries.length(), "");
 			}
@@ -1193,32 +1199,31 @@ public class ObligationsController {
 		Issue issue;		
 		StringBuffer addedIssues = new StringBuffer();
 		StringBuffer removedIssues = new StringBuffer();
-		List<String>  undoIssues = new ArrayList<String>();
-		List<String> currentIssues = new ArrayList<String>();
+		List<String>  undoIssues = new ArrayList<>();
+		List<String> currentIssues = new ArrayList<>();
 		
-		if (obligationIssues != null) {			
-			for (int i = 0; i < obligationIssues.size(); i++) {
-				currentIssues.add(obligationIssues.get(i).getIssueName());
-			}
+		if (obligationIssues != null) {
+            for (Issue obligationIssue : obligationIssues) {
+                currentIssues.add(obligationIssue.getIssueName());
+            }
 		}
 		
-		if (undoList != null) {			
-			for (int i = 0; i < undoList.size(); i++) {
-				undo = undoList.get(i);
-				if (undo.getCol().equals("FK_ISSUE_ID")) {
-					issue = issueDao.findById(Integer.parseInt(undo.getValue()));
-					undoIssues.add(issue.getIssueName());
-				}
-			}
+		if (undoList != null) {
+            for (UndoDTO undo : undoList) {
+                if (undo.getCol().equals("FK_ISSUE_ID")) {
+                    issue = issueDao.findById(Integer.parseInt(undo.getValue()));
+                    undoIssues.add(issue.getIssueName());
+                }
+            }
 		}
 		
 		if (currentIssues.size() > 0) {
-			for (int i = 0; i < currentIssues.size(); i++) {
-				if (!undoIssues.contains(currentIssues.get(i))) {
-					addedIssues.append(currentIssues.get(i));
-					addedIssues.append(", ");
-				}
-			}
+            for (String currentIssue : currentIssues) {
+                if (!undoIssues.contains(currentIssue)) {
+                    addedIssues.append(currentIssue);
+                    addedIssues.append(", ");
+                }
+            }
 			if (addedIssues.length() > 0) {
 				addedIssues = addedIssues.replace(addedIssues.length()-2, addedIssues.length(), "");
 			}
@@ -1226,12 +1231,12 @@ public class ObligationsController {
 		}
 		
 		if (undoIssues.size() > 0) {
-			for (int i = 0; i < undoIssues.size(); i++) {
-				if (!currentIssues.contains(undoIssues.get(i))) {
-					removedIssues.append(undoIssues.get(i));
-					removedIssues.append(", ");
-				}
-			}
+            for (String undoIssue : undoIssues) {
+                if (!currentIssues.contains(undoIssue)) {
+                    removedIssues.append(undoIssue);
+                    removedIssues.append(", ");
+                }
+            }
 			if (removedIssues.length() > 0)	{
 				removedIssues = removedIssues.replace(removedIssues.length()-2, removedIssues.length(), "");
 			}
@@ -1250,32 +1255,31 @@ public class ObligationsController {
 		ClientDTO client;
 		StringBuffer addedClients = new StringBuffer();
 		StringBuffer removedClients = new StringBuffer();
-		List<String>  undoClients = new ArrayList<String>();
-		List<String> currentClients = new ArrayList<String>();
+		List<String>  undoClients = new ArrayList<>();
+		List<String> currentClients = new ArrayList<>();
 		
-		if (obligationClients != null) {			
-			for (int i = 0; i < obligationClients.size(); i++) {
-				currentClients.add(obligationClients.get(i).getName());
-			}
+		if (obligationClients != null) {
+            for (ClientDTO obligationClient : obligationClients) {
+                currentClients.add(obligationClient.getName());
+            }
 		}
 		
-		if (undoList != null) {			
-			for (int i = 0; i < undoList.size(); i++) {
-				undo = undoList.get(i);
-				if (undo.getCol().equals("FK_CLIENT_ID")) {
-					client = clientService.getById(Integer.parseInt(undo.getValue()));
-					undoClients.add(client.getName());
-				}
-			}
+		if (undoList != null) {
+            for (UndoDTO undo : undoList) {
+                if (undo.getCol().equals("FK_CLIENT_ID")) {
+                    client = clientService.getById(Integer.parseInt(undo.getValue()));
+                    undoClients.add(client.getName());
+                }
+            }
 		}
 		
 		if (currentClients.size() > 0) {
-			for (int i = 0; i < currentClients.size(); i++) {
-				if (!undoClients.contains(currentClients.get(i))) {
-					addedClients.append(currentClients.get(i));
-					addedClients.append(", ");
-				}
-			}
+            for (String currentClient : currentClients) {
+                if (!undoClients.contains(currentClient)) {
+                    addedClients.append(currentClient);
+                    addedClients.append(", ");
+                }
+            }
 			if (addedClients.length() > 0)	{
 				addedClients = addedClients.replace(addedClients.length()-2, addedClients.length(), "");
 			}
@@ -1283,12 +1287,12 @@ public class ObligationsController {
 		}
 		
 		if (undoClients.size() > 0) {
-			for (int i = 0; i < undoClients.size(); i++) {
-				if (!currentClients.contains(undoClients.get(i))) {
-					removedClients.append(undoClients.get(i));
-					removedClients.append(", ");
-				}
-			}
+            for (String undoClient : undoClients) {
+                if (!currentClients.contains(undoClient)) {
+                    removedClients.append(undoClient);
+                    removedClients.append(", ");
+                }
+            }
 			if (removedClients.length() > 0) {
 				removedClients = removedClients.replace(removedClients.length()-2, removedClients.length(), "");
 			}
@@ -1309,12 +1313,11 @@ public class ObligationsController {
     	String removedRelation = "";
     	
     	if (undoList != null) {
-    		for (int i = 0; i < undoList.size(); i++) {
-    			undo = undoList.get(i);
-    			if (undo.getCol().equals("FK_RA_ID2")) {
-    				undoRelation = obligationsService.findOblId(Integer.parseInt(undo.getValue())).getOblTitle();
-    			}
-    		}
+            for (UndoDTO undo : undoList) {
+                if (undo.getCol().equals("FK_RA_ID2")) {
+                    undoRelation = obligationsService.findOblId(Integer.parseInt(undo.getValue())).getOblTitle();
+                }
+            }
     	}
     	
     	if (currentRelation.getRelObligationId() != 0 || undoRelation != null) {
@@ -1621,8 +1624,8 @@ public class ObligationsController {
 		FileServiceIF fileService = RODServices.getFileService();
 		
 		try {		
-			Vector<Vector<String>> lists = new Vector<Vector<String>>();
-			Vector<String> list = new Vector<String>();
+			Vector<Vector<String>> lists = new Vector<>();
+			Vector<String> list = new Vector<>();
 			long timestamp = System.currentTimeMillis();
 			String events = "http://rod.eionet.europa.eu/events/" + timestamp;
 			
@@ -1635,14 +1638,14 @@ public class ObligationsController {
 				list.add(Attrs.SCHEMA_RDF + "ObligationChange");
 				lists.add(list);
 				
-				list = new Vector<String>();
+				list = new Vector<>();
 				list.add(events);
 				String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
 				list.add(et_schema);
 				list.add("Obligation change");
 				lists.add(list);
 				
-				list = new Vector<String>();
+				list = new Vector<>();
 				list.add(events);
 				list.add("http://purl.org/dc/elements/1.1/title");
 				list.add("Obligation change");
@@ -1655,21 +1658,21 @@ public class ObligationsController {
 				list.add(Attrs.SCHEMA_RDF + "NewObligation");
 				lists.add(list);
 				
-				list = new Vector<String>();
+				list = new Vector<>();
 				list.add(events);
 				String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
 				list.add(et_schema);
 				list.add("New Obligation");
 				lists.add(list);
 				
-				list = new Vector<String>();
+				list = new Vector<>();
 				list.add(events);
 				list.add("http://purl.org/dc/elements/1.1/title");
 				list.add("New Obligation");
 				lists.add(list);
 			}
 			
-			list = new Vector<String>();
+			list = new Vector<>();
 			list.add(events);
 			String obl_schema = fileService.getStringProperty(FileServiceIF.UNS_OBLIGATION_PREDICATE);
 			list.add(obl_schema);
@@ -1689,13 +1692,13 @@ public class ObligationsController {
 				lists.add(list);
 			}*/
 			
-			list = new Vector<String>();
+			list = new Vector<>();
 			list.add(events);
 			list.add(Attrs.SCHEMA_RDF + "responsiblerole");
 			list.add(pObligations.getResponsibleRole());
 			lists.add(list);
 			
-			list = new Vector<String>();
+			list = new Vector<>();
 			list.add(events);
 			list.add(Attrs.SCHEMA_RDF + "actor");
 			list.add(userName);
@@ -1707,7 +1710,7 @@ public class ObligationsController {
 				for (Enumeration<String> en = changes.elements(); en.hasMoreElements();)
 				{
 					String label = en.nextElement();
-					list = new Vector<String>();
+					list = new Vector<>();
 					list.add(events);
 					list.add(Attrs.SCHEMA_RDF + "change");
 					list.add(label);
@@ -1715,7 +1718,7 @@ public class ObligationsController {
 				}
 			}
 			
-			list = new Vector<String>();
+			list = new Vector<>();
 			list.add(events);
 			list.add("http://purl.org/dc/elements/1.1/identifier");
 			String url = "http://rod.eionet.europa.eu/obligations/" + obligation_id;

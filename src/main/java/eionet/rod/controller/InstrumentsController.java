@@ -153,7 +153,7 @@ public class InstrumentsController {
         	for (int j = 0; selClassifications.size() > j; j++) {
         		if (instrument.getClassifications().get(i).getClassId() != null) {
 	        		if (selClassifications.get(j).getClassId().equals(instrument.getClassifications().get(i).getClassId())) {
-	        			selClassifications.remove(j);
+	        			selClassifications.remove(j); // todo: bug, needs changing after the logic is analyzed
 	            	}
         		}
         	}
@@ -177,7 +177,7 @@ public class InstrumentsController {
 			sendEvent(true, instrument, instrument.getSourceId(), ts);
 		}catch(ServiceException e)
 		{
-			
+
 		}
         return "redirect:edit";
     }
@@ -192,7 +192,7 @@ public class InstrumentsController {
         List<InstrumentClassificationDTO> selClassifications = sourceService.getAllClassifications();
         model.addAttribute("selClassifications", selClassifications);
         InstrumentFactsheetDTO instrument = new InstrumentFactsheetDTO();
-        List<String> selectedClassifications = new ArrayList<String>();
+        List<String> selectedClassifications = new ArrayList<>();
         instrument.setSelectedClassifications(selectedClassifications);
         model.addAttribute("instrument", instrument);
         BreadCrumbs.set(model, "Create a Legislative Instrument");
@@ -266,9 +266,8 @@ public class InstrumentsController {
 	private String getUserName()
 	 {
 		Authentication authentication = authenticationFacade.getAuthentication();
-		String userName = authentication.getName();
-		
-		return userName;
+
+		 return authentication.getName();
 	 }
 	 
 	 private String getLabel(String col, String value, String currentValue) throws ServiceException
@@ -334,106 +333,105 @@ public class InstrumentsController {
 	 
 	 private Vector<String> getChanges(Integer pInstrumentID, long ts) throws ServiceException
 	 {
-		 Vector<String> res_vec = new Vector<String>();
+		 Vector<String> res_vec = new Vector<>();
 		 List<UndoDTO> undoList = undoService.getUndoInformation(ts, "U", "T_SOURCE");
 		 InstrumentFactsheetDTO instrument = sourceService.getById(pInstrumentID);
 		 String value = "";
-		 for (int i = 0; i < undoList.size(); i++) {			 
-			
-			boolean aux = true; 
-			UndoDTO undo = undoList.get(i);
-			
-			switch (undo.getCol()) {
-			case "PK_SOURCE_ID":
-				value = instrument.getSourceId().toString();				
-				break;
-			case "SOURCE_CODE": 
-				value = instrument.getSourceCode();				
-				break;
-			case "TITLE":
-				value = instrument.getSourceTitle();				
-				break;
-			case "CELEX_REF":
-				value = instrument.getSourceCelexRef();				
-				break;
-			case "URL":
-				value = instrument.getSourceUrl();				
-				break;
-			case "ALIAS":
-				value = instrument.getSourceAlias();				
-				break;
-			case "VALID_FROM":
-				value = instrument.getSourceValidFrom();				
-				break;
-			case "ABSTRACT":
-				value = instrument.getSourceAbstract();				
-				break;
-			case "COMMENT":
-				value = instrument.getSourceComment();				
-				break;
-			case "ISSUED_BY_URL":
-				value = instrument.getSourceIssuedByUrl();				
-				break;
-			case "EC_ENTRY_INTO_FORCE":
-				value = instrument.getSourceEcEntryIntoForce();				
-				break;
-			case "EC_ACCESSION":
-				value = instrument.getSourceEcAccession();				
-				break;
-			case "SECRETARIAT":
-				value = instrument.getSourceSecretariat();				
-				break;
-			case "SECRETARIAT_URL":
-				value = instrument.getSourceSecretariatUrl();				
-				break;
-			case "TERMINATE":
-				value = instrument.getSourceTerminate();				
-				break;
-			case "FK_TYPE_ID":
-				value = instrument.getSourceFkTypeId().toString();				
-				break;
-			case "LAST_MODIFIED":
-				value = instrument.getSourceLastModified();				
-				break;
-			case "ISSUED_BY":
-				value = instrument.getSourceIssuedBy();				
-				break;
-			case "FK_CLIENT_ID":
-				value = instrument.getClientId().toString();				
-				break;
-			case "LAST_UPDATE":
-				value = instrument.getSourceLastUpdate();				
-				break;
-			case "LEGAL_NAME":
-				value = instrument.getSourceLegalName();				
-				break;
-			default:
-				aux = false;
-				break;
-		}
-		
-		if (aux) {
-			String undoValue = undo.getValue();	
-			
-			if (value != null) {
-				if (value.trim().equals("")) {
-					value = null;
-				}
-			}
-			
-			if (undoValue != null) {
-				if (undoValue.trim().equals("")) {
-					undoValue = null;
-				}
-			}
-			boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
-			if (!diff) {
-				String label = getLabel(undo.getCol(), undoValue, value);
-				res_vec.add(label);
-			}
-		}
-		
-		}
+		 for (UndoDTO undo : undoList) {
+
+			 boolean aux = true;
+
+			 switch (undo.getCol()) {
+				 case "PK_SOURCE_ID":
+					 value = instrument.getSourceId().toString();
+					 break;
+				 case "SOURCE_CODE":
+					 value = instrument.getSourceCode();
+					 break;
+				 case "TITLE":
+					 value = instrument.getSourceTitle();
+					 break;
+				 case "CELEX_REF":
+					 value = instrument.getSourceCelexRef();
+					 break;
+				 case "URL":
+					 value = instrument.getSourceUrl();
+					 break;
+				 case "ALIAS":
+					 value = instrument.getSourceAlias();
+					 break;
+				 case "VALID_FROM":
+					 value = instrument.getSourceValidFrom();
+					 break;
+				 case "ABSTRACT":
+					 value = instrument.getSourceAbstract();
+					 break;
+				 case "COMMENT":
+					 value = instrument.getSourceComment();
+					 break;
+				 case "ISSUED_BY_URL":
+					 value = instrument.getSourceIssuedByUrl();
+					 break;
+				 case "EC_ENTRY_INTO_FORCE":
+					 value = instrument.getSourceEcEntryIntoForce();
+					 break;
+				 case "EC_ACCESSION":
+					 value = instrument.getSourceEcAccession();
+					 break;
+				 case "SECRETARIAT":
+					 value = instrument.getSourceSecretariat();
+					 break;
+				 case "SECRETARIAT_URL":
+					 value = instrument.getSourceSecretariatUrl();
+					 break;
+				 case "TERMINATE":
+					 value = instrument.getSourceTerminate();
+					 break;
+				 case "FK_TYPE_ID":
+					 value = instrument.getSourceFkTypeId().toString();
+					 break;
+				 case "LAST_MODIFIED":
+					 value = instrument.getSourceLastModified();
+					 break;
+				 case "ISSUED_BY":
+					 value = instrument.getSourceIssuedBy();
+					 break;
+				 case "FK_CLIENT_ID":
+					 value = instrument.getClientId().toString();
+					 break;
+				 case "LAST_UPDATE":
+					 value = instrument.getSourceLastUpdate();
+					 break;
+				 case "LEGAL_NAME":
+					 value = instrument.getSourceLegalName();
+					 break;
+				 default:
+					 aux = false;
+					 break;
+			 }
+
+			 if (aux) {
+				 String undoValue = undo.getValue();
+
+				 if (value != null) {
+					 if (value.trim().equals("")) {
+						 value = null;
+					 }
+				 }
+
+				 if (undoValue != null) {
+					 if (undoValue.trim().equals("")) {
+						 undoValue = null;
+					 }
+				 }
+				 boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
+				 if (!diff) {
+					 String label = getLabel(undo.getCol(), undoValue, value);
+					 res_vec.add(label);
+				 }
+			 }
+
+		 }
 		 
 		 return res_vec;
 	 }
@@ -445,8 +443,8 @@ public class InstrumentsController {
 		 
 		 try 
 		 {
-			 Vector<Vector<String>> lists = new Vector<Vector<String>>();
-			 Vector<String> list = new Vector<String>();
+			 Vector<Vector<String>> lists = new Vector<>();
+			 Vector<String> list = new Vector<>();
 			 long timestamp = System.currentTimeMillis();
 			 String events = "http://rod.eionet.europa.eu/events/" + timestamp;
 			 
@@ -457,14 +455,14 @@ public class InstrumentsController {
 				 list.add(Attrs.SCHEMA_RDF + "InstrumentChange");
 				 lists.add(list);
 				 
-				 list = new Vector<String>();
+				 list = new Vector<>();
 				 list.add(events);
 				 String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
 				 list.add(et_schema);
 				 list.add("instrument change");
 				 lists.add(list);
 				 
-				 list = new Vector<String>();
+				 list = new Vector<>();
 				 list.add(events);
 				 list.add("http://purl.org/dc/elements/1.1/title");
 				 list.add("instrument change");
@@ -477,28 +475,28 @@ public class InstrumentsController {
 				 list.add(Attrs.SCHEMA_RDF + "NewInstrument");
 				 lists.add(list);
 				 
-				 list =  new Vector<String>();
+				 list = new Vector<>();
 				 list.add(events);
 				 String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
 				 list.add(et_schema);
 				 list.add("New instrument");
 				 lists.add(list);
 				 
-				 list = new Vector<String>();
+				 list = new Vector<>();
 				 list.add(events);
 				 list.add("http://purl.org/dc/elements/1.1/title");
 				 list.add("New instrument");
 				 lists.add(list);
 			 }
 			 
-			 list = new Vector<String>();
+			 list = new Vector<>();
 			 list.add(events);
 			 String inst_schema = fileService.getStringProperty(FileServiceIF.UNS_INSTRUMENT_PREDICATE);
 			 list.add(inst_schema);
 			 list.add(pInstrument.getSourceTitle());
 			 lists.add(list);
 			 
-			 list = new Vector<String>();
+			 list = new Vector<>();
 			 list.add(events);
 			 list.add(Attrs.SCHEMA_RDF + "actor");
 			 list.add(userName);
@@ -510,7 +508,7 @@ public class InstrumentsController {
 				 for (Enumeration<String> en = changes.elements(); en.hasMoreElements();)
 				 {
 					 String label = en.nextElement();
-					 list = new Vector<String>();
+					 list = new Vector<>();
 					 list.add(events);
 					 list.add(Attrs.SCHEMA_RDF + "change");
 					 list.add(label);
@@ -518,7 +516,7 @@ public class InstrumentsController {
 				 }
 			 }
 			 
-			 list = new Vector<String>();
+			 list = new Vector<>();
 			 list.add(events);
 			 list.add("http://purl.org/dc/elements/1.1/identifier");
 			 String url = "http://rod.eionet.europa.eu/instruments/" + pInstrumentID;
