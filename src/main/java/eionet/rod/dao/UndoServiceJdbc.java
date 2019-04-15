@@ -73,9 +73,9 @@ public class UndoServiceJdbc implements UndoService {
 	}*/
 
 	@Override
-	public void insertIntoUndo(Integer id, String state, String table, String id_field, long ts, String extraSQL, String show) {
+	public void insertIntoUndo(Integer id, String state, String table, String idField, long ts, String extraSQL, String show) {
 
-		String sql_stmt = null;
+		String sqlStmt = null;
 		String value = null;
 		String quotes = null;
 		String isPrimary = null;
@@ -93,17 +93,17 @@ public class UndoServiceJdbc implements UndoService {
 
 		//List<String> columns = jdbcTemplate.queryForList(queryColumns, String.class, table);
 
-		if (table.equals("T_SOURCE")) {
-			sql_stmt = "SELECT T_SOURCE.PK_SOURCE_ID AS sourceId,"
+		if ("T_SOURCE".equals(table)) {
+			sqlStmt = "SELECT T_SOURCE.PK_SOURCE_ID AS sourceId,"
 	                + "TITLE AS sourceTitle, URL AS sourceUrl,"
 	                + "ALIAS AS sourceAlias, CELEX_REF AS sourceCelexRef, SOURCE_CODE AS sourceCode,"
 	                + "VALID_FROM AS sourceValidFrom, ABSTRACT AS sourceAbstract, COMMENT AS sourceComment, ISSUED_BY_URL AS sourceIssuedByUrl,"
 	                + "EC_ENTRY_INTO_FORCE AS sourceEcEntryIntoForce, EC_ACCESSION AS sourceEcAccession, SECRETARIAT AS sourceSecretariat,"
 	                + "SECRETARIAT_URL AS sourceSecretariatUrl, TERMINATE AS sourceTerminate, FK_TYPE_ID AS sourceFkTypeId, FK_CLIENT_ID AS clientId, "
 	                + "LEGAL_NAME AS sourceLegalName, LAST_MODIFIED AS sourceLastModified, ISSUED_BY AS sourceIssuedBy, LAST_UPDATE AS sourceLastUpdate "
-	                + "FROM " + table + " WHERE " + id_field + " = ?" + " " + extraSQL;
+	                + "FROM " + table + " WHERE " + idField + " = ?" + " " + extraSQL;
 
-			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
+			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sqlStmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
 			for (String column1 : columns) {
 				aux = true;
 
@@ -235,11 +235,11 @@ public class UndoServiceJdbc implements UndoService {
 
 			}
 
-		} else if (table.equals("T_CLIENT_SOURCE_LNK")) {
-			sql_stmt = "SELECT FK_SOURCE_ID AS sourceId, FK_CLIENT_ID AS clientId, STATUS AS clientSourceLnkStatus "
-					+ "FROM " + table + " WHERE " + id_field + " = ?";
+		} else if ("T_CLIENT_SOURCE_LNK".equals(table)) {
+			sqlStmt = "SELECT FK_SOURCE_ID AS sourceId, FK_CLIENT_ID AS clientId, STATUS AS clientSourceLnkStatus "
+					+ "FROM " + table + " WHERE " + idField + " = ?";
 
-			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
+			InstrumentFactsheetDTO instrument = jdbcTemplate.queryForObject(sqlStmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
 			for (String column : columns) {
 				aux = true;
 				switch (column) {
@@ -278,11 +278,11 @@ public class UndoServiceJdbc implements UndoService {
 					);
 				}
 			}
-		} else if (table.equals("T_SOURCE_LNK")) {
-			sql_stmt = "SELECT PK_SOURCE_LNK_ID AS sourceLnkPKSourceId, FK_SOURCE_CHILD_ID AS sourceLnkFKSourceChildId, CHILD_TYPE AS sourceChildType, "
+		} else if ("T_SOURCE_LNK".equals(table)) {
+			sqlStmt = "SELECT PK_SOURCE_LNK_ID AS sourceLnkPKSourceId, FK_SOURCE_CHILD_ID AS sourceLnkFKSourceChildId, CHILD_TYPE AS sourceChildType, "
 					+ "FK_SOURCE_PARENT_ID AS sourceLnkFKSourceParentId, PARENT_TYPE AS sourceParentType "
-					+ "FROM " + table + " WHERE " + id_field + " = ?" + " " + extraSQL;
-			List<InstrumentFactsheetDTO> instruments = jdbcTemplate.query(sql_stmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
+					+ "FROM " + table + " WHERE " + idField + " = ?" + " " + extraSQL;
+			List<InstrumentFactsheetDTO> instruments = jdbcTemplate.query(sqlStmt, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), id);
 			if (instruments != null) {
 				for (InstrumentFactsheetDTO instrument : instruments) {
 					for (String column : columns) {
@@ -336,8 +336,8 @@ public class UndoServiceJdbc implements UndoService {
 					rowCnt++;
 				}
 			}
-		} else if (table.equals("T_OBLIGATION")) {
-			sql_stmt = "SELECT OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
+		} else if ("T_OBLIGATION".equals(table)) {
+			sqlStmt = "SELECT OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 					+ "OB.EEA_PRIMARY as eeaPrimary, OB.EEA_CORE as eeaCore, OB.FLAGGED as flagged, OB.COORDINATOR as coordinator, OB.COORDINATOR_URL as coordinatorUrl, "
 					+ "OB.COORDINATOR_ROLE as coordinatorRole, OB.COORDINATOR_ROLE_SUF as coordinatorRoleSuf, OB.NATIONAL_CONTACT as nationalContact, OB.NATIONAL_CONTACT_URL as nationalContactUrl, OB.TERMINATE as terminate, "
 					+ "OB.NEXT_REPORTING as nextReporting, "
@@ -359,7 +359,7 @@ public class UndoServiceJdbc implements UndoService {
 					+ "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID "
 					+ "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID "
 					+ "WHERE PK_RA_ID = ?";
-			Obligations obligation = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<>(Obligations.class), id);
+			Obligations obligation = jdbcTemplate.queryForObject(sqlStmt, new BeanPropertyRowMapper<>(Obligations.class), id);
 
 			for (String column : columns) {
 				aux = true;
@@ -592,11 +592,11 @@ public class UndoServiceJdbc implements UndoService {
 
 			}
 
-		} else if (table.equals("T_RAISSUE_LNK")) {
-			sql_stmt = "SELECT FK_ISSUE_ID AS issueId "
+		} else if ("T_RAISSUE_LNK".equals(table)) {
+			sqlStmt = "SELECT FK_ISSUE_ID AS issueId "
 					+ "FROM T_RAISSUE_LNK "
 					+ "WHERE FK_RA_ID=?";
-			List<Obligations> obligations = jdbcTemplate.query(sql_stmt, new BeanPropertyRowMapper<>(Obligations.class), id);
+			List<Obligations> obligations = jdbcTemplate.query(sqlStmt, new BeanPropertyRowMapper<>(Obligations.class), id);
 			if (obligations != null) {
 				for (Obligations obligation : obligations) {
 					for (String column : columns) {
@@ -636,11 +636,11 @@ public class UndoServiceJdbc implements UndoService {
 					rowCnt++;
 				}
 			}
-		} else if (table.equals("T_RASPATIAL_LNK")) {
-			sql_stmt = "SELECT FK_SPATIAL_ID AS spatialId, VOLUNTARY AS voluntary "
+		} else if ("T_RASPATIAL_LNK".equals(table)) {
+			sqlStmt = "SELECT FK_SPATIAL_ID AS spatialId, VOLUNTARY AS voluntary "
 					+ "FROM T_RASPATIAL_LNK "
 					+ "WHERE FK_RA_ID=?";
-			List<Obligations> obligations = jdbcTemplate.query(sql_stmt, new BeanPropertyRowMapper<>(Obligations.class), id);
+			List<Obligations> obligations = jdbcTemplate.query(sqlStmt, new BeanPropertyRowMapper<>(Obligations.class), id);
 
 			if (obligations != null) {
 				for (Obligations obligation : obligations) {
@@ -686,11 +686,11 @@ public class UndoServiceJdbc implements UndoService {
 					rowCnt++;
 				}
 			}
-		} else if(table.equals("T_CLIENT_OBLIGATION_LNK")) {
-			sql_stmt = "SELECT FK_CLIENT_ID AS clientLnkFKClientId, STATUS AS clientLnkStatus "
+		} else if("T_CLIENT_OBLIGATION_LNK".equals(table)) {
+			sqlStmt = "SELECT FK_CLIENT_ID AS clientLnkFKClientId, STATUS AS clientLnkStatus "
 					+ "FROM T_CLIENT_OBLIGATION_LNK "
 					+ "WHERE FK_RA_ID=?";
-			List<Obligations> obligations = jdbcTemplate.query(sql_stmt, new BeanPropertyRowMapper<>(Obligations.class), id);
+			List<Obligations> obligations = jdbcTemplate.query(sqlStmt, new BeanPropertyRowMapper<>(Obligations.class), id);
 
 			if (obligations != null) {
 				for (Obligations obligation : obligations) {
@@ -736,16 +736,16 @@ public class UndoServiceJdbc implements UndoService {
 					rowCnt++;
 				}
 			}
-		} else if(table.equals("T_OBLIGATION_RELATION")) {
+		} else if("T_OBLIGATION_RELATION".equals(table)) {
 			String queryCount = "SELECT Count(*) "
 	                + "FROM T_OBLIGATION_RELATION "
 	                + "WHERE FK_RA_ID = ? ";
 			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, id);
 			if (countObligation > 0) {
-				sql_stmt = "SELECT RELATION AS oblRelationId, FK_RA_ID2 AS relObligationId "
+				sqlStmt = "SELECT RELATION AS oblRelationId, FK_RA_ID2 AS relObligationId "
 						+ "FROM T_OBLIGATION_RELATION "
 						+ "WHERE FK_RA_ID=?";
-				Obligations obligation = jdbcTemplate.queryForObject(sql_stmt, new BeanPropertyRowMapper<>(Obligations.class), id);
+				Obligations obligation = jdbcTemplate.queryForObject(sqlStmt, new BeanPropertyRowMapper<>(Obligations.class), id);
 				for (String column : columns) {
 					aux = true;
 					switch (column) {
@@ -805,10 +805,10 @@ public class UndoServiceJdbc implements UndoService {
 	}*/
 
 	@Override
-	public void insertTransactionInfo(Integer id, String state, String table, String id_field, long ts,
-			String extraSQL) {
+	public void insertTransactionInfo(Integer id, String state, String table, String idField, long ts,
+									  String extraSQL) {
 
-		String whereClause = id_field + " = " + id + " " + extraSQL;
+		String whereClause = idField + " = " + id + " " + extraSQL;
 		String insert = "INSERT INTO T_UNDO VALUES (?,?,?,?,'y','n',?,0,'n')";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -816,7 +816,7 @@ public class UndoServiceJdbc implements UndoService {
 		jdbcTemplate.update(insert,
 				ts,
 				table,
-				id_field,
+				idField,
 				state,
 				whereClause);
 
@@ -832,25 +832,25 @@ public class UndoServiceJdbc implements UndoService {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		List<Integer> keys = jdbcTemplate.queryForList(query, Integer.class, id);
-		StringBuilder obligation_ids = new StringBuilder();
+		StringBuilder obligationIds = new StringBuilder();
 
 		if (keys != null) {
 			for (int i = 0; i < keys.size(); i++) {
-				obligation_ids.append(keys.get(i));
+				obligationIds.append(keys.get(i));
 				if (i+1 < keys.size()) {
-					obligation_ids.append(",");
+					obligationIds.append(",");
 				}
 			}
 			jdbcTemplate.update(insert,
 					ts,
 					table,
-					obligation_ids.toString());
+					obligationIds.toString());
 		}
 
 	}
 
 	@Override
-	public List<UndoDTO> getPreviousActionsReportSpecific(Integer id, String tab, String id_field, String operation) {
+	public List<UndoDTO> getPreviousActionsReportSpecific(Integer id, String tab, String idField, String operation) {
 		String query = "SELECT UNDO_TIME AS undoTime FROM T_UNDO WHERE COL=? "
 				+ "AND VALUE=? AND TAB=? AND OPERATION=? "
 				+ "ORDER BY UNDO_TIME DESC";
@@ -864,10 +864,10 @@ public class UndoServiceJdbc implements UndoService {
 		String user;
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, id_field, id, tab, operation);
+		Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, idField, id, tab, operation);
 
 		if (countObligation > 0) {
-			List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), id_field, id, tab, operation);
+			List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), idField, id, tab, operation);
 			for (UndoDTO version : versions) {
 				user = jdbcTemplate.queryForObject(queryUser, String.class, version.getUndoTime(), "A_USER", tab);
 				version.setValue(user);

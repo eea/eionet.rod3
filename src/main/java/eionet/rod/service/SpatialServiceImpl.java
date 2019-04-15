@@ -28,8 +28,8 @@ public class SpatialServiceImpl implements SpatialService {
 	}
 	
 	@Override
-	public List<Spatial> findAllMember(String Member) {
-		return spatialDao.findAllMember(Member);
+	public List<Spatial> findAllMember(String member) {
+		return spatialDao.findAllMember(member);
 	}
 	
 	@Override

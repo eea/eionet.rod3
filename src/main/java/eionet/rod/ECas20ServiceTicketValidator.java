@@ -6,7 +6,7 @@ public class ECas20ServiceTicketValidator extends Cas20ServiceTicketValidator {
 
     private String urlSuffix;
 
-    public ECas20ServiceTicketValidator(final String casServerUrlPrefix) {
+    public ECas20ServiceTicketValidator(String casServerUrlPrefix) {
         super(casServerUrlPrefix);
         try {
             urlSuffix = System.getProperty("cas.url.suffix", "serviceValidate");

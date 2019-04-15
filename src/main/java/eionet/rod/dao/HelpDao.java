@@ -5,9 +5,9 @@ import eionet.rod.model.Help;
 
 public interface HelpDao {
 
-	Help findId(String id);
+	Help findId(String helpId);
 	
-	Documentation getDoc(String area_id);
+	Documentation getDoc(String areaId);
 		
 }
 

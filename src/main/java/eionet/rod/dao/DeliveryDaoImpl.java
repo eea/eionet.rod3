@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 //import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 
 import org.springframework.stereotype.Repository;
@@ -38,7 +39,7 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Transactional
 public class DeliveryDaoImpl implements DeliveryDao{
 	
-	private Log logger = LogFactory.getLog(DeliveryDaoImpl.class);
+	private static final Log logger = LogFactory.getLog(DeliveryDaoImpl.class);
 	
 	private static String obligationsPrefix = "/obligations/";
     private static String spatialsPrefix = "/spatial/";
@@ -123,7 +124,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
 
             if (deliveredCountriesByObligations != null && !deliveredCountriesByObligations.isEmpty()) {
 
-                for (Entry<String, HashSet<Integer>> entry : deliveredCountriesByObligations.entrySet()) {
+                for (Map.Entry<String, HashSet<Integer>> entry : deliveredCountriesByObligations.entrySet()) {
 
                     String obligId = entry.getKey();
                     HashSet<Integer> countryIdsSet = entry.getValue();
@@ -205,7 +206,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
                BindingSet pairs = bindings.next();
                //System.out.print(row);
                String link = pairs.getValue("link").stringValue();
-               if (link == null || link.trim().length() == 0) {
+               if (link == null || link.trim().isEmpty()) {
                    link = "No URL";
                }
                String title = (pairs.getValue("title") != null) ? pairs.getValue("title").stringValue() : "";
@@ -248,7 +249,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
                     	   jdbcTemplate.update(qSaveDeliveries,title,obligation,"","",period,1, date,link,Integer.parseInt(countryId), Integer.parseInt(obligationId),note);
                     
                     	   batchCounter++;
-                    	   
+
                            HashSet<Integer> savedCountries = savedCountriesByObligationId.get(obligationId);
                            if (savedCountries == null) {
                                savedCountries = new HashSet<>();
@@ -261,7 +262,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
            }
        } catch (Exception e) {
     	   logger.error(e.getMessage(), e);
-           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.toString());
+           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.getMessage());
        }
 
        return batchCounter;

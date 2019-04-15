@@ -1,5 +1,9 @@
 package eionet.rod.model;
 
+import eionet.rod.Constants;
+import eionet.rod.util.RODUtil;
+
+
 /**
  * This class implements one breadcrumb.
  */
@@ -30,10 +34,8 @@ public class BreadCrumb {
     public String getLinktext() {
         if (linktext == null || "".equals(linktext)) {
             return "Unknown";
-        } else if (linktext.length() >= 25) {
-            return linktext.substring(0, 24) + "..."; //"…";
         } else {
-            return linktext;
+            return RODUtil.truncateText(linktext,  Constants.BREADCRUMB_MAX_LEN);
         }
     }
 

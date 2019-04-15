@@ -356,7 +356,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "AND CHILD_TYPE='S' AND PARENT_TYPE='S')";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentDTO.class), sourceId);
-		if (instruments != null && instruments.size() > 0) {
+		if (instruments != null && !instruments.isEmpty()) {
 			instrumentDTORec = instruments.get(0);
 		}
 		//instrumentDTORec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class), sourceId);
@@ -376,7 +376,7 @@ public class SourceServiceJdbc implements SourceService {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		instruments = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentFactsheetDTO.class), sourceId);
-		if (instruments != null && instruments.size() > 0) {
+		if (instruments != null && !instruments.isEmpty()) {
 			
 			for (InstrumentFactsheetDTO instrument : instruments) {
 				query = "SELECT PK_SOURCE_ID AS sourceId, ALIAS AS sourceAlias "
@@ -455,7 +455,7 @@ public class SourceServiceJdbc implements SourceService {
             style = "topcategory";
         }
         
-        if (intrumentsListDTOs != null && intrumentsListDTOs.size() > 0) {
+        if (intrumentsListDTOs != null && !intrumentsListDTOs.isEmpty()) {
         	 ret.append("<ul class='").append(style).append("'>").append(newLine);
         	 for (InstrumentsListDTO intrumentsListDTO : intrumentsListDTOs) {
         		 ret.append("<li>").append(newLine);
@@ -465,7 +465,7 @@ public class SourceServiceJdbc implements SourceService {
         			 }
         		 }
     			 ret.append("<a href='instruments?id=").append(intrumentsListDTO.getClassId());
-    			 if (mode != null && mode.equals("X")) {
+    			 if ("X".equals(mode)) {
     				 ret.append("&amp;mode=X");
     			 }
     			 ret.append("'>").append(intrumentsListDTO.getClassName()).append("</a>").append(newLine);
@@ -486,7 +486,7 @@ public class SourceServiceJdbc implements SourceService {
 				+ "ORDER BY SC.CLASSIFICATOR";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<InstrumentsListDTO> hierarchyInstrument = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentsListDTO.class), id);
-		if (hierarchyInstrument != null && hierarchyInstrument.size() > 0) {
+		if (hierarchyInstrument != null && !hierarchyInstrument.isEmpty()) {
 			return hierarchyInstrument.get(0);
 		} else {
 			return null;
@@ -508,15 +508,15 @@ public class SourceServiceJdbc implements SourceService {
 	}
 	
 	private InstrumentFactsheetDTO validateDates(InstrumentFactsheetDTO instrumentFactsheetRec) {
-		if (instrumentFactsheetRec.getSourceValidFrom().equals("")) {
+		if ("".equals(instrumentFactsheetRec.getSourceValidFrom())) {
 			instrumentFactsheetRec.setSourceValidFrom(null);
 		} 
 		
-		if (instrumentFactsheetRec.getSourceEcEntryIntoForce().equals("")) {
+		if ("".equals(instrumentFactsheetRec.getSourceEcEntryIntoForce())) {
 			instrumentFactsheetRec.setSourceEcEntryIntoForce(null);
 		} 
 		
-		if (instrumentFactsheetRec.getSourceEcAccession().equals("")) {
+		if ("".equals(instrumentFactsheetRec.getSourceEcAccession())) {
 			instrumentFactsheetRec.setSourceEcAccession(null);
 		} 
 		return instrumentFactsheetRec;

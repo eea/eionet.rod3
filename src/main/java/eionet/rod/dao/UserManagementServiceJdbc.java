@@ -19,7 +19,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
  * Extends Spring's JDBC implementation to add a list of all users and accept users thart are not in the database.
  */
 public class UserManagementServiceJdbc extends JdbcUserDetailsManager
-        implements UserManagementService, UserDetailsManager, GroupManager {
+        implements UserManagementService {
 
     private static final String DEF_GET_ALL_USERS_SQL = "SELECT * FROM users ORDER BY username";
 

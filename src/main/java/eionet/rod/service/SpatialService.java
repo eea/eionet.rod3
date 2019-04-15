@@ -13,7 +13,7 @@ public interface SpatialService {
 
 	List<Spatial> findAll();
 
-	List<Spatial> findAllMember(String Member);
+	List<Spatial> findAllMember(String member);
 	
 	Long create(Spatial resource);
 

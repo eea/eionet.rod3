@@ -34,7 +34,7 @@ public interface ClientService {
      * Get all clients, by obligation id with status = C.
      */
     
-    List<ClientDTO> findOblClients(Integer raID, String c);
+    List<ClientDTO> findOblClients(Integer raID, String status);
     
     List<Obligations> getDirectObligations(Integer clientId);
     

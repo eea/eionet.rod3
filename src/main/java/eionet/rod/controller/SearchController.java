@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import eionet.rod.Constants;
+import eionet.rod.util.RODUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,10 +104,7 @@ public class SearchController {
             ArrayList<HashMap<String, ResultValue>> rows = result.getRows();
             for (HashMap<String, ResultValue> row : rows) {
                 String found = row.get("found").toString();
-                if (found.length() > 400) {
-                    found = found.substring(0, 400);
-                    found = found.concat("...");
-                }
+                found = RODUtil.truncateText(found, Constants.TEXT_MAX_LEN);
                 String subject;
                 if (row.get("subject") != null) {
                     subject = row.get("subject").toString();
@@ -180,7 +179,7 @@ public class SearchController {
    
     	String anmode = null;
     	String issue = "0";
-    	if (!obligation.getIssueId().equals("NI")) {
+    	if (!"NI".equals(obligation.getIssueId())) {
     		issue = obligation.getIssueId();
        	}else {
        		anmode = obligation.getIssueId();

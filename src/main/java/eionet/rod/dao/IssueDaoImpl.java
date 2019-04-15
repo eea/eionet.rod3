@@ -34,7 +34,7 @@ public class IssueDaoImpl implements IssueDao{
 	}
 	
 	@Override
-	public List<Issue> findObligationIssuesList(Integer IssueOblId){
+	public List<Issue> findObligationIssuesList(Integer issueOblId){
 		String query = "SELECT T_ISSUE.ISSUE_NAME as issueName, T_ISSUE.PK_ISSUE_ID as issueId " 
 				+ "FROM T_ISSUE, T_RAISSUE_LNK "
 				+ "WHERE T_RAISSUE_LNK.FK_ISSUE_ID=T_ISSUE.PK_ISSUE_ID AND T_RAISSUE_LNK.FK_RA_ID= ? " 
@@ -47,7 +47,7 @@ public class IssueDaoImpl implements IssueDao{
         
         try {
     		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, IssueOblId);
+			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, issueOblId);
 		
 			if (countObligation == 0) {
 
@@ -55,12 +55,12 @@ public class IssueDaoImpl implements IssueDao{
 
 			}else {
 		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), IssueOblId);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), issueOblId);
 
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The obligation you requested with id " + IssueOblId + " was not found in the database");
+			throw new ResourceNotFoundException("The obligation you requested with id " + issueOblId + " was not found in the database");
 		}
 	}
 	@Override
@@ -95,7 +95,7 @@ public class IssueDaoImpl implements IssueDao{
 	
 	
 	@Override
-	public Issue findById(Integer IssueId) {
+	public Issue findById(Integer issueId) {
 		String query = "SELECT T_ISSUE.ISSUE_NAME as issueName, T_ISSUE.PK_ISSUE_ID as issueId " 
 				+ "FROM T_ISSUE "
 				+ "Where PK_ISSUE_ID = ?";
@@ -108,18 +108,18 @@ public class IssueDaoImpl implements IssueDao{
         
         try {
     		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, IssueId);
+			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, issueId);
 		
 			if (countObligation == 0) {
-				throw new ResourceNotFoundException("The Issue with id " + IssueId +"  not found in the database");
+				throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database");
 			}else {
 		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), IssueId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), issueId);
 
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The Issue with id " + IssueId +"  not found in the database");
+			throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database");
 		}
 	}
 	

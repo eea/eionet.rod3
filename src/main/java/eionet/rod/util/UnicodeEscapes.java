@@ -294,7 +294,7 @@ public class UnicodeEscapes {
      */
     public boolean isXHTMLEntity(String s) {
 
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return false;
         if (!(s.startsWith("&") && s.endsWith(";")))
             return false;
@@ -313,7 +313,7 @@ public class UnicodeEscapes {
      */
     public boolean isNumericHTMLEscapeCode(String s) {
 
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return false;
         if (!(s.startsWith("&") && s.endsWith(";")))
             return false;

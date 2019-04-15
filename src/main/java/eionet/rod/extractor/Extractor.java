@@ -141,7 +141,7 @@ public class Extractor implements ExtractorConstants {
     }
     private String cDT() {
         Date d = new Date();
-        return "[" + d.toString() + "] ";
+        return "[" + d + "] ";
     }
 
     // Cleanup after everything is done
@@ -273,12 +273,12 @@ public class Extractor implements ExtractorConstants {
 
             } catch (Exception e) {
                 log("Operation failed while filling the database from Eionet Directory. The following error was reported:\n"
-                        + e.toString());
+                        + e.getMessage());
                 LOGGER.error(e.getMessage(), e);
                 exitApp(false); // return;
                 throw new ResourceNotFoundException(
                         "Operation failed while filling the database from Eionet Directory. The following error was reported:\n"
-                                + e.toString());
+                                + e.getMessage());
             }
         } // mode includes roles
 
@@ -337,10 +337,10 @@ public class Extractor implements ExtractorConstants {
         
         try {
             String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
-            SPARQLRepository CREndpoint = new SPARQLRepository(endpointURL);
-            CREndpoint.initialize();
+            SPARQLRepository crEndpoint = new SPARQLRepository(endpointURL);
+            crEndpoint.initialize();
 
-            conn = CREndpoint.getConnection();
+            conn = crEndpoint.getConnection();
 
             int resultsSize = 0;
             TupleQueryResult countTupleQueryResult = conn.prepareTupleQuery(QueryLanguage.SPARQL, countQuery).evaluate();
@@ -384,13 +384,13 @@ public class Extractor implements ExtractorConstants {
             log("Extracting deliveries from CR finished!");
         } catch (Exception e) {
         	deliveryService.rollBackDeliveries();
-            log("Error harvesting deliveries: " + e.toString());
+            log("Error harvesting deliveries: " + e.getMessage());
 
             log("Operation failed while filling the database from Content Registry. The following error was reported:\n"
-                    + e.toString());
+                    + e.getMessage());
             LOGGER.error(e.getMessage());
             exitApp(false); // return;
-            throw new ResourceNotFoundException("Error getting data from Content Registry " + e.toString());
+            throw new ResourceNotFoundException("Error getting data from Content Registry " + e.getMessage());
         } 
     }
 
@@ -419,7 +419,7 @@ public class Extractor implements ExtractorConstants {
      */
     public void saveRole(String roleName) {
 
-        if (roleName == null || roleName.trim().length() == 0) {
+        if (roleName == null || roleName.trim().isEmpty()) {
             return;
         }
 

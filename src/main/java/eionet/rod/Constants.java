@@ -197,4 +197,8 @@ public interface Constants {
 
     String TIMESTAMP_FILEDNAME = "LAST_UPDATE";
 
+    int BREADCRUMB_MAX_LEN = 25;
+    int TEXT_MAX_LEN =  400;
+    int TRUNCATE_DEFAULT_LEN = 80;
+
 }

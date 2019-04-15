@@ -27,7 +27,7 @@ public class UpdateHistoryController {
 		List<UndoDTO> history;
 		
 		if (object != null) {
-			if (object.equals("S")) {
+			if ("S".equals(object)) {
 				history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_SOURCE' ");
 			} else {
 				history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_OBLIGATION' ");

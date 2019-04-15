@@ -20,14 +20,15 @@ public class HelpController {
 	@Autowired
 	private HelpDao helpDao;
 	     
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Help helpLoadData(@RequestParam("helpId") String helpId) {
+	public Help helpLoadData(@RequestParam("helpId") String helpId) {
         if (helpId != null) {
-        	Help HelpData = helpDao.findId(helpId);
-        	String text = RODUtil.replaceTags(HelpData.getText());
-        	HelpData.setText(text);
+        	Help helpData = helpDao.findId(helpId);
+        	String text = RODUtil.replaceTags(helpData.getText());
+        	helpData.setText(text);
         	
-        	return HelpData;
+        	return helpData;
         }else {
         	throw new ResourceNotFoundException("No data to param helpId");
         }

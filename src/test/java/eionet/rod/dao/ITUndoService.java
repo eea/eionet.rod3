@@ -70,9 +70,9 @@ public class ITUndoService {
     	Obligations obligation = obligationsService.findOblId(1);
 
 		for (UndoDTO undoDTO : undoList) {
-			if (undoDTO.getCol().equals("TITLE")) {
+			if ("TITLE".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), obligation.getOblTitle());
-			} else if (undoDTO.getCol().equals("COMMENT")) {
+			} else if ("COMMENT".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), obligation.getComment());
 			}
 		}
@@ -114,9 +114,9 @@ public class ITUndoService {
     	List<UndoDTO> undoList = undoService.getUndoList(Long.parseLong(ts), "T_OBLIGATION", "U");
 
 		for (UndoDTO undoDTO : undoList) {
-			if (undoDTO.getCol().equals("COORDINATOR")) {
+			if ("COORDINATOR".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), "Country contacts");
-			} else if (undoDTO.getCol().equals("DATA_USED_FOR")) {
+			} else if ("DATA_USED_FOR".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), "http://www.pops.int/documents/implementation/nips/submissions/default.htm");
 			}
 		}
@@ -174,9 +174,9 @@ public class ITUndoService {
     	List<UndoDTO> undoList = undoService.getUndoInformation(Long.parseLong(ts), "U", "T_OBLIGATION");
 
 		for (UndoDTO undoDTO : undoList) {
-			if (undoDTO.getCol().equals("DATE_COMMENTS")) {
+			if ("DATE_COMMENTS".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), "For Member States that acceeded to the EU on 1 January 2007 (Bulgaria, Romania) the reporting concerning the period 2004-2006 is voluntary.");
-			} else if (undoDTO.getCol().equals("FIRST_REPORTING")) {
+			} else if ("FIRST_REPORTING".equals(undoDTO.getCol())) {
 				assertEquals(undoDTO.getValue(), "2005-10-31");
 			}
 		}

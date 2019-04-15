@@ -359,8 +359,8 @@ public class ObligationsController {
     	model.addAttribute("issues", issues);
     	
     	//Participating countries/territories
-    	List<ObligationCountry> ObligationCountries = spatialService.findObligationCountriesList(obligationId);
-    	model.addAttribute("ObligationCountries", ObligationCountries);
+    	List<ObligationCountry> obligationCountries = spatialService.findObligationCountriesList(obligationId);
+    	model.addAttribute("ObligationCountries", obligationCountries);
     	
     	model.addAttribute("activeTab", "obligations");
         
@@ -862,7 +862,7 @@ public class ObligationsController {
 	}
 	private void processEditDelete(String state, String userName, Integer obligationId, long ts) {		
 		
-		if (state != null && state.equals("U")) {
+		if ("U".equals(state)) {
 			undoService.insertIntoUndo(obligationId, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
 		}
 		
@@ -871,7 +871,7 @@ public class ObligationsController {
 		undoService.insertIntoUndo(ts, "T_OBLIGATION", "A_USER", "K", "y", "n", userName, 0, "n");
 		undoService.insertIntoUndo(ts, "T_OBLIGATION", "TYPE", "T", "y", "n", "A", 0, "n");
 		
-		if (state != null && state.equals("D")) {
+		if ("D".equals(state)) {
 			String aclPath = "/obligations/" + obligationId;
 			undoService.insertIntoUndo(ts, "T_OBLIGATION", "ACL", "ACL", "y", "n", aclPath, 0, "n");
 		}
@@ -896,7 +896,7 @@ public class ObligationsController {
 		undoService.insertIntoUndo(obligationId, op, "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "", show);
 		undoService.insertIntoUndo(obligationId, op, "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "", show);
 		
-		if (op != null && op.equals("D")) {
+		if ("D".equals(op)) {
 			//FALTAN LOS ACLS
 			undoService.insertIntoUndo(obligationId, "D", "T_OBLIGATION", "PK_RA_ID", ts, "", show);
 		}
@@ -913,7 +913,7 @@ public class ObligationsController {
 	}	
 	
 	private Vector<String> getChanges(Integer obligationID, long ts) throws ServiceException {
-		Vector<String> res_vec = new Vector<>();
+		Vector<String> resVec = new Vector<>();
 		List<UndoDTO> undoList = undoService.getUndoInformation(ts, "U", "T_OBLIGATION");
 		Obligations obligation = obligationsService.findOblId(obligationID);
 		String value = "";
@@ -1060,20 +1060,20 @@ public class ObligationsController {
                 String undoValue = undo.getValue();
 
                 if (value != null) {
-                    if (value.trim().equals("")) {
+                    if ("".equals(value.trim())) {
                         value = null;
                     }
                 }
 
                 if (undoValue != null) {
-                    if (undoValue.trim().equals("")) {
+                    if ("".equals(undoValue.trim())) {
                         undoValue = null;
                     }
                 }
-                boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
+                boolean diff = (value != null && value.equals(undoValue)) || (value == null && undoValue == null);
                 if (!diff) {
                     String label = getLabel(undo.getCol(), undoValue, value);
-                    res_vec.add(label);
+                    resVec.add(label);
                 }
             }
         }
@@ -1094,7 +1094,7 @@ public class ObligationsController {
 		
 		if (undoList != null) {
             for (UndoDTO undoDTO : undoList) {
-                if (undoDTO.getCol().equals("VOLUNTARY")) {
+                if ("VOLUNTARY".equals(undoDTO.getCol())) {
                     voluntary.add(undoDTO.getValue());
                 }
             }
@@ -1103,9 +1103,9 @@ public class ObligationsController {
 		int countVoluntary = 0;
 		if (undoList != null) {
             for (UndoDTO undoDTO : undoList) {
-                if (undoDTO.getCol().equals("FK_SPATIAL_ID")) {
+                if ("FK_SPATIAL_ID".equals(undoDTO.getCol())) {
                     country = spatialService.findOne(Integer.parseInt(undoDTO.getValue()));
-                    if (voluntary.get(countVoluntary).equals("N")) {
+                    if ("N".equals(voluntary.get(countVoluntary))) {
                         undoFormallyCountries.add(country.getName());
                     } else {
                         undoVoluntaryCountries.add(country.getName());
@@ -1128,7 +1128,7 @@ public class ObligationsController {
             }
 		}
 		
-		if (currentFormallyCountries.size() > 0) {
+		if (!currentFormallyCountries.isEmpty()) {
             for (String currentFormallyCountry : currentFormallyCountries) {
                 if (!undoFormallyCountries.contains(currentFormallyCountry)) {
                     addedFormallyCountries.append(currentFormallyCountry);
@@ -1141,7 +1141,7 @@ public class ObligationsController {
 			
 		}
 		
-		if (undoFormallyCountries.size() > 0) {
+		if (!undoFormallyCountries.isEmpty()) {
             for (String undoFormallyCountry : undoFormallyCountries) {
                 if (!currentFormallyCountries.contains(undoFormallyCountry)) {
                     removedFormallyCountries.append(undoFormallyCountry);
@@ -1154,7 +1154,7 @@ public class ObligationsController {
 			
 		}
 		
-		if (currentVoluntaryCountries.size() > 0) {
+		if (!currentVoluntaryCountries.isEmpty()) {
             for (String currentVoluntaryCountry : currentVoluntaryCountries) {
                 if (!undoVoluntaryCountries.contains(currentVoluntaryCountry)) {
                     addedVoluntaryCountries.append(currentVoluntaryCountry);
@@ -1167,7 +1167,7 @@ public class ObligationsController {
 			
 		}
 		
-		if (undoVoluntaryCountries.size() > 0) {
+		if (!undoVoluntaryCountries.isEmpty()) {
             for (String undoVoluntaryCountry : undoVoluntaryCountries) {
                 if (!currentVoluntaryCountries.contains(undoVoluntaryCountry)) {
                     removedVoluntaryCountries.append(undoVoluntaryCountry);
@@ -1181,16 +1181,16 @@ public class ObligationsController {
 		}
 		
 		if (addedFormallyCountries.length() > 0) {
-    		res_vec.add("'Countries reporting formally' added: " + addedFormallyCountries);
+    		resVec.add("'Countries reporting formally' added: " + addedFormallyCountries);
     	}
     	if (removedFormallyCountries.length() > 0)	{
-    		res_vec.add("'Countries reporting formally' removed: " + removedFormallyCountries);
+    		resVec.add("'Countries reporting formally' removed: " + removedFormallyCountries);
     	}
     	if (addedVoluntaryCountries.length() > 0) {
-    		res_vec.add("'Countries reporting voluntarily' added: " + addedVoluntaryCountries);
+    		resVec.add("'Countries reporting voluntarily' added: " + addedVoluntaryCountries);
     	}
     	if (removedVoluntaryCountries.length() > 0)	{
-    		res_vec.add("'Countries reporting voluntarily' removed: " + removedVoluntaryCountries);
+    		resVec.add("'Countries reporting voluntarily' removed: " + removedVoluntaryCountries);
     	}
     	
 		
@@ -1210,14 +1210,14 @@ public class ObligationsController {
 		
 		if (undoList != null) {
             for (UndoDTO undo : undoList) {
-                if (undo.getCol().equals("FK_ISSUE_ID")) {
+                if ("FK_ISSUE_ID".equals(undo.getCol())) {
                     issue = issueDao.findById(Integer.parseInt(undo.getValue()));
                     undoIssues.add(issue.getIssueName());
                 }
             }
 		}
 		
-		if (currentIssues.size() > 0) {
+		if (!currentIssues.isEmpty()) {
             for (String currentIssue : currentIssues) {
                 if (!undoIssues.contains(currentIssue)) {
                     addedIssues.append(currentIssue);
@@ -1230,7 +1230,7 @@ public class ObligationsController {
 			
 		}
 		
-		if (undoIssues.size() > 0) {
+		if (!undoIssues.isEmpty()) {
             for (String undoIssue : undoIssues) {
                 if (!currentIssues.contains(undoIssue)) {
                     removedIssues.append(undoIssue);
@@ -1244,10 +1244,10 @@ public class ObligationsController {
 		}
 		
 		if (addedIssues.length() > 0) {
-    		res_vec.add("'Environmental issues' added: " + addedIssues);
+    		resVec.add("'Environmental issues' added: " + addedIssues);
     	}
     	if (removedIssues.length() > 0)	{
-    		res_vec.add("'Environmental issues' removed: " + removedIssues);
+    		resVec.add("'Environmental issues' removed: " + removedIssues);
     	}
     	
     	undoList = undoService.getUndoInformation(ts, "U", "T_CLIENT_OBLIGATION_LNK");
@@ -1266,14 +1266,14 @@ public class ObligationsController {
 		
 		if (undoList != null) {
             for (UndoDTO undo : undoList) {
-                if (undo.getCol().equals("FK_CLIENT_ID")) {
+                if ("FK_CLIENT_ID".equals(undo.getCol())) {
                     client = clientService.getById(Integer.parseInt(undo.getValue()));
                     undoClients.add(client.getName());
                 }
             }
 		}
 		
-		if (currentClients.size() > 0) {
+		if (!currentClients.isEmpty()) {
             for (String currentClient : currentClients) {
                 if (!undoClients.contains(currentClient)) {
                     addedClients.append(currentClient);
@@ -1286,7 +1286,7 @@ public class ObligationsController {
 			
 		}
 		
-		if (undoClients.size() > 0) {
+		if (!undoClients.isEmpty()) {
             for (String undoClient : undoClients) {
                 if (!currentClients.contains(undoClient)) {
                     removedClients.append(undoClient);
@@ -1300,10 +1300,10 @@ public class ObligationsController {
 		}
 		
     	if (addedClients.length() > 0)	{
-    		res_vec.add("'Other clients using this reporting' added: " + addedClients);
+    		resVec.add("'Other clients using this reporting' added: " + addedClients);
     	}
     	if (removedClients.length() > 0) {
-    		res_vec.add("'Other clients using this reporting' removed: " + removedClients);
+    		resVec.add("'Other clients using this reporting' removed: " + removedClients);
     	}
     	
     	undoList = undoService.getUndoInformation(ts, "U", "T_OBLIGATION_RELATION");
@@ -1314,7 +1314,7 @@ public class ObligationsController {
     	
     	if (undoList != null) {
             for (UndoDTO undo : undoList) {
-                if (undo.getCol().equals("FK_RA_ID2")) {
+                if ("FK_RA_ID2".equals(undo.getCol())) {
                     undoRelation = obligationsService.findOblId(Integer.parseInt(undo.getValue())).getOblTitle();
                 }
             }
@@ -1331,8 +1331,8 @@ public class ObligationsController {
     		}
     	}
     	
-    	if (addedRelation.length() > 0 || removedRelation.length() > 0) {
-    		res_vec.add("'Relation with other obligations' changed from '" + removedRelation + "' to '" + addedRelation + "'");
+    	if (!addedRelation.isEmpty() || !removedRelation.isEmpty()) {
+    		resVec.add("'Relation with other obligations' changed from '" + removedRelation + "' to '" + addedRelation + "'");
     	}
     	
     	
@@ -1409,7 +1409,7 @@ public class ObligationsController {
         	}
         }*/
     			
-		return res_vec;
+		return resVec;
 	}
 	
 	private String getSuffixValue(String value)throws ServiceException
@@ -1445,10 +1445,10 @@ public class ObligationsController {
 	private String getDpsirValue(String value) throws ServiceException
 	{
 		String ret = null;
-		if(value.equalsIgnoreCase("null") || value.equalsIgnoreCase("no"))
+		if("null".equalsIgnoreCase(value) || "no".equalsIgnoreCase(value))
 		{
 			ret = "unchecked";
-		}else if (value.equalsIgnoreCase("yes"))
+		}else if ("yes".equalsIgnoreCase(value))
 		{
 			ret = "checked";
 		}
@@ -1458,156 +1458,158 @@ public class ObligationsController {
 	private String getLabel(String col, String value, String currentValue) throws ServiceException {
 		
 		String label = "";
+
+		// todo replace with case
 		
-		if (col!=null && col.equalsIgnoreCase("TITLE"))
+		if ("TITLE".equalsIgnoreCase(col))
 		{
 			label = "'Title' changed ";
-		}else if (col != null && col.equalsIgnoreCase("DESCRIPTION"))
+		}else if ("DESCRIPTION".equalsIgnoreCase(col))
 		{
 			label = "'Description' changed";
-		}else if (col != null && col.equalsIgnoreCase("COORDINATOR_ROLE"))
+		}else if ("COORDINATOR_ROLE".equalsIgnoreCase(col))
 		{
 			label = "'National reporting coordinators role' changed";
-		}else if (col != null && col.equalsIgnoreCase("COORDINATOR_ROLE_SUF"))
+		}else if ("COORDINATOR_ROLE_SUF".equalsIgnoreCase(col))
 		{
 			label = "'National reporting coordinators suffix' changed";
 			value = getSuffixValue(value);
 			currentValue = getSuffixValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("COORDINATOR"))
+		}else if ("COORDINATOR".equalsIgnoreCase(col))
 		{
 			label = "'National reporting coordinators name' changed";
-		}else if (col != null && col.equalsIgnoreCase("COORDINATOR_URL"))
+		}else if ("COORDINATOR_URL".equalsIgnoreCase(col))
 		{
 			label = "'National reporting coordinators URL' changed";
-		}else if (col != null && col.equalsIgnoreCase("RESPONSIBLE_ROLE"))
+		}else if ("RESPONSIBLE_ROLE".equalsIgnoreCase(col))
 		{
 			label = "'National reporting contacts role' changed";
-		}else if (col != null && col.equalsIgnoreCase("RESPONSIBLE_ROLE_SUF"))
+		}else if ("RESPONSIBLE_ROLE_SUF".equalsIgnoreCase(col))
 		{
 			label = "'National reporting contacts suffix' changed";
 			value = getSuffixValue(value);
 			currentValue = getSuffixValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("NATIONAL_CONTACT"))
+		}else if ("NATIONAL_CONTACT".equalsIgnoreCase(col))
 		{
 			label = "'National reporting contacts name' changed";
-		}else if (col != null && col.equalsIgnoreCase("NATIONAL_CONTACT_URL"))
+		}else if ("NATIONAL_CONTACT_URL".equalsIgnoreCase(col))
 		{
 			label = "'National reporting contacts URL' changed";
-		}else if (col != null && col.equalsIgnoreCase("REPORT_FREQ_MONTHS"))
+		}else if ("REPORT_FREQ_MONTHS".equalsIgnoreCase(col))
 		{
 			label = "'Reporting frequency in months' changed";
-		}else if (col != null && col.equalsIgnoreCase("REPORT_FREQ"))
+		}else if ("REPORT_FREQ".equalsIgnoreCase(col))
 		{
 			label = "'Reporting frequency' changed";
-		}else if (col != null && col.equalsIgnoreCase("REPORT_FREQ_DETAILS"))
+		}else if ("REPORT_FREQ_DETAILS".equalsIgnoreCase(col))
 		{
 			label = "'Reporting frequency details' changed";
-		}else if (col != null && col.equalsIgnoreCase("FIRST_REPORTING"))
+		}else if ("FIRST_REPORTING".equalsIgnoreCase(col))
 		{
 			label = "'Baseline reporting date' changed";
-		}else if (col != null && col.equalsIgnoreCase("VALID_TO"))
+		}else if ("VALID_TO".equalsIgnoreCase(col))
 		{
 			label = "'Valid to' changed";
-		}else if (col != null && col.equalsIgnoreCase("NEXT_DEADLINE"))
+		}else if ("NEXT_DEADLINE".equalsIgnoreCase(col))
 		{
 			label = "'Next due date' changed";
-		}else if (col != null && col.equalsIgnoreCase("NEXT_DEADLINE2"))
+		}else if ("NEXT_DEADLINE2".equalsIgnoreCase(col))
 		{
 			label = "'Due date after next due (calculated automatically)' changed";
-		}else if (col != null && col.equalsIgnoreCase("NEXT_REPORTING"))
+		}else if ("NEXT_REPORTING".equalsIgnoreCase(col))
 		{
 			label = "'Reporting date' changed";
-		}else if (col != null && col.equalsIgnoreCase("DATE_COMMENTS"))
+		}else if ("DATE_COMMENTS".equalsIgnoreCase(col))
 		{
 			label = "'Date comments' changed";
-		}else if (col != null && col.equalsIgnoreCase("FORMAT_NAME"))
+		}else if ("FORMAT_NAME".equalsIgnoreCase(col))
 		{
 			label = "'Name of reporting guidelines' changed";
-		}else if (col != null && col.equalsIgnoreCase("REPORT_FORMAT_URL"))
+		}else if ("REPORT_FORMAT_URL".equalsIgnoreCase(col))
 		{
 			label = "'URL to reporting guidelines' changed";
-		}else if (col != null && col.equalsIgnoreCase("VALID_SINCE"))
+		}else if ("VALID_SINCE".equalsIgnoreCase(col))
 		{
 			label = "'Format valid since' changed";
-		}else if (col != null && col.equalsIgnoreCase("REPORTING_FORMAT"))
+		}else if ("REPORTING_FORMAT".equalsIgnoreCase(col))
 		{
 			label = "'Reporting guidelines -Extra info' changed";
-		}else if (col != null && col.equalsIgnoreCase("LOCATION_INFO"))
+		}else if ("LOCATION_INFO".equalsIgnoreCase(col))
 		{
 			label = "'Name of repository' changed";
-		}else if (col != null && col.equalsIgnoreCase("LOCATION_PTR"))
+		}else if ("LOCATION_PTR".equalsIgnoreCase(col))
 		{
 			label = "'URL to repository' changed";
-		}else if (col != null && col.equalsIgnoreCase("DATA_USED_FOR"))
+		}else if ("DATA_USED_FOR".equalsIgnoreCase(col))
 		{
 			label = "'Data used for (URL)' changed";
-		}else if (col != null && col.equalsIgnoreCase("LEGAL_MORAL"))
+		}else if ("LEGAL_MORAL".equalsIgnoreCase(col))
 		{
 			label = "'Obligation type' changed";
-		}else if (col != null && col.equalsIgnoreCase("PARAMETERS"))
+		}else if ("PARAMETERS".equalsIgnoreCase(col))
 		{
 			label = "'Parameters' changed";
-		}else if (col != null && col.equalsIgnoreCase("EEA_PRIMARY"))
+		}else if ("EEA_PRIMARY".equalsIgnoreCase(col))
 		{
 			label = "'This obligation is an Eionet core data flow' changed";
 			value = getChkValue(value);
 			currentValue = getChkValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("EEA_CORE"))
+		}else if ("EEA_CORE".equalsIgnoreCase(col))
 		{
 			label = "'This obligation is used for EEA Core set of indicators' changed";
 			value = getChkValue(value);
 			currentValue = getChkValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("FLAGGED"))
+		}else if ("FLAGGED".equalsIgnoreCase(col))
 		{
 			label = "'This obligation is flagged' changed";
 			value = getChkValue(value);
 			currentValue = getChkValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("DPSIR_D"))
+		}else if ("DPSIR_D".equalsIgnoreCase(col))
 		{
 			label = "'DPSIR D' changed";
 			value = getDpsirValue(value);
 			currentValue = getDpsirValue(value);
-		}else if (col != null && col.equalsIgnoreCase("DPSIR_P"))
+		}else if ("DPSIR_P".equalsIgnoreCase(col))
 		{
 			label = "'DPSIR P' changed";
 			value = getDpsirValue(value);
 			currentValue = getDpsirValue(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("OVERLAP_URL"))
+		}else if ("OVERLAP_URL".equalsIgnoreCase(col))
 		{
 			label = "'URL of overlapping obligation' changed";
-		}else if (col != null && col.equalsIgnoreCase("COMMENT"))
+		}else if ("COMMENT".equalsIgnoreCase(col))
 		{
 			label = "'General comments' changed";
-		}else if (col != null && col.equalsIgnoreCase("AUTHORITY"))
+		}else if ("AUTHORITY".equalsIgnoreCase(col))
 		{
 			label = "'Authority giving rise to the obligation' changed";
-		}else if (col != null && col.equalsIgnoreCase("RM_VERIFIED"))
+		}else if ("RM_VERIFIED".equalsIgnoreCase(col))
 		{
 			label = "'Verified' changed";
-		}else if (col != null && col.equalsIgnoreCase("RM_VERIFIED_BY"))
+		}else if ("RM_VERIFIED_BY".equalsIgnoreCase(col))
 		{
 			label = "'Verified by' changed";
-		}else if (col != null && col.equalsIgnoreCase("RM_NEXT_UPDATE"))
+		}else if ("RM_NEXT_UPDATE".equalsIgnoreCase(col))
 		{
 			label = "'Next update due' changed";
-		}else if (col != null && col.equalsIgnoreCase("VALIDATED_BY"))
+		}else if ("VALIDATED_BY".equalsIgnoreCase(col))
 		{
 			label = "'Validated by' changed";
-		}else if (col != null && col.equalsIgnoreCase("FK_CLIENT_ID"))
+		}else if ("FK_CLIENT_ID".equalsIgnoreCase(col))
 		{
 			label = "'Report to' changed";
 			value = clientService.getOrganisationNameByID(value);
 			currentValue = clientService.getOrganisationNameByID(currentValue);
-		}else if (col != null && col.equalsIgnoreCase("CONTINOUS_REPORTING"))
+		}else if ("CONTINOUS_REPORTING".equalsIgnoreCase(col))
 		{
 			label = "'Continuous reporting' changed";
-		}else if (col != null && col.equalsIgnoreCase("LAST_UPDATE"))
+		}else if ("LAST_UPDATE".equalsIgnoreCase(col))
 		{
 			label = "'Last update' changed";
-		}else if (col != null && col.equalsIgnoreCase("LAST_HARVESTED"))
+		}else if ("LAST_HARVESTED".equalsIgnoreCase(col))
 		{
 			label = "'Last harvested date' changed";
-		}else if (col != null && col.equalsIgnoreCase("TERMINATE"))
+		}else if ("TERMINATE".equalsIgnoreCase(col))
 		{
 			label = "'Terminate' changed";
 		}
@@ -1618,7 +1620,7 @@ public class ObligationsController {
 				
 	}
 	
-	private void sendEvent(boolean isUpdate, Obligations pObligations, Integer obligation_id, long ts) throws ServiceException
+	private void sendEvent(boolean isUpdate, Obligations pObligations, Integer obligationId, long ts) throws ServiceException
 	{
 		String userName = getUserName();
 		FileServiceIF fileService = RODServices.getFileService();
@@ -1640,8 +1642,8 @@ public class ObligationsController {
 				
 				list = new Vector<>();
 				list.add(events);
-				String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
-				list.add(et_schema);
+				String etSchema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
+				list.add(etSchema);
 				list.add("Obligation change");
 				lists.add(list);
 				
@@ -1660,8 +1662,8 @@ public class ObligationsController {
 				
 				list = new Vector<>();
 				list.add(events);
-				String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
-				list.add(et_schema);
+				String etSchema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
+				list.add(etSchema);
 				list.add("New Obligation");
 				lists.add(list);
 				
@@ -1674,8 +1676,8 @@ public class ObligationsController {
 			
 			list = new Vector<>();
 			list.add(events);
-			String obl_schema = fileService.getStringProperty(FileServiceIF.UNS_OBLIGATION_PREDICATE);
-			list.add(obl_schema);
+			String oblSchema = fileService.getStringProperty(FileServiceIF.UNS_OBLIGATION_PREDICATE);
+			list.add(oblSchema);
 			list.add(pObligations.getOblTitle());
 			lists.add(list);
 			
@@ -1706,7 +1708,7 @@ public class ObligationsController {
 			
 			if (isUpdate) 
 			{
-				Vector<String> changes = getChanges(obligation_id, ts);
+				Vector<String> changes = getChanges(obligationId, ts);
 				for (Enumeration<String> en = changes.elements(); en.hasMoreElements();)
 				{
 					String label = en.nextElement();
@@ -1721,12 +1723,12 @@ public class ObligationsController {
 			list = new Vector<>();
 			list.add(events);
 			list.add("http://purl.org/dc/elements/1.1/identifier");
-			String url = "http://rod.eionet.europa.eu/obligations/" + obligation_id;
+			String url = "http://rod.eionet.europa.eu/obligations/" + obligationId;
 			list.add(url);
 			
 			lists.add(list);
 			
-			if (lists.size() > 0)
+			if (!lists.isEmpty())
 			{
 				UNSEventSender.makeCall(lists);
 			}

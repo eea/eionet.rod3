@@ -81,9 +81,9 @@ public class UndoInfoController {
 		
 		ArrayList<String> currentValues = new ArrayList<>();
 		
-		if (tab.equals("T_OBLIGATION")) {
+		if ("T_OBLIGATION".equals(tab)) {
 			
-			if (!op.equals("D")) {
+			if (!"D".equals(op)) {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_RA_ID", id);
 				
@@ -228,12 +228,12 @@ public class UndoInfoController {
 			HashMap<Integer, String> voluntaries = new HashMap<>();
 			StringBuilder undoCountriesString = new StringBuilder();
 			StringBuilder undoCountriesVolString = new StringBuilder();
-			if (undoCountries != null && !op.equals("D")) {
+			if (undoCountries != null && !"D".equals(op)) {
 				for (UndoDTO undoCountry : undoCountries) {
-					if (undoCountry.getCol().equals("FK_SPATIAL_ID")) {
+					if ("FK_SPATIAL_ID".equals(undoCountry.getCol())) {
 						fkSpatialIds.put(undoCountry.getSubTransNr(), undoCountry.getValue());
 					}
-					if (undoCountry.getCol().equals("VOLUNTARY")) {
+					if ("VOLUNTARY".equals(undoCountry.getCol())) {
 						voluntaries.put(undoCountry.getSubTransNr(), undoCountry.getValue());
 					}
 				}
@@ -242,7 +242,7 @@ public class UndoInfoController {
 				
 				for (int i = 0; i < fkSpatialIds.size(); i++) {
 					country = spatialService.findOne(Integer.parseInt(fkSpatialIds.get(i)));
-					if (voluntaries.get(i).equals("Y")) {					
+					if ("Y".equals(voluntaries.get(i))) {
 						undoCountriesVolString.append(country.getName()).append(", ");
 					} else {
 						undoCountriesString.append(country.getName()).append(", ");
@@ -381,9 +381,9 @@ public class UndoInfoController {
 			List<UndoDTO> undoIssues = undoService.getUndoList(ts, "T_RAISSUE_LNK", op);
 			//ArrayList<Issue> undoIssues = new ArrayList<Issue>();
 			StringBuilder undoIssuesString = new StringBuilder();
-			if (undoIssues != null && !op.equals("D")) {
+			if (undoIssues != null && !"D".equals(op)) {
 				for (UndoDTO undoIssue : undoIssues) {
-					if (undoIssue.getCol().equals("FK_ISSUE_ID")) {
+					if ("FK_ISSUE_ID".equals(undoIssue.getCol())) {
 						Issue issue = issueService.findById(Integer.parseInt(undoIssue.getValue()));
 						//undoIssues.add(issue);
 						undoIssuesString.append(issue.getIssueName());
@@ -458,9 +458,9 @@ public class UndoInfoController {
 			
 			List<UndoDTO> undoClients = undoService.getUndoList(ts, "T_CLIENT_OBLIGATION_LNK", op);
 			StringBuilder undoClientsString = new StringBuilder();
-			if (undoClients != null && !op.equals("D")) {
+			if (undoClients != null && !"D".equals(op)) {
 				for (UndoDTO undoClient : undoClients) {
-					if (undoClient.getCol().equals("FK_CLIENT_ID")) {
+					if ("FK_CLIENT_ID".equals(undoClient.getCol())) {
 						ClientDTO client = clientService.getById((Integer.parseInt(undoClient.getValue())));
 						undoClientsString.append(client.getName());
 						undoClientsString.append(", ");
@@ -537,12 +537,12 @@ public class UndoInfoController {
 			StringBuilder undoObligationsString = new StringBuilder();
 			String relation = "";
 			Obligations obligationRelation;
-			if (undoObligations != null && !op.equals("D")) {
+			if (undoObligations != null && !"D".equals(op)) {
 				for (UndoDTO undoObligation : undoObligations) {
-					if (undoObligation.getCol().equals("FK_RA_ID2")) {
+					if ("FK_RA_ID2".equals(undoObligation.getCol())) {
 						obligationRelation = obligationsService.findOblId((Integer.parseInt(undoObligation.getValue())));
 						undoObligationsString.append(obligationRelation.getOblTitle());
-					} else if (undoObligation.getCol().equals("RELATION")) {
+					} else if ("RELATION".equals(undoObligation.getCol())) {
 						relation = undoObligation.getValue();
 					}
 				}
@@ -608,7 +608,7 @@ public class UndoInfoController {
 			
 		} else {
 			
-			if (!op.equals("D")) {
+			if (!"D".equals(op)) {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_SOURCE_ID", id);
 				

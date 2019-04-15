@@ -70,10 +70,10 @@ private JdbcTemplate jdbcTemplate;
 	/* (non-Javadoc)
 	 * @see eionet.rod.services.modules.db.dao.IGenericDao#getDoc(String area_id)
 	 */
-	public Documentation getDoc(String area_id) throws ResourceNotFoundException {
+	public Documentation getDoc(String areaId) throws ResourceNotFoundException {
 	
 	    try {
-			return jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<>(Documentation.class), area_id);
+			return jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<>(Documentation.class), areaId);
 	    } catch (DataAccessException sqle) {
 	        return null;
 	    } 

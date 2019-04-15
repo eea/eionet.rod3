@@ -30,18 +30,18 @@ public class UNSEventSender {
 		try
 		{
 			FileServiceIF fileSrv = RODServices.getFileService();
-			String server_url = fileSrv.getStringProperty(FileServiceIF.UNS_XMLRPC_SERVER_URL);
-			String channel_name = fileSrv.getStringProperty(FileServiceIF.UNS_CHANNEL_NAME);
+			String serverUrl = fileSrv.getStringProperty(FileServiceIF.UNS_XMLRPC_SERVER_URL);
+			String channelName = fileSrv.getStringProperty(FileServiceIF.UNS_CHANNEL_NAME);
 			if (notifications == null) {
 				throw new Exception("Cannot send a null object via XML-RPC");
 			}
 			
-			XmlRpcClient server = new XmlRpcClient(server_url);
+			XmlRpcClient server = new XmlRpcClient(serverUrl);
 			server.setBasicAuthentication(fileSrv.getStringProperty(FileServiceIF.UNS_USERNAME), fileSrv.getStringProperty(FileServiceIF.UNS_PWD));
 			
 			Vector<Vector<String>> sanitizedNotifications = sanitizeNotifications(notifications);
 			Vector<Object> params = new Vector<>();
-			params.add(channel_name);
+			params.add(channelName);
 			params.add(sanitizedNotifications);
 			
 			String remoteMethodName = fileSrv.getStringProperty(FileServiceIF.UNS_SEND_NOTIFICATION);

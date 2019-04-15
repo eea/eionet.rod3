@@ -1,5 +1,7 @@
 package eionet.rod.util;
 
+import eionet.rod.Constants;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -126,7 +128,7 @@ public class RODUtil {
                 }
 
                 _buf.append("</a>");
-                buf.append(_buf.toString());
+                buf.append(_buf);
             }
         }
 
@@ -168,7 +170,7 @@ public class RODUtil {
     public static boolean isURL(String s) {
         try {
             URL url = new URL(s);
-            return !RODUtil.isNullOrEmpty(url.toString());
+            return !isNullOrEmpty(url.toString());
         } catch (MalformedURLException e) {
             return false;
         }
@@ -184,7 +186,7 @@ public class RODUtil {
      * @return The result.
      */
     public static String str2Date(String date) {
-        if (RODUtil.isNullOrEmpty(date)) {
+        if (isNullOrEmpty(date)) {
             return "NULL";
         }
 
@@ -230,7 +232,7 @@ public class RODUtil {
      * @return boolean Is or not.
      */
     public static boolean isNullOrEmpty(String s) {
-        return s == null || s.length() == 0;
+        return s == null || s.isEmpty();
     }
     
 //    /**
@@ -264,7 +266,7 @@ public class RODUtil {
      * @return The result.
      */
     public static String strDate(String date) {
-        if (RODUtil.isNullOrEmpty(date)) {
+        if (isNullOrEmpty(date)) {
             return "NULL";
         }
 
@@ -303,38 +305,47 @@ public class RODUtil {
         return "";
     }
     /**
-     * Cut out the text into 80 characters
+     * Cut out the text into 80 characters (Constants.TRUNCATE_DEFAULT_LEN)
      * @param truncateText
      * @return
      */
     public static String truncateText(String truncateText) {
+        return truncateText(truncateText, Constants.TRUNCATE_DEFAULT_LEN);
+    }
+
+    /**
+     * Truncate text at any length
+     * @param truncateText
+     * @param length
+     * @return
+     */
+    public static String truncateText(String truncateText, int length) {
+
         if (truncateText == null || "".equals(truncateText)) {
             return "";
-        } else if (truncateText.length() >= 80) {
-            return truncateText.substring(0, 79) + "..."; //"…";
+        } else if (truncateText.length() >= length) {
+            return truncateText.substring(0, length - 1) + "...";
         } else {
             return truncateText;
         }
     }
 
-    private static SimpleDateFormat ymdhmsFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    
     public static String miliseconds2Date(long ts) {
+        SimpleDateFormat ymdhmsFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	ymdhmsFormat.setTimeZone(TimeZone.getTimeZone("Europe/Copenhagen"));
     	Date resultdate = new Date(ts);
     	return ymdhmsFormat.format(resultdate);
     }
 
-    private static SimpleDateFormat dmyDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public static boolean validateDate(String dateValid) {
         try {
+            SimpleDateFormat dmyDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			dmyDateFormat.parse(dateValid);
 		} catch (ParseException e1) {
 			return false;
 		}
        return true;
     }
-    
-       
+
 }

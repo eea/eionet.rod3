@@ -35,8 +35,9 @@ public class SpatialApiController {
 	@Autowired
 	SpatialService service;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody List<Spatial> findAll() {
+	@ResponseBody
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Spatial> findAll() {
 		return service.findAll();
 	}
 

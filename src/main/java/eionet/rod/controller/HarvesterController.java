@@ -77,7 +77,7 @@ public class HarvesterController {
             model.addAttribute("message", messageResult);
         } catch (Exception e) {
         	
-        	String messageExcep = e.toString() + " - " + Constants.SEVERITY_WARNING;
+        	String messageExcep = e.getMessage() + " - " + Constants.SEVERITY_WARNING;
             model.addAttribute("message", messageExcep);
         }
 

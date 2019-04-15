@@ -21,7 +21,7 @@ import org.springframework.web.WebApplicationInitializer;
  */
 public class WebAppInitializer implements WebApplicationInitializer {
 
-    private Log logger = LogFactory.getLog(WebAppInitializer.class);
+    private static final Log logger = LogFactory.getLog(WebAppInitializer.class);
 
     @Override
     public void onStartup(ServletContext container) {

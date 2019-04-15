@@ -59,7 +59,7 @@ public class SpatialDaoImpl implements SpatialDao {
 	}
 	
 	@Override
-	public List<Spatial> findAllMember(String Member) throws ResourceNotFoundException{
+	public List<Spatial> findAllMember(String member) throws ResourceNotFoundException{
 		String query = "SELECT PK_SPATIAL_ID AS spatialId, SPATIAL_NAME AS name "
                 + "FROM T_SPATIAL "
 				+ "WHERE CAST(SPATIAL_ISMEMBERCOUNTRY as char) = ?"
@@ -70,14 +70,14 @@ public class SpatialDaoImpl implements SpatialDao {
 				+ "WHERE CAST(SPATIAL_ISMEMBERCOUNTRY as char) = ?";
 		
 		try {
-			Integer countMember = jdbcTemplate.queryForObject(queryCount, Integer.class, Member);
+			Integer countMember = jdbcTemplate.queryForObject(queryCount, Integer.class, member);
 			
 			if (countMember == 0) {
 
 				return null;
 			}else {
 				
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), Member);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), member);
 			}
 		} catch (DataAccessException e) {
 			throw new ResourceNotFoundException("You requested was not found in the database");

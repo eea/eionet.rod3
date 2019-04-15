@@ -24,15 +24,15 @@ public interface ObligationsDao {
 	
 	Obligations findOblId(Integer obligationId) throws ApplicationContextException;
 	
-	List<SiblingObligation> findSiblingObligations(Integer obligationId);
+	List<SiblingObligation> findSiblingObligations(Integer siblingoblId);
 	
 	Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
 	
 	void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
 	
-	List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary);
+	List<Spatial> findAllCountriesByObligation(Integer obligationId, String voluntary);
 	
-	List<Issue> findAllIssuesbyObligation(Integer ObligationID);
+	List<Issue> findAllIssuesbyObligation(Integer obligationId);
 	
 	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage);
 	
@@ -42,6 +42,6 @@ public interface ObligationsDao {
 	
 	List<Roles> getRespRoles();
 
-	List<ClientDTO> findAllClientsByObligation(Integer ObligationID);
+	List<ClientDTO> findAllClientsByObligation(Integer obligationID);
 		
 }

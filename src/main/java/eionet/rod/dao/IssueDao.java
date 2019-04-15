@@ -10,10 +10,10 @@ import eionet.rod.model.Issue;
 
 public interface IssueDao {
 
-	 List<Issue> findObligationIssuesList(Integer obligationId);
+	 List<Issue> findObligationIssuesList(Integer issueOblId);
 	 
 	 List<Issue> findAllIssuesList();
 	 
-	 Issue findById(Integer IssueId);
+	 Issue findById(Integer issueId);
 	
 }

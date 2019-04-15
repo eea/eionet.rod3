@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailServiceIF {
         
         // if no mail.host specified in the properties, go no further
         String mailHost = fService.getStringProperty(fService.MAIL_HOST);
-        if (mailHost == null || mailHost.trim().length() == 0) {
+        if (mailHost == null || mailHost.trim().isEmpty()) {
             return;
         }
 
@@ -70,7 +70,7 @@ public class EmailServiceImpl implements EmailServiceIF {
             String[] sysAdmins = getSysAdmins();
             for (String sysAdmin1 : sysAdmins) {
                 String sysAdmin = sysAdmin1.trim();
-                if (sysAdmin.length() > 0) {
+                if (!sysAdmin.isEmpty()) {
                     message.addRecipient(Message.RecipientType.CC, new InternetAddress(sysAdmin));
                 }
             }
@@ -92,7 +92,7 @@ public class EmailServiceImpl implements EmailServiceIF {
         String s = fService.getStringProperty(FileServiceIF.MAIL_SYSADMINS);
         if (s != null) {
             s = s.trim();
-            if (s.length() > 0) {
+            if (!s.isEmpty()) {
                 return s.split(",");
             }
         }

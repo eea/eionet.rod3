@@ -24,7 +24,7 @@ import org.springframework.dao.DataAccessException;
 @Service
 public class ClientServiceJdbc implements ClientService {
 
-    private Log logger = LogFactory.getLog(ClientServiceJdbc.class);
+    private static final Log logger = LogFactory.getLog(ClientServiceJdbc.class);
 
     //@Autowired
     private DataSource dataSource;
@@ -145,11 +145,11 @@ public class ClientServiceJdbc implements ClientService {
     			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "
     			+ "LEFT JOIN T_CLIENT CL on CL.PK_CLIENT_ID = OBCL.FK_CLIENT_ID "  
     			+ "WHERE ";
-    			if (status != null){
-    				query = query + "STATUS='" + status + "' and ";
-    			}
-    			query = query +  "OBCL.FK_RA_ID = ? ";
-    		    query = query +  "ORDER BY CL.CLIENT_NAME";
+        if (status != null){
+            query = query + "STATUS='" + status + "' and ";
+        }
+        query += "OBCL.FK_RA_ID = ? ";
+        query += "ORDER BY CL.CLIENT_NAME";
     	
     	String queryCount = "SELECT Count(*) AS clientId "
     			+ "FROM T_CLIENT_OBLIGATION_LNK OBCL "

@@ -75,7 +75,7 @@ public class ITSpatialApiController {
                       
        // System.out.println("result by All: " + result.getResponse().getContentAsString());
 
-        assertThat(result.getResponse().getContentAsString(),result.getResponse().getContentAsString().length() != 0 );
+        assertThat(result.getResponse().getContentAsString(), !result.getResponse().getContentAsString().isEmpty());
         
         assertFalse(result.getResponse().getContentAsString().contentEquals(expected));
        

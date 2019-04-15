@@ -15,7 +15,6 @@ public class EMailAuthenticator extends javax.mail.Authenticator {
      * @param password password
      */
     public EMailAuthenticator(String username, String password) {
-        super();
         this.user = username;
         this.password = password;
     }

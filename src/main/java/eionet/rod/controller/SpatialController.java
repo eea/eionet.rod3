@@ -118,7 +118,7 @@ public class SpatialController {
         
     	String anmode = null;
     	String issue = "0";
-    	if (!obligation.getIssueId().equals("NI")) {
+    	if (!"NI".equals(obligation.getIssueId())) {
     		issue = obligation.getIssueId();
        	}else {
        		anmode = obligation.getIssueId();

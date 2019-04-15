@@ -88,7 +88,7 @@ public class InstrumentsController {
 		model.addAttribute("activeTab", "instruments");
 		model.addAttribute("title","Legal instruments");
 		
-		if (mode != null && mode.equals("X")) {
+		if ("X".equals(mode)) {
 			return "instrumentsx";
 		} else {
 			return "instruments";
@@ -226,7 +226,7 @@ public class InstrumentsController {
 	
 	 private void processEditDelete(String state, String userName, Integer sourceId, long ts) {
 
-		 if (state != null && state.equals("U")) {
+		 if ("U".equals(state)) {
 			 undoService.insertIntoUndo(sourceId, "U", "T_SOURCE", "PK_SOURCE_ID", ts, "", "y");
 			 undoService.insertIntoUndo(sourceId, "U", "T_CLIENT_SOURCE_LNK", "FK_SOURCE_ID", ts, "", "y");
 		 }
@@ -237,9 +237,9 @@ public class InstrumentsController {
 		 undoService.insertIntoUndo(ts, "T_SOURCE", "A_USER", "K", "y", "n", userName, 0, "n");
 		 undoService.insertIntoUndo(ts, "T_SOURCE", "TYPE", "T", "y", "n", "L", 0, "n");
 		 
-		 if (state != null && state.equals("D")) {
-            String acl_path = "/instruments/" + sourceId;
-            undoService.insertIntoUndo(ts, "T_SOURCE", "ACL", "ACL", "y", "n", acl_path, 0, "n");
+		 if ("D".equals(state)) {
+            String aclPath = "/instruments/" + sourceId;
+            undoService.insertIntoUndo(ts, "T_SOURCE", "ACL", "ACL", "y", "n", aclPath, 0, "n");
         }
  
 		 delActivity(state, sourceId, ts);
@@ -254,7 +254,7 @@ public class InstrumentsController {
 		 undoService.insertTransactionInfo(sourceId, "A", "T_SOURCE", "PK_SOURCE_ID", ts, "");
 		 undoService.insertIntoUndo(sourceId, op, "T_SOURCE_LNK", "FK_SOURCE_CHILD_ID", ts, "AND CHILD_TYPE='S'", "y");
 		 
-		 if (op != null && op.equals("D")) {
+		 if ("D".equals(op)) {
 			 undoService.insertIntoUndo(sourceId, op, "T_CLIENT_SOURCE_LNK", "FK_SOURCE_ID", ts, "", "y");
 			 undoService.insertIntoUndo(sourceId, op, "T_SOURCE_LNK", "FK_SOURCE_PARENT_ID", ts, "AND PARENT_TYPE='S'", "y");
 			 undoService.addObligationIdsIntoUndo(sourceId, ts, "T_SOURCE");
@@ -273,56 +273,56 @@ public class InstrumentsController {
 	 private String getLabel(String col, String value, String currentValue) throws ServiceException
 	 {
 		 String label = "";
-		 
-		 if (col != null && col.equalsIgnoreCase("TITLE")) {
+		 // todo replace with case
+		 if ("TITLE".equalsIgnoreCase(col)) {
              label = "'Title' changed ";
-         } else if (col != null && col.equalsIgnoreCase("ALIAS")) {
+         } else if ("ALIAS".equalsIgnoreCase(col)) {
              label = "'Short name' changed ";
-         } else if (col != null && col.equalsIgnoreCase("SOURCE_CODE")) {
+         } else if ("SOURCE_CODE".equalsIgnoreCase(col)) {
              label = "'Identification number' changed ";
-         } else if (col != null && col.equalsIgnoreCase("DRAFT")) {
+         } else if ("DRAFT".equalsIgnoreCase(col)) {
              label = "'Draft' changed ";
-         } else if (col != null && col.equalsIgnoreCase("URL")) {
+         } else if ("URL".equalsIgnoreCase(col)) {
              label = "'URL to official text' changed ";
-         } else if (col != null && col.equalsIgnoreCase("CELEX_REF")) {
+         } else if ("CELEX_REF".equalsIgnoreCase(col)) {
              label = "'CELEX reference' changed ";
-         } else if (col != null && col.equalsIgnoreCase("FK_CLIENT_ID")) {
+         } else if ("FK_CLIENT_ID".equalsIgnoreCase(col)) {
              label = "'Issued by' changed ";
              value = clientService.getOrganisationNameByID(value);
              currentValue = clientService.getOrganisationNameByID(currentValue);
-         } else if (col != null && col.equalsIgnoreCase("ISSUED_BY")) {
+         } else if ("ISSUED_BY".equalsIgnoreCase(col)) {
              label = "'Issuer' changed ";
-         } else if (col != null && col.equalsIgnoreCase("ISSUED_BY_URL")) {
+         } else if ("ISSUED_BY_URL".equalsIgnoreCase(col)) {
              label = "'URL to issuer' changed ";
-         } else if (col != null && col.equalsIgnoreCase("VALID_FROM")) {
+         } else if ("VALID_FROM".equalsIgnoreCase(col)) {
              label = "'Valid from' changed ";
-         } else if (col != null && col.equalsIgnoreCase("GEOGRAPHIC_SCOPE")) {
+         } else if ("GEOGRAPHIC_SCOPE".equalsIgnoreCase(col)) {
              label = "'Geographic scope' changed ";
-         } else if (col != null && col.equalsIgnoreCase("ABSTRACT")) {
+         } else if ("ABSTRACT".equalsIgnoreCase(col)) {
              label = "'Abstract' changed ";
-         } else if (col != null && col.equalsIgnoreCase("COMMENT")) {
+         } else if ("COMMENT".equalsIgnoreCase(col)) {
              label = "'Comments' changed ";
-         } else if (col != null && col.equalsIgnoreCase("EC_ENTRY_INTO_FORCE")) {
+         } else if ("EC_ENTRY_INTO_FORCE".equalsIgnoreCase(col)) {
              label = "'EC entry into force' changed ";
-         } else if (col != null && col.equalsIgnoreCase("EC_ACCESSION")) {
+         } else if ("EC_ACCESSION".equalsIgnoreCase(col)) {
              label = "'EC accession' changed ";
-         } else if (col != null && col.equalsIgnoreCase("SECRETARIAT")) {
+         } else if ("SECRETARIAT".equalsIgnoreCase(col)) {
              label = "'Secretariat' changed ";
-         } else if (col != null && col.equalsIgnoreCase("SECRETARIAT_URL")) {
+         } else if ("SECRETARIAT_URL".equalsIgnoreCase(col)) {
              label = "'URL to Secretariat homepage' changed ";
-         } else if (col != null && col.equalsIgnoreCase("RM_VERIFIED")) {
+         } else if ("RM_VERIFIED".equalsIgnoreCase(col)) {
              label = "'Verified' changed ";
-         } else if (col != null && col.equalsIgnoreCase("RM_VERIFIED_BY")) {
+         } else if ("RM_VERIFIED_BY".equalsIgnoreCase(col)) {
              label = "'Verified by' changed ";
-         } else if (col != null && col.equalsIgnoreCase("RM_NEXT_UPDATE")) {
+         } else if ("RM_NEXT_UPDATE".equalsIgnoreCase(col)) {
              label = "'Next update due' changed ";
-         } else if (col != null && col.equalsIgnoreCase("RM_VALIDATED_BY")) {
+         } else if ("RM_VALIDATED_BY".equalsIgnoreCase(col)) {
              label = "'Validated by' changed ";
-         } else if (col != null && col.equalsIgnoreCase("LAST_UPDATE")) {
+         } else if ("LAST_UPDATE".equalsIgnoreCase(col)) {
              label = "'Last update' changed ";
-         } else if (col != null && col.equalsIgnoreCase("LAST_MODIFIED")) {
+         } else if ("LAST_MODIFIED".equalsIgnoreCase(col)) {
              label = "'Last modification' changed ";
-         } else if (col != null && col.equalsIgnoreCase("LEGAL_NAME")) {
+         } else if ("LEGAL_NAME".equalsIgnoreCase(col)) {
              label = "'Legal name' changed ";
          }
 		 
@@ -333,7 +333,7 @@ public class InstrumentsController {
 	 
 	 private Vector<String> getChanges(Integer pInstrumentID, long ts) throws ServiceException
 	 {
-		 Vector<String> res_vec = new Vector<>();
+		 Vector<String> resVec = new Vector<>();
 		 List<UndoDTO> undoList = undoService.getUndoInformation(ts, "U", "T_SOURCE");
 		 InstrumentFactsheetDTO instrument = sourceService.getById(pInstrumentID);
 		 String value = "";
@@ -414,26 +414,26 @@ public class InstrumentsController {
 				 String undoValue = undo.getValue();
 
 				 if (value != null) {
-					 if (value.trim().equals("")) {
+					 if ("".equals(value.trim())) {
 						 value = null;
 					 }
 				 }
 
 				 if (undoValue != null) {
-					 if (undoValue.trim().equals("")) {
+					 if ("".equals(undoValue.trim())) {
 						 undoValue = null;
 					 }
 				 }
-				 boolean diff = (value != null && undoValue != null && value.equals(undoValue)) || (value == null && undoValue == null);
+				 boolean diff = (value != null && value.equals(undoValue)) || (value == null && undoValue == null);
 				 if (!diff) {
 					 String label = getLabel(undo.getCol(), undoValue, value);
-					 res_vec.add(label);
+					 resVec.add(label);
 				 }
 			 }
 
 		 }
 		 
-		 return res_vec;
+		 return resVec;
 	 }
 	 
 	 private void sendEvent(boolean isUpdate, InstrumentFactsheetDTO pInstrument, Integer pInstrumentID, long ts) throws ServiceException
@@ -457,8 +457,8 @@ public class InstrumentsController {
 				 
 				 list = new Vector<>();
 				 list.add(events);
-				 String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
-				 list.add(et_schema);
+				 String etSchema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
+				 list.add(etSchema);
 				 list.add("instrument change");
 				 lists.add(list);
 				 
@@ -477,8 +477,8 @@ public class InstrumentsController {
 				 
 				 list = new Vector<>();
 				 list.add(events);
-				 String et_schema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
-				 list.add(et_schema);
+				 String etSchema = fileService.getStringProperty(FileServiceIF.UNS_EVENTTYPE_PREDICATE);
+				 list.add(etSchema);
 				 list.add("New instrument");
 				 lists.add(list);
 				 
@@ -488,11 +488,11 @@ public class InstrumentsController {
 				 list.add("New instrument");
 				 lists.add(list);
 			 }
-			 
+
 			 list = new Vector<>();
 			 list.add(events);
-			 String inst_schema = fileService.getStringProperty(FileServiceIF.UNS_INSTRUMENT_PREDICATE);
-			 list.add(inst_schema);
+			 String instSchema = fileService.getStringProperty(FileServiceIF.UNS_INSTRUMENT_PREDICATE);
+			 list.add(instSchema);
 			 list.add(pInstrument.getSourceTitle());
 			 lists.add(list);
 			 
@@ -523,7 +523,7 @@ public class InstrumentsController {
 			 list.add(url);
 			 lists.add(list);
 			 
-			 if (lists.size() > 0)
+			 if (!lists.isEmpty())
 			 {
 				 UNSEventSender.makeCall(lists);
 			 }

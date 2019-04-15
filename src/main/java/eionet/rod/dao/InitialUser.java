@@ -34,18 +34,20 @@ public class InitialUser {
         this.initialPassword = initialPassword;
     }
 
-    private Log logger = LogFactory.getLog(InitialUser.class);
+    private static final Log logger = LogFactory.getLog(InitialUser.class);
 
     /**
      * Adds new user to database when bean is constructed. In the XML configuration
      * for the bean add the attribute init-method="createUser".
      */
     public void createUser() {
-        if (initialUsername == null || initialUsername.trim().equals("")) {
+        if (initialUsername == null || "".equals(initialUsername.trim())) {
             logger.info("No initial user to create");
             return;
         }
-        if (!userManagementService.userExists(initialUsername)) {
+        if (userManagementService.userExists(initialUsername)) {
+            logger.info("Initial user " + initialUsername + " exists already");
+        } else {
             ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(1);
             for (UserRole authority : UserRole.values()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority.toString()));
@@ -53,8 +55,6 @@ public class InitialUser {
             User userDetails = new User(initialUsername, initialPassword, grantedAuthorities);
             userManagementService.createUser(userDetails);
             logger.info("Initial user " + initialUsername + " created");
-        } else {
-            logger.info("Initial user " + initialUsername + " exists already");
         }
     }
 

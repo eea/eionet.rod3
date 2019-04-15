@@ -19,7 +19,7 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Transactional
 public class RoleDaoImpl implements RoleDao {
 	
-	private Log logger = LogFactory.getLog(RoleDaoImpl.class);
+	private static final Log logger = LogFactory.getLog(RoleDaoImpl.class);
 	
 	public RoleDaoImpl() {
 	}

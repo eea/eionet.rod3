@@ -47,7 +47,7 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Transactional
 public class ObligationsDaoImpl implements ObligationsDao {
 	
-    private Log logger = LogFactory.getLog(ObligationsDaoImpl.class);
+    private static final Log logger = LogFactory.getLog(ObligationsDaoImpl.class);
 
 	public ObligationsDaoImpl() {
 	}
@@ -135,7 +135,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
         }
 
-        if (!RODUtil.isNullOrEmpty(deadlineCase) || !deadlineCase.equals("0")) {
+        if (!RODUtil.isNullOrEmpty(deadlineCase) || !"0".equals(deadlineCase)) {
            
         	if (!RODUtil.isNullOrEmpty(date1))
         			date1=cnvDate(date1);
@@ -243,7 +243,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 //		
 //		        query += q_obligations_list.toString();
 		
-				if (!RODUtil.isNullOrEmpty(clientId) && !clientId.equals("0")) {
+				if (!RODUtil.isNullOrEmpty(clientId) && !"0".equals(clientId)) {
 					
 					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
 					includeWhere = false;
@@ -252,7 +252,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					parms.addValue("CLK.FK_CLIENT_ID", clientId);
 
 				}
-				if (!RODUtil.isNullOrEmpty(spatialId) && !spatialId.equals("0")) {
+				if (!RODUtil.isNullOrEmpty(spatialId) && !"0".equals(spatialId)) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -268,7 +268,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				
 					query += "RAS.FK_SPATIAL_ID = " + spatialId;
 				}
-				if (!RODUtil.isNullOrEmpty(issueId) && !issueId.equals("0") && !issueId.equals("NI")) {
+				if (!RODUtil.isNullOrEmpty(issueId) && !"0".equals(issueId) && !"NI".equals(issueId)) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -281,7 +281,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					}
 
 					query += "RAI.FK_ISSUE_ID = " + issueId;
-				} else if (issueId.equals("NI")) {
+				} else if ("NI".equals(issueId)) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -293,7 +293,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					//query += "RAI.FK_ISSUE_ID = " + issueId;
 					query += " OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
 				}
-				if (!RODUtil.isNullOrEmpty(terminate) && terminate.equals("N"))  {
+				if (!RODUtil.isNullOrEmpty(terminate) && "N".equals(terminate))  {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
@@ -306,7 +306,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					}
 					query += " OB.Terminate = '" + terminate + "'";
 				}
-				if (!RODUtil.isNullOrEmpty(deadlineCase) && !deadlineCase.equals("0") || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+				if (!RODUtil.isNullOrEmpty(deadlineCase) && !"0".equals(deadlineCase) || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
 					if (!RODUtil.isNullOrEmpty(date1)) {
 						boolean datetrue = RODUtil.validateDate(date1);
 						if (!datetrue) {
@@ -333,22 +333,22 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					}
 					
 				}
-				if (!RODUtil.isNullOrEmpty(anmode) &&  !anmode.equals("NI")) {
+				if (!RODUtil.isNullOrEmpty(anmode) &&  !"NI".equals(anmode)) {
 					if (includeWhere) {
 						query += " WHERE ";
 						includeWhere = false;
 					}else if (includeAnd) {
 						query += " AND ";
 					}
-					if (anmode.equals("C"))
+					if ("C".equals(anmode))
 					{
 						query += " EEA_CORE=1 ";
 					}
-					if (anmode.equals("P"))
+					if ("P".equals(anmode))
 					{
 						query += " EEA_PRIMARY=1 ";
 					}
-					if (anmode.equals("F"))
+					if ("F".equals(anmode))
 					{
 						query += " FLAGGED=1 ";
 					}
@@ -441,7 +441,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * Find obligation by id
 	 */
 	@Override
-	public Obligations findOblId(Integer OblId) throws ApplicationContextException {
+	public Obligations findOblId(Integer oblId) throws ApplicationContextException {
 
 		String query = "SELECT OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "OB.EEA_PRIMARY as eeaPrimary, OB.EEA_CORE as eeaCore, OB.FLAGGED as flagged, OB.COORDINATOR as coordinator, OB.COORDINATOR_URL as coordinatorUrl, "
@@ -481,13 +481,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				 + "WHERE PK_RA_ID = ? ";
 		try {
 		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, OblId);
+			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, oblId);
 		
 			if (countObligation.equals(0)) {
-				throw new ResourceNotFoundException("The obligation you requested with id " + OblId + " was not found in the database");
+				throw new ResourceNotFoundException("The obligation you requested with id " + oblId + " was not found in the database");
 			}else {
 		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), OblId);
+				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), oblId);
 
 			}
 			
@@ -540,7 +540,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * Find all countries relationed with the obligation
 	 */
 	@Override
-	public List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary){
+	public List<Spatial> findAllCountriesByObligation(Integer obligationId, String voluntary){
 		String query = "SELECT OBSP.FK_SPATIAL_ID AS spatialId, SP.SPATIAL_NAME AS name "
                 + "FROM T_SPATIAL SP, T_RASPATIAL_LNK OBSP "
 				+ "WHERE SP.PK_SPATIAL_ID = OBSP.FK_SPATIAL_ID "
@@ -555,13 +555,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
 		try {
 		
-			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, voluntary, ObligationID);
+			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, voluntary, obligationId);
 		
 			if (countSpatial.equals(0)) {
 				return null;
 			}else {
 			
-				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), voluntary, ObligationID);
+				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), voluntary, obligationId);
 
 			}
 			
@@ -575,7 +575,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * Find issues relationed with the obligation
 	 */
 	@Override
-	public List<Issue> findAllIssuesbyObligation(Integer ObligationID){
+	public List<Issue> findAllIssuesbyObligation(Integer obligationId){
 		String query = "SELECT OBIS.FK_ISSUE_ID AS issueId, TIS.ISSUE_NAME AS issueName "
                 + "FROM T_ISSUE TIS, T_RAISSUE_LNK OBIS "
 				+ "WHERE TIS.PK_ISSUE_ID = OBIS.FK_ISSUE_ID "
@@ -589,13 +589,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		
         try {
     		
-			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, ObligationID);
+			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
 		
 			if (countSpatial.equals(0)) {
 				return null;
 			}else {
 			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), ObligationID);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), obligationId);
 
 			}
 			
@@ -610,7 +610,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * Relation with clients, countries, issues and Other obligations 
 	 */
 	@Override
-	public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allObligationsIssues) {
+	public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
 		try {
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -757,7 +757,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	         insertAllObligationsCountries(allObligationVoluntaryCountries, "Y", obligationID);
 	                 
 	         //Insert Issues
-	         insertAllIssues(allObligationsIssues, obligationID);
+	         insertAllIssues(allSelectedIssues, obligationID);
 	       
 	         //insert relations with other obligations
 	         insertObligationRelations(obligation.getRelObligationId(),obligation.getOblRelationId(), obligationID);
@@ -785,7 +785,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * 
 	 */
     @Override
-    public void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allObligationsIssues) {
+    public void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries,List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
     	
     	Calendar calendar = Calendar.getInstance();
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
@@ -908,7 +908,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
         insertAllObligationsCountries(allObligationVoluntaryCountries, "Y", obligations.getObligationId());
                 
         //Insert Issues
-        insertAllIssues(allObligationsIssues, obligations.getObligationId());
+        insertAllIssues(allSelectedIssues, obligations.getObligationId());
         
       	//insert relations with other obligations
         insertObligationRelations(obligations.getRelObligationId(),obligations.getOblRelationId(), obligations.getObligationId());
@@ -1139,7 +1139,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * Find all clients relationed with the obligation
 	 */
     @Override
-    public List<ClientDTO> findAllClientsByObligation(Integer obligationId) {
+    public List<ClientDTO> findAllClientsByObligation(Integer obligationID) {
     	String query = "SELECT CL.PK_CLIENT_ID AS clientId, CL.CLIENT_NAME AS name "
     			+ "FROM T_CLIENT AS CL INNER JOIN T_CLIENT_OBLIGATION_LNK AS COL "
     			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
@@ -1150,12 +1150,12 @@ public class ObligationsDaoImpl implements ObligationsDao {
     			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
     			+ "WHERE COL.FK_RA_ID=?";
     	
-    	Integer countClients = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
+    	Integer countClients = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationID);
     	
     	if (countClients == 0) {
     		return null;
     	} else {
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), obligationId);
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), obligationID);
     	}    	
     	
     }	   

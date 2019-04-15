@@ -25,9 +25,9 @@ public interface ObligationService {
 	
 	void updateObligations(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries, List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues);
 	
-	List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary);
+	List<Spatial> findAllCountriesByObligation(Integer obligationId, String voluntary);
 	
-	List<Issue> findAllIssuesbyObligation(Integer ObligationID);
+	List<Issue> findAllIssuesbyObligation(Integer obligationId);
 	
 	List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage);
 	

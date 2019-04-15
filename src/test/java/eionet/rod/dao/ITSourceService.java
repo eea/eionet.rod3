@@ -126,10 +126,10 @@ public class ITSourceService {
     @Test
     public void testgetAllClassifications() {
     
-    	List<InstrumentClassificationDTO> AllClassifications = sourceService.getAllClassifications();
-    	assertEquals(2,AllClassifications.size());
-    	assertEquals("1",AllClassifications.get(0).getClassId().toString());
-    	assertEquals("Legal Instrument", AllClassifications.get(0).getClassName());
+    	List<InstrumentClassificationDTO> allClassifications = sourceService.getAllClassifications();
+    	assertEquals(2,allClassifications.size());
+    	assertEquals("1",allClassifications.get(0).getClassId().toString());
+    	assertEquals("Legal Instrument", allClassifications.get(0).getClassName());
     
     }
     

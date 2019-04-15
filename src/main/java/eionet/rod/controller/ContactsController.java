@@ -47,7 +47,7 @@ public class ContactsController {
 		 
 		 if (url != null) {
 			 url = url.substring(url.lastIndexOf("/")+1);
-			 if (url.equals("deadlines")) {
+			 if ("deadlines".equals(url)) {
 				 model.addAttribute("activeTab", "spatial");
 			 } else {
 				 model.addAttribute("activeTab", "obligations");

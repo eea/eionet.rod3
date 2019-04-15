@@ -41,18 +41,18 @@ public class ObligationServiceImpl implements ObligationService {
 		return obligationsDao.insertObligation(obligation, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
 	}
 	@Override
-	public void updateObligations(Obligations obligations, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries, List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
-		obligationsDao.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
+	public void updateObligations(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries, List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
+		obligationsDao.updateObligations(obligation, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
 	}
 	
 	@Override
-	public List<Spatial> findAllCountriesByObligation(Integer ObligationID, String voluntary) {
-		return obligationsDao.findAllCountriesByObligation(ObligationID, voluntary);
+	public List<Spatial> findAllCountriesByObligation(Integer obligationId, String voluntary) {
+		return obligationsDao.findAllCountriesByObligation(obligationId, voluntary);
 	}
 
 	@Override
-	public List<Issue> findAllIssuesbyObligation(Integer ObligationID){
-		return obligationsDao.findAllIssuesbyObligation(ObligationID);
+	public List<Issue> findAllIssuesbyObligation(Integer obligationId){
+		return obligationsDao.findAllIssuesbyObligation(obligationId);
 	}
 	
 	@Override

@@ -10,7 +10,7 @@ import eionet.rod.util.exception.ServiceException;
 
 public class FileServiceImpl implements FileServiceIF  {
 	
-	private ResourceBundle props;
+	private final ResourceBundle props;
 	
 	public static final String PROP_FILE = "application";
 
@@ -84,7 +84,7 @@ public class FileServiceImpl implements FileServiceIF  {
             String[] str = null;
             String s = props.getString(propName);
 
-            if (separator == null || separator.length() == 0) {
+            if (separator == null || separator.isEmpty()) {
                 str = new String[1];
                 str[0] = s;
             } else {
@@ -94,7 +94,7 @@ public class FileServiceImpl implements FileServiceIF  {
             }
             return str;
         } catch (MissingResourceException mre) {
-            throw new ServiceException("Property value for key " + propName + " not found");
+            throw new ServiceException("Property value for key " + propName + " not found (" + mre.getMessage() + ")");
         }
     }
 

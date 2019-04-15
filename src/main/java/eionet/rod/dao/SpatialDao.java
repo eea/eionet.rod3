@@ -16,9 +16,9 @@ public interface SpatialDao {
 
 	List<Spatial> findAll();
 	
-	Spatial findId(Integer id);
+	Spatial findId(Integer spatialId);
 
-	List<Spatial> findAllMember(String Member);
+	List<Spatial> findAllMember(String member);
 	
 	List<ObligationCountry> findObligationCountriesList(Integer obligationId);
 	

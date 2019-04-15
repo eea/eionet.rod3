@@ -71,7 +71,7 @@ public class UserController {
     @RequestMapping("/add")
     public String addUser(Authorisation user, RedirectAttributes redirectAttributes) {
         String userName = user.getUserId();
-        if (userName.trim().equals("")) {
+        if ("".equals(userName.trim())) {
             redirectAttributes.addFlashAttribute("message", "User's username cannot be empty");
             return "redirect:view";
         }

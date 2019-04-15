@@ -72,7 +72,7 @@ public class ClientsController {
      */
     @RequestMapping(value = "/{clientId}")
     public String clientFactsheet(
-            @PathVariable("clientId") Integer clientId, final Model model) throws Exception {
+            @PathVariable("clientId") Integer clientId, Model model) throws Exception {
         model.addAttribute("clientId", clientId);
         
         ClientDTO client = clientService.getById(clientId);
@@ -109,7 +109,7 @@ public class ClientsController {
      * Provide a form for a new client.
      */
     @RequestMapping("/add")
-    public String addClientForm(final Model model) {
+    public String addClientForm(Model model) {
         BreadCrumbs.set(model, clientsCrumb, new BreadCrumb("Add client"));
         ClientDTO client = new ClientDTO();
         
@@ -129,7 +129,7 @@ public class ClientsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addClient(ClientDTO client, RedirectAttributes redirectAttributes) {
         String clientName = client.getName();
-        if (clientName.trim().equals("")) {
+        if ("".equals(clientName.trim())) {
             redirectAttributes.addFlashAttribute("message", "Client name cannot be empty");
             return "redirect:view";
         }
@@ -147,7 +147,7 @@ public class ClientsController {
      * @return view name
      */
     @RequestMapping("/{clientId}/edit")
-    public String editClientForm(@PathVariable("clientId") Integer clientId, final Model model,
+    public String editClientForm(@PathVariable("clientId") Integer clientId, Model model,
             @RequestParam(required = false) String message) {
         model.addAttribute("clientId", clientId);
         BreadCrumbs.set(model, "Modify client");
@@ -186,11 +186,11 @@ public class ClientsController {
      */
     @RequestMapping("/delete/{clientId}")
     public String deleteClient(@PathVariable("clientId") Integer clientId, Model model) {
-        if (!clientService.clientExists(clientId)){
-            model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist");
-        } else {
+        if (clientService.clientExists(clientId)) {
             clientService.deleteById(clientId);
             model.addAttribute("message", "Client " + clientId + " deleted");
+        } else {
+            model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist");
         }
         return "redirect:/clients";
     }
