@@ -34,7 +34,7 @@
         	<div class="filter">
             	<div class="row">
                 	<div class="labeldiv">
-                    	 <label for="shortName">Issue</label>
+                    	 <label for="selIssues">Issue</label>
                     </div>
 	                <div class="input">
 						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
@@ -46,7 +46,7 @@
 				</div>
 				<div class="row">
 	                <div class="labeldiv">
-	                    <label for="shortName">Deadline</label>
+	                    <label for="deadlines">Deadline</label>
 	                </div>
 	                <div class="input">
 						<select name="deadlines"  id="deadlines" class="smalltext" th:field="*{deadlineId}">
@@ -60,7 +60,7 @@
 				</div>
 				<div class="row">
                 	<div class="labeldiv">
-                    	<label for="shortName">Organisation</label>
+                    	<label for="selClients">Organisation</label>
                     </div>
 	      			<div class="input">
 						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">

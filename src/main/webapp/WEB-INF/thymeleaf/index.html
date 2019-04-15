@@ -47,7 +47,7 @@
 		    			<form th:action="@{/obligations/search}" th:object="${obligation}" method="POST" name="f">
 		    			<div class="row">
 		                    <div class="labeldiv">
-		                        <label for="shortName">Country or territory</label>
+		                        <label for="selCountries">Country or territory</label>
 		                    </div>
 			      			<div class="input">
 								<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
@@ -58,7 +58,7 @@
 						</div>
 						<div class="row">
 		                       <div class="labeldiv">
-		                           <label for="shortName">Issue</label>
+		                           <label for="selIssues">Issue</label>
 		                       </div>
 		                       <div class="input">	
 								<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
@@ -70,7 +70,7 @@
 						</div>
 						<div class="row">
 		                       <div class="labeldiv">
-		                           <label for="shortName">Organisation</label>
+		                           <label for="selClients">Organisation</label>
 		                       </div>
 		                       <div class="input">
 								<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
@@ -82,7 +82,7 @@
 						</div>
 						<div class="row">
 		                    <div class="labeldiv">
-		                        <label for="shortName"></label>
+		                        <label for="isterminated"></label>
 		                    </div>
 		                    <div class="input inputcheck">
 		                        <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
