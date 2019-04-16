@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eionet.rod.model.AnalysisDTO;
 
-@Service(value = "AnalysisService")
+@Service(value = "analysisService")
 @Transactional
 public class AnalysisServiceJdbc implements AnalysisService {
 

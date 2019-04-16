@@ -42,7 +42,7 @@
 	            <div class="even form-group">
 				  <div class="col-lg-4">Parent role</div>
 	              <div class="col-lg-8">
-	              	<a th:if="${parentRoleId != null}" th:href="@{/contacts} + '?roleId=' + ${parentRoleId}" th:text="${parentRoleId}"></a> 
+	              	<a th:if="${parentRoleId != null}" th:href="@{/contacts(roleId=${parentRoleId})}" th:text="${parentRoleId}"></a>
 	              	<span th:if="${parentRoleId == null}">N/A</span>
 	              </div>
 	            </div>
@@ -65,7 +65,7 @@
 		        </tr>
 	        </thead>
 	        <tr th:each="subrole, iterStat : ${dirRole.subroles}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td><a th:href="@{'/contacts?roleId=' + ${subrole.id}}" th:text="${subrole.id} + ' (' + ${subrole.description} + ')'"></a></td>
+	        	<td><a th:href="@{/contacts(roleId=${subrole.id})}" th:text="${subrole.id} + ' (' + ${subrole.description} + ')'"></a></td>
 	        </tr>
 	        </table>
         </div>

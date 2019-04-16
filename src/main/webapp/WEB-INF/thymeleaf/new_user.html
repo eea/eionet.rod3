@@ -17,10 +17,10 @@
     <table class="datatable">
         <tr>
             <th scope="row"><label for="userName">Username</label></th>
-            <td><input type="text" value="john" th:field="*{userId}" /></td>
+            <td><input id="userName" type="text" value="john" th:field="*{userId}" /></td>
         </tr>
         <tr>
-            <th scope="row"><label for="roles">User roles</label></th>
+            <th scope="row"><label>User roles</label></th>
             <td>
                 <div th:each="validRole : ${allRoles}">
                     <input type="checkbox" value="ADMIN" th:field="*{authorisations}" th:value="${validRole}"/>

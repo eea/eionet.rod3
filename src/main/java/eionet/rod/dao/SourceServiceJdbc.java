@@ -31,7 +31,7 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 /**
  * Service to store metadata for T_SPURCE using JDBC.
  */
-@Service(value = "SourceService")
+@Service(value = "sourceService")
 @Transactional
 public class SourceServiceJdbc implements SourceService {
 	

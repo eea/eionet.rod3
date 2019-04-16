@@ -43,7 +43,7 @@
     	<property name="dataSource" ref="dataSource"/>
     </bean>
 
-	<bean id="AnalysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
+	<bean id="analysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
     	<property name="dataSource" ref="dataSource"/>
     </bean>
        

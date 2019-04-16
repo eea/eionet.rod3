@@ -17,13 +17,13 @@
 	      		<div class="form-group odd">
 	      			<div class="col-xs-8">Number of reporting obligations used for the EEA Core set of indicators</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.eeaCore}"></span></div>
-	      			<div class="col-xs-2 text-center"><span th:if="${analysis.eeaCore > 0}"><a th:href="@{'obligations?anmode=C'}">Show list</a></span></div>
+	      			<div class="col-xs-2 text-center"><span th:if="${analysis.eeaCore > 0}"><a th:href="@{obligations(anmode='C')}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center"><a class="helpButton" onclick="helpFunction('HELP_ANALYSIS_EEACORE')" title="Help on this field"></a></div>
 	      		</div>
 	      		<div class="form-group even">
 	      			<div class="col-xs-8">Number of reporting obligations used for the Eionet core data flows</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.eeaPriority}"></span></div>
-	      			<div class="col-xs-2 text-center"><span th:if="${analysis.eeaPriority > 0}"><a th:href="@{obligations?anmode=P}">Show list</a></span></div>
+	      			<div class="col-xs-2 text-center"><span th:if="${analysis.eeaPriority > 0}"><a th:href="@{obligations(anmode='P')}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center"><a class="helpButton" onclick="helpFunction('HELP_ANALYSIS_EIONETPRIORITY')" title="Help on this field"></a></div>
 	      		</div>
 	      		<!-- div class="form-group odd">
@@ -35,7 +35,7 @@
 	      		<div class="form-group odd">
 	      			<div class="col-xs-8">Number of reporting obligations where the delivery process is managed by EEA</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.flaggedRa}"></span></div>
-	      			<div class="col-xs-2 text-center"><span th:if="${analysis.flaggedRa > 0}"><a th:href="@{obligations?anmode=F}">Show list</a></span></div>
+	      			<div class="col-xs-2 text-center"><span th:if="${analysis.flaggedRa > 0}"><a th:href="@{obligations(anmode='F')}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center"><a class="helpButton" onclick="helpFunction('HELP_ANALYSIS_FLAGGED')" title="Help on this field"></a></div>
 	      		</div>
 	      		<div class="form-group even">
@@ -47,7 +47,7 @@
 	      		<div class="form-group odd">
 	      			<div class="col-xs-8">No issue allocated</div>
 	      			<div class="col-xs-1 text-center"><span th:text="${analysis.noIssue}"></span></div>
-	      			<div class="col-xs-2 text-center"><span th:if="${analysis.noIssue > 0}"><a th:href="@{obligations?anmode=NI}">Show list</a></span></div>
+	      			<div class="col-xs-2 text-center"><span th:if="${analysis.noIssue > 0}"><a th:href="@{obligations(anmode='NI')}">Show list</a></span></div>
 	      			<div class="col-xs-1 text-center">&nbsp;</div>
 	      		</div>
 	      	</div>
