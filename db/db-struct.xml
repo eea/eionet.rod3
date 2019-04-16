@@ -118,7 +118,7 @@
 
     <changeSet author="roug" id="rev-5">
         <createTable tableName="T_CLIENT">
-            <column name="PK_CLIENT_ID" type="INT(10)" autoIncrement="true">
+            <column name="PK_CLIENT_ID" type="INT(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="CLIENT_NAME" type="varchar(255)"/>
@@ -137,10 +137,10 @@
 
     <changeSet author="roug" id="rev-6">
         <createTable tableName="T_CLIENT_LNK">
-            <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+            <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10) unsigned">
                 <constraints nullable="false" />
             </column>
-            <column defaultValueNumeric="0" name="FK_OBJECT_ID" type="INT(10)">
+            <column defaultValueNumeric="0" name="FK_OBJECT_ID" type="INT(10) unsigned">
                 <constraints nullable="false" />
             </column>
             <column defaultValue="" name="TYPE" type="char(1)">
@@ -179,10 +179,10 @@
             <column name="FORMAT" type="VARCHAR(100)">
                 <constraints nullable="true"/>
             </column>
-            <column name="FK_RA_ID" type="INT">
+            <column name="FK_RA_ID" type="INT(10) unsigned">
                 <constraints nullable="true"/>
             </column>
-            <column name="FK_SPATIAL_ID" type="INT">
+            <column name="FK_SPATIAL_ID" type="INT(10) unsigned">
                 <constraints nullable="true"/>
             </column>
             <column name="COVERAGE" type="VARCHAR(255)">
@@ -217,7 +217,7 @@
 
     <changeSet author="roug" id="rev-10">
         <createTable tableName="T_HISTORIC_DEADLINES">
-            <column name="FK_RA_ID" type="INT(10)" defaultValueNumeric="0">
+            <column name="FK_RA_ID" type="INT(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
             <column name="DEADLINE" type="DATE" defaultValueDate="0000-00-00">
@@ -232,7 +232,7 @@
 
     <changeSet author="roug" id="rev-11">
         <createTable tableName="T_HISTORY">
-            <column name="PK_HISTORY_ID" type="INT(10)" autoIncrement="true">
+            <column name="PK_HISTORY_ID" type="INT(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="ITEM_ID" type="INT(10)"/>
@@ -247,10 +247,10 @@
 
     <changeSet author="roug" id="rev-12">
         <createTable tableName="T_INDICATOR">
-          <column name="PK_INDICATOR_ID" type="int(10)" autoIncrement="true">
+          <column name="PK_INDICATOR_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-          <column name="FK_RA_ID" type="int(10)" defaultValueNumeric="0">
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
           <column name="NUMBER" type="varchar(100)" defaultValue="">
@@ -265,7 +265,7 @@
 
     <changeSet author="roug" id="rev-13">
         <createTable tableName="T_INFO_LNK">
-          <column name="FK_RA_ID" type="int(10)" defaultValueNumeric="0">
+          <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
           <column name="FK_INFO_ID" type="char(1)" defaultValue="">
@@ -279,13 +279,13 @@
 
     <changeSet author="roug" id="rev-14">
         <createTable tableName="T_ISSUE">
-          <column name="PK_ISSUE_ID" type="int(11) unsigned" autoIncrement="true">
+          <column name="PK_ISSUE_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
           <column name="ISSUE_NAME" type="varchar(100)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_DD_GUID" type="int(11) unsigned"/>
+          <column name="FK_DD_GUID" type="int(10) unsigned"/>
           <column name="DD_URL" type="varchar(255)"/>
         </createTable>
    </changeSet>
@@ -311,7 +311,7 @@
 
     <changeSet author="roug" id="rev-16">
         <createTable tableName="T_OBLIGATION">
-          <column name="PK_RA_ID" type="int(10)" autoIncrement="true">
+          <column name="PK_RA_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
           <column name="FK_SOURCE_ID" type="int(10) unsigned" defaultValueNumeric="0">
@@ -347,7 +347,7 @@
           <column name="LOCATION_PTR" type="varchar(255)"/>
           <column name="LOCATION_INFO" type="varchar(255)"/>
           <column name="LEGAL_MORAL" type="enum('L','M','V')" defaultValue="L"/>
-          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="FK_CLIENT_ID" type="int(10) unsigned"/>
           <column name="DESCRIPTION" type="text"/>
           <column name="RESPONSIBLE_ROLE_SUF" type="int(1)" defaultValueNumeric="1">
                 <constraints nullable="false"/>
@@ -472,7 +472,7 @@
           <column name="VALID_FROM" type="date"/>
           <column name="ALIAS" type="text"/>
           <column name="ISSUED_BY_URL" type="varchar(255)"/>
-          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="FK_CLIENT_ID" type="int(10) unsigned"/>
           <column name="LAST_UPDATE" type="timestamp">
                 <constraints nullable="false"/>
             </column>
@@ -588,7 +588,7 @@
 
     <changeSet author="roug" id="rev-25">
         <createTable tableName="T_SPATIAL" remarks="SpatialCoverage">
-          <column name="PK_SPATIAL_ID" type="int(11)" autoIncrement="true">
+          <column name="PK_SPATIAL_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
           <column name="SPATIAL_NAME" type="varchar(100)" defaultValue="">
@@ -597,7 +597,7 @@
           <column name="SPATIAL_TYPE" type="char(1)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_DD_GUID" type="int(11)"/>
+          <column name="FK_DD_GUID" type="int(10) unsigned"/>
           <column name="DD_URL" type="varchar(255)"/>
           <column name="SPATIAL_TWOLETTER" type="varchar(2)"/>
           <column name="SPATIAL_ISMEMBERCOUNTRY" type="enum('Y','N')"/>
@@ -718,8 +718,8 @@
 
     <changeSet author="roug" id="rev-29">
         <createTable tableName="X_CLIENT_LNK">
-          <column name="FK_CLIENT_ID" type="int(10)"/>
-          <column name="FK_OBJECT_ID" type="int(10)"/>
+          <column name="FK_CLIENT_ID" type="int(10) unsigned"/>
+          <column name="FK_OBJECT_ID" type="int(10) unsigned"/>
           <column name="TYPE" type="char(1)"/>
           <column name="STATUS" type="char(1)"/>
         </createTable>
@@ -734,10 +734,10 @@
           <column name="PARAMETER_NAME" type="varchar(100)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_GROUP_ID" type="int(11)" defaultValueNumeric="0">
+          <column name="FK_GROUP_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_DD_GUID" type="int(11) unsigned"/>
+          <column name="FK_DD_GUID" type="int(10) unsigned"/>
           <column name="DD_URL" type="varchar(255)"/>
           <column name="NEW" type="tinyint(3) unsigned" defaultValueNumeric="1">
                 <constraints nullable="false"/>
@@ -764,7 +764,7 @@
           <column name="FK_RA_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_UNIT_ID" type="int(11)"/>
+          <column name="FK_UNIT_ID" type="int(10) unsigned"/>
         </createTable>
         <createIndex tableName="X_PARAMETER_LNK" indexName="FK_PARAMETER_ID">
           <column name="FK_PARAMETER_ID"/>
@@ -777,13 +777,13 @@
 
     <changeSet author="roug" id="rev-32">
         <createTable tableName="X_PARAM_GROUP" remarks="GROUP">
-          <column name="PK_GROUP_ID" type="int(11)" autoIncrement="true">
+          <column name="PK_GROUP_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
           <column name="GROUP_NAME" type="varchar(100)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_DD_GUID" type="int(11)"/>
+          <column name="FK_DD_GUID" type="int(10) unsigned"/>
           <column name="DD_URL" type="varchar(255)"/>
           <column name="GROUP_TYPE" type="enum('C','S')" defaultValue="C">
                 <constraints nullable="false"/>
@@ -817,7 +817,7 @@
             </column>
           <column name="RECOGNIZED_DETAIL" type="varchar(255)"/>
           <column name="REPORT_TO_ROLE" type="varchar(255)"/>
-          <column name="FK_CLIENT_ID" type="int(10)"/>
+          <column name="FK_CLIENT_ID" type="int(10) unsigned"/>
           <column name="RM_NEXT_UPDATE" type="date"/>
           <column name="RM_VERIFIED" type="date"/>
           <column name="RM_VERIFIED_BY" type="varchar(50)"/>
@@ -842,13 +842,13 @@
     <changeSet author="roug" id="rev-34">
         <comment>Links spatial coverage and reporting obligation elements</comment>
         <createTable tableName="X_SPATIAL_LNK">
-          <column name="PK_SPATIAL_LNK_ID" type="int(11)" autoIncrement="true">
+          <column name="PK_SPATIAL_LNK_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-          <column name="FK_SPATIAL_ID" type="int(11)" defaultValueNumeric="0">
+          <column name="FK_SPATIAL_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
-          <column name="FK_RO_ID" type="int(11)" defaultValueNumeric="0">
+          <column name="FK_RO_ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
           <column name="VOLUNTARY" type="enum('Y','N')" defaultValue="N"/>
@@ -868,7 +868,7 @@
     <changeSet author="roug" id="rev-35">
         <comment>Parameter unit types</comment>
         <createTable tableName="X_UNIT">
-          <column name="PK_UNIT_ID" type="int(11) unsigned" autoIncrement="true">
+          <column name="PK_UNIT_ID" type="int(10) unsigned" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
           <column name="UNIT_NAME" type="varchar(50)" defaultValue="">
@@ -891,7 +891,7 @@
     <changeSet author="roug" id="rev-38">
         <comment>Ability to have random attributes on main objects</comment>
         <createTable tableName="T_ATTRIBUTE">
-          <column name="ID" type="int(11)" defaultValueNumeric="-1">
+          <column name="ID" type="int(10) unsigned" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
           <column name="SCOPE" type="enum('obligations','instruments','clients','spatial')" defaultValue="obligations">
@@ -1310,10 +1310,10 @@
       Refs #90026 New table for client-obligation relation
     </comment>    
     <createTable tableName="T_CLIENT_OBLIGATION_LNK">
-      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10) unsigned">
         <constraints nullable="false" />
       </column>
-      <column defaultValueNumeric="0" name="FK_RA_ID" type="INT(10)">
+      <column defaultValueNumeric="0" name="FK_RA_ID" type="INT(10) unsigned">
         <constraints nullable="false" />
       </column>
       <column defaultValue="M" name="STATUS" type="enum('M','C')">
@@ -1331,7 +1331,7 @@
       Refs #90026 New table for client-instrument relation
     </comment>      
     <createTable tableName="T_CLIENT_SOURCE_LNK">
-      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10)">
+      <column defaultValueNumeric="0" name="FK_CLIENT_ID" type="INT(10) unsigned">
         <constraints nullable="false" />
       </column>
       <column defaultValueNumeric="0" name="FK_SOURCE_ID" type="INT(10) unsigned">
@@ -1386,13 +1386,13 @@
   <changeSet author="santamik" id="rev-78">
       <comment>Refs #89743 Relations between obligations</comment>
       <createTable tableName="T_OBLIGATION_RELATION">
-          <column name="FK_RA_ID" type="INT">
+          <column name="FK_RA_ID" type="INT(10) unsigned">
               <constraints nullable="false"/>
           </column>
           <column name="RELATION" type="enum('replaces','is-replaced-by','see-also', 'same-as')">
               <constraints nullable="false"/>            
           </column>
-          <column name="FK_RA_ID2" type="INT">
+          <column name="FK_RA_ID2" type="INT(10) unsigned">
               <constraints nullable="false"/>
           </column>
       </createTable>
@@ -1450,5 +1450,48 @@
             newDataType="TEXT"
             tableName="T_UNDO"/> 
   
- </changeSet>  
+ </changeSet>
+    <changeSet id="rev-84" author="ivascu">
+        <comment>Adding foreign keys</comment>
+       <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_CLIENT_FK"
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID"/>
+       <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_CLIENT_FK"
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID"/>
+       <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+        <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_SRC_FK"
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID"/>
+        <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+        <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+        <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+        <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+        <addForeignKeyConstraint baseTableName="t_source" constraintName="T_SRC_TYPE_FK"
+           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID"/>
+
+        <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA1_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+        <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA2_FK"
+           baseColumnNames="FK_RA_ID2" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+
+        <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+        <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+
+        <addForeignKeyConstraint baseTableName="t_historic_deadlines" constraintName="T_HISTD_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+
+        <addForeignKeyConstraint baseTableName="t_obligation" constraintName="T_OB_SRC_FK"
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID"/>
+
+        <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_ISSUE_FK"
+           baseColumnNames="FK_ISSUE_ID" referencedTableName="t_issue" referencedColumnNames="PK_ISSUE_ID"/>
+        <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+
+    </changeSet>
 </databaseChangeLog>

@@ -18,6 +18,8 @@
 
     <comment>Load lookup values data</comment>
     <!-- The TSV file must have a header row with the correct column names -->
+    <loadData tableName="T_SOURCE_TYPE"   separator="\t" file="db/t_source_type.tsv"/>
+
     <loadData tableName="T_SPATIAL" separator="\t" file="db/t_spatial.tsv"/>
     <loadData tableName="HLP_SCREEN" separator="\t" file="db/hlp_screen.tsv"/>
   </changeSet>
