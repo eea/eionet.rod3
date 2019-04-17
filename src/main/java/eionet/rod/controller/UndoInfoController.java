@@ -86,7 +86,8 @@ public class UndoInfoController {
 			if (!"D".equals(op)) {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_RA_ID", id);
-				
+
+				// todo: reflection on objects instead of this
 				if (!isDelete) {
 					Obligations obligation = obligationsService.findOblId(id);					
 					
@@ -101,124 +102,40 @@ public class UndoInfoController {
 					currentValues.add(obligation.getDataUsedForUrl());
 					currentValues.add(obligation.getDateComments());
 					currentValues.add(obligation.getDescription());
-					if (obligation.getEeaCore() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getEeaCore().toString());
-					}
-					if (obligation.getEeaPrimary() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getEeaPrimary().toString());
-					}
-					if (obligation.getFirstReporting() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getFirstReporting());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getEeaCore()));
+					currentValues.add(toStringOrEmpty(obligation.getEeaPrimary()));
+					currentValues.add(toStringOrEmpty(obligation.getFirstReporting()));
 					currentValues.add(obligation.getDeliveryCountryId());
 					currentValues.add(obligation.getSourceId());
-					if (obligation.getFlagged() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getFlagged().toString());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getFlagged()));
+
 					currentValues.add(obligation.getFormatName());
-					if (obligation.getLastHarvested() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getLastHarvested());
-					}
-					if (obligation.getLastUpdate() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getLastUpdate());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getLastHarvested()));
+					currentValues.add(toStringOrEmpty(obligation.getLastUpdate()));
 					currentValues.add(obligation.getLocationInfo());
 					currentValues.add(obligation.getLocationPtr());
 					currentValues.add(obligation.getNationalContact());
 					currentValues.add(obligation.getNationalContactUrl());
-					if (obligation.getNextDeadline() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getNextDeadline());
-					}
-					if (obligation.getNextDeadline2() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getNextDeadline2());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getNextDeadline()));
+					currentValues.add(toStringOrEmpty(obligation.getNextDeadline2()));
 					currentValues.add(obligation.getNextReporting());
 					currentValues.add(obligation.getObligationId().toString());
 					currentValues.add(obligation.getReportingFormat());
 					currentValues.add(obligation.getReportFormatUrl());
 					currentValues.add(obligation.getReportFreq());
-					if (obligation.getReportFreqDetail() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getReportFreqDetail());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getReportFreqDetail()));
 					currentValues.add(obligation.getReportFreqMonths());
 					currentValues.add(obligation.getResponsibleRole());
 					currentValues.add(obligation.getResponsibleRoleSuf());
 					currentValues.add(obligation.getTerminate());
 					currentValues.add(obligation.getOblTitle());
-					if (obligation.getValidSince() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getValidSince());
-					}
-					if (obligation.getValidTo() == null) {
-						currentValues.add("");
-					} else {
-						currentValues.add(obligation.getValidTo());
-					}
+					currentValues.add(toStringOrEmpty(obligation.getValidSince()));
+					currentValues.add(toStringOrEmpty(obligation.getValidTo()));
 					
 				} else {
-					
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					
+					for(int i=0; i<39; i++) {
+						currentValues.add("");
+					}
 				}
 				
 			}						
@@ -611,7 +528,7 @@ public class UndoInfoController {
 			if (!"D".equals(op)) {
 				
 				boolean isDelete = undoService.isDelete(tab, "PK_SOURCE_ID", id);
-				
+				// todo and here too
 				if (!isDelete) {
 			
 					InstrumentFactsheetDTO instrument = sourceService.getById(id);
@@ -620,34 +537,14 @@ public class UndoInfoController {
 					currentValues.add(instrument.getSourceAlias());
 					currentValues.add(instrument.getSourceCelexRef());
 					currentValues.add(instrument.getSourceComment());
-					if (instrument.getSourceEcAccession() != null) {
-						currentValues.add(instrument.getSourceEcAccession());
-					} else {
-						currentValues.add("");
-					}
-					if (instrument.getSourceEcEntryIntoForce() != null) {
-						currentValues.add(instrument.getSourceEcEntryIntoForce());
-					} else {
-						currentValues.add("");
-					}					
+					currentValues.add(toStringOrEmpty(instrument.getSourceEcAccession()));
+					currentValues.add(toStringOrEmpty(instrument.getSourceEcEntryIntoForce()));
 					currentValues.add(instrument.getClientId().toString());
 					currentValues.add(instrument.getSourceFkTypeId().toString());
-					if (instrument.getSourceIssuedBy() != null) {
-						currentValues.add(instrument.getSourceIssuedBy());
-					} else {
-						currentValues.add("");
-					}
+					currentValues.add(toStringOrEmpty(instrument.getSourceIssuedBy()));
 					currentValues.add(instrument.getSourceIssuedByUrl());
-					if (instrument.getSourceLastModified() != null) {
-						currentValues.add(instrument.getSourceLastModified());
-					} else {
-						currentValues.add("");
-					}
-					if (instrument.getSourceLastUpdate() != null) {
-						currentValues.add(instrument.getSourceLastUpdate());
-					} else {
-						currentValues.add("");
-					}
+					currentValues.add(toStringOrEmpty(instrument.getSourceLastModified()));
+					currentValues.add(toStringOrEmpty(instrument.getSourceLastUpdate()));
 					currentValues.add(instrument.getSourceLegalName());
 					currentValues.add(instrument.getSourceId().toString());
 					currentValues.add(instrument.getSourceSecretariat());
@@ -656,34 +553,12 @@ public class UndoInfoController {
 					currentValues.add(instrument.getSourceTerminate());
 					currentValues.add(instrument.getSourceTitle());
 					currentValues.add(instrument.getSourceUrl());
-					if (instrument.getSourceValidFrom() != null) {
-						currentValues.add(instrument.getSourceValidFrom());
-					} else {
-						currentValues.add("");
-					}
+					currentValues.add(toStringOrEmpty(instrument.getSourceValidFrom()));
 					
 				} else {
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");	
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
-					currentValues.add("");
+					for(int i=0; i<21; i++){
+						currentValues.add("");
+					}
 				}
 				
 			}
@@ -697,6 +572,15 @@ public class UndoInfoController {
 		model.addAttribute("title","Previous Actions");
 		
 		return "undoinfo";
+	}
+
+	/**
+	 * Returns the toString() of the object or empty string if the object is null
+	 * @param o The object
+	 * @return toString() or ""
+	 */
+	private final String toStringOrEmpty(Object o) {
+		return null == o ? "" : o.toString();
 	}
 
 }
