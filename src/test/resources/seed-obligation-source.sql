@@ -1,4 +1,69 @@
+
+DELETE FROM T_SOURCE_LNK;
+DELETE FROM T_OBLIGATION_RELATION;
+DELETE FROM T_CLIENT_OBLIGATION_LNK;
+DELETE FROM T_RAISSUE_LNK;
+DELETE FROM T_DELIVERY;
+DELETE FROM T_RASPATIAL_LNK;
+DELETE FROM T_CLIENT_SOURCE_LNK;
+
 DELETE FROM T_OBLIGATION;
+DELETE FROM T_SOURCE;
+DELETE FROM T_ISSUE;
+DELETE FROM T_SPATIAL;
+DELETE FROM T_CLIENT;
+
+DELETE FROM T_SOURCE_TYPE;
+
+DELETE FROM T_SOURCE_CLASS;
+DELETE FROM T_UNDO;
+
+
+INSERT INTO T_SOURCE_TYPE values(15, 'Agreement', 1);
+
+INSERT INTO T_CLIENT (PK_CLIENT_ID, CLIENT_NAME, CLIENT_ACRONYM,
+    CLIENT_URL, CLIENT_ADDRESS, CLIENT_EMAIL, DESCRIPTION, POSTAL_CODE,
+    CITY, COUNTRY, CLIENT_SHORT_NAME) VALUES (
+    1,'Test client','TC', 'http://www.unep.org/ozone', 'Nowhere', 'nowhere@example.com'
+    , 'description', '0000', 'Longyearbyen', 'Norway', 'Test');
+INSERT INTO T_CLIENT (PK_CLIENT_ID, CLIENT_NAME, CLIENT_ACRONYM,
+    CLIENT_URL, CLIENT_ADDRESS, CLIENT_EMAIL, DESCRIPTION, POSTAL_CODE,
+    CITY, COUNTRY, CLIENT_SHORT_NAME) VALUES (2, 'Test client2', 'TC2',
+    'http://www.unep.org/ozone', 'Nowhere', 'nowhere@example.com',
+    'description2', '0000', 'Viena', 'Austria', 'Test2');
+
+INSERT INTO T_SPATIAL (PK_SPATIAL_ID,SPATIAL_NAME, SPATIAL_TYPE, SPATIAL_TWOLETTER, SPATIAL_ISMEMBERCOUNTRY)
+ VALUES (1, 'Austria','C','AT','Y'),
+        (2,'Albania','C','AL','N'),
+        (3,'Francia','C','FR','Y');
+
+INSERT INTO T_ISSUE SET PK_ISSUE_ID=1, ISSUE_NAME='Climate Change';
+INSERT INTO T_ISSUE SET PK_ISSUE_ID=2, ISSUE_NAME='Ozone Depletion';
+
+INSERT INTO T_SOURCE SET
+      PK_SOURCE_ID='1',
+      FK_TYPE_ID = '15' ,
+      SOURCE_CODE='22222',
+      TITLE='Basel Convention on the control of transboundary movements of hazardous wastes and their disposal',
+      LEGAL_NAME = 'Basel Convention on the control of transboundary movements of hazardous wastes and their disposal',
+      ALIAS='Basel Convention',
+      LAST_UPDATE='2017-12-21',
+      TERMINATE ='N',
+      FK_CLIENT_ID='1';
+
+INSERT INTO T_SOURCE SET
+      PK_SOURCE_ID='2',
+      FK_TYPE_ID = '15' ,
+      SOURCE_CODE='77/795/EEC',
+      TITLE='77/795/EEC: Council Decision of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community - Repealed by Directive 2000/60/EC establishing a framework for Community action in the field of water policy',
+      LEGAL_NAME = 'Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community',
+      ALIAS='Exchange of information Decision on fresh water (consolidated)',
+      LAST_UPDATE='2017-12-21',
+      TERMINATE ='N',
+      FK_CLIENT_ID='2';
+
+
+
 INSERT INTO T_OBLIGATION  SET
         PK_RA_ID =1,
         FK_SOURCE_ID=1,
@@ -81,67 +146,20 @@ INSERT INTO T_OBLIGATION  SET
     DATA_USED_FOR_URL='http://www.pops.int/documents/implementation/nips/submissions/default.htm',
     CONTINOUS_REPORTING='no';
 
-DELETE FROM T_ISSUE;
-INSERT INTO T_ISSUE SET PK_ISSUE_ID=1, ISSUE_NAME='Climate Change';
-INSERT INTO T_ISSUE SET PK_ISSUE_ID=2, ISSUE_NAME='Ozone Depletion';
 
-DELETE FROM T_RAISSUE_LNK;
+INSERT INTO T_CLIENT_SOURCE_LNK (FK_CLIENT_ID, FK_SOURCE_ID, STATUS) VALUES (1,1,'M'),(2,2,'C');
+
+
 INSERT INTO T_RAISSUE_LNK VALUES (1,1),(1,2);
 
-DELETE FROM T_SPATIAL;
-INSERT INTO T_SPATIAL (PK_SPATIAL_ID,SPATIAL_NAME, SPATIAL_TYPE, SPATIAL_TWOLETTER, SPATIAL_ISMEMBERCOUNTRY)
- VALUES (1, 'Austria','C','AT','Y'),
-        (2,'Albania','C','AL','N'),
-        (3,'Francia','C','FR','Y');
-
-DELETE FROM T_RASPATIAL_LNK;
 INSERT INTO T_RASPATIAL_LNK VALUES (1,1,'N'),(1,2,'Y');
 
 DELETE FROM T_ROLE;
 INSERT INTO T_ROLE (ROLE_NAME,ROLE_ID) VALUES ('National Focal Points','eionet-nrc-waterquality');
 
-DELETE FROM T_CLIENT;
-INSERT INTO T_CLIENT (PK_CLIENT_ID, CLIENT_NAME, CLIENT_ACRONYM,
-    CLIENT_URL, CLIENT_ADDRESS, CLIENT_EMAIL, DESCRIPTION, POSTAL_CODE,
-    CITY, COUNTRY, CLIENT_SHORT_NAME) VALUES (
-    1,'Test client','TC', 'http://www.unep.org/ozone', 'Nowhere', 'nowhere@example.com'
-    , 'description', '0000', 'Longyearbyen', 'Norway', 'Test');
-INSERT INTO T_CLIENT (PK_CLIENT_ID, CLIENT_NAME, CLIENT_ACRONYM,
-    CLIENT_URL, CLIENT_ADDRESS, CLIENT_EMAIL, DESCRIPTION, POSTAL_CODE,
-    CITY, COUNTRY, CLIENT_SHORT_NAME) VALUES (2, 'Test client2', 'TC2',
-    'http://www.unep.org/ozone', 'Nowhere', 'nowhere@example.com',
-    'description2', '0000', 'Viena', 'Austria', 'Test2');
-
 DELETE FROM T_CLIENT_OBLIGATION_LNK;
 INSERT INTO T_CLIENT_OBLIGATION_LNK VALUES (1,2,'C'),(1,1,'M'),(1,1,'C');
 
-DELETE FROM T_SOURCE;
-INSERT INTO T_SOURCE SET
-      PK_SOURCE_ID='1',
-      FK_TYPE_ID = '1' ,
-      SOURCE_CODE='22222',
-      TITLE='Basel Convention on the control of transboundary movements of hazardous wastes and their disposal',
-      LEGAL_NAME = 'Basel Convention on the control of transboundary movements of hazardous wastes and their disposal',
-      ALIAS='Basel Convention',
-      LAST_UPDATE='2017-12-21',
-      TERMINATE ='N',
-      FK_CLIENT_ID='1';
-
-INSERT INTO T_SOURCE SET
-      PK_SOURCE_ID='2',
-      FK_TYPE_ID = '1' ,
-      SOURCE_CODE='77/795/EEC',
-      TITLE='77/795/EEC: Council Decision of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community - Repealed by Directive 2000/60/EC establishing a framework for Community action in the field of water policy',
-      LEGAL_NAME = 'Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community',
-      ALIAS='Exchange of information Decision on fresh water (consolidated)',
-      LAST_UPDATE='2017-12-21',
-      TERMINATE ='N',
-      FK_CLIENT_ID='2';
-
-DELETE FROM T_CLIENT_SOURCE_LNK;
-INSERT INTO T_CLIENT_SOURCE_LNK (FK_CLIENT_ID, FK_SOURCE_ID, STATUS) VALUES (1,1,'M'),(2,2,'C');
-
-DELETE FROM T_SOURCE_LNK;
 INSERT INTO T_SOURCE_LNK SET
     PK_SOURCE_LNK_ID ='1',
     FK_SOURCE_CHILD_ID ='1',
@@ -156,8 +174,8 @@ INSERT INTO T_SOURCE_LNK SET
     FK_SOURCE_PARENT_ID ='2',
     PARENT_TYPE ='C';    
 
-    
-DELETE FROM T_SOURCE_CLASS;
+
+
 INSERT INTO T_SOURCE_CLASS SET
     PK_CLASS_ID ='1',
     CLASSIFICATOR ='15.10.10',
@@ -169,11 +187,11 @@ INSERT INTO T_SOURCE_CLASS SET
     CLASS_NAME ='Pollution and nuisances',
     NEW ='1';
     
-DELETE FROM T_OBLIGATION_RELATION;
+
 INSERT INTO T_OBLIGATION_RELATION (FK_RA_ID,RELATION,FK_RA_ID2) VALUES (1,'Replaces',2);
 
-DELETE FROM T_DELIVERY;
+
 INSERT INTO T_DELIVERY (RA_URL, TITLE, UPLOAD_DATE, DELIVERY_URL, TYPE, FORMAT, FK_RA_ID, FK_SPATIAL_ID, COVERAGE, COVERAGE_NOTE, STATUS)
    VALUES ('http://cdr.eionet.europa.eu', 'END - Austria - DF2 - 2015', '2015-11-26', 'http://cdr.eionet.europa.eu', 'P1Y', null, 1, 1, 'Austria', 'only for geometry correction', null);
    
-DELETE FROM T_UNDO;
+

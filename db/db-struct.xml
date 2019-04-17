@@ -1454,44 +1454,44 @@
     <changeSet id="rev-84" author="ivascu">
         <comment>Adding foreign keys</comment>
        <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_CLIENT_FK"
-           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID"/>
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
        <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_CLIENT_FK"
-           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID"/>
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
        <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_SRC_FK"
-           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID"/>
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_source" constraintName="T_SRC_TYPE_FK"
-           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID"/>
+           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID" onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA1_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA2_FK"
-           baseColumnNames="FK_RA_ID2" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID2" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID"/>
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseTableName="t_historic_deadlines" constraintName="T_HISTD_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseTableName="t_obligation" constraintName="T_OB_SRC_FK"
-           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID"/>
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_ISSUE_FK"
-           baseColumnNames="FK_ISSUE_ID" referencedTableName="t_issue" referencedColumnNames="PK_ISSUE_ID"/>
+           baseColumnNames="FK_ISSUE_ID" referencedTableName="t_issue" referencedColumnNames="PK_ISSUE_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID"/>
+           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
     </changeSet>
 </databaseChangeLog>

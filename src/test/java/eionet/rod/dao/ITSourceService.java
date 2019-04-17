@@ -81,7 +81,8 @@ public class ITSourceService {
     	instrumentFactsheetRec.setSourceValidFrom("");
     	instrumentFactsheetRec.setSourceEcEntryIntoForce("");
     	instrumentFactsheetRec.setSourceEcAccession("");
-    	
+    	instrumentFactsheetRec.setSourceFkTypeId(15);
+
     	List<String> selectedClassifications = new ArrayList<>();
     	
     	selectedClassifications.add("1");

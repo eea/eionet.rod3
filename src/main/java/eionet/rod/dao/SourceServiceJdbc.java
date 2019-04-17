@@ -261,7 +261,7 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("SECRETARIAT", instrumentFactsheetRec.getSourceSecretariat());
 		parameters.put("SECRETARIAT_URL", instrumentFactsheetRec.getSourceSecretariatUrl());
 		parameters.put("FK_CLIENT_ID", instrumentFactsheetRec.getClientId());
-		parameters.put("FK_TYPE_ID", 0);
+		parameters.put("FK_TYPE_ID", instrumentFactsheetRec.getSourceFkTypeId()); //todo WHY was it zero?
 		parameters.put("LEGAL_NAME", "");
 	   
 		// java.sql.Date
@@ -445,7 +445,7 @@ public class SourceServiceJdbc implements SourceService {
 		StringBuilder ret = new StringBuilder();
 		String query = "SELECT SC.PK_CLASS_ID AS classId, SC.CLASSIFICATOR AS classificator, SC.CLASS_NAME AS className, SL.FK_SOURCE_PARENT_ID AS parentId "
 				+ "FROM T_SOURCE_CLASS SC_PARENT, T_SOURCE_CLASS SC, T_SOURCE_LNK SL "
-				+ "WHERE SC_PARENT.PK_CLASS_ID=? AND SC_PARENT.PK_CLASS_ID=SL.FK_SOURCE_PARENT_ID "
+				+ "WHERE SC_PARENT.PK_CLASS_ID=? AND SC_PARENT.PK_CLASS_ID=SL.FK_SOURCE_PARENT_ID "  // todo: this looks like a bug - joining pk_class_id with fk_source_parent_id
 				+ "AND SL.FK_SOURCE_CHILD_ID=SC.PK_CLASS_ID AND SL.CHILD_TYPE='C' AND SL.PARENT_TYPE='C' "
 				+ "ORDER BY SC.CLASSIFICATOR";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

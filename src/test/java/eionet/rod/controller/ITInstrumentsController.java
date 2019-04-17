@@ -105,6 +105,7 @@ public class ITInstrumentsController {
     			.param("SourceCelexRef", "31977D0795")
     			.param("clientId", "2")
     			.param("sourceValidFrom","")
+    			.param("sourceFkTypeId","15")
     			.param("sourceEcEntryIntoForce","")
     			.param("SourceEcAccession","")
     			.param("selectedClassifications", "1")

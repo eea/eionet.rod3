@@ -1,6 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 
+   <T_SOURCE
+      PK_SOURCE_ID="1"
+      FK_TYPE_ID = "1"
+      SOURCE_CODE="22222"
+      TITLE="Basel Convention on the control of transboundary movements of hazardous wastes and their disposal"
+      LEGAL_NAME = "Basel Convention on the control of transboundary movements of hazardous wastes and their disposal"
+      ALIAS="Basel Convention"
+      LAST_UPDATE="2017-12-21"
+      TERMINATE ="N"
+    />
+
+     <T_SOURCE
+      PK_SOURCE_ID="2"
+      FK_TYPE_ID = "1"
+      SOURCE_CODE="77/795/EEC"
+      TITLE="77/795/EEC: Council Decision of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community - Repealed by Directive 2000/60/EC establishing a framework for Community action in the field of water policy"
+      LEGAL_NAME = "Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community"
+      ALIAS="Exchange of information Decision on fresh water (consolidated)"
+      LAST_UPDATE="2017-12-21"
+      TERMINATE ="N"
+    />
+
+
+
   <T_OBLIGATION   
         PK_RA_ID ="1"
 		FK_SOURCE_ID="1"
@@ -170,29 +194,7 @@
     	STATUS="C"
     /> 
     
-   
-   <T_SOURCE
-      PK_SOURCE_ID="1"
-      FK_TYPE_ID = "1" 
-      SOURCE_CODE="22222"
-      TITLE="Basel Convention on the control of transboundary movements of hazardous wastes and their disposal"
-      LEGAL_NAME = "Basel Convention on the control of transboundary movements of hazardous wastes and their disposal"
-      ALIAS="Basel Convention"
-      LAST_UPDATE="2017-12-21"
-      TERMINATE ="N"
-    />
-        
-     <T_SOURCE
-      PK_SOURCE_ID="2"
-      FK_TYPE_ID = "1" 
-      SOURCE_CODE="77/795/EEC"
-      TITLE="77/795/EEC: Council Decision of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community - Repealed by Directive 2000/60/EC establishing a framework for Community action in the field of water policy"
-      LEGAL_NAME = "Council Decision 77/795/CEE of 12 December 1977 establishing a common procedure for the exchange of information on the quality of surface fresh water in the Community"
-      ALIAS="Exchange of information Decision on fresh water (consolidated)"
-      LAST_UPDATE="2017-12-21"
-      TERMINATE ="N"
-    />
-    
+
    <T_CLIENT_SOURCE_LNK
    	FK_CLIENT_ID ="1"
    	FK_SOURCE_ID="1"
