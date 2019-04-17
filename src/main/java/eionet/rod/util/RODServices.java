@@ -17,19 +17,6 @@ public class RODServices {
     private static FileServiceIF _fSrv = null;
     private static EmailServiceIF emailService = null;
 
-
-    /**
-     * Instance of RODDaoFactory.
-     * @return RODDaoFactory
-     * @throws ServiceException 
-     */
-    /*public static RODDaoFactory getDbService() throws ServiceException {
-        if (daoFactory == null)
-            daoFactory = new MySqlDaoFactory();
-        return daoFactory; // new DbServiceImpl();
-    }*/
-    
-   
     /**
      * Instance of FileServiceIF (reads from props file).
      * @return FileServiceIF

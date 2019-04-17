@@ -31,13 +31,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
                                 + "/WEB-INF/classes/spring-mvc-config.xml "
                                 + "/WEB-INF/classes/spring-service-config.xml");
 
-        // Listeners
-        //SingleSignOutHttpSessionListener ssoListener = new SingleSignOutHttpSessionListener(appContext);
-        //container.addListener(ssoListener);
-
-        //ContextLoaderListener contextLoaderListener = new ContextLoaderListener(appContext);
-        //container.addListener(contextLoaderListener);
-
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(appContext));
 
         String location = null;

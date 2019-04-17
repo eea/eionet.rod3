@@ -53,11 +53,6 @@ public class AnalysisServiceJdbc implements AnalysisService {
 		Integer eeaPriority = number.intValue();
 		analysisDTORec.setEeaPriority(eeaPriority);
 		
-//		query = "SELECT COUNT(PK_RA_ID) AS overlapRa FROM T_OBLIGATION WHERE OVERLAP_URL IS NOT NULL AND OVERLAP_URL != ''";
-//		number = jdbcTemplate.queryForObject(query, Integer.class);
-//		Integer overlapRa = number.intValue();
-//		analysisDTORec.setOverlapRa(overlapRa);
-		
 		query = "SELECT COUNT(PK_RA_ID) AS flaggedRa FROM T_OBLIGATION WHERE FLAGGED=1";
 		number = jdbcTemplate.queryForObject(query, Integer.class);
 		Integer flaggedRa = number.intValue();

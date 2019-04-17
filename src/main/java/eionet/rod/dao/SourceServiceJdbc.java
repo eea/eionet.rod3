@@ -75,16 +75,7 @@ public class SourceServiceJdbc implements SourceService {
 			instrumentFactsheetRec.setRelatedInstruments(getRelatedInstruments(sourceId));
 			
 			instrumentFactsheetRec.setClassifications(getInstrumentClassifications(sourceId));
-					
-			/*try {
-				instrumentFactsheetRec.setSourceValidFrom(dateParser(instrumentFactsheetRec.getSourceValidFrom()));
-				instrumentFactsheetRec.setSourceEcEntryIntoForce(dateParser(instrumentFactsheetRec.getSourceEcEntryIntoForce()));
-				instrumentFactsheetRec.setSourceEcAccession(dateParser(instrumentFactsheetRec.getSourceEcAccession()));
-				System.out.println(instrumentFactsheetRec.getSourceValidFrom());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}*/
-		
+
 		} catch (DataAccessException e) {
 			throw new ResourceNotFoundException("DataAccessException error: " + e);
 		}
@@ -273,31 +264,7 @@ public class SourceServiceJdbc implements SourceService {
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
                 parameters));
 		Integer sourceId = key.intValue();
-		//System.out.println(sourceId);
-		/*String query = "INSERT INTO T_SOURCE (TITLE, ALIAS, SOURCE_CODE, TERMINATE, URL, "
-				+ "CELEX_REF, ISSUED_BY_URL, VALID_FROM, ABSTRACT, COMMENT, "
-				+ "EC_ENTRY_INTO_FORCE, EC_ACCESSION, SECRETARIAT, SECRETARIAT_URL, "
-				+ "FK_CLIENT_ID) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";		
-		
-		jdbcTemplate.update(query,
-				instrumentFactsheetRec.getSourceTitle(),
-				instrumentFactsheetRec.getSourceAlias(),
-				instrumentFactsheetRec.getSourceCode(),
-				instrumentFactsheetRec.getSourceTerminate(),
-				instrumentFactsheetRec.getSourceUrl(),
-				instrumentFactsheetRec.getSourceCelexRef(),
-				instrumentFactsheetRec.getSourceIssuedByUrl(),
-				instrumentFactsheetRec.getSourceValidFrom(),
-				instrumentFactsheetRec.getSourceAbstract(),
-				instrumentFactsheetRec.getSourceComment(),
-				instrumentFactsheetRec.getSourceEcEntryIntoForce(),
-				instrumentFactsheetRec.getSourceEcAccession(),
-				instrumentFactsheetRec.getSourceSecretariat(),
-				instrumentFactsheetRec.getSourceSecretariatUrl(),
-				instrumentFactsheetRec.getClientId()
-				);	*/
-		
+
 		insertClient(sourceId, instrumentFactsheetRec.getClientId());
 		insertParent(sourceId, instrumentFactsheetRec.getSourceLnkFKSourceParentId());
 		instrumentFactsheetRec.setSourceId(sourceId);
@@ -359,8 +326,7 @@ public class SourceServiceJdbc implements SourceService {
 		if (instruments != null && !instruments.isEmpty()) {
 			instrumentDTORec = instruments.get(0);
 		}
-		//instrumentDTORec = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<InstrumentDTO>(InstrumentDTO.class), sourceId);
-		
+
 		return instrumentDTORec;
 	}
 	
@@ -523,33 +489,6 @@ public class SourceServiceJdbc implements SourceService {
 		
 	}
 	
-	/*public Date stringToDate(String date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date parsed;
-		Date parsedDate = null;
-		try {
-			parsed = format.parse(date);
-			parsedDate = new java.sql.Date(parsed.getTime());
-			return parsedDate;
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return parsedDate;
-		
-	}*/
-	
-	/*public String dateParser(String dateString) throws ParseException {
-		if (dateString != null && !dateString.equals("")) {
-			SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = parser.parse(dateString);
-			return formatter.format(date);
-		} else {
-			return "";
-		}
-		
-	}*/
-
 	@Override
 	public void delete(Integer sourceId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

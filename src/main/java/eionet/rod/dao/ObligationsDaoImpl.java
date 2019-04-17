@@ -165,7 +165,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
             	ret += ret1 + ret3 + ret2;
             	
             	ret +="))";
-            	//ret = " ((NEXT_DEADLINE >= '" + date1 + "' AND NEXT_DEADLINE <= '" + date2 + "') OR (NEXT_DEADLINE2 >= '" + date1 + "' AND NEXT_DEADLINE2 <= '" + date2 + "')) ";
             }
         }
 
@@ -227,22 +226,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
 						+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
 						+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
 
-//				StringBuilder q_obligations_list = new StringBuilder();
-//				if (!RODUtil.nullString(issueId) && !issueId.equals("0")) {
-//		            q_obligations_list.append("(");
-//		        }
-//		        q_obligations_list.append("(T_RASPATIAL_LNK RAS LEFT JOIN T_SPATIAL SP ON RAS.FK_SPATIAL_ID=SP.PK_SPATIAL_ID) "
-//		        + "JOIN T_OBLIGATION OB ON RAS.FK_RA_ID=OB.PK_RA_ID "
-//		        + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
-//		        + "LEFT JOIN T_ROLE RRO ON OB.RESPONSIBLE_ROLE=RRO.ROLE_ID "
-//		        + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID "
-//		        + "LEFT JOIN T_CLIENT CL ON CL.PK_CLIENT_ID = CLK.FK_CLIENT_ID ");
-//		        if (!RODUtil.nullString(issueId) && !issueId.equals("0")) {
-//		            q_obligations_list.append(") JOIN T_RAISSUE_LNK RAI ON OB.PK_RA_ID=RAI.FK_RA_ID ");
-//		        }
-//		
-//		        query += q_obligations_list.toString();
-		
 				if (!RODUtil.isNullOrEmpty(clientId) && !"0".equals(clientId)) {
 					
 					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
@@ -353,77 +336,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 						query += " FLAGGED=1 ";
 					}
 				}
-				
-				
-//				String yourQuery = query;
-//				
-//				final String regex = "^(SELECT)(?:[^;']|(?:'[^']+'))+;\\s*$"; //(?m)^(SELECT).*;$
-//
-//				Pattern p = Pattern.compile(regex, Pattern.MULTILINE);
-//				Matcher matcher = p.matcher(query);
-//				
-//				while (matcher.find()) {
-//					System.out.print("PASO");
-//				}
-				
+
                 query += " ORDER BY oblTitle";
-                
-//		String queryCount = "SELECT COUNT(DISTINCT OB.PK_RA_ID) as obligationId "
-//				+ "FROM T_OBLIGATION OB "
-//                + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
-//                + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
-//                + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID "
-//                + "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
-//                + "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
-//                + "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
-//				if ((!issueId.equals("0") && issueId != null) || (!clientId.equals("0")  && clientId != null) || (!spatialId.equals("0")  && spatialId != null) || (terminate != null && !terminate.equals("")) || (!deadlineCase.equals("0")  && deadlineCase != null)) {
-//					queryCount += "WHERE ";
-//				}
-//				if (!clientId.equals("0")  && clientId != null) {
-//					queryCount += "CLK.FK_CLIENT_ID = " + clientId;
-//				}
-//				if (!spatialId.equals("0")  && spatialId != null) {
-//					if (!clientId.equals("0")  && clientId != null) {
-//						queryCount += " and ";	
-//					}
-//					queryCount += "RAS.FK_SPATIAL_ID = " + spatialId;
-//				}
-//				if (!issueId.equals("0")  && issueId != null) {
-//					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null)) {
-//						queryCount += " and ";	
-//					}
-//					queryCount += "RAI.FK_ISSUE_ID = " + issueId;
-//				}
-//				if (terminate != null && !terminate.equals("")) {
-//					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null) || (!issueId.equals("0")  && issueId != null)) {
-//						queryCount += " and ";	
-//					}
-//					queryCount += "OB.Terminate = '" + terminate + "'";
-//				}
-//				if (!deadlineCase.equals("0")  && deadlineCase != null) {
-//					if (!clientId.equals("0")  && clientId != null || (!spatialId.equals("0")  && spatialId != null) || (!issueId.equals("0")  && issueId != null) || (terminate != null && !terminate.equals(""))) {
-//						queryCount += " and ";	
-//					}
-//					String queryDeadline = handleDeadlines(deadlineCase) ;
-//					queryCount += queryDeadline;
-//				}
-//				
-//		
-//		try {
-//		
-//			Integer countObligations = jdbcTemplate.queryForObject(queryCount, Integer.class);
-//		
-//			if (countObligations == 0) {
-//				return null;
-//			}else {
-//			
-//				return jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class));
-//
-//			}
-//			
-//		} catch (DataAccessException e) {
-//			throw new ResourceNotFoundException("DataAccessException error: " + e);
-//		}
 		
         try {
 

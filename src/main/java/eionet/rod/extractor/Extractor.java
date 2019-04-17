@@ -23,8 +23,6 @@
 
 package eionet.rod.extractor;
 
-//import eionet.acl.AuthMechanism;
-//import eionet.acl.SignOnException;
 import eionet.directory.DirServiceException;
 import eionet.directory.DirectoryService;
 import eionet.rod.dao.UndoService;
@@ -173,56 +171,10 @@ public class Extractor implements ExtractorConstants {
         	fileSrv = RODServices.getFileService();
 //            
         	debugLog = fileSrv.getBooleanProperty("extractor.debugmode");
-//
-//            try {
-//
-//                logPath = fileSrv.getStringProperty("extractor.logpath");
-//                logfileName = fileSrv.getStringProperty("extractor.logfilename");
-//                
-//            } catch (ServiceException e) {
-//                // use default type (XML/RPC), if not specified
-//                LOGGER.warn("Unable to get logger settings from properties file. using default The following error was reported:\n" + e.toString());
-//                
-//            }
-//
+
         } catch (ServiceException e) {
-//            // KL 021009 -> cannot print out, when creating logger does not succeed
-//            // extractor.out.println("Unable to get log file settings from properties file, using defaults. The following error was reported:\n"
-//            // + e.toString());
-//            LOGGER.error("Unable to get settings from properties file. The following error was reported:\n" + e.toString());
-//            LOGGER.error(e.getMessage(), e);
             throw new ServiceException("Unable to get settings from properties file. The following error was reported:\n" + e);
         }
-//
-//        // KL021009
-//        // cannot write to the log file, if opening it does not succeed
-//        if (logfileName != null) {
-//            try {
-//                out = new PrintWriter(new FileWriter(logPath + logfileName, !debugLog), true);
-//            } catch (java.io.IOException e) {
-//                // using default logger instead
-//                LOGGER.warn("Unable to open log file for writing. using default. The following error was reported:\n" + e.toString());
-//                LOGGER.error(e.getMessage(), e);
-//                RODServices.sendEmail("Error in Extractor", "Unable to open log file for writing. \n" + e.toString());
-//            }
-//        }
-//
-//        // Start processing
-//        // extractor.out.println(extractor.cDT() + "Extractor v1.1 - processing... Please wait.");
-//        log(cDT() + "Extractor v1.1 - processing... Please wait.");
-
-        //String userFullName = userName;
-       // long a = System.currentTimeMillis();
-
-//        if (!userName.equals(SYSTEM_USER)) {
-//
-//            try {
-//                // userFullName = DirectoryService.getFullName(userName);
-//                //userFullName = AuthMechanism.getFullName(userFullName);
-//            } catch (SignOnException se) {
-//                log("Error getting full name " + se.toString());
-//            }
-//        }
 
         //String actionText = "Harvesting - ";
         long a = System.currentTimeMillis();
@@ -282,17 +234,8 @@ public class Extractor implements ExtractorConstants {
             }
         } // mode includes roles
 
-//        if (mode == ALL_DATA || mode == PARAMS) {
-//            actionText += " -parameters";
-//        }
-
-       
-        
-        //historyService.logHistory("H", "0", userName, "X", actionText);
-
         long b = System.currentTimeMillis();
-       // undoService.insertIntoUndo(b, modeData(mode), "H", "X", "n", "n", actionText, 0, "n");
-        
+
         log(" ** Harvesting successful TOTAL TIME = " + (b - a));
 
         exitApp(true);
@@ -394,23 +337,6 @@ public class Extractor implements ExtractorConstants {
         } 
     }
 
-//    /**
-//     * Get countries from the database and return them as a hash-map.
-//     *
-//     * @return HashMap<String, Integer> - hashmap where key is the country name and value is the numeric code.
-//     * @throws ServiceException - if there is no access to the database.
-//     */
-//    public HashMap<String, Integer> getKnownCountries() {
-//
-//        HashMap<String, Integer> result = new HashMap<String, Integer>();
-//        String[][] idNamePairs = daoFactory.getSpatialDao().getCountryIdPairs();
-//        for (int i = 0; i < idNamePairs.length; i++) {
-//            result.put(idNamePairs[i][1], Integer.valueOf(idNamePairs[i][0]));
-//        }
-//
-//        return result;
-//    }
-
     /**
      * Get the role from the directory service and save it to database.
      *
@@ -443,27 +369,5 @@ public class Extractor implements ExtractorConstants {
 
         roleService.saveRole(role);
     }
-
-    
-//    private String modeData(int mode) {
-//    	String resultMode= null;
-//    
-//    	switch (mode) {
-//    	  case 0:
-//    		  resultMode = "ALL_DATA"; // 
-//    	      break;
-//    	  case 1:
-//    		  resultMode = "DELIVERIES"; // 
-//    	      break;
-//    	  case 2:
-//    		  resultMode = "ROLES"; // 
-//    	      break;    
-//    	  case 3:
-//    		  resultMode = "PARAMS"; // 
-//    	      break;    
-//    	  
-//    	}
-//    	return resultMode;
-//    } 	
     	
 }

@@ -1334,81 +1334,7 @@ public class ObligationsController {
     	if (!addedRelation.isEmpty() || !removedRelation.isEmpty()) {
     		resVec.add("'Relation with other obligations' changed from '" + removedRelation + "' to '" + addedRelation + "'");
     	}
-    	
-    	
-		/*int intId = new Integer(obligationID).intValue();
-        DifferenceDTO countries_formally = RODServices.getDbService().getDifferencesDao().getDifferencesInCountries(ts, intId, "N", "U");
-        if (countries_formally != null) {
-            String added = countries_formally.getAdded();
-            String removed = countries_formally.getRemoved();
-            if (added.length() > 0) {
-                res_vec.add("'Countries reporting formally' added: " + added);
-            }
-            if (removed.length() > 0) {
-                res_vec.add("'Countries reporting formally' removed: " + removed);
-            }
-        }
-        
-        DifferenceDTO countries_voluntarily = RODServices.getDbService().getDifferencesDao().getDifferencesInCountries(ts, intId, "Y", "U");
-        if (countries_voluntarily != null) 
-        {
-        	String added = countries_voluntarily.getAdded();
-        	String removed = countries_voluntarily.getRemoved();
-        	if (added.length() > 0)
-        	{
-        		res_vec.add("'Countries reporting voluntarily' added: " + added);
-        	}
-        	if (removed.length() > 0)
-        	{
-        		res_vec.add("'Countries reporting voluntarily' removed: " + removed);
-        	}
-        }
-        
-        DifferenceDTO issues = RODServices.getDbService().getDifferencesDao().getDifferencesInIssues(ts, intId, "U");
-        if (issues != null)
-        {
-        	String added = issues.getAdded();
-        	String removed = issues.getRemoved();
-        	if (added.length() > 0)
-        	{
-        		res_vec.add("'Environmental issues' added: " + added);
-        	}
-        	if (removed.length() > 0)
-        	{
-        		res_vec.add("'Environmental issues' removed: " + added);
-        	}
-        }
-        
-        DifferenceDTO clients = RODServices.getDbService().getDifferencesDao().getDifferencesInClients(ts, intId, "C", "U", "A");
-        if (clients != null)
-        {
-        	String added = clients.getAdded();
-        	String removed = clients.getRemoved();
-        	if (added.length() > 0)
-        	{
-        		res_vec.add("'Other clients using this reporting' added: " + added);
-        	}
-        	if (removed.length() > 0)
-        	{
-        		res_vec.add("'Other clients using this reporting' removed: " + added);
-        	}
-        }
-        
-        DifferenceDTO info = RODServices.getDbService().getDifferencesDao().getDifferencesInInfo(ts, intId, "U", "I");
-        if (info != null)
-        {
-        	String added = info.getAdded();
-        	String removed = info.getRemoved();
-        	if (added.length() > 0)
-        	{
-        		res_vec.add("'Type of info reported' added: " + added);
-        	}
-        	if (removed.length() > 0)
-        	{
-        		res_vec.add("'Type of info reported' removed: " + removed);
-        	}
-        }*/
-    			
+
 		return resVec;
 	}
 	
@@ -1680,20 +1606,7 @@ public class ObligationsController {
 			list.add(oblSchema);
 			list.add(pObligations.getOblTitle());
 			lists.add(list);
-			
-			/*Vector<Map<String, String>> countries = RODServices.getDbService().getSpatialDao().getObligationsCountries(obligation_id);
-			
-			for (Enumeration<Map<String,String>> en = countries.elements(); en.hasMoreElements();)
-			{
-				Map<String, String> hash = en.nextElement();
-				list = new Vector<String>();
-				list.add(events);
-				String loc_schema = fileService.getStringProperty(FileServiceIF.UNS_COUNTRY_PREDICATE);
-				list.add(loc_schema);
-				list.add(hash.get("name"));
-				lists.add(list);
-			}*/
-			
+
 			list = new Vector<>();
 			list.add(events);
 			list.add(Attrs.SCHEMA_RDF + "responsiblerole");

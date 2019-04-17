@@ -44,34 +44,6 @@ public class UndoServiceJdbc implements UndoService {
 				);
 	}
 
-	/*@Override
-	public void deleteByPK(Integer undoTime, String table, String column, String operation, Integer subTransNr) {
-		String query = "DELETE FROM T_UNDO WHERE UNDO_TIME = ? AND TAB = ? AND "
-				+ "COL = ? AND OPERATION = ? AND SUB_TRANS_NR = ?";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		jdbcTemplate.update(query, undoTime, table, column, operation, subTransNr);
-	}
-
-	@Override
-	public void update(UndoDTO undoRec) {
-		String update = "UPDATE T_UNDO SET QUOTES = ?, P_KEY = ?, "
-                + "VALUE = ?, SHOW_OBJECT = ? "
-                + "WHERE UNDO_TIME = ? AND TAB = ? AND "
-                + "COL = ? AND OPERATION = ? AND SUB_TRANS_NR = ?";
-		 JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-	        jdbcTemplate.update(update,
-	        		undoRec.getQuotes(),
-	        		undoRec.getPrimaryKey(),
-	        		undoRec.getValue(),
-	        		undoRec.getShow(),
-	        		undoRec.getUndoTime(),
-	        		undoRec.getTab(),
-	        		undoRec.getCol(),
-	        		undoRec.getOperation(),
-	        		undoRec.getSubTransNr()
-	        		);
-	}*/
-
 	@Override
 	public void insertIntoUndo(Integer id, String state, String table, String idField, long ts, String extraSQL, String show) {
 
@@ -90,8 +62,6 @@ public class UndoServiceJdbc implements UndoService {
 		tableMetadataContext.processMetaData(dataSource, Collections.emptyList(), new String[0]);
 
 		List<String> columns = tableMetadataContext.getTableColumns();
-
-		//List<String> columns = jdbcTemplate.queryForList(queryColumns, String.class, table);
 
 		if ("T_SOURCE".equals(table)) {
 			sqlStmt = "SELECT T_SOURCE.PK_SOURCE_ID AS sourceId,"
@@ -790,20 +760,6 @@ public class UndoServiceJdbc implements UndoService {
 
 	}
 	
-	/*private String isPrimaryKey(String table, String column)  {
-		String query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE "
-				+ "TABLE_NAME = ? AND COLUMN_KEY IN('PRI')";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<String> prymaryKeys = jdbcTemplate.queryForList(query, String.class, table);
-		
-		if (prymaryKeys.contains(column)) {
-			return "y";
-		} else {
-			return "n";
-		}		
-		
-	}*/
-
 	@Override
 	public void insertTransactionInfo(Integer id, String state, String table, String idField, long ts,
 									  String extraSQL) {

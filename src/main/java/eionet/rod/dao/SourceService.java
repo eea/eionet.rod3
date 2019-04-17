@@ -21,21 +21,9 @@ public interface SourceService {
 	
 	void update(InstrumentFactsheetDTO instrumentFactsheetRec);
 	
-	//ClientDTO getClient(Integer sourceId);
-	
 	Integer insert(InstrumentFactsheetDTO instrumentFactsheetRec);
 	
-	//void insertClient();
-	
-	//void insertParent(Integer sourceLnkFKSourceParentId);
-	
 	List<InstrumentFactsheetDTO> getAllInstruments();
-	
-	//InstrumentDTO getParent(Integer sourceId);
-	
-	//List<InstrumentDTO> getRelatedInstruments(Integer sourceId);
-	
-	//List<InstrumentClassificationDTO> getInstrumentClassifications(Integer sourceId);
 	
 	List<InstrumentClassificationDTO> getAllClassifications();
 	

@@ -132,23 +132,13 @@ public class SearchController {
         }
         return lists;
     }	
-	
-	/*@RequestMapping(value = "/simpleSearch", method = RequestMethod.POST)
-    public String simpleSearchHome(@RequestParam("expression") String expression, Model model) {
-		System.out.println(expression);
-		return "simpleSearch";    	
-    }*/
-	
-	
-	 
+
     @RequestMapping(value = "/advancedSearch")
     public String search_deadlines(final Model model) throws Exception {
        
     	model.addAttribute("title","Advanced search");
         BreadCrumbs.set(model, "Advanced search");
         
-    	//model.addAttribute("allObligations",obligationsService.findObligationList("0","0","0","N","0",null, null,null));
-    	
         //Countries/territories
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allCountries", countries);

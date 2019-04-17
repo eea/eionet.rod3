@@ -149,37 +149,4 @@ public class SpatialController {
     	
     }
     
-//    @RequestMapping(value = "/deadlines/search", method = RequestMethod.POST)
-//    public String search_deadlines(Obligations obligation, final Model model) throws Exception {
-//           
-//       if (obligation.getSpatialId() != null) {
-//	        Spatial countryName = spatialService.findOne(Integer.parseInt(obligation.getSpatialId()));
-//	        model.addAttribute("countryName", countryName.getName());
-//	        model.addAttribute("title","Reporting deadlines: " +  countryName.getName()); 
-//	        BreadCrumbs.set(model, spatialCrumb, new BreadCrumb("Reporting deadlines: " +  countryName.getName()));
-//       }else {
-//        	model.addAttribute("title","Reporting deadlines"); 
-//	        BreadCrumbs.set(model, spatialCrumb, new BreadCrumb("Reporting deadlines"));
-//       }
-//       model.addAttribute("countryId", obligation.getSpatialId());
-//       model.addAttribute("obligation",obligation);
-//       
-//       //Countries/territories
-//       List<Spatial> countries = spatialService.findAll();
-//       model.addAttribute("allCountries", countries);
-//       
-//       //Environmental issues
-//       List<Issue> issues = issueDao.findAllIssuesList();
-//       model.addAttribute("allIssues", issues);
-//    	
-//       //Countries/territories
-//       List<ClientDTO> clients = clientService.getAllClients();
-//       model.addAttribute("allClients", clients);
-//       model.addAttribute("activeTab", "spatial");
-//        
-//       return "deadlines";
-//    	
-//    }
-    
-    
 }
