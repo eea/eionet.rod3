@@ -5,6 +5,8 @@ package eionet.rod.dao;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +22,10 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Repository
 @Transactional
 public class HelpDaoImpl implements HelpDao{
-	
-private JdbcTemplate jdbcTemplate;
+
+private static final Log logger = LogFactory.getLog(HelpDaoImpl.class);
+
+	private JdbcTemplate jdbcTemplate;
 	
 	@Resource
 	public void setDataSource(DataSource dataSource) {
@@ -57,7 +61,8 @@ private JdbcTemplate jdbcTemplate;
 			}
 		
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The heldp ID you requested: " + helpId + " was not found in the database or is empty");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("The heldp ID you requested: " + helpId + " was not found in the database or is empty", e);
 		}
 	        
 	}
@@ -75,6 +80,7 @@ private JdbcTemplate jdbcTemplate;
 	    try {
 			return jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<>(Documentation.class), areaId);
 	    } catch (DataAccessException sqle) {
+	    	logger.debug(sqle, sqle);
 	        return null;
 	    } 
 	

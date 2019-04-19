@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +24,8 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Transactional
 public class IssueDaoImpl implements IssueDao{
 
-	
+	private static final Log logger = LogFactory.getLog(IssueDaoImpl.class);
+
 	public IssueDaoImpl() {
 	}
 	
@@ -60,7 +63,8 @@ public class IssueDaoImpl implements IssueDao{
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The obligation you requested with id " + issueOblId + " was not found in the database");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("The obligation you requested with id " + issueOblId + " was not found in the database", e);
 		}
 	}
 	@Override
@@ -89,7 +93,8 @@ public class IssueDaoImpl implements IssueDao{
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The Issues not found in the database");
+        	logger.debug(e, e);
+			throw new ResourceNotFoundException("The Issues not found in the database", e);
 		}
 	}
 	
@@ -119,7 +124,8 @@ public class IssueDaoImpl implements IssueDao{
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database");
+        	logger.debug(e, e);
+			throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database", e);
 		}
 	}
 	

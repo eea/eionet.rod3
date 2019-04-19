@@ -83,8 +83,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
 		try {
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Delivery.class));
 		}catch (DataAccessException ex) {
-	    	logger.error(ex.getMessage(), ex);
-			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage());
+	    	logger.debug(ex.getMessage(), ex);
+			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage(), ex);
 		} 
 	}
 	
@@ -98,8 +98,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
             jdbcTemplate.update("UPDATE T_DELIVERY SET STATUS=1 WHERE STATUS=0");
             
         } catch (DataAccessException sqle) {
-            logger.error(sqle.getMessage(), sqle);
-            throw new ResourceNotFoundException(sqle.getMessage());
+            logger.debug(sqle.getMessage(), sqle);
+            throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 
     }
 	
@@ -137,8 +137,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
             }
 
         } catch (DataAccessException sqle) {
-            logger.error(sqle.getMessage(), sqle);
-            throw new ResourceNotFoundException(sqle.getMessage());
+            logger.debug(sqle.getMessage(), sqle);
+            throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 
     }
        
@@ -177,8 +177,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
            jdbcTemplate.update(qBackUpDeliveries);
 
        } catch (DataAccessException sqle) {
-           logger.error(sqle.getMessage(), sqle);
-           throw new ResourceNotFoundException(sqle.getMessage());
+           logger.debug(sqle.getMessage(), sqle);
+           throw new ResourceNotFoundException(sqle.getMessage(), sqle);
        } 
    }
    
@@ -261,8 +261,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
                }
            }
        } catch (Exception e) {
-    	   logger.error(e.getMessage(), e);
-           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.getMessage());
+    	   logger.debug(e.getMessage(), e);
+           throw new ResourceNotFoundException("Saving deliveries failed with reason " + e.getMessage(), e);
        }
 
        return batchCounter;

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +23,9 @@ import org.springframework.security.provisioning.UserDetailsManager;
  */
 public class UserManagementServiceJdbc extends JdbcUserDetailsManager
         implements UserManagementService {
+
+    private static final Log logger = LogFactory.getLog(UserManagementServiceJdbc.class);
+
 
     private static final String DEF_GET_ALL_USERS_SQL = "SELECT * FROM users ORDER BY username";
 

@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
@@ -62,6 +64,8 @@ import javax.validation.Valid;
 public class ObligationsController {
 
     private static BreadCrumb obligationCrumb = new BreadCrumb("/obligations", "Obligations");
+
+    private static final Log logger = LogFactory.getLog(ObligationsController.class);
  
     /**
      * Page of error
@@ -780,7 +784,7 @@ public class ObligationsController {
         	sendEvent(true, obligations, obligations.getObligationId(), ts);
         } catch(ServiceException e)
         {
-        	e.printStackTrace();
+        	logger.debug(e, e);
         }
 		return "eobligation";
     }
@@ -816,15 +820,6 @@ public class ObligationsController {
 
                }
 		}
-//	        if (selectedclients != null) {
-//	            for (int i = 0 ; i < selectedclients.size(); i++) {
-//		        	String [] selectedclientsSplit = selectedclients.get(i).split(":");
-//		        	obligationClient.setClientId(Integer.parseInt(selectedclientsSplit[0]));
-//		        	obligationClient.setName(selectedclientsSplit[1]);
-//		        	allObligationClients.add(obligationClient);
-//		           	obligationClient = new ClientDTO();
-//		        }
-//	        }
 		
 	    return allObligationClients;
 	}
@@ -1646,7 +1641,7 @@ public class ObligationsController {
 				UNSEventSender.makeCall(lists);
 			}
 		}catch (RuntimeException e) {
-			throw new ResourceNotFoundException(e.getMessage());
+			throw new ResourceNotFoundException(e.getMessage(), e);
 		}
 		
 		

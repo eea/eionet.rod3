@@ -173,7 +173,7 @@ public class Extractor implements ExtractorConstants {
         	debugLog = fileSrv.getBooleanProperty("extractor.debugmode");
 
         } catch (ServiceException e) {
-            throw new ServiceException("Unable to get settings from properties file. The following error was reported:\n" + e);
+            throw new ServiceException("Unable to get settings from properties file. The following error was reported:\n" + e, e);
         }
 
         //String actionText = "Harvesting - ";
@@ -230,7 +230,7 @@ public class Extractor implements ExtractorConstants {
                 exitApp(false); // return;
                 throw new ResourceNotFoundException(
                         "Operation failed while filling the database from Eionet Directory. The following error was reported:\n"
-                                + e.getMessage());
+                                + e.getMessage(), e);
             }
         } // mode includes roles
 
@@ -354,13 +354,13 @@ public class Extractor implements ExtractorConstants {
             role = DirectoryService.getRole(roleName);
             log("Received role info for " + roleName + " from Directory");
         } catch (DirServiceException de) {
-            LOGGER.error("Error getting role " + roleName + ": " + de);
+            LOGGER.error("Error getting role " + roleName + ": " + de, de);
             //RODServices.sendEmail("Error in Extractor", "Error getting role " + roleName + ": " + de.toString());
-            throw new ResourceNotFoundException("Error getting role " + de);
+            throw new ResourceNotFoundException("Error getting role " + de, de);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             //RODServices.sendEmail("Error in Extractor", e.toString());
-            throw new ResourceNotFoundException("Error getting role " + e);
+            throw new ResourceNotFoundException("Error getting role " + e, e);
         }
 
         if (role == null) {

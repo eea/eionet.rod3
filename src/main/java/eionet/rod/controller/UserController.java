@@ -4,6 +4,8 @@ import eionet.rod.dao.UserManagementService;
 import eionet.rod.model.UserRole;
 import eionet.rod.model.Authorisation;
 import eionet.rod.util.BreadCrumbs;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +31,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
+    private static final Log logger = LogFactory.getLog(UserController.class);
+
 
     /**
      * Service for user management.
@@ -87,9 +92,11 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message", "User " + userName + " already exists");
             return "redirect:view";
         }
+        String message = "User " + user.getUserId() + " added with " + rolesAsString(user.getAuthorisations());
+        logger.info(message);
+
         userManagementService.createUser(userDetails);
-        redirectAttributes.addFlashAttribute("message", "User " + user.getUserId()
-                + " added with " + rolesAsString(user.getAuthorisations()));
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:view";
     }
 
@@ -144,8 +151,10 @@ public class UserController {
         }
         User userDetails = new User(user.getUserId(), "", grantedAuthorities);
         userManagementService.updateUser(userDetails);
-        model.addAttribute("message", "User " + user.getUserId() + " updated with "
-                + rolesAsString(user.getAuthorisations()));
+        String message = "User " + user.getUserId() + " updated with "
+                + rolesAsString(user.getAuthorisations());
+        logger.info(message);
+        model.addAttribute("message", message);
         return "redirect:view";
     }
 
@@ -162,7 +171,9 @@ public class UserController {
             model.addAttribute("message", "User " + userName + " was not deleted, because it does not exist ");
         } else {
             userManagementService.deleteUser(userName);
-            model.addAttribute("message", "User " + userName + " deleted ");
+            String message = "User " + userName + " deleted";
+            model.addAttribute("message", message);
+            logger.info(message);
         }
         return "redirect:view";
     }

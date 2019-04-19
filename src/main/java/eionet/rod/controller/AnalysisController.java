@@ -12,13 +12,13 @@ import eionet.rod.util.BreadCrumbs;
 @Controller
 @RequestMapping("/analysis")
 public class AnalysisController {
-	
+
 	@Autowired
     AnalysisService analysisService;
 
 	@RequestMapping({"", "/"})
 	public String analysisHome(Model model) {
-		
+
 		AnalysisDTO analysis = analysisService.getStatistics();
 		model.addAttribute("analysis", analysis);
 		BreadCrumbs.set(model, "Database Content Statistics");

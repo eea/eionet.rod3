@@ -1,5 +1,7 @@
 package eionet.rod.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import eionet.rod.util.RODUtil;
 @Controller
 @RequestMapping("/harvester")
 public class HarvesterController {
+
+	private static final Log logger = LogFactory.getLog(HarvesterController.class);
 	
 	@Autowired
     IAuthenticationFacade authenticationFacade;
@@ -66,9 +70,7 @@ public class HarvesterController {
 //            }
 
             int m = Integer.parseInt(mode);
-            //Extractor ext = new Extractor();
 
-            
             extractor.harvest(m, userName);
             
             model.addAttribute("mode" , mode);
@@ -79,6 +81,7 @@ public class HarvesterController {
         	
         	String messageExcep = e.getMessage() + " - " + Constants.SEVERITY_WARNING;
             model.addAttribute("message", messageExcep);
+            logger.info(messageExcep, e);
         }
 
         if(message != null) model.addAttribute("message", message);

@@ -88,8 +88,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-            logger.error("Shadowed exception", e);
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+            logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
 	 
 	}
@@ -343,8 +343,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class)); //jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class),new Object[] { parameters });
         } catch (DataAccessException e) {
-		
-        	throw new ResourceNotFoundException("DataAccessException error: " + e);
+            logger.debug(e, e);
+        	throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
 	}
 	
@@ -406,8 +406,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-            logger.error("Shadowed exception", e);
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+            logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
 		
 	}
@@ -445,7 +445,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				}
 				
 			} catch (DataAccessException e) {
-				throw new ResourceNotFoundException("DataAccessException error: " + e);
+                logger.debug(e, e);
+				throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 			}
 	      
 	    }
@@ -480,7 +481,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		    logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
         
 	}
@@ -514,7 +516,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+            logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
         
 	}
@@ -679,7 +682,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	         return obligationID;
 	         
 		}catch (DataAccessException e){
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		    logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
          
    
@@ -993,7 +997,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		    logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
     }
     
@@ -1043,7 +1048,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					rolesAdd.addAll(jdbcTemplate.query(respRolesQuery, new BeanPropertyRowMapper<>(Roles.class)));
 				}
         	}catch (Exception e) {
-				System.out.print(e.getMessage());
+        	    logger.debug(e, e);
 			}
         	return rolesAdd;
         }

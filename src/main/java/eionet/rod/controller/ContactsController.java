@@ -2,6 +2,8 @@ package eionet.rod.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import eionet.rod.util.BreadCrumbs;
 @Controller
 @RequestMapping("/contacts")
 public class ContactsController {
+
+	private static final Log logger = LogFactory.getLog(ContactsController.class);
 	
 	 @RequestMapping(method = RequestMethod.GET)
 	 public String contacts(String roleId, RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {
@@ -35,8 +39,8 @@ public class ContactsController {
 				model.addAttribute("dirRole", dirRole);
 			 } catch (DirServiceException e) {
 				isDirectoryError = true;
-				e.printStackTrace();
-			 }	
+				logger.info("Directory exception " + e.getMessage(), e);
+			 }
 		 }
 			 
 		 model.addAttribute("isDirectoryError", isDirectoryError);	

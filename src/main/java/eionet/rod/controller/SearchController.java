@@ -6,6 +6,8 @@ import java.util.List;
 
 import eionet.rod.Constants;
 import eionet.rod.util.RODUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,8 @@ import eionet.sparqlClient.helpers.ResultValue;
 
 @Controller
 public class SearchController {
+
+    private static final Log logger = LogFactory.getLog(SearchController.class);
 	
 	@Autowired
     SpatialService spatialService;
@@ -74,7 +78,6 @@ public class SearchController {
 			try {
 				fileSrv = RODServices.getFileService();
 				String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
-				//String CRSparqlEndpoint = "http://cr.eionet.europa.eu/sparql";
 				QueryExecutor executor = new QueryExecutor();
 	            executor.executeQuery(endpointURL, query);
 	            result = executor.getResults();
@@ -83,7 +86,7 @@ public class SearchController {
 			} catch (ServiceException e) {
 				String messageExcep = e.toString();
 	            model.addAttribute("message", messageExcep);
-	            
+	            logger.info(e, e);
 			}
 			
             model.addAttribute("expression", expression);

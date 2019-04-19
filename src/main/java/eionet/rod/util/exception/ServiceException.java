@@ -24,12 +24,12 @@ public class ServiceException extends java.lang.Exception {
     /**
      * Constructs an <code>ServiceException</code> with the specified detail message.
      *
-     * @param msg
-     *            the detail message.
+     * @param message the detail message.
+     * @param cause the cause
      */
-    public ServiceException(String msg) {
-        super(msg);
-        LOGGER.error("Service exception occured with reason <<" + msg + ">>");
-    }
+    public ServiceException(final String message, final Throwable cause) {
+        super(message, cause);
+                LOGGER.error("Service exception occured with reason <<" + message + ">>", cause);
 
+    }
 }

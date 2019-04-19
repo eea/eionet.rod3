@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,7 +36,10 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Service(value = "sourceService")
 @Transactional
 public class SourceServiceJdbc implements SourceService {
-	
+
+
+	private static final Log logger = LogFactory.getLog(SourceServiceJdbc.class);
+
 	private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
@@ -77,7 +82,8 @@ public class SourceServiceJdbc implements SourceService {
 			instrumentFactsheetRec.setClassifications(getInstrumentClassifications(sourceId));
 
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+		    logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
 		
 		return instrumentFactsheetRec;

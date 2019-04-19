@@ -7,6 +7,8 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -44,7 +46,9 @@ import eionet.rod.util.exception.ServiceException;
 @Controller
 @RequestMapping("/instruments")
 public class InstrumentsController {
-	
+
+	private static final Log logger = LogFactory.getLog(InstrumentsController.class);
+
 	@Autowired
 	SourceService sourceService;
 	
@@ -177,7 +181,7 @@ public class InstrumentsController {
 			sendEvent(true, instrument, instrument.getSourceId(), ts);
 		}catch(ServiceException e)
 		{
-
+			logger.debug(e, e);
 		}
         return "redirect:edit";
     }
@@ -210,7 +214,7 @@ public class InstrumentsController {
 			sendEvent(false, instrument, sourdeId, 0);
 		} catch (ServiceException e)
 		{
-			
+			logger.debug(e, e);
 		}
 		return "redirect:edit";		
 	}
@@ -530,7 +534,7 @@ public class InstrumentsController {
 			 
 		 } catch (Exception e)
 		 {
-			 e.printStackTrace();
+			 logger.debug(e, e);
 		 }
 	 }
 }

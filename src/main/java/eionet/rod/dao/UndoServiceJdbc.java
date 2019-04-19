@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.metadata.TableMetaDataContext;
@@ -17,6 +19,8 @@ import eionet.rod.model.UndoDTO;
 
 @Service
 public class UndoServiceJdbc implements UndoService {
+
+    private static final Log logger = LogFactory.getLog(UndoServiceJdbc.class);
 
 	private DataSource dataSource;
 

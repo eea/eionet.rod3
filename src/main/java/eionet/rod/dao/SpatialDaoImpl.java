@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +24,9 @@ import eionet.rod.util.exception.ResourceNotFoundException;
 @Repository
 @Transactional
 public class SpatialDaoImpl implements SpatialDao {
+
+		private static final Log logger = LogFactory.getLog(SpatialDaoImpl.class);
+
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -53,7 +58,8 @@ public class SpatialDaoImpl implements SpatialDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("No data in the database");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("No data in the database", e);
 		}
 	 
 	}
@@ -80,7 +86,8 @@ public class SpatialDaoImpl implements SpatialDao {
 				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), member);
 			}
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("You requested was not found in the database");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("You requested was not found in the database", e);
 		}
 	}
 
@@ -111,7 +118,8 @@ public class SpatialDaoImpl implements SpatialDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The country you requested with id " + spatialId + " was not found in the database");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("The country you requested with id " + spatialId + " was not found in the database", e);
 		}
 		
 	}
@@ -145,7 +153,8 @@ public class SpatialDaoImpl implements SpatialDao {
 			}
 			
 		} catch (DataAccessException e) {
-			throw new ResourceNotFoundException("The obligation you requested with id " + obligationId + " was not found in the database");
+			logger.debug(e, e);
+			throw new ResourceNotFoundException("The obligation you requested with id " + obligationId + " was not found in the database", e);
 		}
 	}
 			

@@ -39,8 +39,8 @@ public class RoleDaoImpl implements RoleDao {
     		jdbcTemplate.update(q_commit_roles);
     	
     	 } catch (DataAccessException e) {
-    		 logger.error("Commit roles exception", e);
- 			throw new ResourceNotFoundException("DataAccessException error: " + e.getMessage());
+    		 logger.warn("Commit roles exception " + e, e);
+ 			throw new ResourceNotFoundException("DataAccessException error: " + e.getMessage(), e);
        } 
     	
     }
@@ -53,8 +53,8 @@ public class RoleDaoImpl implements RoleDao {
     		jdbcTemplate.update(q_update_role_status,0);
     	
     	 } catch (DataAccessException e) {
-    		 logger.error("Commit roles exception", e);
- 			throw new ResourceNotFoundException("DataAccessException error: " + e.getMessage());
+    		 logger.warn("Backup roles exception", e);
+ 			throw new ResourceNotFoundException("DataAccessException error: " + e.getMessage(), e);
        } 
 
     }
@@ -98,8 +98,8 @@ public class RoleDaoImpl implements RoleDao {
             	jdbcTemplate.update(q_update_role_rollback, roleId);
 
             }catch (DataAccessException ex) {
-            	logger.error(ex.getMessage(), ex);
-    			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage());
+            	logger.debug(ex.getMessage(), ex);
+    			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage(), ex);
     		} 
             
        }

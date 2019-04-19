@@ -66,7 +66,8 @@ public class ClientServiceJdbc implements ClientService {
             return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(ClientDTO.class), clientId);
 	       
 	    } catch (DataAccessException e) {
-			throw new ResourceNotFoundException("DataAccessException error: " + e);
+            logger.debug(e, e);
+			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
     }
 
@@ -170,18 +171,13 @@ public class ClientServiceJdbc implements ClientService {
 		
 			if (countObligationClients == 0) {
                 return null;
-							
-				//throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
-		
 			}else {
-		
 				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), raID);
-
 			}
 			
 		} catch (DataAccessException e) {
-            logger.error("Shadowed exception", e);
-			throw new ResourceNotFoundException("The obligation you requested with id " + raID + " have not client with status = C");
+            logger.debug("Shadowed exception " + e, e);
+			throw new ResourceNotFoundException("The obligation you requested with id " + raID + " has no client with status = C", e);
 		}
      }
     
