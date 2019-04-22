@@ -43,25 +43,8 @@ public class IssueDaoImpl implements IssueDao{
 				+ "WHERE T_RAISSUE_LNK.FK_ISSUE_ID=T_ISSUE.PK_ISSUE_ID AND T_RAISSUE_LNK.FK_RA_ID= ? " 
 				+ "ORDER BY T_ISSUE.ISSUE_NAME";
 
-       
-        String queryCount = "SELECT Count(*) as issueId " 
-				+ "FROM T_ISSUE, T_RAISSUE_LNK "
-				+ "WHERE T_RAISSUE_LNK.FK_ISSUE_ID=T_ISSUE.PK_ISSUE_ID AND T_RAISSUE_LNK.FK_RA_ID= ? ";
-        
         try {
-    		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, issueOblId);
-		
-			if (countObligation == 0) {
-
-				return null;
-
-			}else {
-		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), issueOblId);
-
-			}
-			
+    		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), issueOblId);
 		} catch (DataAccessException e) {
 			logger.debug(e, e);
 			throw new ResourceNotFoundException("The obligation you requested with id " + issueOblId + " was not found in the database", e);
@@ -73,25 +56,10 @@ public class IssueDaoImpl implements IssueDao{
 				+ "FROM T_ISSUE "
 				+ "ORDER BY T_ISSUE.ISSUE_NAME";
 
-       
-        String queryCount = "SELECT Count(*) as issueId " 
-				+ "FROM T_ISSUE ";
-
-        
         try {
-    		
-			Integer countIssues = jdbcTemplate.queryForObject(queryCount, Integer.class);
-		
-			if (countIssues == 0) {
 
-				return null;
+        	return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class));
 
-			}else {
-		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class));
-
-			}
-			
 		} catch (DataAccessException e) {
         	logger.debug(e, e);
 			throw new ResourceNotFoundException("The Issues not found in the database", e);
@@ -105,24 +73,10 @@ public class IssueDaoImpl implements IssueDao{
 				+ "FROM T_ISSUE "
 				+ "Where PK_ISSUE_ID = ?";
 
-       
-        String queryCount = "SELECT Count(*) as issueId " 
-				+ "FROM T_ISSUE "
-				+ "Where PK_ISSUE_ID = ?";
-
-        
         try {
-    		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, issueId);
-		
-			if (countObligation == 0) {
-				throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database");
-			}else {
-		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), issueId);
 
-			}
-			
+        	return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), issueId);
+
 		} catch (DataAccessException e) {
         	logger.debug(e, e);
 			throw new ResourceNotFoundException("The Issue with id " + issueId +"  not found in the database", e);

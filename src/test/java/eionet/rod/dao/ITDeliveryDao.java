@@ -71,7 +71,7 @@ public class ITDeliveryDao {
     	try {
     	deliveryService.rollBackDeliveries();
     	} catch (DataAccessException sqle) {
-            throw new ResourceNotFoundException(sqle.getMessage());
+            throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 
     }
     
@@ -82,7 +82,7 @@ public class ITDeliveryDao {
     		HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
 	    	deliveryService.commitDeliveries(savedCountriesByObligationId);
     	} catch (DataAccessException sqle) {
-            throw new ResourceNotFoundException(sqle.getMessage());
+            throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 
     }
     
@@ -92,7 +92,7 @@ public class ITDeliveryDao {
     	try {
     		deliveryService.backUpDeliveries();
     	} catch (DataAccessException sqle) {
-            throw new ResourceNotFoundException(sqle.getMessage());
+            throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 
     }
     

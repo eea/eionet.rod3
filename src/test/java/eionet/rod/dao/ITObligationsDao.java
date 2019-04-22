@@ -105,7 +105,7 @@ public class ITObligationsDao {
         assertEquals("Y",siblingObligations.get(0).getTerminate());
         assertEquals("Article 15",siblingObligations.get(0).getAuthority());
         List<SiblingObligation> siblingObligationsNull = obligationsService.findSiblingObligations(12);
-        assertNull("Null", siblingObligationsNull);
+        assertEquals(0, siblingObligationsNull.size());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class ITObligationsDao {
 
         assertEquals("1",spatialNoVol.get(0).getSpatialId().toString());
         assertEquals("Austria",spatialNoVol.get(0).getName());
-        assertNull(obligationsService.findAllCountriesByObligation(1,"C"));
+        assertEquals(0, obligationsService.findAllCountriesByObligation(1,"C").size());
 
 
     }
@@ -128,7 +128,7 @@ public class ITObligationsDao {
         assertEquals("1",issues.get(0).getIssueId().toString());
         assertEquals("Climate Change", issues.get(0).getIssueName());
 
-        assertNull(obligationsService.findAllIssuesbyObligation(12));
+        assertEquals(0, obligationsService.findAllIssuesbyObligation(12).size());
     }
 
     @Test
@@ -220,7 +220,7 @@ public class ITObligationsDao {
     	List<ClientDTO> clients = obligationsService.findAllClientsByObligation(1);
     	assertEquals(2, clients.size());
     	assertTrue(clients.get(0).getName().contains("Test client"));
-    	assertNull( obligationsService.findAllClientsByObligation(175));
+    	assertEquals(0, obligationsService.findAllClientsByObligation(175).size());
     }
 
 }

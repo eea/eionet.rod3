@@ -62,7 +62,7 @@ public class ITIssueDao {
     	assertEquals("Climate Change",issues.get(0).getIssueName());
     	assertEquals("1",issues.get(0).getIssueId().toString());
     	issues = issueDao.findObligationIssuesList(12);
-    	assertNull(issues);
+    	assertEquals(0, issues.size());
     	
     }
     

@@ -71,7 +71,7 @@ public class ITSpatialDao {
     	List<Spatial> allNoMember = spatialService.findAllMember("N");
     	assertEquals(1 ,allNoMember.size());
     	List<Spatial> allMemberNull = spatialService.findAllMember("E");
-    	assertNull(allMemberNull);
+    	assertEquals(0, allMemberNull.size());
     }
 
     @Test

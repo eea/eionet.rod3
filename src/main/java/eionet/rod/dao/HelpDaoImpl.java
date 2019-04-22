@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -38,28 +39,13 @@ private static final Log logger = LogFactory.getLog(HelpDaoImpl.class);
 				+ "FROM T_HELP "
 				+ "WHERE PK_HELP_ID = ?";
 		
-		String queryCount = "SELECT count(*) as helpId "
-				+ "FROM T_HELP "
-				+ "WHERE PK_HELP_ID = ?";
-		
-		
 		try {
-			Integer countHelp = jdbcTemplate.queryForObject(queryCount, Integer.class, helpId);
-		
-			if (countHelp == 0) {
-				Help help = new Help();
-				help.setTitle("ERROR");
-				help.setText("The heldp ID you requested: " + helpId + " was not found in the database");
-				
-				return help;
-				//throw new ResourceNotFoundException("The help ID you requested: " + helpId + " was not found in the database");
-			
-			}else {
-
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Help.class), helpId);
-
-			}
-		
+			return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Help.class), helpId);
+		} catch(EmptyResultDataAccessException e) {
+			Help help = new Help();
+			help.setTitle("ERROR");
+			help.setText("The help ID you requested: " + helpId + " was not found in the database");
+			return help;
 		} catch (DataAccessException e) {
 			logger.debug(e, e);
 			throw new ResourceNotFoundException("The heldp ID you requested: " + helpId + " was not found in the database or is empty", e);

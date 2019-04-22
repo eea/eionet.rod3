@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -81,6 +82,8 @@ public class SourceServiceJdbc implements SourceService {
 			
 			instrumentFactsheetRec.setClassifications(getInstrumentClassifications(sourceId));
 
+		} catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Not found");
 		} catch (DataAccessException e) {
 		    logger.debug(e, e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
@@ -182,24 +185,10 @@ public class SourceServiceJdbc implements SourceService {
 				+ "INNER JOIN T_SOURCE AS S "
 				+ "ON S.PK_SOURCE_ID=CSL.FK_SOURCE_ID "
 				+ "WHERE S.PK_SOURCE_ID=? AND CSL.STATUS='M'";
-		
-		String queryCount = "SELECT count(*) AS clientId "
-				+ "FROM T_CLIENT AS C "
-				+ "INNER JOIN T_CLIENT_SOURCE_LNK AS CSL "
-				+ "ON C.PK_CLIENT_ID=CSL.FK_CLIENT_ID "
-				+ "INNER JOIN T_SOURCE AS S "
-				+ "ON S.PK_SOURCE_ID=CSL.FK_SOURCE_ID "
-				+ "WHERE S.PK_SOURCE_ID=? AND CSL.STATUS='M'";
-		
+
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		
-		Integer countClients= jdbcTemplate.queryForObject(queryCount, Integer.class, sourceId);
-		if (countClients  != 0 ) {
-			return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(ClientDTO.class), sourceId);
-		}else {
-			return null;
-		}
-		
+
+		return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(ClientDTO.class), sourceId);
 	}
 
 	@Override

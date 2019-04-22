@@ -102,7 +102,7 @@ public class ITUndoService {
     	assertEquals(undoList.get(0).getValue(), "arroyyol");
     	
     	List<UndoDTO> undoList2 = undoService.getPreviousActionsReportSpecific(9, "T_OBLIGATION", "PK_RA_ID", "U");
-    	assertNull(undoList2);
+    	assertEquals(0, undoList2.size());
     	
     }
     

@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.springframework.context.ApplicationContextException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -71,20 +72,15 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		String query = "SELECT PK_RA_ID AS obligationId, TITLE AS oblTitle, DESCRIPTION AS description "
                 + "FROM T_OBLIGATION "
                 + "ORDER BY title";
-		
-		String queryCount = "SELECT Count(*) as obligationId "
-                + "FROM T_OBLIGATION ";
-		
-		try {
-		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class);
-		
-			if (countObligation.equals(0)) {
-				throw new ResourceNotFoundException("No data in the database");
-			}else {
-			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class));
 
+		try {
+		    List<Obligations> result = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class));
+
+		
+			if (result.isEmpty()) {
+				throw new ResourceNotFoundException("No data in the database");
+			} else {
+			    return result;
 			}
 			
 		} catch (DataAccessException e) {
@@ -385,26 +381,12 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID " 
 				+ "WHERE PK_RA_ID = ? ";
 		
-		String queryCount = "SELECT Count(*) as obligationId "
-				 + "FROM T_OBLIGATION OB "
-	             + "LEFT JOIN T_SOURCE SO ON SO.PK_SOURCE_ID = OB.FK_SOURCE_ID "
-	             + "LEFT JOIN T_ROLE CRO ON CRO.ROLE_ID=OB.COORDINATOR_ROLE "
-	             + "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
-	             + "LEFT JOIN T_CLIENT_OBLIGATION_LNK CLK ON CLK.STATUS='M' AND CLK.FK_RA_ID=OB.PK_RA_ID " 
-	             + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID " 
-				 + "WHERE PK_RA_ID = ? ";
 		try {
 		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, oblId);
-		
-			if (countObligation.equals(0)) {
-				throw new ResourceNotFoundException("The obligation you requested with id " + oblId + " was not found in the database");
-			}else {
-		
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), oblId);
+			return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), oblId);
 
-			}
-			
+		} catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("The obligation you requested with id " + oblId + " was not found in the database");
 		} catch (DataAccessException e) {
             logger.debug(e, e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
@@ -422,28 +404,12 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		        + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = ? AND o2.PK_RA_ID != ? AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
 		        + "ORDER BY o2.TITLE";
 
-	       
-	        String queryCount = "SELECT Count(*) as siblingoblId "
-    	        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
-	    	    + "WHERE T_SOURCE.PK_SOURCE_ID=o1.FK_SOURCE_ID AND o1.PK_RA_ID = ? AND o2.PK_RA_ID != ? AND o2.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID ";
-
-
-	        
 	        try {
 	    		
-				Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class,siblingoblId,siblingoblId);
-			
-				if (countObligation.equals(0)) {
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(SiblingObligation.class), siblingoblId, siblingoblId);
 
-					return null;
-					
-					//throw new ResourceNotFoundException("The obligation you requested with id " + siblingoblId + " was not found in the database");
-				}else {
-			
-					return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(SiblingObligation.class), siblingoblId, siblingoblId);
-
-				}
-				
+			} catch(EmptyResultDataAccessException e) {
+	        	return null;
 			} catch (DataAccessException e) {
                 logger.debug(e, e);
 				throw new ResourceNotFoundException("DataAccessException error: " + e, e);
@@ -461,25 +427,13 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "WHERE SP.PK_SPATIAL_ID = OBSP.FK_SPATIAL_ID "
              	+ "and VOLUNTARY = ? and OBSP.FK_RA_ID = ? "
                 + "ORDER BY name";
-       
-        
-        String queryCount = "SELECT Count(*) as spatialId "
-                + "FROM T_SPATIAL SP, T_RASPATIAL_LNK OBSP "
-				+ "WHERE SP.PK_SPATIAL_ID = OBSP.FK_SPATIAL_ID "
-             	+ "and VOLUNTARY = ? and OBSP.FK_RA_ID = ?";
 		
 		try {
 		
-			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, voluntary, obligationId);
-		
-			if (countSpatial.equals(0)) {
-				return null;
-			}else {
-			
-				 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), voluntary, obligationId);
+			 return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Spatial.class), voluntary, obligationId);
 
-			}
-			
+		} catch(EmptyResultDataAccessException e) {
+			return null;
 		} catch (DataAccessException e) {
 		    logger.debug(e, e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
@@ -498,24 +452,11 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				+ "and OBIS.FK_RA_ID = ? "
                 + "ORDER BY issueName";
         
-		String queryCount = "SELECT Count(*) as issueId "
-				+ "FROM T_ISSUE TIS, T_RAISSUE_LNK OBIS "
-				+ "WHERE TIS.PK_ISSUE_ID = OBIS.FK_ISSUE_ID "
-				+ "and OBIS.FK_RA_ID = ?";
-		
         try {
-    		
-			Integer countSpatial = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
-		
-			if (countSpatial.equals(0)) {
-				return null;
-			}else {
-			
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), obligationId);
-
-			}
-			
-		} catch (DataAccessException e) {
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Issue.class), obligationId);
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}catch (DataAccessException e) {
             logger.debug(e, e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
@@ -974,29 +915,17 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 + "ON OBR.FK_RA_ID2=OB.PK_RA_ID "
     			+ "WHERE OBR.FK_RA_ID = ? ";
 
-		
-		String queryCount = "SELECT Count(*) as relObligationId "
-                + "FROM T_OBLIGATION_RELATION "
-                + "WHERE FK_RA_ID = ? ";
-		
 		try {
-		
-			Integer countObligation = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationId);
-		
-			if (countObligation.equals(0)) {
-				Obligations obligation = new Obligations();
-				obligation.setRelObligationId(0);
-				obligation.setOblRelationId("0");
-				obligation.setOblRelationTitle("");
-				
-				return obligation;
-			}else {
-			
-				return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), obligationId);
+			return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Obligations.class), obligationId);
+		} catch(EmptyResultDataAccessException e) {
+			Obligations o = new Obligations();
+			o.setRelObligationId(0);
+			o.setOblRelationId("0");
+			o.setOblRelationTitle("");
+			return o;
 
-			}
-			
-		} catch (DataAccessException e) {
+			// todo try null here
+		}catch (DataAccessException e) {
 		    logger.debug(e, e);
 			throw new ResourceNotFoundException("DataAccessException error: " + e, e);
 		}
@@ -1063,19 +992,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
     			+ "FROM T_CLIENT AS CL INNER JOIN T_CLIENT_OBLIGATION_LNK AS COL "
     			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
     			+ "WHERE COL.FK_RA_ID=?";
-    	
-    	String queryCount = "SELECT Count(*) "
-    			+ "FROM T_CLIENT AS CL INNER JOIN T_CLIENT_OBLIGATION_LNK AS COL "
-    			+ "ON CL.PK_CLIENT_ID = COL.FK_CLIENT_ID "
-    			+ "WHERE COL.FK_RA_ID=?";
-    	
-    	Integer countClients = jdbcTemplate.queryForObject(queryCount, Integer.class, obligationID);
-    	
-    	if (countClients == 0) {
-    		return null;
-    	} else {
+
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ClientDTO.class), obligationID);
-    	}    	
-    	
     }	   
 }
