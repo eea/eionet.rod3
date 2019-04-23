@@ -540,10 +540,10 @@ public class UndoInfoController {
 					currentValues.add(toStringOrEmpty(instrument.getSourceEcAccession()));
 					currentValues.add(toStringOrEmpty(instrument.getSourceEcEntryIntoForce()));
 					currentValues.add(instrument.getClientId().toString());
-					currentValues.add(instrument.getSourceFkTypeId().toString());
+					currentValues.add(toStringOrEmpty(instrument.getSourceFkTypeId()));
 					currentValues.add(toStringOrEmpty(instrument.getSourceIssuedBy()));
-					currentValues.add(instrument.getSourceIssuedByUrl());
 					currentValues.add(toStringOrEmpty(instrument.getSourceLastModified()));
+//					currentValues.add(instrument.getSourceIssuedByUrl());
 					currentValues.add(toStringOrEmpty(instrument.getSourceLastUpdate()));
 					currentValues.add(instrument.getSourceLegalName());
 					currentValues.add(instrument.getSourceId().toString());

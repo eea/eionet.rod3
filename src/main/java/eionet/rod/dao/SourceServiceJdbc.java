@@ -247,7 +247,7 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("SECRETARIAT", instrumentFactsheetRec.getSourceSecretariat());
 		parameters.put("SECRETARIAT_URL", instrumentFactsheetRec.getSourceSecretariatUrl());
 		parameters.put("FK_CLIENT_ID", instrumentFactsheetRec.getClientId());
-		parameters.put("FK_TYPE_ID", instrumentFactsheetRec.getSourceFkTypeId()); //todo WHY was it zero?
+		parameters.put("FK_TYPE_ID", null); //todo WHY unused?
 		parameters.put("LEGAL_NAME", "");
 	   
 		// java.sql.Date

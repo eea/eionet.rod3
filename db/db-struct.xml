@@ -1494,4 +1494,8 @@
            baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
     </changeSet>
+    <changeSet id="rev-85" author="ivascu">
+        <comment>Setting the fk_type_id as optional, as the code doesn't set it</comment>
+        <dropNotNullConstraint  tableName="t_source" columnName="fk_type_id" columnDataType="int(10) unsigned"/>
+    </changeSet>
 </databaseChangeLog>
