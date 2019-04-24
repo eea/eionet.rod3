@@ -14,8 +14,11 @@ public class AnalysisServiceJdbc implements AnalysisService {
 
 	private DataSource dataSource;
 
+	JdbcTemplate jdbcTemplate;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 	
 	@Override
@@ -25,8 +28,7 @@ public class AnalysisServiceJdbc implements AnalysisService {
 		String date;
 		
 		AnalysisDTO analysisDTORec = new AnalysisDTO();
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		
+
 		String query = "SELECT COUNT(*) AS totalRa FROM T_OBLIGATION";
 		number = jdbcTemplate.queryForObject(query, Integer.class);
 		Integer totalRa = number.intValue();

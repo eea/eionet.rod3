@@ -25,8 +25,11 @@ public class UndoServiceJdbc implements UndoService {
 
 	private DataSource dataSource;
 
+   JdbcTemplate jdbcTemplate;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
 	@Override
@@ -35,7 +38,6 @@ public class UndoServiceJdbc implements UndoService {
                 + "COL, OPERATION, QUOTES, P_KEY, VALUE, "
                 + "SUB_TRANS_NR, SHOW_OBJECT) VALUES (?,?,?,?,?,?,?,?,?)";
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(query,
 				ts,
 				table,
@@ -60,7 +62,6 @@ public class UndoServiceJdbc implements UndoService {
 		boolean aux;
 		//String queryColumns = "SELECT COLUMN_NAME FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`=? AND TABLE_SCHEMA='rod3testdb'";
 		String insert ="INSERT INTO T_UNDO (UNDO_TIME, TAB, COL, OPERATION, QUOTES, P_KEY, VALUE, SUB_TRANS_NR, SHOW_OBJECT) VALUES (?,?,?,?,?,?,?,?,?)";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		TableMetaDataContext tableMetadataContext = new TableMetaDataContext();
 		tableMetadataContext.setTableName(table);
@@ -771,8 +772,6 @@ public class UndoServiceJdbc implements UndoService {
 		String whereClause = idField + " = " + id + " " + extraSQL;
 		String insert = "INSERT INTO T_UNDO VALUES (?,?,?,?,'y','n',?,0,'n')";
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		jdbcTemplate.update(insert,
 				ts,
 				table,
@@ -788,8 +787,6 @@ public class UndoServiceJdbc implements UndoService {
 				"FROM T_OBLIGATION " +
 				"WHERE FK_SOURCE_ID=?";
 		String insert = "INSERT INTO T_UNDO VALUES (?,?,'OBLIGATIONS','O','y','n',?,0,'y')";
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		List<Integer> keys = jdbcTemplate.queryForList(query, Integer.class, id);
 		StringBuilder obligationIds = new StringBuilder();
@@ -820,8 +817,6 @@ public class UndoServiceJdbc implements UndoService {
 
 		String user;
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
         List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), idField, id, tab, operation);
         for (UndoDTO version : versions) {
             user = jdbcTemplate.queryForObject(queryUser, String.class, version.getUndoTime(), "A_USER", tab);
@@ -835,8 +830,6 @@ public class UndoServiceJdbc implements UndoService {
 	public List<UndoDTO> getUndoList(long ts, String table, String op) {
 		String query = "SELECT COL AS col, VALUE AS value, SUB_TRANS_NR AS subTransNr "
 				+ "FROM T_UNDO WHERE UNDO_TIME=? AND TAB=? AND OPERATION=?";
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), ts, table, op);
 	}
@@ -853,8 +846,6 @@ public class UndoServiceJdbc implements UndoService {
 				+ "AND U2.COL = 'A_USER' "
 				+ "ORDER BY U1.UNDO_TIME DESC";
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class));
 	}
 
@@ -863,7 +854,6 @@ public class UndoServiceJdbc implements UndoService {
 		String query = "SELECT COUNT(*) FROM T_UNDO "
 				+ "WHERE TAB=? AND COL=? AND VALUE=? AND OPERATION='D'";
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		Integer count = jdbcTemplate.queryForObject(query, Integer.class, table, column, id);
 
 		return count != 0;
@@ -888,8 +878,6 @@ public class UndoServiceJdbc implements UndoService {
 				+ "ORDER BY U1.UNDO_TIME DESC "
 				+ "LIMIT 100";
 
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class));
 
 	}
@@ -901,8 +889,6 @@ public class UndoServiceJdbc implements UndoService {
 				+ "FROM T_UNDO "
 				+ "WHERE undo_time=? AND operation=? AND tab=? "
 				+ "ORDER BY undo_time, tab, sub_trans_nr";
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), ts, op, tab);
 	}

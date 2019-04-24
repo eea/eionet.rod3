@@ -26,6 +26,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -55,6 +56,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcInsert jdbcInsert;
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	
 	
@@ -62,6 +64,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		this.jdbcInsert = new SimpleJdbcInsert(dataSource);
+		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	/**
@@ -145,17 +148,16 @@ public class ObligationsDaoImpl implements ObligationsDao {
             	String ret1 ="";
             	String ret3 = " ) OR ( ";
             	if (!RODUtil.isNullOrEmpty(date1) ) {
-            		ret1 += "NEXT_DEADLINE >= '" + date1 + "' ";
-            		ret2 += "NEXT_DEADLINE2 >= '" + date1 + "' "; 
+            		ret1 += "NEXT_DEADLINE >= :date1 ";
+            		ret2 += "NEXT_DEADLINE2 >= :date1 ";
             	}
             	if (!RODUtil.isNullOrEmpty(date2) ) {
             		if(!RODUtil.isNullOrEmpty(ret1))
             			ret1 += " AND ";
-            		ret1 += "NEXT_DEADLINE <= '" + date2 + "' ";
+            		ret1 += "NEXT_DEADLINE <= :date2 ";
             		if(!RODUtil.isNullOrEmpty(ret2))
             			ret2 += " AND ";
-            		
-            		ret2 += "NEXT_DEADLINE2 <= '" + date2 + "' ";
+            		ret2 += "NEXT_DEADLINE2 <= :date2 ";
             	}
             	
             	ret += ret1 + ret3 + ret2;
@@ -196,17 +198,11 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	@Override
 	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage) throws ResourceNotFoundException {
 		
-		boolean includeAnd = false;
-		boolean includeWhere = true;
-
-		MapSqlParameterSource parms = new MapSqlParameterSource();
+		MapSqlParameterSource params = new MapSqlParameterSource();
 		
 		String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
 				+ "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, SO.SOURCE_CODE as sourceCode, "
 				+ "OB.NEXT_DEADLINE as nextDeadline, "
-				//+ "CASE WHEN OB.NEXT_DEADLINE != '0000-00-00' THEN OB.NEXT_DEADLINE ELSE '' END as nextDeadline, "
-				
-				//+ "IF(OB.NEXT_DEADLINE, DATE_FORMAT(OB.NEXT_DEADLINE, '%d/%m/%Y'), '') as nextDeadline, "
 				+ "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
 				if (deadlinePage) {
 					query += ", OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery "
@@ -220,70 +216,26 @@ public class ObligationsDaoImpl implements ObligationsDao {
 		                + "LEFT JOIN T_CLIENT CL ON CLK.FK_CLIENT_ID=CL.PK_CLIENT_ID "
 						+ "LEFT JOIN T_RASPATIAL_LNK RAS ON RAS.FK_RA_ID=OB.PK_RA_ID "
 						+ "LEFT JOIN T_ROLE RRO ON RRO.ROLE_ID=OB.RESPONSIBLE_ROLE "
-						+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID ";
+						+ "LEFT JOIN T_RAISSUE_LNK RAI ON RAI.FK_RA_ID=OB.PK_RA_ID WHERE 1=1 ";
 
 				if (!RODUtil.isNullOrEmpty(clientId) && !"0".equals(clientId)) {
-					
-					query += " WHERE CLK.FK_CLIENT_ID = " + clientId;
-					includeWhere = false;
-					includeAnd = true;
-
-					parms.addValue("CLK.FK_CLIENT_ID", clientId);
-
+					query += " AND CLK.FK_CLIENT_ID = :client_id ";
+					params.addValue("client_id", clientId);
 				}
 				if (!RODUtil.isNullOrEmpty(spatialId) && !"0".equals(spatialId)) {
-					if (includeWhere) {
-						query += " WHERE ";
-						includeWhere = false;
-						includeAnd = true;
-
-					}else if (includeAnd) {
-						query += " AND ";
-						includeAnd = true;
-
-					}
-
-					parms.addValue("RAS.FK_SPATIAL_ID",spatialId);
-				
-					query += "RAS.FK_SPATIAL_ID = " + spatialId;
+					query += " AND RAS.FK_SPATIAL_ID = :spatial_id ";
+					params.addValue("spatial_id", spatialId);
 				}
 				if (!RODUtil.isNullOrEmpty(issueId) && !"0".equals(issueId) && !"NI".equals(issueId)) {
-					if (includeWhere) {
-						query += " WHERE ";
-						includeWhere = false;
-						includeAnd = true;
-
-					}else if (includeAnd) {
-						query += " AND ";
-						includeAnd = true;
-
-					}
-
-					query += "RAI.FK_ISSUE_ID = " + issueId;
+					query += " AND RAI.FK_ISSUE_ID = :rai_issue_id ";
+					params.addValue("rai_issue_id", issueId);
 				} else if ("NI".equals(issueId)) {
-					if (includeWhere) {
-						query += " WHERE ";
-						includeWhere = false;
-						includeAnd = true;
-					}else if (includeAnd) {
-						query += " AND ";
-						includeAnd = true;
-					}
-					//query += "RAI.FK_ISSUE_ID = " + issueId;
-					query += " OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
+					// todo check if valid
+					query += " AND OB.PK_RA_ID NOT IN (SELECT DISTINCT RAI2.FK_RA_ID FROM T_RAISSUE_LNK RAI2) ";
 				}
 				if (!RODUtil.isNullOrEmpty(terminate) && "N".equals(terminate))  {
-					if (includeWhere) {
-						query += " WHERE ";
-						includeWhere = false;
-						includeAnd = true;
-					
-					}else if (includeAnd) {
-						query += " AND ";
-						includeAnd = true;
-						
-					}
-					query += " OB.Terminate = '" + terminate + "'";
+					query += " AND OB.Terminate = :ob_terminate ";
+					params.addValue("ob_terminate", terminate);
 				}
 				if (!RODUtil.isNullOrEmpty(deadlineCase) && !"0".equals(deadlineCase) || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
 					if (!RODUtil.isNullOrEmpty(date1)) {
@@ -300,44 +252,32 @@ public class ObligationsDaoImpl implements ObligationsDao {
 					}
 					String queryDeadline = handleDeadlines(deadlineCase, date1, date2) ;
 					if (!queryDeadline.isEmpty()) {
-						if (includeWhere) {
-							query += " WHERE ";
-							includeWhere = false;
-							includeAnd = true;
-						}else if (includeAnd) {
-							query += " AND ";
-							includeAnd = true;
-						}
-						query += queryDeadline;	
+						query += "AND " + queryDeadline;
+						params.addValue("date1", date1);
+						params.addValue("date2", date2);
+						// todo solve with all the date issues
 					}
 					
 				}
 				if (!RODUtil.isNullOrEmpty(anmode) &&  !"NI".equals(anmode)) {
-					if (includeWhere) {
-						query += " WHERE ";
-						includeWhere = false;
-					}else if (includeAnd) {
-						query += " AND ";
-					}
 					if ("C".equals(anmode))
 					{
-						query += " EEA_CORE=1 ";
+						query += " AND EEA_CORE=1 ";
 					}
 					if ("P".equals(anmode))
 					{
-						query += " EEA_PRIMARY=1 ";
+						query += " AND EEA_PRIMARY=1 ";
 					}
 					if ("F".equals(anmode))
 					{
-						query += " FLAGGED=1 ";
+						query += " AND FLAGGED=1 ";
 					}
 				}
 
                 query += " ORDER BY oblTitle";
 		
         try {
-
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class)); //jdbcTemplate.query(query, new BeanPropertyRowMapper<Obligations>(Obligations.class),new Object[] { parameters });
+        	return namedParameterJdbcTemplate.query(query, params, new BeanPropertyRowMapper<>(Obligations.class));
         } catch (DataAccessException e) {
             logger.debug(e, e);
         	throw new ResourceNotFoundException("DataAccessException error: " + e, e);
@@ -397,7 +337,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * find the sibling obligations 
 	 */
 	@Override
-	 public List<SiblingObligation> findSiblingObligations(Integer siblingoblId) {
+	 public List<SiblingObligation> findSiblingObligations(Integer siblingOblId) {
 
 	        String query = "SELECT o2.PK_RA_ID as siblingoblId, o2.FK_SOURCE_ID as fkSourceId , o2.TITLE as siblingTitle, o2.AUTHORITY as authority, o2.TERMINATE as terminate "
 		        + "FROM T_OBLIGATION o1, T_OBLIGATION o2, T_SOURCE "
@@ -406,7 +346,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
 	        try {
 	    		
-				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(SiblingObligation.class), siblingoblId, siblingoblId);
+				return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(SiblingObligation.class), siblingOblId, siblingOblId);
 
 			} catch(EmptyResultDataAccessException e) {
 	        	return null;
@@ -480,9 +420,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        parameters.put("TITLE", obligation.getOblTitle()); //obl
 	        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
 	        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
+
 	        if (!RODUtil.isNullOrEmpty(obligation.getFirstReporting())) {
 	        	try {
-	        		
 	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getFirstReporting())).getTime());
 	                parameters.put("FIRST_REPORTING", date);
 	            } catch (ParseException e) {

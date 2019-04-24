@@ -26,6 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,15 +50,19 @@ public class DeliveryDaoImpl implements DeliveryDao{
 	}
 	
 	private JdbcTemplate jdbcTemplate;
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	@Resource
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
 	@Override
 	public List<Delivery> getAllDelivery(String actDetailsId, String spatialId) throws ResourceNotFoundException {
-		
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+
 		String query =  "SELECT T_DELIVERY.FK_RA_ID as deliveryFKObligationId, T_DELIVERY.FK_SPATIAL_ID as deliveryFKSpatialId, T_DELIVERY.TITLE as deliveryTitle, "
                 +"T_DELIVERY.DELIVERY_URL as deliveryUrl, T_DELIVERY.UPLOAD_DATE as deliveryUploadDate, T_DELIVERY.TYPE AS deliveryType, T_DELIVERY.FORMAT as deliveryFormat, T_DELIVERY.COVERAGE as deliveryCoverage, T_DELIVERY.COVERAGE_NOTE as deliveryCoverageNote, "
                 + "T_OBLIGATION.PK_RA_ID, T_OBLIGATION.FK_SOURCE_ID, T_OBLIGATION.TITLE AS OBLIGATION_TITLE, T_OBLIGATION.REPORT_FREQ_MONTHS, "
@@ -71,17 +77,19 @@ public class DeliveryDaoImpl implements DeliveryDao{
                 + "LEFT JOIN T_ROLE ON T_OBLIGATION.RESPONSIBLE_ROLE=T_ROLE.ROLE_ID "
                 + "LEFT JOIN T_CLIENT_OBLIGATION_LNK ON T_CLIENT_OBLIGATION_LNK.STATUS='M' AND T_CLIENT_OBLIGATION_LNK.FK_RA_ID=T_OBLIGATION.PK_RA_ID "
                 + "LEFT JOIN T_CLIENT ON T_CLIENT_OBLIGATION_LNK.FK_CLIENT_ID=T_CLIENT.PK_CLIENT_ID "
-                + "WHERE T_DELIVERY.FK_RA_ID="
-                + actDetailsId;
+                + "WHERE T_DELIVERY.FK_RA_ID=:ra_id";
+
+		params.addValue("ra_id", actDetailsId);
 
         if (!RODUtil.isNullOrEmpty(spatialId)) {
-            query += " AND T_DELIVERY.FK_SPATIAL_ID = " + spatialId;
+            query += " AND T_DELIVERY.FK_SPATIAL_ID = :spatial_id ";
+            params.addValue("spatial_id", spatialId);
         }
 
         query += " ORDER BY T_DELIVERY.UPLOAD_DATE DESC";
 
 		try {
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Delivery.class));
+			return namedParameterJdbcTemplate.query(query, params, new BeanPropertyRowMapper<>(Delivery.class));
 		}catch (DataAccessException ex) {
 	    	logger.debug(ex.getMessage(), ex);
 			throw new ResourceNotFoundException("DataAccessException error: " + ex.getMessage(), ex);

@@ -58,7 +58,7 @@ public class SpatialDaoImpl implements SpatialDao {
 	public List<Spatial> findAllMember(String member) throws ResourceNotFoundException{
 		String query = "SELECT PK_SPATIAL_ID AS spatialId, SPATIAL_NAME AS name "
                 + "FROM T_SPATIAL "
-				+ "WHERE CAST(SPATIAL_ISMEMBERCOUNTRY as char) = ?"
+				+ "WHERE SPATIAL_ISMEMBERCOUNTRY = ?"
                 + "ORDER BY name";
 
 		try {
