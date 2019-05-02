@@ -499,33 +499,6 @@ public class ObligationsController {
         BreadCrumbs.set(model, obligationCrumb, new BreadCrumb("Edit obligation"));
         Obligations obligations = obligationsService.findOblId(obligationId);
         
-        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
-        	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
-        }else {
-        	obligations.setFirstReporting(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
-        	obligations.setValidTo(RODUtil.strDate(obligations.getValidTo()));
-        }else {
-        	obligations.setValidTo(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
-        	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
-        }else {
-        	obligations.setNextDeadline2(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
-        	obligations.setNextDeadline(RODUtil.strDate(obligations.getNextDeadline()));
-        }else {
-        	obligations.setNextDeadline(null);
-        }
-        
-        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
-        	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
-        }else {
-        	obligations.setValidSince(null);
-        }
-       
         //init var ListBox
         List<String> selectedClients = new ArrayList<>();
         obligations.setSelectedClients(selectedClients);
@@ -748,33 +721,7 @@ public class ObligationsController {
         processEditDelete("U", authentication.getName(), obligations.getObligationId(), ts);
         
 		obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
-        //change format of Dates to visualize dd/mm/yyyy
-        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
-        	obligations.setFirstReporting(RODUtil.strDate(obligations.getFirstReporting()));
-        }else {
-        	obligations.setFirstReporting(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
-        	obligations.setValidTo(RODUtil.strDate(obligations.getValidTo()));
-        }else {
-        	obligations.setValidTo(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
-        	obligations.setNextDeadline2(RODUtil.strDate(obligations.getNextDeadline2()));
-        }else {
-        	obligations.setNextDeadline2(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
-        	obligations.setNextDeadline(RODUtil.strDate(obligations.getNextDeadline()));
-        }else {
-        	obligations.setNextDeadline(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
-        	obligations.setValidSince(RODUtil.strDate(obligations.getValidSince()));
-        }else {
-        	obligations.setValidSince(null);
-        }
-        
+
         model.addAttribute("obligation", obligations);
         
         model.addAttribute("id","edit");
@@ -927,16 +874,16 @@ public class ObligationsController {
                     value = obligation.getDescription();
                     break;
                 case "FIRST_REPORTING":
-                    value = obligation.getFirstReporting();
+                    value = (obligation.getFirstReporting() != null)? obligation.getFirstReporting().toString() : null;
                     break;
                 case "VALID_TO":
-                    value = obligation.getValidTo();
+                    value = (obligation.getValidTo() != null)?obligation.getValidTo().toString() : null;
                     break;
                 case "REPORT_FREQ_MONTHS":
                     value = obligation.getReportFreqMonths();
                     break;
                 case "NEXT_DEADLINE":
-                    value = obligation.getNextDeadline();
+                    value = (obligation.getNextDeadline() != null)?obligation.getNextDeadline().toString():null;
                     break;
                 case "NEXT_REPORTING":
                     value = obligation.getNextReporting();
@@ -951,7 +898,7 @@ public class ObligationsController {
                     value = obligation.getReportFormatUrl();
                     break;
                 case "VALID_SINCE":
-                    value = obligation.getValidSince();
+                    value = (obligation.getValidSince() != null)?obligation.getValidSince().toString() : null;
                     break;
                 case "REPORTING_FORMAT":
                     value = obligation.getReportingFormat();
@@ -1038,10 +985,10 @@ public class ObligationsController {
                     value = obligation.getDeliveryCountryId();
                     break;
                 case "NEXT_DEADLINE2":
-                    value = obligation.getNextDeadline2();
+                    value = (obligation.getNextDeadline2() != null)?obligation.getNextDeadline2().toString():null;
                     break;
                 case "LAST_HARVESTED":
-                    value = obligation.getLastHarvested();
+                    value = (obligation.getLastHarvested() != null)?obligation.getLastHarvested().toString():null;
                     break;
                 case "CONTINOUS_REPORTING":
                     value = obligation.getContinousReporting();

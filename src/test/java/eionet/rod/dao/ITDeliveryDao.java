@@ -69,7 +69,7 @@ public class ITDeliveryDao {
     public void testRollBackDeliveries() throws DataAccessException
     {
     	try {
-    	deliveryService.rollBackDeliveries();
+    	    deliveryService.rollBackDeliveries();
     	} catch (DataAccessException sqle) {
             throw new ResourceNotFoundException(sqle.getMessage(), sqle);
         } 

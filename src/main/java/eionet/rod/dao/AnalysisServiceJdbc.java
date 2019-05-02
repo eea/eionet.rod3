@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eionet.rod.model.AnalysisDTO;
 
+import java.util.Date;
+
 @Service(value = "analysisService")
 @Transactional
 public class AnalysisServiceJdbc implements AnalysisService {
@@ -25,7 +27,7 @@ public class AnalysisServiceJdbc implements AnalysisService {
 	public AnalysisDTO getStatistics() {
 		
 		Number number;
-		String date;
+		Date date;
 		
 		AnalysisDTO analysisDTORec = new AnalysisDTO();
 
@@ -33,17 +35,17 @@ public class AnalysisServiceJdbc implements AnalysisService {
 		number = jdbcTemplate.queryForObject(query, Integer.class);
 		Integer totalRa = number.intValue();
 		query = "SELECT MAX(LAST_UPDATE) AS lastUpdateRa FROM T_OBLIGATION";
-		date = jdbcTemplate.queryForObject(query, String.class);
+		date = jdbcTemplate.queryForObject(query, Date.class);
 		analysisDTORec.setTotalRa(totalRa);
-		analysisDTORec.setLastUpdateRa(date.substring(0, 10));
+		analysisDTORec.setLastUpdateRa(date);
 		
 		query = "SELECT COUNT(*) AS totalLi FROM T_SOURCE";
 		number = jdbcTemplate.queryForObject(query, Integer.class);
 		Integer totalLi = number.intValue();
 		query = "SELECT MAX(LAST_UPDATE) AS lastUpdateLi FROM T_SOURCE";
-		date = jdbcTemplate.queryForObject(query, String.class);
+		date = jdbcTemplate.queryForObject(query, Date.class);
 		analysisDTORec.setTotalLi(totalLi);
-		analysisDTORec.setLastUpdateLi(date.substring(0, 10));
+		analysisDTORec.setLastUpdateLi(date);
 		
 		query = "SELECT COUNT(PK_RA_ID) AS eeaCore FROM T_OBLIGATION WHERE EEA_CORE=1";
 		number = jdbcTemplate.queryForObject(query, Integer.class);

@@ -1,11 +1,13 @@
 package eionet.rod.model;
 
+import java.util.Date;
+
 public class AnalysisDTO {
 	
 	private Integer totalRa;
-    private String lastUpdateRa;
+    private Date lastUpdateRa;
     private Integer totalLi;
-    private String lastUpdateLi;
+    private Date lastUpdateLi;
     private Integer eeaCore;
     private Integer eeaPriority;
 
@@ -24,11 +26,11 @@ public class AnalysisDTO {
 		this.totalRa = totalRa;
 	}
 
-	public String getLastUpdateRa() {
+	public Date getLastUpdateRa() {
 		return lastUpdateRa;
 	}
 
-	public void setLastUpdateRa(String lastUpdateRa) {
+	public void setLastUpdateRa(Date lastUpdateRa) {
 		this.lastUpdateRa = lastUpdateRa;
 	}
 
@@ -40,11 +42,11 @@ public class AnalysisDTO {
 		this.totalLi = totalLi;
 	}
 
-	public String getLastUpdateLi() {
+	public Date getLastUpdateLi() {
 		return lastUpdateLi;
 	}
 
-	public void setLastUpdateLi(String lastUpdateLi) {
+	public void setLastUpdateLi(Date lastUpdateLi) {
 		this.lastUpdateLi = lastUpdateLi;
 	}
 

@@ -1,6 +1,10 @@
 package eionet.rod.util;
 
 import org.junit.Test;
+
+import java.util.Calendar;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -117,19 +121,19 @@ public class RODUtilTest {
     
     }
     
-    @Test
-    public void test_str2Date() {
-    	//System.out.print(RODUtil.str2Date("21/12/2017"));
-    	assertEquals("2017-12-21",RODUtil.str2Date("21/12/2017"));
-    	assertEquals("NULL" ,RODUtil.str2Date(""));
-    }
+//    @Test
+//    public void test_str2Date() {
+//    	//System.out.print(RODUtil.str2Date("21/12/2017"));
+//    	assertEquals("2017-12-21",RODUtil.str2Date("21/12/2017"));
+//    	assertEquals("NULL" ,RODUtil.str2Date(""));
+//    }
     
   
-    @Test
-    public void test_strDate() {
-    	assertEquals("21/12/2017",RODUtil.strDate("2017-12-21"));
-    	assertEquals("NULL" ,RODUtil.strDate(""));
-    }
+//    @Test
+//    public void test_strDate() {
+//    	assertEquals("21/12/2017",RODUtil.strDate("2017-12-21"));
+//    	assertEquals("NULL" ,RODUtil.strDate(""));
+//    }
     
     @Test 
     public void truncateText() {
@@ -149,14 +153,26 @@ public class RODUtilTest {
     	assertEquals("2018-02-27 13:18:14",RODUtil.miliseconds2Date(ts));
     }
     
-    @Test
-	public void testDateIsValid() {
-		assertTrue(RODUtil.validateDate("32/02/2012"));
-	}
-
 	@Test
-	public void testDayIsInvalid() {
-		assertFalse(RODUtil.validateDate("32-02-2012"));
-	}
+    public void testReadDate() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        c.set(Calendar.DAY_OF_MONTH, 21);
+        c.set(Calendar.MONTH, Calendar.MARCH);
+        c.set(Calendar.YEAR, 2019);
+        Date theDate = c.getTime();
+        assertEquals(theDate, RODUtil.readDate("21/03/2019"));
+        assertEquals(theDate, RODUtil.readDate("21-03-2019"));
+        assertEquals(theDate, RODUtil.readDate("2019/03/21"));
+        assertEquals(theDate, RODUtil.readDate("2019-03-21"));
+        assertNull(RODUtil.readDate("10-02/2019"));
+        assertNull(RODUtil.readDate("10/02-2019"));
+        assertNull(RODUtil.readDate("10022019"));
+        assertNull(RODUtil.readDate("1002"));
+        assertNull(RODUtil.readDate("10-May-2019"));
+    }
     
  }

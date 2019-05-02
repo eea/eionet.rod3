@@ -78,9 +78,9 @@ public class ITSourceService {
     	instrumentFactsheetRec.setSourceCelexRef("31977D0795");
     	instrumentFactsheetRec.setClientId(1);
     	instrumentFactsheetRec.setSourceLnkFKSourceParentId(1);
-    	instrumentFactsheetRec.setSourceValidFrom("");
-    	instrumentFactsheetRec.setSourceEcEntryIntoForce("");
-    	instrumentFactsheetRec.setSourceEcAccession("");
+    	instrumentFactsheetRec.setSourceValidFrom(null);
+    	instrumentFactsheetRec.setSourceEcEntryIntoForce(null);
+    	instrumentFactsheetRec.setSourceEcAccession(null);
     	instrumentFactsheetRec.setSourceFkTypeId(15);
 
     	List<String> selectedClassifications = new ArrayList<>();
@@ -102,9 +102,9 @@ public class ITSourceService {
     	instrumentFactsheetRec.setSourceCelexRef("31977D0795");
     	instrumentFactsheetRec.setClientId(1);
     	instrumentFactsheetRec.setSourceLnkFKSourceParentId(1);
-    	instrumentFactsheetRec.setSourceValidFrom("");
-    	instrumentFactsheetRec.setSourceEcEntryIntoForce("");
-    	instrumentFactsheetRec.setSourceEcAccession("");
+    	instrumentFactsheetRec.setSourceValidFrom(null);
+    	instrumentFactsheetRec.setSourceEcEntryIntoForce(null);
+    	instrumentFactsheetRec.setSourceEcAccession(null);
 		
 		sourceService.update(instrumentFactsheetRec);
 		

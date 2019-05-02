@@ -106,15 +106,6 @@ public class InstrumentsController {
 		
 		model.addAttribute("sourceId", sourceId);
 		InstrumentFactsheetDTO instrument = sourceService.getById(sourceId);
-		if (!RODUtil.isNullOrEmpty(instrument.getSourceValidFrom())) {
-        	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
-        }
-        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcEntryIntoForce())) {
-        	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
-        }
-        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcAccession())) {
-        	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
-        }
         instrument.setSourceAbstract(RODUtil.replaceTags(instrument.getSourceAbstract()));
         instrument.setSourceComment(RODUtil.replaceTags(instrument.getSourceComment()));
 		model.addAttribute("instrument", instrument);
@@ -136,15 +127,6 @@ public class InstrumentsController {
         	instrument.setSourceLnkFKSourceParentId(instrument.getParent().getSourceId());
         }else {
         	instrument.setSourceLnkFKSourceParentId(-1);
-        }
-        if (!RODUtil.isNullOrEmpty(instrument.getSourceValidFrom())) {
-        	instrument.setSourceValidFrom(RODUtil.strDate(instrument.getSourceValidFrom()));
-        }
-        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcEntryIntoForce())) {
-        	instrument.setSourceEcEntryIntoForce(RODUtil.strDate(instrument.getSourceEcEntryIntoForce()));
-        }
-        if (!RODUtil.isNullOrEmpty(instrument.getSourceEcAccession())) {
-        	instrument.setSourceEcAccession(RODUtil.strDate(instrument.getSourceEcAccession()));
         }
         model.addAttribute("instrument", instrument);
         List<ClientDTO> clients = clientService.getAllClients();
@@ -365,7 +347,7 @@ public class InstrumentsController {
 					 value = instrument.getSourceAlias();
 					 break;
 				 case "VALID_FROM":
-					 value = instrument.getSourceValidFrom();
+					 value = (instrument.getSourceValidFrom() != null) ? instrument.getSourceValidFrom().toString() : null;
 					 break;
 				 case "ABSTRACT":
 					 value = instrument.getSourceAbstract();
@@ -377,10 +359,10 @@ public class InstrumentsController {
 					 value = instrument.getSourceIssuedByUrl();
 					 break;
 				 case "EC_ENTRY_INTO_FORCE":
-					 value = instrument.getSourceEcEntryIntoForce();
+					 value = (instrument.getSourceEcEntryIntoForce() != null) ? instrument.getSourceEcEntryIntoForce().toString() : null;
 					 break;
 				 case "EC_ACCESSION":
-					 value = instrument.getSourceEcAccession();
+					 value = (instrument.getSourceEcAccession() != null)?instrument.getSourceEcAccession().toString():null;
 					 break;
 				 case "SECRETARIAT":
 					 value = instrument.getSourceSecretariat();
@@ -395,7 +377,7 @@ public class InstrumentsController {
 					 value = instrument.getSourceFkTypeId().toString();
 					 break;
 				 case "LAST_MODIFIED":
-					 value = instrument.getSourceLastModified();
+					 value = (instrument.getSourceLastModified() != null)?instrument.getSourceLastModified().toString():null;
 					 break;
 				 case "ISSUED_BY":
 					 value = instrument.getSourceIssuedBy();
@@ -404,7 +386,7 @@ public class InstrumentsController {
 					 value = instrument.getClientId().toString();
 					 break;
 				 case "LAST_UPDATE":
-					 value = instrument.getSourceLastUpdate();
+					 value = (instrument.getSourceLastUpdate() != null)? instrument.getSourceLastUpdate().toString(): null;
 					 break;
 				 case "LEGAL_NAME":
 					 value = instrument.getSourceLegalName();

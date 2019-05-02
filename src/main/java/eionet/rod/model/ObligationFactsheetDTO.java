@@ -1,5 +1,7 @@
 package eionet.rod.model;
 
+import java.util.Date;
+
 /**
  *
  * @author altnyris
@@ -11,8 +13,8 @@ public class ObligationFactsheetDTO {
     private String obligationId;
     private String fkSourceId;
     private String fkClientId;
-    private String validSince;
-    private String validTo;
+    private Date validSince;
+    private Date validTo;
     private String title;
     private String formatName;
     private String reportFormatUrl;
@@ -25,9 +27,9 @@ public class ObligationFactsheetDTO {
     private String lastUpdate;
     private String comment;
     private String responsibleRole;
-    private String nextDeadline;
-    private String nextDeadline2;
-    private String firstReporting;
+    private Date nextDeadline;
+    private Date nextDeadline2;
+    private Date firstReporting;
     private String reportFreqMonths;
     private String continousReporting;
     private String fkDeliveryCountryIds;
@@ -132,22 +134,22 @@ public class ObligationFactsheetDTO {
     }
 
 
-    public String getValidSince() {
+    public Date getValidSince() {
         return validSince;
     }
 
 
-    public void setValidSince(String validSince) {
+    public void setValidSince(Date validSince) {
         this.validSince = validSince;
     }
 
 
-    public String getValidTo() {
+    public Date getValidTo() {
         return validTo;
     }
 
 
-    public void setValidTo(String validTo) {
+    public void setValidTo(Date validTo) {
         this.validTo = validTo;
     }
 
@@ -272,32 +274,32 @@ public class ObligationFactsheetDTO {
     }
 
 
-    public String getNextDeadline() {
+    public Date getNextDeadline() {
         return nextDeadline;
     }
 
 
-    public void setNextDeadline(String nextDeadline) {
+    public void setNextDeadline(Date nextDeadline) {
         this.nextDeadline = nextDeadline;
     }
 
 
-    public String getNextDeadline2() {
+    public Date getNextDeadline2() {
         return nextDeadline2;
     }
 
 
-    public void setNextDeadline2(String nextDeadline2) {
+    public void setNextDeadline2(Date nextDeadline2) {
         this.nextDeadline2 = nextDeadline2;
     }
 
 
-    public String getFirstReporting() {
+    public Date getFirstReporting() {
         return firstReporting;
     }
 
 
-    public void setFirstReporting(String firstReporting) {
+    public void setFirstReporting(Date firstReporting) {
         this.firstReporting = firstReporting;
     }
 

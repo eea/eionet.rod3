@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 <head th:include="layout :: headerFragment"></head>
 <body>
+<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
 <div id="container">
 	<div th:include="layout :: bannerFragment" ></div>
     <div id="workarea">
@@ -110,7 +111,7 @@
 				<div class="col-xs-8">
 					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated"  class="terminated"></span>
 					<span th:unless="${obligation.terminate} != 'N'">
-						<span th:if="${obligation.nextDeadline} != null" th:text="${obligation.nextDeadline}" ></span>
+						<span th:if="${obligation.nextDeadline} != null" th:text="${{obligation.nextDeadline}}" ></span>
 						<span th:unless="${obligation.nextDeadline} != null" th:text="${obligation.nextReporting}" ></span>
 					</span>
 				</div>
@@ -141,7 +142,7 @@
 				<div class="col-xs-8">
 					<a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
 					<span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
-					<span th:if="${obligation.validSince != null}" th:text="' [Valid since ' + ${obligation.validSince} + ']'"></span>
+					<span th:if="${obligation.validSince != null}" th:text="' [Valid since ' + ${{obligation.validSince}} + ']'"></span>
 				</div>
 			</div>
 			<div class="form-group odd">

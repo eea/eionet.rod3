@@ -26,6 +26,8 @@
 					</div>
 					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_RA_TITLE')" title="Help on this field"></a>
 					<div class="col-lg-8">
+						<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+
 						<input type="text" class="smalltext form-control" maxlength="255" onchange="checkMdText(this); changed()" name="oblTitle" id="oblTitle" th:field="${obligation.oblTitle}"/>
 					</div>
 				 </div>

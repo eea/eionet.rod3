@@ -1,5 +1,6 @@
 package eionet.rod.dao;
 
+import eionet.rod.util.RODUtil;
 import org.junit.runner.RunWith;
 import org.junit.Rule;
 //import org.junit.Rule;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.rules.ExpectedException;
 
 //import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +144,7 @@ public class ITObligationsDao {
         obligation.setTerminate("N");
         obligation.setCoordinatorRoleSuf("1");
         obligation.setResponsibleRoleSuf("0");
-        obligation.setValidTo("21/12/2017");
+        obligation.setValidTo(RODUtil.readDate("21/12/2017"));
         obligation.setClientId("1");
         obligation.setReportFreqMonths("5");
 

@@ -115,7 +115,7 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "VALID_FROM":
-						value = instrument.getSourceValidFrom();
+						value = (instrument.getSourceValidFrom() != null)?instrument.getSourceValidFrom().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -135,12 +135,12 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "EC_ENTRY_INTO_FORCE":
-						value = instrument.getSourceEcEntryIntoForce();
+						value = (instrument.getSourceEcEntryIntoForce() != null) ? instrument.getSourceEcEntryIntoForce().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
 					case "EC_ACCESSION":
-						value = instrument.getSourceEcAccession();
+						value = (instrument.getSourceEcAccession() != null) ? instrument.getSourceEcAccession().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -165,7 +165,7 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "LAST_MODIFIED":
-						value = instrument.getSourceLastModified();
+						value = (instrument.getSourceLastModified() != null)?instrument.getSourceLastModified().toString():null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -180,7 +180,7 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "LAST_UPDATE":
-						value = instrument.getSourceLastUpdate();
+						value = (instrument.getSourceLastUpdate() != null)?instrument.getSourceLastUpdate().toString():null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -356,12 +356,12 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "FIRST_REPORTING":
-						value = obligation.getFirstReporting();
+						value = (obligation.getFirstReporting() != null)? obligation.getFirstReporting().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
 					case "VALID_TO":
-						value = obligation.getValidTo();
+						value = (obligation.getValidTo() != null)?obligation.getValidTo().toString():null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -371,7 +371,7 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "NEXT_DEADLINE":
-						value = obligation.getNextDeadline();
+						value = (obligation.getNextDeadline() != null)?obligation.getNextDeadline().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -396,7 +396,7 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "VALID_SINCE":
-						value = obligation.getValidSince();
+						value = (obligation.getValidSince() != null) ? obligation.getValidSince().toString() : null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
@@ -533,12 +533,12 @@ public class UndoServiceJdbc implements UndoService {
 						isPrimary = "n";
 						break;
 					case "NEXT_DEADLINE2":
-						value = obligation.getNextDeadline2();
+						value = (obligation.getNextDeadline2() != null)?obligation.getNextDeadline2().toString():null;
 						quotes = "y";
 						isPrimary = "n";
 						break;
 					case "LAST_HARVESTED":
-						value = obligation.getLastHarvested();
+						value = (obligation.getLastHarvested() != null)?obligation.getLastHarvested().toString():null;
 						quotes = "y";
 						isPrimary = "n";
 						break;

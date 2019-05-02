@@ -193,7 +193,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
       
     /***
      * find all obligations by issue, country, deadline case and terminated yes or not(non-Javadoc)
-     * @see eionet.rod.dao.ObligationsDao#findObligationList(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
 	@Override
 	public List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage) throws ResourceNotFoundException {
@@ -239,14 +238,12 @@ public class ObligationsDaoImpl implements ObligationsDao {
 				}
 				if (!RODUtil.isNullOrEmpty(deadlineCase) && !"0".equals(deadlineCase) || !RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
 					if (!RODUtil.isNullOrEmpty(date1)) {
-						boolean datetrue = RODUtil.validateDate(date1);
-						if (!datetrue) {
+						if (RODUtil.readDate(date1) == null) {
 							throw new ResourceNotFoundException("Date error: " + date1);
 						}
 					}
 					if (!RODUtil.isNullOrEmpty(date2)) {
-						boolean datetrue = RODUtil.validateDate(date2);
-						if (!datetrue) {
+						if (RODUtil.readDate(date2) == null) {
 							throw new ResourceNotFoundException("Date error: " + date2);
 						}
 					}
@@ -420,76 +417,24 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	        parameters.put("TITLE", obligation.getOblTitle()); //obl
 	        parameters.put("FK_SOURCE_ID", Integer.parseInt(obligation.getSourceId())); //obl
 	        parameters.put("DESCRIPTION", obligation.getDescription()); //obl
+			parameters.put("FIRST_REPORTING", obligation.getFirstReporting());
 
-	        if (!RODUtil.isNullOrEmpty(obligation.getFirstReporting())) {
-	        	try {
-	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getFirstReporting())).getTime());
-	                parameters.put("FIRST_REPORTING", date);
-	            } catch (ParseException e) {
-	                parameters.put("FIRST_REPORTING", null);
-	            }
-	        }else {
-	        	parameters.put("FIRST_REPORTING", null);
-	        }
-	        
-            // VALID_TO is a DATE in the database. You can't give it a simple string as value.
-            if (!RODUtil.isNullOrEmpty(obligation.getValidTo())) {
-	            try {
-	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getValidTo())).getTime());
-	                parameters.put("VALID_TO", date);
-	            } catch (ParseException e) {
-	                parameters.put("VALID_TO", null);
-	            }
-	        }else {
-	        	parameters.put("VALID_TO",null);
-	        }  
-	        
+			parameters.put("VALID_TO", obligation.getValidTo());
+
 	        if (obligation.getReportFreqMonths().isEmpty() || obligation.getReportFreqMonths() == null) {
 	        	parameters.put("REPORT_FREQ_MONTHS", null);
 	        }else {
 	        	parameters.put("REPORT_FREQ_MONTHS", Integer.parseInt(obligation.getReportFreqMonths()));
 	        }
-	        
-	        if (!RODUtil.isNullOrEmpty(obligation.getNextDeadline())) {
-		        try {
-	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getNextDeadline())).getTime());
-	                parameters.put("NEXT_DEADLINE", date);
-	            } catch (ParseException e) {
-	                parameters.put("NEXT_DEADLINE", null);
-	            }
-	        }else {
-	        	parameters.put("NEXT_DEADLINE",null);
-	        }    
-	        
-	        if (!RODUtil.isNullOrEmpty(obligation.getNextDeadline2())) {
-		        try {
-	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getNextDeadline2())).getTime());
-	                parameters.put("NEXT_DEADLINE2", date);
-	            } catch (ParseException e) {
-	                parameters.put("NEXT_DEADLINE2", null);
-	            }
-	        }else {
-	        	parameters.put("NEXT_DEADLINE2",null);
-	        } 
-	        
+
+	        parameters.put("NEXT_DEADLINE", obligation.getNextDeadline());
+	        parameters.put("NEXT_DEADLINE2", obligation.getNextDeadline2());
 	        parameters.put("TERMINATE",obligation.getTerminate()); //obl
 	        parameters.put("NEXT_REPORTING",obligation.getNextReporting());
 	        parameters.put("DATE_COMMENTS",obligation.getDateComments());
 	        parameters.put("FORMAT_NAME",obligation.getFormatName());
 	        parameters.put("REPORT_FORMAT_URL",obligation.getReportFormatUrl());
-	       
-	        if (!RODUtil.isNullOrEmpty(obligation.getValidSince())) {
-	        	try {
-	                java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(obligation.getValidSince())).getTime());
-	                parameters.put("VALID_SINCE", date);
-	            } catch (ParseException e) {
-	                parameters.put("VALID_SINCE", null);
-	            }
-        	
-	        }else {
-	        	parameters.put("VALID_SINCE",null);
-	        }
-	        
+	        parameters.put("VALID_SINCE", obligation.getValidSince());
 	        parameters.put("REPORTING_FORMAT",obligation.getReportingFormat());
 	        parameters.put("LOCATION_INFO",obligation.getLocationInfo());
 	        parameters.put("LOCATION_PTR",obligation.getLocationPtr());
@@ -588,37 +533,37 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	
     	Calendar calendar = Calendar.getInstance();
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
-    	
-        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
-        	obligations.setFirstReporting(RODUtil.str2Date(obligations.getFirstReporting()));
-        }else {
-        	obligations.setFirstReporting(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
-        	obligations.setValidTo(RODUtil.str2Date(obligations.getValidTo()));
-        }else {
-        	obligations.setValidTo(null);
-        }
+//
+//        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
+//        	obligations.setFirstReporting(RODUtil.str2Date(obligations.getFirstReporting()));
+//        }else {
+//        	obligations.setFirstReporting(null);
+//        }
+//        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
+//        	obligations.setValidTo(RODUtil.str2Date(obligations.getValidTo()));
+//        }else {
+//        	obligations.setValidTo(null);
+//        }
         Integer setReportFreqMonths = null;
         if (!obligations.getReportFreqMonths().isEmpty()) {
         	setReportFreqMonths = Integer.parseInt(obligations.getReportFreqMonths());
         }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
-        	obligations.setNextDeadline(RODUtil.str2Date(obligations.getNextDeadline()));
-        }else {
-        	obligations.setNextDeadline(null);
-        }
-        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
-        	obligations.setNextDeadline2(RODUtil.str2Date(obligations.getNextDeadline2()));
-        }else {
-        	obligations.setNextDeadline2(null);
-        }
-       
-        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
-        	obligations.setValidSince(RODUtil.str2Date(obligations.getValidSince()));
-        }else {
-        	obligations.setValidSince(null);
-        }
+//        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
+//        	obligations.setNextDeadline(RODUtil.str2Date(obligations.getNextDeadline()));
+//        }else {
+//        	obligations.setNextDeadline(null);
+//        }
+//        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
+//        	obligations.setNextDeadline2(RODUtil.str2Date(obligations.getNextDeadline2()));
+//        }else {
+//        	obligations.setNextDeadline2(null);
+//        }
+//
+//        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
+//        	obligations.setValidSince(RODUtil.str2Date(obligations.getValidSince()));
+//        }else {
+//        	obligations.setValidSince(null);
+//        }
         Integer setCoordinatorRoleSuf = 0;
         if (obligations.getCoordinatorRoleSuf() != null) {
         	setCoordinatorRoleSuf =  Integer.parseInt(obligations.getCoordinatorRoleSuf()); //obl

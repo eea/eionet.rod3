@@ -18,42 +18,44 @@
 	<context:component-scan base-package="eionet.rod" />
 
 	<!-- Configures the @Controller programming model -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService"/>
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<!--	Default date format-->
+    <property name="formatterRegistrars">
+        <set>
+            <bean class="eionet.rod.util.DateFormatterRegistrar" />
+        </set>
+    </property>
 
-        <!-- You might want to try
-             class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver"
-         -->
+</bean>
+
 	<bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="prefix" value="/WEB-INF/thymeleaf/" />
 		<property name="suffix" value=".html" />
 		<property name="templateMode" value="HTML" />
 		<property name="cacheable" value="true" />
-                <property name="characterEncoding" value="UTF-8"/>
+		<property name="characterEncoding" value="UTF-8"/>
 	</bean>
 
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
-                <property name="additionalDialects">
-                    <set>
-                        <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
-                <!--
-                        <bean class="org.thymeleaf.presentation.dialect.PresentationDialect"/>
-                        <bean class="eionet.thymeleaf.LayoutDialect"/>
-                -->
-                    </set>
-                </property>
+		<property name="additionalDialects">
+			<set>
+				<bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+			</set>
+		</property>
 	</bean>
 
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
 		<property name="order" value="1" />
 		<property name="viewNames" value="*" />
-                <property name="contentType" value="text/html;charset=UTF-8"/>
+		<property name="contentType" value="text/html;charset=UTF-8"/>
 	</bean>
 
-        <bean id="multipartResolver"
-                class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
-        </bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</bean>
 
 </beans>

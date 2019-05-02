@@ -1,5 +1,6 @@
 package eionet.rod.model;
 
+import java.util.Date;
 import java.util.List;
 
 import eionet.rod.util.RODUtil;
@@ -14,19 +15,19 @@ public class InstrumentFactsheetDTO {
     private String sourceAlias;
     private String sourceUrl;
     private String sourceAbstract;
-    private String sourceValidFrom;
+    private Date sourceValidFrom;
     private String sourceComment;
-    private String sourceEcEntryIntoForce;
-    private String sourceEcAccession;
+    private Date sourceEcEntryIntoForce;
+    private Date sourceEcAccession;
     private String sourceSecretariat;
     private String sourceSecretariatUrl;
     private String sourceIssuedByUrl;
     private String sourceTerminate;
     private Integer sourceFkTypeId;
     private String sourceLegalName;
-    private String sourceLastModified;
+    private Date sourceLastModified;
     private String sourceIssuedBy;
-    private String sourceLastUpdate;
+    private Date sourceLastUpdate;
     
     //Fields from T_CLIENT_SOURCE_LNK table
     private Integer clientSourceLnkFKClientId;
@@ -111,11 +112,11 @@ public class InstrumentFactsheetDTO {
 		this.sourceAbstract = sourceAbstract;
 	}
 
-	public String getSourceValidFrom() {
+	public Date getSourceValidFrom() {
 		return sourceValidFrom;
 	}
 
-	public void setSourceValidFrom(String sourceValidFrom) {
+	public void setSourceValidFrom(Date sourceValidFrom) {
 		this.sourceValidFrom = sourceValidFrom;
 	}
 
@@ -127,19 +128,19 @@ public class InstrumentFactsheetDTO {
 		this.sourceComment = sourceComment;
 	}
 
-	public String getSourceEcEntryIntoForce() {
+	public Date getSourceEcEntryIntoForce() {
 		return sourceEcEntryIntoForce;
 	}
 
-	public void setSourceEcEntryIntoForce(String sourceEcEntryIntoForce) {
+	public void setSourceEcEntryIntoForce(Date sourceEcEntryIntoForce) {
 		this.sourceEcEntryIntoForce = sourceEcEntryIntoForce;
 	}
 
-	public String getSourceEcAccession() {
+	public Date getSourceEcAccession() {
 		return sourceEcAccession;
 	}
 
-	public void setSourceEcAccession(String sourceEcAccession) {
+	public void setSourceEcAccession(Date sourceEcAccession) {
 		this.sourceEcAccession = sourceEcAccession;
 	}
 
@@ -323,11 +324,11 @@ public class InstrumentFactsheetDTO {
 		this.sourceLegalName = sourceLegalName;
 	}
 
-	public String getSourceLastModified() {
+	public Date getSourceLastModified() {
 		return sourceLastModified;
 	}
 
-	public void setSourceLastModified(String sourceLastModified) {
+	public void setSourceLastModified(Date sourceLastModified) {
 		this.sourceLastModified = sourceLastModified;
 	}
 
@@ -339,11 +340,11 @@ public class InstrumentFactsheetDTO {
 		this.sourceIssuedBy = sourceIssuedBy;
 	}
 
-	public String getSourceLastUpdate() {
+	public Date getSourceLastUpdate() {
 		return sourceLastUpdate;
 	}
 
-	public void setSourceLastUpdate(String sourceLastUpdate) {
+	public void setSourceLastUpdate(Date sourceLastUpdate) {
 		this.sourceLastUpdate = sourceLastUpdate;
 	}
     

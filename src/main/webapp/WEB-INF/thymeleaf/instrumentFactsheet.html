@@ -109,7 +109,7 @@
             <div class="odd form-group">
 				  <div class="col-lg-4">Valid from</div>
 				  <div class="col-lg-8">
-              		<span th:text="${instrument.sourceValidFrom}">Valid from</span>
+              		<span th:text="${{instrument.sourceValidFrom}}">Valid from</span>
               	  </div>
             </div>
             <div class="odd form-group">
@@ -126,6 +126,8 @@
               <div class="col-lg-8">
               	<ul>
               		<li th:each="obligation : ${instrument.obligations}">
+						<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+
               			<a th:href="@{'/obligations/'} + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
               			<span th:if="${obligation.terminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
               			<span th:if="${obligation.authority != null and !obligation.authority.isEmpty()}" th:text="'[' + ${obligation.authority} + ']'">Authority</span>
@@ -142,13 +144,13 @@
             <div class="odd form-group">
 				  <div  class="col-lg-4">EC entry into force</div>
 				  <div class="col-lg-8">
-              		<span th:text="${instrument.sourceEcEntryIntoForce}">EC entry into force</span>
+              		<span th:text="${{instrument.sourceEcEntryIntoForce}}">EC entry into force</span>
               	  </div>
             </div>
             <div class="even form-group">
 				  <div class="col-lg-4">EC accession</div>
 				  <div class="col-lg-8">
-              		<span th:text="${instrument.sourceEcAccession}">EC accession</span>
+              		<span th:text="${{instrument.sourceEcAccession}}">EC accession</span>
               	  </div>
             </div>
             <div class="odd form-group">

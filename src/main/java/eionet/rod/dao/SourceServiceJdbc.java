@@ -109,16 +109,7 @@ public class SourceServiceJdbc implements SourceService {
 	@Override
 	public void update(InstrumentFactsheetDTO instrumentFactsheetRec)  throws ResourceNotFoundException {
 		instrumentFactsheetRec = validateDates(instrumentFactsheetRec);
-		if (instrumentFactsheetRec.getSourceValidFrom() != null) {
-			instrumentFactsheetRec.setSourceValidFrom(RODUtil.str2Date(instrumentFactsheetRec.getSourceValidFrom()));
-		}
-		if (instrumentFactsheetRec.getSourceEcEntryIntoForce() != null) {
-			instrumentFactsheetRec.setSourceEcEntryIntoForce(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcEntryIntoForce()));
-		}
-		if (instrumentFactsheetRec.getSourceEcAccession() != null) {
-			instrumentFactsheetRec.setSourceEcAccession(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcAccession()));
-		}
-				
+
 		String update = "UPDATE T_SOURCE SET TITLE=?, ALIAS=?, "
                 + "SOURCE_CODE=?, URL=?, CELEX_REF=?, ISSUED_BY_URL=?, "
                 + "VALID_FROM=?, ABSTRACT=?, COMMENT=?, EC_ENTRY_INTO_FORCE=?, EC_ACCESSION=?, "
@@ -206,41 +197,11 @@ public class SourceServiceJdbc implements SourceService {
 		parameters.put("URL", instrumentFactsheetRec.getSourceUrl());
 		parameters.put("CELEX_REF", instrumentFactsheetRec.getSourceCelexRef());
 		parameters.put("ISSUED_BY_URL", instrumentFactsheetRec.getSourceIssuedByUrl());
-		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceValidFrom())) {
-			try {
-				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceValidFrom())).getTime());
-				parameters.put("VALID_FROM", date);
-			} catch (ParseException e) {
-				//e.printStackTrace();
-				parameters.put("VALID_FROM", null);
-			}
-		}else {
-			parameters.put("VALID_FROM", null);
-		}
+		parameters.put("VALID_FROM", instrumentFactsheetRec.getSourceValidFrom());
 		parameters.put("ABSTRACT", instrumentFactsheetRec.getSourceAbstract());
 		parameters.put("COMMENT", instrumentFactsheetRec.getSourceComment());
-		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcEntryIntoForce())) {
-			try {
-				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcEntryIntoForce())).getTime());
-				parameters.put("EC_ENTRY_INTO_FORCE", date);
-			} catch (ParseException e) {
-				//e.printStackTrace();
-				parameters.put("EC_ENTRY_INTO_FORCE", null);
-			}
-		}else {
-			parameters.put("EC_ENTRY_INTO_FORCE", null);
-		}
-		if (!RODUtil.isNullOrEmpty(instrumentFactsheetRec.getSourceEcAccession())) {
-			try {
-				java.sql.Date date = new java.sql.Date (format.parse(RODUtil.str2Date(instrumentFactsheetRec.getSourceEcAccession())).getTime());
-				parameters.put("EC_ACCESSION", date);
-			} catch (ParseException e) {
-				//e.printStackTrace();
-				parameters.put("EC_ACCESSION", null);
-			}
-		}else {
-			parameters.put("EC_ACCESSION", null);
-		}
+		parameters.put("EC_ENTRY_INTO_FORCE", instrumentFactsheetRec.getSourceEcEntryIntoForce());
+		parameters.put("EC_ACCESSION", instrumentFactsheetRec.getSourceEcAccession());
 		parameters.put("SECRETARIAT", instrumentFactsheetRec.getSourceSecretariat());
 		parameters.put("SECRETARIAT_URL", instrumentFactsheetRec.getSourceSecretariatUrl());
 		parameters.put("FK_CLIENT_ID", instrumentFactsheetRec.getClientId());

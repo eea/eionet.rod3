@@ -1,5 +1,6 @@
 package eionet.rod.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.*;
@@ -36,10 +37,10 @@ public class Obligations {
     private String terminate;
     
     private String reportFreqMonths;
-    private String nextDeadline;
-    private String nextDeadline2;
+    private Date nextDeadline;
+    private Date nextDeadline2;
     private String nextReporting;
-    private String firstReporting;
+    private Date firstReporting;
     private String continousReporting;
     private String dateComments;
     private String formatName;
@@ -49,26 +50,26 @@ public class Obligations {
     private String locationInfo;
     private String dataUsedFor;
     private String dataUsedForUrl;
-    private String validSince;
-    private String validTo;
+    private Date validSince;
+    private Date validTo;
     private String authority;
     private String comment;
     private String parameters;
     private String hasDelivery;
     
     private String reportFreqDetail;
-    private String lastUpdate; 
+    private String lastUpdate;
     private String reportFreq;
-    private String lastHarvested;
-        
+    private Date lastHarvested;
+
     //Fields from t_role table
     private String coordRoleId;
     private String coordRoleUrl;
     private String coordRoleName;
-    
+
     private String respRoleId;
     private String respRoleName;
-    
+
     //Fields from T_CLIENT_LNK table
     private String clientLnkFKClientId;
     private String clientLnkFKObjectId;
@@ -78,44 +79,44 @@ public class Obligations {
     //Fields from T_CLIENT table
     private String clientId;
     private String clientName;
-    
+
     //Fields from T_SOURCE table
     private String sourceId;
     private String sourceTitle;
     private String sourceAlias;
-    
+
     private List<String> selectedClients;
     private List<String> selectedFormalCountries;
     private List<String> selectedVoluntaryCountries;
     private List<String> selectedIssues;
-   
+
     //Fields from T_ISSUE table to search
     private String issueId;
-    
+
     //Fields from T_SPATIAL table to search
     private String spatialId;
-    
+
     //Fields from T_RASPATIAL_LNK table
     String voluntary;
-    
+
     //field to deadline search
     private String deadlineId;
-    
+
     private String delObligations;
-    
+
     //Obligations relations table T_OBLIGATION_RELATION
     private Integer relObligationId;
     private String oblRelationId;
-    
+
     private String oblRelationTitle;
-    
+
     //advanded Search
     private String nextDeadlineFrom;
     private String nextDeadlineTo;
     private String deliveryCountryId;
     private String deliveryCountryName;
     private String anmode;
-    
+
 	public String getOblTitle() {
 		return oblTitle;
 	}
@@ -252,19 +253,19 @@ public class Obligations {
 		this.reportFreqMonths = reportFreqMonths;
 	}
 
-	public String getNextDeadline() {
+	public Date getNextDeadline() {
 		return nextDeadline;
 	}
 
-	public void setNextDeadline(String nextDeadline) {
+	public void setNextDeadline(Date nextDeadline) {
 		this.nextDeadline = nextDeadline;
 	}
 
-	public String getNextDeadline2() {
+	public Date getNextDeadline2() {
 		return nextDeadline2;
 	}
 
-	public void setNextDeadline2(String nextDeadline2) {
+	public void setNextDeadline2(Date nextDeadline2) {
 		this.nextDeadline2 = nextDeadline2;
 	}
 
@@ -276,11 +277,11 @@ public class Obligations {
 		this.nextReporting = nextReporting;
 	}
 
-	public String getFirstReporting() {
+	public Date getFirstReporting() {
 		return firstReporting;
 	}
 
-	public void setFirstReporting(String firstReporting) {
+	public void setFirstReporting(Date firstReporting) {
 		this.firstReporting = firstReporting;
 	}
 
@@ -356,19 +357,19 @@ public class Obligations {
 		this.dataUsedForUrl = dataUsedForUrl;
 	}
 
-	public String getValidSince() {
+	public Date getValidSince() {
 		return validSince;
 	}
 
-	public void setValidSince(String validSince) {
+	public void setValidSince(Date validSince) {
 		this.validSince = validSince;
 	}
 
-	public String getValidTo() {
+	public Date getValidTo() {
 		return validTo;
 	}
 
-	public void setValidTo(String validTo) {
+	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
 	}
 
@@ -499,7 +500,7 @@ public class Obligations {
 	public void setSourceAlias(String sourceAlias) {
 		this.sourceAlias = sourceAlias;
 	}
-	
+
 	public String getParameters() {
 		return parameters;
 	}
@@ -595,7 +596,7 @@ public class Obligations {
 	public void setOblRelationId(String oblRelationId) {
 		this.oblRelationId = oblRelationId;
 	}
-	
+
 	public String truncateText(String truncateText) {
 	       return RODUtil.truncateText(truncateText);
 	}
@@ -672,11 +673,11 @@ public class Obligations {
 		this.reportFreq = reportFreq;
 	}
 
-	public String getLastHarvested() {
+	public Date getLastHarvested() {
 		return lastHarvested;
 	}
 
-	public void setLastHarvested(String lastHarvested) {
+	public void setLastHarvested(Date lastHarvested) {
 		this.lastHarvested = lastHarvested;
 	}
 
@@ -687,5 +688,5 @@ public class Obligations {
 	public void setAnmode(String anmode) {
 		this.anmode = anmode;
 	}
-	
+
 }
