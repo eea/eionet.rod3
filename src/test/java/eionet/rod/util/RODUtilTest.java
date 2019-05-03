@@ -120,21 +120,7 @@ public class RODUtilTest {
                 RODUtil.setAnchors("Some text (http://en.wikipedia.org/wiki/Fahrvergnügen ).", false, 100));
     
     }
-    
-//    @Test
-//    public void test_str2Date() {
-//    	//System.out.print(RODUtil.str2Date("21/12/2017"));
-//    	assertEquals("2017-12-21",RODUtil.str2Date("21/12/2017"));
-//    	assertEquals("NULL" ,RODUtil.str2Date(""));
-//    }
-    
-  
-//    @Test
-//    public void test_strDate() {
-//    	assertEquals("21/12/2017",RODUtil.strDate("2017-12-21"));
-//    	assertEquals("NULL" ,RODUtil.strDate(""));
-//    }
-    
+
     @Test 
     public void truncateText() {
     	assertEquals("National Authorities, International Organisations, Public, Scientific Community...",RODUtil.truncateText("National Authorities, International Organisations, Public, Scientific Community etc"));
@@ -148,9 +134,11 @@ public class RODUtilTest {
     
     @Test
     public void miliseconds2DateTest() {
-    	String ss = "1519733894881";
-    	long ts = Long.parseLong(ss);
-    	assertEquals("2018-02-27 13:18:14",RODUtil.miliseconds2Date(ts));
+        long ts = 1519733894881L;
+
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(ts);
+    	assertEquals( c.getTime(), RODUtil.miliseconds2Date(ts));
     }
     
 	@Test

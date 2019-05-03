@@ -2,6 +2,8 @@ package eionet.rod.model;
 
 import eionet.rod.util.RODUtil;
 
+import java.util.Date;
+
 public class UndoDTO {
 	
 	private long undoTime;
@@ -13,7 +15,7 @@ public class UndoDTO {
     private String value;
     private Integer subTransNr;
     private String show; 
-    private String date;
+    private Date date;
     private String userName;
     private String description;
     
@@ -95,11 +97,11 @@ public class UndoDTO {
 		this.show = show;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

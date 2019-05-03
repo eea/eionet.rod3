@@ -29,11 +29,7 @@ import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -474,8 +470,7 @@ public class ObligationsController {
     	List<UndoDTO> versions = undoService.getPreviousActionsReportSpecific(obligationId, "T_OBLIGATION", "PK_RA_ID", "U");
     	if (versions != null) {
             for (UndoDTO version : versions) {
-                String date = RODUtil.miliseconds2Date(version.getUndoTime());
-                version.setDate(date);
+                version.setDate(RODUtil.miliseconds2Date(version.getUndoTime()));
             }
     	}
     	model.addAttribute("versions", versions);

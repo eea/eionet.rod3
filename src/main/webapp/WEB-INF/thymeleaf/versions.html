@@ -31,7 +31,7 @@
 		        </tr>
 	        </thead>
 	        <tr th:each="version, iterStat : ${versions}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td><span th:text="${version.date}"></span></td>	        	
+	        	<td><span th:text="${#dates.format(version.date, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
 	        	<td th:switch="${version.tab}">
 	        		<a th:case="'T_OBLIGATION'" th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=' + ${version.tab} + '&op=' + ${version.operation} + '&id=' + ${version.value} + '&user=' + ${version.userName}}" th:text="'/obligations/' + ${version.value}"></a>
 	        		<a th:case="'T_SOURCE'" th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=' + ${version.tab} + '&op=' + ${version.operation} + '&id=' + ${version.value} + '&user=' + ${version.userName}}" th:text="'/instruments/' + ${version.value}"></a>

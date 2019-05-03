@@ -242,11 +242,9 @@ public class RODUtil {
         }
     }
 
-    public static String miliseconds2Date(long ts) {
-        SimpleDateFormat ymdhmsFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    	ymdhmsFormat.setTimeZone(TimeZone.getTimeZone("Europe/Copenhagen"));
+    public static Date miliseconds2Date(long ts) {
     	Date resultdate = new Date(ts);
-    	return ymdhmsFormat.format(resultdate);
+    	return resultdate;
     }
 
 }

@@ -1,9 +1,6 @@
 package eionet.rod.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,8 +55,7 @@ public class UndoInfoController {
 	@RequestMapping({"", "/"}) 
 	public String undoInfoHome(Model model, @RequestParam long ts, @RequestParam String tab, @RequestParam String op, @RequestParam Integer id, @RequestParam String user) {
 		
-		String time = RODUtil.miliseconds2Date(ts);
-		model.addAttribute("time", time);
+		model.addAttribute("time", RODUtil.miliseconds2Date(ts));
 		model.addAttribute("user", user);
 		model.addAttribute("table", tab);
 		switch (op) {
