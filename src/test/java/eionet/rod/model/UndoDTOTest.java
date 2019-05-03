@@ -5,10 +5,10 @@ import org.junit.Test;
 
 public class UndoDTOTest {
 
-	@Test
+    @Test
     public void instanticateClass() {
         UndoDTO obj = new UndoDTO();
         Assert.assertNotNull(obj);
     }
-	
+
 }

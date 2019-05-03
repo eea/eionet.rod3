@@ -1,24 +1,24 @@
 package eionet.rod.service.modules;
 
-import java.io.IOException;
-import java.util.MissingResourceException;
-import java.util.Properties;
-import java.util.ResourceBundle;
-
 import eionet.rod.service.FileServiceIF;
 import eionet.rod.util.exception.ServiceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class FileServiceImpl implements FileServiceIF  {
+import java.io.IOException;
+import java.util.MissingResourceException;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
+public class FileServiceImpl implements FileServiceIF {
 
     private static final Log logger = LogFactory.getLog(FileServiceImpl.class);
 
-	private final ResourceBundle props;
-	
-	public static final String PROP_FILE = "application";
+    private final ResourceBundle props;
 
-	/**
+    public static final String PROP_FILE = "application";
+
+    /**
      * Creates new FileServiceImpl
      */
     public FileServiceImpl() throws ServiceException {
@@ -35,7 +35,7 @@ public class FileServiceImpl implements FileServiceIF  {
      */
     public String getStringProperty(String propName) throws ServiceException {
         try {
-        	System.out.print(propName);
+            System.out.print(propName);
             return props.getString(propName);
         } catch (MissingResourceException mre) {
             throw new ServiceException("Property value for key " + propName + " not found", mre);
@@ -152,16 +152,16 @@ public class FileServiceImpl implements FileServiceIF  {
     @Override
     public String getStringProperty(String propName, String defaultValue) throws ServiceException {
         if (props.containsKey(propName)) {
-            return  getStringProperty(propName);
+            return getStringProperty(propName);
         }
 
         return defaultValue;
     }
-    
+
     @Override
-    public Properties getProps() throws IOException{
+    public Properties getProps() throws IOException {
         Properties props = new Properties();
-        
+
         props.load(getClass().getClassLoader().getResourceAsStream(PROP_FILE + ".properties"));
 
         return props;

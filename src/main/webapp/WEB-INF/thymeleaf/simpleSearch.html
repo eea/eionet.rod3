@@ -2,68 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="layout :: headerFragment"></head>
 <body>
- <script>
-	 $(document).ready(function(){
-	    $('#simpleSearchTable').DataTable({
-	    	"sDom": 'Tfrtipt',
-	    	"sPaginationType": "full_numbers"
-	    });
-	    
-	});
+<script>
+    $(document).ready(function () {
+        $('#simpleSearchTable').DataTable({
+            "sDom": 'Tfrtipt',
+            "sPaginationType": "full_numbers"
+        });
+
+    });
 </script>
 
 <div id="container">
-	<div th:include="layout :: bannerFragment" ></div>
-	<div id="workarea">
-	<div th:replace="helpModal :: helpModalFragment"></div>
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div th:replace="helpModal :: helpModalFragment"></div>
 
-	<form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
-		<div id="drop-operations">
-			<ul>
-				<li class="search open"><a class="searchSection" th:href="@{/simpleSearch}" title="Search">Search</a></li>
-			</ul>
-		</div>			
-		<div id="filters">
-		  <div class="filter">
-			<div class="row">
-				<div class="labeldiv">	 
-					<label for="queryfld">ROD website</label>
-				</div>
-				<div class="input">
-					<input id="queryfld" maxlength="255" name="expression" value="" type="text" class="smalltext" th:value="${expression}">
-				</div>
-			</div>
-		  </div>
-			<p class="actions">
-				<input name="execute" value="Search" class="go_btn" type="submit">
-			</p>
-		</div>
-	</form>
-	
-	<div style="clear: both;"></div>
-		
-     
+        <form th:action="@{/simpleSearch}" class="searchDatasetsForm" method="POST">
+            <div id="drop-operations">
+                <ul>
+                    <li class="search open"><a class="searchSection" th:href="@{/simpleSearch}" title="Search">Search</a></li>
+                </ul>
+            </div>
+            <div id="filters">
+                <div class="filter">
+                    <div class="row">
+                        <div class="labeldiv">
+                            <label for="queryfld">ROD website</label>
+                        </div>
+                        <div class="input">
+                            <input id="queryfld" maxlength="255" name="expression" value="" type="text" class="smalltext" th:value="${expression}">
+                        </div>
+                    </div>
+                </div>
+                <p class="actions">
+                    <input name="execute" value="Search" class="go_btn" type="submit">
+                </p>
+            </div>
+        </form>
+
+        <div style="clear: both;"></div>
+
+
         <div th:if="${#lists.isEmpty(listItem)}">The query gave no results!</div>
         <div th:if="${not #lists.isEmpty(listItem)}">
-	        <table id="simpleSearchTable" class="datatable results table table-striped table-bordered">
-	        <thead>
-		        <tr>
-		        	<th>Found</th>
-			       
-		        </tr>
-	        </thead>
-	        <tr th:each="listItems, iterStat : ${listItem}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td>
-	        		<a th:href="${iterStat.current[1]}" th:text="${iterStat.current[2]} + ' - '"></a>
-	        		<b th:text="${iterStat.current[3]}"></b> </br>
-	        		<span th:text="${iterStat.current[0]}"></span>
-	        	</td>
-	        </tr>
-	        </table>
-        </div>
-	
+            <table id="simpleSearchTable" class="datatable results table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Found</th>
 
-	</div>
+                </tr>
+                </thead>
+                <tr th:each="listItems, iterStat : ${listItem}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                    <td>
+                        <a th:href="${iterStat.current[1]}" th:text="${iterStat.current[2]} + ' - '"></a>
+                        <b th:text="${iterStat.current[3]}"></b> </br>
+                        <span th:text="${iterStat.current[0]}"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
     <div th:replace="layout :: footerFragment"></div>
 </div>
 </body>

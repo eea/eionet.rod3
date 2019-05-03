@@ -18,16 +18,8 @@
  */
 package eionet.rod.controller;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import eionet.rod.model.UserRole;
 import eionet.rod.dao.UserManagementService;
-import eionet.rod.controller.AbstractContextControllerTests;
+import eionet.rod.model.UserRole;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +27,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ITUserController extends AbstractContextControllerTests {
@@ -76,7 +76,7 @@ public class ITUserController extends AbstractContextControllerTests {
 
         editUserTo(TEST_USER, UserRole.ROLE_ADMIN);
         assertUserHasOnlyOneRole(TEST_USER, UserRole.ROLE_ADMIN);
-        
+
         deleteUser(TEST_USER);
         assertFalse("User should be deleted", UserExists(TEST_USER));
     }
@@ -84,15 +84,15 @@ public class ITUserController extends AbstractContextControllerTests {
     private void addUserWith(String username, UserRole role) throws Exception {
         requestWithRedirect(post("/users/add").param("userId", username).param("authorisations", role.name()));
     }
-    
+
     private void editUserTo(String username, UserRole role) throws Exception {
         requestWithRedirect(post("/users/edit").param("userId", username).param("authorisations", role.name()));
     }
-    
+
     private void deleteUser(String username) throws Exception {
         requestWithRedirect(post("/users/delete").param("userName", username));
     }
-    
+
     private boolean UserExists(String username) throws Exception {
         return userManagementService.userExists(username);
     }

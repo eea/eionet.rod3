@@ -3,9 +3,7 @@ package eionet.rod.model;
 import java.util.List;
 
 /**
- *
  * @author altnyris
- *
  */
 public class ClientDTO {
 
@@ -26,7 +24,7 @@ public class ClientDTO {
     private List<ObligationFactsheetDTO> indirectObligations;
     private List<InstrumentDTO> directInstruments;
     private List<InstrumentDTO> indirectInstruments;
-    
+
     private String delClients;
 
     /**
@@ -156,13 +154,13 @@ public class ClientDTO {
         this.indirectInstruments = indirectInstruments;
     }
 
-	public String getDelClients() {
-		return delClients;
-	}
+    public String getDelClients() {
+        return delClients;
+    }
 
-	public void setDelClients(String delClients) {
-		this.delClients = delClients;
-	}
+    public void setDelClients(String delClients) {
+        this.delClients = delClients;
+    }
 
 
 }

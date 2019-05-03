@@ -4,97 +4,97 @@
 <body>
 <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
 <div id="container">
-	<div th:include="layout :: bannerFragment" ></div>
+    <div th:include="layout :: bannerFragment"></div>
     <div id="workarea">
-    	<div class="title">
-		    <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
-		    	<h1 th:unless="${obligation.oblTitle == null}" th:text="'Reporting obligation for: ' + ${obligation.oblTitle}"></h1>
-		    <!--  sec:authorize="hasRole('EDITOR')" -->
-		    <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
-		     	<li><span>Operations</span>
-					<ul>
-						<li><a th:href="@{'/obligations/'+ ${obligationId} +'/edit/'}">Edit obligation</a></li>
-		           		<li><a th:href="@{'/obligations/delete/' + ${obligationId}}">Delete obligation</a></li>
-		          	</ul>
-		        </li>
-	        </ul>
+        <div class="title">
+            <h1 th:if="${obligation.oblTitle == null}">Reporting obligation</h1>
+            <h1 th:unless="${obligation.oblTitle == null}" th:text="'Reporting obligation for: ' + ${obligation.oblTitle}"></h1>
+            <!--  sec:authorize="hasRole('EDITOR')" -->
+            <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
+                <li><span>Operations</span>
+                    <ul>
+                        <li><a th:href="@{'/obligations/'+ ${obligationId} +'/edit/'}">Edit obligation</a></li>
+                        <li><a th:href="@{'/obligations/delete/' + ${obligationId}}">Delete obligation</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-	    <div id="tabbedmenu">
-		    <ul>
-			    <li id="currenttab"><span>Overview</span></li>
-			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/legislation'}">Legislation</a></span></li>
-			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/deliveries'}">Deliveries</a></span></li>
-			    <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/history'}">History</a></span></li>
-		    </ul>
-	    </div>
-		
-		<div class="form-horizontal">
-			<div class="datatable results">
-			<div class="form-group odd">
-				<div class="col-xs-4">Title</div>
-				<div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
-			</div>
-			<div class="form-group even">
-				<div class="col-xs-4">Description</div>
-					<div class="col-xs-8">
-						<span th:utext="${obligation.description}"></span>
-						<span th:if="${obligation.eeaPrimary == 1}"><br/><br/>This reporting obligation is an Eionet core data flow.</span>
-						<span th:if="${obligation.eeaCore == 1}"><br/><br/>Reporting under this obligation is used for EEA Core set of indicators.</span>
-						<span th:if="${obligation.flagged == 1}"><br/><br/>Delivery process is managed by EEA.</span>
-				</div>
-			</div>
-			<div class="form-group odd">
-					<div class="col-xs-4">Legislative instruments title</div>
-				<div class="col-xs-8">
-					<a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
-				</div>
-			</div>
-			<div class="form-group even" th:if="${obligationRelation.relObligationId != 0}">
-					<div class="col-xs-4" th:switch="${obligationRelation.oblRelationId}">
-						<span th:case="'replaces'">Replaces</span>
-						<span th:case="'is-replaced-by'">Is replaced by</span>
-						<span th:case="'see-also'">See also</span>
-						<span th:case="'same-as'">Same as</span>
-					</div>
-				<div class="col-xs-8">
-					<a th:href="@{'/obligations/'+ ${obligationRelation.relObligationId}}" th:utext="${obligationRelation.oblRelationTitle}"></a>
-				</div>
-			</div>
-		</div>
-		<br/>
-		<br/>
-		
-		<h2>Reporting dates and guidelines</h2>
-		
-		<div class="datatable results">
-			<div class="form-group odd">
-					<div class="col-xs-4">National reporting coordinators</div>
-				<div class="col-xs-8">
-					<a th:if="${obligation.coordRoleId != ''}" th:utext="${obligation.coordRoleName} + ' (' + ${obligation.coordRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.coordRoleId}}" th:title="'Public role information'"></a>
-					<span th:unless="${obligation.coordRoleId != ''}">
+        <div id="tabbedmenu">
+            <ul>
+                <li id="currenttab"><span>Overview</span></li>
+                <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/legislation'}">Legislation</a></span></li>
+                <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/deliveries'}">Deliveries</a></span></li>
+                <li><span><a th:href="@{'/obligations/' + ${obligationId} + '/history'}">History</a></span></li>
+            </ul>
+        </div>
+
+        <div class="form-horizontal">
+            <div class="datatable results">
+                <div class="form-group odd">
+                    <div class="col-xs-4">Title</div>
+                    <div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Description</div>
+                    <div class="col-xs-8">
+                        <span th:utext="${obligation.description}"></span>
+                        <span th:if="${obligation.eeaPrimary == 1}"><br/><br/>This reporting obligation is an Eionet core data flow.</span>
+                        <span th:if="${obligation.eeaCore == 1}"><br/><br/>Reporting under this obligation is used for EEA Core set of indicators.</span>
+                        <span th:if="${obligation.flagged == 1}"><br/><br/>Delivery process is managed by EEA.</span>
+                    </div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Legislative instruments title</div>
+                    <div class="col-xs-8">
+                        <a th:href="@{'/instruments/'+ ${obligation.sourceId}}" th:utext="${obligation.sourceAlias != ''} ? ${obligation.sourceAlias} : ${obligation.sourceTitle}"></a>
+                    </div>
+                </div>
+                <div class="form-group even" th:if="${obligationRelation.relObligationId != 0}">
+                    <div class="col-xs-4" th:switch="${obligationRelation.oblRelationId}">
+                        <span th:case="'replaces'">Replaces</span>
+                        <span th:case="'is-replaced-by'">Is replaced by</span>
+                        <span th:case="'see-also'">See also</span>
+                        <span th:case="'same-as'">Same as</span>
+                    </div>
+                    <div class="col-xs-8">
+                        <a th:href="@{'/obligations/'+ ${obligationRelation.relObligationId}}" th:utext="${obligationRelation.oblRelationTitle}"></a>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <h2>Reporting dates and guidelines</h2>
+
+            <div class="datatable results">
+                <div class="form-group odd">
+                    <div class="col-xs-4">National reporting coordinators</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.coordRoleId != ''}" th:utext="${obligation.coordRoleName} + ' (' + ${obligation.coordRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.coordRoleId}}" th:title="'Public role information'"></a>
+                        <span th:unless="${obligation.coordRoleId != ''}">
 						<span class="role_not_found" th:if="${obligation.coordinatorRole != ''}" th:utext="'Directory role not found for ' + ${obligation.coordinatorRole}"></span>
 						<span th:utext="${obligation.coordinator}"></span>
 						<a th:if="${obligation.coordinatorUrl != ''}" th:href="${obligation.coordinatorUrl}" th:utext="${obligation.coordinatorUrl}"></a>
 					</span>
-				</div>
-			</div>
-			<div class="form-group even">
-					<div class="col-xs-4">National reporting contacts</div>
-					<div class="col-xs-8">
-						<a th:if="${obligation.respRoleId != ''}" th:utext="${obligation.respRoleName} + ' (' + ${obligation.respRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.respRoleId}}" th:title="'Public role information'"></a>
-						<span th:unless="${obligation.respRoleId != ''}">
+                    </div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">National reporting contacts</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.respRoleId != ''}" th:utext="${obligation.respRoleName} + ' (' + ${obligation.respRoleId}  + ')'" th:href="@{'/contacts?roleId=' + ${obligation.respRoleId}}" th:title="'Public role information'"></a>
+                        <span th:unless="${obligation.respRoleId != ''}">
 							<span class="role_not_found" th:if="${obligation.responsibleRole != ''}" th:utext="'Directory role not found for ' + ${obligation.responsibleRole}"></span>
 							<span th:utext="${obligation.nationalContact}"></span>
 							<a th:if="${obligation.nationalContactUrl != ''}" th:href="${obligation.nationalContactUrl}" th:utext="${obligation.nationalContactUrl}"></a>
 						</span>
-				</div>
-			</div>
-			
-			<div class="form-group odd">
-				<div class="col-xs-4">Reporting frequency</div>
-				<div class="col-xs-8">
-					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated" ></span>
-					<span th:unless="${obligation.terminate} != 'N'">
+                    </div>
+                </div>
+
+                <div class="form-group odd">
+                    <div class="col-xs-4">Reporting frequency</div>
+                    <div class="col-xs-8">
+                        <span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated"></span>
+                        <span th:unless="${obligation.terminate} != 'N'">
 						<th:block th:switch="${obligation.reportFreqMonths}">
 							<span th:case="''" th:text="''"></span>
 							<span th:case="'0'" th:text="'One time only'"></span>
@@ -103,73 +103,73 @@
 							<span th:case="*" th:text="'Every ' + ${obligation.reportFreqMonths} + ' months'"></span>
 						</th:block>
 					</span>
-				</div>
-			</div>
-			
-			<div class="form-group even">
-				<div class="col-xs-4">Next report due</div>
-				<div class="col-xs-8">
-					<span th:if="${obligation.terminate} != 'N'" th:text="Terminated"  class="terminated"></span>
-					<span th:unless="${obligation.terminate} != 'N'">
-						<span th:if="${obligation.nextDeadline} != null" th:text="${{obligation.nextDeadline}}" ></span>
-						<span th:unless="${obligation.nextDeadline} != null" th:text="${obligation.nextReporting}" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group even">
+                    <div class="col-xs-4">Next report due</div>
+                    <div class="col-xs-8">
+                        <span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated"></span>
+                        <span th:unless="${obligation.terminate} != 'N'">
+						<span th:if="${obligation.nextDeadline} != null" th:text="${{obligation.nextDeadline}}"></span>
+						<span th:unless="${obligation.nextDeadline} != null" th:text="${obligation.nextReporting}"></span>
 					</span>
-				</div>
-			</div>
-			<div class="form-group odd">
-					<div class="col-xs-4">Date comments</div>
-					<div class="col-xs-8" th:text="${obligation.dateComments}"></div>
-			</div>
-			<div class="form-group even">
-				<div class="col-xs-4">Report to</div>
-				<div class="col-xs-8">
-					<a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
-					<span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
-				</div>
-			</div>
-			<div class="form-group odd">
-				<div class="col-xs-4">Other clients using this reporting</div>
-				<div class="col-xs-8">
-					<ul  th:if="${not #lists.isEmpty(clients)}" >
-						<li th:each="client : ${clients}">
-							<a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="form-group even">
-				<div class="col-xs-4">Reporting guidelines</div>
-				<div class="col-xs-8">
-					<a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
-					<span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
-					<span th:if="${obligation.validSince != null}" th:text="' [Valid since ' + ${{obligation.validSince}} + ']'"></span>
-				</div>
-			</div>
-			<div class="form-group odd">
-				<div class="col-xs-4">Information</div>
-				<div class="col-xs-8" th:utext="${obligation.reportingFormat}"></div>
-			</div>
-			<div class="form-group even">
-				<div class="col-xs-4">Principle repository</div>
-				<div class="col-xs-8">
-					<a th:if="${obligation.locationPtr != null}" th:href="${obligation.locationPtr}">
-						<span th:if="${obligation.locationInfo != null}" th:text="${obligation.locationInfo}"></span>
-						<span th:unless="${obligation.locationInfo != null}" th:text="${obligation.locationPtr}"></span>
-					</a>
-					<span th:unless="${obligation.locationPtr != null}" th:text="${obligation.locationInfo}"></span>
-				</div>
-			</div>
-			<div class="form-group odd">
-				<div class="col-xs-4">Data used for</div>
-				<div class="col-xs-8">
-					<a th:if="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}" th:href="${obligation.dataUsedForUrl}"></a>
-					<span th:unless="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}"></span>
-				</div>
-			</div>
-		</div>
-	 </div>
- </div>
-     <div th:replace="layout :: footerFragment"></div>
+                    </div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Date comments</div>
+                    <div class="col-xs-8" th:text="${obligation.dateComments}"></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Report to</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
+                        <span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
+                    </div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Other clients using this reporting</div>
+                    <div class="col-xs-8">
+                        <ul th:if="${not #lists.isEmpty(clients)}">
+                            <li th:each="client : ${clients}">
+                                <a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Reporting guidelines</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
+                        <span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
+                        <span th:if="${obligation.validSince != null}" th:text="' [Valid since ' + ${{obligation.validSince}} + ']'"></span>
+                    </div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Information</div>
+                    <div class="col-xs-8" th:utext="${obligation.reportingFormat}"></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Principle repository</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.locationPtr != null}" th:href="${obligation.locationPtr}">
+                            <span th:if="${obligation.locationInfo != null}" th:text="${obligation.locationInfo}"></span>
+                            <span th:unless="${obligation.locationInfo != null}" th:text="${obligation.locationPtr}"></span>
+                        </a>
+                        <span th:unless="${obligation.locationPtr != null}" th:text="${obligation.locationInfo}"></span>
+                    </div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Data used for</div>
+                    <div class="col-xs-8">
+                        <a th:if="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}" th:href="${obligation.dataUsedForUrl}"></a>
+                        <span th:unless="${obligation.dataUsedForUrl != null}" th:text="${obligation.dataUsedFor}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
 </div>
 </body>
 </html>

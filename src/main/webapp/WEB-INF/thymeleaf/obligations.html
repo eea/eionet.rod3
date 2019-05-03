@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-  <script>
-	 $(document).ready(function(){
-	    $('#obligationTable').DataTable({
-	    	"sDom": 'Tfrtipt',
-	    	"sPaginationType": "full_numbers"
-	    });
-	    
-	});
-	 
-	function deleteObl(){
-	    var deleteList = '';
-	    var firstelem = false;
-	    $("input[name=myCheck]").each(function (index) {  
-	       if($(this).is(':checked')){
-	    		if (firstelem){
-	    		   deleteList += ',';  
-	       		}
-	    	   	deleteList += $(this).val();
-	    	   	firstelem = true;
-	       }
-	    });
-	    document.getElementById('delObligations').value = deleteList;
-	    if (firstelem){
-	    	
-	    	if (window.confirm("Do you really want to delete the seleted obligations?")) 
-	    	{	
+<head th:include="layout :: headerFragment"></head>
+<body>
+<script>
+    $(document).ready(function () {
+        $('#obligationTable').DataTable({
+            "sDom": 'Tfrtipt',
+            "sPaginationType": "full_numbers"
+        });
+
+    });
+
+    function deleteObl() {
+        var deleteList = '';
+        var firstelem = false;
+        $("input[name=myCheck]").each(function (index) {
+            if ($(this).is(':checked')) {
+                if (firstelem) {
+                    deleteList += ',';
+                }
+                deleteList += $(this).val();
+                firstelem = true;
+            }
+        });
+        document.getElementById('delObligations').value = deleteList;
+        if (firstelem) {
+
+            if (window.confirm("Do you really want to delete the seleted obligations?")) {
 // 	    		var loc = window.location;
 // 	    		var pathName ="";
-	    		
+
 // 	    		if (loc.pathname.substring(loc.pathname.length - 1) != "/"){
 // 	    			alert("dentro" + loc);
 // 	    			var pathName = loc.pathname;
@@ -39,88 +38,89 @@
 // 			    	pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
 // 	    		}
 // 			    alert(pathName);
-	
-// 			    var Urlfinal = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
-	
-			    document.getElementById('delObligations').value=deleteList;
-			    
-			    document.forms['f'].action= document.getElementById('hrefdelete').value + "delete";
-			    document.forms['f'].method = 'POST';
-	 		    document.forms['f'].submit();
-			    //location.href = Urlfinal + "obligations/delete";
-	    	}
-	    }else{
-	    	alert("You must select the obligation to delete.")
-	    }
 
-	}
-	 
+// 			    var Urlfinal = loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+
+                document.getElementById('delObligations').value = deleteList;
+
+                document.forms['f'].action = document.getElementById('hrefdelete').value + "delete";
+                document.forms['f'].method = 'POST';
+                document.forms['f'].submit();
+                //location.href = Urlfinal + "obligations/delete";
+            }
+        } else {
+            alert("You must select the obligation to delete.")
+        }
+
+    }
+
 </script>
-    <div id="container">
-     <div th:include="layout :: bannerFragment"></div>
-     <div id="workarea">
-   	 <div th:replace="helpModal :: helpModalFragment"></div>
-      
-     <div class="title">
-     <h1 th:text="${titleObl}"></h1>
-     	<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
-     		<li><span>Operations</span>
-				<ul>
-					<li><a onclick="deleteObl()">Delete obligations</a></li>
-					<li><a th:href="@{'/instruments?mode=X'}">New obligation</a></li>
-				</ul>
-			</li>
-		</ul>
-     </div>
-     <form method="POST" th:action="@{/obligations/search}" th:object="${obligation}" name="f" >
-     <input type="hidden" name="delObligations" id="delObligations">
-     <input type="hidden" name="hrefdelete" id="hrefdelete" th:value="@{'/obligations/'}">
-     <input type="hidden" name="anmode" id="anmode" th:value="${anmode}">
-     <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-		<div id="drop-operations">
-	        <ul>
-	            <li class="search open"><a class="searchSection" href="#" title="Search reporting obligations">Search reporting obligations</a></li>
-	        </ul>
-    	</div>
-    <div id="filters">
-    <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
-          <div class="filter">
-					
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div th:replace="helpModal :: helpModalFragment"></div>
+
+        <div class="title">
+            <h1 th:text="${titleObl}"></h1>
+            <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
+                <li><span>Operations</span>
+                    <ul>
+                        <li><a onclick="deleteObl()">Delete obligations</a></li>
+                        <li><a th:href="@{'/instruments?mode=X'}">New obligation</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <form method="POST" th:action="@{/obligations/search}" th:object="${obligation}" name="f">
+            <input type="hidden" name="delObligations" id="delObligations">
+            <input type="hidden" name="hrefdelete" id="hrefdelete" th:value="@{'/obligations/'}">
+            <input type="hidden" name="anmode" id="anmode" th:value="${anmode}">
+            <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+            <div id="drop-operations">
+                <ul>
+                    <li class="search open"><a class="searchSection" href="#" title="Search reporting obligations">Search reporting obligations</a></li>
+                </ul>
+            </div>
+            <div id="filters">
+                <a class="helpButton" onclick="helpFunction('HELP_SEARCH1')" title="Help on this field"></a>
+                <div class="filter">
+
                     <div class="row">
                         <div class="labeldiv">
                             <label for="selCountries">Country or territory</label>
                         </div>
-		      			<div class="input">
-							<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
-								<option value="0" label="Any country or territory"></option>
-								<option  th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} "  th:selected="(${country.spatialId} == *{spatialId})"></option>								
-							</select>
-						</div>
-					</div>
-					<div class="row">
+                        <div class="input">
+                            <select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}">
+                                <option value="0" label="Any country or territory"></option>
+                                <option th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} " th:selected="(${country.spatialId} == *{spatialId})"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="labeldiv">
                             <label for="selIssues">Issue</label>
                         </div>
-                        <div class="input">	
-							<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
-								<option value="0" label="All issues"></option>
-				    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
-				    			<option value="NI" label="No issue allocated"></option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
+                        <div class="input">
+                            <select name="selIssues" id="selIssues" class="smalltext" th:field="*{issueId}">
+                                <option value="0" label="All issues"></option>
+                                <option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}" th:selected="(${issue.issueId} == *{issueId})"></option>
+                                <option value="NI" label="No issue allocated"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="labeldiv">
                             <label for="selClients">Organisation</label>
                         </div>
                         <div class="input">
-							<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
-								<option value="0" label="Any organisation"></option>
-							    <option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
+                            <select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+                                <option value="0" label="Any organisation"></option>
+                                <option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${client.acronym != ''} ? ${client.acronym} + ' - ' + ${obligation.truncateText(client.name)} : ${obligation.truncateText(client.name)}"
+                                        th:selected="(${client.clientId} == *{clientId})"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="labeldiv">
                             <label for="isterminated"></label>
                         </div>
@@ -128,48 +128,47 @@
                             <input type="checkbox" name="terminated" id="isterminated" value="Y" th:field="*{terminate}"><label>Include terminated obligations</label>
                         </div>
                     </div>
-             </div>
-				<p class="actions">
-                    <input class="mediumbuttonb searchButton" type="submit" value="Search" />
-                    <input class="mediumbuttonb" type="reset" value="Reset" />
+                </div>
+                <p class="actions">
+                    <input class="mediumbuttonb searchButton" type="submit" value="Search"/>
+                    <input class="mediumbuttonb" type="reset" value="Reset"/>
                 </p>
-           </div>
-		
-		
-		
-		<div style="clear: both;"></div>
-		
-     
-        <div th:if="${#lists.isEmpty(allObligations)}">There are no results.</div>
-        <div th:if="${not #lists.isEmpty(allObligations)}">
-	        <table id="obligationTable" class="datatable results table table-striped table-bordered">
-	        <thead>
-		        <tr>
-		        	<th sec:authorize="hasRole('EDITOR')"></th>
-			        <th>Reporting obligation</th>
-			        <th>Legislative instrument</th>
-			        <th>Report to</th>
-			        <th>Deadline</th>
-			       
-		        </tr>
-	        </thead>
-	        <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+            </div>
 
-	        	<td sec:authorize="hasRole('EDITOR')"><input type="checkbox" id="myCheck" name="myCheck" th:value="${obligation.obligationId}"/></td>
-	        	<td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
-	        	<td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
-	        	<td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
-	        	<td th:text="${obligation.nextDeadline != null} ? ${{obligation.nextDeadline}} : ${obligation.nextReporting}"></td>
-					
-	        </tr>
-	        </table>
-        </div>
-       
-      </form>
-     </div>
-      
-	 <div th:replace="layout :: footerFragment"></div>
+
+            <div style="clear: both;"></div>
+
+
+            <div th:if="${#lists.isEmpty(allObligations)}">There are no results.</div>
+            <div th:if="${not #lists.isEmpty(allObligations)}">
+                <table id="obligationTable" class="datatable results table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th sec:authorize="hasRole('EDITOR')"></th>
+                        <th>Reporting obligation</th>
+                        <th>Legislative instrument</th>
+                        <th>Report to</th>
+                        <th>Deadline</th>
+
+                    </tr>
+                    </thead>
+                    <tr th:each="obligation, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                        <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+
+                        <td sec:authorize="hasRole('EDITOR')"><input type="checkbox" id="myCheck" name="myCheck" th:value="${obligation.obligationId}"/></td>
+                        <td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
+                        <td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
+                        <td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
+                        <td th:text="${obligation.nextDeadline != null} ? ${{obligation.nextDeadline}} : ${obligation.nextReporting}"></td>
+
+                    </tr>
+                </table>
+            </div>
+
+        </form>
     </div>
-  </body>
+
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
 </html>

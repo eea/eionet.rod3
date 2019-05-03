@@ -7,16 +7,16 @@ package eionet.rod.util;
 import java.util.Hashtable;
 
 /**
- * 
  * @author jaanus
  */
 public class UnicodeEscapes {
 
-    /** */
+    /**
+     *
+     */
     private Hashtable<String, String> unicodeEscapes = new Hashtable<>();
 
     /**
-     *
      *
      */
     public UnicodeEscapes() {
@@ -275,7 +275,6 @@ public class UnicodeEscapes {
     }
 
     /**
-     * 
      * @param ent
      * @return int
      */
@@ -288,7 +287,6 @@ public class UnicodeEscapes {
     }
 
     /**
-     * 
      * @param s
      * @return boolean
      */
@@ -307,7 +305,6 @@ public class UnicodeEscapes {
     }
 
     /**
-     * 
      * @param s
      * @return boolean
      */

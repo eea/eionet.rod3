@@ -1,61 +1,61 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-        <mvc:resources location="/images/" mapping="/images/**"/>
-        <mvc:resources location="/css/" mapping="/css/**"/>
-        <mvc:resources location="/js/" mapping="/js/**"/>
-        <mvc:resources location="/fonts/" mapping="/fonts/**"/>
-        <mvc:resources location="/robots.txt" mapping="/robots.txt"/>
-        <mvc:resources location="/favicon.ico" mapping="/favicon.ico"/>
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/fonts/" mapping="/fonts/**"/>
+    <mvc:resources location="/robots.txt" mapping="/robots.txt"/>
+    <mvc:resources location="/favicon.ico" mapping="/favicon.ico"/>
 
-	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="eionet.rod" />
+    <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <context:component-scan base-package="eionet.rod"/>
 
-	<!-- Configures the @Controller programming model -->
-	<mvc:annotation-driven conversion-service="conversionService"/>
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-	<!--	Default date format-->
-    <property name="formatterRegistrars">
-        <set>
-            <bean class="eionet.rod.util.DateFormatterRegistrar" />
-        </set>
-    </property>
+    <!-- Configures the @Controller programming model -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!--	Default date format-->
+        <property name="formatterRegistrars">
+            <set>
+                <bean class="eionet.rod.util.DateFormatterRegistrar"/>
+            </set>
+        </property>
 
-</bean>
+    </bean>
 
-	<bean id="templateResolver"
-		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
-		<property name="prefix" value="/WEB-INF/thymeleaf/" />
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML" />
-		<property name="cacheable" value="true" />
-		<property name="characterEncoding" value="UTF-8"/>
-	</bean>
+    <bean id="templateResolver"
+          class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/thymeleaf/"/>
+        <property name="suffix" value=".html"/>
+        <property name="templateMode" value="HTML"/>
+        <property name="cacheable" value="true"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
 
-	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-		<property name="templateResolver" ref="templateResolver" />
-		<property name="additionalDialects">
-			<set>
-				<bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
-			</set>
-		</property>
-	</bean>
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+            </set>
+        </property>
+    </bean>
 
-	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-		<property name="templateEngine" ref="templateEngine" />
-		<property name="order" value="1" />
-		<property name="viewNames" value="*" />
-		<property name="contentType" value="text/html;charset=UTF-8"/>
-	</bean>
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="order" value="1"/>
+        <property name="viewNames" value="*"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+    </bean>
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
-	</bean>
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
 
 </beans>

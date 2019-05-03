@@ -3,21 +3,21 @@
  * License Version 1.1 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of
  * the License at http://www.mozilla.org/MPL/
- *
+ * <p>
  * Software distributed under the License is distributed on an "AS
  * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
- *
+ * <p>
  * The Original Code is "NaMod project".
- *
+ * <p>
  * The Initial Developer of the Original Code is TietoEnator.
  * The Original Code code was developed for the European
  * Environment Agency (EEA) under the IDA/EINRC framework contract.
- *
+ * <p>
  * Copyright (C) 2000-2002 by European Environment Agency.  All
  * Rights Reserved.
- *
+ * <p>
  * Original Code: Ander Tenno (TietoEnator)
  */
 
@@ -34,29 +34,23 @@ import eionet.rod.service.RoleService;
 import eionet.rod.util.RODServices;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import eionet.rod.util.exception.ServiceException;
-
-
+import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
-//import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sparql.SPARQLRepository;
-
-//import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.List;
-
-        import org.openrdf.query.BindingSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.PrintWriter;
+import java.util.*;
+
+//import org.openrdf.repository.RepositoryException;
+//import java.io.FileWriter;
 
 /**
  * Pulls information from various services and saves it to DB.
@@ -74,8 +68,8 @@ public class Extractor implements ExtractorConstants {
     //private static FileServiceIF fileSrv = null;
     boolean debugLog = true;
     private static PrintWriter out = null;
-   // private RODDaoFactory daoFactory;
-   
+    // private RODDaoFactory daoFactory;
+
     @Autowired
     RoleService roleService;
     @Autowired
@@ -84,10 +78,10 @@ public class Extractor implements ExtractorConstants {
     DeliveryService deliveryService;
     @Autowired
     UndoService undoService;
-    
+
     //@Autowired
     FileServiceIF fileSrv;
-    
+
     private static Extractor extractor;
 
     public Extractor() {
@@ -130,13 +124,14 @@ public class Extractor implements ExtractorConstants {
                 extractor = new Extractor();
             }
 
-            
+
             extractor.harvest(mode, userName);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-           // RODServices.sendEmail("Error in extractor", e.toString());
+            // RODServices.sendEmail("Error in extractor", e.toString());
         }
     }
+
     private String cDT() {
         Date d = new Date();
         return "[" + d + "] ";
@@ -159,7 +154,7 @@ public class Extractor implements ExtractorConstants {
      * @param userName
      * @throws ServiceException
      */
-    public void harvest(int mode, String userName) throws ServiceException  {
+    public void harvest(int mode, String userName) throws ServiceException {
 
         // Initial set-up: create class; open the log file
         // mode, which data to harvest
@@ -168,9 +163,9 @@ public class Extractor implements ExtractorConstants {
 //        String logfileName = null;
 //               
         try {
-        	fileSrv = RODServices.getFileService();
+            fileSrv = RODServices.getFileService();
 //            
-        	debugLog = fileSrv.getBooleanProperty("extractor.debugmode");
+            debugLog = fileSrv.getBooleanProperty("extractor.debugmode");
 
         } catch (ServiceException e) {
             throw new ServiceException("Unable to get settings from properties file. The following error was reported:\n" + e, e);
@@ -185,7 +180,7 @@ public class Extractor implements ExtractorConstants {
 
         // Get delivery list from Content Registry and save it also
         if (mode == ALL_DATA || mode == DELIVERIES) {
-           // actionText += " deliveries ";
+            // actionText += " deliveries ";
             extractDeliveries();
         }
 
@@ -220,7 +215,7 @@ public class Extractor implements ExtractorConstants {
 //                if (StringUtils.isNotBlank(errMsg.toString())) {
 //                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
 //                }
-                
+
                 // persons + org name
 
             } catch (Exception e) {
@@ -274,10 +269,10 @@ public class Extractor implements ExtractorConstants {
                 "}";
 
         final String query = prefixDeclarations + queryPattern;
-        final String countQuery = prefixDeclarations + "SELECT (COUNT(*) AS ?count) {{" +  queryPattern + "}}";
-        
+        final String countQuery = prefixDeclarations + "SELECT (COUNT(*) AS ?count) {{" + queryPattern + "}}";
+
         RepositoryConnection conn = null;
-        
+
         try {
             String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
             SPARQLRepository crEndpoint = new SPARQLRepository(endpointURL);
@@ -294,7 +289,7 @@ public class Extractor implements ExtractorConstants {
 
             if (resultsSize > 0) {
                 HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
-                
+
                 // back up currently existing deliveries
                 deliveryService.backUpDeliveries();
 
@@ -303,7 +298,7 @@ public class Extractor implements ExtractorConstants {
                 int saveCount = 0;
                 //only for testing
                 //resultsSize = 1001;
-                
+
                 while (offset <= resultsSize) {
                     String limitedQuery = query + " LIMIT " + chunkSize + " OFFSET " + offset;
                     TupleQuery q = conn.prepareTupleQuery(QueryLanguage.SPARQL, limitedQuery);
@@ -326,7 +321,7 @@ public class Extractor implements ExtractorConstants {
 
             log("Extracting deliveries from CR finished!");
         } catch (Exception e) {
-        	deliveryService.rollBackDeliveries();
+            deliveryService.rollBackDeliveries();
             log("Error harvesting deliveries: " + e.getMessage());
 
             log("Operation failed while filling the database from Content Registry. The following error was reported:\n"
@@ -334,7 +329,7 @@ public class Extractor implements ExtractorConstants {
             LOGGER.error(e.getMessage());
             exitApp(false); // return;
             throw new ResourceNotFoundException("Error getting data from Content Registry " + e.getMessage());
-        } 
+        }
     }
 
     /**
@@ -369,5 +364,5 @@ public class Extractor implements ExtractorConstants {
 
         roleService.saveRole(role);
     }
-    	
+
 }

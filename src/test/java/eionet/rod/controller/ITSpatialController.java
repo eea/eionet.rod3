@@ -1,34 +1,29 @@
 package eionet.rod.controller;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.sql.DataSource;
+import eionet.rod.model.Spatial;
+import eionet.rod.service.ObligationService;
+import eionet.rod.service.SpatialService;
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import org.springframework.web.context.WebApplicationContext;
 
-import eionet.rod.model.Spatial;
-import eionet.rod.service.ObligationService;
-import eionet.rod.service.SpatialService;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,29 +51,29 @@ public class ITSpatialController {
 
     @Autowired
     ObligationService obligationService;
-    
+
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
 
-      
+
     /**
      * Simple test to list countries.
      */
     @Test
     public void listSpatial() throws Exception {
-    	
-    	List<Spatial> spatialListY = new ArrayList<>();
-    	spatialListY.add(new Spatial(1, "Austria", "C", "AT", "Y"));
-    	spatialListY.add(new Spatial(3, "Francia", "C", "FR", "Y"));
-    	
-    	List<Spatial> spatialListN = new ArrayList<>();
-    	spatialListN.add(new Spatial(2, "Albania", "C", "AL", "N"));
-    	
-    	
+
+        List<Spatial> spatialListY = new ArrayList<>();
+        spatialListY.add(new Spatial(1, "Austria", "C", "AT", "Y"));
+        spatialListY.add(new Spatial(3, "Francia", "C", "FR", "Y"));
+
+        List<Spatial> spatialListN = new ArrayList<>();
+        spatialListN.add(new Spatial(2, "Albania", "C", "AL", "N"));
+
+
         this.mockMvc.perform(get("/spatial"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("breadcrumbs"))
@@ -89,41 +84,39 @@ public class ITSpatialController {
 
         List<Spatial> val = spatialService.findAllMember("Y");
         assertEquals(spatialListY.get(0).getName(), val.get(0).getName());
-      
+
         List<Spatial> valN = spatialService.findAllMember("N");
         assertEquals(spatialListN.get(0).getName(), valN.get(0).getName());
-        
+
     }
-    
-      
+
+
     @Test
     public void testspatial_deadlines() throws Exception {
         this.mockMvc.perform(get("/spatial/1/deadlines")
                 .param("spatialId", "1"))
-        		.andExpect(status().isOk())
-        		.andExpect(view().name("deadlines"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("deadlines"));
     }
-    
+
     @Test
-    public void testspatial_search_deadlines() throws Exception 
-    {
-    	this.mockMvc.perform(post("/spatial/1/deadlines/search")
-    			.param("issueId", "0")
-    			.param("deadlineId", "0")
-    			.param("clientId", "0")
-    			.with(csrf()))
-    			.andExpect(status().isOk())
-        		.andExpect(view().name("deadlines"));
+    public void testspatial_search_deadlines() throws Exception {
+        this.mockMvc.perform(post("/spatial/1/deadlines/search")
+                .param("issueId", "0")
+                .param("deadlineId", "0")
+                .param("clientId", "0")
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("deadlines"));
     }
-    
+
     @Test
-    public void testspatial_search_deadlinesWithoutCsrf() throws Exception 
-    {
-    	this.mockMvc.perform(post("/spatial/1/deadlines/search")
-    			.param("issueId", "0")
-    			.param("deadlineId", "0")
-    			.param("clientId", "0"))
-				.andExpect(status().is4xxClientError());
+    public void testspatial_search_deadlinesWithoutCsrf() throws Exception {
+        this.mockMvc.perform(post("/spatial/1/deadlines/search")
+                .param("issueId", "0")
+                .param("deadlineId", "0")
+                .param("clientId", "0"))
+                .andExpect(status().is4xxClientError());
     }
-    
+
 }

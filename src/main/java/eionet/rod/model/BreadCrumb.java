@@ -9,9 +9,13 @@ import eionet.rod.util.RODUtil;
  */
 public class BreadCrumb {
 
-    /** link to place in hierarchy. Can be null for last crumb. */
+    /**
+     * link to place in hierarchy. Can be null for last crumb.
+     */
     private String link;
-    /** The text for the link. */
+    /**
+     * The text for the link.
+     */
     private String linktext;
 
     public BreadCrumb(String linktext) {
@@ -35,7 +39,7 @@ public class BreadCrumb {
         if (linktext == null || "".equals(linktext)) {
             return "Unknown";
         } else {
-            return RODUtil.truncateText(linktext,  Constants.BREADCRUMB_MAX_LEN);
+            return RODUtil.truncateText(linktext, Constants.BREADCRUMB_MAX_LEN);
         }
     }
 

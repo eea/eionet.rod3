@@ -1,184 +1,184 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-  <script>
-	 $(document).ready(function(){
-	    $('#undoTable').DataTable({
-	    	"sDom": 'Tfrtipt',
-	    	"sPaginationType": "full_numbers"
-	    });
-	    
-	});
-  </script>
-    <div id="container">
-     <div th:include="layout :: bannerFragment"></div>
-     <div id="workarea">      
-	 	<div class="title">
-		    <h1>Undo information</h1>
-         </div>
-         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Time</th>
-            <th scope="col" class="col-xs-2">Operation</th>
-            <th scope="col" class="col-xs-2">User</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${#dates.format(time, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
-            <td><span th:text="${operation}"></span></td>
-            <td><span th:text="${user}"></span></td>
-          </tr>
-          </tbody>
-        </table> 
-        
-        <div style="clear: both;"></div>       
-        
-        <div th:if="${#lists.isEmpty(undoList)}">There are no results.</div> 
-        <div th:if="${not #lists.isEmpty(undoList)}">
-        	<div th:switch="${operation}">
-        		<table th:case="'UPDATE'" th:with="i=1" id="undoTable" class="datatable results table table-striped table-bordered">
-			        <thead>
-				        <tr>
-					        <th>Table</th>
-					        <th>Sub#</th>
-					        <th>Column</th>
-					        <th>Undo Value</th>
-					        <th>Current Value</th>
-				        </tr>
-			        </thead>
-			        <tr th:each="undo, iterStat : ${undoList}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-			        	<td><span th:text="${table}"></span></td>	        	
-			        	<td><span th:text="${undo.subTransNr}"></span></td>
-			        	<td><span th:text="${undo.col}"></span></td>
-			        	<td><span th:if="${undo.value != null}" th:text="${undo.value}"></span></td>
-			        	<td th:if="${undo.value == currentValues[iterStat.index]}"><span th:text="${currentValues[iterStat.index]}"></span></td>
-			        	<td th:unless="${undo.value == currentValues[iterStat.index]}" class="currentValueDif"><span th:text="${currentValues[iterStat.index]}"></span></td>
-			        </tr>			        
-		        </table>
-		        <table th:case="'DELETE'" th:with="i=1" id="undoTable" class="datatable results table table-striped table-bordered">
-			        <thead>
-				        <tr>
-					        <th>Table</th>
-					        <th>Sub#</th>
-					        <th>Column</th>
-					        <th>Undo Value</th>
-				        </tr>
-			        </thead>
-			        <tr th:each="undo, iterStat : ${undoList}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-			        	<td><span th:text="${table}"></span></td>	        	
-			        	<td><span th:text="${undo.subTransNr}"></span></td>
-			        	<td><span th:text="${undo.col}"></span></td>
-			        	<td><span th:if="${undo.value != null}" th:text="${undo.value}"></span></td>
-			        </tr>
-		        </table>
-        	</div>	        
+<head th:include="layout :: headerFragment"></head>
+<body>
+<script>
+    $(document).ready(function () {
+        $('#undoTable').DataTable({
+            "sDom": 'Tfrtipt',
+            "sPaginationType": "full_numbers"
+        });
+
+    });
+</script>
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div class="title">
+            <h1>Undo information</h1>
         </div>
-        
+        <table class="datatable results">
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Time</th>
+                <th scope="col" class="col-xs-2">Operation</th>
+                <th scope="col" class="col-xs-2">User</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${#dates.format(time, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
+                <td><span th:text="${operation}"></span></td>
+                <td><span th:text="${user}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div style="clear: both;"></div>
+
+        <div th:if="${#lists.isEmpty(undoList)}">There are no results.</div>
+        <div th:if="${not #lists.isEmpty(undoList)}">
+            <div th:switch="${operation}">
+                <table th:case="'UPDATE'" th:with="i=1" id="undoTable" class="datatable results table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Sub#</th>
+                        <th>Column</th>
+                        <th>Undo Value</th>
+                        <th>Current Value</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="undo, iterStat : ${undoList}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                        <td><span th:text="${table}"></span></td>
+                        <td><span th:text="${undo.subTransNr}"></span></td>
+                        <td><span th:text="${undo.col}"></span></td>
+                        <td><span th:if="${undo.value != null}" th:text="${undo.value}"></span></td>
+                        <td th:if="${undo.value == currentValues[iterStat.index]}"><span th:text="${currentValues[iterStat.index]}"></span></td>
+                        <td th:unless="${undo.value == currentValues[iterStat.index]}" class="currentValueDif"><span th:text="${currentValues[iterStat.index]}"></span></td>
+                    </tr>
+                </table>
+                <table th:case="'DELETE'" th:with="i=1" id="undoTable" class="datatable results table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Sub#</th>
+                        <th>Column</th>
+                        <th>Undo Value</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="undo, iterStat : ${undoList}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                        <td><span th:text="${table}"></span></td>
+                        <td><span th:text="${undo.subTransNr}"></span></td>
+                        <td><span th:text="${undo.col}"></span></td>
+                        <td><span th:if="${undo.value != null}" th:text="${undo.value}"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
         <h2>Countries reporting formally</h2>
         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Undo Countries</th>
-            <th scope="col" class="col-xs-3">Current Countries</th>
-            <th scope="col" class="col-xs-3">Added Countries</th>
-            <th scope="col" class="col-xs-3">Removed Countries</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${undoCountries}"></span></td>
-            <td><span th:text="${currentCountries}"></span></td>
-            <td class="added"><span th:text="${addedCountries}"></span></td>
-            <td class="removed"><span th:text="${removedCountries}"></span></td>
-          </tr>
-          </tbody>
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Undo Countries</th>
+                <th scope="col" class="col-xs-3">Current Countries</th>
+                <th scope="col" class="col-xs-3">Added Countries</th>
+                <th scope="col" class="col-xs-3">Removed Countries</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${undoCountries}"></span></td>
+                <td><span th:text="${currentCountries}"></span></td>
+                <td class="added"><span th:text="${addedCountries}"></span></td>
+                <td class="removed"><span th:text="${removedCountries}"></span></td>
+            </tr>
+            </tbody>
         </table>
-        
+
         <h2>Countries reporting voluntarily</h2>
         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Undo Countries</th>
-            <th scope="col" class="col-xs-3">Current Countries</th>
-            <th scope="col" class="col-xs-3">Added Countries</th>
-            <th scope="col" class="col-xs-3">Removed Countries</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${undoCountriesVol}"></span></td>
-            <td><span th:text="${currentCountriesVol}"></span></td>
-            <td class="added"><span th:text="${addedCountriesVol}"></span></td>
-            <td class="removed"><span th:text="${removedCountriesVol}"></span></td>
-          </tr>
-          </tbody>
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Undo Countries</th>
+                <th scope="col" class="col-xs-3">Current Countries</th>
+                <th scope="col" class="col-xs-3">Added Countries</th>
+                <th scope="col" class="col-xs-3">Removed Countries</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${undoCountriesVol}"></span></td>
+                <td><span th:text="${currentCountriesVol}"></span></td>
+                <td class="added"><span th:text="${addedCountriesVol}"></span></td>
+                <td class="removed"><span th:text="${removedCountriesVol}"></span></td>
+            </tr>
+            </tbody>
         </table>
-        
+
         <h2>Environmental issues</h2>
         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Undo Issues</th>
-            <th scope="col" class="col-xs-3">Current Issues</th>
-            <th scope="col" class="col-xs-3">Added Issues</th>
-            <th scope="col" class="col-xs-3">Removed Issues</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${undoIssues}"></span></td>
-            <td><span th:text="${currentIssues}"></span></td>
-            <td class="added"><span th:text="${addedIssues}"></span></td>
-            <td class="removed"><span th:text="${removedIssues}"></span></td>
-          </tr>
-          </tbody>
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Undo Issues</th>
+                <th scope="col" class="col-xs-3">Current Issues</th>
+                <th scope="col" class="col-xs-3">Added Issues</th>
+                <th scope="col" class="col-xs-3">Removed Issues</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${undoIssues}"></span></td>
+                <td><span th:text="${currentIssues}"></span></td>
+                <td class="added"><span th:text="${addedIssues}"></span></td>
+                <td class="removed"><span th:text="${removedIssues}"></span></td>
+            </tr>
+            </tbody>
         </table>
-        
+
         <h2>Other clients using this reporting</h2>
         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Undo Clients</th>
-            <th scope="col" class="col-xs-3">Current Clients</th>
-            <th scope="col" class="col-xs-3">Added Clients</th>
-            <th scope="col" class="col-xs-3">Removed Clients</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${undoClients}"></span></td>
-            <td><span th:text="${currentClients}"></span></td>
-            <td class="added"><span th:text="${addedClients}"></span></td>
-            <td class="removed"><span th:text="${removedClients}"></span></td>
-          </tr>
-          </tbody>
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Undo Clients</th>
+                <th scope="col" class="col-xs-3">Current Clients</th>
+                <th scope="col" class="col-xs-3">Added Clients</th>
+                <th scope="col" class="col-xs-3">Removed Clients</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${undoClients}"></span></td>
+                <td><span th:text="${currentClients}"></span></td>
+                <td class="added"><span th:text="${addedClients}"></span></td>
+                <td class="removed"><span th:text="${removedClients}"></span></td>
+            </tr>
+            </tbody>
         </table>
-        
+
         <h2>Relation with other obligations</h2>
         <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-3">Undo Obligations</th>
-            <th scope="col" class="col-xs-3">Current Obligations</th>
-            <th scope="col" class="col-xs-3">Added Obligations</th>
-            <th scope="col" class="col-xs-3">Removed Obligations</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td><span th:text="${undoObligations}"></span></td>
-            <td><span th:text="${currentObligations}"></span></td>
-            <td class="added"><span th:text="${addedObligations}"></span></td>
-            <td class="removed"><span th:text="${removedObligations}"></span></td>
-          </tr>
-          </tbody>
+            <thead>
+            <tr>
+                <th scope="col" class="col-xs-3">Undo Obligations</th>
+                <th scope="col" class="col-xs-3">Current Obligations</th>
+                <th scope="col" class="col-xs-3">Added Obligations</th>
+                <th scope="col" class="col-xs-3">Removed Obligations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span th:text="${undoObligations}"></span></td>
+                <td><span th:text="${currentObligations}"></span></td>
+                <td class="added"><span th:text="${addedObligations}"></span></td>
+                <td class="removed"><span th:text="${removedObligations}"></span></td>
+            </tr>
+            </tbody>
         </table>
-        
-     </div>
-    <div th:replace="layout :: footerFragment"></div>
+
     </div>
-  </body>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
 </html>

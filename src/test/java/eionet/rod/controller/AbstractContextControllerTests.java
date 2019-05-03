@@ -40,6 +40,7 @@ public abstract class AbstractContextControllerTests {
 
     /**
      * Expects returning 200(OK) as a http status.
+     *
      * @param requestBuilder request builder
      * @return result actions
      * @throws Exception
@@ -47,12 +48,13 @@ public abstract class AbstractContextControllerTests {
     protected ResultActions request(RequestBuilder requestBuilder) throws Exception {
         return mvc().perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk());
     }
-    
+
     /**
      * Expects returning 302(Found) as http status
+     *
      * @param requestBuilder
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     protected ResultActions requestWithRedirect(RequestBuilder requestBuilder) throws Exception {
         return mvc().perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isFound());
@@ -95,7 +97,7 @@ public abstract class AbstractContextControllerTests {
         assertThat("Field errors=" + fieldErrors, bindingResult.getFieldErrorCount(), equalTo(size));
         return fieldErrors;
     }
-    
+
     protected String bindingResultPropertyNameInModel() {
         throw new UnsupportedOperationException(
                 "Please override this method with giving proper binding result property name in model");

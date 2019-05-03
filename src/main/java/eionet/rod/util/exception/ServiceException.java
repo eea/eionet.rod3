@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  */
 public class ServiceException extends java.lang.Exception {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceException.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceException.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -25,11 +25,11 @@ public class ServiceException extends java.lang.Exception {
      * Constructs an <code>ServiceException</code> with the specified detail message.
      *
      * @param message the detail message.
-     * @param cause the cause
+     * @param cause   the cause
      */
     public ServiceException(final String message, final Throwable cause) {
         super(message, cause);
-                LOGGER.error("Service exception occured with reason <<" + message + ">>", cause);
+        LOGGER.error("Service exception occured with reason <<" + message + ">>", cause);
 
     }
 }

@@ -1,10 +1,5 @@
 package eionet.rod.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -25,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 public class ITDisclaimerController {
 
-	@Autowired
+    @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
@@ -36,17 +34,17 @@ public class ITDisclaimerController {
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
-    
+
     @Test
-    public void helpHome() throws Exception  {
-    	this.mockMvc.perform(get("/disclaimer"))
-	    	.andExpect(status().isOk())
-	        .andExpect(model().attributeExists("activeTab"))
-	        .andExpect(model().attributeExists("title"))
-	        .andExpect(view().name("disclaimer"));
+    public void helpHome() throws Exception {
+        this.mockMvc.perform(get("/disclaimer"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("activeTab"))
+                .andExpect(model().attributeExists("title"))
+                .andExpect(view().name("disclaimer"));
     }
-	
+
 }

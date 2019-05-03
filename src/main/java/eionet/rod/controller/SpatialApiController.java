@@ -1,51 +1,42 @@
 package eionet.rod.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
 import eionet.rod.model.Spatial;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.RestPreconditions;
 import eionet.rod.util.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author jrobles
- *
  */
 @Controller
 @RequestMapping(value = "/api/spatial")
 public class SpatialApiController {
 
-	@ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public String handleResourceNotFoundException() {
         return "404";
     }
-	
-	@Autowired
-	SpatialService service;
 
-	@ResponseBody
+    @Autowired
+    SpatialService service;
+
+    @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public List<Spatial> findAll() {
-		return service.findAll();
-	}
+        return service.findAll();
+    }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public  Spatial findOne(@PathVariable("id") Integer id) {
-		return RestPreconditions.checkFound(service.findOne(id));
-	}
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public Spatial findOne(@PathVariable("id") Integer id) {
+        return RestPreconditions.checkFound(service.findOne(id));
+    }
 
 //	@RequestMapping(method = RequestMethod.POST)
 //	@ResponseStatus(HttpStatus.CREATED)

@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="developer.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
-  </head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment">
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}"/>
+</head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment">
         <div id="pagehead">
-          <div id="networktitle">Eionet</div>
-          <div id="sitetitle">Reporting Obligations Database (ROD)</div>
-          <div id="sitetagline">Networking improving Europe's environment</div>
+            <div id="networktitle">Eionet</div>
+            <div id="sitetitle">Reporting Obligations Database (ROD)</div>
+            <div id="sitetagline">Networking improving Europe's environment</div>
         </div>
-      </div>
-      <div id="workarea">
+    </div>
+    <div id="workarea">
 
-<h1>Modify user</h1>
-<div id="operations">
-    <ul>
-        <li><a href="users.html" th:href="@{/users/view}" >Back to users</a></li>
-    </ul>
+        <h1>Modify user</h1>
+        <div id="operations">
+            <ul>
+                <li><a href="users.html" th:href="@{/users/view}">Back to users</a></li>
+            </ul>
+        </div>
+        <form action="users.html" th:action="@{/users/edit}" th:object="${user}" method="post">
+            <table class="datatable">
+                <tr>
+                    <th scope="row"><label for="userName">Username</label></th>
+                    <td><input id="userName" type="text" value="john" th:field="*{userId}" readonly="readonly"/></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label>User roles</label></th>
+                    <td>
+                        <div th:each="validRole : ${allRoles}">
+                            <input type="checkbox" value="ADMIN" id="role1"
+                                   th:id="${#ids.seq('authorisations')}" th:field="*{authorisations}" th:value="${validRole}"/>
+                            <label for="role1" th:for="${#ids.prev('authorisations')}" th:text="${validRole}">ROLE_ADMIN</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Update user"/>
+        </form>
+    </div>
 </div>
-<form action="users.html" th:action="@{/users/edit}" th:object="${user}" method="post">
-    <table class="datatable">
-        <tr>
-            <th scope="row"><label for="userName">Username</label></th>
-            <td><input id="userName" type="text" value="john" th:field="*{userId}" readonly="readonly"/></td>
-        </tr>
-        <tr>
-            <th scope="row"><label>User roles</label></th>
-            <td>
-                <div th:each="validRole : ${allRoles}">
-                    <input type="checkbox" value="ADMIN" id="role1"
-                    th:id="${#ids.seq('authorisations')}" th:field="*{authorisations}" th:value="${validRole}"/>
-                    <label for="role1" th:for="${#ids.prev('authorisations')}" th:text="${validRole}">ROLE_ADMIN</label>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Update user"/>
-</form>
-      </div>
-    </div>
-    <!-- container -->
-    <div id="pagefoot" th:include="layout :: footerFragment">
+<!-- container -->
+<div id="pagefoot" th:include="layout :: footerFragment">
     Footer
-    </div>
-  </body>
+</div>
+</body>
 </html>

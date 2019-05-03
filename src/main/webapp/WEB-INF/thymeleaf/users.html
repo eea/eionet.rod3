@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="developer.css"/>
-  </head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment">
-      </div>
-      <div id="workarea">
+</head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment">
+    </div>
+    <div id="workarea">
         <h1>Users &amp; Roles</h1>
         <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-<table class="datatable">
-  <thead>
-    <tr>
-        <th>User</th>
-        <th>Roles</th>
-        <th>Edit User</th>
-        <th>Delete User</th>
-    </tr>
-  </thead>
-  <tbody th:remove="all-but-first">
-      <tr th:each="user : ${allUsers}">
-          <td th:text="${user.username}">freddy</td>
-          <td>
+        <table class="datatable">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Roles</th>
+                <th>Edit User</th>
+                <th>Delete User</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.username}">freddy</td>
+                <td>
            <span th:each="authority, loopStatus : ${user.authorities}">
              <th:block th:text="${authority}">ROLE</th:block>
              <th:block th:if="${not loopStatus.last}"> , </th:block>
            </span>
-          </td>
-          <td>
-            <input class="edit-button" type="button" value="Edit" href="userEditForm.html" th:href="@{/users/edit(userName=${user.username})}" />
-          </td>
-          <td>
-            <input class="delete-button" type="button" value="Delete" href="#" th:href="@{/users/delete(userName=${user.username})}" />
-          </td>
-      </tr>
-      <tr>
-        <td>helen</td>
-        <td>ROLE_ADMIN, ROLE_NOEXPIRATION</td>
-          <td>
-            <input class="edit-button" type="button" value="Edit" href="#" />
-          </td>
-          <td>
-            <input class="delete-button" type="button" value="Delete" href="#" />
-          </td>
-      </tr>
-  </tbody>
-</table>
+                </td>
+                <td>
+                    <input class="edit-button" type="button" value="Edit" href="userEditForm.html" th:href="@{/users/edit(userName=${user.username})}"/>
+                </td>
+                <td>
+                    <input class="delete-button" type="button" value="Delete" href="#" th:href="@{/users/delete(userName=${user.username})}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>helen</td>
+                <td>ROLE_ADMIN, ROLE_NOEXPIRATION</td>
+                <td>
+                    <input class="edit-button" type="button" value="Edit" href="#"/>
+                </td>
+                <td>
+                    <input class="delete-button" type="button" value="Delete" href="#"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-<h2>Add new user</h2>
-<form action="#" th:action="@{/users/add}" th:object="${user}" method="post">
-    <table class="datatable">
-        <tr>
-            <th scope="row"><label for="userName">Username</label></th>
-            <td><input id="userName" type="text" size="16" value="john" th:field="*{userId}" /></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="roles">User roles</label></th>
-            <td>
-                <div th:each="validRole : ${allRoles}">
-                    <input type="checkbox" value="ROLE_ADMIN" id="role1" th:id="${#ids.seq('authorisations')}" th:field="*{authorisations}" th:value="${validRole}"/>
-                    <label for="role1" th:for="${#ids.prev('authorisations')}" th:text="${validRole}">ROLE_ADMIN</label>
-                </div>
-                <div th:remove="all">
-                    <input type="checkbox" value="ROLE_NOEXPIRATION" id="role2"/>
-                    <label for="role2">ROLE_NOEXPIRATION</label>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Add user"/>
-</form>
-<script type="text/javascript">
-    (function(){
-        $('.edit-button').click(function(){
-            window.location.assign($(this).attr("href"));
-        });
-        $('.delete-button').click(function(){
-            if (confirm("Are you sure you want to delete the user ?") == true) {
-                window.location.assign($(this).attr("href"));
-            }
-        });
-    })();
-</script>
-      </div>
+        <h2>Add new user</h2>
+        <form action="#" th:action="@{/users/add}" th:object="${user}" method="post">
+            <table class="datatable">
+                <tr>
+                    <th scope="row"><label for="userName">Username</label></th>
+                    <td><input id="userName" type="text" size="16" value="john" th:field="*{userId}"/></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="roles">User roles</label></th>
+                    <td>
+                        <div th:each="validRole : ${allRoles}">
+                            <input type="checkbox" value="ROLE_ADMIN" id="role1" th:id="${#ids.seq('authorisations')}" th:field="*{authorisations}" th:value="${validRole}"/>
+                            <label for="role1" th:for="${#ids.prev('authorisations')}" th:text="${validRole}">ROLE_ADMIN</label>
+                        </div>
+                        <div th:remove="all">
+                            <input type="checkbox" value="ROLE_NOEXPIRATION" id="role2"/>
+                            <label for="role2">ROLE_NOEXPIRATION</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Add user"/>
+        </form>
+        <script type="text/javascript">
+            (function () {
+                $('.edit-button').click(function () {
+                    window.location.assign($(this).attr("href"));
+                });
+                $('.delete-button').click(function () {
+                    if (confirm("Are you sure you want to delete the user ?") == true) {
+                        window.location.assign($(this).attr("href"));
+                    }
+                });
+            })();
+        </script>
     </div>
-    <!-- container -->
-    <div id="pagefoot" th:include="layout :: footerFragment">
+</div>
+<!-- container -->
+<div id="pagefoot" th:include="layout :: footerFragment">
     Footer
-    </div>
-  </body>
+</div>
+</body>
 </html>

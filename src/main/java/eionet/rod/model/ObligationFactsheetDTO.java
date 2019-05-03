@@ -3,9 +3,7 @@ package eionet.rod.model;
 import java.util.Date;
 
 /**
- *
  * @author altnyris
- *
  */
 public class ObligationFactsheetDTO {
 

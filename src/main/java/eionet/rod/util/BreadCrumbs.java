@@ -1,10 +1,11 @@
 package eionet.rod.util;
 
+import eionet.rod.model.BreadCrumb;
+import org.springframework.ui.Model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.ui.Model;
-import eionet.rod.model.BreadCrumb;
 
 /**
  * Generate the bread crumbs.
@@ -14,7 +15,9 @@ public class BreadCrumbs {
     /** Eionet portal. This should be part of the layout template - not here. */
     //private static BreadCrumb eionetCrumb;
 
-    /** Toplevel of this site. */
+    /**
+     * Toplevel of this site.
+     */
     private static BreadCrumb homeCrumb;
 
     // To prevent initialisations.

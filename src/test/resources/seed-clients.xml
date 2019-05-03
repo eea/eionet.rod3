@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <T_CLIENT
-      PK_CLIENT_ID="1" CLIENT_NAME="Test client" CLIENT_ACRONYM="TC"
-      CLIENT_URL="http://www.unep.org/ozone" CLIENT_ADDRESS="Nowhere"
-      CLIENT_EMAIL="nowhere@example.com"
-      DESCRIPTION="description" POSTAL_CODE="0000" CITY="Longyearbyen" COUNTRY="Norway"
-      CLIENT_SHORT_NAME="Test"
+    <T_CLIENT
+            PK_CLIENT_ID="1" CLIENT_NAME="Test client" CLIENT_ACRONYM="TC"
+            CLIENT_URL="http://www.unep.org/ozone" CLIENT_ADDRESS="Nowhere"
+            CLIENT_EMAIL="nowhere@example.com"
+            DESCRIPTION="description" POSTAL_CODE="0000" CITY="Longyearbyen" COUNTRY="Norway"
+            CLIENT_SHORT_NAME="Test"
     />
-     <T_CLIENT
-      PK_CLIENT_ID="2" CLIENT_NAME="Test client2" CLIENT_ACRONYM="TC"
-      CLIENT_URL="http://www.unep.org/ozone" CLIENT_ADDRESS="Nowhere2"
-      CLIENT_EMAIL="nowhere@example.com"
-      DESCRIPTION="description2" POSTAL_CODE="0000" CITY="Longyearbyen" COUNTRY="Norway"
-      CLIENT_SHORT_NAME="Test2"
+    <T_CLIENT
+            PK_CLIENT_ID="2" CLIENT_NAME="Test client2" CLIENT_ACRONYM="TC"
+            CLIENT_URL="http://www.unep.org/ozone" CLIENT_ADDRESS="Nowhere2"
+            CLIENT_EMAIL="nowhere@example.com"
+            DESCRIPTION="description2" POSTAL_CODE="0000" CITY="Longyearbyen" COUNTRY="Norway"
+            CLIENT_SHORT_NAME="Test2"
     />
 
 </dataset>

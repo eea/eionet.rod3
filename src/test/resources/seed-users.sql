@@ -1,2 +1,5 @@
-DELETE FROM users;
-INSERT INTO users VALUES ('pablo', 'mypassword', 1),('peter', 'anotherpassword',1);
+DELETE
+FROM users;
+INSERT INTO users
+VALUES ('pablo', 'mypassword', 1),
+       ('peter', 'anotherpassword', 1);

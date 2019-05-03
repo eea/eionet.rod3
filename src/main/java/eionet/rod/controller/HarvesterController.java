@@ -1,5 +1,9 @@
 package eionet.rod.controller;
 
+import eionet.rod.Constants;
+import eionet.rod.IAuthenticationFacade;
+import eionet.rod.extractor.Extractor;
+import eionet.rod.util.RODUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,56 +15,49 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import eionet.rod.Constants;
-import eionet.rod.IAuthenticationFacade;
-
-import eionet.rod.extractor.Extractor;
-
-import eionet.rod.util.RODUtil;
-
 
 @Controller
 @RequestMapping("/harvester")
 public class HarvesterController {
 
-	private static final Log logger = LogFactory.getLog(HarvesterController.class);
-	
-	@Autowired
+    private static final Log logger = LogFactory.getLog(HarvesterController.class);
+
+    @Autowired
     IAuthenticationFacade authenticationFacade;
 
-	@Autowired
-	Extractor extractor;
-	
-	@RequestMapping({"", "/", "/view"})
-	 public String harvest(Model model, @RequestParam(required = false) String message) {
-		 Authentication authentication = authenticationFacade.getAuthentication();
-			String userName = authentication.getName();
-			
-	        if (RODUtil.isNullOrEmpty(userName)) {
-	        	String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
-	        	model.addAttribute("message", messageLogin);
-	        	return "harvester";
-	        }
-	        
-	        model.addAttribute("mode" , "");
-	        
-	        if(message != null) model.addAttribute("message", message);
-	        return "harvester";
-	 }
-	
-	 @RequestMapping(method = RequestMethod.POST)
-	 public String harvest(String mode, RedirectAttributes redirectAttributes, Model model, @RequestParam(required = false) String message) {
-		
-	    Authentication authentication = authenticationFacade.getAuthentication();
-		String userName = authentication.getName();
+    @Autowired
+    Extractor extractor;
+
+    @RequestMapping({"", "/", "/view"})
+    public String harvest(Model model, @RequestParam(required = false) String message) {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        String userName = authentication.getName();
+
         if (RODUtil.isNullOrEmpty(userName)) {
-        	String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
-       	 	model.addAttribute("message", messageLogin);
-       	 	return "harvester";
+            String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
+            model.addAttribute("message", messageLogin);
+            return "harvester";
+        }
+
+        model.addAttribute("mode", "");
+
+        if (message != null) model.addAttribute("message", message);
+        return "harvester";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String harvest(String mode, RedirectAttributes redirectAttributes, Model model, @RequestParam(required = false) String message) {
+
+        Authentication authentication = authenticationFacade.getAuthentication();
+        String userName = authentication.getName();
+        if (RODUtil.isNullOrEmpty(userName)) {
+            String messageLogin = "You are not logged in!" + " - " + Constants.SEVERITY_WARNING;
+            model.addAttribute("message", messageLogin);
+            return "harvester";
         }
 
         try {
-        	//Comment only for test in my PC
+            //Comment only for test in my PC
 //            AccessControlListIF acl = AccessController.getAcl(Constants.ACL_HARVEST_NAME);
 //            boolean perm = acl.checkPermission(userName, Constants.ACL_INSERT_PERMISSION);
 //            if (!perm) {
@@ -72,22 +69,21 @@ public class HarvesterController {
             int m = Integer.parseInt(mode);
 
             extractor.harvest(m, userName);
-            
-            model.addAttribute("mode" , mode);
-            
+
+            model.addAttribute("mode", mode);
+
             String messageResult = "Harvested!"; // See log for details";
             model.addAttribute("message", messageResult);
         } catch (Exception e) {
-        	
-        	String messageExcep = e.getMessage() + " - " + Constants.SEVERITY_WARNING;
+
+            String messageExcep = e.getMessage() + " - " + Constants.SEVERITY_WARNING;
             model.addAttribute("message", messageExcep);
             logger.info(messageExcep, e);
         }
 
-        if(message != null) model.addAttribute("message", message);
-		return "harvester";
-	 }
-	 
-	 
-	 
+        if (message != null) model.addAttribute("message", message);
+        return "harvester";
+    }
+
+
 }

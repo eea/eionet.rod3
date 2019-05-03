@@ -3,256 +3,259 @@
 <head th:include="layout :: headerFragment"></head>
 <body>
 <div id="container">
-	<div th:include="layout :: bannerFragment" ></div>
-      <div id="workarea">
-      <div th:replace="helpModal :: helpModalFragment"></div>
-      
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div th:replace="helpModal :: helpModalFragment"></div>
+
         <h1 th:text="${instrument.sourceTitle != null} ? ${instrument.sourceTitle} : 'Add instrument'">Edit Instrument</h1>
-        <form action="instrumentEditForm.html" method="POST" th:action="@{/instruments/} + ${form}" th:object="${instrument}" name="f" class="form-horizontal">
-         <input name="sourceId" th:value="*{sourceId}" value="55" type="hidden"/>
-          <input type="hidden" name="hrefInstruments" id="hrefInstruments" th:value="@{'/instruments'}">
-         	<fieldset><legend>Identification</legend>   
-            <div class="datatable results">
-				<div class="form-group ">
-				  	<div class="col-lg-3">
-						<label class="required question" for="sourceTitle">Legal name</label>
-              		</div>
-              		<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_LEGALNAME')" title="Help on this field"></a>
-		            <div class="col-lg-8">
-		                <textarea id="sourceTitle" cols="55" rows="5" style="height:5em" onchange="checkMdText(this); changed()" name="sourceTitle" class="form-control full" th:field="*{sourceTitle}"></textarea>
-		            </div>
-            	</div>
-	            <div class="form-group">
-					  <div class="col-lg-3">
-		             	   <label class="required question" for="sourceAlias">Short Name</label>
-		              </div>
-		              <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ALIASNAME')" title="Help on this field"></a>
-		              <div class="col-lg-8">
-		                	<input id="sourceAlias" maxlength="100" name="sourceAlias" onchange="checkMdText(this); changed()" th:field="*{sourceAlias}" type="text" size="68" class="form-control full"/>
-		              </div>
-	            </div>
-	            <div class="form-group">
-					  <div class="col-lg-3">
-		             	   <label class="question">Terminated</label>
-		              </div>
-		              <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_DRAFT')" title="Help on this field"></a>
-		              <div class="col-lg-8" th:switch="${instrument.sourceTerminate}">
+        <form action="instrumentEditForm.html" class="form-horizontal" method="POST" name="f" th:action="@{/instruments/} + ${form}" th:object="${instrument}">
+            <input name="sourceId" th:value="*{sourceId}" type="hidden" value="55"/>
+            <input id="hrefInstruments" name="hrefInstruments" th:value="@{'/instruments'}" type="hidden">
+            <fieldset>
+                <legend>Identification</legend>
+                <div class="datatable results">
+                    <div class="form-group ">
+                        <div class="col-lg-3">
+                            <label class="required question" for="sourceTitle">Legal name</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_LEGALNAME')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <textarea class="form-control full" cols="55" id="sourceTitle" name="sourceTitle" onchange="checkMdText(this); changed()" rows="5" style="height:5em" th:field="*{sourceTitle}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="required question" for="sourceAlias">Short Name</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ALIASNAME')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="form-control full" id="sourceAlias" maxlength="100" name="sourceAlias" onchange="checkMdText(this); changed()" size="68" th:field="*{sourceAlias}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question">Terminated</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_DRAFT')" title="Help on this field"></a>
+                        <div class="col-lg-8" th:switch="${instrument.sourceTerminate}">
 		                	<span th:case="'Y'">	                              
-				              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" checked="checked" />
+				              	<input checked="checked" id="terminateYes" name="sourceTerminate" type="radio" value="Y"/>
 				              	<label for="terminateYes">Yes</label>
-				              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" />
+				              	<input id="terminateNo" name="sourceTerminate" type="radio" value="N"/>
 				              	<label for="terminateNo">No</label>
 				            </span>
-				            <span th:case="*">	                              
-				              	<input id="terminateYes" type="radio" name="sourceTerminate" value="Y" />
+                            <span th:case="*">
+				              	<input id="terminateYes" name="sourceTerminate" type="radio" value="Y"/>
 				              	<label for="terminateYes">Yes</label>
-				              	<input id="terminateNo" type="radio" name="sourceTerminate" value="N" checked="checked" />
+				              	<input checked="checked" id="terminateNo" name="sourceTerminate" type="radio" value="N"/>
 				              	<label for="terminateNo">No</label>
 				            </span>
-		              </div>
-	            </div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceCode">Identification number</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_IDENTIFICATIONNUMBER')" title="Help on this field"></a>
-	              <div class="col-lg-8">
-	              	<input id="sourceCode" maxlength="255" name="sourceCode" th:field="*{sourceCode}" type="text"  class="form-control"/>		            
-	              </div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-	                	<label class="question" for="sourceUrl">URL to official text</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_URLTOOFFICIALSOURCE')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceUrl" maxlength="255" name="sourceUrl" th:field="*{sourceUrl}" type="text" size="68" class="form-control full"/>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceCelexRef">CELEX reference</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_CELEXREFERENCE')" title="Help on this field"></a>
-	              <div class="col-lg-8">
-	                <input id="sourceCelexRef" maxlength="255" name="sourceCelexRef" th:field="*{sourceCelexRef}" type="text" class="full form-control"/>
-	              </div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-	                	<label class="required question" for="clientId">Issued by</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ISSUEDBY')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-		              	<select id="clientId" name="clientId" class="full form-control" th:required="required" th:field="*{clientId}">
-		              	  <!-- <option th:if="${instrument.clientName != null}" th:text="${instrument.truncateText(instrument.clientName)}" th:value="${instrument.clientId}" th:selected="selected"></option> 
-						  <option th:each="client : ${clients}" th:if="${client.name != instrument.clientName}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}"></option> -->
-						  <option th:each="client : ${clients}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}" th:selected="*{clientId} == ${client.clientId}"></option>
-						</select>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-	                	<label class="question" for="sourceIssuedByUrl">URL to issuer</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_URLTOISSUER')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceIssuedByUrl" maxlength="255" name="sourceIssuedByUrl" th:field="*{sourceIssuedByUrl}" type="text" size="68"  class="full form-control"/>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-	                	<label class="question" for="sourceLnkFKSourceParentId">Parent legislative instrument</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_PARENTLEGALINSTRUMENT')" title="Help on this field"></a>
-		            <div  class="col-lg-8">
-		              	<select id="sourceLnkFKSourceParentId" name="sourceLnkFKSourceParentId" class="full form-control" th:field="*{sourceLnkFKSourceParentId}">              	  
-		              	  <!-- <option th:if="${instrument.parent != null}" th:selected="selected" th:text="${instrument.truncateText(instrument.parent.sourceAlias)}" th:value="${instrument.parent.sourceId}"></option> -->
-		              	  <option value="-1">No parent</option>
-						  <option th:each="i : ${instruments}" th:if="${i.sourceId != instrument.sourceId}" th:text="${instrument.truncateText(i.sourceAlias)}" th:value="${i.sourceId}" th:selected="*{sourceLnkFKSourceParentId} == ${i.sourceId}"></option>
-						</select>
-		            </div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-			      		<label class="required question">Eur-lex categories</label>
-					</div>
-					<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_CLASSIFICATION')" title="Help on this field"></a>
-					<div class="col-lg-8"></div>
-				</div>
-				<div class="form-group">
-					<div class="col-lg-55">
-						<select id="selClassifications" name="selClassifications" class="multiple form-control" multiple="multiple" size="9">				    				
-	    					<option th:each="classification : ${selClassifications}" th:value="${classification.classId}" th:text="${classification.classificator != null} ? ${classification.classificator} + ' ' + ${classification.className} : ${classification.className}">				    						
-	    					</option>				    				
-					  	</select>
-					</div>
-					<div class="col-lg-1">
-						<div class="arrow_btnbox">
-							<input  type="button" onclick="mvValues(document.f.selClassifications.options, document.f.selectedClassifications.options, null)" value="-&gt;" class="arrow_btn add"/>
-						</div>
-						<div class="arrow_btnbox">
-							<input  type="button" onclick="mvValues(document.f.selectedClassifications.options, document.f.selClassifications.options, null)" value="&lt;-" class="arrow_btn delete"/>
-						</div>
-					</div>
-					<div class="col-lg-55">
-						<select id="selectedClassifications" th:field="*{selectedClassifications}" name="selectedClassifications" class="multiple form-control" multiple="multiple" size="9"> 
-		    				<option th:each="classification : ${instrument.classifications}" th:value="${classification.classId}" th:text="${classification.classificator != null} ? ${classification.classificator} + ' ' + ${classification.className} : ${classification.className}">			    						
-	    					</option>
-					  	</select>
-					</div>
-				</div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceValidFrom">Valid from</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_VALIDFROM')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-		                <input id="sourceValidFrom" class="smalltext date form-control" size="30" name="sourceValidFrom" th:field="*{sourceValidFrom}"  onchange="checkDateSimple(this); changed()" type="text" /> 
-		                <span class="input-hint">(dd/mm/yyyy)</span>
-	               </div>
-	            </div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceAbstract">Abstract</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ABSTRACT')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-		              	<textarea id="sourceAbstract" cols="55" rows="10" name="sourceAbstract" class="full form-control" th:field="*{sourceAbstract}">Abstract</textarea>
-	              </div>
-	            </div>         	        
-	             
-	          </div>
-	          </fieldset>
-	          <fieldset>
-	          <legend>Reporting framework</legend>
-	          <div class="formtable datatable results">
-				<div class="form-group">
-					<div class="col-lg-3">
-			        	<label class="question" for="sourceComment">Comments</label>
-			        </div>
-			        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_COMMENT')" title="Help on this field"></a>
-		            <div class="col-lg-8">
-		            	<textarea id="sourceComment" cols="55" rows="5" name="sourceComment" th:field="*{sourceComment}" class="full form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceCode">Identification number</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_IDENTIFICATIONNUMBER')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="form-control" id="sourceCode" maxlength="255" name="sourceCode" th:field="*{sourceCode}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceUrl">URL to official text</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_URLTOOFFICIALSOURCE')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="form-control full" id="sourceUrl" maxlength="255" name="sourceUrl" size="68" th:field="*{sourceUrl}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceCelexRef">CELEX reference</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_CELEXREFERENCE')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="full form-control" id="sourceCelexRef" maxlength="255" name="sourceCelexRef" th:field="*{sourceCelexRef}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="required question" for="clientId">Issued by</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ISSUEDBY')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <select class="full form-control" id="clientId" name="clientId" th:field="*{clientId}" th:required="required">
+                                <!-- <option th:if="${instrument.clientName != null}" th:text="${instrument.truncateText(instrument.clientName)}" th:value="${instrument.clientId}" th:selected="selected"></option>
+                              <option th:each="client : ${clients}" th:if="${client.name != instrument.clientName}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}"></option> -->
+                                <option th:each="client : ${clients}" th:selected="*{clientId} == ${client.clientId}" th:text="${instrument.truncateText(client.name)}" th:value="${client.clientId}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceIssuedByUrl">URL to issuer</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_URLTOISSUER')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="full form-control" id="sourceIssuedByUrl" maxlength="255" name="sourceIssuedByUrl" size="68" th:field="*{sourceIssuedByUrl}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceLnkFKSourceParentId">Parent legislative instrument</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_PARENTLEGALINSTRUMENT')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <select class="full form-control" id="sourceLnkFKSourceParentId" name="sourceLnkFKSourceParentId" th:field="*{sourceLnkFKSourceParentId}">
+                                <!-- <option th:if="${instrument.parent != null}" th:selected="selected" th:text="${instrument.truncateText(instrument.parent.sourceAlias)}" th:value="${instrument.parent.sourceId}"></option> -->
+                                <option value="-1">No parent</option>
+                                <option th:each="i : ${instruments}" th:if="${i.sourceId != instrument.sourceId}" th:selected="*{sourceLnkFKSourceParentId} == ${i.sourceId}" th:text="${instrument.truncateText(i.sourceAlias)}" th:value="${i.sourceId}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="required question">Eur-lex categories</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_CLASSIFICATION')" title="Help on this field"></a>
+                        <div class="col-lg-8"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-55">
+                            <select class="multiple form-control" id="selClassifications" multiple="multiple" name="selClassifications" size="9">
+                                <option th:each="classification : ${selClassifications}" th:text="${classification.classificator != null} ? ${classification.classificator} + ' ' + ${classification.className} : ${classification.className}" th:value="${classification.classId}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="arrow_btnbox">
+                                <input class="arrow_btn add" onclick="mvValues(document.f.selClassifications.options, document.f.selectedClassifications.options, null)" type="button" value="-&gt;"/>
+                            </div>
+                            <div class="arrow_btnbox">
+                                <input class="arrow_btn delete" onclick="mvValues(document.f.selectedClassifications.options, document.f.selClassifications.options, null)" type="button" value="&lt;-"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-55">
+                            <select class="multiple form-control" id="selectedClassifications" multiple="multiple" name="selectedClassifications" size="9" th:field="*{selectedClassifications}">
+                                <option th:each="classification : ${instrument.classifications}" th:text="${classification.classificator != null} ? ${classification.classificator} + ' ' + ${classification.className} : ${classification.className}"
+                                        th:value="${classification.classId}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceValidFrom">Valid from</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_VALIDFROM')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="smalltext date form-control" id="sourceValidFrom" name="sourceValidFrom" onchange="checkDateSimple(this); changed()" size="30" th:field="*{sourceValidFrom}" type="text"/>
+                            <span class="input-hint">(dd/mm/yyyy)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceAbstract">Abstract</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ABSTRACT')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <textarea class="full form-control" cols="55" id="sourceAbstract" name="sourceAbstract" rows="10" th:field="*{sourceAbstract}">Abstract</textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Reporting framework</legend>
+                <div class="formtable datatable results">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceComment">Comments</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_COMMENT')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+		            	<textarea class="full form-control" cols="55" id="sourceComment" name="sourceComment" rows="5" th:field="*{sourceComment}">
 							Comments
 						</textarea>
-		            </div>
-		        </div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	            	    <label class="question" for="sourceEcEntryIntoForce">EC entry into force</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECENTRYINTOFORCE')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceEcEntryIntoForce" class="smalltext date form-control" size="30"  name="sourceEcEntryIntoForce" th:field="*{sourceEcEntryIntoForce}" onchange="checkDateSimple(this); changed()" type="text"/>
-	                	<span class="input-hint">(dd/mm/yyyy)</span>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-				  	<div class="col-lg-3">
-	                	<label class="question" for="sourceEcAccession">EC accession</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECACCESSION')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceEcAccession"class="smalltext date form-control" size="30" name="sourceEcAccession" th:field="*{sourceEcAccession}" onchange="checkDateSimple(this); changed()" type="text"/> 
-						<span class="input-hint">(dd/mm/yyyy)</span>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceSecretariat">Secretariat</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_SECRETARIAT')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceSecretariat" maxlength="255" name="sourceSecretariat" th:field="*{sourceSecretariat}" type="text" size="68" class="full"/>
-	              	</div>
-	            </div>            
-	            <div class="form-group">
-					<div class="col-lg-3">
-	                	<label class="question" for="sourceSecretariatUrl">URL to Secretariat homepage</label>
-	              	</div>
-	              	<a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_SECRETARIATHOMEPAGE')" title="Help on this field"></a>
-	              	<div class="col-lg-8">
-	                	<input id="sourceSecretariatUrl" maxlength="255" name="sourceSecretariatUrl" th:field="*{sourceSecretariatUrl}" type="text" size="68" class="full"/>
-	              	</div>
-	            </div>         	        
-          </div> 
-          </fieldset>
-          <script type="text/javascript">
-				function selectAll(){
-					var errors = false;
-					
-					if (document.getElementById("sourceTitle").value == ''){
-						checkMdText(document.getElementById("sourceTitle"));
-						errors = true
-					}
-					
-					if (document.getElementById("sourceAlias").value == ''){
-						checkMdText(document.getElementById("sourceAlias"));
-						errors = true
-					}
-					
-					if (!errors) {
-						selValues(document.f.selectedClassifications.options);
-						isChanged = false;
-						document.forms['f'].submit();
-					}
-					
-				}
-				function exit(){
-					location.href = document.getElementById('hrefInstruments').value;
-				}
-			</script>
-          <div>
-                
-                <input th:if="${instrument.sourceId} == null" name="add" value="Add" type="button" onclick="selectAll()" class="btn btn-primary"/>
-                <input th:unless="${instrument.sourceId} == null" name="edit" value="Save changes" type="button" onclick="javascript:selectAll()" class="btn btn-primary"/>
-                <input name="cancel" value="Exit" onclick="exit()" type="button" class="btn btn-default"/>
-          </div>
-          
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceEcEntryIntoForce">EC entry into force</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECENTRYINTOFORCE')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="smalltext date form-control" id="sourceEcEntryIntoForce" name="sourceEcEntryIntoForce" onchange="checkDateSimple(this); changed()" size="30" th:field="*{sourceEcEntryIntoForce}" type="text"/>
+                            <span class="input-hint">(dd/mm/yyyy)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceEcAccession">EC accession</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_ECACCESSION')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="smalltext date form-control" id="sourceEcAccession" name="sourceEcAccession" onchange="checkDateSimple(this); changed()" size="30" th:field="*{sourceEcAccession}" type="text"/>
+                            <span class="input-hint">(dd/mm/yyyy)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceSecretariat">Secretariat</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_SECRETARIAT')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="full" id="sourceSecretariat" maxlength="255" name="sourceSecretariat" size="68" th:field="*{sourceSecretariat}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="question" for="sourceSecretariatUrl">URL to Secretariat homepage</label>
+                        </div>
+                        <a class="helpButton col-lg-1" onclick="helpFunction('HELP_LI_SECRETARIATHOMEPAGE')" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input class="full" id="sourceSecretariatUrl" maxlength="255" name="sourceSecretariatUrl" size="68" th:field="*{sourceSecretariatUrl}" type="text"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <script type="text/javascript">
+                function selectAll() {
+                    var errors = false;
+
+                    if (document.getElementById("sourceTitle").value == '') {
+                        checkMdText(document.getElementById("sourceTitle"));
+                        errors = true
+                    }
+
+                    if (document.getElementById("sourceAlias").value == '') {
+                        checkMdText(document.getElementById("sourceAlias"));
+                        errors = true
+                    }
+
+                    if (!errors) {
+                        selValues(document.f.selectedClassifications.options);
+                        isChanged = false;
+                        document.forms['f'].submit();
+                    }
+
+                }
+
+                function exit() {
+                    location.href = document.getElementById('hrefInstruments').value;
+                }
+            </script>
+            <div>
+
+                <input class="btn btn-primary" name="add" onclick="selectAll()" th:if="${instrument.sourceId} == null" type="button" value="Add"/>
+                <input class="btn btn-primary" name="edit" onclick="selectAll()" th:unless="${instrument.sourceId} == null" type="button" value="Save changes"/>
+                <input class="btn btn-default" name="cancel" onclick="exit()" type="button" value="Exit"/>
+            </div>
+
         </form>
-      </div>
-      <div th:replace="layout :: footerFragment"></div>
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
 </div>
 </body>
 </html>

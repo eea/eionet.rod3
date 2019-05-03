@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
+<head th:include="layout :: headerFragment">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  </head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment">
-      </div>
-      <div id="workarea">
+</head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment">
+    </div>
+    <div id="workarea">
         <h1 th:text="${title}">Page title</h1>
         <div>
-<p>
-ROD is the EEA's reporting obligations database. It contains records
-describing environmental reporting obligations that countries have towards
-international organisations. ROD is part of Reportnet. Reportnet is
-group of web applications and processes developed by the EEA to support
-international environmental reporting.
-</p>
-<h2>What are reporting obligations?</h2>
-<p>
-Reporting obligations are requirement to provide information agreed
-between countries and international bodies, such as the EEA or
-international conventions. Reporting obligations provide the basis for
-most environmental information flows.
-</p>
-<p>
-A reporting obligation is taken to mean any requirement to provide
-specified information to a secretariat, coordinating body or governing
-body of a legal instrument, or their representatives, whether or not there
-is a prescribed format or fixed frequency, or whether or not the word
-'report' is used. Reporting obligations can be 'compulsory', 'expected'
-or 'voluntary' depending on whether information must be submitted in
-order to be in compliance with the legal instrument or is just submitted
-by countries at their own volition.
-</p>
+            <p>
+                ROD is the EEA's reporting obligations database. It contains records
+                describing environmental reporting obligations that countries have towards
+                international organisations. ROD is part of Reportnet. Reportnet is
+                group of web applications and processes developed by the EEA to support
+                international environmental reporting.
+            </p>
+            <h2>What are reporting obligations?</h2>
+            <p>
+                Reporting obligations are requirement to provide information agreed
+                between countries and international bodies, such as the EEA or
+                international conventions. Reporting obligations provide the basis for
+                most environmental information flows.
+            </p>
+            <p>
+                A reporting obligation is taken to mean any requirement to provide
+                specified information to a secretariat, coordinating body or governing
+                body of a legal instrument, or their representatives, whether or not there
+                is a prescribed format or fixed frequency, or whether or not the word
+                'report' is used. Reporting obligations can be 'compulsory', 'expected'
+                or 'voluntary' depending on whether information must be submitted in
+                order to be in compliance with the legal instrument or is just submitted
+                by countries at their own volition.
+            </p>
 
-<h2>Authors</h2>
-<ul>
-<li>Søren Roug, European Environment Agency</li>
-<li>...</li>
-</ul>
+            <h2>Authors</h2>
+            <ul>
+                <li>Søren Roug, European Environment Agency</li>
+                <li>...</li>
+            </ul>
         </div>
-      </div>
     </div>
-    <!-- container -->
-    <div id="pagefoot" th:include="layout :: footerFragment">
+</div>
+<!-- container -->
+<div id="pagefoot" th:include="layout :: footerFragment">
     Footer
-    </div>
-  </body>
+</div>
+</body>
 </html>

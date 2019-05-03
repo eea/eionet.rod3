@@ -1,14 +1,14 @@
 package eionet.rod.service;
 
+import eionet.rod.util.exception.ServiceException;
+
 import java.io.IOException;
 import java.util.Properties;
 
-import eionet.rod.util.exception.ServiceException;
-
 
 public interface FileServiceIF {
-	
-	/**
+
+    /**
      * DB connection URL for DB connection.
      */
     String DB_URL = "db.url";

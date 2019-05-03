@@ -1,11 +1,10 @@
 package eionet.rod.service;
 
-import java.io.IOException;
-
-import javax.mail.MessagingException;
-
 import eionet.rod.util.exception.ServiceException;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+
 public interface EmailServiceIF {
-	void sendToSysAdmin(String subject, String body) throws MessagingException, ServiceException, IOException;
+    void sendToSysAdmin(String subject, String body) throws MessagingException, ServiceException, IOException;
 }

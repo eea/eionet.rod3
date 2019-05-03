@@ -1,60 +1,60 @@
 package eionet.rod.model;
 
-public class Documentation implements java.io.Serializable { 
+public class Documentation implements java.io.Serializable {
 
-		private static final long serialVersionUID = 1L;
-		
-		private String areaId;
-	    private String screenId;
-	    private String description;
-	    private String html;
+    private static final long serialVersionUID = 1L;
 
-
-	    /**
-	     *Constructor
-	     */
-	    public Documentation() {
-	    }
+    private String areaId;
+    private String screenId;
+    private String description;
+    private String html;
 
 
-	    public String getAreaId() {
-	        return areaId;
-	    }
+    /**
+     * Constructor
+     */
+    public Documentation() {
+    }
 
 
-	    public void setAreaId(String areaId) {
-	        this.areaId = areaId;
-	    }
+    public String getAreaId() {
+        return areaId;
+    }
 
 
-	    public String getScreenId() {
-	        return screenId;
-	    }
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
 
 
-	    public void setScreenId(String screenId) {
-	        this.screenId = screenId;
-	    }
+    public String getScreenId() {
+        return screenId;
+    }
 
 
-	    public String getDescription() {
-	        return description;
-	    }
+    public void setScreenId(String screenId) {
+        this.screenId = screenId;
+    }
 
 
-	    public void setDescription(String description) {
-	        this.description = description;
-	    }
+    public String getDescription() {
+        return description;
+    }
 
 
-	    public String getHtml() {
-	        return html;
-	    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
-	    public void setHtml(String html) {
-	        this.html = html;
-	    }
+    public String getHtml() {
+        return html;
+    }
+
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
 
 }

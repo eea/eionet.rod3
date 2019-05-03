@@ -1,12 +1,13 @@
 package eionet.rod.util;
 
-import java.util.List;
 import eionet.rod.model.BreadCrumb;
-
 import org.junit.Test;
+import org.springframework.ui.ExtendedModelMap;
+
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import org.springframework.ui.ExtendedModelMap;
 
 public class BreadCrumbsTest {
 

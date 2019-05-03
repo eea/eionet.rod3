@@ -1,51 +1,51 @@
 package eionet.rod.model;
 
 public class ObligationCountry {
-	 
-	private Integer countryId;
-	private String countryName;
-	private String twoLetter;
-	private String isMemberCountry;
 
-	private String voluntary;
+    private Integer countryId;
+    private String countryName;
+    private String twoLetter;
+    private String isMemberCountry;
 
-	public Integer getCountryId() {
-		return countryId;
-	}
+    private String voluntary;
 
-	public void setCountryId(Integer countryId) {
-		this.countryId = countryId;
-	}
-	
-	public String getCountryName() {
-		return countryName;
-	}
+    public Integer getCountryId() {
+        return countryId;
+    }
 
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-	
-	public String getTwoLetter() {
-		return twoLetter;
-	}
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
 
-	public void setTwoLetter(String twoLetter) {
-		this.twoLetter = twoLetter;
-	}
+    public String getCountryName() {
+        return countryName;
+    }
 
-	public String getIsMemberCountry() {
-		return isMemberCountry;
-	}
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
 
-	public void setIsMemberCountry(String isMemberCountry) {
-		this.isMemberCountry = isMemberCountry;
-	}
+    public String getTwoLetter() {
+        return twoLetter;
+    }
 
-	public String getVoluntary() {
-		return voluntary;
-	}
+    public void setTwoLetter(String twoLetter) {
+        this.twoLetter = twoLetter;
+    }
 
-	public void setVoluntary(String voluntary) {
-		this.voluntary = voluntary;
-	}
+    public String getIsMemberCountry() {
+        return isMemberCountry;
+    }
+
+    public void setIsMemberCountry(String isMemberCountry) {
+        this.isMemberCountry = isMemberCountry;
+    }
+
+    public String getVoluntary() {
+        return voluntary;
+    }
+
+    public void setVoluntary(String voluntary) {
+        this.voluntary = voluntary;
+    }
 }

@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-    <div id="container">
-     <div th:include="layout :: bannerFragment" ></div>
-     <div id="workarea">
-      
-     <h1>Countries and territories</h1>
-     <p>This part of ROD helps administrations co-ordinate and manage their international reporting obligations. It provides information about when to report, who is responsible for reporting, and to which organisation the data set should be delivered. It is geared towards EEA member countries. You can browse deliveries by choosing a locality below or query the contents of ROD and CDR by using the advanced search.</p>
-            
-     	<div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+
+        <h1>Countries and territories</h1>
+        <p>This part of ROD helps administrations co-ordinate and manage their international reporting obligations. It provides information about when to report, who is responsible for reporting, and to which organisation the data set should be delivered. It is geared towards EEA
+            member countries. You can browse deliveries by choosing a locality below or query the contents of ROD and CDR by using the advanced search.</p>
+
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
         <div th:if="${#lists.isEmpty(allMember)}">There are no results.</div>
-        
+
         <div th:if="${not #lists.isEmpty(allMember)}">
-			<h3>EEA member countries</h3>
-	        <div id="tabCountries">
-	         	<ul class="menu" >
-		        	<li class="disabled" th:each="allMenberList : ${allMember}">
-		  				<a th:text="${allMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allMenberList.spatialId}+'/deadlines'}"></a>
-		  			</li>
-		  		</ul>
-			</div>
-	    </div>
-        
+            <h3>EEA member countries</h3>
+            <div id="tabCountries">
+                <ul class="menu">
+                    <li class="disabled" th:each="allMenberList : ${allMember}">
+                        <a th:text="${allMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allMenberList.spatialId}+'/deadlines'}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <div th:if="${#lists.isEmpty(allNoMember)}">There are no results.</div>
         <div th:if="${not #lists.isEmpty(allNoMember)}">
-			<h3>Other countries and territories</h3>
-	        <div id="tabCountries">
-	         	<ul class="menu" >
-		        	<li class="disabled" th:each="allNoMenberList : ${allNoMember}">
-		  				<a th:text="${allNoMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allNoMenberList.spatialId}+'/deadlines'}"></a>
-		  			</li>
-		  		</ul>
-			</div>
-	    </div>
+            <h3>Other countries and territories</h3>
+            <div id="tabCountries">
+                <ul class="menu">
+                    <li class="disabled" th:each="allNoMenberList : ${allNoMember}">
+                        <a th:text="${allNoMenberList.name}" class="link-folder" th:href="@{'/spatial/'+${allNoMenberList.spatialId}+'/deadlines'}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-      
-     </div>
-      
-	 <div th:replace="layout :: footerFragment"></div>
+
     </div>
-  </body>
+
+    <div th:replace="layout :: footerFragment"></div>
+</div>
+</body>
 </html>

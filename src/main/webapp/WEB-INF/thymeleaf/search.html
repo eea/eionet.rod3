@@ -1,141 +1,142 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-      <div id="container">
-     <div th:include="layout :: bannerFragment"></div>
-     <div id="workarea">
-   	 <div th:replace="helpModal :: helpModalFragment"></div>
-      
-     <div class="title">
-     <h1>Advanced search</h1>
-     </div>
-    	<form method="POST" th:action="@{/advancedSearch}" th:object="${obligation}" name="f" >
-			
-		<div id="filters">
-     		<a class="helpButton" onclick="helpFunction('HELP_CSINDEX_SEARCH')" title="Help on this field"></a>
-        	<div class="filter">
-        		 <div class="row">
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div th:replace="helpModal :: helpModalFragment"></div>
+
+        <div class="title">
+            <h1>Advanced search</h1>
+        </div>
+        <form method="POST" th:action="@{/advancedSearch}" th:object="${obligation}" name="f">
+
+            <div id="filters">
+                <a class="helpButton" onclick="helpFunction('HELP_CSINDEX_SEARCH')" title="Help on this field"></a>
+                <div class="filter">
+                    <div class="row">
                         <div class="labeldiv">
                             <label for="selCountries">Country or territory</label>
                         </div>
-		      			<div class="input">
-							<select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}"> 
-								<option value="0" label="Any country or territory"></option>
-								<option  th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} "  th:selected="(${country.spatialId} == *{spatialId})"></option>
-						
-							</select>
-						</div>
-					</div>
-            	<div class="row">
-                	<div class="labeldiv">
-                    	 <label for="selIssues">Issue</label>
-                    </div>
-	                <div class="input">
-						<select name="selIssues"  id="selIssues" class="smalltext" th:field="*{issueId}">
-							<option value="0" label="Any issues"></option>
-			    			<option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}"  th:selected="(${issue.issueId} == *{issueId})"></option>
-			    			<option value="NI" label="No issue allocated"></option>
-						</select>
-					</div>
-				</div>
-				
-				<div class="row">
-                	<div class="labeldiv">
-                    	<label for="client_list">Organisation</label>
-                    </div>
-	      			<div class="input">
-						<select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
-							<option value="0" label="Any organisation"></option>
-					    	<option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
-						</select>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="labeldiv">
-                    	<label for="nextDeadlineFrom">Next deadline</label>
-                    </div>
-                   	<div class="input">
-                   	<input type="text"  value="nextDeadlineFrom" id="nextDeadlineFrom" th:field="*{nextDeadlineFrom}" onchange="checkDateFormat(this.value); changed()"> - <input type="text" value="nextDeadlineTo" id="nextDeadlineTo" onchange="checkDateFormat(this.value); changed()" th:field="*{nextDeadlineTo}"> (dd/mm/yyyy)  
-                   	</div>
-				</div>
-				
-			<script type="text/javascript">
-				 $(document).ready(function(){
-				    $('#searchTable').DataTable({
-				    	"sDom": 'Tfrtipt',
-				    	"sPaginationType": "full_numbers"
-				    });
-				    
-				});
-				
-				function validateDate(){
-					var errors = false;
-					if (checkDateFormat(document.getElementById("nextDeadlineFrom").value) == 1  ){
-						errors = true;
-					}else{
-						if (checkDateFormat(document.getElementById("nextDeadlineTo").value) == 1  ){
-							errors = true;
-						}
-					}	
-					if(!errors){
-						document.forms['f'].submit();
-					}	
-				}
+                        <div class="input">
+                            <select name="selCountries" id="selCountries" class="smalltext" th:field="*{spatialId}">
+                                <option value="0" label="Any country or territory"></option>
+                                <option th:each="country : ${allCountries}" th:value="${country.spatialId}" th:text="${country.name} " th:selected="(${country.spatialId} == *{spatialId})"></option>
 
-			</script>
-			
-			</div>
-			
-				<p class="actions">
-                    <input class="btn btn-primary" onclick="validateDate()" type="button" value="Search" />
-                    <input class="mediumbuttonb" type="reset" value="Reset" />
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="labeldiv">
+                            <label for="selIssues">Issue</label>
+                        </div>
+                        <div class="input">
+                            <select name="selIssues" id="selIssues" class="smalltext" th:field="*{issueId}">
+                                <option value="0" label="Any issues"></option>
+                                <option th:each="issue : ${allIssues}" th:value="${issue.issueId}" th:text="${issue.issueName}" th:selected="(${issue.issueId} == *{issueId})"></option>
+                                <option value="NI" label="No issue allocated"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="labeldiv">
+                            <label for="client_list">Organisation</label>
+                        </div>
+                        <div class="input">
+                            <select name="selClients" id="client_list" class="smalltext" th:field="*{clientId}">
+                                <option value="0" label="Any organisation"></option>
+                                <option th:each="client : ${allClients}" th:value="${client.clientId}" th:text="${obligation.truncateText(client.name)}" th:selected="(${client.clientId} == *{clientId})"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="labeldiv">
+                            <label for="nextDeadlineFrom">Next deadline</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" value="nextDeadlineFrom" id="nextDeadlineFrom" th:field="*{nextDeadlineFrom}" onchange="checkDateFormat(this.value); changed()"> - <input type="text" value="nextDeadlineTo" id="nextDeadlineTo"
+                                                                                                                                                                                         onchange="checkDateFormat(this.value); changed()" th:field="*{nextDeadlineTo}"> (dd/mm/yyyy)
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#searchTable').DataTable({
+                                "sDom": 'Tfrtipt',
+                                "sPaginationType": "full_numbers"
+                            });
+
+                        });
+
+                        function validateDate() {
+                            var errors = false;
+                            if (checkDateFormat(document.getElementById("nextDeadlineFrom").value) == 1) {
+                                errors = true;
+                            } else {
+                                if (checkDateFormat(document.getElementById("nextDeadlineTo").value) == 1) {
+                                    errors = true;
+                                }
+                            }
+                            if (!errors) {
+                                document.forms['f'].submit();
+                            }
+                        }
+
+                    </script>
+
+                </div>
+
+                <p class="actions">
+                    <input class="btn btn-primary" onclick="validateDate()" type="button" value="Search"/>
+                    <input class="mediumbuttonb" type="reset" value="Reset"/>
                 </p>
-			</div>
+            </div>
 
-		</form>
-		
-		<div th:if="${resultMessage == '1'}">
-			<span th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></span>
-		</div>
-        <div th:if="${not #lists.isEmpty(allObligations)}">
-	        <table id="searchTable" class="datatable results table table-striped table-bordered">
-	        <thead>
-		        <tr>
-			        <th>Reporting obligation</th>
-			        <th>Reporting to</th>
-			        <th>Deadline</th>
-			        <th>Responsible</th>
-			        <th>Deliveries</th>
-		        </tr>
-	        </thead>
-	        <tr th:each="obligations, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-	        	<td>
-	        		<a th:href="@{'/obligations/'+${obligations.obligationId}}" th:text="${obligations.oblTitle}"></a>
-	        		<!-- a th:href="@{'/instruments/'+${obligations.sourceId}}"  th:utext="${obligations.sourceTitle}"></a -->
-	        	</td>
-	        	<td><a th:href="@{'/clients/'+${obligations.clientId}}" th:text="${obligations.clientName}"></a></td>
-	        	<td>
-	        		<span th:if="${obligations.nextDeadline} != ''" th:text="${obligations.nextDeadline}" ></span>
-						<span th:unless="${obligations.nextDeadline} != ''" th:text="${obligations.nextReporting}" ></span>
-	        	</td>
-	        	<td>
-	        		<a th:if="${obligations.respRoleId != null}" th:utext="${obligations.respRoleName}" th:href="@{'/contacts?roleId=' + ${obligations.respRoleId}}"></a>
-	        		<span th:if="${obligations.respRoleId == null}" th:utext="${obligations.deliveryCountryName}"></span>
-	        	</td>
-	        	<td>
-	        		<a th:if="${obligations.hasDelivery == '1'}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligations.obligationId} + '&spatialId=' +  ${obligations.deliveryCountryId}}"></a>
-	        		<span th:if="${obligations.hasDelivery == ''}" th:text="'None'"></span>
-	        		<span th:if="${obligations.hasDelivery == null}" th:text="'None'"></span>
-	        		<span th:if="${obligations.hasDelivery == '0'}" th:text="'None'"></span>
-	            </td>
-	        </tr>
-	        </table>
+        </form>
+
+        <div th:if="${resultMessage == '1'}">
+            <span th:if="${#lists.isEmpty(allObligations)}" th:text="'There are no results.'"></span>
         </div>
-		
-	</div>
-	 <div th:replace="layout :: footerFragment"></div>
-	</div>
+        <div th:if="${not #lists.isEmpty(allObligations)}">
+            <table id="searchTable" class="datatable results table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Reporting obligation</th>
+                    <th>Reporting to</th>
+                    <th>Deadline</th>
+                    <th>Responsible</th>
+                    <th>Deliveries</th>
+                </tr>
+                </thead>
+                <tr th:each="obligations, iterStat : ${allObligations}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                    <td>
+                        <a th:href="@{'/obligations/'+${obligations.obligationId}}" th:text="${obligations.oblTitle}"></a>
+                        <!-- a th:href="@{'/instruments/'+${obligations.sourceId}}"  th:utext="${obligations.sourceTitle}"></a -->
+                    </td>
+                    <td><a th:href="@{'/clients/'+${obligations.clientId}}" th:text="${obligations.clientName}"></a></td>
+                    <td>
+                        <span th:if="${obligations.nextDeadline} != ''" th:text="${obligations.nextDeadline}"></span>
+                        <span th:unless="${obligations.nextDeadline} != ''" th:text="${obligations.nextReporting}"></span>
+                    </td>
+                    <td>
+                        <a th:if="${obligations.respRoleId != null}" th:utext="${obligations.respRoleName}" th:href="@{'/contacts?roleId=' + ${obligations.respRoleId}}"></a>
+                        <span th:if="${obligations.respRoleId == null}" th:utext="${obligations.deliveryCountryName}"></span>
+                    </td>
+                    <td>
+                        <a th:if="${obligations.hasDelivery == '1'}" th:text="'Show List'" th:href="@{'/countrydeliveries?actDetailsId=' + ${obligations.obligationId} + '&spatialId=' +  ${obligations.deliveryCountryId}}"></a>
+                        <span th:if="${obligations.hasDelivery == ''}" th:text="'None'"></span>
+                        <span th:if="${obligations.hasDelivery == null}" th:text="'None'"></span>
+                        <span th:if="${obligations.hasDelivery == '0'}" th:text="'None'"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
+</div>
 </body>
 </html>

@@ -1,10 +1,5 @@
 package eionet.rod.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -30,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 public class ITVersionsController {
 
-	@Autowired
+    @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
@@ -41,21 +39,21 @@ public class ITVersionsController {
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
-    
+
     /**
      * Simple test to list versions.
      */
     @Test
     public void viewVersions() throws Exception {
-    	this.mockMvc.perform(get("/versions"))
-		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("versions"))
-        .andExpect(model().attributeExists("title"))
-        .andExpect(model().attributeExists("activeTab"))
-    	.andExpect(view().name("versions"));
+        this.mockMvc.perform(get("/versions"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("versions"))
+                .andExpect(model().attributeExists("title"))
+                .andExpect(model().attributeExists("activeTab"))
+                .andExpect(view().name("versions"));
     }
-	
+
 }

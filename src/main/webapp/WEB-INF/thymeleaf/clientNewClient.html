@@ -1,115 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment">
-  </head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment">
-      </div>
-      <div id="workarea">
-		<h1>Add new client</h1>
-		<div class="panel-body">
-		<form action="#" th:action="@{/clients/add}" th:object="${client}" method="post" class="form-horizontal">
-		 <input name="clientsHref" id="clientsHref" th:value="@{'/clients'}" type="hidden"/>
-		    <div class="datatable results">
-		         <div class="form-group">
-					<div class="col-lg-3 scope-row simple_attr_title">
-						<label for="name" class="control-label text-left required">Name</label>
-		              </div>
-		              <a class="helpButton col-lg-1" title="Help on this field"></a>
-		              <div class="col-lg-8">
-		                <input id="name" maxlength="255" name="name" th:field="*{name}" onchange="checkMdText(this); changed()" value="" type="text" class="smalltext form-control"/>
-		              </div>
-		         </div>
-		         <div class="form-group">
-					<div class="col-lg-3 scope-row simple_attr_title">
-						<label for="shortname" class="control-label text-left">Short Name</label>
-		            </div>
-		            <a class="helpButton col-lg-1" title="Help on this field"></a>
-		            <div class="col-lg-8">
-		                <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" class="smalltext form-control"/>
-		            </div>
-		          </div>
-		          <div class="form-group">
-					<div class="col-lg-3 scope-row simple_attr_title">
-		                <label class="control-label text-left" for="acronym">Acronym</label>
-		            </div>
-		            <a class="helpButton col-lg-1" title="Help on this field"></a>
-		           	<div class="col-lg-8">
-		                <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="" type="text" class="smalltext form-control"/>
-		            </div>
-		          </div>
-		          <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="address">Address</label>
-			            </div>
-			             <a class="helpButton col-lg-1" title="Help on this field"></a>
-			            <div class="col-lg-8">
-			                <input id="address" maxlength="255" name="address" th:field="*{address}" value="" type="text" class="smalltext form-control"/>
-			            </div>
-		           </div>
-		           <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="postalcode">Postal code</label>
-			             </div>
-			             <a class="helpButton col-lg-1" title="Help on this field"></a>
-			             <div class="col-lg-8">
-			                <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="" type="text" class="smalltext form-control"/>
-			              </div>
-			            </div>
-		            <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="city">City</label>
-			            </div>
-			            <a class="helpButton col-lg-1" title="Help on this field"></a>
-			           	 <div class="col-lg-8">
-			                <input id="city" maxlength="255" name="city" th:field="*{city}" value="" type="text" class="smalltext form-control"/>
-			             </div>
-		            </div>
-		             <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="country">Country</label>
-			            </div>
-			            <a class="helpButton col-lg-1" title="Help on this field"></a>
-			            <div class="col-lg-8">
-			                <input id="country" maxlength="255" name="country" th:field="*{country}" value="" type="text" class="smalltext form-control"/>
-			            </div>
-		            </div>
-		           <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="homepage">Homepage</label>
-		              </div>
-		              <a class="helpButton col-lg-1" title="Help on this field"></a>
-		              <div class="col-lg-8">
-		                <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="" type="text" class="smalltext form-control"/>
-		              </div>
-		            </div>
-		            <div class="form-group">
-						<div class="col-lg-3 scope-row simple_attr_title">
-			                <label class="control-label text-left" for="description">Description</label>
-		              	</div>
-		              	<a class="helpButton col-lg-1" title="Help on this field"></a>
-		             	<div class="col-lg-8">
-		             	   <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}" class="smalltext form-control"></textarea>
-		              	</div>
-		            </div>
-		    </div>
-		    <script type="text/javascript">
-			   	function exit(){
-					location.href = document.getElementById('clientsHref').value;
-				}
-		  	</script>
-		    <div>
-		    	<input type="submit" value="Add" />
-		    	<input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>
-		    </div>  
-		</form>
-		</div>
-      </div>
+<head th:include="layout :: headerFragment">
+</head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment">
     </div>
-    <!-- container -->
-    <div id="pagefoot" th:include="layout :: footerFragment">
+    <div id="workarea">
+        <h1>Add new client</h1>
+        <div class="panel-body">
+            <form action="#" th:action="@{/clients/add}" th:object="${client}" method="post" class="form-horizontal">
+                <input name="clientsHref" id="clientsHref" th:value="@{'/clients'}" type="hidden"/>
+                <div class="datatable results">
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label for="name" class="control-label text-left required">Name</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="name" maxlength="255" name="name" th:field="*{name}" onchange="checkMdText(this); changed()" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label for="shortname" class="control-label text-left">Short Name</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="shortname" maxlength="100" name="shortName" th:field="*{shortName}" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="acronym">Acronym</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="acronym" maxlength="255" name="acronym" th:field="*{acronym}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="address">Address</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="address" maxlength="255" name="address" th:field="*{address}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="postalcode">Postal code</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="postalcode" maxlength="255" name="postalCode" th:field="*{postalCode}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="city">City</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="city" maxlength="255" name="city" th:field="*{city}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="country">Country</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="country" maxlength="255" name="country" th:field="*{country}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="homepage">Homepage</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <input id="homepage" maxlength="255" name="url" th:field="*{url}" value="" type="text" class="smalltext form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 scope-row simple_attr_title">
+                            <label class="control-label text-left" for="description">Description</label>
+                        </div>
+                        <a class="helpButton col-lg-1" title="Help on this field"></a>
+                        <div class="col-lg-8">
+                            <textarea id="description" cols="53" name="description" rows="4" th:field="*{description}" class="smalltext form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    function exit() {
+                        location.href = document.getElementById('clientsHref').value;
+                    }
+                </script>
+                <div>
+                    <input type="submit" value="Add"/>
+                    <input type="button" name="cancel" onclick="exit()" value="Exit" class="btn"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- container -->
+<div id="pagefoot" th:include="layout :: footerFragment">
     Footer
-    </div>
-  </body>
+</div>
+</body>
 </html>

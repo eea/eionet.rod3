@@ -13,21 +13,27 @@ import java.util.ArrayList;
  */
 public class InitialUser {
 
-    /** * Service for user management.  */
+    /**
+     * Service for user management.
+     */
     private UserManagementService userManagementService;
 
     public void setUserManagementService(UserManagementService userManagementService) {
         this.userManagementService = userManagementService;
     }
 
-    /** Inital username. Injected from configuration. */
+    /**
+     * Inital username. Injected from configuration.
+     */
     private String initialUsername;
 
     public void setInitialUsername(String initialUsername) {
         this.initialUsername = initialUsername;
     }
 
-    /** Inital user's password. Injected from configuration. */
+    /**
+     * Inital user's password. Injected from configuration.
+     */
     private String initialPassword;
 
     public void setInitialPassword(String initialPassword) {

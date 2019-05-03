@@ -1,14 +1,11 @@
 package eionet.rod.dao;
 
-import org.junit.runner.RunWith;
+import eionet.rod.model.Delivery;
+import eionet.rod.service.DeliveryService;
+import eionet.rod.util.exception.ResourceNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.web.FilterChainProxy;
@@ -20,9 +17,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import eionet.rod.model.Delivery;
-import eionet.rod.service.DeliveryService;
-import eionet.rod.util.exception.ResourceNotFoundException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -37,11 +36,11 @@ import eionet.rod.util.exception.ResourceNotFoundException;
         "classpath:spring-security.xml"})
 @Sql("/seed-issue.sql")
 public class ITDeliveryDao {
-    
-	@Autowired
-	private DeliveryService deliveryService;
-	
-	@Autowired
+
+    @Autowired
+    private DeliveryService deliveryService;
+
+    @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
@@ -52,48 +51,44 @@ public class ITDeliveryDao {
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
-		
+
     @Test
-    public void testfindAllDelivery() throws ResourceNotFoundException
-    {
-    	List<Delivery> deliveries = deliveryService.getAllDelivery("1", "1");
-    	//System.out.println(deliveries.size());
-    	assertEquals("END - Austria - DF2 - 2015",deliveries.get(0).getDeliveryTitle());
-    	assertEquals(1,deliveries.size());
+    public void testfindAllDelivery() throws ResourceNotFoundException {
+        List<Delivery> deliveries = deliveryService.getAllDelivery("1", "1");
+        //System.out.println(deliveries.size());
+        assertEquals("END - Austria - DF2 - 2015", deliveries.get(0).getDeliveryTitle());
+        assertEquals(1, deliveries.size());
     }
-    
+
     @Test
-    public void testRollBackDeliveries() throws DataAccessException
-    {
-    	try {
-    	    deliveryService.rollBackDeliveries();
-    	} catch (DataAccessException sqle) {
+    public void testRollBackDeliveries() throws DataAccessException {
+        try {
+            deliveryService.rollBackDeliveries();
+        } catch (DataAccessException sqle) {
             throw new ResourceNotFoundException(sqle.getMessage(), sqle);
-        } 
+        }
     }
-    
+
     @Test
-    public void testCommitDeliveries() throws DataAccessException
-    {
-    	try {
-    		HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
-	    	deliveryService.commitDeliveries(savedCountriesByObligationId);
-    	} catch (DataAccessException sqle) {
+    public void testCommitDeliveries() throws DataAccessException {
+        try {
+            HashMap<String, HashSet<Integer>> savedCountriesByObligationId = new HashMap<>();
+            deliveryService.commitDeliveries(savedCountriesByObligationId);
+        } catch (DataAccessException sqle) {
             throw new ResourceNotFoundException(sqle.getMessage(), sqle);
-        } 
+        }
     }
-    
+
     @Test
-    public void testBackUpDeliveries() throws DataAccessException
-    {
-    	try {
-    		deliveryService.backUpDeliveries();
-    	} catch (DataAccessException sqle) {
+    public void testBackUpDeliveries() throws DataAccessException {
+        try {
+            deliveryService.backUpDeliveries();
+        } catch (DataAccessException sqle) {
             throw new ResourceNotFoundException(sqle.getMessage(), sqle);
-        } 
+        }
     }
-    
+
 }

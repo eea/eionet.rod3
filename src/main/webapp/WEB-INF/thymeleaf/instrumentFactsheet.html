@@ -2,79 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="layout :: headerFragment"></head>
 <body>
-<script>	 
-	function deleteInstrument() { 
-    	
-    	if (window.confirm("Do you really want to delete this instrument?")) {	
- 		    document.forms['f'].submit();
-    	}	    
+<script>
+    function deleteInstrument() {
 
-	}
-	 
+        if (window.confirm("Do you really want to delete this instrument?")) {
+            document.forms['f'].submit();
+        }
+
+    }
+
 </script>
 <div id="container">
-      <div th:include="layout :: bannerFragment"></div>
-      <div id="workarea">
-      	<div class="title">
-	      	<h1>Legislative instrument details: 
-	      		<span th:text="${instrument.sourceAlias}">Alias</span> 
-	      		<span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
-	      	</h1>
-      		<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
-	     		<li><span>Operations</span>
-					<ul>
-						<li><a href="instrumentEditForm.html" th:href="@{'/instruments/edit?sourceId=' + *{sourceId}}">Edit instrument</a></li>
-						<li><a onclick="deleteInstrument()">Delete instrument</a></li>
-					</ul>
-				</li>
-			</ul>
-      	</div>
-      	<form method="POST" th:action="@{/instruments/delete}" th:object="${instrument}" name="f" >
-      		<input type="hidden" name="sourceId" id="sourceId" th:value="*{sourceId}">
-      	</form>
-      	<div class="form-horizontal">
-			<div class="datatable results">
-				<div class="odd form-group">
-				  <div class="col-lg-4">Classification</div>
-	              	<div class="col-lg-8">
-						<ul>
-		              		<li th:each="classification : ${instrument.classifications}">
-		              			<span th:if="${classification.classificator != null}" th:text="${classification.classificator} + ' '"></span>
-		              			<a th:text="${classification.className}" th:href="@{'/instruments?id='} + ${classification.classId}"></a>
-		              		</li>
-	              		</ul>
-	              	</div>
-            	</div>
-            <div class="even form-group">
-				  <div class="col-lg-4">Legal name</div>
-              <div class="col-lg-8">
-              	<span class="link-do"><span><a th:href="${instrument.sourceUrl}" th:text="${instrument.sourceTitle}"></a></span></span>
-              </div>
-            </div>
-          	<div class="odd form-group">
-				  <div class="col-lg-4">Short name</div>
-				<div class="col-lg-8">
-	              	<span th:text="${instrument.sourceAlias}">Short name</span> 
-	              	<span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
-             	</div>
-            </div>
-            <div class="even form-group">
-				<div class="col-lg-4">CELEX reference</div>
-            	<div class="col-lg-8"><span th:text="${instrument.sourceCelexRef}">CELEX reference</span></div>
-            </div>
-            <div class="odd form-group">
-				<div class="col-lg-4">Identification number</div>
-                <div class="col-lg-8"><span th:text="${instrument.sourceCode}">Identification number</span></div>
-            </div>
-            <div class="even form-group">
-				  <div class="col-lg-4">Issued by</div>
-	              <div class="col-lg-8">
-	              	<a th:href="@{'/clients/'} + ${instrument.clientId}" th:text="${instrument.clientName}">Client name</a>
-	              </div>
-            </div>
-            <div class="odd form-group">
-				<div class="col-lg-4">URL to issuer</div>
-				<div class="col-lg-8">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div class="title">
+            <h1>Legislative instrument details:
+                <span th:text="${instrument.sourceAlias}">Alias</span>
+                <span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
+            </h1>
+            <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
+                <li><span>Operations</span>
+                    <ul>
+                        <li><a href="instrumentEditForm.html" th:href="@{'/instruments/edit?sourceId=' + *{sourceId}}">Edit instrument</a></li>
+                        <li><a onclick="deleteInstrument()">Delete instrument</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <form method="POST" th:action="@{/instruments/delete}" th:object="${instrument}" name="f">
+            <input type="hidden" name="sourceId" id="sourceId" th:value="*{sourceId}">
+        </form>
+        <div class="form-horizontal">
+            <div class="datatable results">
+                <div class="odd form-group">
+                    <div class="col-lg-4">Classification</div>
+                    <div class="col-lg-8">
+                        <ul>
+                            <li th:each="classification : ${instrument.classifications}">
+                                <span th:if="${classification.classificator != null}" th:text="${classification.classificator} + ' '"></span>
+                                <a th:text="${classification.className}" th:href="@{'/instruments?id='} + ${classification.classId}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">Legal name</div>
+                    <div class="col-lg-8">
+                        <span class="link-do"><span><a th:href="${instrument.sourceUrl}" th:text="${instrument.sourceTitle}"></a></span></span>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">Short name</div>
+                    <div class="col-lg-8">
+                        <span th:text="${instrument.sourceAlias}">Short name</span>
+                        <span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
+                    </div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">CELEX reference</div>
+                    <div class="col-lg-8"><span th:text="${instrument.sourceCelexRef}">CELEX reference</span></div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">Identification number</div>
+                    <div class="col-lg-8"><span th:text="${instrument.sourceCode}">Identification number</span></div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">Issued by</div>
+                    <div class="col-lg-8">
+                        <a th:href="@{'/clients/'} + ${instrument.clientId}" th:text="${instrument.clientName}">Client name</a>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">URL to issuer</div>
+                    <div class="col-lg-8">
 					<span th:switch="${instrument.sourceIssuedByUrl}">
 		              	<a th:case="null" th:href="${instrument.clientUrl}" th:text="${instrument.clientUrl}">
 		              		URL to issuer
@@ -86,85 +86,85 @@
 		              		URL to issuer
 		              	</a>            
 		            </span>
-            	</div>
+                    </div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">Parent legislative instrument</div>
+                    <div class="col-lg-8">
+                        <a th:if="${instrument.parent != null}" th:text="${instrument.parent.sourceAlias}" th:href="@{'/instruments/'} + ${instrument.parent.sourceId}">
+                            Parent
+                        </a>
+                    </div>
+                </div>
+                <div class="odd form-group" th:if="${!instrument.relatedInstruments.isEmpty()}">
+                    <div class="col-lg-4">Related instrument(s)</div>
+                    <div class="col-lg-8">
+                        <ul>
+                            <li th:each="relatedInstrument : ${instrument.relatedInstruments}">
+                                <a th:href="@{'/instruments/'} + ${relatedInstrument.sourceId}" th:text="${relatedInstrument.sourceAlias}">Related instrument</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">Valid from</div>
+                    <div class="col-lg-8">
+                        <span th:text="${{instrument.sourceValidFrom}}">Valid from</span>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">Abstract</div>
+                    <div class="col-lg-8"><span th:utext="${instrument.sourceAbstract}">Abstract</span></div>
+                </div>
             </div>
-            <div class="even form-group">
-				  <div class="col-lg-4">Parent legislative instrument</div>
-               	  <div class="col-lg-8">
-		              	<a th:if="${instrument.parent != null}" th:text="${instrument.parent.sourceAlias}" th:href="@{'/instruments/'} + ${instrument.parent.sourceId}">
-		              		Parent
-		             	</a>
-             	 </div>
-            </div>
-            <div class="odd form-group" th:if="${!instrument.relatedInstruments.isEmpty()}">
-				  <div class="col-lg-4">Related instrument(s)</div>
-	              <div class="col-lg-8">
-	              	<ul>
-	              		<li th:each="relatedInstrument : ${instrument.relatedInstruments}">
-	              			<a th:href="@{'/instruments/'} + ${relatedInstrument.sourceId}" th:text="${relatedInstrument.sourceAlias}">Related instrument</a>
-	              		</li>
-	              	</ul>
-	              </div>
-            </div>
-            <div class="odd form-group">
-				  <div class="col-lg-4">Valid from</div>
-				  <div class="col-lg-8">
-              		<span th:text="${{instrument.sourceValidFrom}}">Valid from</span>
-              	  </div>
-            </div>
-            <div class="odd form-group">
-				  <div class="col-lg-4">Abstract</div>
-				  <div class="col-lg-8"><span th:utext="${instrument.sourceAbstract}">Abstract</span></div>
+
+            <span class="pagebanner">Reporting framework</span>
+
+            <div class="datatable results">
+                <div class="odd form-group">
+                    <div class="col-lg-4">Reporting obligations</div>
+                    <div class="col-lg-8">
+                        <ul>
+                            <li th:each="obligation : ${instrument.obligations}">
+                                <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+
+                                <a th:href="@{'/obligations/'} + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
+                                <span th:if="${obligation.terminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
+                                <span th:if="${obligation.authority != null and !obligation.authority.isEmpty()}" th:text="'[' + ${obligation.authority} + ']'">Authority</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">Comments</div>
+                    <div class="col-lg-8">
+                        <span th:utext="${instrument.sourceComment}">Comments</span>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">EC entry into force</div>
+                    <div class="col-lg-8">
+                        <span th:text="${{instrument.sourceEcEntryIntoForce}}">EC entry into force</span>
+                    </div>
+                </div>
+                <div class="even form-group">
+                    <div class="col-lg-4">EC accession</div>
+                    <div class="col-lg-8">
+                        <span th:text="${{instrument.sourceEcAccession}}">EC accession</span>
+                    </div>
+                </div>
+                <div class="odd form-group">
+                    <div class="col-lg-4">Convention secretariat</div>
+                    <div class="col-lg-8">
+                        <a th:href="${instrument.sourceSecretariatUrl}" th:text="${instrument.sourceSecretariat}">
+                            Convention secretariat
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-            
-            <span class="pagebanner">Reporting framework</span>
-			
-		<div class="datatable results">
-			<div class="odd form-group">
-				  <div class="col-lg-4">Reporting obligations</div>
-              <div class="col-lg-8">
-              	<ul>
-              		<li th:each="obligation : ${instrument.obligations}">
-						<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
-
-              			<a th:href="@{'/obligations/'} + ${obligation.obligationId}" th:text="${obligation.title}">Obligation</a>
-              			<span th:if="${obligation.terminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
-              			<span th:if="${obligation.authority != null and !obligation.authority.isEmpty()}" th:text="'[' + ${obligation.authority} + ']'">Authority</span>
-              		</li>
-              	</ul>
-              </div>
-            </div>
-            <div class="even form-group">
-				  <div class="col-lg-4">Comments</div>
-				  <div class="col-lg-8">
-              		<span th:utext="${instrument.sourceComment}">Comments</span>
-              	  </div>
-            </div>
-            <div class="odd form-group">
-				  <div  class="col-lg-4">EC entry into force</div>
-				  <div class="col-lg-8">
-              		<span th:text="${{instrument.sourceEcEntryIntoForce}}">EC entry into force</span>
-              	  </div>
-            </div>
-            <div class="even form-group">
-				  <div class="col-lg-4">EC accession</div>
-				  <div class="col-lg-8">
-              		<span th:text="${{instrument.sourceEcAccession}}">EC accession</span>
-              	  </div>
-            </div>
-            <div class="odd form-group">
-				  <div class="col-lg-4">Convention secretariat</div>
-	              <div class="col-lg-8">
-	              	<a th:href="${instrument.sourceSecretariatUrl}" th:text="${instrument.sourceSecretariat}">
-	              		Convention secretariat
-	              	</a>              
-	              </div>
-            </div>
-         </div>
-      </div>
-  </div>
-<div th:replace="layout :: footerFragment"></div>
+    </div>
+    <div th:replace="layout :: footerFragment"></div>
 
 </div>
 <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>

@@ -3,14 +3,17 @@ package eionet.rod.service.modules;
 import javax.mail.PasswordAuthentication;
 
 public class EMailAuthenticator extends javax.mail.Authenticator {
-	
-	 /** */
-    private String user;
-    /** */
-    private String password;
 
     /**
      *
+     */
+    private String user;
+    /**
+     *
+     */
+    private String password;
+
+    /**
      * @param username username
      * @param password password
      */

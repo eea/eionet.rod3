@@ -1,109 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment">
-      </div>
-      <div id="workarea">
-      <div th:replace="helpModal :: helpModalFragment"></div>
-		<p>
-		The contents of ROD can be used in several different ways. Currently the main way is to browse the website. The contents of the database are also available for 
-		use as RSS, RDF and via XML-RPC. The purpose of this text is to give an introduction to how these technologies can be used to extract contents from ROD and overview 
-		what is available.
-		</p>
-		
-		<h2>RDF and RSS</h2>
-		<p>
-		RDF and RSS are methods of distributing links to content from web sites for others to use. There are a wide-range of web sites that 'syndicate' their content in this way.
-		</p>
-		<p>
-		ROD offers several RSS and RDF feeds for syndication. This allows distributed users to display selected custom content from ROD in their own website or in an 
-		application such as an RSS newsreader. The data is available in a variety of formats. Choose your preferred format and import the data on your website or your Intranet. 
-		There are no restrictions on the use of these feeds.
-		</p>
-		<p>
-		Please let us know, so that we can let you know if we plan to change the service in any way. Please click on the title below to get the corresponding feed.
-		</p>
-		
-		<h2>RSS (version 1.0)</h2>
-		<ol>
-			<li>
-			<a href="http://rod.eionet.europa.eu/events.rss"><b>Reporting Obligation deadlines</b></a>: available at: <a href="http://rod.eionet.europa.eu/events.rss">
-			http://rod.eionet.europa.eu/events.rss</a>; lists all reporting obligations with their deadline linked to environmental issues or countries specified in the 
-			URL. Only obligations with a numeric date deadline are listed. This feed is used for the Eionet calendar.
-			</li>
-			<li>
-			<a href="http://rod.eionet.europa.eu/obligations.rss"><b>Reporting Obligations</b></a>: available at: <a href="http://rod.eionet.europa.eu/obligations.rss">
-			http://rod.eionet.europa.eu/obligations.rss</a>; lists all obligations linked to environmental issues or countries specified in the URL.
-			<br/>
-			Note: Use http://rod.eionet.europa.eu/obligations.rss?issues=[issueId1],[issueId2], etc. or http://rod.eionet.europa.eu/obligations.rss?countries=[country1],[country2]
-			Example: <a href="http://rod.eionet.europa.eu/obligations.rss?issues=8,9">http://rod.eionet.europa.eu/obligations.rss?issues=8,9</a>. The issue IDs are: 1 - Climate Change, 
-			2 - Ozone Depletion, 3 - Acidification, 4 - Soil, 6 - Air quality, 7 - Noise, 8 - Natural Resources, 10 - Chemicals, 12 - Various other issues, 13 - 
-			Waste, 14 - Biodiversity Change and Nature, 15 - Water.
-			</li>
-			<li>
-			<a href="http://rod.eionet.europa.eu/instruments.rss"><b>Legislative Instruments</b></a>: available at: <a href="http://rod.eionet.europa.eu/instruments.rss">
-			http://rod.eionet.europa.eu/instruments.rss</a>; lists all legislative instruments.
-			</li>
-		</ol>
-		
-		<h2>RDF</h2>
-		<ol>
-			<li>
-			<a th:href="@{/obligations}"><b>Reporting Obligations</b></a>: available at: <a href="http://rod.eionet.europa.eu/obligations.rdf">
-			http://rod.eionet.europa.eu/obligations.rdf</a>; lists all reporting obligations with linked countries and environmental issues.
-			</li>
-			<li>
-			<a th:href="@{/instruments}"><b>Legislative Instruments</b></a>: available at: <a href="http://rod.eionet.europa.eu/instruments.rdf">
-			http://rod.eionet.europa.eu/instruments.rdf</a>; lists all legislative Instruments.
-			</li>
-			<li>
-			<a th:href="@{/spatial}"><b>Countries and territories</b></a>: available at: <a href="http://rod.eionet.europa.eu/spatial.rdf">
-			http://rod.eionet.europa.eu/spatial.rdf</a>; lists all countries and territories.
-			</li>
-		</ol>
-		
-		<h2>ROD XML-RPC</h2>
-		<p>
-		In the context of ROD, XML-RPC can be used to look up records in the database across the Internet. It is not an open door to query the whole of ROD as the procedures 
-		must have been anticipated and developed and made available for calling over XML-RPC. There are currently five procedures available to users:
-		</p>
-		<ol>
-			<li>
-			<b>getActivities()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT;
-			</li>
-			<li>
-			<b>getROComplete()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT; 
-			all the fields of the obligations are returned;
-			</li>
-			<li>
-			<b>getROSummary()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT; the 
-			STRUCT contains links to obligation, title, last update and description;
-			</li>
-			<li>
-			<b>getRODeadlines()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT; the 
-			STRUCT contains the reporting client name and the next deadline;
-			</li>
-			<li>
-			<b>getCountries()</b>: returns an ARRAY of STRUCTs that contains all countries from T_SPATIAL table; each STRUCT has got three country attributes:
-			<ul>
-				<li>'ISO' - the two-letter ISO code in capitals;</li>
-				<li>'URL' - '<a th:href="@{/spatial}">http://rod.eionet.europa.eu/spatial/</a><span th:text="'<T_SPATIAL.PK_SPATIAL_ID>'"></span>' [T_SPATIAL.PK_SPATIAL_ID];</li>
-				<li>'NAME'=[T_SPATIAL.SPATIAL_NAME].</li>
-			</ul>
-			</li>
-		</ol>
-		<p></p>
-		<p>
-		Other XML RPC methods can be put in place for key stakeholders if they specify what they want returned from ROD. If the returned information resembles the 
-		underlying logic for showing similar information on a web page then this can be fairly easy to implement. Sometimes all that is required is to do is to declare 
-		an existing method accessible over XML-RPC.
-		</p>
-		<p>
-		To make use of the ROD XML RPC, it needs to be called from a program. The following is an example for the Python programming language:
-		</p>
-		<pre>
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment">
+    </div>
+    <div id="workarea">
+        <div th:replace="helpModal :: helpModalFragment"></div>
+        <p>
+            The contents of ROD can be used in several different ways. Currently the main way is to browse the website. The contents of the database are also available for
+            use as RSS, RDF and via XML-RPC. The purpose of this text is to give an introduction to how these technologies can be used to extract contents from ROD and overview
+            what is available.
+        </p>
+
+        <h2>RDF and RSS</h2>
+        <p>
+            RDF and RSS are methods of distributing links to content from web sites for others to use. There are a wide-range of web sites that 'syndicate' their content in this way.
+        </p>
+        <p>
+            ROD offers several RSS and RDF feeds for syndication. This allows distributed users to display selected custom content from ROD in their own website or in an
+            application such as an RSS newsreader. The data is available in a variety of formats. Choose your preferred format and import the data on your website or your Intranet.
+            There are no restrictions on the use of these feeds.
+        </p>
+        <p>
+            Please let us know, so that we can let you know if we plan to change the service in any way. Please click on the title below to get the corresponding feed.
+        </p>
+
+        <h2>RSS (version 1.0)</h2>
+        <ol>
+            <li>
+                <a href="http://rod.eionet.europa.eu/events.rss"><b>Reporting Obligation deadlines</b></a>: available at: <a href="http://rod.eionet.europa.eu/events.rss">
+                http://rod.eionet.europa.eu/events.rss</a>; lists all reporting obligations with their deadline linked to environmental issues or countries specified in the
+                URL. Only obligations with a numeric date deadline are listed. This feed is used for the Eionet calendar.
+            </li>
+            <li>
+                <a href="http://rod.eionet.europa.eu/obligations.rss"><b>Reporting Obligations</b></a>: available at: <a href="http://rod.eionet.europa.eu/obligations.rss">
+                http://rod.eionet.europa.eu/obligations.rss</a>; lists all obligations linked to environmental issues or countries specified in the URL.
+                <br/>
+                Note: Use http://rod.eionet.europa.eu/obligations.rss?issues=[issueId1],[issueId2], etc. or http://rod.eionet.europa.eu/obligations.rss?countries=[country1],[country2]
+                Example: <a href="http://rod.eionet.europa.eu/obligations.rss?issues=8,9">http://rod.eionet.europa.eu/obligations.rss?issues=8,9</a>. The issue IDs are: 1 - Climate Change,
+                2 - Ozone Depletion, 3 - Acidification, 4 - Soil, 6 - Air quality, 7 - Noise, 8 - Natural Resources, 10 - Chemicals, 12 - Various other issues, 13 -
+                Waste, 14 - Biodiversity Change and Nature, 15 - Water.
+            </li>
+            <li>
+                <a href="http://rod.eionet.europa.eu/instruments.rss"><b>Legislative Instruments</b></a>: available at: <a href="http://rod.eionet.europa.eu/instruments.rss">
+                http://rod.eionet.europa.eu/instruments.rss</a>; lists all legislative instruments.
+            </li>
+        </ol>
+
+        <h2>RDF</h2>
+        <ol>
+            <li>
+                <a th:href="@{/obligations}"><b>Reporting Obligations</b></a>: available at: <a href="http://rod.eionet.europa.eu/obligations.rdf">
+                http://rod.eionet.europa.eu/obligations.rdf</a>; lists all reporting obligations with linked countries and environmental issues.
+            </li>
+            <li>
+                <a th:href="@{/instruments}"><b>Legislative Instruments</b></a>: available at: <a href="http://rod.eionet.europa.eu/instruments.rdf">
+                http://rod.eionet.europa.eu/instruments.rdf</a>; lists all legislative Instruments.
+            </li>
+            <li>
+                <a th:href="@{/spatial}"><b>Countries and territories</b></a>: available at: <a href="http://rod.eionet.europa.eu/spatial.rdf">
+                http://rod.eionet.europa.eu/spatial.rdf</a>; lists all countries and territories.
+            </li>
+        </ol>
+
+        <h2>ROD XML-RPC</h2>
+        <p>
+            In the context of ROD, XML-RPC can be used to look up records in the database across the Internet. It is not an open door to query the whole of ROD as the procedures
+            must have been anticipated and developed and made available for calling over XML-RPC. There are currently five procedures available to users:
+        </p>
+        <ol>
+            <li>
+                <b>getActivities()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT;
+            </li>
+            <li>
+                <b>getROComplete()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT;
+                all the fields of the obligations are returned;
+            </li>
+            <li>
+                <b>getROSummary()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT; the
+                STRUCT contains links to obligation, title, last update and description;
+            </li>
+            <li>
+                <b>getRODeadlines()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT; the
+                STRUCT contains the reporting client name and the next deadline;
+            </li>
+            <li>
+                <b>getCountries()</b>: returns an ARRAY of STRUCTs that contains all countries from T_SPATIAL table; each STRUCT has got three country attributes:
+                <ul>
+                    <li>'ISO' - the two-letter ISO code in capitals;</li>
+                    <li>'URL' - '<a th:href="@{/spatial}">http://rod.eionet.europa.eu/spatial/</a><span th:text="'<T_SPATIAL.PK_SPATIAL_ID>'"></span>' [T_SPATIAL.PK_SPATIAL_ID];</li>
+                    <li>'NAME'=[T_SPATIAL.SPATIAL_NAME].</li>
+                </ul>
+            </li>
+        </ol>
+        <p></p>
+        <p>
+            Other XML RPC methods can be put in place for key stakeholders if they specify what they want returned from ROD. If the returned information resembles the
+            underlying logic for showing similar information on a web page then this can be fairly easy to implement. Sometimes all that is required is to do is to declare
+            an existing method accessible over XML-RPC.
+        </p>
+        <p>
+            To make use of the ROD XML RPC, it needs to be called from a program. The following is an example for the Python programming language:
+        </p>
+        <pre>
   import xmlrpclib
 
   server = xmlrpclib.Server('http://rod.eionet.europa.eu/rpcrouter')
@@ -113,14 +113,14 @@
   else:
 	print result
 		</pre>
-		<br/>
-		<p>
-		The ROD XML RPC Router is: <a href="http://rod.eionet.europa.eu/rpcrouter">http://rod.eionet.europa.eu/rpcrouter</a>. The service name is: WebRODService.
-		</p>
+        <br/>
+        <p>
+            The ROD XML RPC Router is: <a href="http://rod.eionet.europa.eu/rpcrouter">http://rod.eionet.europa.eu/rpcrouter</a>. The service name is: WebRODService.
+        </p>
 
-     </div>
-   </div>
-    <!-- container -->
-    <div id="pagefoot" th:include="layout :: footerFragment"></div>
-  </body>
+    </div>
+</div>
+<!-- container -->
+<div id="pagefoot" th:include="layout :: footerFragment"></div>
+</body>
 </html>

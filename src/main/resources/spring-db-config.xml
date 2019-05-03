@@ -1,30 +1,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <util:properties id="cas" location="classpath:cas.properties"/>
     <util:properties id="application" location="classpath:application.properties"/>
 
-<!--
-    <context:property-placeholder
-            system-properties-mode="OVERRIDE"
-            location="classpath:cap.properties,
-                      classpath:application.properties"
-            ignore-unresolvable="true"/>
--->
+    <!--
+        <context:property-placeholder
+                system-properties-mode="OVERRIDE"
+                location="classpath:cap.properties,
+                          classpath:application.properties"
+                ignore-unresolvable="true"/>
+    -->
     <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" properties-ref="application"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${db.driver}" />
-        <property name="url" value="${db.url}" />
-        <property name="username" value="${db.username}" />
-        <property name="password" value="${db.password}" />
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
     </bean>
 
     <bean id="userService" class="eionet.rod.dao.UserManagementServiceJdbc">
@@ -34,17 +32,17 @@
     <bean id="clientService" class="eionet.rod.dao.ClientServiceJdbc">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
-       <bean id="undoService" class="eionet.rod.dao.UndoServiceJdbc">
-    	<property name="dataSource" ref="dataSource"/>
-    </bean>
-    
-    <bean id="sourceService" class="eionet.rod.dao.SourceServiceJdbc">
-    	<property name="dataSource" ref="dataSource"/>
+
+    <bean id="undoService" class="eionet.rod.dao.UndoServiceJdbc">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
-	<bean id="analysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
-    	<property name="dataSource" ref="dataSource"/>
+    <bean id="sourceService" class="eionet.rod.dao.SourceServiceJdbc">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
-       
+
+    <bean id="analysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

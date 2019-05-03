@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-  <script>
-	 $(document).ready(function(){
-	    $('#deliveriesTable').DataTable({
-	    	"sDom": 'Tfrtipt',
-	    	"sPaginationType": "full_numbers"
-	    });
-	    
-	});
-	</script>
-  <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+<head th:include="layout :: headerFragment"></head>
+<body>
+<script>
+    $(document).ready(function () {
+        $('#deliveriesTable').DataTable({
+            "sDom": 'Tfrtipt',
+            "sPaginationType": "full_numbers"
+        });
 
-  <div id="container">
-    <div th:include="layout :: bannerFragment" ></div>
-     <div id="workarea">
-     	<div class="title">
-     		<h1 th:text="'Status of deliveries: ' + ${country.name}"></h1>
-     	</div>
-		<form  name="f">
-		    <div class="form-horizontal">
-				<div class="datatable results">
-					<div class="form-group odd">
-						<div class="col-xs-4">Reporting obligation</div>
-						<div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
-					</div>
-					<div class="form-group even">
-						<div class="col-xs-4 ">Reporting frequency</div>
-						<div class="col-xs-8">
-							<span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated" ></span>
-							<span th:unless="${obligation.terminate} != 'N'">
+    });
+</script>
+<!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
+
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div class="title">
+            <h1 th:text="'Status of deliveries: ' + ${country.name}"></h1>
+        </div>
+        <form name="f">
+            <div class="form-horizontal">
+                <div class="datatable results">
+                    <div class="form-group odd">
+                        <div class="col-xs-4">Reporting obligation</div>
+                        <div class="col-xs-8" th:utext="${obligation.oblTitle}"></div>
+                    </div>
+                    <div class="form-group even">
+                        <div class="col-xs-4 ">Reporting frequency</div>
+                        <div class="col-xs-8">
+                            <span th:if="${obligation.terminate} != 'N'" th:text="Terminated" class="terminated"></span>
+                            <span th:unless="${obligation.terminate} != 'N'">
 								<th:block th:switch="${obligation.reportFreqMonths}">
 									<span th:case="''" th:text="''"></span>
 									<span th:case="'0'" th:text="'One time only'"></span>
@@ -39,68 +39,68 @@
 									<span th:case="*" th:text="'Every ' + ${obligation.reportFreqMonths} + ' months'"></span>
 								</th:block>
 							</span>
-						</div>
-					</div>
-					<div class="form-group odd">
-						<div class="col-xs-4">Client organisation</div>
-						<div class="col-xs-8">
-							<a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
-							<span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
-						</div>
-					</div>
-					<div class="form-group even">
-						<div class="col-xs-4">Other clients using this reporting</div>
-						<div class="col-xs-8">
-							<ul  th:if="${not #lists.isEmpty(clients)}" >
-								<li th:each="client : ${clients}">
-									<a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="form-group odd">
-						<div class="col-xs-4">Reporting guidelines</div>
-						<div class="col-xs-8">
-							<a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
-							<span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		     
-		     <div class="clearfix margin-top-60">
-       	
-		        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-		        <div th:if="${#lists.isEmpty(allDeliveries)}">There are no results.</div>
-		        <div th:if="${not #lists.isEmpty(allDeliveries)}">
-		          
-		          <table id="deliveriesTable" class="datatable results table table-striped table-bordered">
-			        <thead>
-				        <tr>
-				        	<th>Delivery Title</th>
-		                	<th>Delivery Date</th>
-		                	<th>Period covered</th>
-		                	<th>Coverage note</th>
-		                	<th>Coverage</th>
-		                </tr>
-		               </thead>
-		           	  <tr th:each="delivery, iterStat : ${allDeliveries}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-		              	<td>
-		                    <a th:href="${delivery.deliveryUrl}" th:text="${delivery.deliveryTitle}"></a>
-		               </td>
-		               <td th:text="${delivery.deliveryUploadDate}"></td>
-		               <td th:text="${delivery.deliveryCoverage}"></td>
-		               <td th:text="${delivery.deliveryCoverageNote}"></td>
-		               <td></td>
-		             </tr>  
-		            </table>
-		        </div>
-	      	</div>
+                        </div>
+                    </div>
+                    <div class="form-group odd">
+                        <div class="col-xs-4">Client organisation</div>
+                        <div class="col-xs-8">
+                            <a th:if="${obligation.clientId != null}" th:text="${obligation.clientName}" th:href="@{'/clients/' + ${obligation.clientId}}"></a>
+                            <span th:unless="${obligation.clientId != null}" th:text="${obligation.clientName}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group even">
+                        <div class="col-xs-4">Other clients using this reporting</div>
+                        <div class="col-xs-8">
+                            <ul th:if="${not #lists.isEmpty(clients)}">
+                                <li th:each="client : ${clients}">
+                                    <a th:href="@{'/clients/'+${client.clientId}}" th:text="${client.name}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group odd">
+                        <div class="col-xs-4">Reporting guidelines</div>
+                        <div class="col-xs-8">
+                            <a th:if="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}" th:href="${obligation.reportFormatUrl}"></a>
+                            <span th:unless="${obligation.reportFormatUrl != null}" th:text="${obligation.formatName}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		
-		</form>
- 	</div>
-      <div id="pagefoot" th:include="layout :: footerFragment"></div>
+            <div class="clearfix margin-top-60">
+
+                <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+                <div th:if="${#lists.isEmpty(allDeliveries)}">There are no results.</div>
+                <div th:if="${not #lists.isEmpty(allDeliveries)}">
+
+                    <table id="deliveriesTable" class="datatable results table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Delivery Title</th>
+                            <th>Delivery Date</th>
+                            <th>Period covered</th>
+                            <th>Coverage note</th>
+                            <th>Coverage</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="delivery, iterStat : ${allDeliveries}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                            <td>
+                                <a th:href="${delivery.deliveryUrl}" th:text="${delivery.deliveryTitle}"></a>
+                            </td>
+                            <td th:text="${delivery.deliveryUploadDate}"></td>
+                            <td th:text="${delivery.deliveryCoverage}"></td>
+                            <td th:text="${delivery.deliveryCoverageNote}"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+        </form>
     </div>
-  </body>
+    <div id="pagefoot" th:include="layout :: footerFragment"></div>
+</div>
+</body>
 </html>

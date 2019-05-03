@@ -10,7 +10,7 @@ import org.springframework.format.datetime.DateFormatter;
  */
 public class DateFormatterRegistrar implements FormatterRegistrar {
 
-    @Value( "${date.format}" )
+    @Value("${date.format}")
     private String dateFormat;
 
     @Override

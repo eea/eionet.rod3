@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package eionet.rod.dao;
 
-import java.util.List;
-
 import eionet.rod.model.ObligationCountry;
 import eionet.rod.model.Spatial;
+
+import java.util.List;
 
 /**
  * @author jrobles
@@ -14,13 +14,13 @@ import eionet.rod.model.Spatial;
  */
 public interface SpatialDao {
 
-	List<Spatial> findAll();
-	
-	Spatial findId(Integer spatialId);
+    List<Spatial> findAll();
 
-	List<Spatial> findAllMember(String member);
-	
-	List<ObligationCountry> findObligationCountriesList(Integer obligationId);
-	
-	
+    Spatial findId(Integer spatialId);
+
+    List<Spatial> findAllMember(String member);
+
+    List<ObligationCountry> findObligationCountriesList(Integer obligationId);
+
+
 }

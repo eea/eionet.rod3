@@ -1,145 +1,145 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:include="layout :: headerFragment"></head>
-  <body>
-    <div id="container">
-      <div th:include="layout :: bannerFragment"></div>
-      <div id="workarea">
-      	<div class="form-horizontal">
-		 <div class="title">
-	        <h1>Reporting client or issuer details</h1>
-	        <!--  sec:authorize="hasRole('EDITOR')" -->
-	     	<ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
-	     		<li><span>Operations</span>
-					<ul>
-						 <li><a href="clientEditForm.html" th:href="@{'/clients/' + ${client.clientId} + '/edit'}">Edit client</a></li>
-	            		 <li><a th:href="@{'/clients/delete/' + ${client.clientId}}">Delete client</a></li>
-					</ul>
-				</li>
-			</ul>
-		  </div>
-        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
-        <div class="datatable results">
-			<div class="form-group odd">
-			  	<div class="col-xs-4">Name</div>
-             	<div class="col-xs-8"><span th:text="${client.name}"></span></div>
-             </div>
-            <div class="form-group even">
-				<div class="col-xs-4">Short Name</div>
-              	<div class="col-xs-8"><span th:text="${client.shortName}"></span></div>
+<head th:include="layout :: headerFragment"></head>
+<body>
+<div id="container">
+    <div th:include="layout :: bannerFragment"></div>
+    <div id="workarea">
+        <div class="form-horizontal">
+            <div class="title">
+                <h1>Reporting client or issuer details</h1>
+                <!--  sec:authorize="hasRole('EDITOR')" -->
+                <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
+                    <li><span>Operations</span>
+                        <ul>
+                            <li><a href="clientEditForm.html" th:href="@{'/clients/' + ${client.clientId} + '/edit'}">Edit client</a></li>
+                            <li><a th:href="@{'/clients/delete/' + ${client.clientId}}">Delete client</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="form-group odd">
-			  	<div  class="col-xs-4">Acronym</div>
-              	<div class="col-xs-8"><span th:text="${client.acronym}"></span></div>
-            </div>
-            <div class="form-group even">
-				<div class="col-xs-4">Address</div>
-              	<div class="col-xs-8"><span th:text="${client.address}"/></span></div>
-            </div>
-            <div class="form-group odd">
-				<div  class="col-xs-4">Postal code</div>
-              	<div class="col-xs-8"><span th:text="${client.postalCode}"></span></div>
-            </div>
-            <div class="form-group even">
-				<div  class="col-xs-4">City</div>
-              <div class="col-xs-8"><span th:text="${client.city}"></span></div>
-            </div>
-            <div class="form-group odd">
-				<div class="col-xs-4">Country</div>
-              	<div class="col-xs-8"><span th:text="${client.country}"></span></div>
-            </div>
-            <div class="form-group odd">
-              <div class="col-xs-4">Email</div>
-              <div class="col-xs-8"><span th:text="${client.email}"></span></div>
-            </div>
-           <div class="form-group even">
-				<div  class="col-xs-4">Homepage</div>
-              	<div class="col-xs-8"><a href="http://www.consilium.europa.eu/" th:href="${client.url}" th:text="${client.url}"></a></div>
-            </div>
-            <div class="form-group odd">
-				<div class="col-xs-4">Description</div>
-              	<div class="col-xs-8"><span  th:text="${client.description}"></span></div>
-            </div>
-          
-        </div>
-        
-        <div th:if="${not #lists.isEmpty(directObligations)}">
-        <h2>Direct Obligations</h2>
-        <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-4">ID</th>
-            <th scope="col" class="col-xs-8">Title</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="directObl, iterStat : ${directObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
-            <td><a th:href="@{'/obligations/' + ${directObl.obligationId}}" th:text="${directObl.obligationId}"></a></td>
-            <td><span th:text="${directObl.oblTitle}"></span><span th:if="${directObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
-          </tr>
-          </tbody>
-        </table>
-        </div>
-        
-        <div th:if="${not #lists.isEmpty(indirectObligations)}">
-        <h2>Indirect Obligations</h2>
-        <table class="datatable results">
-          <thead>
-          <tr>
-            <th scope="col" class="col-xs-4">ID</th>
-            <th scope="col" class="col-xs-8">Title</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="indirectObl, iterStat : ${indirectObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
-            <td><a th:href="@{'/obligations/' + ${indirectObl.obligationId}}" th:text="${indirectObl.obligationId}"></a></td>
-            <td><span th:text="${indirectObl.oblTitle}"></span><span th:if="${indirectObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
-          </tr>
-          </tbody>
-        </table>
-        </div>
-   		<div th:if="${not #lists.isEmpty(directInstruments)}">
-        <h2>Direct Instruments</h2>
-        <table class="datatable results">
-         <thead>
-          <tr>
-            <th scope="col" class="col-xs-4">ID</th>
-            <th scope="col" class="col-xs-8">Alias</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="directInstrument, iterStat : ${directInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
-            <td><a th:href="@{'/instruments/' + ${directInstrument.sourceId}}" th:text="${directInstrument.sourceId}"></a></td>
-            <td><span th:text="${directInstrument.sourceAlias}"></span></td>
-          </tr>
-       
-          </tbody>
-         </table>
-         </div>
+            <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+            <div class="datatable results">
+                <div class="form-group odd">
+                    <div class="col-xs-4">Name</div>
+                    <div class="col-xs-8"><span th:text="${client.name}"></span></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Short Name</div>
+                    <div class="col-xs-8"><span th:text="${client.shortName}"></span></div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Acronym</div>
+                    <div class="col-xs-8"><span th:text="${client.acronym}"></span></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Address</div>
+                    <div class="col-xs-8"><span th:text="${client.address}"/></span></div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Postal code</div>
+                    <div class="col-xs-8"><span th:text="${client.postalCode}"></span></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">City</div>
+                    <div class="col-xs-8"><span th:text="${client.city}"></span></div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Country</div>
+                    <div class="col-xs-8"><span th:text="${client.country}"></span></div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Email</div>
+                    <div class="col-xs-8"><span th:text="${client.email}"></span></div>
+                </div>
+                <div class="form-group even">
+                    <div class="col-xs-4">Homepage</div>
+                    <div class="col-xs-8"><a href="http://www.consilium.europa.eu/" th:href="${client.url}" th:text="${client.url}"></a></div>
+                </div>
+                <div class="form-group odd">
+                    <div class="col-xs-4">Description</div>
+                    <div class="col-xs-8"><span th:text="${client.description}"></span></div>
+                </div>
 
-		<div th:if="${not #lists.isEmpty(directInstruments)}">
-        <h2>Indirect Instruments</h2>
-        <table class="datatable results">
-         <thead>
-          <tr>
-            <th scope="col" class="col-xs-4">ID</th>
-            <th scope="col" class="col-xs-8">Alias</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="indirectInstrument, iterStat : ${indirectInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
-            <td><a th:href="@{'/instruments/' + ${indirectInstrument.sourceId}}" th:text="${indirectInstrument.sourceId}"></a></td>
-            <td><span th:text="${indirectInstrument.sourceAlias}"></span></td>
-          </tr>
-       
-          </tbody>
-         </table>
-         </div>
+            </div>
 
-      </div>
-      </div>
-      <div id="pagefoot" th:include="layout :: footerFragment"></div>
+            <div th:if="${not #lists.isEmpty(directObligations)}">
+                <h2>Direct Obligations</h2>
+                <table class="datatable results">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-xs-4">ID</th>
+                        <th scope="col" class="col-xs-8">Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="directObl, iterStat : ${directObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                        <td><a th:href="@{'/obligations/' + ${directObl.obligationId}}" th:text="${directObl.obligationId}"></a></td>
+                        <td><span th:text="${directObl.oblTitle}"></span><span th:if="${directObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(indirectObligations)}">
+                <h2>Indirect Obligations</h2>
+                <table class="datatable results">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-xs-4">ID</th>
+                        <th scope="col" class="col-xs-8">Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="indirectObl, iterStat : ${indirectObligations}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                        <td><a th:href="@{'/obligations/' + ${indirectObl.obligationId}}" th:text="${indirectObl.obligationId}"></a></td>
+                        <td><span th:text="${indirectObl.oblTitle}"></span><span th:if="${indirectObl.terminate != 'N'}" class='smallfont' style='color:red' th:text="' [terminated]'"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${not #lists.isEmpty(directInstruments)}">
+                <h2>Direct Instruments</h2>
+                <table class="datatable results">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-xs-4">ID</th>
+                        <th scope="col" class="col-xs-8">Alias</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="directInstrument, iterStat : ${directInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                        <td><a th:href="@{'/instruments/' + ${directInstrument.sourceId}}" th:text="${directInstrument.sourceId}"></a></td>
+                        <td><span th:text="${directInstrument.sourceAlias}"></span></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(directInstruments)}">
+                <h2>Indirect Instruments</h2>
+                <table class="datatable results">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col-xs-4">ID</th>
+                        <th scope="col" class="col-xs-8">Alias</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="indirectInstrument, iterStat : ${indirectInstruments}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                        <td><a th:href="@{'/instruments/' + ${indirectInstrument.sourceId}}" th:text="${indirectInstrument.sourceId}"></a></td>
+                        <td><span th:text="${indirectInstrument.sourceAlias}"></span></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
-    <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>
-  </body>
+    <div id="pagefoot" th:include="layout :: footerFragment"></div>
+</div>
+<script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>
+</body>
 </html>

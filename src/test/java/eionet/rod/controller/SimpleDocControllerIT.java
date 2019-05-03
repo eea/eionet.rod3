@@ -1,13 +1,8 @@
 package eionet.rod.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
-//import static org.hamcrest.Matchers.*;
-
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,6 +11,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+//import static org.hamcrest.Matchers.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,8 +41,8 @@ public class SimpleDocControllerIT {
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
 
     /**
@@ -82,14 +83,14 @@ public class SimpleDocControllerIT {
      * We're getting the login page, but we are already logged in.
      * What happens?
      */
-  //  @Test
+    //  @Test
     public void getLogin() throws Exception {
         this.mockMvc.perform(get("/login").with(user("admin")))
                 .andExpect(status().isOk());
-                //.andExpect(model().attributeExists("breadcrumbs"))
-                //.andExpect(status().is3xxRedirection());
-                //.andExpect(view().name("index"));
-               // .andExpect(content().contentType("text/html;charset=UTF-8"));
+        //.andExpect(model().attributeExists("breadcrumbs"))
+        //.andExpect(status().is3xxRedirection());
+        //.andExpect(view().name("index"));
+        // .andExpect(content().contentType("text/html;charset=UTF-8"));
     }
 
     /**

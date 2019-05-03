@@ -1,17 +1,16 @@
 package eionet.rod.util;
 
-import static org.junit.Assert.assertNotNull;
-
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 
 public class RestPreconditionsTest {
 
-	@Test
+    @Test
     public void instanticateClass() {
         RestPreconditions obj = new RestPreconditions();
         assertNotNull(obj);
     }
-		
+
 }

@@ -1,14 +1,14 @@
 package eionet.rod.controller;
 
 import eionet.rod.dao.UserManagementService;
-import eionet.rod.model.UserRole;
 import eionet.rod.model.Authorisation;
+import eionet.rod.model.UserRole;
 import eionet.rod.util.BreadCrumbs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,10 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class UserController {
     /**
      * View for all users.
      *
-     * @param model - contains attributes for the view
+     * @param model   - contains attributes for the view
      * @param message
      * @return view name
      */
@@ -63,13 +63,14 @@ public class UserController {
         model.addAttribute("allUsers", userManagementService.getAllUsers());
         Authorisation user = new Authorisation();
         model.addAttribute("user", user);
-        if(message != null) model.addAttribute("message", message);
+        if (message != null) model.addAttribute("message", message);
         return "users";
     }
 
     /**
      * Adds new user to database.
-     * @param user user name
+     *
+     * @param user               user name
      * @param redirectAttributes
      * @return view name or redirection
      */
@@ -111,14 +112,15 @@ public class UserController {
 
     /**
      * Form for editing existing user.
+     *
      * @param userName
-     * @param model - contains attributes for the view
+     * @param model    - contains attributes for the view
      * @param message
      * @return view name
      */
     @RequestMapping("/edit")
     public String editUserForm(@RequestParam String userName, Model model,
-            @RequestParam(required = false) String message) {
+                               @RequestParam(required = false) String message) {
         model.addAttribute("userName", userName);
         BreadCrumbs.set(model, "Modify user");
         UserDetails userDetails = userManagementService.loadUserByUsername(userName);
@@ -138,7 +140,7 @@ public class UserController {
      *
      * @param user
      * @param bindingResult
-     * @param model - contains attributes for the view
+     * @param model         - contains attributes for the view
      * @return view name
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -162,12 +164,12 @@ public class UserController {
      * Deletes user.
      *
      * @param userName
-     * @param model - contains attributes for the view
+     * @param model    - contains attributes for the view
      * @return view name
      */
     @RequestMapping("/delete")
     public String deleteUser(@RequestParam String userName, Model model) {
-        if (!userManagementService.userExists(userName)){
+        if (!userManagementService.userExists(userName)) {
             model.addAttribute("message", "User " + userName + " was not deleted, because it does not exist ");
         } else {
             userManagementService.deleteUser(userName);

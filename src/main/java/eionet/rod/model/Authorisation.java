@@ -10,7 +10,9 @@ public class Authorisation {
 
     private String userId;
 
-    /** List of roles. */
+    /**
+     * List of roles.
+     */
     private List<String> authorisations;
 
     /**

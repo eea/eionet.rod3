@@ -1,22 +1,22 @@
 package eionet.rod;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletContext;
-//import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-//import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
+import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.WebApplicationInitializer;
+
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
+//import javax.servlet.ServletException;
+//import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 //import org.springframework.web.context.ContextLoaderListener;
 
 /**
  * Initialise DispatcherServlet.
- *
+ * <p>
  * See http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc-container-config
  */
 public class WebAppInitializer implements WebApplicationInitializer {
@@ -27,9 +27,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext container) {
         XmlWebApplicationContext appContext = new XmlWebApplicationContext();
         appContext.setConfigLocation("/WEB-INF/classes/spring-db-config.xml "
-                                + "/WEB-INF/classes/spring-init-config.xml "
-                                + "/WEB-INF/classes/spring-mvc-config.xml "
-                                + "/WEB-INF/classes/spring-service-config.xml");
+                + "/WEB-INF/classes/spring-init-config.xml "
+                + "/WEB-INF/classes/spring-mvc-config.xml "
+                + "/WEB-INF/classes/spring-service-config.xml");
 
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(appContext));
 

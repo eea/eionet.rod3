@@ -1,13 +1,11 @@
 <beans
-    xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:security="http://www.springframework.org/schema/security"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:security="http://www.springframework.org/schema/security"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <security:http pattern="/api/**" security="none"/> <!-- To bypass csrf -->
     <security:http entry-point-ref="casEntryPoint" pattern="/**" use-expressions="true" auto-config="false">
@@ -26,7 +24,7 @@
         <security:intercept-url pattern="/harvester" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/subscribe" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/**" access="permitAll()"/>
-        <security:custom-filter position="CAS_FILTER" ref="casFilter" />
+        <security:custom-filter position="CAS_FILTER" ref="casFilter"/>
         <security:logout logout-success-url="/logout"/>
         <security:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
         <security:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
@@ -49,19 +47,19 @@
     </bean>
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider ref="casAuthenticationProvider" />
+        <security:authentication-provider ref="casAuthenticationProvider"/>
     </security:authentication-manager>
 
     <bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
         <property name="authenticationUserDetailsService">
             <bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-                <constructor-arg ref="userService" />
+                <constructor-arg ref="userService"/>
             </bean>
         </property>
-        <property name="serviceProperties" ref="serviceProperties" />
+        <property name="serviceProperties" ref="serviceProperties"/>
         <property name="ticketValidator">
             <bean class="eionet.rod.ECas20ServiceTicketValidator">
-                <constructor-arg index="0" value="${cas.server.host}" />
+                <constructor-arg index="0" value="${cas.server.host}"/>
             </bean>
         </property>
         <property name="key" value="an_id_for_this_auth_provider_only"/>

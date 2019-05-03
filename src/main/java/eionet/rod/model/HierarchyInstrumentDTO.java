@@ -1,54 +1,54 @@
 package eionet.rod.model;
 
 public class HierarchyInstrumentDTO {
-	
-	private Integer sourceId;
-	private String sourceAlias;
-	private String sourceUrl;
-	private Integer sourceParentId;
-	private String sourceParentAlias;
-	
-	public HierarchyInstrumentDTO() {		
-	}
 
-	public Integer getSourceId() {
-		return sourceId;
-	}
+    private Integer sourceId;
+    private String sourceAlias;
+    private String sourceUrl;
+    private Integer sourceParentId;
+    private String sourceParentAlias;
 
-	public void setSourceId(Integer sourceId) {
-		this.sourceId = sourceId;
-	}
+    public HierarchyInstrumentDTO() {
+    }
 
-	public String getSourceAlias() {
-		return sourceAlias;
-	}
+    public Integer getSourceId() {
+        return sourceId;
+    }
 
-	public void setSourceAlias(String sourceAlias) {
-		this.sourceAlias = sourceAlias;
-	}
+    public void setSourceId(Integer sourceId) {
+        this.sourceId = sourceId;
+    }
 
-	public String getSourceUrl() {
-		return sourceUrl;
-	}
+    public String getSourceAlias() {
+        return sourceAlias;
+    }
 
-	public void setSourceUrl(String sourceUrl) {
-		this.sourceUrl = sourceUrl;
-	}
+    public void setSourceAlias(String sourceAlias) {
+        this.sourceAlias = sourceAlias;
+    }
 
-	public Integer getSourceParentId() {
-		return sourceParentId;
-	}
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
 
-	public void setSourceParentId(Integer sourceParentId) {
-		this.sourceParentId = sourceParentId;
-	}
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
+    }
 
-	public String getSourceParentAlias() {
-		return sourceParentAlias;
-	}
+    public Integer getSourceParentId() {
+        return sourceParentId;
+    }
 
-	public void setSourceParentAlias(String sourceParentAlias) {
-		this.sourceParentAlias = sourceParentAlias;
-	}
+    public void setSourceParentId(Integer sourceParentId) {
+        this.sourceParentId = sourceParentId;
+    }
+
+    public String getSourceParentAlias() {
+        return sourceParentAlias;
+    }
+
+    public void setSourceParentAlias(String sourceParentAlias) {
+        this.sourceParentAlias = sourceParentAlias;
+    }
 
 }

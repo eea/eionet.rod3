@@ -1,14 +1,10 @@
 package eionet.rod.dao;
 
-import org.junit.runner.RunWith;
+import eionet.rod.model.Issue;
+import eionet.rod.util.exception.ResourceNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import java.util.List;
-
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,9 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import eionet.rod.model.Issue;
+import java.util.List;
 
-import eionet.rod.util.exception.ResourceNotFoundException;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -36,11 +32,11 @@ import eionet.rod.util.exception.ResourceNotFoundException;
         "classpath:spring-security.xml"})
 @Sql("/seed-issue.sql")
 public class ITIssueDao {
-    
-	@Autowired
-	private IssueDao issueDao;
-	
-	@Autowired
+
+    @Autowired
+    private IssueDao issueDao;
+
+    @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
@@ -51,20 +47,19 @@ public class ITIssueDao {
     @Before
     public void setUp() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
-            .addFilters(this.springSecurityFilterChain)
-            .build();
+                .addFilters(this.springSecurityFilterChain)
+                .build();
     }
-		
+
     @Test
-    public void testfindObligationIssuesList() throws ResourceNotFoundException
-    {
-    	List<Issue> issues = issueDao.findObligationIssuesList(1);
-    	assertEquals("Climate Change",issues.get(0).getIssueName());
-    	assertEquals("1",issues.get(0).getIssueId().toString());
-    	issues = issueDao.findObligationIssuesList(12);
-    	assertEquals(0, issues.size());
-    	
+    public void testfindObligationIssuesList() throws ResourceNotFoundException {
+        List<Issue> issues = issueDao.findObligationIssuesList(1);
+        assertEquals("Climate Change", issues.get(0).getIssueName());
+        assertEquals("1", issues.get(0).getIssueId().toString());
+        issues = issueDao.findObligationIssuesList(12);
+        assertEquals(0, issues.size());
+
     }
-    
-    
+
+
 }

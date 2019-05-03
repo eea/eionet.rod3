@@ -8,9 +8,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Jaanus Heinlaid
- *
  */
 public class RODUtilTest {
 
@@ -83,7 +81,7 @@ public class RODUtilTest {
         assertEquals(expected, result);
     }
 
-   
+
     @Test
     public void test_isURL() {
         assertTrue(RODUtil.isURL("http://cdr.eionet.europa.eu/"));
@@ -92,7 +90,7 @@ public class RODUtilTest {
         assertFalse(RODUtil.isURL("XXX"));
     }
 
-    
+
     @Test
     public void test_setAnchors() {
         // Simple check
@@ -118,30 +116,31 @@ public class RODUtilTest {
         assertEquals(
                 "Some text (<a href=\"http://en.wikipedia.org/wiki/Fahrvergnügen\">http://en.wikipedia.org/wiki/Fahrvergnügen</a> ).",
                 RODUtil.setAnchors("Some text (http://en.wikipedia.org/wiki/Fahrvergnügen ).", false, 100));
-    
+
     }
 
-    @Test 
+    @Test
     public void truncateText() {
-    	assertEquals("National Authorities, International Organisations, Public, Scientific Community...",RODUtil.truncateText("National Authorities, International Organisations, Public, Scientific Community etc"));
-    	assertEquals("Bonn Agreement Secretariat",RODUtil.truncateText("Bonn Agreement Secretariat"));
+        assertEquals("National Authorities, International Organisations, Public, Scientific Community...", RODUtil.truncateText("National Authorities, International Organisations, Public, Scientific Community etc"));
+        assertEquals("Bonn Agreement Secretariat", RODUtil.truncateText("Bonn Agreement Secretariat"));
     }
-    @Test 
+
+    @Test
     public void isNullorEmptyText() {
         assertTrue(RODUtil.isNullOrEmpty(null));
         assertFalse(RODUtil.isNullOrEmpty("Bonn Agreement Secretariat"));
     }
-    
+
     @Test
     public void miliseconds2DateTest() {
         long ts = 1519733894881L;
 
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(ts);
-    	assertEquals( c.getTime(), RODUtil.miliseconds2Date(ts));
+        assertEquals(c.getTime(), RODUtil.miliseconds2Date(ts));
     }
-    
-	@Test
+
+    @Test
     public void testReadDate() {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY, 0);
@@ -162,5 +161,5 @@ public class RODUtilTest {
         assertNull(RODUtil.readDate("1002"));
         assertNull(RODUtil.readDate("10-May-2019"));
     }
-    
- }
+
+}

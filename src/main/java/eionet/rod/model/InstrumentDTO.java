@@ -1,9 +1,7 @@
 package eionet.rod.model;
 
 /**
- *
  * @author altnyris
- *
  */
 public class InstrumentDTO {
 
@@ -59,8 +57,6 @@ public class InstrumentDTO {
     public void setSourceLegalName(String sourceLegalName) {
         this.sourceLegalName = sourceLegalName;
     }
-
-
 
 
 }

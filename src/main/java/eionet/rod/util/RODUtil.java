@@ -6,12 +6,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 public class RODUtil {
-	
-	
-	 /**
+
+
+    /**
      * Returns the result of {@link #replaceTags(String, boolean, boolean)}, passing on the given string,
      * and setting the booleans to false.
      *
@@ -26,7 +29,7 @@ public class RODUtil {
      * Returns the result of {@link #replaceTags(String, boolean, boolean)}, passing on the given string and boolean,
      * and setting the last boolean to false.
      *
-     * @param in Passed on.
+     * @param in                    Passed on.
      * @param dontCreateHTMLAnchors Passed on.
      * @return String The result.
      */
@@ -37,12 +40,12 @@ public class RODUtil {
     /**
      * Processes given text for display in HTML pages.
      *
-     * @param in Text to process.
-     * @param dontCreateHTMLAnchors If true, no HTML links will be interpreted.
+     * @param in                       Text to process.
+     * @param dontCreateHTMLAnchors    If true, no HTML links will be interpreted.
      * @param dontCreateHTMLLineBreaks If true, no HTML line-breaks will be interpreted.
      * @return The result.
      */
-	public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
+    public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
 
         in = (in != null ? in : "");
         StringBuilder ret = new StringBuilder();
@@ -91,14 +94,14 @@ public class RODUtil {
 
         return retString;
     }
-	
-	 /**
+
+    /**
      * Finds all URLs in a given string and replaces them with HTML anchors. If boolean newWindow==true then target will be a new
      * window, else no. If boolean cutLink>0 then cut the displayed link length.
      *
-     * @param s String to parse.
+     * @param s         String to parse.
      * @param newWindow Generate or not the "target=_blank" attribute.
-     * @param cutLink Cut links display text to this length, replace the tail with 3 dots.
+     * @param cutLink   Cut links display text to this length, replace the tail with 3 dots.
      * @return The resulting text.
      */
     public static String setAnchors(String s, boolean newWindow, int cutLink) {
@@ -132,14 +135,14 @@ public class RODUtil {
 
         return buf.toString();
     }
-    
+
     /**
      * Finds all URLs in a given string and replaces them with HTML anchors. If boolean newWindow==true then target will be a new
      * window, else no.
-     *
+     * <p>
      * This method calls {@link #setAnchors(String, boolean, int)}, passing on the string and the boolean, and setting int=0.
      *
-     * @param s String to parse.
+     * @param s         String to parse.
      * @param newWindow Generate or not the "target=_blank" attribute.
      * @return The resulting text.
      */
@@ -186,11 +189,12 @@ public class RODUtil {
 
     /**
      * Tries to parse a date according to the accepted date formats
+     *
      * @param dateString The string to be parsed
      * @return the date if the conversion succeeded or null if not
      */
     public static Date readDate(String dateString) {
-        if(dateString == null) {
+        if (dateString == null) {
             return null;
         }
         for (String regexp : DATE_FORMAT_REGEXPS.keySet()) {
@@ -218,6 +222,7 @@ public class RODUtil {
 
     /**
      * Cut out the text into 80 characters (Constants.TRUNCATE_DEFAULT_LEN)
+     *
      * @param truncateText
      * @return
      */
@@ -227,6 +232,7 @@ public class RODUtil {
 
     /**
      * Truncate text at any length
+     *
      * @param truncateText
      * @param length
      * @return
@@ -243,8 +249,8 @@ public class RODUtil {
     }
 
     public static Date miliseconds2Date(long ts) {
-    	Date resultdate = new Date(ts);
-    	return resultdate;
+        Date resultdate = new Date(ts);
+        return resultdate;
     }
 
 }
