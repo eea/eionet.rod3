@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import org.springframework.web.context.WebApplicationContext;
 
-//import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
@@ -51,9 +50,6 @@ public class ITSpatialController {
 
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
-
-    @Autowired
-    private DataSource datasource;
 
     @Autowired
     SpatialService spatialService;

@@ -103,10 +103,9 @@ public class ClientServiceJdbc implements ClientService {
         	listClients = clientIds.split(",");
 
             for (String listClient : listClients) {
-                jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID =" + listClient);
+                jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID = ?", listClient);
             }
         }
-    	
     }
 
     @Override

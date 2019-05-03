@@ -82,6 +82,9 @@ public class ITSearchInjection {
                       //.andDo(print())
                         .andReturn();
         ModelAndView mv = res.getModelAndView();
+        if(mv == null) {
+            return;
+        }
         Map<String, Object> model = mv.getModel();
         if (model == null) {
             return;
