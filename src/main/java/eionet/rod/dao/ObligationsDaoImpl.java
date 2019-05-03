@@ -533,37 +533,10 @@ public class ObligationsDaoImpl implements ObligationsDao {
     	
     	Calendar calendar = Calendar.getInstance();
         java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
-//
-//        if (!RODUtil.isNullOrEmpty(obligations.getFirstReporting())) {
-//        	obligations.setFirstReporting(RODUtil.str2Date(obligations.getFirstReporting()));
-//        }else {
-//        	obligations.setFirstReporting(null);
-//        }
-//        if (!RODUtil.isNullOrEmpty(obligations.getValidTo())) {
-//        	obligations.setValidTo(RODUtil.str2Date(obligations.getValidTo()));
-//        }else {
-//        	obligations.setValidTo(null);
-//        }
         Integer setReportFreqMonths = null;
         if (!obligations.getReportFreqMonths().isEmpty()) {
         	setReportFreqMonths = Integer.parseInt(obligations.getReportFreqMonths());
         }
-//        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline())) {
-//        	obligations.setNextDeadline(RODUtil.str2Date(obligations.getNextDeadline()));
-//        }else {
-//        	obligations.setNextDeadline(null);
-//        }
-//        if (!RODUtil.isNullOrEmpty(obligations.getNextDeadline2())) {
-//        	obligations.setNextDeadline2(RODUtil.str2Date(obligations.getNextDeadline2()));
-//        }else {
-//        	obligations.setNextDeadline2(null);
-//        }
-//
-//        if (!RODUtil.isNullOrEmpty(obligations.getValidSince())) {
-//        	obligations.setValidSince(RODUtil.str2Date(obligations.getValidSince()));
-//        }else {
-//        	obligations.setValidSince(null);
-//        }
         Integer setCoordinatorRoleSuf = 0;
         if (obligations.getCoordinatorRoleSuf() != null) {
         	setCoordinatorRoleSuf =  Integer.parseInt(obligations.getCoordinatorRoleSuf()); //obl
@@ -670,7 +643,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 			deleteClients(Integer.parseInt(listObligation), "C");
 			deleteIssues(Integer.parseInt(listObligation));
 			deleteObligationRelations(Integer.parseInt(listObligation));
-			jdbcTemplate.update("DELETE FROM T_OBLIGATION where PK_RA_ID =" + listObligation);
+			jdbcTemplate.update("DELETE FROM T_OBLIGATION where PK_RA_ID = ? ", listObligation);
 		}
     	
     	
