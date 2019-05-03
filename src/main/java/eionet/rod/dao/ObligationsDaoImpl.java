@@ -2,13 +2,8 @@ package eionet.rod.dao;
 
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
@@ -101,35 +96,37 @@ public class ObligationsDaoImpl implements ObligationsDao {
 	 * @param date2
 	 * @return
 	 */
-	private String handleDeadlines(String deadlineCase, String date1, String date2) {
+	private String handleDeadlines(String deadlineCase, String date1, String date2, MapSqlParameterSource params) {
         String ret = "";
+        Date d1 = null;
+        Date d2 = null;
        
         if ( deadlineCase != null ) { //selected in combo
             Calendar today = Calendar.getInstance();
             //next month
 			switch (deadlineCase) {
 				case "1":
-					date1 = getDate(today);
+				    d1 = today.getTime();
 					today.add(Calendar.MONTH, 1);
-					date2 = getDate(today);
+					d2 = today.getTime();
 					break;
 				//next 3 months
 				case "2":
-					date1 = getDate(today);
+				    d1 = today.getTime();
 					today.add(Calendar.MONTH, 3);
-					date2 = getDate(today);
+					d2 = today.getTime();
 					break;
 				//next 6 months
 				case "3":
-					date1 = getDate(today);
+				    d1 = today.getTime();
 					today.add(Calendar.MONTH, 6);
-					date2 = getDate(today);
+					d2 = today.getTime();
 					break;
 				//passed
 				case "4":
-					date2 = getDate(today);
+					d2 = today.getTime();
 					today.add(Calendar.MONTH, -3);
-					date1 = getDate(today);
+					d1 = today.getTime();
 					break;
 			}
         }
@@ -137,21 +134,21 @@ public class ObligationsDaoImpl implements ObligationsDao {
         if (!RODUtil.isNullOrEmpty(deadlineCase) || !"0".equals(deadlineCase)) {
            
         	if (!RODUtil.isNullOrEmpty(date1))
-        			date1=cnvDate(date1);
+                d1 = RODUtil.readDate(date1);
         	if (!RODUtil.isNullOrEmpty(date2))
-        		date2=cnvDate(date2);
+        		d2 = RODUtil.readDate(date2);
             
-        	if (!RODUtil.isNullOrEmpty(date1) || !RODUtil.isNullOrEmpty(date2)) {
+        	if (d1 != null || d2 != null) {
             	
             	ret ="((";
             	String ret2 ="";
             	String ret1 ="";
             	String ret3 = " ) OR ( ";
-            	if (!RODUtil.isNullOrEmpty(date1) ) {
+            	if (d1 != null) {
             		ret1 += "NEXT_DEADLINE >= :date1 ";
             		ret2 += "NEXT_DEADLINE2 >= :date1 ";
             	}
-            	if (!RODUtil.isNullOrEmpty(date2) ) {
+            	if (d2 != null) {
             		if(!RODUtil.isNullOrEmpty(ret1))
             			ret1 += " AND ";
             		ret1 += "NEXT_DEADLINE <= :date2 ";
@@ -159,7 +156,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
             			ret2 += " AND ";
             		ret2 += "NEXT_DEADLINE2 <= :date2 ";
             	}
-            	
+                params.addValue("date1", d1);
+                params.addValue("date2", d2);
             	ret += ret1 + ret3 + ret2;
             	
             	ret +="))";
@@ -168,28 +166,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
         return ret;
     }
-    
-    // dd/mm/yyyy -> yyyy-mm-dd
-    private String cnvDate(String date ) {
-        date = date.substring(6) + "-" + date.substring(3,5) + "-" + date.substring(0,2);
-        return date;
-    }
-    
-    //formats Calendar object date to dd/mm/yyyy
-    private String getDate(Calendar cal) {
-        String day = Integer.toString( cal.get( Calendar.DATE) );
-        if (day.length() == 1)
-            day  ="0" + day;
-        String month = Integer.toString( cal.get( Calendar.MONTH) +1 );
-        if (month.length() == 1)
-            month  ="0" + month;
-
-        String year = Integer.toString( cal.get( Calendar.YEAR) );
-
-        return day + "/" + month + "/" + year;
-    }
-	
-    
       
     /***
      * find all obligations by issue, country, deadline case and terminated yes or not(non-Javadoc)
@@ -247,12 +223,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
 							throw new ResourceNotFoundException("Date error: " + date2);
 						}
 					}
-					String queryDeadline = handleDeadlines(deadlineCase, date1, date2) ;
+					String queryDeadline = handleDeadlines(deadlineCase, date1, date2, params) ;
 					if (!queryDeadline.isEmpty()) {
 						query += "AND " + queryDeadline;
-						params.addValue("date1", date1);
-						params.addValue("date2", date2);
-						// todo solve with all the date issues
 					}
 					
 				}
@@ -842,7 +815,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
                       
  
     /**
-	 * Find all clients relationed with the obligation
+	 * Find all clients linked the obligation
 	 */
     @Override
     public List<ClientDTO> findAllClientsByObligation(Integer obligationID) {
