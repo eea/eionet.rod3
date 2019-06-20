@@ -1500,7 +1500,6 @@
             alter table T_CLIENT_OBLIGATION_LNK engine=InnoDB;
             alter table T_CLIENT_SOURCE_LNK engine=InnoDB;
             alter table T_DELIVERY engine=InnoDB;
-            alter table T_DUMMY engine=InnoDB;
             alter table T_HELP engine=InnoDB;
             alter table T_HISTORIC_DEADLINES engine=InnoDB;
             alter table T_ISSUE engine=InnoDB;
