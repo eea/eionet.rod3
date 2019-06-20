@@ -88,6 +88,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19</version>
                 <configuration>
+                    <runOrder>alphabetical</runOrder>
                   <systemPropertyVariables>
                     <storage.dir>${project.build.directory}</storage.dir>
                   </systemPropertyVariables>
@@ -110,6 +111,7 @@
                         <profile>test</profile>
                         <storage.dir>${project.build.directory}</storage.dir>
                     </systemPropertyVariables>
+                    <runOrder>alphabetical</runOrder>
                 </configuration>
                 <executions>
                     <execution>
@@ -650,6 +652,7 @@
                     <db.username>roduser</db.username>
                     <db.password>password</db.password>
                   </systemPropertyVariables>
+                    <runOrder>alphabetical</runOrder>
                 </configuration>
                 <executions>
                   <execution>
