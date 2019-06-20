@@ -25,7 +25,7 @@ public class UserManagementServiceJdbc extends JdbcUserDetailsManager
     private static final Log logger = LogFactory.getLog(UserManagementServiceJdbc.class);
 
 
-    private static final String DEF_GET_ALL_USERS_SQL = "SELECT * FROM USERS ORDER BY username";
+    private static final String DEF_GET_ALL_USERS_SQL = "SELECT * FROM users ORDER BY username";
 
     /**
      * The users table has only the people with roles, so we fake the check as we're using CAS.
