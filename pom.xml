@@ -105,7 +105,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <db.driver>org.h2.Driver</db.driver>
-                        <db.url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL</db.url>
+                        <db.url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL;IGNORECASE=TRUE</db.url>
                         <db.username>roduser</db.username>
                         <db.password>password</db.password>
                         <profile>test</profile>
@@ -196,7 +196,7 @@
                             <skip>${maven.test.skip}</skip>
                             <changeLogFile>db/changelog-master.xml</changeLogFile>
                             <driver>org.h2.Driver</driver>
-                            <url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL</url>
+                            <url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL;IGNORECASE=TRUE</url>
                             <username>roduser</username>
                             <password>password</password>
                             <contexts>test</contexts>
