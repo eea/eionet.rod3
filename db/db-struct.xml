@@ -499,6 +499,9 @@
    </changeSet>
 
     <changeSet author="roug" id="rev-21m" dbms="mysql">
+        <preConditions onFail="MARK_RAN">
+            <not><indexExists indexName="FT_TITLE"/></not>
+        </preConditions>
         <createIndex tableName="T_SOURCE" indexName="FT_TITLE">
           <column name="TITLE(1)"/>
         </createIndex>
@@ -1451,6 +1454,84 @@
             tableName="T_UNDO"/> 
   
  </changeSet>
+    <changeSet id="rev-84a" author="ivascu" dbms="mysql">
+        <comment>Preparing for foreign keys</comment>
+        <sql>
+            alter table t_client MODIFY COLUMN PK_CLIENT_ID int(10);
+            alter table t_client_obligation_lnk MODIFY COLUMN FK_CLIENT_ID int(10);
+            alter table t_client_source_lnk MODIFY COLUMN FK_CLIENT_ID int(10);
+            alter table t_client_source_lnk MODIFY COLUMN FK_SOURCE_ID int(10);
+            alter table t_client_obligation_lnk MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_obligation MODIFY COLUMN PK_RA_ID int(10);
+            alter table t_delivery MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_delivery MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table t_spatial MODIFY COLUMN PK_SPATIAL_ID int(10);
+            alter table t_spatial_history MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table t_spatial_history MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_source_type MODIFY COLUMN PK_TYPE_ID int(10);
+            alter table t_source MODIFY COLUMN FK_TYPE_ID int(10);
+            alter table t_obligation_relation MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_obligation_relation MODIFY COLUMN FK_RA_ID2 int(10);
+            alter table t_raspatial_lnk MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_raspatial_lnk MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table t_historic_deadlines MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_obligation MODIFY COLUMN FK_SOURCE_ID int(10);
+            alter table t_raissue_lnk MODIFY COLUMN FK_ISSUE_ID int(10);
+            alter table t_raissue_lnk MODIFY COLUMN FK_RA_ID int(10);
+            alter table t_issue MODIFY COLUMN PK_ISSUE_ID int(10);
+            alter table t_issue MODIFY COLUMN FK_DD_GUID int(10);
+            alter table t_source MODIFY COLUMN PK_SOURCE_ID int(10);
+            alter table t_source_class MODIFY COLUMN PK_CLASS_ID int(10);
+
+        </sql>
+    </changeSet>
+    <changeSet id="rev-84b" author="ivascu" dbms="mysql">
+        <comment>Changed DB engine to InnoDB for all tables</comment>
+        <sql>
+            alter table acl_rows engine=InnoDB;
+            alter table acls engine=InnoDB;
+            alter table authorities engine=InnoDB;
+            alter table databasechangelog engine=InnoDB;
+            alter table databasechangeloglock engine=InnoDB;
+            alter table hlp_area engine=InnoDB;
+            alter table hlp_screen engine=InnoDB;
+            alter table t_attribute engine=InnoDB;
+            alter table t_client engine=InnoDB;
+            alter table t_client_obligation_lnk engine=InnoDB;
+            alter table t_client_source_lnk engine=InnoDB;
+            alter table t_delivery engine=InnoDB;
+            alter table t_dummy engine=InnoDB;
+            alter table t_help engine=InnoDB;
+            alter table t_historic_deadlines engine=InnoDB;
+            alter table t_issue engine=InnoDB;
+            alter table t_lookup engine=InnoDB;
+            alter table t_namelabel engine=InnoDB;
+            alter table t_obligation engine=InnoDB;
+            alter table t_obligation_relation engine=InnoDB;
+            alter table t_raissue_lnk engine=InnoDB;
+            alter table t_raspatial_lnk engine=InnoDB;
+            alter table t_role engine=InnoDB;
+            alter table t_source engine=InnoDB;
+            alter table t_source_class engine=InnoDB;
+            alter table t_source_lnk engine=InnoDB;
+            alter table t_source_type engine=InnoDB;
+            alter table t_spatial engine=InnoDB;
+            alter table t_spatial_history engine=InnoDB;
+            alter table t_undo engine=InnoDB;
+            alter table users engine=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet id="rev-84c" author="ivascu">
+        <comment>Cleanup to solve FK issues</comment>
+        <sql>
+            delete from t_client_source_lnk where fk_client_id=0;
+            delete from t_delivery where fk_ra_id=70;
+            delete from t_spatial_history where not exists (select 1 from t_obligation where pk_ra_id = fk_ra_id);
+            insert into t_source_type(pk_type_id, type) values(0, 'Unknown');
+            delete from t_obligation_relation where not exists (select 1 from t_obligation where FK_RA_ID2= pk_ra_id);
+            insert into t_source(pk_source_id, title, alias, source_code, legal_name) values (0, 'Unknown', 'Unknown', 'Unknown','Unknown');
+        </sql>
+    </changeSet>
     <changeSet id="rev-84" author="ivascu">
         <comment>Adding foreign keys</comment>
        <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_CLIENT_FK"
@@ -1469,8 +1550,8 @@
            baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_RA_FK"
            baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_source" constraintName="T_SRC_TYPE_FK"
-           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID" onDelete="CASCADE"/>
+<!--        <addForeignKeyConstraint baseTableName="t_source" constraintName="T_SRC_TYPE_FK"-->
+<!--           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID" onDelete="CASCADE"/>-->
 
         <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA1_FK"
            baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>

@@ -11,7 +11,7 @@
       Potentially with -Dliquibase.dropFirst=true
  -->
 
-  <changeSet author="roug" id="rev-1" context="demo">
+  <changeSet author="roug" id="rev-1" context="demo" dbms="h2">
     <preConditions>
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SPATIAL</sqlCheck>
     </preConditions>
@@ -23,7 +23,7 @@
     <loadData tableName="T_SPATIAL" separator="\t" file="db/t_spatial.tsv"/>
     <loadData tableName="HLP_SCREEN" separator="\t" file="db/hlp_screen.tsv"/>
   </changeSet>
-  <changeSet author="santamik" id="rev-2">
+  <changeSet author="santamik" id="rev-2" dbms="h2">
     <preConditions onFail="MARK_RAN">
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SOURCE_CLASS</sqlCheck>
     </preConditions>
@@ -31,7 +31,7 @@
     <comment>Load T_SOURCE_CLASS</comment>
     <loadData tableName="T_SOURCE_CLASS" separator="\t" file="db/t_source_class.tsv"/>
   </changeSet>
-  <changeSet author="santamik" id="rev-3">
+  <changeSet author="santamik" id="rev-3" dbms="h2">
     <preConditions onFail="MARK_RAN">
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SOURCE_LNK</sqlCheck>
     </preConditions>
@@ -39,7 +39,7 @@
     <comment>Load T_SOURCE_LNK</comment>
     <loadData tableName="T_SOURCE_LNK" separator="\t" file="db/t_source_lnk.tsv"/>
   </changeSet>
-  <changeSet author="santamik" id="rev-4">
+  <changeSet author="santamik" id="rev-4" dbms="h2">
     <preConditions onFail="MARK_RAN">
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_ISSUE</sqlCheck>
     </preConditions>
