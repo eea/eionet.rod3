@@ -930,10 +930,10 @@
   <changeSet id="rev-39" author="roug">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="authorities"/>
+        <tableExists tableName="AUTHORITIES"/>
       </not>
     </preConditions>
-    <createTable tableName="authorities">
+    <createTable tableName="AUTHORITIES">
           <column name="username" type="varchar(40)">
         <constraints nullable="false"/>
       </column>
@@ -944,10 +944,10 @@
   <changeSet id="rev-40" author="roug">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="users"/>
+        <tableExists tableName="USERS"/>
       </not>
     </preConditions>
-    <createTable tableName="users">
+    <createTable tableName="USERS">
           <column name="username" type="varchar(40)">
         <constraints unique="true"/>
       </column>
@@ -1457,126 +1457,126 @@
     <changeSet id="rev-84a" author="ivascu" dbms="mysql">
         <comment>Preparing for foreign keys</comment>
         <sql>
-            alter table t_client MODIFY COLUMN PK_CLIENT_ID int(10);
-            alter table t_client_obligation_lnk MODIFY COLUMN FK_CLIENT_ID int(10);
-            alter table t_client_source_lnk MODIFY COLUMN FK_CLIENT_ID int(10);
-            alter table t_client_source_lnk MODIFY COLUMN FK_SOURCE_ID int(10);
-            alter table t_client_obligation_lnk MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_obligation MODIFY COLUMN PK_RA_ID int(10);
-            alter table t_delivery MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_delivery MODIFY COLUMN FK_SPATIAL_ID int(10);
-            alter table t_spatial MODIFY COLUMN PK_SPATIAL_ID int(10);
-            alter table t_spatial_history MODIFY COLUMN FK_SPATIAL_ID int(10);
-            alter table t_spatial_history MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_source_type MODIFY COLUMN PK_TYPE_ID int(10);
-            alter table t_source MODIFY COLUMN FK_TYPE_ID int(10);
-            alter table t_obligation_relation MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_obligation_relation MODIFY COLUMN FK_RA_ID2 int(10);
-            alter table t_raspatial_lnk MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_raspatial_lnk MODIFY COLUMN FK_SPATIAL_ID int(10);
-            alter table t_historic_deadlines MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_obligation MODIFY COLUMN FK_SOURCE_ID int(10);
-            alter table t_raissue_lnk MODIFY COLUMN FK_ISSUE_ID int(10);
-            alter table t_raissue_lnk MODIFY COLUMN FK_RA_ID int(10);
-            alter table t_issue MODIFY COLUMN PK_ISSUE_ID int(10);
-            alter table t_issue MODIFY COLUMN FK_DD_GUID int(10);
-            alter table t_source MODIFY COLUMN PK_SOURCE_ID int(10);
-            alter table t_source_class MODIFY COLUMN PK_CLASS_ID int(10);
+            alter table T_CLIENT MODIFY COLUMN PK_CLIENT_ID int(10);
+            alter table T_CLIENT_OBLIGATION_LNK MODIFY COLUMN FK_CLIENT_ID int(10);
+            alter table T_CLIENT_SOURCE_LNK MODIFY COLUMN FK_CLIENT_ID int(10);
+            alter table T_CLIENT_SOURCE_LNK MODIFY COLUMN FK_SOURCE_ID int(10);
+            alter table T_CLIENT_OBLIGATION_LNK MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_OBLIGATION MODIFY COLUMN PK_RA_ID int(10);
+            alter table T_DELIVERY MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_DELIVERY MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table T_SPATIAL MODIFY COLUMN PK_SPATIAL_ID int(10);
+            alter table T_SPATIAL_HISTORY MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table T_SPATIAL_HISTORY MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_SOURCE_TYPE MODIFY COLUMN PK_TYPE_ID int(10);
+            alter table T_SOURCE MODIFY COLUMN FK_TYPE_ID int(10);
+            alter table T_OBLIGATION_RELATION MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_OBLIGATION_RELATION MODIFY COLUMN FK_RA_ID2 int(10);
+            alter table T_RASPATIAL_LNK MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_RASPATIAL_LNK MODIFY COLUMN FK_SPATIAL_ID int(10);
+            alter table T_HISTORIC_DEADLINES MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_OBLIGATION MODIFY COLUMN FK_SOURCE_ID int(10);
+            alter table T_RAISSUE_LNK MODIFY COLUMN FK_ISSUE_ID int(10);
+            alter table T_RAISSUE_LNK MODIFY COLUMN FK_RA_ID int(10);
+            alter table T_ISSUE MODIFY COLUMN PK_ISSUE_ID int(10);
+            alter table T_ISSUE MODIFY COLUMN FK_DD_GUID int(10);
+            alter table T_SOURCE MODIFY COLUMN PK_SOURCE_ID int(10);
+            alter table T_SOURCE_CLASS MODIFY COLUMN PK_CLASS_ID int(10);
 
         </sql>
     </changeSet>
     <changeSet id="rev-84b" author="ivascu" dbms="mysql">
         <comment>Changed DB engine to InnoDB for all tables</comment>
         <sql>
-            alter table acl_rows engine=InnoDB;
-            alter table acls engine=InnoDB;
-            alter table authorities engine=InnoDB;
-            alter table databasechangelog engine=InnoDB;
-            alter table databasechangeloglock engine=InnoDB;
-            alter table hlp_area engine=InnoDB;
-            alter table hlp_screen engine=InnoDB;
-            alter table t_attribute engine=InnoDB;
-            alter table t_client engine=InnoDB;
-            alter table t_client_obligation_lnk engine=InnoDB;
-            alter table t_client_source_lnk engine=InnoDB;
-            alter table t_delivery engine=InnoDB;
-            alter table t_dummy engine=InnoDB;
-            alter table t_help engine=InnoDB;
-            alter table t_historic_deadlines engine=InnoDB;
-            alter table t_issue engine=InnoDB;
-            alter table t_lookup engine=InnoDB;
-            alter table t_namelabel engine=InnoDB;
-            alter table t_obligation engine=InnoDB;
-            alter table t_obligation_relation engine=InnoDB;
-            alter table t_raissue_lnk engine=InnoDB;
-            alter table t_raspatial_lnk engine=InnoDB;
-            alter table t_role engine=InnoDB;
-            alter table t_source engine=InnoDB;
-            alter table t_source_class engine=InnoDB;
-            alter table t_source_lnk engine=InnoDB;
-            alter table t_source_type engine=InnoDB;
-            alter table t_spatial engine=InnoDB;
-            alter table t_spatial_history engine=InnoDB;
-            alter table t_undo engine=InnoDB;
-            alter table users engine=InnoDB;
+            alter table ACL_ROWS engine=InnoDB;
+            alter table ACLS engine=InnoDB;
+            alter table AUTHORITIES engine=InnoDB;
+            alter table DATABASECHANGELOG engine=InnoDB;
+            alter table DATABASECHANGELOGLOCK engine=InnoDB;
+            alter table HLP_AREA engine=InnoDB;
+            alter table HLP_SCREEN engine=InnoDB;
+            alter table T_ATTRIBUTE engine=InnoDB;
+            alter table T_CLIENT engine=InnoDB;
+            alter table T_CLIENT_OBLIGATION_LNK engine=InnoDB;
+            alter table T_CLIENT_SOURCE_LNK engine=InnoDB;
+            alter table T_DELIVERY engine=InnoDB;
+            alter table T_DUMMY engine=InnoDB;
+            alter table T_HELP engine=InnoDB;
+            alter table T_HISTORIC_DEADLINES engine=InnoDB;
+            alter table T_ISSUE engine=InnoDB;
+            alter table T_LOOKUP engine=InnoDB;
+            alter table T_NAMELABEL engine=InnoDB;
+            alter table T_OBLIGATION engine=InnoDB;
+            alter table T_OBLIGATION_RELATION engine=InnoDB;
+            alter table T_RAISSUE_LNK engine=InnoDB;
+            alter table T_RASPATIAL_LNK engine=InnoDB;
+            alter table T_ROLE engine=InnoDB;
+            alter table T_SOURCE engine=InnoDB;
+            alter table T_SOURCE_CLASS engine=InnoDB;
+            alter table T_SOURCE_LNK engine=InnoDB;
+            alter table T_SOURCE_TYPE engine=InnoDB;
+            alter table T_SPATIAL engine=InnoDB;
+            alter table T_SPATIAL_HISTORY engine=InnoDB;
+            alter table T_UNDO engine=InnoDB;
+            alter table USERS engine=InnoDB;
         </sql>
     </changeSet>
     <changeSet id="rev-84c" author="ivascu">
         <comment>Cleanup to solve FK issues</comment>
         <sql>
-            delete from t_client_source_lnk where fk_client_id=0;
-            delete from t_delivery where fk_ra_id=70;
-            delete from t_spatial_history where not exists (select 1 from t_obligation where pk_ra_id = fk_ra_id);
-            insert into t_source_type(pk_type_id, type) values(0, 'Unknown');
-            delete from t_obligation_relation where not exists (select 1 from t_obligation where FK_RA_ID2= pk_ra_id);
-            insert into t_source(pk_source_id, title, alias, source_code, legal_name) values (0, 'Unknown', 'Unknown', 'Unknown','Unknown');
+            delete from T_CLIENT_SOURCE_LNK where FK_CLIENT_ID=0;
+            delete from T_DELIVERY where FK_RA_ID=70;
+            delete from T_SPATIAL_HISTORY where not exists (select 1 from T_OBLIGATION where PK_RA_ID = FK_RA_ID);
+            insert into T_SOURCE_TYPE(PK_TYPE_ID, TYPE) values(0, 'Unknown');
+            delete from T_OBLIGATION_RELATION where not exists (select 1 from T_OBLIGATION where FK_RA_ID2= PK_RA_ID);
+            insert into T_SOURCE(PK_SOURCE_ID, TITLE, ALIAS, SOURCE_CODE, LEGAL_NAME) values (0, 'Unknown', 'Unknown', 'Unknown','Unknown');
         </sql>
     </changeSet>
     <changeSet id="rev-84" author="ivascu">
         <comment>Adding foreign keys</comment>
-       <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_CLIENT_FK"
-           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
-       <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_CLIENT_FK"
-           baseColumnNames="FK_CLIENT_ID" referencedTableName="t_client" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
-       <addForeignKeyConstraint baseTableName="t_client_obligation_lnk" constraintName="T_CLIENT_OB_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_client_source_lnk" constraintName="T_CLIENT_SRC_SRC_FK"
-           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_delivery" constraintName="T_DELIVERY_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_spatial_history" constraintName="T_SP_H_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-<!--        <addForeignKeyConstraint baseTableName="t_source" constraintName="T_SRC_TYPE_FK"-->
-<!--           baseColumnNames="FK_TYPE_ID" referencedTableName="t_source_type" referencedColumnNames="PK_TYPE_ID" onDelete="CASCADE"/>-->
+       <addForeignKeyConstraint baseTableName="T_CLIENT_OBLIGATION_LNK" constraintName="T_CLIENT_OB_CLIENT_FK"
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="T_CLIENT" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
+       <addForeignKeyConstraint baseTableName="T_CLIENT_SOURCE_LNK" constraintName="T_CLIENT_SRC_CLIENT_FK"
+           baseColumnNames="FK_CLIENT_ID" referencedTableName="T_CLIENT" referencedColumnNames="PK_CLIENT_ID" onDelete="CASCADE"/>
+       <addForeignKeyConstraint baseTableName="T_CLIENT_OBLIGATION_LNK" constraintName="T_CLIENT_OB_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_CLIENT_SOURCE_LNK" constraintName="T_CLIENT_SRC_SRC_FK"
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_DELIVERY" constraintName="T_DELIVERY_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_DELIVERY" constraintName="T_DELIVERY_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="T_SPATIAL" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_SPATIAL_HISTORY" constraintName="T_SP_H_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="T_SPATIAL" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_SPATIAL_HISTORY" constraintName="T_SP_H_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+<!--        <addForeignKeyConstraint baseTableName="T_SOURCE" constraintName="T_SRC_TYPE_FK"-->
+<!--           baseColumnNames="FK_TYPE_ID" referencedTableName="T_SOURCE_TYPE" referencedColumnNames="PK_TYPE_ID" onDelete="CASCADE"/>-->
 
-        <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA1_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_obligation_relation" constraintName="T_OB_REL_RA2_FK"
-           baseColumnNames="FK_RA_ID2" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_OBLIGATION_RELATION" constraintName="T_OB_REL_RA1_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_OBLIGATION_RELATION" constraintName="T_OB_REL_RA2_FK"
+           baseColumnNames="FK_RA_ID2" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
-        <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_raspatial_lnk" constraintName="T_RASP_LINK_SP_FK"
-           baseColumnNames="FK_SPATIAL_ID" referencedTableName="t_spatial" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_RASPATIAL_LNK" constraintName="T_RASP_LINK_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_RASPATIAL_LNK" constraintName="T_RASP_LINK_SP_FK"
+           baseColumnNames="FK_SPATIAL_ID" referencedTableName="T_SPATIAL" referencedColumnNames="PK_SPATIAL_ID" onDelete="CASCADE"/>
 
-        <addForeignKeyConstraint baseTableName="t_historic_deadlines" constraintName="T_HISTD_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_HISTORIC_DEADLINES" constraintName="T_HISTD_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
-        <addForeignKeyConstraint baseTableName="t_obligation" constraintName="T_OB_SRC_FK"
-           baseColumnNames="FK_SOURCE_ID" referencedTableName="t_source" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_OBLIGATION" constraintName="T_OB_SRC_FK"
+           baseColumnNames="FK_SOURCE_ID" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
 
-        <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_ISSUE_FK"
-           baseColumnNames="FK_ISSUE_ID" referencedTableName="t_issue" referencedColumnNames="PK_ISSUE_ID" onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="t_raissue_lnk" constraintName="T_ISSUE_LNK_RA_FK"
-           baseColumnNames="FK_RA_ID" referencedTableName="t_obligation" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_RAISSUE_LNK" constraintName="T_ISSUE_LNK_ISSUE_FK"
+           baseColumnNames="FK_ISSUE_ID" referencedTableName="T_ISSUE" referencedColumnNames="PK_ISSUE_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_RAISSUE_LNK" constraintName="T_ISSUE_LNK_RA_FK"
+           baseColumnNames="FK_RA_ID" referencedTableName="T_OBLIGATION" referencedColumnNames="PK_RA_ID" onDelete="CASCADE"/>
 
     </changeSet>
     <changeSet id="rev-85" author="ivascu">
         <comment>Setting the fk_type_id as optional, as the code doesn't set it</comment>
-        <dropNotNullConstraint  tableName="t_source" columnName="fk_type_id" columnDataType="int(10) unsigned"/>
+        <dropNotNullConstraint  tableName="T_SOURCE" columnName="FK_TYPE_ID" columnDataType="int(10) unsigned"/>
     </changeSet>
 </databaseChangeLog>
