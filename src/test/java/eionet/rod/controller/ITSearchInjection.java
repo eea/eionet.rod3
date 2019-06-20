@@ -69,7 +69,7 @@ public class ITSearchInjection {
     @Test
     @SuppressWarnings("unchecked")
     public void injectInNextDeadlineTo() throws Exception {
-        String date2 = "01/03/1900-01-31')) UNION SELECT 1,username,2,0,'',3,'2000-01-01',4,password,6,7,8,9,10,11 FROM users; -- ";
+        String date2 = "01/03/1900-01-31')) UNION SELECT 1,username,2,0,'',3,'2000-01-01',4,password,6,7,8,9,10,11 FROM USERS; -- ";
         MvcResult res = this.mockMvc.perform(post("/advancedSearch")
                 .param("spatialId", "0")
                 .param("issueId", "NI")
