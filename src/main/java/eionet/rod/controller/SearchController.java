@@ -140,18 +140,7 @@ public class SearchController {
         model.addAttribute("title", "Advanced search");
         BreadCrumbs.set(model, "Advanced search");
 
-        //Countries/territories
-        List<Spatial> countries = spatialService.findAll();
-        model.addAttribute("allCountries", countries);
-
-        //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
-        model.addAttribute("allIssues", issues);
-
-        //Countries/territories
-        List<ClientDTO> clients = clientService.getAllClients();
-        model.addAttribute("allClients", clients);
-        model.addAttribute("activeTab", "advancedSearch");
+        addAllAdvanced(model);
 
         Obligations obligation = new Obligations();
         model.addAttribute("obligation", obligation);
@@ -182,6 +171,15 @@ public class SearchController {
 
         model.addAttribute("obligation", obligation);
 
+        addAllAdvanced(model);
+
+        model.addAttribute("resultMessage", "1");
+
+        return "search";
+
+    }
+
+    private void addAllAdvanced(Model model) {
         //Countries/territories
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allCountries", countries);
@@ -195,11 +193,6 @@ public class SearchController {
         model.addAttribute("allClients", clients);
 
         model.addAttribute("activeTab", "advancedSearch");
-
-        model.addAttribute("resultMessage", "1");
-
-        return "search";
-
     }
 
 

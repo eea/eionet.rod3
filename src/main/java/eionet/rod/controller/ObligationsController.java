@@ -133,24 +133,7 @@ public class ObligationsController {
 
         model.addAttribute("allObligations", obligationsService.findObligationList("0", issueID, "0", "N", "0", anmode, null, null, deliveries));
 
-        model.addAttribute("title", "Reporting obligations");
-
-        model.addAttribute("deliveryColumn", deliveryColumn);
-
-        //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
-        model.addAttribute("allIssues", issues);
-
-        //Countries/territories
-        List<Spatial> countries = spatialService.findAll();
-        model.addAttribute("allCountries", countries);
-
-        //Countries/territories
-        List<ClientDTO> clients = clientService.getAllClients();
-        model.addAttribute("allClients", clients);
-
-
-        model.addAttribute("obligation", obligation);
+        addAllObligation(model, deliveryColumn, obligation);
 
         if (message != null) model.addAttribute("message", message);
         return "obligations";
@@ -240,6 +223,12 @@ public class ObligationsController {
 
         model.addAttribute("allObligations", obligationsService.findObligationList(obligations.getClientId(), obligations.getIssueId(), obligations.getSpatialId(), terminate, "0", obligations.getAnmode(), null, null, deliveries));
 
+        addAllObligation(model, deliveryColumn, obligations);
+
+        return "obligations";
+    }
+
+    private void addAllObligation(Model model, String deliveryColumn, Obligations obligations){
         model.addAttribute("title", "Reporting obligations");
 
         model.addAttribute("deliveryColumn", deliveryColumn);
@@ -256,11 +245,7 @@ public class ObligationsController {
         List<ClientDTO> clients = clientService.getAllClients();
         model.addAttribute("allClients", clients);
 
-        //model.addAttribute("activeTab", "obligations");
-
         model.addAttribute("obligation", obligations);
-
-        return "obligations";
     }
 
 
@@ -634,7 +619,7 @@ public class ObligationsController {
             try {
                 sendEvent(false, obligations, obligationID, ts);
             } catch (ServiceException e) {
-
+                logger.debug(e, e);
             }
         }
 

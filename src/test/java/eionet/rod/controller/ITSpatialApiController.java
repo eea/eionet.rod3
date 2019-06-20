@@ -23,7 +23,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-
+/**
+ * Test the spatial Api controller.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -31,9 +33,6 @@ import static org.junit.Assert.assertFalse;
         "classpath:spring-security.xml"})
 
 @Sql("/seed-spatial.sql")
-/**
- * Test the spatial Api controller.
- */
 public class ITSpatialApiController {
 
     @Autowired

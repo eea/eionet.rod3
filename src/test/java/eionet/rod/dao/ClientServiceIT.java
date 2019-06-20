@@ -19,15 +19,15 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test the client operations.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
         "classpath:spring-db-config.xml"})
 
 @Sql("/seed-obligation-source.sql")
-/**
- * Test the client operations.
- */
 public class ClientServiceIT {
 
     @Autowired

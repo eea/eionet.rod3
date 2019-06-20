@@ -17,18 +17,14 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//import static org.hamcrest.Matchers.*;
-
-
+/**
+ * Test the user controller.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
         "classpath:spring-db-config.xml",
         "classpath:spring-security.xml"})
-
-/**
- * Test the user controller.
- */
 public class UserControllerMoreIT {
 
     @Autowired

@@ -25,8 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "classpath:spring-security.xml"})
 
 @Sql("/seed-obligation-source.sql")
-/**
- */
 public class ITDeliveryController {
 
     @Autowired

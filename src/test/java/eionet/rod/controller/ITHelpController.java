@@ -18,7 +18,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.Assert.assertTrue;
 
-
+/**
+ * Test the help controller.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -26,9 +28,6 @@ import static org.junit.Assert.assertTrue;
         "classpath:spring-security.xml"})
 
 @Sql("/seed-help.sql")
-/**
- * Test the help controller.
- */
 public class ITHelpController {
 
     @Autowired

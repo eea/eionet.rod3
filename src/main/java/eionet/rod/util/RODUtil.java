@@ -108,7 +108,7 @@ public class RODUtil {
 
         StringBuilder buf = new StringBuilder();
 
-        StringTokenizer st = new StringTokenizer(s, " \t\n\r\f|(|)<>", true);
+        StringTokenizer st = new StringTokenizer(s, " \t\n\r\f|()<>", true);
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
             if (!isURL(token)) {

@@ -87,13 +87,10 @@ public class SourceServiceJdbc implements SourceService {
                 + "WHERE S.PK_SOURCE_ID = ?";
 
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(InstrumentObligationDTO.class), sourceId);
-
-
     }
 
     @Override
     public void update(InstrumentFactsheetDTO instrumentFactsheetRec) throws ResourceNotFoundException {
-        instrumentFactsheetRec = validateDates(instrumentFactsheetRec);
 
         String update = "UPDATE T_SOURCE SET TITLE=?, ALIAS=?, "
                 + "SOURCE_CODE=?, URL=?, CELEX_REF=?, ISSUED_BY_URL=?, "
@@ -396,22 +393,6 @@ public class SourceServiceJdbc implements SourceService {
                 + "WHERE SL1.PARENT_TYPE = 'C' AND SL1.FK_SOURCE_PARENT_ID=? "
                 + "ORDER BY S1.ALIAS";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(HierarchyInstrumentDTO.class), id);
-    }
-
-    private InstrumentFactsheetDTO validateDates(InstrumentFactsheetDTO instrumentFactsheetRec) {
-        if ("".equals(instrumentFactsheetRec.getSourceValidFrom())) {
-            instrumentFactsheetRec.setSourceValidFrom(null);
-        }
-
-        if ("".equals(instrumentFactsheetRec.getSourceEcEntryIntoForce())) {
-            instrumentFactsheetRec.setSourceEcEntryIntoForce(null);
-        }
-
-        if ("".equals(instrumentFactsheetRec.getSourceEcAccession())) {
-            instrumentFactsheetRec.setSourceEcAccession(null);
-        }
-        return instrumentFactsheetRec;
-
     }
 
     @Override

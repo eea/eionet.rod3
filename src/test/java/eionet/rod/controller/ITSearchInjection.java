@@ -25,7 +25,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+/**
+ * Test for security vulnerabilities.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -34,10 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Sql("/seed-obligation-source.sql")
 @Sql("/seed-users.sql")
-
-/**
- * Test for security vulnerabilities.
- */
 public class ITSearchInjection {
 
     @Autowired

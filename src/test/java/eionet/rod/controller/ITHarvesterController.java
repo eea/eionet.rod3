@@ -21,7 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+/**
+ * Test the Harvest controller.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
@@ -29,9 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "classpath:spring-security.xml"})
 
 @Sql("/seed-obligation-source.sql")
-/**
- * Test the Harvest controller.
- */
 public class ITHarvesterController {
 
     @Autowired

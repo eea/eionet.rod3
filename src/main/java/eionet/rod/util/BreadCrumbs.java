@@ -12,9 +12,6 @@ import java.util.List;
  */
 public class BreadCrumbs {
 
-    /** Eionet portal. This should be part of the layout template - not here. */
-    //private static BreadCrumb eionetCrumb;
-
     /**
      * Toplevel of this site.
      */

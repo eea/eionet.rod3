@@ -174,9 +174,9 @@ public class Extractor implements ExtractorConstants {
         //String actionText = "Harvesting - ";
         long a = System.currentTimeMillis();
 
-        /***************************************************
-         * Start extracting
-         ***************************************************/
+        /*
+         Start extracting
+         */
 
         // Get delivery list from Content Registry and save it also
         if (mode == ALL_DATA || mode == DELIVERIES) {
