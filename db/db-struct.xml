@@ -930,10 +930,10 @@
   <changeSet id="rev-39" author="roug">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="AUTHORITIES"/>
+        <tableExists tableName="authorities"/>
       </not>
     </preConditions>
-    <createTable tableName="AUTHORITIES">
+    <createTable tableName="authorities">
           <column name="username" type="varchar(40)">
         <constraints nullable="false"/>
       </column>
@@ -944,10 +944,10 @@
   <changeSet id="rev-40" author="roug">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="USERS"/>
+        <tableExists tableName="users"/>
       </not>
     </preConditions>
-    <createTable tableName="USERS">
+    <createTable tableName="users">
           <column name="username" type="varchar(40)">
         <constraints unique="true"/>
       </column>
@@ -1490,7 +1490,7 @@
         <sql>
             alter table ACL_ROWS engine=InnoDB;
             alter table ACLS engine=InnoDB;
-            alter table AUTHORITIES engine=InnoDB;
+            alter table authorities engine=InnoDB;
             alter table DATABASECHANGELOG engine=InnoDB;
             alter table DATABASECHANGELOGLOCK engine=InnoDB;
             alter table HLP_AREA engine=InnoDB;
@@ -1517,7 +1517,7 @@
             alter table T_SPATIAL engine=InnoDB;
             alter table T_SPATIAL_HISTORY engine=InnoDB;
             alter table T_UNDO engine=InnoDB;
-            alter table USERS engine=InnoDB;
+            alter table users engine=InnoDB;
         </sql>
     </changeSet>
     <changeSet id="rev-84c" author="ivascu">
