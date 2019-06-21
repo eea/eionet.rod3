@@ -484,7 +484,7 @@
           <column name="RM_VALIDATED_BY" type="varchar(50)"/>
         </createTable>
 
-        <sql dbms="mysql">ALTER TABLE T_SOURCE CHANGE COLUMN LAST_UPDATE
+        <sql dbms="mysql,mariadb">ALTER TABLE T_SOURCE CHANGE COLUMN LAST_UPDATE
             LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
 
         <createIndex tableName="T_SOURCE" indexName="FK_TYPE_ID">
@@ -498,7 +498,7 @@
     	</modifySql>
    </changeSet>
 
-    <changeSet author="roug" id="rev-21m" dbms="mysql">
+    <changeSet author="roug" id="rev-21m" dbms="mysql,mariadb">
         <preConditions onFail="MARK_RAN">
             <not><indexExists indexName="FT_TITLE"/></not>
         </preConditions>
@@ -826,7 +826,7 @@
           <column name="RM_VERIFIED_BY" type="varchar(50)"/>
         </createTable>
 
-        <sql dbms="mysql">ALTER TABLE X_REPORTING CHANGE COLUMN LAST_UPDATE
+        <sql dbms="mysql,mariadb">ALTER TABLE X_REPORTING CHANGE COLUMN LAST_UPDATE
             LAST_UPDATE timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP</sql>
 
         <createIndex tableName="X_REPORTING" indexName="LEGAL_MORAL">
@@ -1454,21 +1454,21 @@
             tableName="T_UNDO"/> 
   
  </changeSet>
-    <changeSet id="rev-84a" author="ivascu" dbms="mysql">
+    <changeSet id="rev-84a" author="ivascu" dbms="mysql,mariadb">
         <comment>Preparing for foreign keys</comment>
         <sql>
-            alter table T_CLIENT MODIFY COLUMN PK_CLIENT_ID int(10);
+            alter table T_CLIENT MODIFY COLUMN PK_CLIENT_ID int(10) auto_increment;
             alter table T_CLIENT_OBLIGATION_LNK MODIFY COLUMN FK_CLIENT_ID int(10);
             alter table T_CLIENT_SOURCE_LNK MODIFY COLUMN FK_CLIENT_ID int(10);
             alter table T_CLIENT_SOURCE_LNK MODIFY COLUMN FK_SOURCE_ID int(10);
             alter table T_CLIENT_OBLIGATION_LNK MODIFY COLUMN FK_RA_ID int(10);
-            alter table T_OBLIGATION MODIFY COLUMN PK_RA_ID int(10);
+            alter table T_OBLIGATION MODIFY COLUMN PK_RA_ID int(10) auto_increment;
             alter table T_DELIVERY MODIFY COLUMN FK_RA_ID int(10);
             alter table T_DELIVERY MODIFY COLUMN FK_SPATIAL_ID int(10);
-            alter table T_SPATIAL MODIFY COLUMN PK_SPATIAL_ID int(10);
+            alter table T_SPATIAL MODIFY COLUMN PK_SPATIAL_ID int(10) auto_increment;
             alter table T_SPATIAL_HISTORY MODIFY COLUMN FK_SPATIAL_ID int(10);
             alter table T_SPATIAL_HISTORY MODIFY COLUMN FK_RA_ID int(10);
-            alter table T_SOURCE_TYPE MODIFY COLUMN PK_TYPE_ID int(10);
+            alter table T_SOURCE_TYPE MODIFY COLUMN PK_TYPE_ID int(10) auto_increment;
             alter table T_SOURCE MODIFY COLUMN FK_TYPE_ID int(10);
             alter table T_OBLIGATION_RELATION MODIFY COLUMN FK_RA_ID int(10);
             alter table T_OBLIGATION_RELATION MODIFY COLUMN FK_RA_ID2 int(10);
@@ -1478,14 +1478,14 @@
             alter table T_OBLIGATION MODIFY COLUMN FK_SOURCE_ID int(10);
             alter table T_RAISSUE_LNK MODIFY COLUMN FK_ISSUE_ID int(10);
             alter table T_RAISSUE_LNK MODIFY COLUMN FK_RA_ID int(10);
-            alter table T_ISSUE MODIFY COLUMN PK_ISSUE_ID int(10);
+            alter table T_ISSUE MODIFY COLUMN PK_ISSUE_ID int(10) auto_increment;
             alter table T_ISSUE MODIFY COLUMN FK_DD_GUID int(10);
-            alter table T_SOURCE MODIFY COLUMN PK_SOURCE_ID int(10);
-            alter table T_SOURCE_CLASS MODIFY COLUMN PK_CLASS_ID int(10);
+            alter table T_SOURCE MODIFY COLUMN PK_SOURCE_ID int(10) auto_increment;
+            alter table T_SOURCE_CLASS MODIFY COLUMN PK_CLASS_ID int(10) auto_increment;
 
         </sql>
     </changeSet>
-    <changeSet id="rev-84b" author="ivascu" dbms="mysql">
+    <changeSet id="rev-84b" author="ivascu" dbms="mysql,mariadb">
         <comment>Changed DB engine to InnoDB for all tables</comment>
         <sql>
             alter table ACL_ROWS engine=InnoDB;

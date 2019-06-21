@@ -10,7 +10,7 @@
      Use the maven goals: liquibase:update and liquibase:status
       Potentially with -Dliquibase.dropFirst=true
  -->
-  <property name="geometry.type" value="TEXT" dbms="h2,mysql"/>
+  <property name="geometry.type" value="TEXT" dbms="h2,mysql,mariadb"/>
 
   <include file="db/db-struct.xml"/>
   <include file="db/loaddemodata.xml"/>
