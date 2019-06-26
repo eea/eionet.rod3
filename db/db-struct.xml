@@ -1526,9 +1526,9 @@
             delete from T_CLIENT_SOURCE_LNK where FK_CLIENT_ID=0;
             delete from T_DELIVERY where FK_RA_ID=70;
             delete from T_SPATIAL_HISTORY where not exists (select 1 from T_OBLIGATION where PK_RA_ID = FK_RA_ID);
-            insert into T_SOURCE_TYPE(PK_TYPE_ID, TYPE) values(0, 'Unknown');
             delete from T_OBLIGATION_RELATION where not exists (select 1 from T_OBLIGATION where FK_RA_ID2= PK_RA_ID);
-            insert into T_SOURCE(PK_SOURCE_ID, TITLE, ALIAS, SOURCE_CODE, LEGAL_NAME) values (0, 'Unknown', 'Unknown', 'Unknown','Unknown');
+            insert into T_SOURCE(PK_SOURCE_ID, TITLE, ALIAS, SOURCE_CODE, LEGAL_NAME) values (1, 'Unknown', 'Unknown', 'Unknown','Unknown');
+            update T_OBLIGATION set fk_source_id=1 where fk_source_id=0;
         </sql>
     </changeSet>
     <changeSet id="rev-84" author="ivascu">
