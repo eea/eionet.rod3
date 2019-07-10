@@ -51,4 +51,22 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+	<servlet-mapping>
+		<servlet-name>rpcrouter</servlet-name>
+		<url-pattern>/rpcrouter</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>soaprouter</servlet-name>
+		<url-pattern>/soaprouter</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>rpcrouter</servlet-name>
+		<servlet-class>eionet.rpcserver.servlets.XmlRpcRouter</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>soaprouter</servlet-name>
+		<servlet-class>eionet.rpcserver.servlets.SOAPRouter</servlet-class>
+	</servlet>
+
 </web-app>

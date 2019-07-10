@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY dctns "http://purl.org/dc/terms/">
+<!ENTITY xsdns "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY rdfsns "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY skosns "http://www.w3.org/2004/02/skos/core#">
+]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:owl="http://www.w3.org/2002/07/owl#"
+	 xmlns:rdfs="&rdfsns;">
+
+	<owl:Ontology rdf:about="">
+		<rdfs:label>Obligations schema</rdfs:label>
+		<owl:versionInfo>$Id: schema.rdf 2017-07-05 roug $</owl:versionInfo>
+	</owl:Ontology>
+
+	<rdf:Property rdf:ID="lastModified">
+		<rdfs:label>Last modified date</rdfs:label>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="lastModifiedBy">
+		<rdfs:label>Last modified by</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="lastUpdate">
+		<rdfs:label>Last update</rdfs:label>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="nextUpdate">
+		<rdfs:label>Next update</rdfs:label>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+        <!-- Deliveries -->
+
+	<!-- A Delivery is the combination of an Envelope and its contents. -->
+	<rdfs:Class rdf:ID="Delivery">
+                <rdfs:label>Reportnet Delivery</rdfs:label>
+	</rdfs:Class>
+
+	<rdfs:Class rdf:ID="Referral">
+                <rdfs:label>Repository Referral</rdfs:label>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="obligation">	<!-- Also known as dataflow -->
+		<rdfs:label>Obligation</rdfs:label>
+		<rdfs:range rdf:resource="#Obligation"/>
+		<rdfs:domain rdf:resource="#Delivery"/>
+	</rdf:Property>
+
+	<rdfs:Class rdf:ID="File">
+		<rdfs:label>Reportnet File</rdfs:label>
+		<rdfs:comment>A Reportnet File is the data carrier inside a delivery</rdfs:comment>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="link">
+		<rdfs:label>Link to delivery</rdfs:label>
+		<rdfs:domain rdf:resource="#Delivery"/>
+		<rdfs:comment>Link to a location where you can download the delivery.</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasFile">
+		<rdfs:label>File in delivery</rdfs:label>
+		<rdfs:comment>Reference from delivery envelope to file.</rdfs:comment>
+		<rdfs:subPropertyOf rdf:resource="&dctns;hasPart"/>
+		<rdfs:domain rdf:resource="#Delivery"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="locality">
+		<rdfs:label>Locality</rdfs:label>
+		<rdfs:subPropertyOf rdf:resource="&dctns;spatial"/>
+                <rdfs:comment>Coverage of delivery, but using ROD spatial entities.</rdfs:comment>
+		<rdfs:range rdf:resource="#Locality"/>
+		<rdfs:domain rdf:resource="#Delivery"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="coverageNote">
+		<rdfs:label>Coverage note</rdfs:label>
+                <rdfs:comment>Limitation or clarification of locality reference.</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="released">
+		<rdfs:label>Release date</rdfs:label>
+		<rdfs:subPropertyOf rdf:resource="&dctns;issued"/>
+		<rdfs:domain rdf:resource="#Delivery"/>
+                <rdfs:range rdf:resource="&xsdns;dateTime"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="blockedByQA">
+		<rdfs:label>Blocked by QA</rdfs:label>
+                <rdfs:comment>Boolean value that is true if the delivery has too severe quality issues.</rdfs:comment>
+		<rdfs:domain rdf:resource="#Delivery"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="period">
+		<rdfs:label>Delivery period</rdfs:label>
+		<rdfs:subPropertyOf rdf:resource="&dctns;temporal"/>
+		<rdfs:domain rdf:resource="#Delivery"/>
+                <!-- XML Schema doesn't have a time interval datatype -->
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="startOfPeriod">
+		<rdfs:label>Start of period</rdfs:label>
+		<rdfs:domain rdf:resource="#Delivery"/>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="endOfPeriod">
+		<rdfs:label>End of period</rdfs:label>
+		<rdfs:domain rdf:resource="#Delivery"/>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+ 
+        <!-- Data providers/Localities (Countries and territories) -->
+
+	<rdfs:Class rdf:ID="Locality">
+		<rdfs:label>Locality</rdfs:label>
+		<rdfs:comment>A locality defines the spatial coverage of a delivery to Reportnet</rdfs:comment>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="loccode">
+		<rdfs:label>ROD Locality code</rdfs:label>
+		<rdfs:comment>Sometimes this is an ISO country code, but ROD can also contain "local" localities</rdfs:comment>
+		<rdfs:subPropertyOf rdf:resource="&skosns;notation"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="localityName">
+		<rdfs:label>Name</rdfs:label>
+<!--		<rdfs:subPropertyOf rdf:resource="&rdfsns;label"/> -->
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="localityType">
+		<rdfs:label>Type of locality</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="providerFor">
+		<rdfs:label>Has obligation</rdfs:label>
+	</rdf:Property>
+
+	<!-- Environmental issues -->
+	<rdfs:Class rdf:ID="Issue">
+		<rdfs:label>Environmental issue</rdfs:label>
+	</rdfs:Class>
+
+	<!-- Clients -->
+
+	<rdfs:Class rdf:ID="Client">
+		<rdfs:label>Reportnet client</rdfs:label>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="clientName">
+		<rdfs:label>Name</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+		<rdfs:subPropertyOf rdf:resource="&rdfsns;label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientAcronym">
+		<rdfs:label>Acronym</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientUrl">
+		<rdfs:label>Url</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientAddress">
+		<rdfs:label>Address</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientEmail">
+		<rdfs:label>Email</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientDescription">
+		<rdfs:label>Description</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientPostalCode">
+		<rdfs:label>Postal code</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientCity">
+		<rdfs:label>City</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientCountry">
+		<rdfs:label>Country</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="clientShortName">
+		<rdfs:label>Short name</rdfs:label>
+		<rdfs:domain rdf:resource="#Client"/>
+	</rdf:Property>
+
+	<!-- Obligations -->
+
+	<rdfs:Class rdf:ID="Obligation">
+		<rdfs:label>Reporting Obligation</rdfs:label>
+		<rdfs:comment>A reporting obligation contains information about what to deliver, deadline and who must deliver</rdfs:comment>
+	</rdfs:Class>
+
+	<!-- Used by obligations to refer to the instrument with an rdf:resource attribute -->
+	<rdf:Property rdf:ID="instrument">
+		<rdfs:label>Legislation Instrument</rdfs:label>
+		<rdfs:range rdf:resource="#Instrument"/>
+		<rdfs:domain rdf:resource="#Obligation"/>
+		<rdfs:subPropertyOf rdf:resource="&dctns;relation"/>
+	</rdf:Property>
+
+	<!-- Used by obligations to refer to an environmental issue with an rdf:resource attribute -->
+	<rdf:Property rdf:ID="issue">
+		<rdfs:label>Environmental issue</rdfs:label>
+		<rdfs:range rdf:resource="#Issue"/>
+		<rdfs:subPropertyOf rdf:resource="&dctns;subject"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="isTerminated">
+		<rdfs:label>Obligation terminated</rdfs:label>
+                <rdfs:range rdf:resource="&xsdns;boolean"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="isEEAPrimary">
+		<rdfs:label>Eionet core data flow</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+                <rdfs:range rdf:resource="&xsdns;boolean"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="isEEACore">
+		<rdfs:label>Used for EEA Core Set of Indicators</rdfs:label>
+                <rdfs:range rdf:resource="&xsdns;boolean"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="comment">
+		<rdfs:label>General Comment</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="client">
+		<rdfs:label>Client</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="requester">
+		<rdfs:label>Requesting client</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="otherClient">
+		<rdfs:label>Other clients</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="dpsirCategory">
+		<rdfs:label>DPSIR category</rdfs:label>
+                <rdfs:range rdf:resource="&skosns;Concept"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="responsibleRole">
+		<rdfs:label>Role responsible for reporting</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="nextdeadline">
+		<rdfs:label>Next Deadline</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="nextdeadline2">
+		<rdfs:label>Deadline for 2nd period</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+                <rdfs:range rdf:resource="&xsdns;date"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="guidelines">
+		<rdfs:label>Guidelines for reporting</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="guidelines_url">
+		<rdfs:label>Guidelines link</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="details_url">
+		<rdfs:label>Information link</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
+	</rdf:Property>
+
+	<!-- Instruments -->
+
+	<rdfs:Class rdf:ID="Instrument">
+		<rdfs:label>Legislation Instrument</rdfs:label>
+		<rdfs:comment>A legal instrument is a law, directive or agreement describing one or more reporting obligations</rdfs:comment>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="celexref">
+		<rdfs:label>CELEX reference</rdfs:label>
+		<rdfs:domain rdf:resource="#Instrument"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="issuer">
+		<rdfs:label>Issued by</rdfs:label>
+		<rdfs:domain rdf:resource="#Instrument"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="instrumentUrl">
+		<rdfs:label>URL to official text</rdfs:label>
+		<rdfs:domain rdf:resource="#Instrument"/>
+	</rdf:Property>
+
+	<!-- Notifications -->
+	<rdfs:Class rdf:ID="Deadlineevent">
+		<rdfs:label>Approaching deadline</rdfs:label>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="event_type"> <!-- Used by notifications -->
+		<rdfs:label>Event type</rdfs:label>
+	</rdf:Property>
+
+	<!-- Used to refer to the obligation the resource is product of -->
+	<rdf:Property rdf:ID="productOf">
+		<rdfs:label>Product of</rdfs:label>
+		<rdfs:range rdf:resource="#Obligation"/>
+	</rdf:Property>
+
+</rdf:RDF>

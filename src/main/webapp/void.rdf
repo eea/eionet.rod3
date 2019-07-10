@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xml:lang="en"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:dcterms="http://purl.org/dc/terms/" 
+           xmlns:foaf="http://xmlns.com/foaf/0.1/"
+           xmlns:void="http://rdfs.org/ns/void#">
+
+   <!-- This file is a listing of the RDF outputs supported by EUNIS
+        See http://rdfs.org/ns/void-guide
+    -->
+
+  <void:Dataset rdf:ID="ROD">
+    <dcterms:title>ROD - Reporting Obligations Database</dcterms:title>
+    <dcterms:description>ROD is EEA's reporting obligations database.
+    It contains records describing environmental reporting obligations that countries have towards international organisations.</dcterms:description>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="/clients/3"/>
+    <dcterms:publisher rdf:resource="/clients/3"/>
+    <foaf:homepage rdf:resource="http://rod.eionet.europa.eu/"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/obligations/523"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/instruments/545"/>
+    <void:uriPattern>^http://rod.eionet.europa.eu/.*</void:uriPattern>
+    <void:subset rdf:resource="#obligations"/>
+    <void:subset rdf:resource="#instruments"/>
+    <void:subset rdf:resource="#spatials"/>
+    <void:subset rdf:resource="#issues"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="obligations">
+    <dcterms:title>Reporting Obligations</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="/clients/3"/>
+    <dcterms:publisher rdf:resource="/clients/3"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/obligations/523"/>
+    <void:dataDump rdf:resource="http://rod.eionet.europa.eu/obligations/rdf"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/elements/1.1/"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/terms/"/>
+    <void:vocabulary rdf:resource="http://rod.eionet.europa.eu/schema.rdf"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="instruments">
+    <dcterms:title>Legislative Instruments</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="/clients/3"/>
+    <dcterms:publisher rdf:resource="/clients/3"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/instruments/545"/>
+    <void:dataDump rdf:resource="http://rod.eionet.europa.eu/instruments/rdf"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/elements/1.1/"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/terms/"/>
+    <void:vocabulary rdf:resource="http://rod.eionet.europa.eu/schema.rdf"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="issues">
+    <dcterms:title>Issues</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="/clients/3"/>
+    <dcterms:publisher rdf:resource="/clients/3"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/issues/6"/>
+    <void:dataDump rdf:resource="http://rod.eionet.europa.eu/issues/rdf"/>
+    <void:vocabulary rdf:resource="http://rod.eionet.europa.eu/schema.rdf"/>
+  </void:Dataset>
+  
+  <void:Dataset rdf:ID="spatials">
+    <dcterms:title>Countries &amp; regions</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="/clients/3"/>
+    <dcterms:publisher rdf:resource="/clients/3"/>
+    <void:exampleResource rdf:resource="http://rod.eionet.europa.eu/spatials/5"/>
+    <void:dataDump rdf:resource="http://rod.eionet.europa.eu/spatial/rdf"/>
+    <void:vocabulary rdf:resource="http://rod.eionet.europa.eu/schema.rdf"/>
+  </void:Dataset>
+
+</rdf:RDF>

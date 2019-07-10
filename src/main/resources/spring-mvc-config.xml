@@ -13,6 +13,8 @@
     <mvc:resources location="/fonts/" mapping="/fonts/**"/>
     <mvc:resources location="/robots.txt" mapping="/robots.txt"/>
     <mvc:resources location="/favicon.ico" mapping="/favicon.ico"/>
+    <mvc:resources location="/void.rdf" mapping="/void.rdf"/>
+    <mvc:resources location="/schema.rdf" mapping="/schema.rdf"/>
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
     <context:component-scan base-package="eionet.rod"/>
