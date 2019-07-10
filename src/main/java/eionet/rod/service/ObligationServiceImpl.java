@@ -76,4 +76,9 @@ public class ObligationServiceImpl implements ObligationService {
         return obligationsDao.findAllClientsByObligation(obligationID);
     }
 
+    @Override
+    public List<Obligations> findActivities() {
+        return obligationsDao.findActivities();
+    }
+
 }

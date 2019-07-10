@@ -32,4 +32,6 @@ public interface ObligationService {
     List<ClientDTO> findAllClientsByObligation(Integer obligationID);
 
     List<Roles> getRespRoles();
+
+    List<Obligations> findActivities();
 }

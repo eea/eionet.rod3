@@ -35,4 +35,6 @@ public interface ObligationsDao {
 
     List<ClientDTO> findAllClientsByObligation(Integer obligationID);
 
+    List<Obligations> findActivities();
+
 }

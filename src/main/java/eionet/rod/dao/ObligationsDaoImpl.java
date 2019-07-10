@@ -73,6 +73,29 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
     }
 
+    @Override
+    public List<Obligations> findActivities() {
+        String query = "SELECT PK_RA_ID AS obligationId, T_OBLIGATION.TITLE AS oblTitle, DESCRIPTION AS description, T_OBLIGATION.TERMINATE as terminate, T_OBLIGATION.LAST_UPDATE lastUpdate, T_SOURCE.PK_SOURCE_ID sourceId, T_SOURCE.TITLE as sourceTitle, T_SOURCE.ALIAS as sourceAlias "
+                + " FROM T_OBLIGATION, T_SOURCE "
+                + " WHERE T_OBLIGATION.FK_SOURCE_ID = T_SOURCE.PK_SOURCE_ID "
+                + " ORDER BY PK_RA_ID";
+
+        try {
+            List<Obligations> result = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Obligations.class));
+
+            if (result.isEmpty()) {
+                throw new ResourceNotFoundException("No data in the database");
+            } else {
+                return result;
+            }
+
+        } catch (DataAccessException e) {
+            logger.debug(e, e);
+            throw new ResourceNotFoundException("DataAccessException error: " + e, e);
+        }
+
+    }
+
 
     /**
      * cases of deadlines

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./services.xsd">
+	<Service Name="WebRODService" Provider="eionet.rod.service.WebRODService">
+		<Methods>
+			<Method Name="getActivities" Auth="false">
+					<Parameters/>
+					<Value Type="ARRAY">
+						<Array Type="STRUCT"/>
+					</Value>
+			</Method>
+			<Method Name="getCountries" Auth="false">
+					<Parameters/>
+					<Value Type="ARRAY">
+						<Array Type="STRUCT"/>
+					</Value>
+				</Method>
+<!--			<Method Name="getROSummary" Auth="false">-->
+<!--					<Parameters/>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getROComplete" Auth="false">-->
+<!--					<Parameters/>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getObligations" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="countryId" Type="STRING"/>-->
+<!--						<Parameter Name="issueId" Type="STRING"/>-->
+<!--						<Parameter Name="client" Type="STRING"/>-->
+<!--						<Parameter Name="terminated" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getRODeadlines" Auth="false">-->
+<!--					<Parameters/>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getObligationDetail" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="id" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getObligationIssues" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="id" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getObligationOrg" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="id" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getTable" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="tablename" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+<!--			<Method Name="getTableDesc" Auth="false">-->
+<!--					<Parameters>-->
+<!--						<Parameter Name="tablename" Type="STRING"/>-->
+<!--					</Parameters>-->
+<!--					<Value Type="ARRAY">-->
+<!--						<Array Type="STRUCT"/>-->
+<!--					</Value>-->
+<!--			</Method>-->
+		</Methods>
+	</Service>
+</Services>
