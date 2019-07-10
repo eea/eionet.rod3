@@ -1593,7 +1593,7 @@
             delete from T_SOURCE_LNK where not exists (select 1 from T_SOURCE where PK_SOURCE_ID = FK_SOURCE_CHILD_ID);
             delete from T_SOURCE_LNK where not exists (select 1 from T_SOURCE where PK_SOURCE_ID = FK_SOURCE_PARENT_ID);
         </sql>
-        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_CHILD_ID" constraintName="T_SOURCE_CHILD_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID"/>
-        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_PARENT_ID" constraintName="T_SOURCE_PARENT_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID"/>
+        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_CHILD_ID" constraintName="T_SOURCE_CHILD_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_PARENT_ID" constraintName="T_SOURCE_PARENT_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

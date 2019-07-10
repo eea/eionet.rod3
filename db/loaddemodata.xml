@@ -31,14 +31,14 @@
     <comment>Load T_SOURCE_CLASS</comment>
     <loadData tableName="T_SOURCE_CLASS" separator="\t" file="db/t_source_class.tsv"/>
   </changeSet>
-  <changeSet author="santamik" id="rev-3" dbms="h2">
-    <preConditions onFail="MARK_RAN">
-      <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SOURCE_LNK</sqlCheck>
-    </preConditions>
+<!--  <changeSet author="santamik" id="rev-3" dbms="h2">-->
+<!--    <preConditions onFail="MARK_RAN">-->
+<!--      <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_SOURCE_LNK</sqlCheck>-->
+<!--    </preConditions>-->
 
-    <comment>Load T_SOURCE_LNK</comment>
-    <loadData tableName="T_SOURCE_LNK" separator="\t" file="db/t_source_lnk.tsv"/>
-  </changeSet>
+<!--    <comment>Load T_SOURCE_LNK</comment>-->
+<!--    <loadData tableName="T_SOURCE_LNK" separator="\t" file="db/t_source_lnk.tsv"/>-->
+<!--  </changeSet>-->
   <changeSet author="santamik" id="rev-4" dbms="h2">
     <preConditions onFail="MARK_RAN">
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM T_ISSUE</sqlCheck>
