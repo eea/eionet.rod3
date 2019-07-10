@@ -1578,4 +1578,22 @@
         <comment>Setting the fk_type_id as optional, as the code doesn't set it</comment>
         <dropNotNullConstraint  tableName="T_SOURCE" columnName="FK_TYPE_ID" columnDataType="int(10) unsigned"/>
     </changeSet>
+    <changeSet id="rev-86" author="ivascu" dbms="mysql,mariadb">
+        <comment>Other incorrect table keys</comment>
+        <sql>
+            alter table T_SOURCE_LNK MODIFY COLUMN PK_SOURCE_LNK_ID int(10) auto_increment;
+            alter table T_SOURCE_LNK MODIFY COLUMN FK_SOURCE_CHILD_ID int(10);
+            alter table T_SOURCE_LNK MODIFY COLUMN FK_SOURCE_PARENT_ID int(10);
+        </sql>
+    </changeSet>
+    <changeSet id="rev-87" author="ivascu">
+        <comment>Adding forgotten FKs, with cleanup of old data</comment>
+
+        <sql>
+            delete from T_SOURCE_LNK where not exists (select 1 from T_SOURCE where PK_SOURCE_ID = FK_SOURCE_CHILD_ID);
+            delete from T_SOURCE_LNK where not exists (select 1 from T_SOURCE where PK_SOURCE_ID = FK_SOURCE_PARENT_ID);
+        </sql>
+        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_CHILD_ID" constraintName="T_SOURCE_CHILD_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID"/>
+        <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_PARENT_ID" constraintName="T_SOURCE_PARENT_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID"/>
+    </changeSet>
 </databaseChangeLog>
