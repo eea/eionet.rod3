@@ -148,8 +148,9 @@ public class ObligationsController {
         if (obligations.getDelObligations() != null) {
             String[] listObligations = obligations.getDelObligations().split(",");
             Authentication authentication = authenticationFacade.getAuthentication();
-            long ts = System.currentTimeMillis();
+
             for (String listObligation : listObligations) {
+                long ts = System.currentTimeMillis();
                 processEditDelete("D", authentication.getName(), Integer.parseInt(listObligation), ts);
             }
             obligationsService.deleteObligations(obligations.getDelObligations());
@@ -686,7 +687,7 @@ public class ObligationsController {
 
         try {
             sendEvent(true, obligations, obligations.getObligationId(), ts);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             logger.debug(e, e);
         }
         return "eobligation";
@@ -1248,7 +1249,9 @@ public class ObligationsController {
     }
 
     private String getChkValue(String value) throws ServiceException {
-
+        if(value == null) {
+            return "unchecked";
+        }
         String ret = null;
         int b = Integer.parseInt(value); //new Integer(value).intValue();
         if (b == 0) {
