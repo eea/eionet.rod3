@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="layout :: headerFragment"></head>
 <body>
-<script>
+<script th:inline="none">
+    /*<![CDATA[*/
     $(document).ready(function () {
+        $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');
         $('#historyTable').DataTable({
             "sDom": 'Tfrtipt',
-            "sPaginationType": "full_numbers"
+            "sPaginationType": "full_numbers",
+            "order": [[ 0, "desc" ]]
         });
 
     });
-
+    /*]]>*/
 </script>
 <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
 
@@ -52,7 +55,7 @@
                 </tr>
                 </thead>
                 <tr th:each="version, iterStat : ${versions}" th:class="${iterStat.odd} ? 'even' : 'odd'">
-                    <td><span th:text="${version.date}"></span></td>
+                    <td><span th:text="${#dates.format(version.date, 'dd/MM/yyyy HH:mm:ss')}"></span></td>
                     <td><a th:href="@{'/undoinfo?ts=' + ${version.undoTime} + '&tab=T_OBLIGATION&op=U&id=' +${obligationId} + '&user=' + ${version.value}}" th:text="'/obligations/' + ${obligationId}"></a></td>
                     <td><span>UPDATE</span></td>
                     <td><span th:text="${version.value}"></span></td>
