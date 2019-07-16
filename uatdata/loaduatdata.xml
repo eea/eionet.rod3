@@ -15,8 +15,8 @@
   <changeSet author="roug" id="rev-1" context="uat">
     <comment>Load FULL dataset for User Acceptance Testing</comment>
     <!-- The TSV file must have a header row with the correct column names -->
-    <loadData tableName="ACLS"            separator="\t" file="uatdata/acls.tsv"/>
-    <loadData tableName="ACL_ROWS"        separator="\t" file="uatdata/acl_rows.tsv"/>
+<!--    <loadData tableName="ACLS"            separator="\t" file="uatdata/acls.tsv"/>-->
+<!--    <loadData tableName="ACL_ROWS"        separator="\t" file="uatdata/acl_rows.tsv"/>-->
     <loadData tableName="T_LOOKUP"        separator="\t" file="uatdata/t_lookup.tsv"/>
     <loadData tableName="T_SPATIAL"       separator="\t" file="uatdata/t_spatial.tsv"/>
     <loadData tableName="HLP_SCREEN"      separator="\t" file="uatdata/hlp_screen.tsv"/>

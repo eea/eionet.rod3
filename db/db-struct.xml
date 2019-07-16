@@ -1596,4 +1596,14 @@
         <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_CHILD_ID" constraintName="T_SOURCE_CHILD_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="T_SOURCE_LNK" baseColumnNames="FK_SOURCE_PARENT_ID" constraintName="T_SOURCE_PARENT_FK" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="CASCADE"/>
     </changeSet>
+    <changeSet id="rev-88" author="ivascu">
+        <comment>Moving the users</comment>
+        <sql>
+            insert into users(username, password, enabled)  select distinct owner, '', 1 from acls a, acl_rows ar where a.acl_id = ar.acl_id and owner is not null and owner not in ('') and status=1 and not exists (select 1 from users where owner=username);
+            insert into authorities(username, authority) select distinct owner, 'ROLE_EDITOR' from acls a, acl_rows ar where a.acl_id = ar.acl_id and owner is not null and owner not in ('') and status=1 and not exists (select 1 from authorities b where b.username=owner and b.authority='ROLE_EDITOR');
+        </sql>
+        <dropTable tableName="ACLS"/>
+        <dropTable tableName="ACL_ROWS"/>
+
+    </changeSet>
 </databaseChangeLog>
