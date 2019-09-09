@@ -1,6 +1,6 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.UndoService;
+import eionet.rod.dao.UndoDao;
 import eionet.rod.model.UndoDTO;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
@@ -16,12 +16,12 @@ import java.util.List;
 public class VersionsController {
 
     @Autowired
-    UndoService undoService;
+    UndoDao undoDao;
 
     @RequestMapping({"", "/"})
     public String versionsHome(Model model) {
 
-        List<UndoDTO> versions = undoService.getPreviousActionsGeneral();
+        List<UndoDTO> versions = undoDao.getPreviousActionsGeneral();
         if (versions != null) {
             UndoDTO undo;
             for (UndoDTO version : versions) {

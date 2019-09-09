@@ -5,7 +5,7 @@ import eionet.rod.model.UndoDTO;
 
 import java.util.List;
 
-public interface UndoService {
+public interface UndoDao {
 
     void insertIntoUndo(long ts, String table, String column, String state, String quotes, String isPrimary, String value, int rowCnt, String show);
 

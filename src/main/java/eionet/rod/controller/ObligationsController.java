@@ -3,14 +3,9 @@ package eionet.rod.controller;
 import eionet.rod.Attrs;
 import eionet.rod.IAuthenticationFacade;
 import eionet.rod.UNSEventSender;
-import eionet.rod.dao.ClientService;
-import eionet.rod.dao.IssueDao;
-import eionet.rod.dao.UndoService;
+import eionet.rod.dao.UndoDao;
 import eionet.rod.model.*;
-import eionet.rod.service.DeliveryService;
-import eionet.rod.service.FileServiceIF;
-import eionet.rod.service.ObligationService;
-import eionet.rod.service.SpatialService;
+import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODServices;
 import eionet.rod.util.RODUtil;
@@ -64,7 +59,7 @@ public class ObligationsController {
     ObligationService obligationsService;
 
     @Autowired
-    IssueDao issueDao;
+    IssueService issueService;
 
     @Autowired
     SpatialService spatialService;
@@ -75,7 +70,7 @@ public class ObligationsController {
     @Autowired
     DeliveryService deliveryService;
     @Autowired
-    UndoService undoService;
+    UndoDao undoDao;
 
     @Autowired
     IAuthenticationFacade authenticationFacade;
@@ -235,7 +230,7 @@ public class ObligationsController {
         model.addAttribute("deliveryColumn", deliveryColumn);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("allIssues", issues);
 
         //Countries/territories
@@ -321,7 +316,7 @@ public class ObligationsController {
         model.addAttribute("siblingObligations", siblingObligations);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findObligationIssuesList(obligationId);
+        List<Issue> issues = issueService.findObligationIssuesList(obligationId);
         model.addAttribute("issues", issues);
 
         //Participating countries/territories
@@ -433,7 +428,7 @@ public class ObligationsController {
         model.addAttribute("obligation", obligation);
         model.addAttribute("title", RODUtil.replaceTags(obligation.getOblTitle()));
 
-        List<UndoDTO> versions = undoService.getPreviousActionsReportSpecific(obligationId, "T_OBLIGATION", "PK_RA_ID", "U");
+        List<UndoDTO> versions = undoDao.getPreviousActionsReportSpecific(obligationId, "T_OBLIGATION", "PK_RA_ID", "U");
         if (versions != null) {
             for (UndoDTO version : versions) {
                 version.setDate(RODUtil.miliseconds2Date(version.getUndoTime()));
@@ -484,7 +479,7 @@ public class ObligationsController {
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allcountries", countries);
 
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
         //List box selected
@@ -537,7 +532,7 @@ public class ObligationsController {
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allcountries", countries);
 
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
         List<Obligations> relObligations = obligationsService.findAll();
@@ -566,7 +561,7 @@ public class ObligationsController {
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allcountries", countries);
         //Lists Issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
 
@@ -651,7 +646,7 @@ public class ObligationsController {
         List<Spatial> countries = spatialService.findAll();
         model.addAttribute("allcountries", countries);
         //Lists Issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
         //drop down list selected
@@ -752,7 +747,7 @@ public class ObligationsController {
         List<Issue> allSelectedIssues = new ArrayList<>();
         if (selectedIssues != null) {
             for (String selectedIssue1 : selectedIssues) {
-                selectedIssue = issueDao.findById(Integer.parseInt(selectedIssue1));
+                selectedIssue = issueService.findById(Integer.parseInt(selectedIssue1));
                 allSelectedIssues.add(selectedIssue);
             }
         }
@@ -762,17 +757,17 @@ public class ObligationsController {
     private void processEditDelete(String state, String userName, Integer obligationId, long ts) {
 
         if ("U".equals(state)) {
-            undoService.insertIntoUndo(obligationId, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
+            undoDao.insertIntoUndo(obligationId, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
         }
 
         String url = "obligations/" + obligationId;
-        undoService.insertIntoUndo(ts, "T_OBLIGATION", "REDIRECT_URL", "L", "y", "n", url, 0, "n");
-        undoService.insertIntoUndo(ts, "T_OBLIGATION", "A_USER", "K", "y", "n", userName, 0, "n");
-        undoService.insertIntoUndo(ts, "T_OBLIGATION", "TYPE", "T", "y", "n", "A", 0, "n");
+        undoDao.insertIntoUndo(ts, "T_OBLIGATION", "REDIRECT_URL", "L", "y", "n", url, 0, "n");
+        undoDao.insertIntoUndo(ts, "T_OBLIGATION", "A_USER", "K", "y", "n", userName, 0, "n");
+        undoDao.insertIntoUndo(ts, "T_OBLIGATION", "TYPE", "T", "y", "n", "A", 0, "n");
 
         if ("D".equals(state)) {
             String aclPath = "/obligations/" + obligationId;
-            undoService.insertIntoUndo(ts, "T_OBLIGATION", "ACL", "ACL", "y", "n", aclPath, 0, "n");
+            undoDao.insertIntoUndo(ts, "T_OBLIGATION", "ACL", "ACL", "y", "n", aclPath, 0, "n");
         }
 
         delActivity(state, "y", obligationId, ts);
@@ -781,26 +776,26 @@ public class ObligationsController {
 
     private void delActivity(String op, String show, Integer obligationId, long ts) {
 
-        undoService.insertTransactionInfo(obligationId, "A", "T_RAISSUE_LNK", "FK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(obligationId, "A", "T_RASPATIAL_LNK", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_RAISSUE_LNK", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_RASPATIAL_LNK", "FK_RA_ID", ts, "");
         //undoService.insertTransactionInfo(sourceId, "A", "T_INFO_LNK", "FK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(obligationId, "A", "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(obligationId, "A", "T_OBLIGATION", "PK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(obligationId, "A", "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(obligationId, "A", "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_OBLIGATION", "PK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(obligationId, "A", "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "");
 
-        undoService.insertIntoUndo(obligationId, op, "T_RAISSUE_LNK", "FK_RA_ID", ts, "", show);
-        undoService.insertIntoUndo(obligationId, op, "T_RASPATIAL_LNK", "FK_RA_ID", ts, "", show);
+        undoDao.insertIntoUndo(obligationId, op, "T_RAISSUE_LNK", "FK_RA_ID", ts, "", show);
+        undoDao.insertIntoUndo(obligationId, op, "T_RASPATIAL_LNK", "FK_RA_ID", ts, "", show);
         //undoService.insertIntoUndo(sourceId, op, "T_INFO_LNK", "FK_RA_ID", ts, "", show);
-        undoService.insertIntoUndo(obligationId, op, "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "", show);
-        undoService.insertIntoUndo(obligationId, op, "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "", show);
+        undoDao.insertIntoUndo(obligationId, op, "T_HISTORIC_DEADLINES", "FK_RA_ID", ts, "", show);
+        undoDao.insertIntoUndo(obligationId, op, "T_OBLIGATION_RELATION", "FK_RA_ID", ts, "", show);
 
         if ("D".equals(op)) {
             //FALTAN LOS ACLS
-            undoService.insertIntoUndo(obligationId, "D", "T_OBLIGATION", "PK_RA_ID", ts, "", show);
+            undoDao.insertIntoUndo(obligationId, "D", "T_OBLIGATION", "PK_RA_ID", ts, "", show);
         }
 
-        undoService.insertIntoUndo(obligationId, op, "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "", show);
+        undoDao.insertIntoUndo(obligationId, op, "T_CLIENT_OBLIGATION_LNK", "FK_RA_ID", ts, "", show);
 
     }
 
@@ -812,7 +807,7 @@ public class ObligationsController {
 
     private Vector<String> getChanges(Integer obligationID, long ts) throws ServiceException {
         Vector<String> resVec = new Vector<>();
-        List<UndoDTO> undoList = undoService.getUndoInformation(ts, "U", "T_OBLIGATION");
+        List<UndoDTO> undoList = undoDao.getUndoInformation(ts, "U", "T_OBLIGATION");
         Obligations obligation = obligationsService.findOblId(obligationID);
         String value = "";
 
@@ -976,7 +971,7 @@ public class ObligationsController {
             }
         }
 
-        undoList = undoService.getUndoInformation(ts, "U", "T_RASPATIAL_LNK");
+        undoList = undoDao.getUndoInformation(ts, "U", "T_RASPATIAL_LNK");
         List<Spatial> formallyCountries = obligationsService.findAllCountriesByObligation(obligationID, "N");
         List<Spatial> voluntaryCountries = obligationsService.findAllCountriesByObligation(obligationID, "Y");
         Spatial country = new Spatial();
@@ -1092,7 +1087,7 @@ public class ObligationsController {
         }
 
 
-        undoList = undoService.getUndoInformation(ts, "U", "T_RAISSUE_LNK");
+        undoList = undoDao.getUndoInformation(ts, "U", "T_RAISSUE_LNK");
         List<Issue> obligationIssues = obligationsService.findAllIssuesbyObligation(obligationID);
         Issue issue;
         StringBuffer addedIssues = new StringBuffer();
@@ -1109,7 +1104,7 @@ public class ObligationsController {
         if (undoList != null) {
             for (UndoDTO undo : undoList) {
                 if ("FK_ISSUE_ID".equals(undo.getCol())) {
-                    issue = issueDao.findById(Integer.parseInt(undo.getValue()));
+                    issue = issueService.findById(Integer.parseInt(undo.getValue()));
                     undoIssues.add(issue.getIssueName());
                 }
             }
@@ -1148,7 +1143,7 @@ public class ObligationsController {
             resVec.add("'Environmental issues' removed: " + removedIssues);
         }
 
-        undoList = undoService.getUndoInformation(ts, "U", "T_CLIENT_OBLIGATION_LNK");
+        undoList = undoDao.getUndoInformation(ts, "U", "T_CLIENT_OBLIGATION_LNK");
         List<ClientDTO> obligationClients = obligationsService.findAllClientsByObligation(obligationID);
         ClientDTO client;
         StringBuffer addedClients = new StringBuffer();
@@ -1204,7 +1199,7 @@ public class ObligationsController {
             resVec.add("'Other clients using this reporting' removed: " + removedClients);
         }
 
-        undoList = undoService.getUndoInformation(ts, "U", "T_OBLIGATION_RELATION");
+        undoList = undoDao.getUndoInformation(ts, "U", "T_OBLIGATION_RELATION");
         Obligations currentRelation = obligationsService.findObligationRelation(obligationID);
         String undoRelation = null;
         String addedRelation = "";

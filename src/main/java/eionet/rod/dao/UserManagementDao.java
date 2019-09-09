@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Additional operations for Springs UserDetailsManager.
  */
-public interface UserManagementService extends UserDetailsManager, GroupManager {
+public interface UserManagementDao extends UserDetailsManager, GroupManager {
 
     /**
      * Returns a list of all users.

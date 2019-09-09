@@ -1,15 +1,11 @@
 package eionet.rod.controller;
 
 import eionet.rod.Constants;
-import eionet.rod.dao.ClientService;
-import eionet.rod.dao.IssueDao;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
-import eionet.rod.service.FileServiceIF;
-import eionet.rod.service.ObligationService;
-import eionet.rod.service.SpatialService;
+import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODServices;
 import eionet.rod.util.RODUtil;
@@ -42,7 +38,7 @@ public class SearchController {
     SpatialService spatialService;
 
     @Autowired
-    IssueDao issueDao;
+    IssueService issueService;
 
     @Autowired
     ClientService clientService;
@@ -185,7 +181,7 @@ public class SearchController {
         model.addAttribute("allCountries", countries);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("allIssues", issues);
 
         //Countries/territories

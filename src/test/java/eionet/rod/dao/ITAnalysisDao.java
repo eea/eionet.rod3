@@ -18,10 +18,10 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
         "classpath:spring-db-config.xml"})
 @Sql("/seed-obligation-source.sql")
-public class ITAnalysisService {
+public class ITAnalysisDao {
 
     @Autowired
-    private AnalysisService analysisService;
+    private AnalysisDao analysisDao;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -29,7 +29,7 @@ public class ITAnalysisService {
     @Test
     public void testGetStatistics() {
 
-        AnalysisDTO analysisDTORec = analysisService.getStatistics();
+        AnalysisDTO analysisDTORec = analysisDao.getStatistics();
         assertEquals("2", analysisDTORec.getTotalRa().toString());
         assertEquals("2007-06-29 00:00:00.0", analysisDTORec.getLastUpdateRa().toString());
         assertEquals("2", analysisDTORec.getTotalLi().toString());

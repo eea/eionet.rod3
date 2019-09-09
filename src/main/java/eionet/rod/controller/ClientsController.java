@@ -1,10 +1,10 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.ClientService;
 import eionet.rod.model.BreadCrumb;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.InstrumentDTO;
 import eionet.rod.model.Obligations;
+import eionet.rod.service.ClientService;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

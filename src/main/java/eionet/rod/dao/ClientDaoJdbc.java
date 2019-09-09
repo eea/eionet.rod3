@@ -23,9 +23,9 @@ import java.util.List;
  * Service to store metadata for T_CLIENT using JDBC.
  */
 @Service
-public class ClientServiceJdbc implements ClientService {
+public class ClientDaoJdbc implements ClientDao {
 
-    private static final Log logger = LogFactory.getLog(ClientServiceJdbc.class);
+    private static final Log logger = LogFactory.getLog(ClientDaoJdbc.class);
 
     //@Autowired
     private DataSource dataSource;

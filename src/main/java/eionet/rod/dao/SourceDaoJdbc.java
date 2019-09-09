@@ -20,12 +20,11 @@ import java.util.*;
 /**
  * Service to store metadata for T_SPURCE using JDBC.
  */
-@Service(value = "sourceService")
 @Transactional
-public class SourceServiceJdbc implements SourceService {
+public class SourceDaoJdbc implements SourceDao {
 
 
-    private static final Log logger = LogFactory.getLog(SourceServiceJdbc.class);
+    private static final Log logger = LogFactory.getLog(SourceDaoJdbc.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;

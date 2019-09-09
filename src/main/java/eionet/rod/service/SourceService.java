@@ -1,13 +1,9 @@
-package eionet.rod.dao;
+package eionet.rod.service;
 
 import eionet.rod.model.*;
 
 import java.util.List;
 
-
-/**
- * Service to store metadata for T_SOURCE using JDBC.
- */
 public interface SourceService {
 
     InstrumentFactsheetDTO getById(Integer sourceId);
@@ -33,5 +29,4 @@ public interface SourceService {
     List<HierarchyInstrumentDTO> getHierarchyInstruments(Integer id);
 
     void delete(Integer sourceId);
-
 }

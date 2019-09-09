@@ -25,29 +25,29 @@ import static org.junit.Assert.*;
         "classpath:spring-security.xml"})
 @Sql("/seed-obligation-source.sql")
 
-public class ITSourceService {
+public class ITSourceDao {
 
     @Autowired
-    private SourceService sourceService;
+    private SourceDao sourceDao;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void testfgetById() {
-        InstrumentFactsheetDTO intrument = sourceService.getById(1);
+        InstrumentFactsheetDTO intrument = sourceDao.getById(1);
         assertEquals("22222", intrument.getSourceCode());
         assertEquals("Basel Convention", intrument.getSourceAlias());
 
         exception.expect(ResourceNotFoundException.class);
-        intrument = sourceService.getById(12);
+        intrument = sourceDao.getById(12);
 
         // todo implement
     }
 
     @Test
     public void getObligationsById() {
-        List<InstrumentObligationDTO> instruments = sourceService.getObligationsById(1);
+        List<InstrumentObligationDTO> instruments = sourceDao.getObligationsById(1);
 
         assertEquals(2, instruments.size());
         assertEquals("1", instruments.get(0).getObligationId().toString());
@@ -78,9 +78,9 @@ public class ITSourceService {
         selectedClassifications.add("1");
 
         instrumentFactsheetRec.setSelectedClassifications(selectedClassifications);
-        Integer sourceId = sourceService.insert(instrumentFactsheetRec);
+        Integer sourceId = sourceDao.insert(instrumentFactsheetRec);
 
-        InstrumentFactsheetDTO instrumentsResult = sourceService.getById(sourceId);
+        InstrumentFactsheetDTO instrumentsResult = sourceDao.getById(sourceId);
         assertEquals(instrumentFactsheetRec.getSourceTitle(), instrumentsResult.getSourceTitle());
         assertEquals(instrumentFactsheetRec.getClientId(), instrumentsResult.getClientId());
 
@@ -96,18 +96,18 @@ public class ITSourceService {
         instrumentFactsheetRec.setSourceEcEntryIntoForce(null);
         instrumentFactsheetRec.setSourceEcAccession(null);
 
-        sourceService.update(instrumentFactsheetRec);
+        sourceDao.update(instrumentFactsheetRec);
 
-        sourceService.delete(sourceId);
+        sourceDao.delete(sourceId);
 
         exception.expect(ResourceNotFoundException.class);
-        InstrumentFactsheetDTO intrument = sourceService.getById(sourceId);
+        InstrumentFactsheetDTO intrument = sourceDao.getById(sourceId);
 
     }
 
     @Test
     public void testgetAllInstruments() {
-        List<InstrumentFactsheetDTO> instruments = sourceService.getAllInstruments();
+        List<InstrumentFactsheetDTO> instruments = sourceDao.getAllInstruments();
         assertEquals(2, instruments.size());
         assertEquals("1", instruments.get(0).getSourceId().toString());
         assertEquals("Basel Convention", instruments.get(0).getSourceAlias());
@@ -117,7 +117,7 @@ public class ITSourceService {
     @Test
     public void testgetAllClassifications() {
 
-        List<InstrumentClassificationDTO> allClassifications = sourceService.getAllClassifications();
+        List<InstrumentClassificationDTO> allClassifications = sourceDao.getAllClassifications();
         assertEquals(2, allClassifications.size());
         assertEquals("1", allClassifications.get(0).getClassId().toString());
         assertEquals("Legal Instrument", allClassifications.get(0).getClassName());
@@ -132,30 +132,30 @@ public class ITSourceService {
         instrumentFactsheetRec.setSelectedClassifications(selectedclass);
         instrumentFactsheetRec.setSourceId(1);
 
-        sourceService.insertClassifications(instrumentFactsheetRec);
+        sourceDao.insertClassifications(instrumentFactsheetRec);
 
-        sourceService.deleteClassifications(instrumentFactsheetRec.getSourceId());
+        sourceDao.deleteClassifications(instrumentFactsheetRec.getSourceId());
 
     }
 
     @Test
     public void testgetHierarchy() {
-        String result = sourceService.getHierarchy(1, false, "X");
+        String result = sourceDao.getHierarchy(1, false, "X");
         assertEquals(0, result.length());
-        result = sourceService.getHierarchy(2, false, "X");
+        result = sourceDao.getHierarchy(2, false, "X");
         assertNotNull(result);
     }
 
 
     @Test
     public void testgetHierarchyInstrument() {
-        InstrumentsListDTO result = sourceService.getHierarchyInstrument(1);
+        InstrumentsListDTO result = sourceDao.getHierarchyInstrument(1);
         assertEquals("2", result.getParentId().toString());
     }
 
     @Test
     public void testgetHierarchyInstruments() {
-        List<HierarchyInstrumentDTO> intruments = sourceService.getHierarchyInstruments(1);
+        List<HierarchyInstrumentDTO> intruments = sourceDao.getHierarchyInstruments(1);
         assertNotEquals(0, intruments.size());
     }
 }

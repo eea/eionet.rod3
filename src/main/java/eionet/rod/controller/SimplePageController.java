@@ -1,9 +1,9 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.ClientService;
-import eionet.rod.dao.HelpDao;
-import eionet.rod.dao.IssueDao;
 import eionet.rod.model.*;
+import eionet.rod.service.ClientService;
+import eionet.rod.service.HelpService;
+import eionet.rod.service.IssueService;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class SimplePageController {
 
 
     @Autowired
-    IssueDao issueDao;
+    IssueService issueService;
 
     @Autowired
     SpatialService spatialService;
@@ -31,7 +31,7 @@ public class SimplePageController {
     ClientService clientService;
 
     @Autowired
-    HelpDao helpdao;
+    HelpService helpService;
 
     /**
      * Frontpage.
@@ -46,7 +46,7 @@ public class SimplePageController {
 
         Obligations obligation = new Obligations();
         List<Spatial> countries = spatialService.findAll();
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         List<ClientDTO> clients = clientService.getAllClients();
 
         model.addAttribute("obligation", obligation);
@@ -57,7 +57,7 @@ public class SimplePageController {
         model.addAttribute("title", "EEA - Reporting Obligations Database");
         BreadCrumbs.set(model, "EEA - Reporting Obligations Database");
 
-        Documentation doc = helpdao.getDoc("two_boxes");
+        Documentation doc = helpService.getDoc("two_boxes");
         if (doc != null) {
             model.addAttribute("news", doc.getHtml());
         } else {

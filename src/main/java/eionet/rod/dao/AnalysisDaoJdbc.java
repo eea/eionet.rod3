@@ -2,15 +2,12 @@ package eionet.rod.dao;
 
 import eionet.rod.model.AnalysisDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.Date;
 
-@Service(value = "analysisService")
-@Transactional
-public class AnalysisServiceJdbc implements AnalysisService {
+
+public class AnalysisDaoJdbc implements AnalysisDao {
 
     private DataSource dataSource;
 

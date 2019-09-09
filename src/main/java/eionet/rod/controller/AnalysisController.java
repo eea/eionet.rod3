@@ -1,7 +1,8 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.AnalysisService;
+import eionet.rod.dao.AnalysisDao;
 import eionet.rod.model.AnalysisDTO;
+import eionet.rod.service.AnalysisService;
 import eionet.rod.util.BreadCrumbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

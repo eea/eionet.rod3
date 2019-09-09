@@ -25,23 +25,23 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <bean id="userService" class="eionet.rod.dao.UserManagementServiceJdbc">
+    <bean id="userDao" class="eionet.rod.dao.UserManagementDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="clientService" class="eionet.rod.dao.ClientServiceJdbc">
+    <bean id="clientDao" class="eionet.rod.dao.ClientDaoJdbc">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="undoService" class="eionet.rod.dao.UndoServiceJdbc">
+    <bean id="undoDao" class="eionet.rod.dao.UndoDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="sourceService" class="eionet.rod.dao.SourceServiceJdbc">
+    <bean id="sourceDao" class="eionet.rod.dao.SourceDaoJdbc">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="analysisService" class="eionet.rod.dao.AnalysisServiceJdbc">
+    <bean id="analysisDao" class="eionet.rod.dao.AnalysisDaoJdbc">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

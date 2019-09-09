@@ -1,13 +1,11 @@
 package eionet.rod.controller;
 
+import eionet.rod.service.*;
 import eionet.rod.IAuthenticationFacade;
 import eionet.rod.UNSEventSender;
 import eionet.rod.dao.ClientService;
-import eionet.rod.dao.IssueDao;
 import eionet.rod.dao.SourceService;
 import eionet.rod.model.*;
-import eionet.rod.service.ObligationService;
-import eionet.rod.service.SpatialService;
 import eionet.rod.util.BreadCrumbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,7 +27,7 @@ public class SubscribeController {
 
 
     @Autowired
-    IssueDao issueDao;
+    IssueService issueService;
 
     @Autowired
     SpatialService spatialService;
@@ -58,7 +56,7 @@ public class SubscribeController {
         model.addAttribute("obligations", obligations);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
         //Countries/territories
@@ -99,7 +97,7 @@ public class SubscribeController {
         model.addAttribute("obligations", obligations);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("issues", issues);
 
         //Countries/territories

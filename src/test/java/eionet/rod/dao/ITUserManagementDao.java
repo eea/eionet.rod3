@@ -10,7 +10,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class ITUserManagementService {
+public class ITUserManagementDao {
 
     private UserDetailsManager userManagementService;
 
@@ -20,7 +20,7 @@ public class ITUserManagementService {
     public void loadContext() {
         ctx = new ClassPathXmlApplicationContext("spring-db-config.xml");
 
-        userManagementService = ctx.getBean("userService", UserManagementService.class);
+        userManagementService = ctx.getBean("userDao", UserManagementDao.class);
     }
 
     @After
@@ -43,7 +43,7 @@ public class ITUserManagementService {
         InitialUser initialUser = new InitialUser();
         initialUser.setInitialUsername("johnny");
         initialUser.setInitialPassword("rotten");
-        initialUser.setUserManagementService((UserManagementService) userManagementService);
+        initialUser.setUserManagementDao((UserManagementDao) userManagementService);
         initialUser.createUser();
     }
 

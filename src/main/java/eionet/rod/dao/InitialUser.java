@@ -16,10 +16,10 @@ public class InitialUser {
     /**
      * Service for user management.
      */
-    private UserManagementService userManagementService;
+    private UserManagementDao userManagementDao;
 
-    public void setUserManagementService(UserManagementService userManagementService) {
-        this.userManagementService = userManagementService;
+    public void setUserManagementDao(UserManagementDao userManagementDao) {
+        this.userManagementDao = userManagementDao;
     }
 
     /**
@@ -51,7 +51,7 @@ public class InitialUser {
             logger.info("No initial user to create");
             return;
         }
-        if (userManagementService.userExists(initialUsername)) {
+        if (userManagementDao.userExists(initialUsername)) {
             logger.info("Initial user " + initialUsername + " exists already");
         } else {
             ArrayList<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(1);
@@ -59,7 +59,7 @@ public class InitialUser {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority.toString()));
             }
             User userDetails = new User(initialUsername, initialPassword, grantedAuthorities);
-            userManagementService.createUser(userDetails);
+            userManagementDao.createUser(userDetails);
             logger.info("Initial user " + initialUsername + " created");
         }
     }

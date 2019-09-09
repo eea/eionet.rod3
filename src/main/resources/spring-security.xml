@@ -54,7 +54,7 @@
     <bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
         <property name="authenticationUserDetailsService">
             <bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-                <constructor-arg ref="userService"/>
+                <constructor-arg ref="userDao"/>
             </bean>
         </property>
         <property name="serviceProperties" ref="serviceProperties"/>

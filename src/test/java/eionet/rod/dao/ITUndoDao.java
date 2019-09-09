@@ -27,10 +27,10 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:spring-mvc-config.xml",
         "classpath:spring-db-config.xml"})
 @Sql("/seed-undo.sql")
-public class ITUndoService {
+public class ITUndoDao {
 
     @Autowired
-    private UndoService undoService;
+    private UndoDao undoDao;
 
     @Autowired
     private ObligationService obligationsService;
@@ -43,10 +43,10 @@ public class ITUndoService {
 
         long ts = System.currentTimeMillis();
 
-        undoService.insertIntoUndo(ts, "T_SOURCE", "ALIAS", "U", "y", "n", "Test Alias", 0, "y");
-        undoService.insertIntoUndo(ts, "T_SOURCE", "PK_SOURCE_ID", "U", "n", "y", "1", 0, "y");
+        undoDao.insertIntoUndo(ts, "T_SOURCE", "ALIAS", "U", "y", "n", "Test Alias", 0, "y");
+        undoDao.insertIntoUndo(ts, "T_SOURCE", "PK_SOURCE_ID", "U", "n", "y", "1", 0, "y");
 
-        List<UndoDTO> undoList = undoService.getUndoList(ts, "T_SOURCE", "U");
+        List<UndoDTO> undoList = undoDao.getUndoList(ts, "T_SOURCE", "U");
 
         assertEquals(undoList.get(0).getCol(), "ALIAS");
         assertEquals(undoList.get(1).getValue(), "1");
@@ -58,9 +58,9 @@ public class ITUndoService {
 
         long ts = System.currentTimeMillis();
 
-        undoService.insertIntoUndo(1, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
+        undoDao.insertIntoUndo(1, "U", "T_OBLIGATION", "PK_RA_ID", ts, "", "y");
 
-        List<UndoDTO> undoList = undoService.getUndoList(ts, "T_OBLIGATION", "U");
+        List<UndoDTO> undoList = undoDao.getUndoList(ts, "T_OBLIGATION", "U");
         Obligations obligation = obligationsService.findOblId(1);
 
         for (UndoDTO undoDTO : undoList) {
@@ -78,11 +78,11 @@ public class ITUndoService {
 
         long ts = System.currentTimeMillis();
 
-        undoService.insertTransactionInfo(1, "A", "T_OBLIGATION", "PK_RA_ID", ts, "");
-        undoService.insertTransactionInfo(1, "A", "T_RASPATIAL_LNK", "FK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(1, "A", "T_OBLIGATION", "PK_RA_ID", ts, "");
+        undoDao.insertTransactionInfo(1, "A", "T_RASPATIAL_LNK", "FK_RA_ID", ts, "");
 
-        List<UndoDTO> undoObligationsList = undoService.getUndoList(ts, "T_OBLIGATION", "A");
-        List<UndoDTO> undoSpatialLnkList = undoService.getUndoList(ts, "T_RASPATIAL_LNK", "A");
+        List<UndoDTO> undoObligationsList = undoDao.getUndoList(ts, "T_OBLIGATION", "A");
+        List<UndoDTO> undoSpatialLnkList = undoDao.getUndoList(ts, "T_RASPATIAL_LNK", "A");
 
         assertEquals(undoObligationsList.get(0).getValue(), "PK_RA_ID = 1 ");
         assertEquals(undoSpatialLnkList.get(0).getValue(), "FK_RA_ID = 1 ");
@@ -92,10 +92,10 @@ public class ITUndoService {
     @Test
     public void testGetPreviousActionsReportSpecific() {
 
-        List<UndoDTO> undoList = undoService.getPreviousActionsReportSpecific(1, "T_OBLIGATION", "PK_RA_ID", "U");
+        List<UndoDTO> undoList = undoDao.getPreviousActionsReportSpecific(1, "T_OBLIGATION", "PK_RA_ID", "U");
         assertEquals(undoList.get(0).getValue(), "arroyyol");
 
-        List<UndoDTO> undoList2 = undoService.getPreviousActionsReportSpecific(9, "T_OBLIGATION", "PK_RA_ID", "U");
+        List<UndoDTO> undoList2 = undoDao.getPreviousActionsReportSpecific(9, "T_OBLIGATION", "PK_RA_ID", "U");
         assertEquals(0, undoList2.size());
 
     }
@@ -105,7 +105,7 @@ public class ITUndoService {
 
         String ts = "1519895729320";
 
-        List<UndoDTO> undoList = undoService.getUndoList(Long.parseLong(ts), "T_OBLIGATION", "U");
+        List<UndoDTO> undoList = undoDao.getUndoList(Long.parseLong(ts), "T_OBLIGATION", "U");
 
         for (UndoDTO undoDTO : undoList) {
             if ("COORDINATOR".equals(undoDTO.getCol())) {
@@ -120,7 +120,7 @@ public class ITUndoService {
     @Test
     public void testGetPreviousActionsGeneral() {
 
-        List<UndoDTO> undoList = undoService.getPreviousActionsGeneral();
+        List<UndoDTO> undoList = undoDao.getPreviousActionsGeneral();
 
         assertEquals(undoList.get(0).getUserName(), "arroyyol");
         assertEquals(undoList.get(0).getTab(), "T_OBLIGATION");
@@ -131,10 +131,10 @@ public class ITUndoService {
     @Test
     public void testIsDelete() {
 
-        boolean isDelete = undoService.isDelete("T_SOURCE", "PK_SOURCE_ID", 1);
+        boolean isDelete = undoDao.isDelete("T_SOURCE", "PK_SOURCE_ID", 1);
         assertTrue(isDelete);
 
-        isDelete = undoService.isDelete("T_OBLIGATION", "PK_RA_ID", 1);
+        isDelete = undoDao.isDelete("T_OBLIGATION", "PK_RA_ID", 1);
         assertFalse(isDelete);
 
     }
@@ -144,9 +144,9 @@ public class ITUndoService {
 
         String ts = "1520339150385";
 
-        undoService.addObligationIdsIntoUndo(1, Long.parseLong(ts), "T_SOURCE");
+        undoDao.addObligationIdsIntoUndo(1, Long.parseLong(ts), "T_SOURCE");
 
-        List<UndoDTO> undoList = undoService.getUndoList(Long.parseLong(ts), "T_SOURCE", "O");
+        List<UndoDTO> undoList = undoDao.getUndoList(Long.parseLong(ts), "T_SOURCE", "O");
         assertEquals(undoList.get(0).getValue(), "1,2");
 
     }
@@ -154,7 +154,7 @@ public class ITUndoService {
     @Test
     public void testGetUpdateHistory() {
 
-        List<UndoDTO> history = undoService.getUpdateHistory("");
+        List<UndoDTO> history = undoDao.getUpdateHistory("");
         assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
         assertEquals(history.get(0).getOperation(), "U");
 
@@ -165,7 +165,7 @@ public class ITUndoService {
 
         String ts = "1519895729320";
 
-        List<UndoDTO> undoList = undoService.getUndoInformation(Long.parseLong(ts), "U", "T_OBLIGATION");
+        List<UndoDTO> undoList = undoDao.getUndoInformation(Long.parseLong(ts), "U", "T_OBLIGATION");
 
         for (UndoDTO undoDTO : undoList) {
             if ("DATE_COMMENTS".equals(undoDTO.getCol())) {

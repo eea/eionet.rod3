@@ -18,7 +18,7 @@
  */
 package eionet.rod.controller;
 
-import eionet.rod.dao.UserManagementService;
+import eionet.rod.dao.UserManagementDao;
 import eionet.rod.model.UserRole;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ITUserController extends AbstractContextControllerTests {
 
     @Autowired
-    UserManagementService userManagementService;
+    UserManagementDao userManagementDao;
 
     private static final String TEST_USER = "test-user";
 
@@ -94,11 +94,11 @@ public class ITUserController extends AbstractContextControllerTests {
     }
 
     private boolean UserExists(String username) throws Exception {
-        return userManagementService.userExists(username);
+        return userManagementDao.userExists(username);
     }
 
     private void assertUserHasOnlyOneRole(String username, UserRole role) {
-        Collection<? extends GrantedAuthority> authorities = userManagementService.loadUserByUsername(username).getAuthorities();
+        Collection<? extends GrantedAuthority> authorities = userManagementDao.loadUserByUsername(username).getAuthorities();
         assertThat(authorities.size(), equalTo(1));
         assertThat(authorities.iterator().next().getAuthority(), equalTo(role.name()));
     }

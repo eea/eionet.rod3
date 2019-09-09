@@ -1,4 +1,4 @@
-package eionet.rod.dao;
+package eionet.rod.service;
 
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.InstrumentDTO;
@@ -6,18 +6,12 @@ import eionet.rod.model.Obligations;
 
 import java.util.List;
 
-/**
- * Service to store metadata for T_CLIENT using JDBC.
- */
 public interface ClientService {
 
     void insert(ClientDTO clientRec);
 
     ClientDTO getById(Integer clientId);
 
-    /**
-     * Get all clients, and only the attributes that are relevant.
-     */
     List<ClientDTO> getAllClients();
 
     void deleteById(Integer clientId);
@@ -29,10 +23,6 @@ public interface ClientService {
     void update(ClientDTO clientRec);
 
     boolean clientExists(Integer clientId);
-
-    /**
-     * Get all clients, by obligation id with status = C.
-     */
 
     List<ClientDTO> findOblClients(Integer raID, String status);
 

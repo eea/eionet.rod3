@@ -1,7 +1,7 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.HelpDao;
 import eionet.rod.model.Help;
+import eionet.rod.service.HelpService;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelpController {
 
     @Autowired
-    private HelpDao helpDao;
+    private HelpService helpService;
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Help helpLoadData(@RequestParam("helpId") String helpId) {
         if (helpId != null) {
-            Help helpData = helpDao.findId(helpId);
+            Help helpData = helpService.findId(helpId);
             String text = RODUtil.replaceTags(helpData.getText());
             helpData.setText(text);
 

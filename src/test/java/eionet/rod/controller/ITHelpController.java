@@ -46,7 +46,7 @@ public class ITHelpController {
     }
 
     @Test
-    public void helpfindId() throws Exception {
+    public void helpFindId() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/help.do").param("helpId", "HELP_LI_ABSTRACT");
         MvcResult result;

@@ -17,9 +17,9 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class UndoServiceJdbc implements UndoService {
+public class UndoDaoImpl implements UndoDao {
 
-    private static final Log logger = LogFactory.getLog(UndoServiceJdbc.class);
+    private static final Log logger = LogFactory.getLog(UndoDaoImpl.class);
 
     private DataSource dataSource;
 

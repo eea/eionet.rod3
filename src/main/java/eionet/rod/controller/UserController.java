@@ -1,8 +1,8 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.UserManagementService;
 import eionet.rod.model.Authorisation;
 import eionet.rod.model.UserRole;
+import eionet.rod.service.UserManagementService;
 import eionet.rod.util.BreadCrumbs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

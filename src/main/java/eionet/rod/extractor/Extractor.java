@@ -25,7 +25,7 @@ package eionet.rod.extractor;
 
 import eionet.directory.DirServiceException;
 import eionet.directory.DirectoryService;
-import eionet.rod.dao.UndoService;
+import eionet.rod.dao.UndoDao;
 import eionet.rod.model.Roles;
 import eionet.rod.service.DeliveryService;
 import eionet.rod.service.FileServiceIF;
@@ -77,7 +77,7 @@ public class Extractor implements ExtractorConstants {
     @Autowired
     DeliveryService deliveryService;
     @Autowired
-    UndoService undoService;
+    UndoDao undoDao;
 
     //@Autowired
     FileServiceIF fileSrv;

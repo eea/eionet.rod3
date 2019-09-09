@@ -13,7 +13,7 @@
 
     <bean id="initialUser" class="eionet.rod.dao.InitialUser"
           init-method="createUser">
-        <property name="userManagementService" ref="userService"/>
+        <property name="userManagementDao" ref="userDao"/>
         <property name="initialUsername" value="${initial.username}"/>
         <property name="initialPassword" value="${initial.password}"/>
     </bean>

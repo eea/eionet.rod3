@@ -1,7 +1,7 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.ClientService;
-import eionet.rod.dao.IssueDao;
+import eionet.rod.service.ClientService;
+import eionet.rod.service.IssueService;
 import eionet.rod.model.*;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
@@ -36,7 +36,7 @@ public class SpatialController {
     SpatialService spatialService;
 
     @Autowired
-    IssueDao issueDao;
+    IssueService issueService;
 
     @Autowired
     ClientService clientService;
@@ -89,7 +89,7 @@ public class SpatialController {
 
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("allIssues", issues);
 
 
@@ -124,7 +124,7 @@ public class SpatialController {
         model.addAttribute("obligation", obligation);
 
         //Environmental issues
-        List<Issue> issues = issueDao.findAllIssuesList();
+        List<Issue> issues = issueService.findAllIssuesList();
         model.addAttribute("allIssues", issues);
 
         //Countries/territories

@@ -1,10 +1,10 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.ClientService;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.Delivery;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
+import eionet.rod.service.ClientService;
 import eionet.rod.service.DeliveryService;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;

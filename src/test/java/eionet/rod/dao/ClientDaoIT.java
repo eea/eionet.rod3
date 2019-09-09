@@ -28,52 +28,52 @@ import static org.junit.Assert.assertEquals;
         "classpath:spring-db-config.xml"})
 
 @Sql("/seed-obligation-source.sql")
-public class ClientServiceIT {
+public class ClientDaoIT {
 
     @Autowired
     private WebApplicationContext ctx;
 
     @Autowired
-    private ClientService clientService;
+    private ClientDao clientDao;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void productionTest() throws Exception {
-        ClientService clientService = ctx.getBean("clientService", ClientService.class);
-        insertAndDelete(clientService);
+        ClientDao clientDao = ctx.getBean("clientDao", ClientDao.class);
+        insertAndDelete(clientDao);
 
-        getDirectIndirectObligations(clientService);
+        getDirectIndirectObligations(clientDao);
 
-        getDirectIndirectInstruments(clientService);
+        getDirectIndirectInstruments(clientDao);
 
-        insertSelectbyIDs(clientService);
+        insertSelectbyIDs(clientDao);
 
     }
 
-    private void insertAndDelete(ClientService clientService) throws Exception {
+    private void insertAndDelete(ClientDao clientDao) throws Exception {
         ClientDTO newRec = new ClientDTO();
 
         newRec.setName("CLIENT 1");
         newRec.setAcronym("TLA");
-        clientService.insert(newRec);
+        clientDao.insert(newRec);
 
         List<ClientDTO> allClients;
-        allClients = clientService.getAllClients();
+        allClients = clientDao.getAllClients();
 
         // System.out.print("size: " + allClients.size());
         assertEquals(3, allClients.size());
 
         Integer newId = allClients.get(0).getClientId();
-        ClientDTO upload = clientService.getById(newId);
+        ClientDTO upload = clientDao.getById(newId);
 
         assertEquals(newRec.getName(), upload.getName());
 
         // System.out.print("name: " + upload.getName());
-        clientService.deleteById(newId);
+        clientDao.deleteById(newId);
 
-        allClients = clientService.getAllClients();
+        allClients = clientDao.getAllClients();
 
         // System.out.print("size: " + allClients.size());
         assertEquals(2, allClients.size());
@@ -83,30 +83,30 @@ public class ClientServiceIT {
         //clientService.deleteById(newId);
     }
 
-    private void insertSelectbyIDs(ClientService clientService) {
+    private void insertSelectbyIDs(ClientDao clientDao) {
         String clientsIds = "1,2,";
-        clientService.deleteByIds(clientsIds);
+        clientDao.deleteByIds(clientsIds);
     }
 
-    private void getDirectIndirectObligations(ClientService clientService) {
-        List<Obligations> directObligations = clientService.getDirectObligations(1);
+    private void getDirectIndirectObligations(ClientDao clientDao) {
+        List<Obligations> directObligations = clientDao.getDirectObligations(1);
         assertEquals("1", directObligations.get(0).getObligationId().toString());
         assertEquals(1, directObligations.size());
 
-        List<Obligations> indirectObligations = clientService.getIndirectObligations(1);
+        List<Obligations> indirectObligations = clientDao.getIndirectObligations(1);
         assertEquals(2, indirectObligations.size());
         assertEquals("1", indirectObligations.get(0).getObligationId().toString());
         assertEquals("2", indirectObligations.get(1).getObligationId().toString());
     }
 
 
-    private void getDirectIndirectInstruments(ClientService clientService) {
-        List<InstrumentDTO> directInstruments = clientService.getDirectInstruments(1);
+    private void getDirectIndirectInstruments(ClientDao clientDao) {
+        List<InstrumentDTO> directInstruments = clientDao.getDirectInstruments(1);
         //System.out.print(directInstruments.size());
         assertEquals("1", directInstruments.get(0).getSourceId().toString());
         assertEquals(1, directInstruments.size());
 
-        List<InstrumentDTO> indirectInstruments = clientService.getIndirectInstruments(2);
+        List<InstrumentDTO> indirectInstruments = clientDao.getIndirectInstruments(2);
         assertEquals(1, indirectInstruments.size());
         assertEquals("2", indirectInstruments.get(0).getSourceId().toString());
 
@@ -114,7 +114,7 @@ public class ClientServiceIT {
 
     @Test
     public void testGetOrganisationNameByID() {
-        String organisationName = clientService.getOrganisationNameByID("1");
+        String organisationName = clientDao.getOrganisationNameByID("1");
         assertEquals("TC-Test client", organisationName);
     }
 

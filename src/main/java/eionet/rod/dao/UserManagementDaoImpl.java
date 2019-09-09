@@ -19,10 +19,10 @@ import java.util.Set;
 /**
  * Extends Spring's JDBC implementation to add a list of all users and accept users thart are not in the database.
  */
-public class UserManagementServiceJdbc extends JdbcUserDetailsManager
-        implements UserManagementService {
+public class UserManagementDaoImpl extends JdbcUserDetailsManager
+        implements UserManagementDao {
 
-    private static final Log logger = LogFactory.getLog(UserManagementServiceJdbc.class);
+    private static final Log logger = LogFactory.getLog(UserManagementDaoImpl.class);
 
 
     private static final String DEF_GET_ALL_USERS_SQL = "SELECT * FROM users ORDER BY username";
