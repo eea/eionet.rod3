@@ -3,6 +3,7 @@ package eionet.rod.model;
 import eionet.rod.util.RODUtil;
 
 import java.util.List;
+import java.util.Vector;
 
 public class Subscribe {
 
@@ -18,8 +19,8 @@ public class Subscribe {
     private String selectedClient;
     private String eventTypeDeadline;
     private String eventTypeOblChange;
-    private String eventTypeObligation;
-    private String eventTypeInstrument;
+    private String eventTypeNewObligation;
+    private String eventTypeInstrumentChange;
     private String eventTypeNewInstrument;
 
 
@@ -106,20 +107,20 @@ public class Subscribe {
         this.eventTypeOblChange = eventTypeOblChange;
     }
 
-    public String getEventTypeObligation() {
-        return eventTypeObligation;
+    public String getEventTypeNewObligation() {
+        return eventTypeNewObligation;
     }
 
-    public void setEventTypeObligation(String eventTypeObligation) {
-        this.eventTypeObligation = eventTypeObligation;
+    public void setEventTypeNewObligation(String eventTypeNewObligation) {
+        this.eventTypeNewObligation = eventTypeNewObligation;
     }
 
-    public String getEventTypeInstrument() {
-        return eventTypeInstrument;
+    public String getEventTypeInstrumentChange() {
+        return eventTypeInstrumentChange;
     }
 
-    public void setEventTypeInstrument(String eventTypeInstrument) {
-        this.eventTypeInstrument = eventTypeInstrument;
+    public void setEventTypeInstrumentChange(String eventTypeInstrumentChange) {
+        this.eventTypeInstrumentChange = eventTypeInstrumentChange;
     }
 
     public String getEventTypeNewInstrument() {
@@ -188,6 +189,26 @@ public class Subscribe {
 
     public String truncateText(String truncateText) {
         return RODUtil.truncateText(truncateText);
+    }
+
+    public Vector<String> getEventTypes(){
+        Vector<String> result = new Vector<>();
+        if(eventTypeDeadline != null) {
+            result.add(eventTypeDeadline);
+        }
+        if(eventTypeInstrumentChange != null) {
+            result.add(eventTypeInstrumentChange);
+        }
+        if(eventTypeNewInstrument != null) {
+            result.add(eventTypeNewInstrument);
+        }
+        if(eventTypeNewObligation != null) {
+            result.add(eventTypeNewObligation);
+        }
+        if(eventTypeOblChange != null) {
+            result.add(eventTypeOblChange);
+        }
+        return result;
     }
 
 }
