@@ -35,7 +35,10 @@ public class FileServiceImpl implements FileServiceIF {
      */
     public String getStringProperty(String propName) throws ServiceException {
         try {
-            System.out.print(propName);
+            // dynamic properties first
+            if(System.getProperty(propName) != null) {
+                return System.getProperty(propName);
+            }
             return props.getString(propName);
         } catch (MissingResourceException mre) {
             throw new ServiceException("Property value for key " + propName + " not found", mre);
@@ -47,8 +50,8 @@ public class FileServiceImpl implements FileServiceIF {
      */
     public boolean getBooleanProperty(String propName) throws ServiceException {
         try {
-            String s = props.getString(propName);
-            return Boolean.valueOf(s);
+            String s = getStringProperty(propName);
+            return Boolean.parseBoolean(s);
         } catch (MissingResourceException mre) {
             throw new ServiceException("Property value for key " + propName + " not found", mre);
         }
@@ -59,7 +62,7 @@ public class FileServiceImpl implements FileServiceIF {
      */
     public int getIntProperty(String propName) throws ServiceException {
         try {
-            String s = props.getString(propName);
+            String s = getStringProperty(propName);
             return Integer.parseInt(s);
         } catch (MissingResourceException mre) {
             throw new ServiceException("Property value for key " + propName + " not found", mre);
@@ -70,45 +73,19 @@ public class FileServiceImpl implements FileServiceIF {
 
     @Override
     public long getLongProperty(String propName, long defaultValue) throws ServiceException {
-        String value;
-        if (props.containsKey(propName)) {
-            value = props.getString(propName);
-            return Long.parseLong(value);
-
-        }
-        return defaultValue;
-
-    }
-
-    /**
-     *
-     */
-    public String[] getStringArrayProperty(String propName, String separator) throws ServiceException {
         try {
-            String[] str = null;
-            String s = props.getString(propName);
-
-            if (separator == null || separator.isEmpty()) {
-                str = new String[1];
-                str[0] = s;
-            } else {
-                char c = separator.charAt(0);
-                String sep = Character.isLetterOrDigit(c) ? Character.toString(c) : "\\" + c;
-                str = s.split(sep);
-            }
-            return str;
-        } catch (MissingResourceException mre) {
-            throw new ServiceException("Property value for key " + propName + " not found (" + mre.getMessage() + ")", mre);
+            return Long.parseLong(getStringProperty(propName));
+        } catch (Exception se) {
+            // not found OR cannot parse!
+            return defaultValue;
         }
     }
 
     @Override
     public synchronized Long getTimePropertyMilliseconds(final String key, Long defaultValue) {
 
-        Long value = defaultValue;
-
-        if (props.containsKey(key)) {
-            String propValue = props.getString(key);
+        try {
+            String propValue = getStringProperty(key);
 
             int coefficient = 1;
 
@@ -139,23 +116,24 @@ public class FileServiceImpl implements FileServiceIF {
             }
 
             try {
-                value = Long.parseLong(propValue) * coefficient;
+                return Long.parseLong(propValue) * coefficient;
             } catch (Exception e) {
                 // Ignore exceptions resulting from string-to-integer conversion here.
                 logger.debug("Ignored " + e + " for " + propValue, e);
             }
+        } catch (ServiceException se) {
+            // nothing really
         }
-
-        return value;
+        return defaultValue;
     }
 
     @Override
     public String getStringProperty(String propName, String defaultValue) throws ServiceException {
-        if (props.containsKey(propName)) {
+        try {
             return getStringProperty(propName);
+        } catch (ServiceException se) {
+            return defaultValue;
         }
-
-        return defaultValue;
     }
 
     @Override

@@ -258,16 +258,6 @@ public interface FileServiceIF {
     int getIntProperty(String propName) throws ServiceException;
 
     /**
-     * Returns String arrray property from the properties file.
-     *
-     * @param propName
-     * @param separator
-     * @return String[]
-     * @throws ServiceException
-     */
-    String[] getStringArrayProperty(String propName, String separator) throws ServiceException;
-
-    /**
      * returns long value of property.
      *
      * @param propName     property name
