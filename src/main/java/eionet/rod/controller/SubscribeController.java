@@ -3,8 +3,6 @@ package eionet.rod.controller;
 import eionet.rod.service.*;
 import eionet.rod.IAuthenticationFacade;
 import eionet.rod.UNSEventSender;
-import eionet.rod.dao.ClientService;
-import eionet.rod.dao.SourceService;
 import eionet.rod.model.*;
 import eionet.rod.util.BreadCrumbs;
 import org.springframework.beans.factory.annotation.Autowired;
