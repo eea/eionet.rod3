@@ -1,6 +1,5 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.AnalysisDao;
 import eionet.rod.model.AnalysisDTO;
 import eionet.rod.service.AnalysisService;
 import eionet.rod.util.BreadCrumbs;

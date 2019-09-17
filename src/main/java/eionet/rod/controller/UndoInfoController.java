@@ -1,12 +1,8 @@
 package eionet.rod.controller;
 
 import eionet.rod.dao.IssueDaoImpl;
-import eionet.rod.dao.UndoDao;
 import eionet.rod.model.*;
-import eionet.rod.service.ClientService;
-import eionet.rod.service.ObligationService;
-import eionet.rod.service.SourceService;
-import eionet.rod.service.SpatialService;
+import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
@@ -35,7 +31,7 @@ public class UndoInfoController {
     ObligationService obligationsService;
 
     @Autowired
-    UndoDao undoDao;
+    UndoService undoService;
 
     @Autowired
     IssueDaoImpl issueService;
@@ -69,7 +65,7 @@ public class UndoInfoController {
                 break;
         }
 
-        List<UndoDTO> undoList = undoDao.getUndoList(ts, tab, op);
+        List<UndoDTO> undoList = undoService.getUndoList(ts, tab, op);
         model.addAttribute("undoList", undoList);
 
         ArrayList<String> currentValues = new ArrayList<>();
@@ -78,7 +74,7 @@ public class UndoInfoController {
 
             if (!"D".equals(op)) {
 
-                boolean isDelete = undoDao.isDelete(tab, "PK_RA_ID", id);
+                boolean isDelete = undoService.isDelete(tab, "PK_RA_ID", id);
 
                 // todo: reflection on objects instead of this
                 if (!isDelete) {
@@ -133,7 +129,7 @@ public class UndoInfoController {
 
             }
 
-            List<UndoDTO> undoCountries = undoDao.getUndoList(ts, "T_RASPATIAL_LNK", op);
+            List<UndoDTO> undoCountries = undoService.getUndoList(ts, "T_RASPATIAL_LNK", op);
             HashMap<Integer, String> fkSpatialIds = new HashMap<>();
             HashMap<Integer, String> voluntaries = new HashMap<>();
             StringBuilder undoCountriesString = new StringBuilder();
@@ -288,7 +284,7 @@ public class UndoInfoController {
 
             }
 
-            List<UndoDTO> undoIssues = undoDao.getUndoList(ts, "T_RAISSUE_LNK", op);
+            List<UndoDTO> undoIssues = undoService.getUndoList(ts, "T_RAISSUE_LNK", op);
             //ArrayList<Issue> undoIssues = new ArrayList<Issue>();
             StringBuilder undoIssuesString = new StringBuilder();
             if (undoIssues != null && !"D".equals(op)) {
@@ -366,7 +362,7 @@ public class UndoInfoController {
                 model.addAttribute("removedIssues", removedIssuesString);
             }
 
-            List<UndoDTO> undoClients = undoDao.getUndoList(ts, "T_CLIENT_OBLIGATION_LNK", op);
+            List<UndoDTO> undoClients = undoService.getUndoList(ts, "T_CLIENT_OBLIGATION_LNK", op);
             StringBuilder undoClientsString = new StringBuilder();
             if (undoClients != null && !"D".equals(op)) {
                 for (UndoDTO undoClient : undoClients) {
@@ -443,7 +439,7 @@ public class UndoInfoController {
 
             }
 
-            List<UndoDTO> undoObligations = undoDao.getUndoList(ts, "T_OBLIGATION_RELATION", op);
+            List<UndoDTO> undoObligations = undoService.getUndoList(ts, "T_OBLIGATION_RELATION", op);
             StringBuilder undoObligationsString = new StringBuilder();
             String relation = "";
             Obligations obligationRelation;
@@ -522,7 +518,7 @@ public class UndoInfoController {
 
             if (!"D".equals(op)) {
 
-                boolean isDelete = undoDao.isDelete(tab, "PK_SOURCE_ID", id);
+                boolean isDelete = undoService.isDelete(tab, "PK_SOURCE_ID", id);
                 // todo and here too
                 if (!isDelete) {
 

@@ -1,7 +1,7 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.UndoDao;
 import eionet.rod.model.UndoDTO;
+import eionet.rod.service.UndoService;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UpdateHistoryController {
 
     @Autowired
-    UndoDao undoDao;
+    UndoService undoService;
 
     @RequestMapping({"", "/"})
     public String updateHistoryHome(Model model, @RequestParam(required = false) Integer id, @RequestParam(required = false) String object, @RequestParam(required = false) String username) {
@@ -26,14 +26,14 @@ public class UpdateHistoryController {
 
         if (object != null) {
             if ("S".equals(object)) {
-                history = undoDao.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_SOURCE' ");
+                history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_SOURCE' ");
             } else {
-                history = undoDao.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_OBLIGATION' ");
+                history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_OBLIGATION' ");
             }
         } else if (username != null) {
-            history = undoDao.getUpdateHistory("AND U2.VALUE = '" + username + "' ");
+            history = undoService.getUpdateHistory("AND U2.VALUE = '" + username + "' ");
         } else {
-            history = undoDao.getUpdateHistory("");
+            history = undoService.getUpdateHistory("");
         }
 
         if (history != null) {

@@ -1,7 +1,7 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.UndoDao;
 import eionet.rod.model.UndoDTO;
+import eionet.rod.service.UndoService;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import java.util.List;
 public class VersionsController {
 
     @Autowired
-    UndoDao undoDao;
+    UndoService undoService;
 
     @RequestMapping({"", "/"})
     public String versionsHome(Model model) {
 
-        List<UndoDTO> versions = undoDao.getPreviousActionsGeneral();
+        List<UndoDTO> versions = undoService.getPreviousActionsGeneral();
         if (versions != null) {
             UndoDTO undo;
             for (UndoDTO version : versions) {
