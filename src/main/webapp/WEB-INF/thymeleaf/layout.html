@@ -24,7 +24,7 @@
 
     <!-- link rel="stylesheet" type="text/css" href="https:////cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" media="datatable"/ -->
     <!-- script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script -->
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="../../js/moment.min.js" th:src="@{/js/moment.min.js}"></script>
@@ -41,7 +41,7 @@
                 <a id="skiplink" href="#workarea" accesskey="2">
                     <span>Skip to content</span>
                 </a>
-                <a id="eealink" href="http://www.eea.europa.eu/">EEA</a>
+                <a id="eealink" href="https://www.eea.europa.eu/">EEA</a>
             </div>
             <div id="righttools">
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout <span sec:authentication="name">UserID</span></a>
@@ -53,10 +53,10 @@
                     <span>Switch to/from full screen mode</span>
                 </a>
                 <a href="about.html" th:href="@{/about}"><span>About</span></a>
-                <a id="rsslink" type="application/rss+xml" href="http://www.eionet.europa.eu/announcements.rdf" title="Eionet headlines as RSS">
+                <a id="rsslink" type="application/rss+xml" href="https://www.eionet.europa.eu/announcements.rdf" title="Eionet headlines as RSS">
                     <span>RSS</span>
                 </a>
-                <form action="http://google.com/search" method="get">
+                <form action="https://google.com/search" method="get">
                     <div id="freesrchform">
                         <label for="freesrchfld">Search</label>
                         <input type="text" id="freesrchfld" name="q" onfocus="if(this.value=='Search ROD')this.value='';" onblur="if(this.value=='')this.value='Search ROD';" value="Search ROD" size="10"/>
@@ -81,7 +81,7 @@
         <div class="breadcrumbtrail">
             <div class="breadcrumbhead">You are here:</div>
             <div class="breadcrumbitem eionetaccronym">
-                <a href="http://www.eionet.europa.eu">Eionet</a>
+                <a href="https://www.eionet.europa.eu">Eionet</a>
             </div>
             <th:block th:each="item, itemStat : ${breadcrumbs}">
                 <div class="breadcrumbitem" th:unless="${itemStat.last}">
@@ -161,11 +161,11 @@
 </div>
 <!-- container -->
 <div id="pagefoot" th:fragment="footerFragment">
-    <p><a th:href="@{/disclaimer}">Disclaimer</a> | <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20ROD%20website">Feedback</a> | Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB"
+    <p><a th:href="@{/disclaimer}">Disclaimer</a> | <a href="mailto:helpdesk@eionet.europa.eu?subject=Feedback%20from%20the%20ROD%20website">Feedback</a> | Copyright: <a rel="license" href="https://creativecommons.org/licenses/by/2.5/dk/deed.en_GB"
                                                                                                                                                                           title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License"
-                                                                                                                                                                                                                            src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
+                                                                                                                                                                                                                            src="https://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
     </p>
-    <p><a href="http://www.eea.europa.eu/"><b>European Environment Agency</b></a>
+    <p><a href="https://www.eea.europa.eu/"><b>European Environment Agency</b></a>
         <br/>Kgs. Nytorv 6, DK-1050 Copenhagen K, Denmark - Phone: +45 3336 7100</p>
 </div>
 </body>
