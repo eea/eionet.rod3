@@ -3,6 +3,7 @@ package eionet.rod.dao;
 import eionet.rod.model.*;
 import org.springframework.context.ApplicationContextException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +26,8 @@ public interface ObligationsDao {
 
     List<Issue> findAllIssuesbyObligation(Integer obligationId);
 
+    void updateDeadlines(Integer obligationId, Date nextDeadline, Date nextDeadline2, Date current);
+
     List<Obligations> findObligationList(String clientId, String issueId, String spatialId, String terminate, String deadlineCase, String anmode, String date1, String date2, boolean deadlinePage);
 
     void deleteObligations(String obligations);
@@ -36,5 +39,9 @@ public interface ObligationsDao {
     List<ClientDTO> findAllClientsByObligation(Integer obligationID);
 
     List<Obligations> findActivities();
+
+    List<Obligations> getDeadlines();
+
+    void updateTermination(Integer obligationId, String terminated);
 
 }

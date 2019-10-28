@@ -32,6 +32,23 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
     private static final Log logger = LogFactory.getLog(ObligationsDaoImpl.class);
 
+
+    private static final String Q_DEADLINES =
+            "SELECT PK_RA_ID AS obligationId, FIRST_REPORTING, REPORT_FREQ_MONTHS, VALID_TO, TERMINATE "
+                    + "FROM T_OBLIGATION "
+                    + "WHERE FIRST_REPORTING > 0 "
+                    + "AND VALID_TO > 0";
+
+    private static final String TERMINATION_UPDATE = "UPDATE T_OBLIGATION SET TERMINATE=? WHERE PK_RA_ID=?";
+
+    private static final String DEADLINE_UPDATE =
+            "UPDATE T_OBLIGATION "
+                    + "SET NEXT_DEADLINE = ?, NEXT_DEADLINE2 = NULL " + "WHERE PK_RA_ID = ?";
+
+    private static final String DEADLINE_HIST_INSERT =
+            "INSERT IGNORE INTO T_HISTORIC_DEADLINES "
+                    + "SET FK_RA_ID=?, DEADLINE=?";
+
     public ObligationsDaoImpl() {
     }
 
@@ -94,6 +111,23 @@ public class ObligationsDaoImpl implements ObligationsDao {
             throw new ResourceNotFoundException("DataAccessException error: " + e, e);
         }
 
+    }
+
+    @Override
+    public List<Obligations> getDeadlines() {
+         return jdbcTemplate.query(Q_DEADLINES, new BeanPropertyRowMapper<>(Obligations.class));
+    }
+
+    @Override
+    public void updateTermination(Integer obligationId, String terminated) {
+        jdbcTemplate.update(TERMINATION_UPDATE, terminated, obligationId);
+    }
+
+    @Override
+    public void updateDeadlines(Integer obligationId, Date nextDeadline, Date nextDeadline2, Date current) {
+        logger.debug("update deadlines for " + obligationId);
+        jdbcTemplate.update(DEADLINE_UPDATE, nextDeadline, nextDeadline2);
+        jdbcTemplate.update(DEADLINE_HIST_INSERT, obligationId, current);
     }
 
 

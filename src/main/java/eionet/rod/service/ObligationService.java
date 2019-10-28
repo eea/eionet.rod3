@@ -2,6 +2,7 @@ package eionet.rod.service;
 
 import eionet.rod.model.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,4 +35,10 @@ public interface ObligationService {
     List<Roles> getRespRoles();
 
     List<Obligations> findActivities();
+
+    List<Obligations> getDeadlines();
+
+    void updateTermination(Integer obligationId, String terminated);
+
+    void updateDeadlines(Integer obligationId, Date nextDeadline, Date nextDeadline2, Date current);
 }
