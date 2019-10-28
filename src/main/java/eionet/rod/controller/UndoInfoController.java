@@ -1,6 +1,6 @@
 package eionet.rod.controller;
 
-import eionet.rod.dao.IssueDaoImpl;
+import eionet.rod.dao.IssueDao;
 import eionet.rod.model.*;
 import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
@@ -34,7 +34,7 @@ public class UndoInfoController {
     UndoService undoService;
 
     @Autowired
-    IssueDaoImpl issueService;
+    IssueDao issueService;
 
     @Autowired
     ClientService clientService;
