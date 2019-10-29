@@ -102,4 +102,10 @@ public class ObligationServiceImpl implements ObligationService {
         obligationsDao.updateDeadlines(obligationId, nextDeadline, nextDeadline2, current);
     }
 
+    @Override
+    public List<Obligations> getUpcomingDeadlines(int days) {
+        return obligationsDao.getUpcomingDeadlines(days);
+    }
+
+
 }

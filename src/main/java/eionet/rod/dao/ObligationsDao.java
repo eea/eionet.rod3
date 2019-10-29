@@ -44,4 +44,5 @@ public interface ObligationsDao {
 
     void updateTermination(Integer obligationId, String terminated);
 
+    List<Obligations> getUpcomingDeadlines(int days);
 }

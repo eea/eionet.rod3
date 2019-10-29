@@ -39,6 +39,8 @@ import org.openrdf.repository.sparql.SPARQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +58,9 @@ import java.util.*;
 public class Extractor implements ExtractorConstants {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Extractor.class);
+
+    @Value("${cr.sparql.endpoint}")
+    private String sparqlEndpoint;
 
     public static final int ALL_DATA = 0;
     public static final int DELIVERIES = 1;
@@ -249,6 +254,7 @@ public class Extractor implements ExtractorConstants {
      *
      * @throws ServiceException
      */
+    @Scheduled(cron = "${extractor.job.cron}")
     private void extractDeliveries() {
         log("Going to extract deliveries from CR");
 
@@ -270,8 +276,7 @@ public class Extractor implements ExtractorConstants {
         RepositoryConnection conn = null;
 
         try {
-            String endpointURL = fileSrv.getStringProperty(FileServiceIF.CR_SPARQL_ENDPOINT);
-            SPARQLRepository crEndpoint = new SPARQLRepository(endpointURL);
+            SPARQLRepository crEndpoint = new SPARQLRepository(sparqlEndpoint);
             crEndpoint.initialize();
 
             conn = crEndpoint.getConnection();

@@ -239,16 +239,18 @@ public class DeliveryDaoImpl implements DeliveryDao {
                     int index = obligation.lastIndexOf("/");
                     if (index != -1 && obligation.length() > (index + 1)) {
                         String obligationId = obligation.substring(index + 1);
-
                         if (!StringUtils.isBlank(obligationId)) {
 
                             title = (title == null) ? "" : title;
                             period = ((period == null) ? "" : period);
                             date = date != null ? new Timestamp(date.getTime()) : null;
 
-                            jdbcTemplate.update(qSaveDeliveries, title, obligation, "", "", period, 1, date, link, Integer.parseInt(countryId), Integer.parseInt(obligationId), note);
-
-                            batchCounter++;
+                            try {
+                                jdbcTemplate.update(qSaveDeliveries, title, obligation, "", "", period, 1, date, link, Integer.parseInt(countryId), Integer.parseInt(obligationId), note);
+                                batchCounter++;
+                            } catch (Exception e) {
+                                logger.debug("Delivery save failed with >" + e.getMessage() + "< for delivery " + pairs);
+                            }
 
                             HashSet<Integer> savedCountries = savedCountriesByObligationId.get(obligationId);
                             if (savedCountries == null) {

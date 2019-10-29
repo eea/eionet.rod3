@@ -49,6 +49,19 @@ public class ObligationsDaoImpl implements ObligationsDao {
             "INSERT IGNORE INTO T_HISTORIC_DEADLINES "
                     + "SET FK_RA_ID=?, DEADLINE=?";
 
+    private static final String Q_UPCOMING_DEADLINES =
+            "SELECT "
+                    + "o.TITLE AS oblTitle, "
+                    + "o.PK_RA_ID AS obligationId, "
+                    + "o.FK_SOURCE_ID AS src_id, "
+                    + "o.REPORT_FREQ_MONTHS AS reportFreqMonths, "
+                    + "o.NEXT_DEADLINE AS next_deadline, "
+                    + "o.NEXT_DEADLINE2 AS next_deadline2, "
+                    + "o.RESPONSIBLE_ROLE AS responsibleRole "
+                    + "FROM T_OBLIGATION o "
+                    + "WHERE CURDATE() < o.NEXT_DEADLINE "
+                    + "AND (CURDATE() + INTERVAL (o.REPORT_FREQ_MONTHS * ? ) DAY) > o.NEXT_DEADLINE ";
+
     public ObligationsDaoImpl() {
     }
 
@@ -121,6 +134,11 @@ public class ObligationsDaoImpl implements ObligationsDao {
     @Override
     public void updateTermination(Integer obligationId, String terminated) {
         jdbcTemplate.update(TERMINATION_UPDATE, terminated, obligationId);
+    }
+
+    @Override
+    public List<Obligations> getUpcomingDeadlines(int days) {
+        return jdbcTemplate.query(Q_UPCOMING_DEADLINES, new BeanPropertyRowMapper<>(Obligations.class), days);
     }
 
     @Override

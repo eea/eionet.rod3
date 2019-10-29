@@ -41,4 +41,6 @@ public interface ObligationService {
     void updateTermination(Integer obligationId, String terminated);
 
     void updateDeadlines(Integer obligationId, Date nextDeadline, Date nextDeadline2, Date current);
+
+    List<Obligations> getUpcomingDeadlines(int days);
 }

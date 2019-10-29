@@ -253,4 +253,13 @@ public class RODUtil {
         return resultdate;
     }
 
+    public static String formatDate(Date d) {
+        if(d != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            return sdf.format(d);
+        } else {
+            return null;
+        }
+    }
+
 }
