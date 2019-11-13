@@ -70,6 +70,7 @@ public class ITInstrumentsController {
     @Test
     public void editInstrumentForm() throws Exception {
         this.mockMvc.perform(get("/instruments/edit?sourceId=1")
+                .with(user("editor").roles("EDITOR"))
                 .param("sourceId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("instrumentEditForm"));
