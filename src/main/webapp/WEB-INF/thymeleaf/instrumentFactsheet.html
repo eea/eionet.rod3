@@ -24,7 +24,7 @@
                 <li><span>Operations</span>
                     <ul>
                         <li><a href="instrumentEditForm.html" th:href="@{'/instruments/edit?sourceId=' + *{sourceId}}">Edit instrument</a></li>
-                        <li><a onclick="deleteInstrument()">Delete instrument</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a onclick="deleteInstrument()">Delete instrument</a></li>
                     </ul>
                 </li>
             </ul>
@@ -106,12 +106,12 @@
                         </ul>
                     </div>
                 </div>
-                <div class="odd form-group">
-                    <div class="col-lg-4">Valid from</div>
-                    <div class="col-lg-8">
-                        <span th:text="${{instrument.sourceValidFrom}}">Valid from</span>
-                    </div>
-                </div>
+<!--                <div class="odd form-group">-->
+<!--                    <div class="col-lg-4">Valid from</div>-->
+<!--                    <div class="col-lg-8">-->
+<!--                        <span th:text="${{instrument.sourceValidFrom}}">Valid from</span>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="odd form-group">
                     <div class="col-lg-4">Abstract</div>
                     <div class="col-lg-8"><span th:utext="${instrument.sourceAbstract}">Abstract</span></div>
@@ -141,12 +141,12 @@
                         <span th:utext="${instrument.sourceComment}">Comments</span>
                     </div>
                 </div>
-                <div class="odd form-group">
-                    <div class="col-lg-4">EC entry into force</div>
-                    <div class="col-lg-8">
-                        <span th:text="${{instrument.sourceEcEntryIntoForce}}">EC entry into force</span>
-                    </div>
-                </div>
+<!--                <div class="odd form-group">-->
+<!--                    <div class="col-lg-4">EC entry into force</div>-->
+<!--                    <div class="col-lg-8">-->
+<!--                        <span th:text="${{instrument.sourceEcEntryIntoForce}}">EC entry into force</span>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="even form-group">
                     <div class="col-lg-4">EC accession</div>
                     <div class="col-lg-8">

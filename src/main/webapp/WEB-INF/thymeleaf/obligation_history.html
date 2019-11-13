@@ -27,7 +27,7 @@
                 <li><span>Operations</span>
                     <ul>
                         <li><a th:href="@{'/obligations/'+ ${obligationId} +'/edit/'}">Edit obligation</a></li>
-                        <li><a th:href="@{'/obligations/delete/' + ${obligationId}}">Delete obligation</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{'/obligations/delete/' + ${obligationId}}">Delete obligation</a></li>
                     </ul>
                 </li>
             </ul>

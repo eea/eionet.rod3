@@ -65,7 +65,7 @@
             <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
                 <li><span>Operations</span>
                     <ul>
-                        <li><a onclick="deleteObl()">Delete obligations</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a onclick="deleteObl()">Delete obligations</a></li>
                         <li><a th:href="@{'/instruments?mode=X'}">New obligation</a></li>
                     </ul>
                 </li>

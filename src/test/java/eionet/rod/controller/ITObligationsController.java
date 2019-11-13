@@ -219,16 +219,15 @@ public class ITObligationsController {
                 .param("clientId", "0")
                 .param("hrefdelete", "/rod/obligations/")
                 .param("delObligations", "1")
-                .with(user("editor").roles("EDITOR"))
+                .with(user("editor").roles("ADMIN"))
                 .with(csrf()))
                 .andExpect(status().isOk());
     }
 
-
     @Test
     public void deleteObligation() throws Exception {
         this.mockMvc.perform(get("/obligations/delete/1")
-                .with(user("editor").roles("EDITOR")))
+                .with(user("editor").roles("ADMIN")))
                 .andExpect(status().is3xxRedirection());
     }
 
