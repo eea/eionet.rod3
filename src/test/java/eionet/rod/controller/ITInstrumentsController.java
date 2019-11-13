@@ -113,9 +113,23 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithCsrf() throws Exception {
         this.mockMvc.perform(post("/instruments/delete")
                 .param("sourceId", "1")
-                .with(user("editor").roles("EDITOR"))
+                .with(user("editor").roles("ADMIN"))
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection());
+
+    }
+
+    /**
+     * Tests that editors cannot delete instruments
+     * @throws Exception
+     */
+    @Test
+    public void deleteInstrumentsWithCsrfEditor() throws Exception {
+        this.mockMvc.perform(post("/instruments/delete")
+                .param("sourceId", "1")
+                .with(user("editor").roles("EDITOR"))
+                .with(csrf()))
+                .andExpect(status().is4xxClientError());
 
     }
 
@@ -123,7 +137,7 @@ public class ITInstrumentsController {
     public void deleteInstrumentsWithoutCsrf() throws Exception {
         this.mockMvc.perform(post("/instruments/delete")
                 .param("sourceId", "1")
-                .with(user("editor").roles("EDITOR")))
+                .with(user("editor").roles("ADMIN")))
                 .andExpect(status().is4xxClientError());
 
     }
