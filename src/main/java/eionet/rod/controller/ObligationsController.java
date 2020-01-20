@@ -58,6 +58,9 @@ public class ObligationsController {
     ObligationService obligationsService;
 
     @Autowired
+    SourceService sourceService;
+
+    @Autowired
     IssueService issueService;
 
     @Autowired
@@ -505,7 +508,7 @@ public class ObligationsController {
         List<Obligations> relObligations = obligationsService.findAll();
         model.addAttribute("relObligations", relObligations);
 
-        model.addAttribute("title", "Edit Reporting Obligation for");
+        model.addAttribute("title", "Edit Reporting Obligation for " + obligations.getSourceAlias());
 
         model.addAttribute("id", "edit");
 
@@ -517,30 +520,39 @@ public class ObligationsController {
      * obligations details by ID (overview)
      */
     @RequestMapping(value = "/add/{sourceId}")
-    public String obligation_add(final Model model, @PathVariable("sourceId") String sourceId) {
+    public String obligation_add(final Model model, @PathVariable("sourceId") Integer sourceId) {
         BreadCrumbs.set(model, obligationCrumb, new BreadCrumb("Add obligation"));
-        model.addAttribute("activeTab", "obligations");
-        model.addAttribute("title", "Edit Reporting Obligation for");
 
-        Obligations obligation = new Obligations();
-        obligation.setSourceId(sourceId);
-        model.addAttribute("obligation", obligation);
-        //List of clients with status = C
-        List<ClientDTO> clients = clientService.getAllClients();
-        model.addAttribute("allClients", clients);
+        InstrumentFactsheetDTO source = sourceService.getById(sourceId);
 
-        List<Spatial> countries = spatialService.findAll();
-        model.addAttribute("allcountries", countries);
+        if(source != null) {
 
-        List<Issue> issues = issueService.findAllIssuesList();
-        model.addAttribute("issues", issues);
+            model.addAttribute("activeTab", "obligations");
+            model.addAttribute("title", "Add Reporting Obligation for " + source.getSourceAlias());
 
-        List<Obligations> relObligations = obligationsService.findAll();
-        model.addAttribute("relObligations", relObligations);
+            Obligations obligation = new Obligations();
+            obligation.setSourceId(sourceId.toString());
+            model.addAttribute("obligation", obligation);
+            //List of clients with status = C
+            List<ClientDTO> clients = clientService.getAllClients();
+            model.addAttribute("allClients", clients);
 
-        model.addAttribute("id", "add");
+            List<Spatial> countries = spatialService.findAll();
+            model.addAttribute("allcountries", countries);
 
-        return "eobligation";
+            List<Issue> issues = issueService.findAllIssuesList();
+            model.addAttribute("issues", issues);
+
+            List<Obligations> relObligations = obligationsService.findAll();
+            model.addAttribute("relObligations", relObligations);
+
+            model.addAttribute("id", "add");
+
+            return "eobligation";
+        } else {
+            // instrument not found
+            throw new ResourceNotFoundException("Legal instrument not found");
+        }
     }
 
     /**

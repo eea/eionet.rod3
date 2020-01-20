@@ -24,6 +24,7 @@
                 <li><span>Operations</span>
                     <ul>
                         <li><a href="instrumentEditForm.html" th:href="@{'/instruments/edit?sourceId=' + *{sourceId}}">Edit instrument</a></li>
+                        <li><a href="instrumentEditForm.html" th:href="@{'/obligations/add/' + *{sourceId}}">Add obligation</a></li>
                         <li sec:authorize="hasRole('ADMIN')"><a onclick="deleteInstrument()">Delete instrument</a></li>
                     </ul>
                 </li>

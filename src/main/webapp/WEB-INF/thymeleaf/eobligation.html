@@ -7,7 +7,7 @@
     <div id="workarea">
         <div th:replace="helpModal :: helpModalFragment"></div>
 
-        <h1>Edit Reporting Obligation for</h1>
+        <h1 th:inline="text">[(${title})]</h1>
 
         <form method="POST" th:action="@{'/obligations/' + ${id}}" th:object="${obligation}" name="f" class="form-horizontal">
             <span class="pagebanner">Identification</span>
