@@ -1606,4 +1606,11 @@
         <dropTable tableName="ACL_ROWS"/>
 
     </changeSet>
+
+    <changeSet id="rev-89" author="ivascu">
+        <comment>Reverting some of the FK changes as the DB is not normalized and the T_SOURCE_LNK table is actually used with multiple tables (T_SOURCE + T_SOURCE_CLASS)</comment>
+        <dropForeignKeyConstraint baseTableName="T_SOURCE_LNK" constraintName="T_SOURCE_CHILD_FK"/>
+        <dropForeignKeyConstraint baseTableName="T_SOURCE_LNK" constraintName="T_SOURCE_PARENT_FK"/>
+        <sqlFile path="db/restore_t_source_lnk.sql"/>
+    </changeSet>
 </databaseChangeLog>
