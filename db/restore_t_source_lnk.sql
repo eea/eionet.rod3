@@ -1,4 +1,4 @@
-insert into t_source_lnk
+insert into T_SOURCE_LNK
 values (1, 2, 'C', 25, 'C'),
        (2, 3, 'C', 25, 'C'),
        (3, 9, 'C', 25, 'C'),
