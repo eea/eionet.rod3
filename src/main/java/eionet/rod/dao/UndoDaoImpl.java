@@ -158,7 +158,7 @@ public class UndoDaoImpl implements UndoDao {
                         isPrimary = "n";
                         break;
                     case "FK_TYPE_ID":
-                        value = instrument.getSourceFkTypeId().toString();
+                        value = (instrument.getSourceFkTypeId() != null) ? instrument.getSourceFkTypeId().toString() : null;
                         quotes = "n";
                         isPrimary = "n";
                         break;
@@ -173,7 +173,7 @@ public class UndoDaoImpl implements UndoDao {
                         isPrimary = "n";
                         break;
                     case "FK_CLIENT_ID":
-                        value = instrument.getClientId().toString();
+                        value = (instrument.getClientId() != null) ? instrument.getClientId().toString() : null;
                         quotes = "n";
                         isPrimary = "n";
                         break;
