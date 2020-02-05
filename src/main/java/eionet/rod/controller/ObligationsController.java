@@ -3,6 +3,7 @@ package eionet.rod.controller;
 import eionet.rod.Attrs;
 import eionet.rod.IAuthenticationFacade;
 import eionet.rod.UNSEventSender;
+import eionet.rod.extractor.Extractor;
 import eionet.rod.model.*;
 import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
@@ -56,6 +57,8 @@ public class ObligationsController {
      */
     @Autowired
     ObligationService obligationsService;
+    @Autowired
+    Extractor extractor;
 
     @Autowired
     SourceService sourceService;
@@ -686,6 +689,9 @@ public class ObligationsController {
         processEditDelete("U", authentication.getName(), obligations.getObligationId(), ts);
 
         obligationsService.updateObligations(obligations, allObligationClients, allObligationCountries, allObligationVoluntaryCountries, allSelectedIssues);
+
+        extractor.saveRole(obligations.getResponsibleRole());
+        extractor.saveRole(obligations.getCoordinatorRole());
 
         model.addAttribute("obligation", obligations);
 
