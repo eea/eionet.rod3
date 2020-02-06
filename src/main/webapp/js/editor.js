@@ -730,9 +730,9 @@ function contReporting() {
 function contReportingChanged(){
 	var elem = document.getElementById("continousReporting");
 	if(elem.checked){
-		document.getElementById("next_reporting").value = 'Continuous reporting';
+		document.getElementById("nextReporting").value = 'Continuous reporting';
 	} else {
-		document.getElementById("next_reporting").value = '';
+		document.getElementById("nextReporting").value = '';
 	}
 }
 
