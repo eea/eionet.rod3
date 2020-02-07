@@ -159,7 +159,7 @@
                         <td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
                         <td><a th:href="@{'/instruments/'+${obligation.sourceId}}" th:text="${obligation.sourceAlias}" th:alt="${obligation.sourceTitle}"></a></td>
                         <td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
-                        <td th:text="${obligation.nextDeadline != null} ? ${{obligation.nextDeadline}} : ${obligation.nextReporting}"></td>
+                        <td th:text="${obligation.nextDeadline != null} ? ${#dates.format(obligation.nextDeadline,'yyyy-MM-dd')} : ${obligation.nextReporting}"></td>
 
                     </tr>
                 </table>
