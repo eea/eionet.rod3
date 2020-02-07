@@ -35,6 +35,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sparql.SPARQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -330,6 +331,12 @@ public class Extractor implements ExtractorConstants {
             LOGGER.error(e.getMessage());
             exitApp(false); // return;
             throw new ResourceNotFoundException("Error getting data from Content Registry " + e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (RepositoryException e) {
+                log(e.getMessage());
+            }
         }
     }
 
