@@ -103,7 +103,7 @@
                     <td><a th:href="@{'/obligations/'+${obligation.obligationId}}" th:text="${obligation.oblTitle}"></a></td>
                     <td><a th:href="@{'/clients/'+${obligation.clientId}}" th:text="${obligation.clientName}"></a></td>
                     <td>
-                        <span th:if="${obligation.nextDeadline} != ''" th:text="${{obligation.nextDeadline}}"></span>
+                        <span th:if="${obligation.nextDeadline} != ''" th:text="${#dates.format({obligation.nextDeadline},'yyyy-MM-dd')}"></span>
                         <span th:unless="${obligation.nextDeadline} != ''" th:text="${obligation.nextReporting}"></span>
                     </td>
                     <td>
