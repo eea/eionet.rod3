@@ -1463,6 +1463,16 @@ public class ObligationsController {
             list.add(pObligations.getOblTitle());
             lists.add(list);
 
+            List<ObligationCountry> countries = spatialService.findObligationCountriesList(obligationId);
+
+            for (ObligationCountry oc : countries) {
+                list = new Vector<>();
+                list.add(events);
+                list.add(fileService.getStringProperty(FileServiceIF.UNS_COUNTRY_PREDICATE));
+                list.add(oc.getCountryName());
+                lists.add(list);
+            }
+
             list = new Vector<>();
             list.add(events);
             list.add(Attrs.SCHEMA_RDF + "responsiblerole");
