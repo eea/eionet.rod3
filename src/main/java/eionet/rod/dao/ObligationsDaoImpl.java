@@ -43,7 +43,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
     private static final String DEADLINE_UPDATE =
             "UPDATE T_OBLIGATION "
-                    + "SET NEXT_DEADLINE = ?, NEXT_DEADLINE2 = NULL " + "WHERE PK_RA_ID = ?";
+                    + "SET NEXT_DEADLINE = ?, NEXT_DEADLINE2 = ? " + "WHERE PK_RA_ID = ?";
 
     private static final String DEADLINE_HIST_INSERT =
             "INSERT IGNORE INTO T_HISTORIC_DEADLINES "
@@ -144,7 +144,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
     @Override
     public void updateDeadlines(Integer obligationId, Date nextDeadline, Date nextDeadline2, Date current) {
         logger.debug("update deadlines for " + obligationId);
-        jdbcTemplate.update(DEADLINE_UPDATE, nextDeadline, nextDeadline2);
+        jdbcTemplate.update(DEADLINE_UPDATE, nextDeadline, nextDeadline2, obligationId);
         jdbcTemplate.update(DEADLINE_HIST_INSERT, obligationId, current);
     }
 

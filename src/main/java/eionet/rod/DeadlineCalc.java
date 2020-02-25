@@ -80,6 +80,7 @@ public class DeadlineCalc {
         GregorianCalendar currDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 
         LOGGER.debug("Calculation for obligation " + o.getObligationId());
+        Date current = o.getNextDeadline();
 
         // set termination to true if past the valid time
         if (!(currDate.after(o.getValidTo()) ? "Y" : "N").equals(o.getTerminate())) {
@@ -131,7 +132,7 @@ public class DeadlineCalc {
         if (!repDate.after(o.getValidTo()))
             nextDeadline2 = repDate.getTime();
 
-        obligationService.updateDeadlines(o.getObligationId(), nextDeadline, nextDeadline2, o.getFirstReporting());
+        obligationService.updateDeadlines(o.getObligationId(), nextDeadline, nextDeadline2, current);
     }
 
     Calendar calculateNextDeadline(Calendar currDate, Calendar firstReporting, Calendar validTo, Integer freq) {
