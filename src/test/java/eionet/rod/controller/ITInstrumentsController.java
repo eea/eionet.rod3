@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.util.NestedServletException;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -113,10 +114,25 @@ public class ITInstrumentsController {
     @Test
     public void deleteInstrumentsWithCsrf() throws Exception {
         this.mockMvc.perform(post("/instruments/delete")
-                .param("sourceId", "1")
+                .param("sourceId", "2")
                 .with(user("editor").roles("ADMIN"))
                 .with(csrf()))
                 .andExpect(status().is3xxRedirection());
+
+    }
+
+    /**
+     * Tests that an instrument with obligations cannot be deleted
+     * @throws Exception
+     */
+    @Test(expected = NestedServletException.class)
+    public void deleteInstrumentsWithObligations() throws Exception {
+
+        this.mockMvc.perform(post("/instruments/delete")
+                .param("sourceId", "1")
+                .with(user("editor").roles("ADMIN"))
+                .with(csrf()))
+                .andExpect(status().is5xxServerError());
 
     }
 

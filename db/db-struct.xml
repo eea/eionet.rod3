@@ -1613,4 +1613,11 @@
         <dropForeignKeyConstraint baseTableName="T_SOURCE_LNK" constraintName="T_SOURCE_PARENT_FK"/>
         <sqlFile path="db/restore_t_source_lnk.sql"/>
     </changeSet>
+    <changeSet id="rev-90" author="ivascu">
+        <comment>Do not delete instruments that have obligations.</comment>
+        <dropForeignKeyConstraint baseTableName="T_OBLIGATION" constraintName="T_OB_SRC_FK"/>
+        <addForeignKeyConstraint baseTableName="T_OBLIGATION" constraintName="T_OB_SRC_FK"
+                                 baseColumnNames="FK_SOURCE_ID" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="RESTRICT"/>
+
+    </changeSet>
 </databaseChangeLog>

@@ -2,14 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="layout :: headerFragment"></head>
 <body>
-<script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
     function deleteInstrument() {
-
+        [# th:if="${not #lists.isEmpty(instrument.obligations)}"]
+        window.alert("Instruments with obligations cannot be deleted.");
+        [/]
+        [# th:unless= "${not #lists.isEmpty(instrument.obligations)}"]
         if (window.confirm("Do you really want to delete this instrument?")) {
             document.forms['f'].submit();
         }
-
+        [/]
     }
+    /*]]>*/
 
 </script>
 <div id="container">
