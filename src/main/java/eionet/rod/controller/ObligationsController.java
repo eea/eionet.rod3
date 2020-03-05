@@ -511,7 +511,7 @@ public class ObligationsController {
         List<Obligations> relObligations = obligationsService.findAll();
         model.addAttribute("relObligations", relObligations);
 
-        model.addAttribute("title", "Edit Reporting Obligation for " + obligations.getSourceAlias());
+        model.addAttribute("title", "Edit Reporting Obligation for: " + obligations.getOblTitle());
 
         model.addAttribute("id", "edit");
 
