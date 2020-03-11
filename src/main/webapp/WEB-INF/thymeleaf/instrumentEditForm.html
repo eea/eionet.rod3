@@ -7,7 +7,7 @@
     <div id="workarea">
         <div th:replace="helpModal :: helpModalFragment"></div>
 
-        <h1 th:text="${instrument.sourceTitle != null} ? ${instrument.sourceTitle} : 'Add instrument'">Edit Instrument</h1>
+        <h1 th:text="${instrument.sourceAlias != null} ? ${instrument.sourceAlias} : 'Add instrument'">Edit Instrument</h1>
         <form action="instrumentEditForm.html" class="form-horizontal" method="POST" name="f" th:action="@{/instruments/} + ${form}" th:object="${instrument}">
             <input name="sourceId" th:value="*{sourceId}" type="hidden" value="55"/>
             <input id="hrefInstruments" name="hrefInstruments" th:value="@{'/instruments'}" type="hidden">

@@ -27,7 +27,7 @@
         <security:intercept-url pattern="/instruments/delete" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/instruments/add" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/harvester" access="hasRole('EDITOR')"/>
-        <security:intercept-url pattern="/subscribe" access="hasRole('EDITOR')"/>
+        <security:intercept-url pattern="/subscribe" access="isAuthenticated()"/>
         <security:intercept-url pattern="/**" access="permitAll()"/>
         <security:custom-filter position="CAS_FILTER" ref="casFilter"/>
         <security:logout logout-success-url="/logout"/>
