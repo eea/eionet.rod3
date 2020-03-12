@@ -185,8 +185,13 @@ public class ClientsController {
     @RequestMapping("/delete/{clientId}")
     public String deleteClient(@PathVariable("clientId") Integer clientId, Model model) {
         if (clientService.clientExists(clientId)) {
-            clientService.deleteById(clientId);
-            model.addAttribute("message", "Client " + clientId + " deleted");
+            if (!clientService.isClientInUse(clientId)) {
+                clientService.deleteById(clientId);
+                model.addAttribute("message", "Client " + clientId + " deleted");
+            }
+            else {
+                model.addAttribute("message", "Client " + clientId + " was not deleted, because it is in use in an obligation or in a legal instrument");
+            }
         } else {
             model.addAttribute("message", "Client " + clientId + " was not deleted, because it does not exist");
         }

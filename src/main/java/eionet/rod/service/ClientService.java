@@ -36,4 +36,5 @@ public interface ClientService {
 
     String getOrganisationNameByID(String clientId);
 
+    boolean isClientInUse(Integer clientId);
 }

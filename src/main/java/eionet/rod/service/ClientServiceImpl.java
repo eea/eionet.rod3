@@ -87,4 +87,9 @@ public class ClientServiceImpl implements ClientService {
     public String getOrganisationNameByID(String clientId) {
         return clientDao.getOrganisationNameByID(clientId);
     }
+
+    @Override
+    public boolean isClientInUse(Integer clientId) {
+        return clientDao.isClientInUse(clientId);
+    }
 }

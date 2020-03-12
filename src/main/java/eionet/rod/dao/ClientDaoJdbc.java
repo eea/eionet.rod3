@@ -217,4 +217,17 @@ public class ClientDaoJdbc implements ClientDao {
         return name != null ? name : "";
     }
 
+    public boolean isClientInUse(Integer clientId) {
+        String query = 
+            "SELECT COUNT(*) FROM " +
+                "(SELECT FK_CLIENT_ID FROM T_CLIENT_OBLIGATION_LNK " +
+                "UNION " +
+                "SELECT FK_CLIENT_ID FROM T_CLIENT_SOURCE_LNK " +
+                "WHERE FK_CLIENT_ID = ?) clientUse";
+
+        int count = jdbcTemplate.queryForObject(query, Integer.class, clientId);
+
+        return count > 0;
+    }
+
 }

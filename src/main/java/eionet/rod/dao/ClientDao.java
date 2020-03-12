@@ -46,4 +46,5 @@ public interface ClientDao {
 
     String getOrganisationNameByID(String clientId);
 
+    boolean isClientInUse(Integer clientId);
 }
