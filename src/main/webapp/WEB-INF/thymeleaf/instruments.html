@@ -6,7 +6,7 @@
     <div th:include="layout :: bannerFragment"></div>
     <div id="workarea">
         <div class="title">
-            <h1>Legislative instruments</h1>
+            <h1>Legal instruments</h1>
             <ul sec:authorize="hasRole('EDITOR')" class="menu-operations">
                 <li><span>Operations</span>
                     <ul>
@@ -32,7 +32,7 @@
                         <a th:if="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}" th:href="${instrument.sourceUrl}">Link to legal text</a>
                         <span th:unless="${instrument.sourceUrl != null and !instrument.sourceUrl.isEmpty()}">Link to legal text</span>
                         <br/>
-                        Parent legislative instrument:
+                        Parent legal instrument:
                         <a class="normal_weight" th:if="${instrument.sourceParentId != null}" th:href="@{'/instruments/'} + ${instrument.sourceParentId}" th:text="${instrument.sourceParentAlias}"></a>
                     </li>
                 </ul>

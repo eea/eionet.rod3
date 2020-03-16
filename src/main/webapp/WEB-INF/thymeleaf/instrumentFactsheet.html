@@ -21,7 +21,7 @@
     <div th:include="layout :: bannerFragment"></div>
     <div id="workarea">
         <div class="title">
-            <h1>Legislative instrument details:
+            <h1>Legal instrument details:
                 <span th:text="${instrument.sourceAlias}">Alias</span>
                 <span th:if="${instrument.sourceTerminate == 'Y'}" class='smallfont' style='color:red'> [terminated]</span>
             </h1>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="even form-group">
-                    <div class="col-lg-4">Parent legislative instrument</div>
+                    <div class="col-lg-4">Parent legal instrument</div>
                     <div class="col-lg-8">
                         <a th:if="${instrument.parent != null}" th:text="${instrument.parent.sourceAlias}" th:href="@{'/instruments/'} + ${instrument.parent.sourceId}">
                             Parent

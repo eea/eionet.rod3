@@ -111,7 +111,7 @@ public class InstrumentsController {
                                      @RequestParam(required = false) String message) {
         model.addAttribute("form", "edit");
         model.addAttribute("sourceId", sourceId);
-        BreadCrumbs.set(model, "Edit a Legislative Instrument");
+        BreadCrumbs.set(model, "Edit a Legal Instrument");
         InstrumentFactsheetDTO instrument = sourceService.getById(sourceId);
         if (instrument.getParent() != null) {
             instrument.setSourceLnkFKSourceParentId(instrument.getParent().getSourceId());
@@ -170,9 +170,9 @@ public class InstrumentsController {
         List<String> selectedClassifications = new ArrayList<>();
         instrument.setSelectedClassifications(selectedClassifications);
         model.addAttribute("instrument", instrument);
-        BreadCrumbs.set(model, "Create a Legislative Instrument");
+        BreadCrumbs.set(model, "Create a Legal Instrument");
         model.addAttribute("activeTab", "instruments");
-        model.addAttribute("title", "Create a Legislative Instrument");
+        model.addAttribute("title", "Create a Legal Instrument");
         if (message != null) model.addAttribute("message", message);
         return "instrumentEditForm";
     }
