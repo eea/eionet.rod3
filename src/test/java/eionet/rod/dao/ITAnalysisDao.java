@@ -30,10 +30,10 @@ public class ITAnalysisDao {
     public void testGetStatistics() {
 
         AnalysisDTO analysisDTORec = analysisDao.getStatistics();
-        assertEquals("2", analysisDTORec.getTotalRa().toString());
-        assertEquals("2007-06-29 00:00:00.0", analysisDTORec.getLastUpdateRa().toString());
-        assertEquals("2", analysisDTORec.getTotalLi().toString());
-        assertEquals("2017-12-21 00:00:00.0", analysisDTORec.getLastUpdateLi().toString());
+        assertEquals("2", analysisDTORec.getTotalReportingObligation().toString());
+        assertEquals("2007-06-29 00:00:00.0", analysisDTORec.getLastUpdateReportingObligation().toString());
+        assertEquals("2", analysisDTORec.getTotalLegalInstrument().toString());
+        assertEquals("2017-12-21 00:00:00.0", analysisDTORec.getLastUpdateLegalInstrument().toString());
         assertEquals("0", analysisDTORec.getEeaCore().toString());
         assertEquals("0", analysisDTORec.getEeaPriority().toString());
         assertEquals("0", analysisDTORec.getFlaggedRa().toString());

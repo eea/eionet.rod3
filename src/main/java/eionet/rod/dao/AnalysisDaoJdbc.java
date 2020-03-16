@@ -26,21 +26,33 @@ public class AnalysisDaoJdbc implements AnalysisDao {
 
         AnalysisDTO analysisDTORec = new AnalysisDTO();
 
-        String query = "SELECT COUNT(*) AS totalRa FROM T_OBLIGATION";
+        String query = "SELECT COUNT(*) AS totalReportingObligation FROM T_OBLIGATION";
         number = jdbcTemplate.queryForObject(query, Integer.class);
-        Integer totalRa = number.intValue();
-        query = "SELECT MAX(LAST_UPDATE) AS lastUpdateRa FROM T_OBLIGATION";
-        date = jdbcTemplate.queryForObject(query, Date.class);
-        analysisDTORec.setTotalRa(totalRa);
-        analysisDTORec.setLastUpdateRa(date);
+        Integer totalReportingObligation = number.intValue();
+        analysisDTORec.setTotalReportingObligation(totalReportingObligation);
 
-        query = "SELECT COUNT(*) AS totalLi FROM T_SOURCE";
+        query = "SELECT COUNT(*) AS totalReportingObligation FROM T_OBLIGATION WHERE TERMINATE = 'N'";
         number = jdbcTemplate.queryForObject(query, Integer.class);
-        Integer totalLi = number.intValue();
-        query = "SELECT MAX(LAST_UPDATE) AS lastUpdateLi FROM T_SOURCE";
+        Integer openedReportingObligation = number.intValue();
+        analysisDTORec.setOpenedReportingObligation(openedReportingObligation);
+
+        query = "SELECT COUNT(*) AS totalReportingObligation FROM T_OBLIGATION WHERE TERMINATE = 'Y'";
+        number = jdbcTemplate.queryForObject(query, Integer.class);
+        Integer terminatedReportingObligation = number.intValue();
+        analysisDTORec.setTerminatedReportingObligation(terminatedReportingObligation);
+
+        query = "SELECT MAX(LAST_UPDATE) AS lastUpdateReportingObligation FROM T_OBLIGATION";
         date = jdbcTemplate.queryForObject(query, Date.class);
-        analysisDTORec.setTotalLi(totalLi);
-        analysisDTORec.setLastUpdateLi(date);
+        analysisDTORec.setLastUpdateReportingObligation(date);
+
+        query = "SELECT COUNT(*) AS totalLegalInstrument FROM T_SOURCE";
+        number = jdbcTemplate.queryForObject(query, Integer.class);
+        Integer totalLegalInstrument = number.intValue();
+        analysisDTORec.setTotalLegalInstrument(totalLegalInstrument);
+
+        query = "SELECT MAX(LAST_UPDATE) AS lastUpdateLegalInstrument FROM T_SOURCE";
+        date = jdbcTemplate.queryForObject(query, Date.class);
+        analysisDTORec.setLastUpdateLegalInstrument(date);
 
         query = "SELECT COUNT(PK_RA_ID) AS eeaCore FROM T_OBLIGATION WHERE EEA_CORE=1";
         number = jdbcTemplate.queryForObject(query, Integer.class);

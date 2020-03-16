@@ -8,8 +8,10 @@
         <div th:replace="helpModal :: helpModalFragment"></div>
         <h1>Database Content Statistics</h1>
         <div>
-            <span><span th:text="${analysis.totalRa}"></span> Reporting Obligation records (last update: <span th:text="${analysis.lastUpdateRa}"></span>)</span><br/>
-            <span><span th:text="${analysis.totalLi}"></span> Legal Instrument records (last update: <span th:text="${analysis.lastUpdateLi}"></span>)</span>
+            <span><span th:text="${analysis.totalReportingObligation}"></span> Reporting Obligation records (last update: <span th:text="${analysis.lastUpdateReportingObligation}"></span>)</span><br/>
+            <span>- <span th:text="${analysis.openedReportingObligation}"></span> opened Reporting Obligation records</span><br/>
+            <span>- <span th:text="${analysis.terminatedReportingObligation}"></span> terminated Reporting Obligation records</span><br/>
+            <span><span th:text="${analysis.totalLegalInstrument}"></span> Legal Instrument records (last update: <span th:text="${analysis.lastUpdateLegalInstrument}"></span>)</span>
         </div>
         <br/>
         <div class="form-horizontal">

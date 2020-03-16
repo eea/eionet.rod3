@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class AnalysisDTO {
 
-    private Integer totalRa;
-    private Date lastUpdateRa;
-    private Integer totalLi;
-    private Date lastUpdateLi;
+    private Integer totalReportingObligation;
+    private Integer openedReportingObligation;
+    private Integer terminatedReportingObligation;
+    private Date lastUpdateReportingObligation;
+    private Integer totalLegalInstrument;
+    private Date lastUpdateLegalInstrument;
     private Integer eeaCore;
     private Integer eeaPriority;
 
@@ -18,36 +20,52 @@ public class AnalysisDTO {
     public AnalysisDTO() {
     }
 
-    public Integer getTotalRa() {
-        return totalRa;
+    public Integer getTotalReportingObligation() {
+        return totalReportingObligation;
     }
 
-    public void setTotalRa(Integer totalRa) {
-        this.totalRa = totalRa;
+    public void setTotalReportingObligation(Integer totalReportingObligation) {
+        this.totalReportingObligation = totalReportingObligation;
     }
 
-    public Date getLastUpdateRa() {
-        return lastUpdateRa;
+    public Integer getOpenedReportingObligation() {
+        return openedReportingObligation;
     }
 
-    public void setLastUpdateRa(Date lastUpdateRa) {
-        this.lastUpdateRa = lastUpdateRa;
+    public void setOpenedReportingObligation(Integer openedReportingObligation) {
+        this.openedReportingObligation = openedReportingObligation;
     }
 
-    public Integer getTotalLi() {
-        return totalLi;
+    public Integer getTerminatedReportingObligation() {
+        return terminatedReportingObligation;
     }
 
-    public void setTotalLi(Integer totalLi) {
-        this.totalLi = totalLi;
+    public void setTerminatedReportingObligation(Integer terminatedReportingObligation) {
+        this.terminatedReportingObligation = terminatedReportingObligation;
     }
 
-    public Date getLastUpdateLi() {
-        return lastUpdateLi;
+    public Date getLastUpdateReportingObligation() {
+        return lastUpdateReportingObligation;
     }
 
-    public void setLastUpdateLi(Date lastUpdateLi) {
-        this.lastUpdateLi = lastUpdateLi;
+    public void setLastUpdateReportingObligation(Date lastUpdateReportingObligation) {
+        this.lastUpdateReportingObligation = lastUpdateReportingObligation;
+    }
+
+    public Integer getTotalLegalInstrument() {
+        return totalLegalInstrument;
+    }
+
+    public void setTotalLegalInstrument(Integer totalLegalInstrument) {
+        this.totalLegalInstrument = totalLegalInstrument;
+    }
+
+    public Date getLastUpdateLegalInstrument() {
+        return lastUpdateLegalInstrument;
+    }
+
+    public void setLastUpdateLegalInstrument(Date lastUpdateLegalInstrument) {
+        this.lastUpdateLegalInstrument = lastUpdateLegalInstrument;
     }
 
     public Integer getEeaCore() {
