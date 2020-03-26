@@ -17,8 +17,10 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
-    <version>3.6-SNAPSHOT</version>
-    <name>rod</name>
+    <version>3.6-RELEASE</version>
+  
+
+  <name>rod</name>
     <url>http://rod.eionet.europa.eu</url>
 
     <repositories>
