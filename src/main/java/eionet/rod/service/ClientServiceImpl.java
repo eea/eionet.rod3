@@ -39,11 +39,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteByIds(String clientIds) {
-        clientDao.deleteByIds(clientIds);
-    }
-
-    @Override
     public void deleteAll() {
         clientDao.deleteAll();
     }

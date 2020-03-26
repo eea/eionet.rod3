@@ -16,8 +16,6 @@ public interface ClientService {
 
     void deleteById(Integer clientId);
 
-    void deleteByIds(String clientIds);
-
     void deleteAll();
 
     void update(ClientDTO clientRec);

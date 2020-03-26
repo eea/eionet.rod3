@@ -90,20 +90,6 @@ public class ClientDaoJdbc implements ClientDao {
         jdbcTemplate.update(query, clientId);
     }
 
-
-    @Override
-    public void deleteByIds(String clientIds) {
-        String[] listClients = null;
-        if (!RODUtil.isNullOrEmpty(clientIds)) {
-
-            listClients = clientIds.split(",");
-
-            for (String listClient : listClients) {
-                jdbcTemplate.update("DELETE FROM T_CLIENT WHERE PK_CLIENT_ID = ?", listClient);
-            }
-        }
-    }
-
     @Override
     public void deleteAll() {
         String query = "DELETE FROM T_CLIENT";

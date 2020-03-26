@@ -111,7 +111,7 @@
                     <li sec:authorize="hasRole('ADMIN')" th:class="${activeTab == 'users'}? 'current' : null">
                         <a href="users.html" th:href="@{/users/view}">User authorisations</a>
                     </li>
-                    <li th:class="${activeTab == 'analysis'}? 'current' : null"><a href="analysis.html" th:href="@{/analysis}">Database statistics</a></li>
+                    <!--<li th:class="${activeTab == 'analysis'}? 'current' : null"><a href="analysis.html" th:href="@{/analysis}">Database statistics</a></li>-->
                     <li th:class="${activeTab == 'advancedSearch'}? 'current' : null"><a href="search.html" th:href="@{/advancedSearch}">Advanced search</a></li>
                     <li th:class="${activeTab == 'help'}? 'current' : null"><a href="help.html" th:href="@{/help}">Help</a></li>
                 </ul>

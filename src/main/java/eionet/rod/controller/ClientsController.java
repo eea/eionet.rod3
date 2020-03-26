@@ -205,8 +205,23 @@ public class ClientsController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteClients(ClientDTO client, Model model) {
         if (client.getDelClients() != null) {
-            clientService.deleteByIds(client.getDelClients());
-            model.addAttribute("message", "Clients selected deleted.");
+            boolean allOfThem = true;    
+            String[] listClients = client.getDelClients().split(",");
+
+            for (String listClient : listClients) {
+                Integer clientId = Integer.parseInt(listClient);
+                if (!clientService.isClientInUse(clientId)) {
+                    clientService.deleteById(clientId);
+                } else {
+                    allOfThem = false;
+                }
+            }
+
+            if (allOfThem) {
+                model.addAttribute("message", "Clients selected deleted.");
+            } else {
+                model.addAttribute("message", "Only clients not in use were deleted.");
+            }
         }
 
         return "redirect:view";
