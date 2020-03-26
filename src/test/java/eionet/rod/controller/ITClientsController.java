@@ -142,7 +142,7 @@ public class ITClientsController {
                 .param("clientId", "1")
                 .with(csrf()).with(user("editor").roles("EDITOR")))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/clients?message=Client+1+deleted"))
+                .andExpect(redirectedUrl("/clients?message=Client+1+was+not+deleted%2C+because+it+is+in+use+in+an+obligation+or+in+a+legal+instrument"))
                 .andExpect(model().attributeExists("message"));
     }
 
@@ -155,7 +155,7 @@ public class ITClientsController {
                 .param("delClients", "1,")
                 .with(csrf()).with(user("editor").roles("EDITOR")))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("view?message=Clients+selected+deleted."))
+                .andExpect(redirectedUrl("view?message=Only+clients+not+in+use+were+deleted."))
                 .andExpect(model().attributeExists("message"));
     }
 
