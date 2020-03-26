@@ -84,8 +84,8 @@ public class ClientDaoIT {
     }
 
     private void insertSelectbyIDs(ClientDao clientDao) {
-        String clientsIds = "1,2,";
-        clientDao.deleteByIds(clientsIds);
+        clientDao.deleteById(1);
+        clientDao.deleteById(2);
     }
 
     private void getDirectIndirectObligations(ClientDao clientDao) {
