@@ -36,7 +36,7 @@ public class ObligationRestController {
    *
    * @return the obligations
    */
-  @RequestMapping(value = "/findById/{obligationId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{obligationId}", method = RequestMethod.GET)
   public Obligations findObligation(@PathVariable("obligationId") Integer obligationId){
     return obligationService.findOblId(obligationId);
   }
