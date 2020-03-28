@@ -32,7 +32,7 @@ public class ObligationRestController {
   /**
    * Find opened obligations obligations.
    *
-   * @param id the id
+   * @param obligationId the id
    *
    * @return the obligations
    */
