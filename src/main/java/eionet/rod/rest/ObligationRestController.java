@@ -6,10 +6,12 @@ import eionet.rod.service.ObligationService;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -39,8 +41,8 @@ public class ObligationRestController {
    * @return the list
    */
   @RequestMapping(value = "/findOpened", method = RequestMethod.GET)
-  public List<Obligations> findOpenedObligations(@PathVariable("clientId") String clientId, @PathVariable("issueId") String issueId, 
-          @PathVariable("spatialId") String spatialId, @PathVariable("dateFrom") Date dateFrom, @PathVariable("dateTo") Date dateTo) {
+  public List<Obligations> findOpenedObligations(@RequestParam(value = "clientId",required = false) Integer clientId, @RequestParam(value="issueId", required = false) Integer issueId,
+          @RequestParam(value="spatialId",required = false) Integer spatialId, @RequestParam(value="dateFrom",required = false) Date dateFrom, @RequestParam(value="dateTo",required = false) Date dateTo) {
     String deadlineCase = null;
     String date1 = null;
     String date2 = null;
@@ -50,8 +52,11 @@ public class ObligationRestController {
       date1 = formatter.format(dateFrom);
       date2 = formatter.format(dateTo);
     }
-    
-    return obligationService.findObligationList(clientId, issueId, spatialId, "N", deadlineCase, null, date1, date2, false);
+    String client= Optional.ofNullable(clientId).map(id->id.toString()).orElse(null);
+    String issue= Optional.ofNullable(issueId).map(id->id.toString()).orElse(null);
+    String country= Optional.ofNullable(spatialId).map(id->id.toString()).orElse(null);
+
+    return obligationService.findObligationList(client, issue, country, "N", deadlineCase, null, date1, date2, false);
   }
   /**
    * Find opened obligations obligations.
