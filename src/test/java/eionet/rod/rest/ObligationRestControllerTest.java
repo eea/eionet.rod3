@@ -42,11 +42,15 @@ public class ObligationRestControllerTest {
     Obligations obligation = new Obligations();
     obligation.setObligationId(1);
     obligations.add(obligation);
-    Mockito.when(obligationService.findObligationList(null,null,null,"N",null,null,null,null,false)).thenReturn(obligations);
-    List<Obligations> result=obligationRestController.findOpenedObligations();
+    Mockito.when(obligationService.findObligationList(null, null, null, "N", null, null, null, null, false)).thenReturn(obligations);
+    List<Obligations> result = obligationRestController.findOpenedObligations(null, null, null, null, null);
+    List<Obligations> result2 = obligationRestController.findAllOpenedObligations();
     Assert.assertNotNull(result);
-    Assert.assertEquals(result.size(),1);
-    Assert.assertEquals(result.get(0).getObligationId().intValue(),1);
+    Assert.assertNotNull(result2);
+    Assert.assertEquals(result.size(), 1);
+    Assert.assertEquals(result2.size(), 1);
+    Assert.assertEquals(result.get(0).getObligationId().intValue(), 1);
+    Assert.assertEquals(result2.get(0).getObligationId().intValue(), 1);
   }
 
 

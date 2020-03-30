@@ -2,6 +2,9 @@ package eionet.rod.rest;
 
 import eionet.rod.model.Obligations;
 import eionet.rod.service.ObligationService;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,17 +21,38 @@ public class ObligationRestController {
 
   @Autowired
   private ObligationService obligationService;
+  
+  /**
+   * Find all opened obligations list.
+   *
+   * @return the list
+   */
+  @RequestMapping(value = "/findAllOpened", method = RequestMethod.GET)
+  public List<Obligations> findAllOpenedObligations() {
+    return obligationService.findObligationList(null, null, null, "N", null, null, null, null, false);
+  }
+
 
   /**
-   * Find opened obligations list.
+   * Find opened obligations list with filters.
    *
    * @return the list
    */
   @RequestMapping(value = "/findOpened", method = RequestMethod.GET)
-  public List<Obligations> findOpenedObligations(){
-    return obligationService.findObligationList(null,null,null,"N",null,null,null,null,false);
+  public List<Obligations> findOpenedObligations(@PathVariable("clientId") String clientId, @PathVariable("issueId") String issueId, 
+          @PathVariable("spatialId") String spatialId, @PathVariable("dateFrom") Date dateFrom, @PathVariable("dateTo") Date dateTo) {
+    String deadlineCase = null;
+    String date1 = null;
+    String date2 = null;
+    if (dateFrom != null && dateTo != null) {
+      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+      deadlineCase = "0";
+      date1 = formatter.format(dateFrom);
+      date2 = formatter.format(dateTo);
+    }
+    
+    return obligationService.findObligationList(clientId, issueId, spatialId, "N", deadlineCase, null, date1, date2, false);
   }
-
   /**
    * Find opened obligations obligations.
    *
@@ -37,7 +61,7 @@ public class ObligationRestController {
    * @return the obligations
    */
   @RequestMapping(value = "/{obligationId}", method = RequestMethod.GET)
-  public Obligations findObligation(@PathVariable("obligationId") Integer obligationId){
+  public Obligations findObligation(@PathVariable("obligationId") Integer obligationId) {
     return obligationService.findOblId(obligationId);
   }
 }
