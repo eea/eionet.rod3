@@ -5,8 +5,6 @@ import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
 import eionet.rod.model.Spatial;
 import eionet.rod.service.ObligationService;
-
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +42,7 @@ public class ObligationRestController {
    */
   @RequestMapping(value = "/findOpened", method = RequestMethod.GET)
   public List<Obligations> findOpenedObligations(@RequestParam(value = "clientId",required = false) Integer clientId, @RequestParam(value="issueId", required = false) Integer issueId,
-          @RequestParam(value="spatialId",required = false) Integer spatialId, @RequestParam(value="dateFrom",required = false) Date dateFrom, @RequestParam(value="dateTo",required = false) Date dateTo) {
+          @RequestParam(value="spatialId",required = false) Integer spatialId, @RequestParam(value="dateFrom",required = false) Long dateFrom, @RequestParam(value="dateTo",required = false) Long dateTo) {
     String deadlineCase = null;
     String date1 = null;
     String date2 = null;
@@ -81,7 +79,7 @@ public class ObligationRestController {
    *
    * @return the list of countries
    */
-  @RequestMapping(value = "/countries/{obligationId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{obligationId}/countries", method = RequestMethod.GET)
   public List<Spatial> findObligationCountries(@PathVariable("obligationId") Integer obligationId, String voluntary) {
     return obligationService.findAllCountriesByObligation(obligationId, voluntary);
   }
@@ -93,7 +91,7 @@ public class ObligationRestController {
    *
    * @return the list of issues
    */
-  @RequestMapping(value = "/issues/{obligationId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{obligationId}/issues", method = RequestMethod.GET)
   public List<Issue> findObligationIssues(@PathVariable("obligationId") Integer obligationId) {
     return obligationService.findAllIssuesbyObligation(obligationId);
   }
@@ -105,7 +103,7 @@ public class ObligationRestController {
    *
    * @return the list of clients
    */
-  @RequestMapping(value = "/clients/{obligationId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{obligationId}/clients}", method = RequestMethod.GET)
   public List<ClientDTO> findObligationClients(@PathVariable("obligationId") Integer obligationId) {
     return obligationService.findAllClientsByObligation(obligationId);
   }
@@ -117,7 +115,7 @@ public class ObligationRestController {
    *
    * @return the obligations
    */
-  @RequestMapping(value = "/relation/{obligationId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{obligationId}/relation", method = RequestMethod.GET)
   public Obligations findObligationRelation(@PathVariable("obligationId") Integer obligationId) {
     return obligationService.findObligationRelation(obligationId);
   }
