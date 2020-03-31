@@ -2,7 +2,10 @@ package eionet.rod.rest;
 
 import static org.junit.Assert.*;
 
+import eionet.rod.model.ClientDTO;
+import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Spatial;
 import eionet.rod.service.ObligationService;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +56,6 @@ public class ObligationRestControllerTest {
     Assert.assertEquals(result2.get(0).getObligationId().intValue(), 1);
   }
 
-
   @Test
   public void findObligation() {
     Obligations obligation = new Obligations();
@@ -62,5 +64,54 @@ public class ObligationRestControllerTest {
     Obligations result = obligationRestController.findObligation(1);
     Assert.assertNotNull(result);
     Assert.assertEquals(result.getObligationId().intValue(), 1);
+  }
+
+  @Test
+  public void findObligationCountries() {
+    List<Spatial> spatials = new ArrayList<>();
+    Spatial spatial = new Spatial();
+    spatial.setSpatialId(1);
+    spatials.add(spatial);
+    Mockito.when(obligationService.findAllCountriesByObligation(1, "Y")).thenReturn(spatials);
+    List<Spatial> result = obligationRestController.findObligationCountries(1, "Y");
+    Assert.assertNotNull(result);
+    Assert.assertEquals(result.size(), 1);
+    Assert.assertEquals(result.get(0).getSpatialId().intValue(), 1);
+  }
+
+  @Test
+  public void findObligationIssues() {
+    List<Issue> issues = new ArrayList<>();
+    Issue issue = new Issue();
+    issue.setIssueId(1);
+    issues.add(issue);
+    Mockito.when(obligationService.findAllIssuesbyObligation(1)).thenReturn(issues);
+    List<Issue> result = obligationRestController.findObligationIssues(1);
+    Assert.assertNotNull(result);
+    Assert.assertEquals(result.size(), 1);
+    Assert.assertEquals(result.get(0).getIssueId().intValue(), 1);
+  }
+
+  @Test
+  public void findObligationClients() {
+    List<ClientDTO> clients = new ArrayList<>();
+    ClientDTO client = new ClientDTO();
+    client.setClientId(1);
+    clients.add(client);
+    Mockito.when(obligationService.findAllClientsByObligation(1)).thenReturn(clients);
+    List<ClientDTO> result = obligationRestController.findObligationClients(1);
+    Assert.assertNotNull(result);
+    Assert.assertEquals(result.size(), 1);
+    Assert.assertEquals(result.get(0).getClientId().intValue(), 1);
+  }
+
+  @Test
+  public void findObligationRelation() {
+    Obligations obligation = new Obligations();
+    obligation.setObligationId(2);
+    Mockito.when(obligationService.findObligationRelation(1)).thenReturn(obligation);
+    Obligations result = obligationRestController.findObligationRelation(1);
+    Assert.assertNotNull(result);
+    Assert.assertEquals(result.getObligationId().intValue(), 2);
   }
 }

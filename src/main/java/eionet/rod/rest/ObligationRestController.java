@@ -1,6 +1,9 @@
 package eionet.rod.rest;
 
+import eionet.rod.model.ClientDTO;
+import eionet.rod.model.Issue;
 import eionet.rod.model.Obligations;
+import eionet.rod.model.Spatial;
 import eionet.rod.service.ObligationService;
 
 import java.sql.Date;
@@ -34,7 +37,6 @@ public class ObligationRestController {
     return obligationService.findObligationList(null, null, null, "N", null, null, null, null, false);
   }
 
-
   /**
    * Find opened obligations list with filters.
    *
@@ -52,12 +54,14 @@ public class ObligationRestController {
       date1 = formatter.format(dateFrom);
       date2 = formatter.format(dateTo);
     }
-    String client= Optional.ofNullable(clientId).map(id->id.toString()).orElse(null);
-    String issue= Optional.ofNullable(issueId).map(id->id.toString()).orElse(null);
-    String country= Optional.ofNullable(spatialId).map(id->id.toString()).orElse(null);
+
+    String client = Optional.ofNullable(clientId).map(id->id.toString()).orElse(null);
+    String issue = Optional.ofNullable(issueId).map(id->id.toString()).orElse(null);
+    String country = Optional.ofNullable(spatialId).map(id->id.toString()).orElse(null);
 
     return obligationService.findObligationList(client, issue, country, "N", deadlineCase, null, date1, date2, false);
   }
+  
   /**
    * Find opened obligations obligations.
    *
@@ -68,5 +72,53 @@ public class ObligationRestController {
   @RequestMapping(value = "/{obligationId}", method = RequestMethod.GET)
   public Obligations findObligation(@PathVariable("obligationId") Integer obligationId) {
     return obligationService.findOblId(obligationId);
+  }
+
+  /**
+   * Find countries for an obligation.
+   *
+   * @param obligationId the id
+   *
+   * @return the list of countries
+   */
+  @RequestMapping(value = "/countries/{obligationId}", method = RequestMethod.GET)
+  public List<Spatial> findObligationCountries(@PathVariable("obligationId") Integer obligationId, String voluntary) {
+    return obligationService.findAllCountriesByObligation(obligationId, voluntary);
+  }
+
+  /**
+   * Find issues for an obligation.
+   *
+   * @param obligationId the id
+   *
+   * @return the list of issues
+   */
+  @RequestMapping(value = "/issues/{obligationId}", method = RequestMethod.GET)
+  public List<Issue> findObligationIssues(@PathVariable("obligationId") Integer obligationId) {
+    return obligationService.findAllIssuesbyObligation(obligationId);
+  }
+
+  /**
+   * Find clients for an obligation.
+   *
+   * @param obligationId the id
+   *
+   * @return the list of clients
+   */
+  @RequestMapping(value = "/clients/{obligationId}", method = RequestMethod.GET)
+  public List<ClientDTO> findObligationClients(@PathVariable("obligationId") Integer obligationId) {
+    return obligationService.findAllClientsByObligation(obligationId);
+  }
+
+  /**
+   * Find obligations relations for an obligation.
+   *
+   * @param obligationId the id
+   *
+   * @return the obligations
+   */
+  @RequestMapping(value = "/relation/{obligationId}", method = RequestMethod.GET)
+  public Obligations findObligationRelation(@PathVariable("obligationId") Integer obligationId) {
+    return obligationService.findObligationRelation(obligationId);
   }
 }
