@@ -4,7 +4,6 @@ package eionet.rod.dao;
 import eionet.rod.model.ClientDTO;
 import eionet.rod.model.InstrumentDTO;
 import eionet.rod.model.Obligations;
-import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
