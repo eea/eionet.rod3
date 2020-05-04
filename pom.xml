@@ -19,7 +19,7 @@
     <mockito.version>2.27.0</mockito.version>
   </properties>
 
-  <version>3.7-SNAPSHOT</version>
+  <version>3.7-RELEASE</version>
   <name>rod</name>
   <url>http://rod.eionet.europa.eu</url>
 
