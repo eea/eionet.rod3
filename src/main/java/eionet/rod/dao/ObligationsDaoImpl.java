@@ -238,7 +238,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
         String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
                 + "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, SO.SOURCE_CODE as sourceCode, "
-                + "OB.NEXT_DEADLINE as nextDeadline, "
+                + "OB.NEXT_DEADLINE as nextDeadline, OB.REPORT_FREQ_DETAIL as reportFreqDetail, OB.REPORT_FREQ as reportFreq, "
                 + "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
         if (deadlinePage) {
             query += ", OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery "
