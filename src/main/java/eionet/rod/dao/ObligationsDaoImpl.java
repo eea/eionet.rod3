@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -437,9 +436,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
     @Override
     public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries, List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
         try {
-
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
             jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
             jdbcInsert.withTableName("T_OBLIGATION").usingGeneratedKeyColumns(
                     "PK_RA_ID");
