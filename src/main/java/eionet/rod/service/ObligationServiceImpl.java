@@ -1,10 +1,8 @@
 package eionet.rod.service;
 
-import eionet.rod.DeadlineCalc;
 import eionet.rod.dao.ObligationsDao;
 import eionet.rod.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +16,6 @@ public class ObligationServiceImpl implements ObligationService {
 
     @Autowired
     private ObligationsDao obligationsDao;
-
-    @Autowired
-    private DeadlineCalc deadlineCalc;
 
     @Override
     public List<Obligations> findAll() {

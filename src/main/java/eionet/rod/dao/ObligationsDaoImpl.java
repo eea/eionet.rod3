@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -238,8 +237,8 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
         String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
                 + "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, SO.SOURCE_CODE as sourceCode, "
-                + "OB.NEXT_DEADLINE as nextDeadline, "
-                + "CL.PK_CLIENT_ID as clientId, CL.CLIENT_NAME as clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
+                + "OB.NEXT_DEADLINE AS nextDeadline, OB.REPORT_FREQ_DETAIL AS reportFreqDetail, OB.REPORT_FREQ AS reportFreq, "
+                + "CL.PK_CLIENT_ID AS clientId, CL.CLIENT_NAME AS clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
         if (deadlinePage) {
             query += ", OB.FK_DELIVERY_COUNTRY_IDS REGEXP CONCAT('.',RAS.FK_SPATIAL_ID,'.') AS hasdelivery "
                     + ", RAS.FK_SPATIAL_ID as deliveryCountryId, "
@@ -437,9 +436,6 @@ public class ObligationsDaoImpl implements ObligationsDao {
     @Override
     public Integer insertObligation(Obligations obligation, List<ClientDTO> allObligationClients, List<Spatial> allObligationCountries, List<Spatial> allObligationVoluntaryCountries, List<Issue> allSelectedIssues) {
         try {
-
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
             jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
             jdbcInsert.withTableName("T_OBLIGATION").usingGeneratedKeyColumns(
                     "PK_RA_ID");

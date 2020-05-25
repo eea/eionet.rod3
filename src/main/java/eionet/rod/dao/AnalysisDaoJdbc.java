@@ -8,13 +8,9 @@ import java.util.Date;
 
 
 public class AnalysisDaoJdbc implements AnalysisDao {
-
-    private DataSource dataSource;
-
     JdbcTemplate jdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

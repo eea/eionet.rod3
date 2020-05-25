@@ -26,13 +26,10 @@ public class ClientDaoJdbc implements ClientDao {
 
     private static final Log logger = LogFactory.getLog(ClientDaoJdbc.class);
 
-    //@Autowired
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }

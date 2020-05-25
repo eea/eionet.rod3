@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
@@ -26,11 +25,9 @@ public class SourceDaoJdbc implements SourceDao {
 
     private static final Log logger = LogFactory.getLog(SourceDaoJdbc.class);
 
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -164,8 +161,6 @@ public class SourceDaoJdbc implements SourceDao {
 
     @Override
     public Integer insert(InstrumentFactsheetDTO instrumentFactsheetRec) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("T_SOURCE").usingGeneratedKeyColumns(
                 "PK_SOURCE_ID");
@@ -195,8 +190,7 @@ public class SourceDaoJdbc implements SourceDao {
 
         parameters.put("LAST_UPDATE", ourJavaDateObject);
 
-        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(
-                parameters));
+        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         Integer sourceId = key.intValue();
 
         insertClient(sourceId, instrumentFactsheetRec.getClientId());
