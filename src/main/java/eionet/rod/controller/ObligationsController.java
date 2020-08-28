@@ -653,7 +653,6 @@ public class ObligationsController {
 
         model.addAttribute("obligationId", obligations.getObligationId());
 
-
         //List of clients with status = C
         List<ClientDTO> allclients = clientService.getAllClients();
         model.addAttribute("allClients", allclients);
@@ -962,6 +961,33 @@ public class ObligationsController {
                 case "CONTINOUS_REPORTING":
                     value = obligation.getContinousReporting();
                     break;
+                case "DATA_STEWARD":
+                    value = obligation.getDataSteward();
+                    break;
+                case "DATA_CUSTODIAN":
+                    value = obligation.getDataCustodian();
+                    break;
+                case "HELPDESK_MAIL":
+                    value = obligation.getHelpdeskMail();
+                    break;
+                case "TYPE_INFORMATION":
+                    value = obligation.getTypeInformation();
+                    break;
+                case "PRODUCT_KEYWORD":
+                    value = obligation.getProductKeyword();
+                    break;
+                case "PROCEDURE_DOCUMENTATION":
+                    value = obligation.getProcedureDocumentation();
+                    break;
+                case "EEA_STRATEGIC_AREA":
+                    value = obligation.getEeaStrategicArea();
+                    break; 
+                case "EEA_PROGRAMME":
+                    value = obligation.getEeaProgramme();
+                    break; 
+                case "EEA_GROUP":
+                    value = obligation.getEeaGroup();
+                    break;                
                 default:
                     aux = false;
                     break;
@@ -1397,6 +1423,24 @@ public class ObligationsController {
             label = "'Last harvested date' changed";
         } else if ("TERMINATE".equalsIgnoreCase(col)) {
             label = "'Terminate' changed";
+        } else if ("DATA_STEWARD".equalsIgnoreCase(col)) {
+            label = "'Data Steward' changed";
+        } else if ("DATA_CUSTODIAN".equalsIgnoreCase(col)) {
+            label = "'Data Custodian' changed";
+        } else if ("HELPDESK MAIL".equalsIgnoreCase(col)) {
+            label = "'Helpdesk mail' changed";
+        } else if ("TYPE_INFORMATION".equalsIgnoreCase(col)) {
+            label = "'Type imformation' changed";
+        } else if ("PRODUCT_KEYWORD".equalsIgnoreCase(col)) {
+            label = "'Product Keyword' changed";
+        } else if ("PROCEDURE_DOCUMENTATION".equalsIgnoreCase(col)) {
+            label = "'Procedure documentation' changed";
+        } else if ("EEA_STRATEGIC_AREA".equalsIgnoreCase(col)) {
+            label = "'EEA strategic area' changed";
+        } else if ("EEA_PROGRAMME".equalsIgnoreCase(col)) {
+            label = "'EEA programme' changed";
+        } else if ("EEA_GROUP".equalsIgnoreCase(col)) {
+            label = "'EEA group' changed";
         }
 
         label = label + " from '" + value + "' to '" + currentValue + "'";

@@ -332,6 +332,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 + "OB.VALID_SINCE as validSince, "
                 + "OB.AUTHORITY as authority, OB.COMMENT as comment, "
                 + "OB.REPORT_FREQ_DETAIL AS reportFreqDetail, OB.LAST_UPDATE AS lastUpdate, OB.REPORT_FREQ AS reportFreq, OB.LAST_HARVESTED AS lastHarvested, "
+                + "OB.DATA_STEWARD AS dataSteward, OB.DATA_CUSTODIAN AS dataCustodian, OB.HELPDESK_MAIL AS helpdeskMail, OB.TYPE_INFORMATION AS typeInformation, "
+                + "OB.PRODUCT_KEYWORD AS productKeyword, OB.PROCEDURE_DOCUMENTATION AS procedureDocumentation, "
+                + "OB.EEA_STRATEGIC_AREA AS eeaStrategicArea, OB.EEA_PROGRAMME AS eeaProgramme, OB.EEA_GROUP AS eeaGroup, "
                 + "OB.FK_DELIVERY_COUNTRY_IDS AS deliveryCountryId, OB.CONTINOUS_REPORTING AS continousReporting, "
                 + "CRO.ROLE_ID AS coordRoleId, CRO.ROLE_NAME AS coordRoleName, CRO.ROLE_URL AS coordRoleUrl, "
                 + "RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.RESPONSIBLE_ROLE as responsibleRole,OB.RESPONSIBLE_ROLE_SUF as responsibleRoleSuf, "
@@ -490,6 +493,16 @@ public class ObligationsDaoImpl implements ObligationsDao {
             parameters.put("COMMENT", obligation.getComment());
             parameters.put("AUTHORITY", obligation.getAuthority());
 
+            parameters.put("DATA_STEWARD", obligation.getDataSteward());
+            parameters.put("DATA_CUSTODIAN", obligation.getDataCustodian());
+            parameters.put("HELPDESK_MAIL", obligation.getHelpdeskMail());
+            parameters.put("TYPE_INFORMATION", obligation.getTypeInformation());
+            parameters.put("PRODUCT_KEYWORD", obligation.getProductKeyword());
+            parameters.put("PROCEDURE_DOCUMENTATION", obligation.getProcedureDocumentation());
+            parameters.put("EEA_STRATEGIC_AREA", obligation.getEeaStrategicArea());
+            parameters.put("EEA_PROGRAMME", obligation.getEeaProgramme());
+            parameters.put("EEA_GROUP", obligation.getEeaGroup());
+
             // java.sql.Date
             Calendar calendar = Calendar.getInstance();
             java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
@@ -551,6 +564,9 @@ public class ObligationsDaoImpl implements ObligationsDao {
             + "NATIONAL_CONTACT_URL = ?, COORDINATOR_ROLE = ?, COORDINATOR_ROLE_SUF = ?, COORDINATOR = ?, COORDINATOR_URL = ?, "
             + "EEA_PRIMARY = ?, EEA_CORE = ?, FLAGGED = ?, AUTHORITY = ?, DATA_USED_FOR = ?, DATA_USED_FOR_URL = ?,"
             + "CONTINOUS_REPORTING = ?, LAST_UPDATE = ?, "
+            + "DATA_STEWARD = ?, DATA_CUSTODIAN = ?, HELPDESK_MAIL = ?, TYPE_INFORMATION = ?, "
+            + "PRODUCT_KEYWORD = ?, PROCEDURE_DOCUMENTATION = ?, "
+            + "EEA_STRATEGIC_AREA = ?, EEA_PROGRAMME = ?, EEA_GROUP = ?, "
             + "FK_SOURCE_ID  = ? "
             + "WHERE PK_RA_ID = ?";
 
@@ -613,6 +629,15 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 obligations.getDataUsedForUrl(),
                 obligations.getContinousReporting(),
                 ourJavaDateObject,
+                obligations.getDataSteward(),
+                obligations.getDataCustodian(),
+                obligations.getHelpdeskMail(),
+                obligations.getTypeInformation(),
+                obligations.getProductKeyword(),
+                obligations.getProcedureDocumentation(),
+                obligations.getEeaStrategicArea(),
+                obligations.getEeaProgramme(),
+                obligations.getEeaGroup(),
                 obligations.getSourceId(),
                 obligations.getObligationId());
 

@@ -1620,4 +1620,18 @@
                                  baseColumnNames="FK_SOURCE_ID" referencedTableName="T_SOURCE" referencedColumnNames="PK_SOURCE_ID" onDelete="RESTRICT"/>
 
     </changeSet>
+    <changeSet id="rev-91" author="alfaredu">
+      <comment>Add new fields in obligations</comment>
+      <sql>
+          alter table T_OBLIGATION ADD column DATA_STEWARD varchar(255);
+          alter table T_OBLIGATION ADD column DATA_CUSTODIAN varchar(255);
+          alter table T_OBLIGATION ADD column HELPDESK_MAIL varchar(255);
+          alter table T_OBLIGATION ADD column TYPE_INFORMATION varchar(255);
+          alter table T_OBLIGATION ADD column PRODUCT_KEYWORD varchar(255);
+          alter table T_OBLIGATION ADD column PROCEDURE_DOCUMENTATION text;
+          alter table T_OBLIGATION ADD column EEA_STRATEGIC_AREA varchar(50);
+          alter table T_OBLIGATION ADD column EEA_PROGRAMME varchar(50);
+          alter table T_OBLIGATION ADD column EEA_GROUP varchar(50);
+      </sql>
+  </changeSet>
 </databaseChangeLog>

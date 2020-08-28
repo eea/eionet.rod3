@@ -62,6 +62,17 @@ public class Obligations {
     private String reportFreq;
     private Date lastHarvested;
 
+    private String dataSteward;
+    private String dataCustodian;
+    private String helpdeskMail;
+    private String typeInformation;
+
+    private String productKeyword;
+    private String procedureDocumentation;
+    private String eeaStrategicArea;
+    private String eeaProgramme;
+    private String eeaGroup;
+
     //Fields from t_role table
     private String coordRoleId;
     private String coordRoleUrl;
@@ -679,6 +690,78 @@ public class Obligations {
 
     public void setLastHarvested(Date lastHarvested) {
         this.lastHarvested = lastHarvested;
+    }
+
+    public String getDataSteward() {
+        return dataSteward;
+    }
+
+    public void setDataSteward(String dataSteward) {
+        this.dataSteward = dataSteward;
+    }
+
+    public String getDataCustodian() {
+        return dataCustodian;
+    }
+
+    public void setDataCustodian(String dataCustodian) {
+        this.dataCustodian = dataCustodian;
+    }
+
+    public String getHelpdeskMail() {
+        return helpdeskMail;
+    }
+
+    public void setHelpdeskMail(String helpdeskMail) {
+        this.helpdeskMail = helpdeskMail;
+    }
+
+    public String getTypeInformation() {
+        return typeInformation;
+    }
+
+    public void setTypeInformation(String typeInformation) {
+        this.typeInformation = typeInformation;
+    }
+
+    public String getProductKeyword() {
+        return productKeyword;
+    }
+
+    public void setProductKeyword(String productKeyword) {
+        this.productKeyword = productKeyword;
+    }
+
+    public String getProcedureDocumentation() {
+        return procedureDocumentation;
+    }
+
+    public void setProcedureDocumentation(String procedureDocumentation) {
+        this.procedureDocumentation = procedureDocumentation;
+    }
+
+    public String getEeaStrategicArea() {
+        return eeaStrategicArea;
+    }
+
+    public void setEeaStrategicArea(String eeaStrategicArea) {
+        this.eeaStrategicArea = eeaStrategicArea;
+    }
+
+    public String getEeaProgramme() {
+        return eeaProgramme;
+    }
+
+    public void setEeaProgramme(String eeaProgramme) {
+        this.eeaProgramme = eeaProgramme;
+    }
+
+    public String getEeaGroup() {
+        return eeaGroup;
+    }
+
+    public void setEeaGroup(String eeaGroup) {
+        this.eeaGroup = eeaGroup;
     }
 
     public String getAnmode() {
