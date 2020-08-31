@@ -226,54 +226,63 @@
 
 	<rdf:Property rdf:ID="isTerminated">
 		<rdfs:label>Obligation terminated</rdfs:label>
-                <rdfs:range rdf:resource="&xsdns;boolean"/>
+        <rdfs:range rdf:resource="&xsdns;boolean"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="isEEAPrimary">
 		<rdfs:label>Eionet core data flow</rdfs:label>
 		<rdfs:domain rdf:resource="#Obligation"/>
-                <rdfs:range rdf:resource="&xsdns;boolean"/>
+        <rdfs:range rdf:resource="&xsdns;boolean"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="isEEACore">
 		<rdfs:label>Used for EEA Core Set of Indicators</rdfs:label>
-                <rdfs:range rdf:resource="&xsdns;boolean"/>
+        <rdfs:range rdf:resource="&xsdns;boolean"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="dataSteward">
 		<rdfs:label>Data Steward</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="dataCustodian">
 		<rdfs:label>Data Custodian</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="helpdeskMail">
 		<rdfs:label>Helpdesk mail</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="typeInformation">
 		<rdfs:label>Type of information</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="productKeyword">
 		<rdfs:label>Product keyword</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="procedureDocumentation">
 		<rdfs:label>Procedure documentation</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="eeaStrategicArea">
 		<rdfs:label>EEA strategic area</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="eeaProgramme">
 		<rdfs:label>EEA programme</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="eeaGroup">
-		<rdfs:label>EEA grouup</rdfs:label>
+		<rdfs:label>EEA group</rdfs:label>
+		<rdfs:domain rdf:resource="#Obligation"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="comment">
@@ -306,13 +315,13 @@
 	<rdf:Property rdf:ID="nextdeadline">
 		<rdfs:label>Next Deadline</rdfs:label>
 		<rdfs:domain rdf:resource="#Obligation"/>
-                <rdfs:range rdf:resource="&xsdns;date"/>
+        <rdfs:range rdf:resource="&xsdns;date"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="nextdeadline2">
 		<rdfs:label>Deadline for 2nd period</rdfs:label>
 		<rdfs:domain rdf:resource="#Obligation"/>
-                <rdfs:range rdf:resource="&xsdns;date"/>
+        <rdfs:range rdf:resource="&xsdns;date"/>
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="guidelines">
