@@ -26,6 +26,16 @@ public class ObligationRestController {
   private ObligationService obligationService;
   
   /**
+   * Find all obligations list.
+   *
+   * @return the list
+   */
+  @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+  public List<Obligations> findAllObligations() {
+    return obligationService.findObligationList(null, null, null, null, null, null, null, null, false);
+  }
+  
+  /**
    * Find all opened obligations list.
    *
    * @return the list
