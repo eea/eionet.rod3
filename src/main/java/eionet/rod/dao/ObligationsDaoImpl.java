@@ -235,7 +235,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
 
         MapSqlParameterSource params = new MapSqlParameterSource();
 
-        String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, "
+        String query = "SELECT distinct OB.PK_RA_ID AS obligationId, OB.TITLE AS oblTitle, OB.DESCRIPTION AS description, OB.terminate as terminate, OB.LAST_UPDATE AS lastUpdate, "
                 + "SO.PK_SOURCE_ID as sourceId, SO.TITLE AS sourceTitle, SO.ALIAS as sourceAlias, SO.SOURCE_CODE as sourceCode, "
                 + "OB.NEXT_DEADLINE AS nextDeadline, OB.REPORT_FREQ_DETAIL AS reportFreqDetail, OB.REPORT_FREQ AS reportFreq, "
                 + "CL.PK_CLIENT_ID AS clientId, CL.CLIENT_NAME AS clientName, RRO.ROLE_ID AS respRoleId, RRO.ROLE_NAME AS respRoleName, OB.NEXT_REPORTING as nextReporting ";
@@ -329,7 +329,7 @@ public class ObligationsDaoImpl implements ObligationsDao {
                 + "OB.REPORT_FREQ_MONTHS as reportFreqMonths, OB.DATE_COMMENTS as dateComments, OB.FORMAT_NAME as formatName, OB.REPORT_FORMAT_URL as reportFormatUrl, "
                 + "OB.REPORTING_FORMAT as reportingFormat, OB.LOCATION_PTR as locationPtr, OB.LOCATION_INFO as locationInfo, OB.DATA_USED_FOR as dataUsedFor, OB.DATA_USED_FOR_URL as dataUsedForUrl, "
                 //+ "DATE_FORMAT(OB.VALID_SINCE, '%d/%m/%Y') as validSince, "
-                + "OB.VALID_SINCE as validSince, "
+                + "OB.VALID_SINCE as validSince, OB.terminate as terminate, "
                 + "OB.AUTHORITY as authority, OB.COMMENT as comment, "
                 + "OB.REPORT_FREQ_DETAIL AS reportFreqDetail, OB.LAST_UPDATE AS lastUpdate, OB.REPORT_FREQ AS reportFreq, OB.LAST_HARVESTED AS lastHarvested, "
                 + "OB.FK_DELIVERY_COUNTRY_IDS AS deliveryCountryId, OB.CONTINOUS_REPORTING AS continousReporting, "
