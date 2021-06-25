@@ -1,0 +1,75 @@
+version: '2'
+volumes:
+  rod3-database:
+    external: true
+    driver: rancher-nfs
+services:
+  unsmock:
+    image: eeacms/unsmock:latest
+    environment:
+      LANG: C.UTF-8
+      SERVER_PORT: '80'
+      TZ: Europe/Copenhagen
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  dbservice:
+    image: mariadb:10.2.10
+    environment:
+      LANG: C.UTF-8
+      MYSQL_DATABASE: rod3
+      MYSQL_PASSWORD: ritikiwini
+      MYSQL_ROOT_PASSWORD: yibimilosi
+      MYSQL_USER: roduser
+      TZ: Europe/Copenhagen
+    stdin_open: true
+    volumes:
+      - rod3-database:/var/lib/mysql
+    tty: true
+    mem_reservation: 104857600
+    command:
+      - mysqld
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+  appl:
+    image: eeacms/rod:latest
+    environment:
+      CATALINA_OPTS: |-
+        "-Dinitial.username=roug"
+        "-Dcas.service=http://rod3.devel1dub.eionet.europa.eu"
+        "-Ddb.driver=org.mariadb.jdbc.Driver"
+        "-Ddb.url=jdbc:mariadb://dbservice/rod3"
+        "-Ddb.username=roduser"
+        "-Ddb.password=ritikiwini"
+        "-Dcr.sparql.endpoint=https://cr.eionet.europa.eu/sparql"
+        "-Duns.xml.rpc.server.url=https://uns.ewxdevel1dub.eionet.europa.eu/rpcrouter"
+        "-Duns.username=unsUser"
+        "-Duns.pwd=reportnet2345"
+    stdin_open: true
+    volumes:
+      - rod3-database:/mysql
+    tty: true
+    mem_reservation: 419430400
+    labels:
+      io.rancher.container.pull_image: always
+      rod3appl: notnow
+  smtpmock:
+    image: marcelesser/smtp-sink:latest
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  rsynch:
+    image: eeacms/rsync
+    stdin_open: true
+    tty: true
+    ports:
+      - 2222:22/tcp
+    command:
+      - client
+    labels:
+      io.rancher.container.pull_image: always

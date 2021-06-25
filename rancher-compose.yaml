@@ -1,0 +1,17 @@
+version: '2'
+services:
+  unsmock:
+    scale: 1
+    start_on_create: true
+  dbservice:
+    scale: 1
+    start_on_create: true
+  appl:
+    scale: 1
+    start_on_create: true
+  smtpmock:
+    scale: 1
+    start_on_create: true
+  rsynch:
+    scale: 1
+    start_on_create: true
