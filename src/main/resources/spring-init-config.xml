@@ -18,4 +18,13 @@
         <property name="initialPassword" value="${initial.password}"/>
     </bean>
 
+    <bean id="directoryProperties" class="eionet.directory.DynamicProperties">
+        <property name="ldapPrincipal" value="${env.ldap.principal}" />
+        <property name="ldapPassword" value="${env.ldap.password}" />
+        <property name="ldapUrl" value="${env.ldap.url}"/>
+    </bean>
+
+    <bean id="directoryPropertiesLoader" class="eionet.directory.DynamicPropertiesLoader">
+        <property name="dynamicProperties" ref="directoryProperties"/>
+    </bean>
 </beans>
