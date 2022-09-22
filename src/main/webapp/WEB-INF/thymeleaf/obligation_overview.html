@@ -170,48 +170,6 @@
             <br/>
             <br/>
 
-            <h2>Obligation management</h2>
-
-            <div class="datatable results">
-                <div class="form-group odd">
-                    <div class="col-xs-4">Data Steward</div>
-                    <div class="col-xs-8" th:text="${obligation.dataSteward}"></div>
-                </div>
-                <div class="form-group even">
-                    <div class="col-xs-4">Data Custodian</div>
-                    <div class="col-xs-8" th:text="${obligation.dataCustodian}"></div>
-                </div>
-
-                <div class="form-group odd">
-                    <div class="col-xs-4">Helpdesk mail</div>
-                    <div class="col-xs-8" th:text="${obligation.helpdeskMail}"></div>
-                </div>
-
-                <div class="form-group even">
-                    <div class="col-xs-4">Type of information</div>
-                    <div class="col-xs-8" th:text="${obligation.typeInformation}"></div>
-                </div>
-                <div sec:authorize="hasRole('EDITOR')" class="form-group odd">
-                    <div class="col-xs-4">Product keyword</div>
-                    <div class="col-xs-8" th:text="${obligation.productKeyword}"></div>
-                </div>
-                <div sec:authorize="hasRole('EDITOR')" class="form-group even">
-                    <div class="col-xs-4">Procedure documentation</div>
-                    <div class="col-xs-8" th:text="${obligation.procedureDocumentation}"></div>
-                </div>
-                <div sec:authorize="hasRole('EDITOR')" class="form-group odd">
-                    <div class="col-xs-4">EEA strategic area</div>
-                    <div class="col-xs-8" th:text="${obligation.eeaStrategicArea}"></div>
-                </div>
-                <div sec:authorize="hasRole('EDITOR')" class="form-group even">
-                    <div class="col-xs-4">EEA programme</div>
-                    <div class="col-xs-8" th:text="${obligation.eeaProgramme}"></div>
-                </div>
-                <div sec:authorize="hasRole('EDITOR')" class="form-group odd">
-                    <div class="col-xs-4">EEA group</div>
-                    <div class="col-xs-8" th:text="${obligation.eeaGroup}"></div>
-                </div>
-            </div>
         </div>
     </div>
     <div th:replace="layout :: footerFragment"></div>
