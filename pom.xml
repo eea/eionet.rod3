@@ -82,9 +82,15 @@
         </executions>
         <configuration>
           <toolchains>
-            <jdk>
-              <version>8</version>
-            </jdk>
+            <toolchain>
+              <type>jdk</type>
+              <provides>
+                <version>8</version>
+              </provides>
+              <configuration>
+                <jdkHome>/var/jenkins_home/worker/tools/hudson.model.JDK/Java8/bin/java</jdkHome>
+              </configuration>
+            </toolchain>
           </toolchains>
         </configuration>
       </plugin>
