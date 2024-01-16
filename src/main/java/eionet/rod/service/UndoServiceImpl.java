@@ -3,6 +3,7 @@ package eionet.rod.service;
 import eionet.rod.dao.UndoDao;
 import eionet.rod.model.UndoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,8 +57,8 @@ public class UndoServiceImpl implements UndoService {
     }
 
     @Override
-    public List<UndoDTO> getUpdateHistory(String extraSQL) {
-        return undoDao.getUpdateHistory(extraSQL);
+    public List<UndoDTO> getUpdateHistory(String extraSQL, MapSqlParameterSource parameterSource) {
+        return undoDao.getUpdateHistory(extraSQL, parameterSource);
     }
 
     @Override

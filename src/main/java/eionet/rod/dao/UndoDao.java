@@ -2,6 +2,7 @@ package eionet.rod.dao;
 
 
 import eionet.rod.model.UndoDTO;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface UndoDao {
 
     boolean isDelete(String table, String column, Integer id);
 
-    List<UndoDTO> getUpdateHistory(String extraSQL);
+    List<UndoDTO> getUpdateHistory(String extraSQL, MapSqlParameterSource parameterSource);
 
     List<UndoDTO> getUndoInformation(long ts, String op, String tab);
 
