@@ -175,6 +175,19 @@ public class ITUndoDao {
     }
 
     @Test
+    public void testGetUpdateHistory_with_ExtraSql_Value_id() {
+        Integer id = 1;
+        String extraSQL = "AND U1.VALUE = :extraSQL AND U1.TAB = 'T_OBLIGATION' ";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("extraSQL", id);
+
+        List<UndoDTO> history = undoDao.getUpdateHistory(extraSQL, params);
+        assertEquals(history.size(), 1);
+        assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
+        assertEquals(history.get(0).getOperation(), "U");
+    }
+
+    @Test
     public void testGetUpdateHistory_with_Sql_Injection() {
         String username_sqlInjection = "%27%20UNION%20ALL%20SELECT%20CONCAT(0x2228,database(),0x2922),NULL,NULL,NULL,NULL,NULL--%20-";
         String extraSQL = "AND U2.VALUE = :extraSQL ";
