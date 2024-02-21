@@ -1,6 +1,7 @@
 package eionet.rod.service;
 
 import eionet.rod.model.UndoDTO;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface UndoService {
 
     boolean isDelete(String table, String column, Integer id);
 
-    List<UndoDTO> getUpdateHistory(String extraSQL);
+    List<UndoDTO> getUpdateHistory(String extraSQL, MapSqlParameterSource p);
 
     List<UndoDTO> getUndoInformation(long ts, String op, String tab);
 }

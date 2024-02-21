@@ -5,6 +5,7 @@ import eionet.rod.service.UndoService;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +24,20 @@ public class UpdateHistoryController {
     public String updateHistoryHome(Model model, @RequestParam(required = false) Integer id, @RequestParam(required = false) String object, @RequestParam(required = false) String username) {
 
         List<UndoDTO> history;
+        MapSqlParameterSource params = new MapSqlParameterSource();
 
         if (object != null) {
+            params.addValue("extraSQL", id);
             if ("S".equals(object)) {
-                history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_SOURCE' ");
+                history = undoService.getUpdateHistory("AND U1.VALUE = :extraSQL AND U1.TAB = 'T_SOURCE' ", params);
             } else {
-                history = undoService.getUpdateHistory("AND U1.VALUE = " + id + " AND U1.TAB = 'T_OBLIGATION' ");
+                history = undoService.getUpdateHistory("AND U1.VALUE = :extraSQL AND U1.TAB = 'T_OBLIGATION' ", params);
             }
         } else if (username != null) {
-            history = undoService.getUpdateHistory("AND U2.VALUE = '" + username + "' ");
+            params.addValue("extraSQL", username);
+            history = undoService.getUpdateHistory("AND U2.VALUE = :extraSQL ", params);
         } else {
-            history = undoService.getUpdateHistory("");
+            history = undoService.getUpdateHistory("", params);
         }
 
         if (history != null) {

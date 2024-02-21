@@ -10,6 +10,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.metadata.TableMetaDataContext;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -24,10 +26,12 @@ public class UndoDaoImpl implements UndoDao {
     private DataSource dataSource;
 
     JdbcTemplate jdbcTemplate;
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Override
@@ -859,7 +863,7 @@ public class UndoDaoImpl implements UndoDao {
     }
 
     @Override
-    public List<UndoDTO> getUpdateHistory(String extraSQL) {
+    public List<UndoDTO> getUpdateHistory(String extraSQL, MapSqlParameterSource parameterSource) {
         String query = "SELECT U1.UNDO_TIME AS undoTime, U1.TAB AS tab, U1.VALUE AS value, U1.OPERATION AS operation, U2.VALUE as userName, U3.VALUE AS description "
                 + "FROM T_UNDO U1 INNER JOIN T_UNDO U2 "
                 + "ON U1.UNDO_TIME = U2.UNDO_TIME "
@@ -876,8 +880,7 @@ public class UndoDaoImpl implements UndoDao {
                 + "ORDER BY U1.UNDO_TIME DESC "
                 + "LIMIT 100";
 
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class));
-
+        return namedParameterJdbcTemplate.query(query, parameterSource, new BeanPropertyRowMapper<>(UndoDTO.class));
     }
 
     @Override

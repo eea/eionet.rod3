@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -154,10 +155,47 @@ public class ITUndoDao {
     @Test
     public void testGetUpdateHistory() {
 
-        List<UndoDTO> history = undoDao.getUpdateHistory("");
+        List<UndoDTO> history = undoDao.getUpdateHistory("", new MapSqlParameterSource());
         assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
         assertEquals(history.get(0).getOperation(), "U");
 
+    }
+
+    @Test
+    public void testGetUpdateHistory_with_ExtraSql_Value() {
+        String username = "arroyyol";
+        String extraSQL = "AND U2.VALUE = :extraSQL ";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("extraSQL", username);
+
+        List<UndoDTO> history = undoDao.getUpdateHistory(extraSQL, params);
+        assertEquals(history.size(), 1);
+        assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
+        assertEquals(history.get(0).getOperation(), "U");
+    }
+
+    @Test
+    public void testGetUpdateHistory_with_ExtraSql_Value_id() {
+        Integer id = 1;
+        String extraSQL = "AND U1.VALUE = :extraSQL AND U1.TAB = 'T_OBLIGATION' ";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("extraSQL", id);
+
+        List<UndoDTO> history = undoDao.getUpdateHistory(extraSQL, params);
+        assertEquals(history.size(), 1);
+        assertEquals(history.get(0).getDescription(), "Fuel Quality Directive Article 7a");
+        assertEquals(history.get(0).getOperation(), "U");
+    }
+
+    @Test
+    public void testGetUpdateHistory_with_Sql_Injection() {
+        String username_sqlInjection = "%27%20UNION%20ALL%20SELECT%20CONCAT(0x2228,database(),0x2922),NULL,NULL,NULL,NULL,NULL--%20-";
+        String extraSQL = "AND U2.VALUE = :extraSQL ";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("extraSQL", username_sqlInjection);
+
+        List<UndoDTO> history = undoDao.getUpdateHistory(extraSQL, params);
+        assertEquals(history.size(), 0);
     }
 
     @Test
