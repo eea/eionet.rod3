@@ -27,7 +27,7 @@ pipeline {
                    sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean install docker:push '''
                 }
                 finally {
-                  sh '''mvn docker:stop'''
+                  sh '''mvn -X -Pdocker docker:stop'''
                   sh '''mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false'''
                  }           
  
