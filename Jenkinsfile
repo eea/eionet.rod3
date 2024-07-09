@@ -21,9 +21,9 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN'),  usernamePassword(credentialsId: 'jekinsdockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
-                sh '''mkdir -p /var/jenkins_home/worker/.m2'''
+                sh '''mkdir -p ~/.m2'''
                 sh '''find /var/jenkins_home/worker/tools -type d -name .m2 2>/dev/null'''
-                sh ''' sed "s/TOKEN/ersRnmSYSzDQfCK4lARVnSWxNbw67T2qBCvN/" m2.settings.tpl.xml > /var/jenkins_home/worker/.m2/settings.xml '''
+                sh ''' sed "s/TOKEN/ersRnmSYSzDQfCK4lARVnSWxNbw67T2qBCvN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
                 sh '''mvn -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean install docker:push '''
             }
          }
