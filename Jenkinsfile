@@ -23,8 +23,16 @@ pipeline {
           withCredentials([string(credentialsId: 'jenkins-maven-token', variable: 'GITHUB_TOKEN'),  usernamePassword(credentialsId: 'jekinsdockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
                 sh '''mkdir -p ~/.m2'''
                 sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
-                sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean install docker:push '''
-            }
+                try {
+                   sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean install docker:push '''
+                }
+                finally {
+                  sh '''mvn docker:stop'''
+                  sh '''mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false'''
+                 }           
+ 
+
+          }
          }
        }
      }
