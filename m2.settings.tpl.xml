@@ -28,8 +28,8 @@
   <servers>
     <server>
       <id>github</id>
-      <username>miahi</username>
-      <password>ghp_TOKEN</password>
+      <username>eea-jenkins</username>
+      <password>TOKEN</password>
     </server>
   </servers>
 </settings>
