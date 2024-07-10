@@ -29,8 +29,13 @@ pipeline {
                 }
                 finally {
                       junit 'target/failsafe-reports/*.xml'
-                      discoverGitReferenceBuild()
-                      recordCoverage(tools: [[parser: 'COBERTURA']])
+
+recordCoverage(tools: [[parser: 'COBERTURA']],
+        id: 'cobertura', name: 'Cobertura Coverage',
+        sourceCodeRetention: 'EVERY_BUILD'
+       )
+
+
                 }
            }
         }
