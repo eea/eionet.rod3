@@ -552,7 +552,7 @@
                   <alias>service</alias>
                   <name>docker.io/eeacms/${project.artifactId}</name>
                   <build>
-                    <from>tomcat:8.5.100-jre11</from>
+                    <from>tomcat:8.5.0-jre8</from>
                     <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
                     <tags>
                       <tag>latest</tag>
