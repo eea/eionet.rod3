@@ -10,9 +10,39 @@ pipeline {
   stages {
 
 
+
+     stage ('Build & Test') {
+      when {
+          environment name: 'CHANGE_ID', value: ''
+      }
+      tools {
+         maven 'maven3.9'
+         jdk 'Java8'
+      }
+      steps {
+        script {
+          withCredentials([string(credentialsId: 'jenkins-maven-token', variable: 'GITHUB_TOKEN')]) {
+                sh '''mkdir -p ~/.m2'''
+                sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
+                try {
+                   sh '''mvn -X clean cobertura:cobertura-integration-test pmd:pmd findbugs:findbugs'''
+                }
+                finally {
+                      junit 'target/failsafe-reports/*.xml'
+                      discoverGitReferenceBuild()
+                      recordCoverage(tools: [[parser: 'COBERTURA']])
+                }
+           }
+        }
+      }      
+     }
+
+    
+    
     stage ('Build & Docker push') {
       when {
           environment name: 'CHANGE_ID', value: ''
+          branch 'master'
       }
       tools {
          maven 'maven3.9'
