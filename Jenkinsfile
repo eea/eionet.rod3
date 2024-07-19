@@ -29,13 +29,6 @@ pipeline {
                 }
                 finally {
                       junit 'target/failsafe-reports/*.xml'
-
-recordCoverage(tools: [[parser: 'COBERTURA']],
-        id: 'cobertura', name: 'Cobertura Coverage',
-        sourceCodeRetention: 'EVERY_BUILD'
-       )
-
-
                 }
            }
         }
