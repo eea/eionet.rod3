@@ -40,7 +40,10 @@ pipeline {
     stage ('Build & Docker push') {
       when {
           environment name: 'CHANGE_ID', value: ''
-          branch 'master'
+          anyOf {
+            branch 'master'
+            branch 'develop'
+          }
       }
       tools {
          maven 'maven3.9'
