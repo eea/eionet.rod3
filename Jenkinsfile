@@ -6,19 +6,18 @@ pipeline {
   environment {
     GIT_NAME = "eionet.rod3"
   }
+  tools {
+    maven 'maven3.9'
+    jdk 'Java8'
+  }
   
   stages {
 
-
-
-     stage ('Build & Test') {
+    stage ('Build & Test') {
       when {
           environment name: 'CHANGE_ID', value: ''
       }
-      tools {
-         maven 'maven3.9'
-         jdk 'Java8'
-      }
+
       steps {
         script {
           withCredentials([string(credentialsId: 'jenkins-maven-token', variable: 'GITHUB_TOKEN')]) {
@@ -44,10 +43,6 @@ pipeline {
             branch 'master'
             branch 'develop'
           }
-      }
-      tools {
-         maven 'maven3.9'
-         jdk 'Java8'
       }
       steps {
         script {
