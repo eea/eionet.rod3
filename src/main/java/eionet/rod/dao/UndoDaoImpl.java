@@ -10,6 +10,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.metadata.TableMetaDataContext;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -24,10 +26,12 @@ public class UndoDaoImpl implements UndoDao {
     private DataSource dataSource;
 
     JdbcTemplate jdbcTemplate;
+    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Override
@@ -827,9 +831,14 @@ public class UndoDaoImpl implements UndoDao {
     @Override
     public List<UndoDTO> getUndoList(long ts, String table, String op) {
         String query = "SELECT COL AS col, VALUE AS value, SUB_TRANS_NR AS subTransNr "
-                + "FROM T_UNDO WHERE UNDO_TIME=? AND TAB=? AND OPERATION=?";
+            + "FROM T_UNDO WHERE UNDO_TIME = :ts AND TAB = :table AND OPERATION = :op";
 
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), ts, table, op);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("ts", ts);
+        parameters.addValue("table", table);
+        parameters.addValue("op", op);
+
+        return namedParameterJdbcTemplate.query(query, parameters, new BeanPropertyRowMapper<>(UndoDTO.class));
     }
 
     @Override
