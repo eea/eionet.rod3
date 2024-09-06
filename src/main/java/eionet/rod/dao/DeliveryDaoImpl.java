@@ -2,6 +2,7 @@ package eionet.rod.dao;
 
 import eionet.rod.model.Delivery;
 import eionet.rod.util.RODUtil;
+import eionet.rod.util.exception.BadRequestException;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -51,6 +52,10 @@ public class DeliveryDaoImpl implements DeliveryDao {
     @Override
     public List<Delivery> getAllDelivery(String actDetailsId, String spatialId) throws ResourceNotFoundException {
 
+        if (!RODUtil.isInteger(actDetailsId)) {
+            throw new BadRequestException(actDetailsId);
+        }
+
         MapSqlParameterSource params = new MapSqlParameterSource();
 
         String query = "SELECT T_DELIVERY.FK_RA_ID as deliveryFKObligationId, T_DELIVERY.FK_SPATIAL_ID as deliveryFKSpatialId, T_DELIVERY.TITLE as deliveryTitle, "
@@ -69,11 +74,14 @@ public class DeliveryDaoImpl implements DeliveryDao {
                 + "LEFT JOIN T_CLIENT ON T_CLIENT_OBLIGATION_LNK.FK_CLIENT_ID=T_CLIENT.PK_CLIENT_ID "
                 + "WHERE T_DELIVERY.FK_RA_ID=:ra_id";
 
-        params.addValue("ra_id", actDetailsId);
+        params.addValue("ra_id", Integer.parseInt(actDetailsId));
 
         if (!RODUtil.isNullOrEmpty(spatialId)) {
+            if (!RODUtil.isInteger(spatialId)) {
+                throw new BadRequestException(spatialId);
+            }
             query += " AND T_DELIVERY.FK_SPATIAL_ID = :spatial_id ";
-            params.addValue("spatial_id", spatialId);
+            params.addValue("spatial_id", Integer.parseInt(spatialId));
         }
 
         query += " ORDER BY T_DELIVERY.UPLOAD_DATE DESC";

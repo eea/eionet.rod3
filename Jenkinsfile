@@ -10,7 +10,7 @@ pipeline {
     maven 'maven3.9'
     jdk 'Java8'
   }
-  
+
   stages {
 
     stage ('Build & Test') {

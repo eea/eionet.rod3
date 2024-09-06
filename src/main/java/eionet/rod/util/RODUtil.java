@@ -262,4 +262,13 @@ public class RODUtil {
         }
     }
 
+    /**
+     * Checks if a provided String has only numbers
+     * @param ch The string to check
+     * @return true if the string contains only integers
+     */
+    public static boolean isInteger(String ch) {
+        return ch.matches("\\d+");
+    }
+
 }

@@ -831,9 +831,14 @@ public class UndoDaoImpl implements UndoDao {
     @Override
     public List<UndoDTO> getUndoList(long ts, String table, String op) {
         String query = "SELECT COL AS col, VALUE AS value, SUB_TRANS_NR AS subTransNr "
-                + "FROM T_UNDO WHERE UNDO_TIME=? AND TAB=? AND OPERATION=?";
+            + "FROM T_UNDO WHERE UNDO_TIME = :ts AND TAB = :table AND OPERATION = :op";
 
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), ts, table, op);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("ts", ts);
+        parameters.addValue("table", table);
+        parameters.addValue("op", op);
+
+        return namedParameterJdbcTemplate.query(query, parameters, new BeanPropertyRowMapper<>(UndoDTO.class));
     }
 
     @Override
