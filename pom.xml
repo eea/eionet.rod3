@@ -107,7 +107,7 @@
         <configuration>
           <systemPropertyVariables>
             <db.driver>org.h2.Driver</db.driver>
-            <db.url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL</db.url>
+            <db.url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL;NON_KEYWORDS=VALUE</db.url>
             <db.username>roduser</db.username>
             <db.password>password</db.password>
             <profile>test</profile>
@@ -190,7 +190,7 @@
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
-        <version>3.5.3</version>
+        <version>4.24.0</version>
         <executions>
           <execution>
             <id>Update database</id>
@@ -199,7 +199,7 @@
               <skip>${maven.test.skip}</skip>
               <changeLogFile>db/changelog-master.xml</changeLogFile>
               <driver>org.h2.Driver</driver>
-              <url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL</url>
+              <url>jdbc:h2:file:${project.build.directory}/rod3test;MODE=MYSQL;NON_KEYWORDS=VALUE</url>
               <username>roduser</username>
               <password>password</password>
               <contexts>test</contexts>
@@ -430,14 +430,14 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>1.4.199</version>
+      <version>2.2.224</version>
     </dependency>
 
 
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
-      <version>3.5.3</version>
+      <version>4.24.0</version>
     </dependency>
     <!-- Thymeleaf -->
     <dependency>

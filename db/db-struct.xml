@@ -637,6 +637,7 @@
 
 
     <changeSet author="roug" id="rev-27">
+        <validCheckSum>7:2999e53823f23a5f21cf70e748457aa5</validCheckSum>
         <createTable tableName="T_UNDO">
           <column name="undo_time" type="bigint(20)" defaultValueNumeric="0">
                 <constraints nullable="false"/>
@@ -652,7 +653,7 @@
             </column>
           <column name="quotes" type="enum('n','y')"/>
           <column name="p_key" type="enum('n','y')"/>
-          <column name="value" type="blob"/>
+          <column name="VALUE" type="blob"/>
           <column name="sub_trans_nr" type="int(11)" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
@@ -1298,6 +1299,7 @@
   </changeSet> 
 
   <changeSet author="santamik" id="rev-72">
+    <validCheckSum>7:467a49bbe9c5ab9b63c10e7e7a201a1e</validCheckSum>
     <preConditions onFail="MARK_RAN">
       <tableExists tableName="T_OBLIGATION"/>
       <columnExists tableName="T_OBLIGATION" columnName="FK_CLIENT_ID"/>      
@@ -1305,7 +1307,7 @@
     <comment>
       Refs #89743 Remove "FK_CLIENT_ID" from the Obligations
     </comment>  
-    <dropColumn columnName="FK_CLIENT_ID " tableName="T_OBLIGATION"/>
+    <dropColumn columnName="FK_CLIENT_ID" tableName="T_OBLIGATION"/>
   </changeSet> 
 
   <changeSet author="santamik" id="rev-73">
@@ -1521,13 +1523,14 @@
         </sql>
     </changeSet>
     <changeSet id="rev-84c" author="ivascu">
+        <validCheckSum>7:d9b5e2c57b25fcdf89351d27e2cb2027</validCheckSum>
         <comment>Cleanup to solve FK issues</comment>
         <sql>
             delete from T_CLIENT_SOURCE_LNK where FK_CLIENT_ID=0;
             delete from T_DELIVERY where FK_RA_ID=70;
             delete from T_SPATIAL_HISTORY where not exists (select 1 from T_OBLIGATION where PK_RA_ID = FK_RA_ID);
             delete from T_OBLIGATION_RELATION where not exists (select 1 from T_OBLIGATION where FK_RA_ID2= PK_RA_ID);
-            insert into T_SOURCE(PK_SOURCE_ID, TITLE, ALIAS, SOURCE_CODE, LEGAL_NAME) values (1, 'Unknown', 'Unknown', 'Unknown','Unknown');
+            insert into T_SOURCE(PK_SOURCE_ID, TITLE, ALIAS, SOURCE_CODE, LEGAL_NAME, LAST_UPDATE) values (1, 'Unknown', 'Unknown', 'Unknown', 'Unknown', CURRENT_TIMESTAMP);
             update T_OBLIGATION set fk_source_id=1 where fk_source_id=0;
         </sql>
     </changeSet>
