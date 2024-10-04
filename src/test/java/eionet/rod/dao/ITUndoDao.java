@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -179,7 +180,7 @@ public class ITUndoDao {
         Integer id = 1;
         String extraSQL = "AND U1.VALUE = :extraSQL AND U1.TAB = 'T_OBLIGATION' ";
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("extraSQL", id);
+        params.addValue("extraSQL", String.valueOf(id).getBytes(StandardCharsets.UTF_8));
 
         List<UndoDTO> history = undoDao.getUpdateHistory(extraSQL, params);
         assertEquals(history.size(), 1);

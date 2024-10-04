@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,7 @@ public class UpdateHistoryController {
         MapSqlParameterSource params = new MapSqlParameterSource();
 
         if (object != null) {
-            params.addValue("extraSQL", id);
+            params.addValue("extraSQL", String.valueOf(id).getBytes(StandardCharsets.UTF_8));
             if ("S".equals(object)) {
                 history = undoService.getUpdateHistory("AND U1.VALUE = :extraSQL AND U1.TAB = 'T_SOURCE' ", params);
             } else {
