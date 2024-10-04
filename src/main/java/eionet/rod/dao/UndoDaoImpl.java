@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
@@ -819,7 +820,7 @@ public class UndoDaoImpl implements UndoDao {
 
         String user;
 
-        List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), idField, id, tab, operation);
+        List<UndoDTO> versions = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(UndoDTO.class), idField, String.valueOf(id).getBytes(StandardCharsets.UTF_8), tab, operation);
         for (UndoDTO version : versions) {
             user = jdbcTemplate.queryForObject(queryUser, String.class, version.getUndoTime(), "A_USER", tab);
             version.setValue(user);
@@ -861,7 +862,7 @@ public class UndoDaoImpl implements UndoDao {
         String query = "SELECT COUNT(*) FROM T_UNDO "
                 + "WHERE TAB=? AND COL=? AND VALUE=? AND OPERATION='D'";
 
-        Integer count = jdbcTemplate.queryForObject(query, Integer.class, table, column, id);
+        Integer count = jdbcTemplate.queryForObject(query, Integer.class, table, column, String.valueOf(id).getBytes(StandardCharsets.UTF_8));
 
         return count != 0;
 
