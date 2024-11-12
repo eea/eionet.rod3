@@ -575,12 +575,8 @@
                     <env>
                       <LANG>C.UTF-8</LANG>
                       <TZ>Europe/Copenhagen</TZ>
-                      <CATALINA_OPTS>-Dinitial.username=roug
-                        -Dcas.service=http://localhost:4590
-                        -Ddb.driver=org.mariadb.jdbc.Driver
-                        -Ddb.url=jdbc:mariadb://database/rod3 -Ddb.username=roduser
-                        -Ddb.password=password
-                        -Ddeploy.contexts=test
+                      <CATALINA_OPTS>
+                        "-Dinitial.username=roug" "-Dcas.service=http://localhost:4590" "-Ddb.driver=org.mariadb.jdbc.Driver" "-Ddb.url=jdbc:mariadb://database/rod3" "-Ddb.username=roduser" "-Ddb.password=password" "-Ddeploy.contexts=test"
                       </CATALINA_OPTS>
                     </env>
                     <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
