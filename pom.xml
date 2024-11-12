@@ -537,7 +537,7 @@
           <plugin>
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>0.23.0</version>
+            <version>0.45.1</version>
             <configuration>
               <verbose>false</verbose>
               <logDate>default</logDate>
@@ -547,7 +547,7 @@
                   <alias>service</alias>
                   <name>docker.io/eeacms/${project.artifactId}</name>
                   <build>
-                    <from>tomcat:8.5-jre8</from>
+                    <from>tomcat:8.5.100-jre8</from>
                     <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
                     <tags>
                       <tag>latest</tag>
