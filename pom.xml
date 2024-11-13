@@ -19,7 +19,7 @@
     <mockito.version>2.27.0</mockito.version>
   </properties>
 
-  <version>3.14-TEST</version>
+  <version>3.15-TEST</version>
   <name>rod</name>
   <url>https://rod.eionet.europa.eu</url>
 
@@ -576,7 +576,13 @@
                       <LANG>C.UTF-8</LANG>
                       <TZ>Europe/Copenhagen</TZ>
                       <CATALINA_OPTS>
-                        "-Dinitial.username=roug" "-Dcas.service=http://localhost:4590" "-Ddb.driver=org.mariadb.jdbc.Driver" "-Ddb.url=jdbc:mariadb://database/rod3" "-Ddb.username=roduser" "-Ddb.password=password" "-Ddeploy.contexts=test"
+                        -Dinitial.username=roug
+                        -Dcas.service=http://localhost:4590
+                        -Ddb.driver=org.mariadb.jdbc.Driver
+                        -Ddb.url=jdbc:mariadb://database/rod3
+                        -Ddb.username=roduser
+                        -Ddb.password=password
+                        -Ddeploy.contexts=test
                       </CATALINA_OPTS>
                     </env>
                     <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
