@@ -13,7 +13,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java_version>1.8</java_version>
     <spring.version>4.3.27.RELEASE</spring.version>
-    <spring.security.version>4.2.17.RELEASE</spring.security.version>
+    <spring.security.version>5.2.10.RELEASE</spring.security.version>
     <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
     <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     <mockito.version>2.27.0</mockito.version>
