@@ -9,7 +9,7 @@ c. One sub-collection folder for each Marine region and/or sub-region relevant t
 
 Further details of the types of reports and their content are given in MSFD Article 11 Reporting Package (https://circabc.europa.eu/d/a/workspace/SpacesStore/2678a5fe-d8bc-4f62-aafe-d09c53294e0b/MSFD_Art11ReportingPackage_Final_Feb2014.doc)
 
-Helpdesk service and support
-a. In case of login problems or any other technical difficulties with Eionet web services, please contact Eionet Helpdesk (helpdesk@eionet.europa.eu).
+Service Desk service and support
+a. In case of login problems or any other technical difficulties with Eionet web services, please contact Eionet Service Desk (ServiceDesk@eea.europa.eu).
 b. If you need national support for your work with ReportNet, please contact your Eionet National Focal Points (http://www.eionet.europa.eu/ldap-roles/?role_id=eionet).
 c. In case of problems with the reporting tools or questions related to the content of the data requested, please contact helpdesk (helpdeskWISEreporting@atkinsglobal.com)
