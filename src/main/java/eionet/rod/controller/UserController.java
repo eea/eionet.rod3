@@ -61,6 +61,7 @@ public class UserController {
     public String viewUsers(Model model, @RequestParam(required = false) String message) {
         BreadCrumbs.set(model, "Users");
         model.addAttribute("allUsers", userManagementService.getAllUsers());
+        model.addAttribute("activeTab", "users");
         Authorisation user = new Authorisation();
         model.addAttribute("user", user);
         if (message != null) model.addAttribute("message", message);
@@ -121,6 +122,7 @@ public class UserController {
     @RequestMapping("/edit")
     public String editUserForm(@RequestParam String userName, Model model,
                                @RequestParam(required = false) String message) {
+        model.addAttribute("activeTab", "users");
         model.addAttribute("userName", userName);
         BreadCrumbs.set(model, "Modify user");
         UserDetails userDetails = userManagementService.loadUserByUsername(userName);
