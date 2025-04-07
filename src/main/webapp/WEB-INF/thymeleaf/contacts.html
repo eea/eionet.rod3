@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <script>
     $(document).ready(function () {
@@ -18,9 +18,9 @@
 
 </script>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
-        <div th:replace="helpModal :: helpModalFragment"></div>
+        <div th:replace="~{helpModal :: helpModalFragment}"></div>
 
         <span th:if="${dirRole} == null">
 		<span th:if="${isDirectoryError} == true">Technical error when getting the requested role's description from Eionet's directory service!</span>
@@ -102,7 +102,7 @@
         </div>
 
     </div>
-    <div th:replace="layout :: footerFragment"></div>
+    <div th:replace="~{layout :: footerFragment}"></div>
 </div>
 </body>
 </html>

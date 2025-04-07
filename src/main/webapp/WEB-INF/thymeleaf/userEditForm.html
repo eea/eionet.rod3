@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment">
+<head th:insert="~{layout :: headerFragment}">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="developer.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}"/>
 </head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment">
+    <div th:insert="~{layout :: bannerFragment}">
         <div id="pagehead">
             <div id="networktitle">Eionet</div>
             <div id="sitetitle">Reporting Obligations Database (ROD)</div>
@@ -44,7 +44,7 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:include="layout :: footerFragment">
+<div id="pagefoot" th:insert="~{layout :: footerFragment}">
     Footer
 </div>
 </body>

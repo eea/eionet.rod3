@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
-        <div th:replace="helpModal :: helpModalFragment"></div>
+        <div th:replace="~{helpModal :: helpModalFragment}"></div>
 
         <div class="title">
             <h1>Advanced search</h1>
@@ -136,7 +136,7 @@
         </div>
 
     </div>
-    <div th:replace="layout :: footerFragment"></div>
+    <div th:replace="~{layout :: footerFragment}"></div>
 </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
         <div class="form-horizontal">
             <div class="title">
@@ -138,7 +138,7 @@
 
         </div>
     </div>
-    <div id="pagefoot" th:include="layout :: footerFragment"></div>
+    <div id="pagefoot" th:insert="~{layout :: footerFragment}"></div>
 </div>
 <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>
 </body>

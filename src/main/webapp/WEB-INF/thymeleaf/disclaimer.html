@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment">
+    <div th:insert="~{layout :: bannerFragment}">
     </div>
     <div id="workarea">
-        <div th:replace="helpModal :: helpModalFragment"></div>
+        <div th:replace="~{helpModal :: helpModalFragment}"></div>
         <h1>Disclaimer</h1>
         <h2>Summary</h2>
         <p>
@@ -87,6 +87,6 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:include="layout :: footerFragment"></div>
+<div id="pagefoot" th:insert="~{layout :: footerFragment}"></div>
 </body>
 </html>

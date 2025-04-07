@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -18,7 +18,7 @@
 
 </script>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
         <div class="title">
             <h1>Legal instrument details:
@@ -170,7 +170,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="layout :: footerFragment"></div>
+    <div th:replace="~{layout :: footerFragment}"></div>
 
 </div>
 <script type="text/javascript" src="../../js/editor.js" th:src="@{/js/editor.js}"></script>

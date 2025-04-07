@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment" th:with="activeTab = 'home'"></div>
+    <div th:insert="~{layout :: bannerFragment}" th:with="activeTab = 'home'"></div>
 
-    <div th:replace="helpModal :: helpModalFragment"></div>
+    <div th:replace="~{helpModal :: helpModalFragment}"></div>
     <div id="workarea">
         <div class="leftworkarea">
             <h1>What is ROD?</h1>
@@ -119,7 +119,7 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:include="layout :: footerFragment">
+<div id="pagefoot" th:insert="~{layout :: footerFragment}">
     Footer
 </div>
 </body>

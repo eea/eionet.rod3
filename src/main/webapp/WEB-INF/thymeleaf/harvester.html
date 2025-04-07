@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea" sec:authorize="hasRole('EDITOR')">
-        <div th:replace="helpModal :: helpModalFragment"></div>
+        <div th:replace="~{helpModal :: helpModalFragment}"></div>
         <div class="title">
             <h1>Harvest deliveries and roles</h1>
             <div th:if="${message}" th:text="${message}" class="system-msg"></div>
@@ -34,7 +34,7 @@
         </form>
 
     </div>
-    <div th:replace="layout :: footerFragment"></div>
+    <div th:replace="~{layout :: footerFragment}"></div>
 </div>
 </body>
 </html>

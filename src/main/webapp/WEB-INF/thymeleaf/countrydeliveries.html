@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <script>
     $(document).ready(function () {
@@ -14,7 +14,7 @@
 <!--/*@thymesVar id="obligation" type="eionet.rod.model.Obligations"*/-->
 
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
         <div class="title">
             <h1 th:text="'Status of deliveries: ' + ${country.name}"></h1>
@@ -100,7 +100,7 @@
 
         </form>
     </div>
-    <div id="pagefoot" th:include="layout :: footerFragment"></div>
+    <div id="pagefoot" th:insert="~{layout :: footerFragment}"></div>
 </div>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment">
+<head th:insert="~{layout :: headerFragment}">
 </head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment">
+    <div th:insert="~{layout :: bannerFragment}">
     </div>
     <div id="workarea">
         <h1>Add new client</h1>
@@ -108,7 +108,7 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:include="layout :: footerFragment">
+<div id="pagefoot" th:insert="~{layout :: footerFragment}">
     Footer
 </div>
 </body>

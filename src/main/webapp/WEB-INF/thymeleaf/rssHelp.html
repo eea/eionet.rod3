@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment">
+    <div th:insert="~{layout :: bannerFragment}">
     </div>
     <div id="workarea">
-        <div th:replace="helpModal :: helpModalFragment"></div>
+        <div th:replace="~{helpModal :: helpModalFragment}"></div>
         <p>
             The contents of ROD can be used in several different ways. Currently the main way is to browse the website. The contents of the database are also available for
             use as RSS, RDF and via XML-RPC. The purpose of this text is to give an introduction to how these technologies can be used to extract contents from ROD and overview
@@ -121,6 +121,6 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:include="layout :: footerFragment"></div>
+<div id="pagefoot" th:insert="~{layout :: footerFragment}"></div>
 </body>
 </html>

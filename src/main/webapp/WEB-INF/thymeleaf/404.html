@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: headerFragment"></head>
+<head th:insert="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:include="layout :: bannerFragment"></div>
+    <div th:insert="~{layout :: bannerFragment}"></div>
     <div id="workarea">
 
         <h1>HTTP Status 404</h1>
@@ -11,7 +11,7 @@
         <strong>Resource not found.</strong>
 
     </div>
-    <div th:replace="layout :: footerFragment"></div>
+    <div th:replace="~{layout :: footerFragment}"></div>
 </div>
 </body>
 </html>
