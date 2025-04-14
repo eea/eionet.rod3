@@ -70,15 +70,14 @@ pipeline {
               sh '''mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false'''
             }
           }
-         }
-       }
-     }
-     post {
-       always {
-         sh "docker rmi $registry:$tagName | docker images $registry:$tagName"
-       }
-     }
-  }
+        }
+      }
+      post {
+        always {
+          sh "docker rmi $registry:$tagName | docker images $registry:$tagName"
+        }
+      }
+    }
 
   post {
       always {
