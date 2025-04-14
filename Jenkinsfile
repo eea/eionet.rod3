@@ -5,6 +5,9 @@ pipeline {
 
   environment {
     GIT_NAME = "eionet.rod3"
+    registry = "eeacms/rod"
+    dockerImage = ''
+    tagName = ''
   }
   tools {
     maven 'maven3.9'
@@ -38,28 +41,41 @@ pipeline {
     
     stage ('Build & Docker push') {
       when {
-          environment name: 'CHANGE_ID', value: ''
-          anyOf {
-            branch 'master'
-            branch 'develop'
-          }
+        environment name: 'CHANGE_ID', value: ''
+        anyOf {
+          branch 'master'
+          branch 'develop'
+        }
       }
       steps {
         script {
           withCredentials([string(credentialsId: 'jenkins-maven-token', variable: 'GITHUB_TOKEN'),  usernamePassword(credentialsId: 'jekinsdockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
-                sh '''mkdir -p ~/.m2'''
-                sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
-                try {
-                   sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean install docker:push '''
-                }
-                finally {
-                  sh '''mvn -X -Pdocker docker:stop'''
-                  sh '''mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false'''
-                 }           
- 
+            sh '''mkdir -p ~/.m2'''
+            sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
+            try {
+              sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean verify '''
 
+              if (env.BRANCH_NAME == 'master') {
+                tagName = 'latest'
+              } else {
+                tagName = "$BRANCH_NAME"
+              }
+              def date = sh(returnStdout: true, script: 'echo $(date "+%Y-%m-%dT%H%M")').trim()
+              dockerImage = docker.build("$registry:$tagName", "--no-cache .")
+              docker.withRegistry( '', 'eeajenkins' ) {
+                dockerImage.push()
+                dockerImage.push(date)
+              }
+            } finally {
+              sh '''mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false'''
+            }
           }
          }
+       }
+     }
+     post {
+       always {
+         sh "docker rmi $registry:$tagName | docker images $registry:$tagName"
        }
      }
   }

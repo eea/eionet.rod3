@@ -529,9 +529,6 @@
   <profiles>
     <profile>
       <id>docker</id>
-      <properties>
-        <tomcat.port>4590</tomcat.port>
-      </properties>
       <build>
         <plugins>
           <plugin>
@@ -539,68 +536,9 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.45.1</version>
             <configuration>
-              <verbose>false</verbose>
-              <logDate>default</logDate>
-              <autoPull>true</autoPull>
               <images>
                 <image>
-                  <alias>service</alias>
-                  <name>docker.io/eeacms/${project.artifactId}</name>
-                  <build>
-                    <from>tomcat:9.0.102-jre8</from>
-                    <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
-                    <tags>
-                      <tag>latest</tag>
-                      <tag>${project.version}</tag>
-                      <!-- <tag>${maven.build.timestamp}</tag> -->
-                    </tags>
-                    <assembly>
-                      <descriptorRef>rootWar</descriptorRef>
-                    </assembly>
-                    <runCmds>
-                      <run>rm -rf /usr/local/tomcat/conf/logging.properties /usr/local/tomcat/webapps/*</run>
-                      <run>mv /maven/ROOT.war /usr/local/tomcat/webapps/ROOT.war</run>
-                    </runCmds>
-                    <optimise>true</optimise>
-
-                    <!-- Expose ports -->
-                    <ports>
-                      <port>8080</port>
-                      <port>8009</port>
-                    </ports>
-                    <!-- Default command for the build image -->
-                    <!--<cmd>catalina.sh run</cmd> -->
-                  </build>
-                  <run>
-                    <env>
-                      <LANG>C.UTF-8</LANG>
-                      <TZ>Europe/Copenhagen</TZ>
-                      <CATALINA_OPTS>
-                        -Dinitial.username=roug -Dcas.service=http://localhost:4590 -Ddb.driver=org.mariadb.jdbc.Driver -Ddb.url=jdbc:mariadb://database/rod3 -Ddb.username=roduser -Ddb.password=password -Ddeploy.contexts=test
-                      </CATALINA_OPTS>
-                    </env>
-                    <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
-                    <ports>
-                      <port>tomcat.port:8080</port>
-                    </ports>
-                    <wait>
-                      <!-- Check for this URL to return a 200 return code .... -->
-                      <url>http://${docker.host.address}:${tomcat.port}/</url>
-                      <!-- ... but at max 300 seconds -->
-                      <time>300000</time>
-                    </wait>
-                    <links>
-                      <link>database</link>
-                    </links>
-                    <log>
-                      <prefix>TC</prefix>
-                      <color>cyan</color>
-                    </log>
-                  </run>
-                </image>
-
-                <image>
-                  <alias>database</alias>
+                  <alias>mariadb</alias>
                   <name>mariadb:10.2.10</name>
                   <run>
                     <ports>
@@ -626,7 +564,6 @@
                   </run>
                 </image>
               </images>
-
             </configuration>
 
             <!-- Hooking into the lifecycle -->
@@ -635,7 +572,6 @@
                 <id>start</id>
                 <phase>pre-integration-test</phase>
                 <goals>
-                  <goal>build</goal>
                   <goal>start</goal>
                 </goals>
               </execution>
@@ -644,6 +580,31 @@
                 <phase>post-integration-test</phase>
                 <goals>
                   <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>4.24.0</version>
+            <executions>
+              <execution>
+                <id>Update database</id>
+                <phase>pre-integration-test</phase>
+                <configuration>
+                  <skip>${maven.test.skip}</skip>
+                  <changeLogFile>db/changelog-master.xml</changeLogFile>
+                  <driver>org.mariadb.jdbc.Driver</driver>
+                  <url>jdbc:mariadb://${docker.host.address}:${database.port}/rod3</url>
+                  <username>roduser</username>
+                  <password>password</password>
+                  <contexts>test</contexts>
+                </configuration>
+                <goals>
+                  <goal>dropAll</goal>
+                  <goal>update</goal>
                 </goals>
               </execution>
             </executions>
