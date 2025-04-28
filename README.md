@@ -6,9 +6,9 @@ You can find the layout template at src/main/webapp/WEB-INF/thymeleaf/layout.htm
 
 Dependencies
 ------------
-* Tomcat 8
+* Tomcat 9
 * Java 1.8
-* Spring 4
+* Spring 5
 * Thymeleaf 3
 * MySQL or H2 Database Engine
 
@@ -16,27 +16,20 @@ Automated tests
 ---------------
 There are test examples of both controllers and data access objects using the Spring test package.
 
-Building a Docker image
------------------------
+Building the .war file
+----------------------
+The default profile is using the docker maven plugin to setup an h2 database for use with the integration tests phase. To create a .war file for deployment with tomcat, you can run any of the following commands:
 
-It is possible to build, test and push a Docker image of Eionet ROD3 to Docker Hub. To do so you activate the `docker` profile. The `install` goal will do a test start up of the container. The `docker:push` will push the Docker image to Docker Hub as `eeacms/rod`.
+To run unit and integration tests before building, run:
 ```
-mvn -Pdocker install docker:push
+$ mvn clean install
 ```
-To use `docker:push` you must have an account and add these lines to your `~/.m2/settings.xml`:
+To skip the integration tests (not recommended), you can add -Dmaven.test.skip=true e.g
 ```
-<server>
-  <id>docker.io</id>
-  <username>{account}</username>
-  <password>{password}</password>
-</server>
+$ mvn clean install -Dmaven.test.skip=true
 ```
 
-Upgrading the demo site
------------------------
-After you have pushed a new image to Docker Hub you can upgrade the demo site at http://rod3.devel1dub.eionet.europa.eu/ with the Rancher client or UI by pulling the latest image.
-
-Deployment of WAR file
+Deployment of the .war file
 ----------------------
 The default configuration is to allow you to deploy to your own workstation directly. You install the target/rod.war to Tomcat's webapps directory as ROOT.war. You can make it create an initial user with administrator rights by setting system properties to configure the application.
 
@@ -61,6 +54,14 @@ cas.server.host
 ```
 The default values are in src/main/resources/application.properties and src/main/resources/cas.properties.
 
-References
-----------
-* https://github.com/fabric8io/docker-maven-plugin
+Building a Docker image
+-----------------------
+
+After having built the .war file with maven, it can be directly used in docker containers thanks to the environmental configuration. The Dockerfile can be used to build a ready-to-deploy image of rod:
+```
+docker build -t eeacms/rod:latest .
+```
+To push the Docker image of Eionet ROD to Docker Hub:
+```
+docker push eeacms/rod:latest
+```
