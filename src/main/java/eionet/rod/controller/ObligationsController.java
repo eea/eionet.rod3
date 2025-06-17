@@ -947,7 +947,7 @@ public class ObligationsController {
                     value = obligation.getTerminate();
                     break;
                 case "REPORT_FREQ":
-                    value = obligation.getTerminate();
+                    value = obligation.getReportFreq();
                     break;
                 case "FK_DELIVERY_COUNTRY_IDS":
                     value = obligation.getDeliveryCountryId();

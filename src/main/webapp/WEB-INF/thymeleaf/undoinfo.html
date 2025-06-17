@@ -49,13 +49,19 @@
                         <th>Current Value</th>
                     </tr>
                     </thead>
-                    <tr th:each="undo, iterStat : ${undoList}" th:class="${iterStat.odd} ? 'even' : 'odd'">
+                    <tr th:each="undo, iterStat : ${undoList}"
+                        th:if="${#maps.containsKey(currentValues, undo.col)}"
+                        th:class="${iterStat.odd} ? 'even' : 'odd'">
                         <td><span th:text="${table}"></span></td>
                         <td><span th:text="${undo.subTransNr}"></span></td>
                         <td><span th:text="${undo.col}"></span></td>
                         <td><span th:if="${undo.value != null}" th:text="${undo.value}"></span></td>
-                        <td th:if="${undo.value == currentValues[iterStat.index]}"><span th:text="${currentValues[iterStat.index]}"></span></td>
-                        <td th:unless="${undo.value == currentValues[iterStat.index]}" class="currentValueDif"><span th:text="${currentValues[iterStat.index]}"></span></td>
+                        <td th:if="${undo.value == currentValues[undo.col]}">
+                            <span th:text="${currentValues[undo.col]}"></span>
+                        </td>
+                        <td th:unless="${undo.value == currentValues[undo.col]}" class="currentValueDif">
+                            <span th:text="${currentValues[undo.col]}"></span>
+                        </td>
                     </tr>
                 </table>
                 <table th:case="'DELETE'" th:with="i=1" id="undoTable" class="datatable results table table-striped table-bordered">

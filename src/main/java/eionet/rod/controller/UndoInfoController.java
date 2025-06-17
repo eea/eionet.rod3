@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/undoinfo")
@@ -68,65 +65,53 @@ public class UndoInfoController {
         List<UndoDTO> undoList = undoService.getUndoList(ts, tab, op);
         model.addAttribute("undoList", undoList);
 
-        ArrayList<String> currentValues = new ArrayList<>();
+        Map<String,String> currentValues = new LinkedHashMap<>();
 
         if ("T_OBLIGATION".equals(tab)) {
 
             if (!"D".equals(op)) {
-
                 boolean isDelete = undoService.isDelete(tab, "PK_RA_ID", id);
+                Obligations obligation = obligationsService.findOblId(id);
 
-                // todo: reflection on objects instead of this
-                if (!isDelete) {
-                    Obligations obligation = obligationsService.findOblId(id);
-
-                    currentValues.add(obligation.getAuthority());
-                    currentValues.add(obligation.getComment());
-                    currentValues.add(obligation.getContinousReporting());
-                    currentValues.add(obligation.getCoordinator());
-                    currentValues.add(obligation.getCoordinatorRole());
-                    currentValues.add(obligation.getCoordinatorRoleSuf());
-                    currentValues.add(obligation.getCoordinatorUrl());
-                    currentValues.add(obligation.getDataUsedFor());
-                    currentValues.add(obligation.getDataUsedForUrl());
-                    currentValues.add(obligation.getDateComments());
-                    currentValues.add(obligation.getDescription());
-                    currentValues.add(toStringOrEmpty(obligation.getEeaCore()));
-                    currentValues.add(toStringOrEmpty(obligation.getEeaPrimary()));
-                    currentValues.add(toStringOrEmpty(obligation.getFirstReporting()));
-                    currentValues.add(obligation.getDeliveryCountryId());
-                    currentValues.add(obligation.getSourceId());
-                    currentValues.add(toStringOrEmpty(obligation.getFlagged()));
-
-                    currentValues.add(obligation.getFormatName());
-                    currentValues.add(toStringOrEmpty(obligation.getLastHarvested()));
-                    currentValues.add(toStringOrEmpty(obligation.getLastUpdate()));
-                    currentValues.add(obligation.getLocationInfo());
-                    currentValues.add(obligation.getLocationPtr());
-                    currentValues.add(obligation.getNationalContact());
-                    currentValues.add(obligation.getNationalContactUrl());
-                    currentValues.add(toStringOrEmpty(obligation.getNextDeadline()));
-                    currentValues.add(toStringOrEmpty(obligation.getNextDeadline2()));
-                    currentValues.add(obligation.getNextReporting());
-                    currentValues.add(obligation.getObligationId().toString());
-                    currentValues.add(obligation.getReportingFormat());
-                    currentValues.add(obligation.getReportFormatUrl());
-                    currentValues.add(obligation.getReportFreq());
-                    currentValues.add(toStringOrEmpty(obligation.getReportFreqDetail()));
-                    currentValues.add(obligation.getReportFreqMonths());
-                    currentValues.add(obligation.getResponsibleRole());
-                    currentValues.add(obligation.getResponsibleRoleSuf());
-                    currentValues.add(obligation.getTerminate());
-                    currentValues.add(obligation.getOblTitle());
-                    currentValues.add(toStringOrEmpty(obligation.getValidSince()));
-                    currentValues.add(toStringOrEmpty(obligation.getValidTo()));
-
-                } else {
-                    for (int i = 0; i < 39; i++) {
-                        currentValues.add("");
-                    }
-                }
-
+                currentValues.put("AUTHORITY", isDelete ? "" : obligation.getAuthority());
+                currentValues.put("COMMENT", isDelete ? "" : obligation.getComment());
+                currentValues.put("CONTINOUS_REPORTING", isDelete ? "" : obligation.getContinousReporting());
+                currentValues.put("COORDINATOR", isDelete ? "" : obligation.getCoordinator());
+                currentValues.put("COORDINATOR_ROLE", isDelete ? "" : obligation.getCoordinatorRole());
+                currentValues.put("COORDINATOR_ROLE_SUF", isDelete ? "" : obligation.getCoordinatorRoleSuf());
+                currentValues.put("COORDINATOR_URL", isDelete ? "" : obligation.getCoordinatorUrl());
+                currentValues.put("DATA_USED_FOR", isDelete ? "" : obligation.getDataUsedFor());
+                currentValues.put("DATA_USED_FOR_URL", isDelete ? "" : obligation.getDataUsedForUrl());
+                currentValues.put("DATE_COMMENTS", isDelete ? "" : obligation.getDateComments());
+                currentValues.put("DESCRIPTION", isDelete ? "" : obligation.getDescription());
+                currentValues.put("EEA_CORE", isDelete ? "" : toStringOrEmpty(obligation.getEeaCore()));
+                currentValues.put("EEA_PRIMARY", isDelete ? "" : toStringOrEmpty(obligation.getEeaPrimary()));
+                currentValues.put("FIRST_REPORTING", isDelete ? "" : toStringOrEmpty(obligation.getFirstReporting()));
+                currentValues.put("FK_DELIVERY_COUNTRY_IDS", isDelete ? "" : toStringOrEmpty(obligation.getDeliveryCountryId()));
+                currentValues.put("FK_SOURCE_ID", isDelete ? "" : obligation.getSourceId());
+                currentValues.put("FLAGGED", isDelete ? "" : toStringOrEmpty(obligation.getFlagged()));
+                currentValues.put("FORMAT_NAME", isDelete ? "" : obligation.getFormatName());
+                currentValues.put("LAST_HARVESTED", isDelete ? "" : toStringOrEmpty(obligation.getLastHarvested()));
+                currentValues.put("LAST_UPDATE", isDelete ? "" : toStringOrEmpty(obligation.getLastUpdate()));
+                currentValues.put("LOCATION_INFO", isDelete ? "" : obligation.getLocationInfo());
+                currentValues.put("LOCATION_PTR", isDelete ? "" : obligation.getLocationPtr());
+                currentValues.put("NATIONAL_CONTACT", isDelete ? "" : obligation.getNationalContact());
+                currentValues.put("NATIONAL_CONTACT_URL", isDelete ? "" : obligation.getNationalContactUrl());
+                currentValues.put("NEXT_DEADLINE", isDelete ? "" : toStringOrEmpty(obligation.getNextDeadline()));
+                currentValues.put("NEXT_DEADLINE2", isDelete ? "" : toStringOrEmpty(obligation.getNextDeadline2()));
+                currentValues.put("NEXT_REPORTING", isDelete ? "" : obligation.getNextReporting());
+                currentValues.put("PK_RA_ID", isDelete ? "" : obligation.getObligationId().toString());
+                currentValues.put("REPORTING_FORMAT", isDelete ? "" : obligation.getReportingFormat());
+                currentValues.put("REPORT_FORMAT_URL", isDelete ? "" : obligation.getReportFormatUrl());
+                currentValues.put("REPORT_FREQ", isDelete ? "" : obligation.getReportFreq());
+                currentValues.put("REPORT_FREQ_DETAIL", isDelete ? "" : toStringOrEmpty(obligation.getReportFreqDetail()));
+                currentValues.put("REPORT_FREQ_MONTHS", isDelete ? "" : obligation.getReportFreqMonths());
+                currentValues.put("RESPONSIBLE_ROLE", isDelete ? "" : obligation.getResponsibleRole());
+                currentValues.put("RESPONSIBLE_ROLE_SUF", isDelete ? "" : obligation.getResponsibleRoleSuf());
+                currentValues.put("TERMINATE", isDelete ? "" : obligation.getTerminate());
+                currentValues.put("TITLE", isDelete ? "" : obligation.getOblTitle());
+                currentValues.put("VALID_SINCE", isDelete ? "" : toStringOrEmpty(obligation.getValidSince()));
+                currentValues.put("VALID_TO", isDelete ? "" : toStringOrEmpty(obligation.getValidTo()));
             }
 
             List<UndoDTO> undoCountries = undoService.getUndoList(ts, "T_RASPATIAL_LNK", op);
@@ -515,43 +500,31 @@ public class UndoInfoController {
             model.addAttribute("activeTab", "obligations");
 
         } else {
-
             if (!"D".equals(op)) {
-
                 boolean isDelete = undoService.isDelete(tab, "PK_SOURCE_ID", id);
-                // todo and here too
-                if (!isDelete) {
+                InstrumentFactsheetDTO instrument = sourceService.getById(id);
 
-                    InstrumentFactsheetDTO instrument = sourceService.getById(id);
-
-                    currentValues.add(instrument.getSourceAbstract());
-                    currentValues.add(instrument.getSourceAlias());
-                    currentValues.add(instrument.getSourceCelexRef());
-                    currentValues.add(instrument.getSourceComment());
-                    currentValues.add(toStringOrEmpty(instrument.getSourceEcAccession()));
-                    currentValues.add(toStringOrEmpty(instrument.getSourceEcEntryIntoForce()));
-                    currentValues.add(instrument.getClientId().toString());
-                    currentValues.add(toStringOrEmpty(instrument.getSourceFkTypeId()));
-                    currentValues.add(toStringOrEmpty(instrument.getSourceIssuedBy()));
-                    currentValues.add(toStringOrEmpty(instrument.getSourceLastModified()));
-//					currentValues.add(instrument.getSourceIssuedByUrl());
-                    currentValues.add(toStringOrEmpty(instrument.getSourceLastUpdate()));
-                    currentValues.add(instrument.getSourceLegalName());
-                    currentValues.add(instrument.getSourceId().toString());
-                    currentValues.add(instrument.getSourceSecretariat());
-                    currentValues.add(instrument.getSourceSecretariatUrl());
-                    currentValues.add(instrument.getSourceCode());
-                    currentValues.add(instrument.getSourceTerminate());
-                    currentValues.add(instrument.getSourceTitle());
-                    currentValues.add(instrument.getSourceUrl());
-                    currentValues.add(toStringOrEmpty(instrument.getSourceValidFrom()));
-
-                } else {
-                    for (int i = 0; i < 21; i++) {
-                        currentValues.add("");
-                    }
-                }
-
+                currentValues.put("ABSTRACT", isDelete ? "" : instrument.getSourceAbstract());
+                currentValues.put("ALIAS", isDelete ? "" : instrument.getSourceAlias());
+                currentValues.put("CELEX_REF", isDelete ? "" : instrument.getSourceCelexRef());
+                currentValues.put("COMMENT", isDelete ? "" : instrument.getSourceComment());
+                currentValues.put("EC_ACCESSION", isDelete ? "" : toStringOrEmpty(instrument.getSourceEcAccession()));
+                currentValues.put("EC_ENTRY_INTO_FORCE", isDelete ? "" : toStringOrEmpty(instrument.getSourceEcEntryIntoForce()));
+                currentValues.put("FK_CLIENT_ID", isDelete ? "" : instrument.getClientId().toString());
+                currentValues.put("FK_TYPE_ID", isDelete ? "" : toStringOrEmpty(instrument.getSourceFkTypeId()));
+                currentValues.put("ISSUED_BY", isDelete ? "" : toStringOrEmpty(instrument.getSourceIssuedBy()));
+                currentValues.put("LAST_MODIFIED", isDelete ? "" : toStringOrEmpty(instrument.getSourceLastModified()));
+                // currentValues.put("ISSUED_BY_URL", isDelete ? "" : instrument.getSourceIssuedByUrl());
+                currentValues.put("LAST_UPDATE", isDelete ? "" : toStringOrEmpty(instrument.getSourceLastUpdate()));
+                currentValues.put("LEGAL_NAME", isDelete ? "" : instrument.getSourceLegalName());
+                currentValues.put("PK_SOURCE_ID", isDelete ? "" : instrument.getSourceId().toString());
+                currentValues.put("SECRETARIAT", isDelete ? "" : instrument.getSourceSecretariat());
+                currentValues.put("SECRETARIAT_URL", isDelete ? "" : instrument.getSourceSecretariatUrl());
+                currentValues.put("SOURCE_CODE", isDelete ? "" : instrument.getSourceCode());
+                currentValues.put("TERMINATE", isDelete ? "" : instrument.getSourceTerminate());
+                currentValues.put("TITLE", isDelete ? "" : instrument.getSourceTitle());
+                currentValues.put("URL", isDelete ? "" : instrument.getSourceUrl());
+                currentValues.put("VALID_FROM", isDelete ? "" : toStringOrEmpty(instrument.getSourceValidFrom()));
             }
 
             model.addAttribute("activeTab", "instruments");
