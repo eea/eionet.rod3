@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="stdout">
+      <PatternLayout pattern="%d %5p [%c{1}] (%F:%L) - %m%n"/>
+    </Console>
+    <Gelf name="gelf" host="logcentral.eea.europa.eu" port="12201"
+          extractStackTrace="true" filterStackTrace="true"
+          originHost="${sys:cas.service}" />
+  </Appenders>
+  <Loggers>
+    <Logger name="eionet.rod" level="DEBUG" additivity="false">
+      <AppenderRef ref="stdout"/>
+      <AppenderRef ref="gelf"/>
+    </Logger>
+    <Root level="INFO">
+      <AppenderRef ref="stdout"/>
+      <AppenderRef ref="gelf"/>
+    </Root>
+  </Loggers>
+</Configuration>
