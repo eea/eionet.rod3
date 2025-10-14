@@ -4,7 +4,7 @@ import eionet.rod.model.Delivery;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.BadRequestException;
 import eionet.rod.util.exception.ResourceNotFoundException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openrdf.query.BindingSet;
