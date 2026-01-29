@@ -52,7 +52,6 @@
       </plugin>
 
       <!-- Configure Eclipse plugin -->
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
@@ -65,7 +64,6 @@
       </plugin>
 
       <!-- Configure Surefire plugin (for executing unit tests) -->
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -78,9 +76,7 @@
         </configuration>
       </plugin>
 
-
       <!-- Configure Failsafe plugin (for executing integration tests) -->
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -105,7 +101,6 @@
           </execution>
         </executions>
       </plugin>
-
 
       <!-- Configure WAR plugin (for building WAR application) -->
       <plugin>
@@ -132,7 +127,6 @@
       </plugin>
 
       <!-- Update database tables -->
-
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
@@ -149,7 +143,6 @@
         <artifactId>findbugs-maven-plugin</artifactId>
         <version>3.0.4</version>
         <configuration>
-          <!-- <effort>Max</effort> -->
           <threshold>Medium</threshold>
           <failOnError>true</failOnError>
         </configuration>
@@ -166,8 +159,8 @@
           <targetJdk>${java_version}</targetJdk>
         </configuration>
       </plugin>
-      <!-- Update database tables -->
 
+      <!-- Update database tables -->
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
@@ -197,21 +190,11 @@
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>3.3.4</version>
-        <!--
-        <executions>
-            <execution>
-                <goals>
-                    <goal>check</goal>
-                </goals>
-            </execution>
-        </executions>
-        -->
       </plugin>
 
     </plugins>
 
     <!-- resources for the main code -->
-
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -256,19 +239,16 @@
       </testResource>
     </testResources>
 
-
   </build>
 
   <!-- dependencies -->
-
   <dependencies>
-    <!-- Json -->
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.18.3</version>
     </dependency>
-    <!-- End Json -->
 
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -376,7 +356,7 @@
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.24.3</version>
+      <version>2.25.3</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -386,7 +366,7 @@
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j2-impl</artifactId>
-      <version>2.24.3</version>
+      <version>2.25.3</version>
     </dependency>
     <dependency>
       <groupId>biz.paluch.logging</groupId>
@@ -418,12 +398,12 @@
       <version>2.2.224</version>
     </dependency>
 
-
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>4.24.0</version>
     </dependency>
+
     <!-- Thymeleaf -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
