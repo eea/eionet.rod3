@@ -54,12 +54,13 @@
                 <a id="rsslink" type="application/rss+xml" href="https://www.eionet.europa.eu/announcements.rdf" title="Eionet headlines as RSS">
                     <span>RSS</span>
                 </a>
-                <form action="https://google.com/search" method="get">
+                <form th:action="@{/simpleSearch}">
                     <div id="freesrchform">
                         <label for="freesrchfld">Search</label>
-                        <input type="text" id="freesrchfld" name="q" onfocus="if(this.value=='Search ROD')this.value='';" onblur="if(this.value=='')this.value='Search ROD';" value="Search ROD" size="10"/>
-                        <input type="hidden" name="sitesearch" value="rod.eionet.europa.eu"/>
-                        <input id="freesrchbtn" type="image" src="../../images/button_go.gif" th:src="@{/images/button_go.gif}" alt="Go"/>
+                        <input type="text" id="freesrchfld" name="expression" placeholder="Search ROD" size="10"/>
+                        <button id="freesrchbtn" type="submit">
+                            <img src="../../images/button_go.gif" th:src="@{/images/button_go.gif}" alt="Go"/>
+                        </button>
                     </div>
                 </form>
             </div>

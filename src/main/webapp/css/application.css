@@ -20,6 +20,13 @@
     text-align: center;
 }
 
+#freesrchbtn {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 .bigbutton a:link, .bigbutton a:visited {
     color: #ffffff;
 }
