@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{layout :: headerFragment}"></head>
+<head th:replace="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:insert="~{layout :: bannerFragment}">
+    <div th:replace="~{layout :: bannerFragment}">
     </div>
     <div id="workarea">
         <div th:replace="~{helpModal :: helpModalFragment}"></div>
@@ -178,6 +178,6 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:insert="~{layout :: footerFragment}"></div>
+<div id="pagefoot" th:replace="~{layout :: footerFragment}"></div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{layout :: headerFragment}"></head>
+<head th:replace="~{layout :: headerFragment}"></head>
 <body>
 <div id="container">
-    <div th:insert="~{layout :: bannerFragment}">
+    <div th:replace="~{layout :: bannerFragment}">
         <div id="pagehead">
             <div id="networktitle">Eionet</div>
             <div id="sitetitle">Reporting Obligations Database (ROD)</div>
@@ -40,7 +40,7 @@
     </div>
 </div>
 <!-- container -->
-<div id="pagefoot" th:insert="~{layout :: footerFragment}">
+<div id="pagefoot" th:replace="~{layout :: footerFragment}">
     Footer
 </div>
 </body>
