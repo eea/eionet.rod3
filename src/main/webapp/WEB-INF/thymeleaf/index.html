@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: headerFragment}"></head>
 <body>
-<div id="container">
-    <div th:replace="~{layout :: bannerFragment}" th:with="activeTab = 'home'"></div>
+<div id="container" th:with="activeTab = 'home'">
+    <div th:replace="~{layout :: bannerFragment}"></div>
 
     <div th:replace="~{helpModal :: helpModalFragment}"></div>
     <div id="workarea">
