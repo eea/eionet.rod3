@@ -20,7 +20,6 @@
         <security:intercept-url pattern="/obligations/add/{sourceId}" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/obligations/delete/{obligationId}" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/obligations/delete" access="hasRole('ADMIN')"/>
-        <security:intercept-url pattern="/obligations/{obligationId}/edit" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/obligations/edit" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/instruments/edit?sourceId={sourceId}" access="hasRole('EDITOR')"/>
         <security:intercept-url pattern="/instruments/edit" access="hasRole('EDITOR')"/>
