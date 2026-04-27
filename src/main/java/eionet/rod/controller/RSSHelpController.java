@@ -12,8 +12,8 @@ public class RSSHelpController {
     @RequestMapping({"", "/"})
     public String rssHelpHome(Model model) {
 
-        BreadCrumbs.set(model, "RSS XML/RPC data extraction help text");
-        model.addAttribute("title", "RSS XML/RPC data extraction help text");
+        BreadCrumbs.set(model, "RDF XML/RPC data extraction help text");
+        model.addAttribute("title", "RDF XML/RPC data extraction help text");
         model.addAttribute("activeTab", "help");
 
         return "rssHelp";
