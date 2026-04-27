@@ -6,6 +6,8 @@ import eionet.rod.service.*;
 import eionet.rod.util.BreadCrumbs;
 import eionet.rod.util.RODUtil;
 import eionet.rod.util.exception.ResourceNotFoundException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import java.util.*;
 @Controller
 @RequestMapping("/undoinfo")
 public class UndoInfoController {
+
+    private static final Log LOGGER = LogFactory.getLog(UndoInfoController.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public String handleResourceNotFoundException() {
@@ -270,17 +274,20 @@ public class UndoInfoController {
             }
 
             List<UndoDTO> undoIssues = undoService.getUndoList(ts, "T_RAISSUE_LNK", op);
-            //ArrayList<Issue> undoIssues = new ArrayList<Issue>();
             StringBuilder undoIssuesString = new StringBuilder();
             if (undoIssues != null && !"D".equals(op)) {
                 for (UndoDTO undoIssue : undoIssues) {
                     if ("FK_ISSUE_ID".equals(undoIssue.getCol())) {
-                        Issue issue = issueService.findById(Integer.parseInt(undoIssue.getValue()));
-                        //undoIssues.add(issue);
-                        undoIssuesString.append(issue.getIssueName());
-                        undoIssuesString.append(", ");
+                        try {
+                            Issue issue = issueService.findById(Integer.parseInt(undoIssue.getValue()));
+                            undoIssuesString.append(issue.getIssueName());
+                            undoIssuesString.append(", ");
+                        } catch (ResourceNotFoundException e) {
+                            LOGGER.debug("Issue with id " + undoIssue.getValue() + " not found for UNDO record with ts=" + ts +
+                                    ", tab=" + tab + ", op=" + op + ", obligation id=" + id + ", user=" + user);
+                            throw e;
+                        }
                     }
-
                 }
                 if (undoIssuesString.length() > 1) {
                     undoIssuesString.replace(undoIssuesString.length() - 2, undoIssuesString.length(), "");
