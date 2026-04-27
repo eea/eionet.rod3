@@ -72,11 +72,8 @@ public class IssueDaoImpl implements IssueDao {
                 + "Where PK_ISSUE_ID = ?";
 
         try {
-
             return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Issue.class), issueId);
-
         } catch (DataAccessException e) {
-            logger.debug(e, e);
             throw new ResourceNotFoundException("The Issue with id " + issueId + "  not found in the database", e);
         }
     }
