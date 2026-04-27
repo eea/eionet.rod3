@@ -64,6 +64,7 @@ public class WebRODService {
      * @throws ServiceException
      */
     public Vector<Map<String, String>> getActivities() throws ServiceException {
+        LOGGER.info("XML-RPC call to getActivities method");
         Vector<Map<String, String>> result = new Vector<>();
 
         try {
@@ -101,6 +102,7 @@ public class WebRODService {
      * @throws ServiceException
      */
     public Vector<Map<String, String>> getCountries() throws ServiceException {
+        LOGGER.info("XML-RPC call to getCountries method");
         Vector<Map<String, String>> result = new Vector<>();
 
         try {
