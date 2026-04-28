@@ -1210,7 +1210,7 @@ select {
 }
 
 .error {
-    font-style: bold;
+    font-weight: bold;
 }
 
 /* @group Horisontal list. */
@@ -1248,7 +1248,7 @@ select {
 .popup #pagehead {
     height: 102px;
     width: 100%;
-    background: #a5ced1 url('top_01.png') repeat-y;
+    background: #a5ced1 url(../images/top_01.png) repeat-y;
     border-top: 4px solid #6f7072;
     border-bottom: 1px solid #315076;
 }
@@ -1559,66 +1559,8 @@ fieldset#vocabularyConceptFilters #filterList span.filterItem label {
     box-sizing: border-box;
 }
 
-#vocabularyConceptFilters select,
-#vocabularyConceptFilterOptions select {
-    max-width: 300px;
-}
-
-#vocabularyConceptFilterOptions span.optionsItem,
-#vocabularyConceptFilterOptions span.cartcontainer {
-    display: block;
-    margin-bottom: 10px;
-}
-
-#vocabularyConceptFilterOptions span.cartcontainer {
-    display: table;
-}
-
-#vocabularyConceptFilterOptions span.cartcontainer label,
-#vocabularyConceptFilterOptions span.cartcontainer select,
-#vocabularyConceptFilterOptions span.cartcontainer p.middle {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0 5px;
-}
-
-#vocabularyConceptFilterOptions span.cartcontainer p.middle input {
-    clear: both;
-    display: block;
-    margin: 3px 10px;
-}
-
-#vocabularyConceptFilterOptions span.cartcontainer label {
-    width: 130px;
-}
-
 #searchframe p.actions input {
     width: 150px;
-}
-
-#vocabularyConceptFilterOptions {
-    border-top: 1px solid #b6b6b6;
-    border-right: none;
-    border-bottom: 1px solid #b6b6b6;
-    border-left: none;
-    padding: 20px 25px 10px 25px;
-}
-
-fieldset#vocabularyConceptFilters a.showHide,
-fieldset#vocabularyConceptFilterOptions a.showHide {
-    text-decoration: none;
-    padding-left: 20px;
-    padding-right: 5px;
-}
-
-fieldset#vocabularyConceptFilters a.showHide.expanded,
-fieldset#vocabularyConceptFilterOptions a.showHide.expanded {
-    background: url(../images/expanded.png) 3px 0 no-repeat;
-}
-
-fieldset#vocabularyConceptFilterOptions a.showHide,
-fieldset#vocabularyConceptFilters a.showHide {
-    background: url(../images/collapsed.png) 3px 0 no-repeat;
 }
 
 span.conceptDefinition {
@@ -1630,51 +1572,6 @@ span.conceptDefinition {
 span.noDefinition {
     font-size: 0.8em;
     font-style: italic;
-}
-
-.cartcontainer select.left,
-.cartcontainer select.right,
-.cartcontainer p.middle {
-    display: block;
-    float: left;
-}
-
-.cartcontainer select.left,
-.cartcontainer select.right {
-    min-height: 150px;
-    min-width: 150px;
-}
-
-.cartcontainer p.middle {
-    margin: 60px 10px 0 10px;
-}
-
-.cartcontainer p.middle input.button {
-    display: block;
-    float: left;
-    clear: both;
-    width: 70px;
-    cursor: pointer;
-}
-
-.cartcontainer p.middle input.button.moveup {
-    margin-bottom: 5px;
-    text-indent: -5000px;
-    background: url(../images/add-remove.png) 17px -41px no-repeat;
-}
-
-.cartcontainer p.middle input.button.movedown {
-    margin-bottom: 5px;
-    text-indent: -5000px;
-    background: url(../images/add-remove.png) 19px 0px no-repeat;
-}
-
-#vocabularyConceptResults,
-h2#otherVersions {
-    display: block;
-    clear: both;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .ajaxError {
