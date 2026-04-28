@@ -375,7 +375,7 @@ a.helpButton {
 
 .note-msg strong:before {
     content: "\81";
-    background: url(https://www.eionet.europa.eu/styles/eionet2007/admonitions/note_ea.gif) no-repeat;
+    background: url(../images/note_ea.gif) no-repeat;
     padding: 0.3em 0.9em;
     margin-right: 1em;
 }
