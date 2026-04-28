@@ -595,81 +595,6 @@ a#pagehelplink {
 	height: 14px;
 }
 
-/* Tool ribbon end */
-
-#menuribbon {
-	font: 80% Helvetica, Verdana, Geneva, Arial, sans-serif;
-	width:100%;
-	height: 1.3em;
-	padding: 0;
-	background: #00446a;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-}
-
-#dropdowns, #dropdowns ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-
-#dropdowns li {
-	float: left;
-	position: relative;
-#	text-transform: uppercase;
-	width: 15em;
-	border-right: 1px dotted #ffffff;
-	background-color: #00446a;
-	color: #fff;
-	z-index: 11; /* Bug in IE6, IE7 */
-}
-
-#dropdowns a:link, #dropdowns a:visited {
-	display: block;
-	text-decoration: none;
-	padding: 0.1em 0.5em;
-	color: #fff;
-}
-
-#dropdowns ul {
-	display: none;
-	position: absolute;
-	top: 1.5em;
-	left: 0;
-	background-color: #eee;
-}
-
-#dropdowns li > ul { /* For Opera and Firefox */
-	top: auto;
-	left: auto;
-}
-
-#dropdowns ul li {
-	float: none;
-	border-right: 0 none transparent;
-	border-bottom: 1px dotted #000;
-	background-color: #eee;
-	text-transform: none;
-	margin: 0;
-	padding: 0.1em 0;
-	color: #fff;
-}
-
-#dropdowns li ul li a:link, #dropdowns li ul li a:visited {
-	background: transparent url(../images/arrow-normal.png) 3px center no-repeat;
-	padding: 0.1em 0 0.1em 15px;
-	color: #000;
-}
-#dropdowns li ul li a:hover {
-	background-color: white;
-}
-
-#dropdowns li:hover ul, #dropdowns li.over ul {
-	display: block;
-}
-#dropdowns li:hover ul li, #dropdowns li.over ul li{
-	width: 20em;
-}
 /* Breadcrumb trail */
 
 .breadcrumbtrail {
@@ -1753,44 +1678,6 @@ a#ewlink, a#printlink, a#xfullscreenlink, a#acronymlink, a#rsslink {
 
 #sitetagline {
 	display: none;
-}
-
-/* Dropdowns */
-#menuribbon {
-	font: 80% Verdana, Geneva, Arial, Helvetica, sans-serif;
-	width:100%;
-	height: 1.3em;
-	padding: 0;
-	background: #00446a;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-}
-
-#dropdowns {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
-
-#dropdowns li {
-	float: left;
-	position: relative;
-	text-transform: uppercase;
-	width: 9em;
-	border-right: 1px dotted #ffffff;
-	background-color: #00446a;
-	color: #fff;
-}
-
-#dropdowns ul {
-	display: none;
-}
-
-#dropdowns a:link, #dropdowns a:visited {
-	display: block;
-	text-decoration: none;
-	padding: 0.1em 0.5em;
-	color: #fff;
 }
 
 /* Remove the border around images */
