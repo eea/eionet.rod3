@@ -10,10 +10,6 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-//import javax.servlet.ServletException;
-//import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
-//import org.springframework.web.context.ContextLoaderListener;
-
 /**
  * Initialise DispatcherServlet.
  * <p>
