@@ -63,7 +63,7 @@ public class HelpDaoImpl implements HelpDao {
         try {
             return jdbcTemplate.queryForObject(q_get_doc, new BeanPropertyRowMapper<>(Documentation.class), areaId);
         } catch (DataAccessException sqle) {
-            logger.debug(sqle, sqle);
+            logger.debug("Area not found: " + areaId);
             return null;
         }
 
