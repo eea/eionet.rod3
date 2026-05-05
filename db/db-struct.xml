@@ -1636,5 +1636,9 @@
           alter table T_OBLIGATION ADD column EEA_PROGRAMME varchar(50);
           alter table T_OBLIGATION ADD column EEA_GROUP varchar(50);
       </sql>
-  </changeSet>
+    </changeSet>
+    <changeSet id="rev-92" author="stamojoh">
+        <comment>Refs #303143 Remove foreign key constraint.</comment>
+        <dropForeignKeyConstraint baseTableName="T_DELIVERY" constraintName="T_DELIVERY_RA_FK"/>
+    </changeSet>
 </databaseChangeLog>
