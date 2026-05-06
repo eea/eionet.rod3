@@ -36,7 +36,8 @@ pipeline {
              recordCoverage(tools: [[parser: 'JACOCO']],
                id: 'jacoco', name: 'JaCoCo Coverage',
                sourceCodeRetention: 'EVERY_BUILD',
-               ignoreParsingErrors: true,
+               ignoreParsingErrors: true
+             )
              publishHTML target:[
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
