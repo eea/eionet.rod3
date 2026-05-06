@@ -24,21 +24,34 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'jenkins-maven-token', variable: 'GITHUB_TOKEN')]) {
-                sh '''mkdir -p ~/.m2'''
-                sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
-                try {
-                   sh '''mvn -X clean cobertura:cobertura-integration-test pmd:pmd findbugs:findbugs'''
-                }
-                finally {
-                      junit 'target/failsafe-reports/*.xml'
-                }
-           }
+            sh '''mkdir -p ~/.m2'''
+            sh '''sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
+            sh '''mvn clean verify pmd:pmd spotbugs:spotbugs'''
+          }
         }
-      }      
-     }
+       }
+       post {
+         always {
+             junit 'target/surefire-reports/*.xml, target/failsafe-reports/*.xml'
+             recordCoverage(tools: [[parser: 'JACOCO']],
+               id: 'jacoco', name: 'JaCoCo Coverage',
+               sourceCodeRetention: 'EVERY_BUILD',
+               ignoreParsingErrors: true,
+               qualityGates: [
+                  [threshold: 5.0, metric: 'LINE', baseline: 'PROJECT', unstable: true],
+                  [threshold: 5.0, metric: 'BRANCH', baseline: 'PROJECT', unstable: true]])
+             publishHTML target:[
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'target/site/jacoco',
+                reportFiles: 'index.html',
+                reportName: "Detailed Coverage Report"
+             ]
+         }
+       }
+    }
 
-    
-    
     stage ('Build & Docker push') {
       when {
         environment name: 'CHANGE_ID', value: ''
@@ -53,7 +66,7 @@ pipeline {
             sh '''mkdir -p ~/.m2'''
             sh ''' sed "s/TOKEN/$GITHUB_TOKEN/" m2.settings.tpl.xml > ~/.m2/settings.xml '''
             try {
-              sh '''mvn -X -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean verify '''
+              sh '''mvn -Dmaven.test.skip=true -Ddocker.username=$DOCKERHUB_USER -Ddocker.password=$DOCKERHUB_PASS -Pdocker clean verify '''
 
               if (env.BRANCH_NAME == 'master') {
                 tagName = 'latest'
