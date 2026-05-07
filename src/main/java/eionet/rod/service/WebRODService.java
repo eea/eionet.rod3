@@ -70,7 +70,7 @@ public class WebRODService {
         try {
             FileServiceIF fileService = RODServices.getFileService();
 
-            String rodDomain  = fileService.getStringProperty( Constants.ROD_URL_DOMAIN );
+            String rodDomain  = fileService.getStringProperty(Constants.ROD_URL_DOMAIN);
             ObligationService obligationService = (ObligationService) SpringContext.getApplicationContext().getBean("obligationService");
             List<Obligations> obligationsList =  obligationService.findActivities();
             for(Obligations obligation : obligationsList) {
@@ -86,12 +86,10 @@ public class WebRODService {
                 oblMap.put("PK_SOURCE_ID", valueOrDefault(obligation.getSourceId(), ""));
                 result.add(oblMap);
             }
-
         } catch (eionet.rod.util.exception.ServiceException e) {
             LOGGER.error(e.getMessage(), e);
             throw new ServiceException("Internal server error " + e.getMessage());
         }
-
         return result;
     }
 
@@ -107,7 +105,6 @@ public class WebRODService {
 
         try {
             FileServiceIF fileService = RODServices.getFileService();
-
             SpatialService spatialService = (SpatialService) SpringContext.getApplicationContext().getBean("spatialService");
 
             List<Spatial> spatials = spatialService.findAll();
@@ -118,14 +115,11 @@ public class WebRODService {
                 oblMap.put("name", valueOrDefault(s.getName(), ""));
                 oblMap.put("uri", fileService.getStringProperty(FileServiceIF.SPATIAL_NAMESPACE) + s.getSpatialId());
             }
-
         } catch (eionet.rod.util.exception.ServiceException e) {
             LOGGER.error(e.getMessage(), e);
             throw new ServiceException("Internal server error " + e.getMessage());
         }
-
         return result;
-
     }
 
 }
