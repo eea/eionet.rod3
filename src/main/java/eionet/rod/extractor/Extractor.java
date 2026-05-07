@@ -48,9 +48,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.PrintWriter;
 import java.util.*;
 
-//import org.openrdf.repository.RepositoryException;
-//import java.io.FileWriter;
-
 /**
  * Pulls information from various services and saves it to DB.
  */
@@ -67,10 +64,8 @@ public class Extractor implements ExtractorConstants {
     public static final int DELIVERIES = 1;
     public static final int ROLES = 2;
 
-    //private static FileServiceIF fileSrv = null;
     boolean debugLog = true;
     private static PrintWriter out = null;
-    // private RODDaoFactory daoFactory;
 
     @Autowired
     RoleService roleService;
@@ -81,9 +76,7 @@ public class Extractor implements ExtractorConstants {
     @Autowired
     UndoService undoService;
 
-    //@Autowired
     FileServiceIF fileSrv;
-
     private static Extractor extractor;
 
     public Extractor() {
@@ -125,12 +118,9 @@ public class Extractor implements ExtractorConstants {
             if (extractor == null) {
                 extractor = new Extractor();
             }
-
-
             extractor.harvest(mode, userName);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            // RODServices.sendEmail("Error in extractor", e.toString());
         }
     }
 
@@ -140,7 +130,6 @@ public class Extractor implements ExtractorConstants {
     }
 
     // Cleanup after everything is done
-    //
     public void exitApp(boolean successful) {
         log(this.cDT() + "Extractor v1.0 - " + ((successful) ? "finished succesfully." : "failed to complete."));
         if (out != null) {
@@ -157,40 +146,25 @@ public class Extractor implements ExtractorConstants {
      * @throws ServiceException
      */
     public void harvest(int mode, String userName) throws ServiceException {
-
-        // Initial set-up: create class; open the log file
-        // mode, which data to harvest
-
-//        String logPath = null;
-//        String logfileName = null;
-//               
+        // Initial set-up: create class; open the log file mode, which data to harvest
         try {
             fileSrv = RODServices.getFileService();
-//            
             debugLog = fileSrv.getBooleanProperty("extractor.debugmode");
-
         } catch (ServiceException e) {
             throw new ServiceException("Unable to get settings from properties file. The following error was reported:\n" + e, e);
         }
 
-        //String actionText = "Harvesting - ";
         long a = System.currentTimeMillis();
 
-        /*
-         Start extracting
-         */
-
+        // Start extracting
         // Get delivery list from Content Registry and save it also
         if (mode == ALL_DATA || mode == DELIVERIES) {
-            // actionText += " deliveries ";
             extractDeliveries();
         }
 
         // Get roles from Eionet Directory and save them, too
         if (mode == ALL_DATA || mode == ROLES) {
-            //actionText += " - roles ";
             try {
-//
                 StringBuilder errMsg = new StringBuilder();
                 List<Roles> respRoles = obligationService.getRespRoles();
 
@@ -208,18 +182,9 @@ public class Extractor implements ExtractorConstants {
                 }
 
                 roleService.commitRoles();
-
                 if (debugLog) {
                     log("* Roles OK");
                 }
-
-                // todo use the errMsg somehow?
-//                if (StringUtils.isNotBlank(errMsg.toString())) {
-//                    RODServices.sendEmail("Error in Extractor ", errMsg.toString());
-//                }
-
-                // persons + org name
-
             } catch (Exception e) {
                 log("Operation failed while filling the database from Eionet Directory. The following error was reported:\n"
                         + e.getMessage());
@@ -230,11 +195,8 @@ public class Extractor implements ExtractorConstants {
                                 + e.getMessage(), e);
             }
         } // mode includes roles
-
         long b = System.currentTimeMillis();
-
         log(" ** Harvesting successful TOTAL TIME = " + (b - a));
-
         exitApp(true);
     }
 
@@ -347,7 +309,6 @@ public class Extractor implements ExtractorConstants {
      * @throws ServiceException
      */
     public void saveRole(String roleName) {
-
         if (roleName == null || roleName.trim().isEmpty()) {
             return;
         }
@@ -358,18 +319,15 @@ public class Extractor implements ExtractorConstants {
             log("Received role info for " + roleName + " from Directory");
         } catch (DirServiceException de) {
             LOGGER.error("Error getting role " + roleName + ": " + de, de);
-            //RODServices.sendEmail("Error in Extractor", "Error getting role " + roleName + ": " + de.toString());
             throw new ResourceNotFoundException("Error getting role " + de, de);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            //RODServices.sendEmail("Error in Extractor", e.toString());
             throw new ResourceNotFoundException("Error getting role " + e, e);
         }
 
         if (role == null) {
             return;
         }
-
         roleService.saveRole(role);
     }
 
