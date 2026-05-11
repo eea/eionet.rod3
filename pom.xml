@@ -320,12 +320,6 @@
       <version>2.6.10</version>
     </dependency>
 
-    <dependency>
-      <groupId>eionet</groupId>
-      <artifactId>acl</artifactId>
-      <version>3.1-SNAPSHOT</version> <!-- Use prerelease -->
-    </dependency>
-
     <!-- Spring Security -->
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -453,11 +447,6 @@
     <dependency>
       <groupId>eionet</groupId>
       <artifactId>rpcserver</artifactId>
-      <version>3.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>eionet</groupId>
-      <artifactId>definition</artifactId>
       <version>3.1-SNAPSHOT</version>
     </dependency>
 
