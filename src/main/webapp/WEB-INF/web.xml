@@ -45,6 +45,7 @@
     <filter-mapping>
         <filter-name>rpcRouterLoggingFilter</filter-name>
         <url-pattern>/rpcrouter</url-pattern>
+        <url-pattern>/api/spatial/*</url-pattern>
     </filter-mapping>
 
     <!-- Spring Security -->

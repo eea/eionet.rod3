@@ -30,12 +30,14 @@ public class RpcRouterLoggingFilter implements Filter {
             String remoteAddr = httpRequest.getRemoteAddr();
             String xForwardedFor = httpRequest.getHeader("X-Forwarded-For");
             String userAgent = httpRequest.getHeader("User-Agent");
+            String requestURI = httpRequest.getRequestURI();
 
-            LOGGER.info("XML-RPC call: method={}, remoteAddr={}, X-Forwarded-For={}, userAgent={}",
+            LOGGER.info("XML-RPC call: method={}, remoteAddr={}, X-Forwarded-For={}, userAgent={}, requestURI={}",
                     method,
                     remoteAddr,
                     xForwardedFor,
-                    userAgent);
+                    userAgent,
+                    requestURI);
         }
 
         chain.doFilter(request, response);
