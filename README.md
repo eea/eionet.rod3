@@ -7,7 +7,7 @@ You can find the layout template at src/main/webapp/WEB-INF/thymeleaf/layout.htm
 Dependencies
 ------------
 * Tomcat 9
-* Java 11
+* Java 17
 * Spring 5
 * Thymeleaf 3
 * MySQL or H2 Database Engine
