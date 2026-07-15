@@ -25,6 +25,8 @@ package eionet.rod;
 
 import eionet.rod.model.Obligations;
 import eionet.rod.service.ObligationService;
+import net.javacrumbs.shedlock.core.LockAssert;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,42 +46,42 @@ public class DeadlineCalc {
     ObligationService obligationService;
 
     @Scheduled(cron = "${deadlinecalc.job.cron}")
+    @SchedulerLock(name = "deadlineCalcLock")
     @Transactional
     public void execute() {
+        LockAssert.assertLocked();
         List<Obligations> deadlines;
-
-        LOGGER.info("DeadlineCalc v1.0 - getting deadlines...");
+        LOGGER.info("DeadlineCalc scheduled task is running...");
 
         // Get deadlines
-        //
         try {
             deadlines = obligationService.getDeadlines();
         } catch (Exception e) {
-            LOGGER.error("Getting deadlines from database failed. The following error was reported:\n" + e);
+            LOGGER.error("Getting deadlines from database failed. The following error was reported: {}", e.getMessage());
             LOGGER.error(e.getMessage(), e);
             return;
         }
-        if (deadlines == null || deadlines.size() == 0) {
+        if (deadlines == null || deadlines.isEmpty()) {
             LOGGER.info("0 deadlines found");
             return;
         }
-        LOGGER.info(deadlines.size() + " deadlines found, updating...");
+        LOGGER.info("{} deadlines found, updating...", deadlines.size());
 
         // Update deadlines and save them back to the database
-        for(Obligations o : deadlines){
+        for (Obligations o : deadlines) {
             calculate(o);
         }
 
         // SELECT PK_RA_ID, FIRST_REPORTING, REPORT_FREQ_MONTHS, VALID_TO, TERMINATE "
         //           0           1               2                3           4
 
-        LOGGER.info("Update complete.");
+        LOGGER.info("DeadlineCalc scheduled task has finished.");
     }
 
-    private void calculate(Obligations o){
+    private void calculate(Obligations o) {
         GregorianCalendar currDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 
-        LOGGER.debug("Calculation for obligation " + o.getObligationId());
+        LOGGER.debug("Calculation for obligation {}", o.getObligationId());
         Date current = o.getNextDeadline();
 
         // set termination to true if past the valid time
@@ -92,19 +94,16 @@ public class DeadlineCalc {
         }
 
         Integer freq = Integer.parseInt(o.getReportFreqMonths());
-
-
         Calendar repDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         repDate.setTime(o.getFirstReporting());
 
         int day = repDate.get(Calendar.DATE);
-
         int m;
 
         Calendar validTo = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         validTo.setTime(o.getValidTo());
         repDate = calculateNextDeadline(currDate, repDate, validTo, freq);
-        if(repDate == null) {
+        if (repDate == null) {
             LOGGER.error("Calculation stopped for obligation " + o.getObligationId() + " parameters " + formatCalendar(currDate) + " / " + formatCalendar(repDate) + " / " + formatCalendar(validTo) + " f " + freq);
             return;
         }
@@ -115,7 +114,6 @@ public class DeadlineCalc {
         Date nextDeadline = repDate.getTime();
 
         // Deadline after the next
-        //
         if (day < 28)
             repDate.add(Calendar.MONTH, freq);
         else {
@@ -137,7 +135,7 @@ public class DeadlineCalc {
 
     Calendar calculateNextDeadline(Calendar currDate, Calendar firstReporting, Calendar validTo, Integer freq) {
         LOGGER.debug("new:  " + formatCalendar(currDate) + " " + formatCalendar(firstReporting) + " " + formatCalendar(validTo));
-        if(freq <= 0) {
+        if (freq <= 0) {
             return null;
         }
 
@@ -161,7 +159,6 @@ public class DeadlineCalc {
                 firstReporting.add(Calendar.DATE, 1);
             firstReporting.add(Calendar.DATE, -1);
             // If we went over Valid To date, rewind and repeat
-            //
             if (firstReporting.after(validTo)) {
                 firstReporting = rewindDate;
                 firstReporting.add(Calendar.MONTH, -freq);
@@ -173,58 +170,6 @@ public class DeadlineCalc {
         }
         LOGGER.debug("response: " + formatCalendar(firstReporting));
         return firstReporting;
-    }
-    
-    Calendar oldCalculateNextDeadline(String[] deadlines){
-
-        int m;
-        int year = Integer.parseInt(deadlines[1].substring(0, 4));
-        int month = Integer.parseInt(deadlines[1].substring(5, 7));
-        int day = Integer.parseInt(deadlines[1].substring(8));
-        int yearTo = Integer.parseInt(deadlines[3].substring(0, 4));
-        int monthTo = Integer.parseInt(deadlines[3].substring(5, 7));
-        int dayTo = Integer.parseInt(deadlines[3].substring(8));
-
-        GregorianCalendar repDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-        repDate.set(year, month - 1, day, 20, 0);
-        GregorianCalendar toDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-        toDate.set(yearTo, monthTo - 1, dayTo, 23, 59);
-        GregorianCalendar currDate = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-        LOGGER.debug("old:  " + formatCalendar(currDate) + " " + formatCalendar(repDate)+ " " + formatCalendar(toDate));
-
-        int freq = Integer.parseInt(deadlines[2]);
-        // No point in updating if non-repeating
-        //
-        currDate.add(Calendar.DATE, -3 * freq);
-        if (day < 28) {
-            while (repDate.before(currDate) && repDate.before(toDate))
-                repDate.add(Calendar.MONTH, freq);
-            if (repDate.after(toDate))
-                repDate.add(Calendar.MONTH, -freq);
-        } else {
-            repDate.add(Calendar.DATE, -3);
-            while (repDate.before(currDate) && repDate.before(toDate))
-                repDate.add(Calendar.MONTH, freq);
-            if (repDate.after(toDate))
-                repDate.add(Calendar.MONTH, -freq);
-            GregorianCalendar rewindDate = (GregorianCalendar) repDate.clone(); // Save for check below
-            m = repDate.get(Calendar.MONTH);
-            while (repDate.get(Calendar.MONTH) == m)
-                repDate.add(Calendar.DATE, 1);
-            repDate.add(Calendar.DATE, -1);
-            // If we went over Valid To date, rewind and repeat
-            //
-            if (repDate.after(toDate)) {
-                repDate = rewindDate;
-                repDate.add(Calendar.MONTH, -freq);
-                m = repDate.get(Calendar.MONTH);
-                while (repDate.get(Calendar.MONTH) == m)
-                    repDate.add(Calendar.DATE, 1);
-                repDate.add(Calendar.DATE, -1);
-            }
-        }
-
-        return repDate;
     }
 
     private String formatCalendar(Calendar c) {

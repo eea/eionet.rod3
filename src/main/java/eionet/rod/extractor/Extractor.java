@@ -30,6 +30,8 @@ import eionet.rod.service.*;
 import eionet.rod.util.RODServices;
 import eionet.rod.util.exception.ResourceNotFoundException;
 import eionet.rod.util.exception.ServiceException;
+import net.javacrumbs.shedlock.core.LockAssert;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
@@ -218,7 +220,10 @@ public class Extractor implements ExtractorConstants {
      * @throws ServiceException
      */
     @Scheduled(cron = "${extractor.job.cron}")
-    private void extractDeliveries() {
+    @SchedulerLock(name = "extractorServiceLock")
+    void extractDeliveries() {
+        LockAssert.assertLocked();
+        LOGGER.info("Extract Deliveries scheduled task is running...");
         log("Going to extract deliveries from CR");
 
         final String prefixDeclarations = "PREFIX dct: <http://purl.org/dc/terms/> " + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> ";
@@ -282,7 +287,7 @@ public class Extractor implements ExtractorConstants {
             } else {
                 log("CR sparql query call returned 0 deliveries");
             }
-
+            LOGGER.info("Extract Deliveries scheduled task has finished.");
             log("Extracting deliveries from CR finished!");
         } catch (Exception e) {
             deliveryService.rollBackDeliveries();

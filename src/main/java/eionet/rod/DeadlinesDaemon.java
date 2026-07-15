@@ -5,6 +5,8 @@ import eionet.rod.model.Obligations;
 import eionet.rod.service.ObligationService;
 import eionet.rod.service.SpatialService;
 import eionet.rod.util.RODUtil;
+import net.javacrumbs.shedlock.core.LockAssert;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +40,14 @@ public class DeadlinesDaemon {
     @Value("${percent.of.freq:10}")
     Integer percentOfFreq;
 
-    /**
-     * executes the job.
-     */
-
-//    @Scheduled(cron = "${deadlinedaemon.job.cron}")
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(cron = "${deadlinedaemon.job.cron}")
+    @SchedulerLock(name = "deadlineDaemonLock")
     @Transactional
-    public void execute(){
+    public void execute() {
+        LockAssert.assertLocked();
         FileWriter out = null;
-
+        LOGGER.info( "DeadlinesDaemon scheduled task is running...");
         try {
-
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy");
             String d = formatter.format(new Date());
             Date today = formatter.parse(d);
@@ -72,11 +70,11 @@ public class DeadlinesDaemon {
                 makeStructure(today);
                 out.write(d);
             }
-
+            LOGGER.info("DeadlinesDaemon scheduled task has finished.");
         } catch (Exception e) {
             LOGGER.error("Error in DeadlinesDaemon " + e.getMessage(), e);
         } finally {
-            if(out != null) {
+            if (out != null) {
                 try {
                     out.close();
                 } catch (IOException e) {
@@ -95,6 +93,7 @@ public class DeadlinesDaemon {
         long timestamp = System.currentTimeMillis();
 
         for (Obligations o : deadlines) {
+            LOGGER.info( "makeStructure {}", o.getOblTitle());
             long nextDeadlineMillis = o.getNextDeadline().getTime();
 
             String freq = o.getReportFreqMonths();
@@ -174,28 +173,5 @@ public class DeadlinesDaemon {
             }
         }
     }
-//
-//    public static void makeCall(Object notifications) throws Exception {
-//        try {
-//            FileServiceIF fileSrv = RODServices.getFileService();
-//            String server_url = fileSrv.getStringProperty(FileServiceIF.UNS_XMLRPC_SERVER_URL);
-//            String channel_name = fileSrv.getStringProperty(FileServiceIF.UNS_CHANNEL_NAME);
-//            if (notifications == null)
-//                throw new Exception("Cannot send a null object via XML-RPC");
-//
-//            XmlRpcClient server = new XmlRpcClient(server_url);
-//            server.setBasicAuthentication(fileSrv.getStringProperty(FileServiceIF.UNS_USERNAME),
-//                    fileSrv.getStringProperty(FileServiceIF.UNS_PWD));
-//
-//            Vector<Object> params = new Vector<Object>();
-//            params.add(channel_name);
-//            params.add(notifications);
-//
-//            server.execute(fileSrv.getStringProperty(FileServiceIF.UNS_SEND_NOTIFICATION), params);
-//
-//        } catch (Throwable t) {
-//            LOGGER.error("Error in DeadlinesDaemond makeCall() " + t.getMessage(), t);
-//            throw new ServletException(t);
-//        }
-//    }
+
 }
