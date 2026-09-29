@@ -12,7 +12,7 @@ public class RpcRouterLoggingFilter implements Filter {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcRouterLoggingFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         // no-op
     }
 
@@ -23,9 +23,7 @@ public class RpcRouterLoggingFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        if (request instanceof HttpServletRequest) {
-            HttpServletRequest httpRequest = (HttpServletRequest) request;
-
+        if (request instanceof HttpServletRequest httpRequest) {
             String method = httpRequest.getMethod();
             String remoteAddr = httpRequest.getRemoteAddr();
             String xForwardedFor = httpRequest.getHeader("X-Forwarded-For");

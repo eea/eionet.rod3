@@ -9,7 +9,7 @@
         <div th:replace="~{helpModal :: helpModalFragment}"></div>
         <p>
             The contents of ROD can be used in several different ways. Currently the main way is to browse the website. The contents of the database are also available for
-            use as RDF and via XML-RPC. The purpose of this text is to give an introduction to how these technologies can be used to extract contents from ROD and overview
+            use as RDF. The purpose of this text is to give an introduction to how these technologies can be used to extract contents from ROD and overview
             what is available.
         </p>
 
@@ -28,49 +28,6 @@
                 http://rod.eionet.europa.eu/spatial.rdf</a>; lists all countries and territories.
             </li>
         </ol>
-
-        <h2>ROD XML-RPC</h2>
-        <p>
-            In the context of ROD, XML-RPC can be used to look up records in the database across the Internet. It is not an open door to query the whole of ROD as the procedures
-            must have been anticipated and developed and made available for calling over XML-RPC. There are currently five procedures available to users:
-        </p>
-        <ol>
-            <li>
-                <b>getActivities()</b>: returns an ARRAY of STRUCTs that contains all the obligations in an ARRAY, with each obligation's information put into a STRUCT;
-            </li>
-            <li>
-                <b>getCountries()</b>: returns an ARRAY of STRUCTs that contains all countries from T_SPATIAL table; each STRUCT has got three country attributes:
-                <ul>
-                    <li>'ISO' - the two-letter ISO code in capitals;</li>
-                    <li>'URL' - '<a th:href="@{/spatial}">http://rod.eionet.europa.eu/spatial/</a><span th:text="'<T_SPATIAL.PK_SPATIAL_ID>'"></span>' [T_SPATIAL.PK_SPATIAL_ID];</li>
-                    <li>'NAME'=[T_SPATIAL.SPATIAL_NAME].</li>
-                </ul>
-            </li>
-        </ol>
-        <p></p>
-        <p>
-            Other XML RPC methods can be put in place for key stakeholders if they specify what they want returned from ROD. If the returned information resembles the
-            underlying logic for showing similar information on a web page then this can be fairly easy to implement. Sometimes all that is required is to do is to declare
-            an existing method accessible over XML-RPC.
-        </p>
-        <p>
-            To make use of the ROD XML RPC, it needs to be called from a program. The following is an example for the Python programming language:
-        </p>
-        <pre>
-  import xmlrpclib
-
-  server = xmlrpclib.Server('https://rod.eionet.europa.eu/rpcrouter')
-  result = server.WebRODService.getActivities()
-  if not result:
-	print "No value returned"
-  else:
-	print result
-		</pre>
-        <br/>
-        <p>
-            The ROD XML RPC Router is: <a href="https://rod.eionet.europa.eu/rpcrouter">https://rod.eionet.europa.eu/rpcrouter</a>. The service name is: WebRODService.
-        </p>
-
     </div>
 </div>
 <!-- container -->

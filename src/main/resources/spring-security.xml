@@ -8,7 +8,6 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <security:http pattern="/api/**" security="none"/> <!-- To bypass csrf -->
-    <security:http pattern="/rpcrouter/**" security="none"/> <!-- To bypass csrf -->
     <security:http entry-point-ref="casEntryPoint" pattern="/**" use-expressions="true" auto-config="false">
         <security:intercept-url pattern="/login" access="isAuthenticated()"/>
         <security:intercept-url pattern="/users/**" access="hasRole('ADMIN')"/>
