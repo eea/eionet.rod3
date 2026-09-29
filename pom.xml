@@ -493,22 +493,6 @@
 
   </dependencies>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.8</version>
-        <configuration>
-          <linkXRef>false</linkXRef>
-          <sourceEncoding>utf-8</sourceEncoding>
-          <minimumTokens>300</minimumTokens>
-          <targetJdk>${java_version}</targetJdk>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <profiles>
     <profile>
       <id>docker</id>
