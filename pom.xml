@@ -171,8 +171,8 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <version>3.28.0</version>
         <configuration>
-          <linkXref>false</linkXref>
-          <sourceEncoding>utf-8</sourceEncoding>
+          <linkXRef>false</linkXRef>
+          <inputEncoding>utf-8</inputEncoding>
           <minimumTokens>300</minimumTokens>
           <targetJdk>${java_version}</targetJdk>
         </configuration>
@@ -500,7 +500,7 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <version>3.8</version>
         <configuration>
-          <linkXref>false</linkXref>
+          <linkXRef>false</linkXRef>
           <sourceEncoding>utf-8</sourceEncoding>
           <minimumTokens>300</minimumTokens>
           <targetJdk>${java_version}</targetJdk>
